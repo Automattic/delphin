@@ -1,6 +1,6 @@
 /**
  * External dependencies
  */
-import App from './App';
+import App from './app';
 
 App();

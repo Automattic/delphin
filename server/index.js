@@ -28,7 +28,8 @@ if ( isDevelopment ) {
 		hot: true,
 		proxy: {
 			'*': 'http://localhost:' + app.get( 'backend-port' )
-		}
+		},
+		stats: { colors: true }
 	} );
 
 	devServer.listen( app.get( 'port' ), 'localhost', function( err ) {

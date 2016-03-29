@@ -1,0 +1,25 @@
+{
+  "name": "delphin",
+  "version": "0.0.1",
+  "description": "A registrar client",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/delphin.git"
+  },
+  "author": "@automattic",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Automattic/delphin/issues"
+  },
+  "homepage": "https://github.com/Automattic/delphin#readme",
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

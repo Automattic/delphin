@@ -2,11 +2,12 @@
   "name": "delphin",
   "version": "0.0.1",
   "description": "A registrar client",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "test",
-    "build": "node_modules/.bin/webpack --config webpack.config.js",
-    "start-dev": "npm install && webpack-dev-server --port 1337"
+    "build": "node_modules/.bin/webpack --config webpack.config.js --progress --colors",
+    "start": "node server",
+    "postinstall": "npm run-script build"
   },
   "repository": {
     "type": "git",
@@ -25,8 +26,8 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
+    "babel-runtime": "^6.6.1",
     "lodash": "^4.6.1",
-    "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {

@@ -9,7 +9,7 @@ module.exports = {
 		'bundle' : [
 			'webpack-dev-server/client?/',
 			'webpack/hot/only-dev-server',
-			'./src',
+			path.join( __dirname, 'client' ),
 		]
     },
 	output: {
@@ -23,7 +23,7 @@ module.exports = {
 			{
 				test:   /\.jsx?$/,
 				loader: 'babel-loader',
-				include: path.join( __dirname, '/src' )
+				include: path.join( __dirname, 'client' )
 			},
 			{
 				test: /\.json$/,

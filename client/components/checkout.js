@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { push } from 'react-router-redux';
-import { createUser, createSite } from '../actions/index';
+import { createUser, createSite, createTransaction } from '../actions/index';
 
 const Checkout = React.createClass( {
 	componentDidMount() {
@@ -21,7 +21,7 @@ const Checkout = React.createClass( {
 	},
 
 	createSite() {
-		const rand = Math.ceil( Math.random() * 100000 );
+		const rand = Math.ceil( Math.random() * 990000 );
 
 		this.props.createSite( `foobarbaz${ rand }` );
 	},
@@ -73,6 +73,32 @@ const Checkout = React.createClass( {
 		);
 	},
 
+	renderCheckoutButton() {
+		if ( ! this.props.checkout.site ) {
+			return null;
+		}
+
+		return (
+			<div>
+				<button onClick={ this.props.createTransaction.bind( this, this.props.checkout.site + '.com', this.props.checkout.blogId ) }>create transaction</button>
+			</div>
+		);
+	},
+
+	renderCheckoutDetails() {
+		const { transaction } = this.props.checkout;
+
+		if ( ! transaction ) {
+			return null;
+		}
+
+		return (
+			<div>
+				{ transaction }
+			</div>
+		);
+	},
+
 	render() {
 		return (
 			<div>
@@ -81,6 +107,8 @@ const Checkout = React.createClass( {
 				{ this.renderUserDetails() }
 				{ this.renderCreateSiteButton() }
 				{ this.renderSiteDetails() }
+				{ this.renderCheckoutButton() }
+				{ this.renderCheckoutDetails() }
 			</div>
 		);
 	}
@@ -90,7 +118,7 @@ export default connect(
 	state => {
 		return { checkout: state.checkout };
 	},
-	dispatch => {
+	( dispatch, props ) => {
 		return {
 			redirect: url => {
 				dispatch( push( url ) );
@@ -100,6 +128,9 @@ export default connect(
 			},
 			createUser: ( username, email, password ) => {
 				dispatch( createUser( username, email, password ) );
+			},
+			createTransaction: ( domainName, blogId ) => {
+				dispatch( createTransaction( domainName, blogId ) );
 			}
 		}
 	}

@@ -12,7 +12,8 @@ export function checkout( state = {}, action ) {
 			} );
 		case 'CREATE_SITE_COMPLETE':
 			return Object.assign( {}, state, {
-				site: action.slug
+				site: action.slug,
+				blogId: action.blogId
 			} );
 		default:
 			return state;

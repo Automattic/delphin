@@ -37,7 +37,8 @@ module.exports = {
 		} )
 	],
 	resolve: {
-		extensions: [ '', '.json', '.js', '.jsx' ]
+		extensions: [ '', '.json', '.js', '.jsx' ],
+		root: path.join( __dirname, 'client' ),
 	},
 	devServer: {
 		port: 1337,

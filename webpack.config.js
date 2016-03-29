@@ -5,11 +5,18 @@ var webpack = require( 'webpack' ),
 	path = require( 'path' );
 
 module.exports = {
-	entry:  './src',
+	entry: {
+		'bundle' : [
+			'webpack-dev-server/client?/',
+			'webpack/hot/only-dev-server',
+			'./src',
+		]
+    },
 	output: {
-		path:     'build',
-		filename: 'bundle.js',
-		publicPath: '/build',
+		path: path.join( __dirname, 'build' ),
+		publicPath: '/build/',
+		filename: '[name].js',
+		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},
 	module: {
 		loaders: [
@@ -17,17 +24,35 @@ module.exports = {
 				test:   /\.jsx?$/,
 				loader: 'babel-loader',
 				include: path.join( __dirname, '/src' )
-			}
+			},
+			{
+				test: /\.json$/,
+				loader: 'json-loader'
+			},
 		],
 	},
 	plugins: [
+		new webpack.DefinePlugin( {
+			'process.env': {
+				WPCOM_API_KEY: '"' + process.env.WPCOM_API_KEY + '"'
+			}
+		} ),
 		new webpack.HotModuleReplacementPlugin()
 	],
 	resolve: {
-		extensions: [ '', '.js', '.jsx' ]
+		extensions: [ '', '.json', '.js', '.jsx' ]
 	},
 	devServer: {
 		port: 1337,
 		historyApiFallback: true
-	}
+	},
+	node: {
+		console: false,
+		process: true,
+		global: true,
+		Buffer: true,
+		__filename: 'mock',
+		__dirname: 'mock',
+		fs: 'empty'
+	},
 };

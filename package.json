@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "build": "node_modules/.bin/webpack --config webpack.config.js"
+    "build": "node_modules/.bin/webpack --config webpack.config.js",
+    "start-dev": "webpack-dev-server --port 1337"
   },
   "repository": {
     "type": "git",

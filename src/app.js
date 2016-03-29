@@ -18,7 +18,8 @@ const store = createStore(
 	combineReducers({
 		...reducers,
 		routing: routerReducer
-	})
+	}),
+	window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
 // Create an enhanced history that syncs navigation events with the store
@@ -29,12 +30,12 @@ export default function App() {
 		<Provider store={ store }>
 			<Router history={ history }>
 				<Route path="/" component={ Root }>
-					<Route path="/hello" component={ Hello }></Route>
-					<Route path="/about" component={ About }></Route>
-					<Route path="/search" component={ Search }></Route>
+					<Route path="/hello" component={ Hello } />
+					<Route path="/about" component={ About } />
+					<Route path="/search" component={ Search } />
 				</Route>
 			</Router>
 		</Provider>,
-		document.body
+		document.getElementById( 'content' )
 	);
 };

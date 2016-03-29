@@ -1,10 +1,8 @@
-
-const initialState = {
-	hello: "world"
-};
+import { checkout } from './checkout';
 
 export default {
-	update( state = initialState, action ) {
+	update( state = {}, action ) {
 		return state;
-	}
+	},
+	checkout
 }

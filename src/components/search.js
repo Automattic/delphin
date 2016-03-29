@@ -1,3 +1,5 @@
+import { selectDomain } from '../actions/index';
+import { connect } from 'react-redux';
 import throttle from 'lodash/throttle';
 
 import React from 'react';
@@ -47,10 +49,14 @@ const Search = React.createClass( {
 		} );
 	},
 
+	selectDomain( event ) {
+		this.props.selectDomain( 'test' );
+	},
+
 	renderSuggestions() {
-		return this.state.suggestions.map( ( suggestion ) => {
-			return <p>{ suggestion.domain_name }</p>;
-		} );
+		return this.state.suggestions.map( ( suggestion ) => (
+			<a href="#" onClick={ this.selectDomain } key={ suggestion.domain_name }>{ suggestion.domain_name }</a>
+		) );
 	},
 
 	render() {
@@ -66,4 +72,13 @@ const Search = React.createClass( {
 	}
 } );
 
-export default Search;
+export default connect(
+	undefined,
+	( dispatch ) => {
+		return {
+			selectDomain: name => {
+				dispatch( selectDomain( name ) );
+			}
+		};
+	}
+)( Search );

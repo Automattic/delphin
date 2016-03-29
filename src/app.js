@@ -12,7 +12,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
  * Internal dependencies
  */
 import reducers from './reducers';
-import { About, Hello, Root, Search } from './components';
+import { About, Hello, Root, Search, Checkout } from './components';
 
 const store = createStore(
 	combineReducers({
@@ -33,6 +33,7 @@ export default function App() {
 					<Route path="/hello" component={ Hello } />
 					<Route path="/about" component={ About } />
 					<Route path="/search" component={ Search } />
+					<Route path="/checkout" component={ Checkout } />
 				</Route>
 			</Router>
 		</Provider>,

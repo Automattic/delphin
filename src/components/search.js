@@ -1,9 +1,9 @@
 import { selectDomain } from '../actions/index';
 import { connect } from 'react-redux';
 import throttle from 'lodash/throttle';
-
 import React from 'react';
 import WPCOM from 'wpcom';
+import { Link } from 'react-router';
 
 const wpcomAPI = WPCOM();
 
@@ -49,13 +49,19 @@ const Search = React.createClass( {
 		} );
 	},
 
-	selectDomain( event ) {
-		this.props.selectDomain( 'test' );
+	selectDomain( name, event ) {
+		this.props.selectDomain( name );
 	},
 
 	renderSuggestions() {
 		return this.state.suggestions.map( ( suggestion ) => (
-			<a href="#" onClick={ this.selectDomain } key={ suggestion.domain_name }>{ suggestion.domain_name }</a>
+			<li key={ suggestion.domain_name }>
+				<Link
+					to="/checkout"
+					onClick={ this.selectDomain.bind( null, suggestion.domain_name ) }>
+					{ suggestion.domain_name }
+				</Link>
+			</li>
 		) );
 	},
 
@@ -65,7 +71,9 @@ const Search = React.createClass( {
 				<h1>Find a domain</h1>
 				<input onChange={ this.onChange } />
 				<h2>Suggestions</h2>
-				{ this.renderSuggestions() }
+				<ul>
+					{ this.renderSuggestions() }
+				</ul>
 			</div>
 		);
 

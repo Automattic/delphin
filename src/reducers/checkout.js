@@ -1,8 +1,8 @@
 export function checkout( state = {}, action ) {
-	const { name, type } = action;
+	const { domain, type } = action;
 	switch ( type ) {
 		case 'SELECT_DOMAIN':
-			return { name };
+			return { domain };
 		default:
 			return state;
 	}

@@ -4,7 +4,8 @@
   "description": "A registrar client",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "node_modules/.bin/webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",

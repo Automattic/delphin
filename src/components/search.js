@@ -1,12 +1,69 @@
+import throttle from 'lodash/throttle';
 
 import React from 'react';
 import WPCOM from 'wpcom';
 
-const wpcomAPI = WPCOM( process.env.WPCOM_API_KEY );
-console.log( process.env.WPCOM_API_KEY );
+const wpcomAPI = WPCOM();
 
-export default function Search() {
-	return (
-		<div>Search</div>
-	);
-}
+const Search = React.createClass( {
+	getInitialState() {
+		return {
+			query: '',
+			suggestions: []
+		};
+	},
+
+	componentDidMount() {
+		this.debouncedGetDomainSuggestions = throttle( this.getDomainSuggestions, 500 );
+	},
+
+	onChange( event ) {
+		this.setState( {
+			query: event.target.value
+		}, this.debouncedGetDomainSuggestions );
+	},
+
+	getDomainSuggestions() {
+		this.fetchDomainSuggestions( ( error, response ) => {
+			this.setState( {
+				suggestions: response || []
+			} );
+		} );
+	},
+
+	fetchDomainSuggestions( callback ) {
+		const query = {
+			query: this.state.query,
+			quantity: 10,
+			include_wordpressdotcom: false,
+		};
+
+		wpcomAPI.req.get( '/domains/suggestions', query, function( error, response ) {
+			if ( error ) {
+				return callback( error );
+			}
+
+			return callback( null, response );
+		} );
+	},
+
+	renderSuggestions() {
+		return this.state.suggestions.map( ( suggestion ) => {
+			return <p>{ suggestion.domain_name }</p>;
+		} );
+	},
+
+	render() {
+		return (
+			<div>
+				<h1>Find a domain</h1>
+				<input onChange={ this.onChange } />
+				<h2>Suggestions</h2>
+				{ this.renderSuggestions() }
+			</div>
+		);
+
+	}
+} );
+
+export default Search;

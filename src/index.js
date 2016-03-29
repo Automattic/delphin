@@ -1,6 +1,6 @@
-
-import React from 'react';
-import ReactDOM from 'react-dom';
+/**
+ * External dependencies
+ */
 import App from './App';
 
 App();

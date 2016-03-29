@@ -80,7 +80,7 @@ const Checkout = React.createClass( {
 
 		return (
 			<div>
-				<button onClick={ this.props.createTransaction.bind( this, this.props.checkout.site + '.com', this.props.checkout.blogId ) }>create transaction</button>
+				<button onClick={ this.props.createTransaction.bind( this, this.props.checkout.domain, this.props.checkout.blogId ) }>create transaction</button>
 			</div>
 		);
 	},

@@ -17,6 +17,10 @@ if ( isDevelopment ) {
 	app.set( 'backend-port', app.get( 'port' ) + 1 );
 
 	var config = require( '../webpack.config' );
+	config.entry.bundle.unshift( 'webpack/hot/only-dev-server' );
+	config.entry.bundle.unshift( 'webpack-dev-server/client?/' );
+	config.plugins.push( new webpack.HotModuleReplacementPlugin() );
+
 	var WebpackDevServer = require( 'webpack-dev-server' );
 	var compiler = webpack( config );
 	var devServer = new WebpackDevServer( compiler, {

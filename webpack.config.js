@@ -7,8 +7,6 @@ var webpack = require( 'webpack' ),
 module.exports = {
 	entry: {
 		'bundle' : [
-			'webpack-dev-server/client?/',
-			'webpack/hot/only-dev-server',
 			path.join( __dirname, 'client' ),
 		]
     },
@@ -36,8 +34,7 @@ module.exports = {
 			'process.env': {
 				WPCOM_API_KEY: '"' + process.env.WPCOM_API_KEY + '"'
 			}
-		} ),
-		new webpack.HotModuleReplacementPlugin()
+		} )
 	],
 	resolve: {
 		extensions: [ '', '.json', '.js', '.jsx' ]

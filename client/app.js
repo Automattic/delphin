@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
  * Internal dependencies
  */
 import reducers from './reducers';
-import { About, Hello, Root, Search, Checkout } from './components';
+import { About, Hello, Root, Search, Checkout, Success } from './components';
 
 const store = createStore(
 	combineReducers({
@@ -36,6 +36,7 @@ export default function App() {
 					<Route path="/about" component={ About } />
 					<Route path="/search" component={ Search } />
 					<Route path="/checkout" component={ Checkout } />
+					<Route path="/success" component={ Success } />
 				</Route>
 			</Router>
 		</Provider>,

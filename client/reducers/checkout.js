@@ -15,6 +15,8 @@ export function checkout( state = {}, action ) {
 				site: action.slug,
 				blogId: action.blogId
 			} );
+		case 'CREATE_TRANSACTION_COMPLETE':
+			return Object.assign( {}, state, { form: action.form } );
 		default:
 			return state;
 	}

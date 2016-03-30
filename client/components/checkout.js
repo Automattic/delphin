@@ -1,12 +1,26 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { push } from 'react-router-redux';
-import { createUser, createSite, createTransaction } from '../actions/index';
+import { createUser, createSite, createTransaction, processCheckout } from '../actions/index';
 
 const Checkout = React.createClass( {
+	getInitialState() {
+		return {
+			form: {
+				email: `drew.blaisdell+${ Math.ceil( Math.random() * 999999 ) }@automattic.com`
+			}
+		};
+	},
+
 	componentDidMount() {
 		if ( ! this.props.checkout.domain ) {
 			this.props.redirect( '/search' );
+		}
+	},
+
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.checkout.form ) {
+			this.props.redirect( '/success' );
 		}
 	},
 
@@ -99,15 +113,44 @@ const Checkout = React.createClass( {
 		);
 	},
 
+	updateForm( event ) {
+		const { form } = this.state;
+
+		this.setState( { form: Object.assign( {}, form, { [ event.target.name ]: event.target.value } ) } );
+	},
+
+	checkout( event ) {
+		event.preventDefault();
+
+		this.props.processCheckout( Object.assign( {}, this.state.form, { domain: this.props.checkout.domain } ) );
+	},
+
 	render() {
 		return (
 			<div>
 				<h1>registering { this.props.checkout.domain }</h1>
-				<button onClick={ this.createUser }>create user</button>
+				<form onChange={ this.updateForm } onSubmit={ this.checkout }>
+					<label>username</label>
+					<input type="text" name="username" />
+					<label>email</label>
+					<input type="text" name="email" onChange={ this.updateForm } value={ this.state.form.email } />
+					<label>password</label>
+					<input type="text" name="password" />
+					<label>name</label>
+					<input type="text" name="name" />
+					<label>credit card #</label>
+					<input type="text" name="credit-card-number" />
+					<label>cvv</label>
+					<input type="text" name="cvv" />
+					<label>expiration date in MM/YY format</label>
+					<input type="text" name="expiration-date" placeholder="01/20" />
+					<label>postal code</label>
+					<input type="text" name="postal-code" />
+					<br />
+					<button>Checkout</button>
+				</form>
 				{ this.renderUserDetails() }
-				{ this.renderCreateSiteButton() }
 				{ this.renderSiteDetails() }
-				{ this.renderCheckoutButton() }
 				{ this.renderCheckoutDetails() }
 			</div>
 		);
@@ -131,6 +174,9 @@ export default connect(
 			},
 			createTransaction: ( domainName, blogId ) => {
 				dispatch( createTransaction( domainName, blogId ) );
+			},
+			processCheckout: form => {
+				dispatch( processCheckout( form ) );
 			}
 		}
 	}

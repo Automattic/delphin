@@ -13,54 +13,63 @@ export function selectDomain( domain ) {
 	};
 }
 
-export function createUser( username, email, password ) {
+export function createUser( form ) {
 	return dispatch => {
 		wpcomAPI.req.post( '/users/new', {
-			username,
-			email,
-			password,
+			username: form.username,
+			email: form.email,
+			password: form.password,
 			validate: false,
 			client_id: CLIENT_ID,
 			client_secret: CLIENT_SECRET
 		}, ( error, data ) => {
-			dispatch( createUserComplete( username, email, password, data.bearer_token ) );
-
 			wpcomAPI = WPCOM( data.bearer_token );
-		} )
-	};
-}
 
-export function createUserComplete( username, email, password, bearerToken ) {
-	return {
-		type: 'CREATE_USER_COMPLETE',
-		username,
-		email,
-		password,
-		bearerToken
-	};
-}
-
-export function createSite( slug ) {
-	return dispatch => {
-		wpcomAPI.req.post( '/sites/new', {
-			blog_name: slug,
-			blog_title: slug,
-			lang_id: 1,
-			locale: 'en',
-			validate: false,
-			client_id: CLIENT_ID,
-			client_secret: CLIENT_SECRET
-		}, ( error, data ) => {
-			dispatch( createSiteComplete( slug, data.blog_details.blogid ) );
+			dispatch( createUserComplete( form ) );
 		} );
 	};
 }
 
-export function createSiteComplete( slug, blogId ) {
-	return {
-		type: 'CREATE_SITE_COMPLETE',
-		slug,
-		blogId
+export function createUserComplete( form ) {
+	// return {
+	// 	type: 'CREATE_USER_COMPLETE',
+	// 	username,
+	// 	email,
+	// 	password,
+	// 	bearerToken
+	// };
+
+	return dispatch => {
+		dispatch( createSite( form ) );
+	};
+}
+
+export function createSite( form ) {
+	return dispatch => {
+		wpcomAPI.req.post( '/sites/new', {
+			blog_name: form.domain,
+			blog_title: form.domain,
+			lang_id: 1,
+			locale: 'en',
+			validate: false,
+			find_available_url: true,
+			client_id: CLIENT_ID,
+			client_secret: CLIENT_SECRET
+		}, ( error, data ) => {
+			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
+		} );
+	};
+}
+
+export function createSiteComplete( form ) {
+	// return {
+	// 	type: 'CREATE_SITE_COMPLETE',
+	// 	slug,
+	// 	blogId
+	// };
+
+	return dispatch => {
+		dispatch( createTransaction( form ) );
 	};
 }
 
@@ -113,13 +122,13 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	}
 }
 
-export function createTransaction( domainName, blogId ) {
+export function createTransaction( form ) {
 	const cardDetails = {
-		name: 'John Smith',
-		number: '4556247566398191',
-		cvv: '451',
-		'expiration-date': '01/20',
-		'postal-code': '94705'
+		name: form.name,
+		number: form['credit-card-number'],
+		cvv: form.cvv,
+		'expiration-date': form['expiration-date'],
+		'postal-code': form['postal-code']
 	};
 
 	return dispatch => {
@@ -129,14 +138,14 @@ export function createTransaction( domainName, blogId ) {
 				'payment_method': 'WPCOM_Billing_MoneyPress_Paygate',
 				'locale': 'en',
 				'cart': {
-					'blog_id': blogId,
+					'blog_id': form.blogId,
 					'currency': 'GBP',
 					'temporary': 1,
 					'extra': {},
 					'products': [
 						{
 							'product_id': 6,
-							'meta': domainName,
+							'meta': form.domain,
 							'volume': 1,
 							'free_trial': false,
 						}
@@ -154,15 +163,21 @@ export function createTransaction( domainName, blogId ) {
 					'phone': '666-666-666',
 				}
 			}, ( error, data ) => {
-				dispatch( createTransactionComplete( site ) );
+				dispatch( createTransactionComplete( form ) );
 			} );
 		} );
 	};
 }
 
-export function createTransactionComplete( site ) {
+export function createTransactionComplete( form ) {
 	return {
 		type: 'CREATE_TRANSACTION_COMPLETE',
-		site
+		form
+	};
+}
+
+export function processCheckout( form ) {
+	return dispatch => {
+		dispatch( createUser( form ) );
 	};
 }

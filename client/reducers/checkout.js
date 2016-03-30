@@ -5,18 +5,22 @@ export function checkout( state = {}, action ) {
 			return { domain };
 		case 'CREATE_USER_COMPLETE':
 			return Object.assign( {}, state, {
-				username: action.username,
-				email: action.email,
-				password: action.password,
-				bearerToken: action.bearerToken
+				user: {
+					username: action.username,
+					email: action.email,
+					password: action.password,
+					bearerToken: action.bearerToken
+				}
 			} );
 		case 'CREATE_SITE_COMPLETE':
 			return Object.assign( {}, state, {
-				site: action.slug,
-				blogId: action.blogId
+				site: {
+					domain: action.domain,
+					blogId: action.blogId
+				}
 			} );
 		case 'CREATE_TRANSACTION_COMPLETE':
-			return Object.assign( {}, state, { form: action.form } );
+			return Object.assign( {}, state, { transaction: action.form } );
 		default:
 			return state;
 	}

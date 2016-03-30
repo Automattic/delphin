@@ -25,22 +25,18 @@ export function createUser( form ) {
 		}, ( error, data ) => {
 			wpcomAPI = WPCOM( data.bearer_token );
 
-			dispatch( createUserComplete( form ) );
+			dispatch( createUserComplete( form, data.bearer_token ) );
 		} );
 	};
 }
 
-export function createUserComplete( form ) {
-	// return {
-	// 	type: 'CREATE_USER_COMPLETE',
-	// 	username,
-	// 	email,
-	// 	password,
-	// 	bearerToken
-	// };
-
-	return dispatch => {
-		dispatch( createSite( form ) );
+export function createUserComplete( form, bearerToken ) {
+	return {
+		type: 'CREATE_USER_COMPLETE',
+		username: form.username,
+		email: form.email,
+		password: form.password,
+		bearerToken
 	};
 }
 
@@ -62,14 +58,10 @@ export function createSite( form ) {
 }
 
 export function createSiteComplete( form ) {
-	// return {
-	// 	type: 'CREATE_SITE_COMPLETE',
-	// 	slug,
-	// 	blogId
-	// };
-
-	return dispatch => {
-		dispatch( createTransaction( form ) );
+	return {
+		type: 'CREATE_SITE_COMPLETE',
+		domain: form.domain,
+		blogId: form.blogId
 	};
 }
 
@@ -173,11 +165,5 @@ export function createTransactionComplete( form ) {
 	return {
 		type: 'CREATE_TRANSACTION_COMPLETE',
 		form
-	};
-}
-
-export function processCheckout( form ) {
-	return dispatch => {
-		dispatch( createUser( form ) );
 	};
 }

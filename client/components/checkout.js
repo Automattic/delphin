@@ -7,8 +7,13 @@ const Checkout = React.createClass( {
 	getInitialState() {
 		return {
 			form: {
-				email: `drew.blaisdell+${ Math.ceil( Math.random() * 999999 ) }@automattic.com`
-			}
+				email: `drew.blaisdell+${ Math.ceil( Math.random() * 999999 ) }@automattic.com`,
+				'credit-card-number': 4446186116594038,
+				'postal-code': 97227,
+				'expiration-date': '03/17',
+				cvv: 123
+			},
+			submiting: false
 		};
 	},
 
@@ -19,7 +24,22 @@ const Checkout = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.checkout.form ) {
+		const { checkout } = nextProps,
+			{ form } = this.state;
+
+		if ( ! checkout ) {
+			return;
+		}
+
+		if ( checkout.user && ! checkout.site ) {
+			return this.props.createSite( Object.assign( {}, this.state.form, { domain: checkout.domain } ) );
+		}
+
+		if ( checkout.site && ! checkout.transaction ) {
+			return this.props.createTransaction( Object.assign( {}, form, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
+		}
+
+		if ( checkout.transaction ) {
 			this.props.redirect( '/success' );
 		}
 	},
@@ -41,11 +61,11 @@ const Checkout = React.createClass( {
 	},
 
 	renderUserDetails() {
-		if ( ! this.props.checkout.username ) {
+		if ( ! this.props.checkout.user ) {
 			return null;
 		}
 
-		const { username, email, password, bearerToken } = this.props.checkout;
+		const { username, email, password, bearerToken } = this.props.checkout.user;
 
 		return (
 			<div>
@@ -61,18 +81,6 @@ const Checkout = React.createClass( {
 		);
 	},
 
-	renderCreateSiteButton() {
-		if ( ! this.props.checkout.username ) {
-			return null;
-		}
-
-		return (
-			<div>
-				<button onClick={ this.createSite }>create site</button>
-			</div>
-		);
-	},
-
 	renderSiteDetails() {
 		const { site } = this.props.checkout;
 
@@ -82,33 +90,7 @@ const Checkout = React.createClass( {
 
 		return (
 			<div>
-				{ site }
-			</div>
-		);
-	},
-
-	renderCheckoutButton() {
-		if ( ! this.props.checkout.site ) {
-			return null;
-		}
-
-		return (
-			<div>
-				<button onClick={ this.props.createTransaction.bind( this, this.props.checkout.domain, this.props.checkout.blogId ) }>create transaction</button>
-			</div>
-		);
-	},
-
-	renderCheckoutDetails() {
-		const { transaction } = this.props.checkout;
-
-		if ( ! transaction ) {
-			return null;
-		}
-
-		return (
-			<div>
-				{ transaction }
+				{ site.domain } { site.blogId }
 			</div>
 		);
 	},
@@ -122,36 +104,48 @@ const Checkout = React.createClass( {
 	checkout( event ) {
 		event.preventDefault();
 
-		this.props.processCheckout( Object.assign( {}, this.state.form, { domain: this.props.checkout.domain } ) );
+		this.setState( { submitting: true } );
+
+		this.props.createUser( this.state.form );
+	},
+
+	renderForm() {
+		if ( this.state.submitting ) {
+			return null;
+		}
+
+		return (
+			<form onChange={ this.updateForm } onSubmit={ this.checkout }>
+				<label>username</label>
+				<input type="text" name="username" />
+				<label>email</label>
+				<input type="text" name="email" onChange={ this.updateForm } value={ this.state.form.email } />
+				<label>password</label>
+				<input type="text" name="password" />
+				<label>name</label>
+				<input type="text" name="name" />
+				<label>credit card #</label>
+				<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
+				<label>cvv</label>
+				<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form['cvv'] } />
+				<label>expiration date in MM/YY format</label>
+				<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form['expiration-date'] } placeholder="01/20" />
+				<label>postal code</label>
+				<input type="text" name="postal-code" onChange={ this.updateForm } value={ this.state.form['postal-code'] } />
+				<br />
+				<button>Checkout</button>
+			</form>
+		);
 	},
 
 	render() {
 		return (
 			<div>
 				<h1>registering { this.props.checkout.domain }</h1>
-				<form onChange={ this.updateForm } onSubmit={ this.checkout }>
-					<label>username</label>
-					<input type="text" name="username" />
-					<label>email</label>
-					<input type="text" name="email" onChange={ this.updateForm } value={ this.state.form.email } />
-					<label>password</label>
-					<input type="text" name="password" />
-					<label>name</label>
-					<input type="text" name="name" />
-					<label>credit card #</label>
-					<input type="text" name="credit-card-number" />
-					<label>cvv</label>
-					<input type="text" name="cvv" />
-					<label>expiration date in MM/YY format</label>
-					<input type="text" name="expiration-date" placeholder="01/20" />
-					<label>postal code</label>
-					<input type="text" name="postal-code" />
-					<br />
-					<button>Checkout</button>
-				</form>
+				{ this.state.submitting && 'beep boop...' }
+				{ this.renderForm() }
 				{ this.renderUserDetails() }
 				{ this.renderSiteDetails() }
-				{ this.renderCheckoutDetails() }
 			</div>
 		);
 	}
@@ -166,17 +160,14 @@ export default connect(
 			redirect: url => {
 				dispatch( push( url ) );
 			},
-			createSite: slug => {
-				dispatch( createSite( slug ) );
+			createSite: form => {
+				dispatch( createSite( form ) );
 			},
-			createUser: ( username, email, password ) => {
-				dispatch( createUser( username, email, password ) );
+			createUser: ( form ) => {
+				dispatch( createUser( form ) );
 			},
-			createTransaction: ( domainName, blogId ) => {
-				dispatch( createTransaction( domainName, blogId ) );
-			},
-			processCheckout: form => {
-				dispatch( processCheckout( form ) );
+			createTransaction: ( form ) => {
+				dispatch( createTransaction( form ) );
 			}
 		}
 	}

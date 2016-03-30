@@ -4,13 +4,13 @@ import { push } from 'react-router-redux';
 
 const Success = React.createClass( {
 	componentWillMount() {
-		if ( ! this.props.form ) {
+		if ( ! this.props.transaction ) {
 			this.props.redirect( '/search' );
 		}
 	},
 
 	render() {
-		if ( ! this.props.form ) {
+		if ( ! this.props.transaction ) {
 			return null;
 		}
 
@@ -20,7 +20,7 @@ const Success = React.createClass( {
 			email,
 			blogId,
 			password
-		} = this.props.form;
+		} = this.props.transaction;
 
 		return (
 			<div style={{ textAlign: 'center' }}>
@@ -38,7 +38,7 @@ const Success = React.createClass( {
 export default connect(
 	state => {
 		return {
-			form: state.checkout && state.checkout.form
+			transaction: state.checkout && state.checkout.transaction
 		};
 	},
 	( dispatch, props ) => {

@@ -19,7 +19,12 @@
     "url": "https://github.com/Automattic/delphin/issues"
   },
   "homepage": "https://github.com/Automattic/delphin#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^6.0.2",
+    "eslint": "^2.2.0",
+    "eslint-plugin-react": "^4.3.0",
+    "eslint-plugin-wpcalypso": "^1.1.3"
+  },
   "dependencies": {
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",

@@ -23,7 +23,7 @@ const Success = React.createClass( {
 		} = this.props.transaction;
 
 		return (
-			<div style={{ textAlign: 'center' }}>
+			<div style={ { textAlign: 'center' } }>
 				<h1>You registered { domain }!!!</h1>
 				<h2>we're so happy</h2>
 				<h3>your username is { username }</h3>
@@ -41,7 +41,7 @@ export default connect(
 			transaction: state.checkout && state.checkout.transaction
 		};
 	},
-	( dispatch, props ) => {
+	dispatch => {
 		return {
 			redirect: url => {
 				dispatch( push( url ) );

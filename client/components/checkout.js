@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { push } from 'react-router-redux';
-import { createUser, createSite, createTransaction, processCheckout } from '../actions/index';
+import { createUser, createSite, createTransaction } from '../actions/index';
 
 const Checkout = React.createClass( {
 	getInitialState() {
@@ -127,7 +127,7 @@ const Checkout = React.createClass( {
 				<label>credit card #</label>
 				<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
 				<label>cvv</label>
-				<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form['cvv'] } />
+				<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
 				<label>expiration date in MM/YY format</label>
 				<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form['expiration-date'] } placeholder="01/20" />
 				<label>postal code</label>
@@ -155,7 +155,7 @@ export default connect(
 	state => {
 		return { checkout: state.checkout };
 	},
-	( dispatch, props ) => {
+	dispatch => {
 		return {
 			redirect: url => {
 				dispatch( push( url ) );
@@ -169,6 +169,6 @@ export default connect(
 			createTransaction: ( form ) => {
 				dispatch( createTransaction( form ) );
 			}
-		}
+		};
 	}
 )( Checkout );

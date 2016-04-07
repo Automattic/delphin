@@ -49,7 +49,7 @@ const Search = React.createClass( {
 		} );
 	},
 
-	selectDomain( name, event ) {
+	selectDomain( name ) {
 		this.props.selectDomain( name );
 	},
 
@@ -76,7 +76,6 @@ const Search = React.createClass( {
 				</ul>
 			</div>
 		);
-
 	}
 } );
 

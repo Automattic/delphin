@@ -78,16 +78,16 @@ function getPaygateParameters( cardDetails ) {
 }
 
 function createPaygateToken( requestType, cardDetails, callback ) {
-	wpcomAPI.req.get( '/me/paygate-configuration', { request_type: requestType }, function ( error, configuration ) {
+	wpcomAPI.req.get( '/me/paygate-configuration', { request_type: requestType }, function( error, configuration ) {
 		if ( error ) {
 			callback( error );
 			return;
 		}
 
-		paygateLoader.ready( configuration.js_url, function( error, Paygate ) {
+		paygateLoader.ready( configuration.js_url, function( innerError, Paygate ) {
 			var parameters;
-			if ( error ) {
-				callback( error );
+			if ( innerError ) {
+				callback( innerError );
 				return;
 			}
 
@@ -126,35 +126,35 @@ export function createTransaction( form ) {
 	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			wpcomAPI.req.post( '/me/transactions', {
-				'payment_key': response,
-				'payment_method': 'WPCOM_Billing_MoneyPress_Paygate',
-				'locale': 'en',
-				'cart': {
-					'blog_id': form.blogId,
-					'currency': 'GBP',
-					'temporary': 1,
-					'extra': {},
-					'products': [
+				payment_key: response,
+				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
+				locale: 'en',
+				cart: {
+					blog_id: form.blogId,
+					currency: 'GBP',
+					temporary: 1,
+					extra: {},
+					products: [
 						{
-							'product_id': 6,
-							'meta': form.domain,
-							'volume': 1,
-							'free_trial': false,
+							product_id: 6,
+							meta: form.domain,
+							volume: 1,
+							free_trial: false,
 						}
 					],
 				},
-				'domain_details': {
-					'first_name': 'Wesley',
-					'last_name': 'Snipes',
-					'address_1': 'The Tomb of Dracula road',
-					'city': 'Boston',
-					'state': 'MA',
-					'postal_code': '02110',
-					'country_code': 'US',
-					'email': 'wesley@snipes.com',
-					'phone': '666-666-666',
+				domain_details: {
+					first_name: 'Wesley',
+					last_name: 'Snipes',
+					address_1: 'The Tomb of Dracula road',
+					city: 'Boston',
+					state: 'MA',
+					postal_code: '02110',
+					country_code: 'US',
+					email: 'wesley@snipes.com',
+					phone: '666-666-666',
 				}
-			}, ( error, data ) => {
+			}, () => {
 				dispatch( createTransactionComplete( form ) );
 			} );
 		} );

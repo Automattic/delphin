@@ -21,6 +21,13 @@ if ( isDevelopment ) {
 	config.entry.bundle.unshift( 'webpack-dev-server/client?/' );
 	config.plugins.push( new webpack.HotModuleReplacementPlugin() );
 
+	config.module.loaders.unshift( {
+		test:   /\.jsx?$/,
+		loader: 'react-hot',
+		include: path.join( __dirname, '../client' )
+	} );
+	console.log( config.module.loaders );
+
 	var WebpackDevServer = require( 'webpack-dev-server' );
 	var compiler = webpack( config );
 	var devServer = new WebpackDevServer( compiler, {

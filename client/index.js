@@ -17,7 +17,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import reducers from './state/reducers';
+import reducers from './state';
 
 const store = createStore(
 	combineReducers( {

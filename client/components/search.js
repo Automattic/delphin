@@ -1,10 +1,12 @@
-import { selectDomain } from '../actions/index';
 import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
 import React from 'react';
 import WPCOM from 'wpcom';
 
 import SuggestionComponent from './suggestion';
+
+import { reduxForm } from 'redux-form';
+import { selectDomain } from '../actions/index';
 
 const wpcomAPI = WPCOM();
 
@@ -24,7 +26,6 @@ CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 const Search = React.createClass( {
 	getInitialState() {
 		return {
-			query: '',
 			suggestions: []
 		};
 	},
@@ -33,33 +34,25 @@ const Search = React.createClass( {
 		this.debouncedGetDomainSuggestions = debounce( this.getDomainSuggestions, 500 );
 	},
 
-	onChange( event ) {
-		this.setState( {
-			query: event.target.value
-		}, this.debouncedGetDomainSuggestions );
+	componentWillReceiveProps( nextProps ) {
+		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
+			this.debouncedFetchResults( nextProps.fields.query.value );
+		}
 	},
 
-	getDomainSuggestions() {
-		this.fetchDomainSuggestions( ( error, response ) => {
-			this.setState( {
-				suggestions: response || []
-			} );
-		} );
-	},
-
-	fetchDomainSuggestions( callback ) {
-		const query = {
-			query: this.state.query,
+	fetchResults( query ) {
+		const payload = {
+			query,
 			quantity: 10,
 			include_wordpressdotcom: false,
 		};
 
-		wpcomAPI.req.get( '/domains/suggestions', query, function( error, response ) {
+		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, response ) => {
 			if ( error ) {
-				return callback( error );
+				return;
 			}
 
-			return callback( null, response );
+			this.setState( { suggestions: response || [] } );
 		} );
 	},
 
@@ -77,10 +70,12 @@ const Search = React.createClass( {
 	},
 
 	render() {
+		const { fields: { query } } = this.props;
+
 		return (
 			<div>
 				<h1 style={ CSS.h1 }>Find a domain</h1>
-				<input onChange={ this.onChange } style={ CSS.field } />
+				<input { ...query } style={ CSS.field } />
 				<h2 style={ CSS.heading }>Suggestions</h2>
 				<ul>
 					{ this.renderSuggestions() }
@@ -89,6 +84,11 @@ const Search = React.createClass( {
 		);
 	}
 } );
+
+Search = reduxForm( {
+	form: 'search',
+	fields: [ 'query' ]
+} )( Search );
 
 export default connect(
 	undefined,

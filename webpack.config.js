@@ -27,6 +27,10 @@ module.exports = {
 				test: /\.json$/,
 				loader: 'json-loader'
 			},
+			{
+				test: /\.scss$/,
+				loader: 'style!css!sass?sourceMap'
+			}
 		],
 	},
 	plugins: [
@@ -38,7 +42,11 @@ module.exports = {
 	],
 	resolve: {
 		extensions: [ '', '.json', '.js', '.jsx' ],
-		root: path.join( __dirname, 'client' ),
+		modulesDirectories: [
+			'node_modules',
+			path.join( __dirname, 'client' ),
+			path.join( __dirname, 'assets' ),
+		]
 	},
 	devServer: {
 		port: 1337,

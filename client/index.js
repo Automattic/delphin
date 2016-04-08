@@ -1,4 +1,9 @@
 /**
+ * Styles
+ */
+import 'styles/app.scss';
+
+/**
  * External dependencies
  */
 import App from './app';

@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
 import React from 'react';
 
@@ -82,12 +81,11 @@ let Search = React.createClass( {
 	}
 } );
 
-Search = reduxForm( {
-	form: 'search',
-	fields: [ 'query' ]
-} )( Search );
-
-export default connect(
+export default reduxForm(
+	{
+		form: 'search',
+		fields: [ 'query' ]
+	},
 	state => ( { results: state.domainSearch.results } ),
 	dispatch => {
 		return {

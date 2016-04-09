@@ -1,14 +1,10 @@
 import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
 import React from 'react';
-import WPCOM from 'wpcom';
 
 import SuggestionComponent from './suggestion';
-
 import { reduxForm } from 'redux-form';
-import { selectDomain } from '../actions/index';
-
-const wpcomAPI = WPCOM();
+import { fetchDomainSuggestions, selectDomain } from '../actions/index';
 
 const CSS = {
 	heading: {
@@ -23,7 +19,7 @@ const CSS = {
 
 CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
-const Search = React.createClass( {
+let Search = React.createClass( {
 	getInitialState() {
 		return {
 			suggestions: []
@@ -41,19 +37,7 @@ const Search = React.createClass( {
 	},
 
 	fetchResults( query ) {
-		const payload = {
-			query,
-			quantity: 10,
-			include_wordpressdotcom: false,
-		};
-
-		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, response ) => {
-			if ( error ) {
-				return;
-			}
-
-			this.setState( { suggestions: response || [] } );
-		} );
+		this.props.fetchDomainSuggestions( query );
 	},
 
 	selectDomain( name ) {
@@ -62,6 +46,19 @@ const Search = React.createClass( {
 
 	renderSuggestions() {
 		return this.state.suggestions.map( ( suggestion ) => (
+			<SuggestionComponent
+				key={ suggestion.domain_name }
+				selectDomain={ this.selectDomain }
+				suggestion={ suggestion } />
+		) );
+	},
+
+	renderResults() {
+		if ( ! this.props.results ) {
+			return null;
+		}
+
+		return this.props.results.map( ( suggestion ) => (
 			<SuggestionComponent
 				key={ suggestion.domain_name }
 				selectDomain={ this.selectDomain }
@@ -78,7 +75,7 @@ const Search = React.createClass( {
 				<input { ...query } style={ CSS.field } />
 				<h2 style={ CSS.heading }>Suggestions</h2>
 				<ul>
-					{ this.renderSuggestions() }
+					{ this.renderResults() }
 				</ul>
 			</div>
 		);
@@ -91,9 +88,12 @@ Search = reduxForm( {
 } )( Search );
 
 export default connect(
-	undefined,
-	( dispatch ) => {
+	state => ( { results: state.domainSearch.results } ),
+	dispatch => {
 		return {
+			fetchDomainSuggestions: query => {
+				dispatch( fetchDomainSuggestions( query ) );
+			},
 			selectDomain: name => {
 				dispatch( selectDomain( name ) );
 			}

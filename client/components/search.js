@@ -7,6 +7,20 @@ import { Link } from 'react-router';
 
 const wpcomAPI = WPCOM();
 
+const CSS = {
+	heading: {
+		fontFamily: 'Helvetica Neue',
+		fontWeight: '100'
+	},
+	field: {
+		fontSize: '4em',
+		width: '100%'
+	}
+};
+
+CSS.h1 = CSS.heading;
+CSS.h1.textAlign = 'center';
+
 const Search = React.createClass( {
 	getInitialState() {
 		return {
@@ -68,9 +82,9 @@ const Search = React.createClass( {
 	render() {
 		return (
 			<div>
-				<h1>Find a domain</h1>
-				<input onChange={ this.onChange } />
-				<h2>Suggestions</h2>
+				<h1 style={ CSS.h1 }>Find a domain</h1>
+				<input onChange={ this.onChange } style={ CSS.field } />
+				<h2 style={ CSS.heading }>Suggestions</h2>
 				<ul>
 					{ this.renderSuggestions() }
 				</ul>

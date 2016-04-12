@@ -1,10 +1,13 @@
 # Delphin
-A registrar client
+
+Delphin is a place where you register a `.blog` domain in the easiest way.
+
+It’s built with JavaScript – a very light [node](https://nodejs.org) server, [React.js](https://facebook.github.io/react/), [Redux](http://redux.js.org/), and many other wonderful libraries.
 
 ### Getting started
-1. Install webpack-dev-server globally: `npm install webpack-dev-server -g`
-2. Install npm modules: `npm install`
-3. Run the server `npm start`
 
-### Registering a domain
-- Only .com names can be registered right now. Avoid clicking a non-.com TLD in the search results.
+1. Make sure you have `git`, `node`, and `npm` installed
+2. Clone this repository locally
+3. Execute `npm install` from the root directory of the repository
+4. Start the server with `npm start`
+5. Open `localhost:1337` in your browser

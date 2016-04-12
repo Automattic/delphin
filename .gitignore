@@ -26,6 +26,9 @@ build
 # Dependency directory
 node_modules
 
+# Optional JetBrains IDE directory
+.idea
+
 # Optional npm cache directory
 .npm
 

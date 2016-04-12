@@ -26,7 +26,7 @@ let Search = React.createClass( {
 	},
 
 	componentDidMount() {
-		this.debouncedGetDomainSuggestions = debounce( this.fetchResults, 500 );
+		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 	},
 
 	componentWillReceiveProps( nextProps ) {

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
 import React from 'react';
 import WPCOM from 'wpcom';
-import { Link } from 'react-router';
+
+import SuggestionComponent from './suggestion';
 
 const wpcomAPI = WPCOM();
 
@@ -68,13 +69,10 @@ const Search = React.createClass( {
 
 	renderSuggestions() {
 		return this.state.suggestions.map( ( suggestion ) => (
-			<li key={ suggestion.domain_name }>
-				<Link
-					to="/checkout"
-					onClick={ this.selectDomain.bind( null, suggestion.domain_name ) }>
-					{ suggestion.domain_name }
-				</Link>
-			</li>
+			<SuggestionComponent
+				key={ suggestion.domain_name }
+				selectDomain={ this.selectDomain }
+				suggestion={ suggestion } />
 		) );
 	},
 

@@ -4,7 +4,7 @@
   "description": "A registrar client",
   "main": "server/index.js",
   "scripts": {
-    "test": "test",
+    "test": "echo we have not written tests yet",
     "build": "node_modules/.bin/webpack --config webpack.config.js --progress --colors",
     "start": "node server",
     "postinstall": "npm run-script build"

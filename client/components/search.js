@@ -18,8 +18,7 @@ const CSS = {
 	}
 };
 
-CSS.h1 = CSS.heading;
-CSS.h1.textAlign = 'center';
+CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
 const Search = React.createClass( {
 	getInitialState() {

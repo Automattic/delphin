@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { IndexRoute, Router, Route } from 'react-router';
 
 /**
  * Internal dependencies
@@ -13,6 +13,7 @@ export default function App( { history } ) {
 	return (
 		<Router history={ history }>
 			<Route path="/" component={ Root }>
+				<IndexRoute component={ Search } />
 				<Route path="/hello" component={ Hello } />
 				<Route path="/about" component={ About } />
 				<Route path="/search" component={ Search } />

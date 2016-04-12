@@ -1,0 +1,14 @@
+{
+	"allfiles": false,
+	"ignoreerrors": true,
+	"dirpattern": "(server)|(client)",
+	"maxfod": 20,
+	"maxcost": 50,
+	"maxsize": 25,
+	"minmi": 100,
+	"maxcyc": 8,
+	"maxcycden": 100,
+	"maxhd": 20,
+	"maxhv": 500,
+	"maxhe": 2000
+}

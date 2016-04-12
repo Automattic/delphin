@@ -4,8 +4,9 @@
   "description": "A registrar client",
   "main": "server/index.js",
   "scripts": {
-    "test": "test",
+    "test": "npm run complexity",
     "build": "node_modules/.bin/webpack --config webpack.config.js --progress --colors",
+    "complexity": "cr client server",
     "start": "node server",
     "postinstall": "npm run-script build"
   },

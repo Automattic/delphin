@@ -32,7 +32,7 @@ if ( isDevelopment ) {
 		stats: { colors: true }
 	} );
 
-	devServer.listen( app.get( 'port' ), 'localhost', function( err ) {
+	devServer.listen( app.get( 'port' ), function( err ) {
 		console.log( err || 'Server listening on http://localhost:' + app.get( 'port' ) );
 	} );
 	app.listen( app.get( 'backend-port' ), function( err ) {

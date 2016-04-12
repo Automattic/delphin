@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Search from './search';
 
 const CSS = {
 	body: {
@@ -25,14 +24,10 @@ export default function Root( { children } ) {
 	return (
 		<div style={ CSS.body }>
 			<header style={ CSS.header }>
-				<Link style={ CSS.headerLink } to="/">Home</Link>
-				<Link style={ CSS.headerLink } to="/about">About</Link>
 				<Link style={ CSS.headerLink } to="/search">Search</Link>
+				<Link style={ CSS.headerLink } to="/about">About</Link>
 			</header>
-			<div style={ CSS.main }>
-				<Search />
-			</div>
-			<div style={ { marginTop: '1.5em' } }>{ children }</div>
+			<div style={ CSS.main }>{ children }</div>
 		</div>
 	);
 }

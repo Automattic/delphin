@@ -1,6 +1,6 @@
 import { selectDomain } from '../actions/index';
 import { connect } from 'react-redux';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import React from 'react';
 import WPCOM from 'wpcom';
 import { Link } from 'react-router';
@@ -29,7 +29,7 @@ const Search = React.createClass( {
 	},
 
 	componentDidMount() {
-		this.debouncedGetDomainSuggestions = throttle( this.getDomainSuggestions, 500 );
+		this.debouncedGetDomainSuggestions = debounce( this.getDomainSuggestions, 500 );
 	},
 
 	onChange( event ) {

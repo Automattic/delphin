@@ -1,22 +1,19 @@
 /**
  * External dependencies
  */
-import App from './app';
-
-/**
- * External dependencies
- */
+import { browserHistory } from 'react-router';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
 /**
  * Internal dependencies
  */
+import App from './app';
 import reducers from './reducers';
 
 const store = createStore(
@@ -30,6 +27,8 @@ const store = createStore(
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );
+
+injectTapEventPlugin();
 
 ReactDOM.render(
 	<Provider store={ store }>

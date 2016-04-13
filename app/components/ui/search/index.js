@@ -1,4 +1,6 @@
+
 import debounce from 'lodash/debounce';
+import i18n from 'lib/i18n';
 import React from 'react';
 
 import SuggestionComponent from './suggestion';
@@ -70,9 +72,9 @@ let Search = React.createClass( {
 
 		return (
 			<div>
-				<h1 style={ CSS.h1 }>Find a domain</h1>
+				<h1 style={ CSS.h1 }>{ i18n.translate( 'Enter a domain' ) }</h1>
 				<input { ...query } style={ CSS.field } />
-				<h2 style={ CSS.heading }>Suggestions</h2>
+				<h2 style={ CSS.heading }>{ i18n.translate( 'Suggestions' ) }</h2>
 				<ul>
 					{ this.renderResults() }
 				</ul>

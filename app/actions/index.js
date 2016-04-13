@@ -92,7 +92,6 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 		}
 
 		paygateLoader.ready( configuration.js_url, function( innerError, Paygate ) {
-			var parameters;
 			if ( innerError ) {
 				callback( innerError );
 				return;
@@ -103,7 +102,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 			Paygate.setPublicKey( configuration.public_key );
 			Paygate.setEnvironment( configuration.environment );
 
-			parameters = getPaygateParameters( cardDetails );
+			const parameters = getPaygateParameters( cardDetails );
 			Paygate.createToken( parameters, onSuccess, onFailure );
 		} );
 	} );

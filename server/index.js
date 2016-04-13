@@ -24,7 +24,11 @@ if ( isDevelopment ) {
 	config.module.loaders.unshift( {
 		test: /\.jsx?$/,
 		loader: 'react-hot',
-		include: path.join( __dirname, '../client' )
+		include: [
+			path.join( __dirname, '../app' ),
+			path.join( __dirname, '../client' ),
+			path.join( __dirname, '../lib' )
+		]
 	} );
 
 	WebpackDevServer = require( 'webpack-dev-server' );

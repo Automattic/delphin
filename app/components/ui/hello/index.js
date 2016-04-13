@@ -1,6 +1,4 @@
-/**
- * External dependencies
- */
+// External dependencies
 import i18n from 'lib/i18n';
 import React from 'react';
 

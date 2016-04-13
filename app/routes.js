@@ -1,6 +1,4 @@
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import About from 'components/ui/about';
 import Checkout from 'components/ui/checkout';
 import Hello from 'components/ui/hello';

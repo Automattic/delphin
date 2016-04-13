@@ -1,14 +1,10 @@
-/**
- * External dependencies
- */
+// External dependencies
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React from 'react';
 import { reduxForm } from 'redux-form';
 
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import { fetchDomainSuggestions, selectDomain } from 'actions';
 import SuggestionComponent from './suggestion';
 

@@ -1,12 +1,8 @@
-/**
- * External Dependencies
- */
+// External dependencies
 import React from 'react';
 import createFragment from 'react-addons-create-fragment';
 
-/**
- * Internal Dependencies
- */
+// Internal dependencies
 import tokenize from './tokenize';
 
 let currentMixedString;

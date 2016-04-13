@@ -1,6 +1,4 @@
-/**
- * External dependencies
- */
+// External dependencies
 var express = require( 'express' ),
 	app = express(),
 	path = require( 'path' ),

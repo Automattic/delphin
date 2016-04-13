@@ -1,6 +1,4 @@
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import {
 	DOMAIN_SEARCH_FETCH,
 	DOMAIN_SEARCH_FETCH_COMPLETED

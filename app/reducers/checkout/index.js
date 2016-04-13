@@ -1,6 +1,4 @@
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,

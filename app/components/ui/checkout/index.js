@@ -1,14 +1,10 @@
-/**
- * External dependencies
- */
+// External dependencies
 import { connect } from 'react-redux';
 import i18n from 'lib/i18n';
 import { push } from 'react-router-redux';
 import React from 'react';
 
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import { createSite, createTransaction, createUser } from 'actions';
 
 const Checkout = React.createClass( {

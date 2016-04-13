@@ -1,6 +1,4 @@
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import { checkout } from '..';
 import {
 	CREATE_SITE_COMPLETE,

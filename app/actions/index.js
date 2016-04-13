@@ -1,11 +1,7 @@
-/**
- * External dependencies
- */
+// External dependencies
 import WPCOM from 'wpcom';
 
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,

@@ -1,11 +1,7 @@
-/**
- * External dependencies
- */
+// External dependencies
 import { reducer as form } from 'redux-form';
 
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import { checkout } from './checkout';
 import { domainSearch } from './domain-search';
 

@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
-import ReactInjection from 'react/lib/ReactInjection';
 import thunk from 'redux-thunk';
 
 /**
@@ -16,7 +15,6 @@ import thunk from 'redux-thunk';
  */
 import App from 'app';
 import reducers from 'reducers';
-
 import i18n from 'lib/i18n';
 
 const store = createStore(

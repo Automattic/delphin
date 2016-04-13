@@ -25,7 +25,7 @@ const CSS = {
 
 CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
-let Search = React.createClass( {
+const Search = React.createClass( {
 	getInitialState() {
 		return {
 			suggestions: []

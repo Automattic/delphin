@@ -10,6 +10,8 @@ import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
+	DOMAIN_SEARCH_FETCH,
+	DOMAIN_SEARCH_FETCH_COMPLETED,
 	SELECT_DOMAIN
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
@@ -182,7 +184,7 @@ export function createTransactionComplete( form ) {
 
 export function fetchDomainSuggestions( query ) {
 	return dispatch => {
-		dispatch( { type: 'DOMAIN_SEARCH_FETCH' } );
+		dispatch( { type: DOMAIN_SEARCH_FETCH } );
 
 		const payload = {
 			query,
@@ -196,7 +198,7 @@ export function fetchDomainSuggestions( query ) {
 			}
 
 			dispatch( {
-				type: 'DOMAIN_SEARCH_FETCH_COMPLETED',
+				type: DOMAIN_SEARCH_FETCH_COMPLETED,
 				results
 			} );
 		} );

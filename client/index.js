@@ -13,8 +13,9 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import App from 'components/app';
+import App from 'app';
 import reducers from 'reducers';
+import i18n from 'lib/i18n';
 
 const store = createStore(
 	combineReducers( {
@@ -28,11 +29,34 @@ const store = createStore(
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );
 
-injectTapEventPlugin();
+function init() {
+	var i18nLocaleStringsObject = null;
 
-ReactDOM.render(
-	<Provider store={ store }>
-		<App history={ history } />
-	</Provider>,
-	document.getElementById( 'content' )
-);
+	// Initialize i18n
+	if ( window.i18nLocaleStrings ) {
+		i18nLocaleStringsObject = JSON.parse( window.i18nLocaleStrings );
+	}
+	i18n.initialize( i18nLocaleStringsObject );
+
+	injectTapEventPlugin();
+}
+
+function render() {
+	ReactDOM.render(
+		<Provider store={ store }>
+			<App history={ history } />
+		</Provider>,
+		document.getElementById( 'content' )
+	);
+}
+
+function boot() {
+	init();
+
+	render();
+	i18n.observer.on( 'change', render );
+
+	window.i18n = i18n;
+}
+
+boot();

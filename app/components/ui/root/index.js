@@ -1,3 +1,4 @@
+import i18n from 'lib/i18n';
 import React from 'react';
 import { Link } from 'react-router';
 
@@ -24,8 +25,8 @@ export default function Root( { children } ) {
 	return (
 		<div style={ CSS.body }>
 			<header style={ CSS.header }>
-				<Link style={ CSS.headerLink } to="/search">Search</Link>
-				<Link style={ CSS.headerLink } to="/about">About</Link>
+				<Link style={ CSS.headerLink } to="/search">{ i18n.translate( 'Search' ) }</Link>
+				<Link style={ CSS.headerLink } to="/about">{ i18n.translate( 'About' ) }</Link>
 			</header>
 			<div style={ CSS.main }>{ children }</div>
 		</div>

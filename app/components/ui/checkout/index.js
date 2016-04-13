@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import i18n from 'lib/i18n';
 import React from 'react';
 import { push } from 'react-router-redux';
 
@@ -117,21 +118,21 @@ const Checkout = React.createClass( {
 
 		return (
 			<form onChange={ this.updateForm } onSubmit={ this.checkout }>
-				<label>username</label>
+				<label>{ i18n.translate( 'username' ) }</label>
 				<input type="text" name="username" />
-				<label>email</label>
+				<label>{ i18n.translate( 'email' ) }</label>
 				<input type="text" name="email" onChange={ this.updateForm } value={ this.state.form.email } />
-				<label>password</label>
+				<label>{ i18n.translate( 'password' ) }</label>
 				<input type="text" name="password" />
-				<label>name</label>
+				<label>{ i18n.translate( 'name' ) }</label>
 				<input type="text" name="name" />
-				<label>credit card #</label>
+				<label>{ i18n.translate( 'credit card #' ) }</label>
 				<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
-				<label>cvv</label>
+				<label>{ i18n.translate( 'cvv' ) }</label>
 				<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
-				<label>expiration date in MM/YY format</label>
+				<label>{ i18n.translate( 'expiration date in MM/YY format' ) }</label>
 				<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form['expiration-date'] } placeholder="01/20" />
-				<label>postal code</label>
+				<label>{ i18n.translate( 'postal code' ) }</label>
 				<input type="text" name="postal-code" onChange={ this.updateForm } value={ this.state.form['postal-code'] } />
 				<br />
 				<button>Checkout</button>

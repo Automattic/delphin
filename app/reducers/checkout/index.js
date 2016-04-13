@@ -1,8 +1,10 @@
 export function checkout( state = {}, action ) {
 	const { domain, type } = action;
+
 	switch ( type ) {
 		case 'SELECT_DOMAIN':
 			return { domain };
+
 		case 'CREATE_USER_COMPLETE':
 			return Object.assign( {}, state, {
 				user: {
@@ -12,6 +14,7 @@ export function checkout( state = {}, action ) {
 					bearerToken: action.bearerToken
 				}
 			} );
+
 		case 'CREATE_SITE_COMPLETE':
 			return Object.assign( {}, state, {
 				site: {
@@ -19,8 +22,12 @@ export function checkout( state = {}, action ) {
 					blogId: action.blogId
 				}
 			} );
+
 		case 'CREATE_TRANSACTION_COMPLETE':
-			return Object.assign( {}, state, { transaction: action.form } );
+			return Object.assign( {}, state, {
+				transaction: action.form
+			} );
+
 		default:
 			return state;
 	}

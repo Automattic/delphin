@@ -4,7 +4,7 @@
   "description": "A registrar client",
   "main": "server/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_PATH=app jest",
     "build": "node_modules/.bin/webpack --config webpack.config.js --progress --colors",
     "lint": "eslint --max-warnings 0 client server",
     "start": "npm install && node server",

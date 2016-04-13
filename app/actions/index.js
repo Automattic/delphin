@@ -6,6 +6,12 @@ import WPCOM from 'wpcom';
 /**
  * Internal dependencies
  */
+import {
+	CREATE_SITE_COMPLETE,
+	CREATE_TRANSACTION_COMPLETE,
+	CREATE_USER_COMPLETE,
+	SELECT_DOMAIN
+} from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
 const CLIENT_ID = 39911;
@@ -15,7 +21,7 @@ let wpcomAPI = WPCOM();
 
 export function selectDomain( domain ) {
 	return {
-		type: 'SELECT_DOMAIN',
+		type: SELECT_DOMAIN,
 		domain
 	};
 }
@@ -39,7 +45,7 @@ export function createUser( form ) {
 
 export function createUserComplete( form, bearerToken ) {
 	return {
-		type: 'CREATE_USER_COMPLETE',
+		type: CREATE_USER_COMPLETE,
 		username: form.username,
 		email: form.email,
 		password: form.password,
@@ -66,7 +72,7 @@ export function createSite( form ) {
 
 export function createSiteComplete( form ) {
 	return {
-		type: 'CREATE_SITE_COMPLETE',
+		type: CREATE_SITE_COMPLETE,
 		domain: form.domain,
 		blogId: form.blogId
 	};
@@ -169,7 +175,7 @@ export function createTransaction( form ) {
 
 export function createTransactionComplete( form ) {
 	return {
-		type: 'CREATE_TRANSACTION_COMPLETE',
+		type: CREATE_TRANSACTION_COMPLETE,
 		form
 	};
 }

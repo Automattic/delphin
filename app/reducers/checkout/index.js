@@ -1,8 +1,18 @@
+/**
+ * Internal dependencies
+ */
+import {
+	CREATE_SITE_COMPLETE,
+	CREATE_TRANSACTION_COMPLETE,
+	CREATE_USER_COMPLETE,
+	SELECT_DOMAIN
+} from 'reducers/action-types';
+
 export function checkout( state = {}, action ) {
 	const { domain, type } = action;
 
 	switch ( type ) {
-		case 'CREATE_SITE_COMPLETE':
+		case CREATE_SITE_COMPLETE:
 			return Object.assign( {}, state, {
 				site: {
 					domain: action.domain,
@@ -10,12 +20,12 @@ export function checkout( state = {}, action ) {
 				}
 			} );
 
-		case 'CREATE_TRANSACTION_COMPLETE':
+		case CREATE_TRANSACTION_COMPLETE:
 			return Object.assign( {}, state, {
 				transaction: action.form
 			} );
 
-		case 'CREATE_USER_COMPLETE':
+		case CREATE_USER_COMPLETE:
 			return Object.assign( {}, state, {
 				user: {
 					username: action.username,
@@ -25,7 +35,7 @@ export function checkout( state = {}, action ) {
 				}
 			} );
 
-		case 'SELECT_DOMAIN':
+		case SELECT_DOMAIN:
 			return { domain };
 
 		default:

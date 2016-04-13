@@ -2,6 +2,12 @@
  * Internal dependencies
  */
 import { checkout } from '..';
+import {
+	CREATE_SITE_COMPLETE,
+	CREATE_TRANSACTION_COMPLETE,
+	CREATE_USER_COMPLETE,
+	SELECT_DOMAIN
+} from 'reducers/action-types';
 
 jest.unmock( '..' );
 
@@ -38,14 +44,14 @@ describe( 'checkout reducer', () => {
 describe( 'checkout reducer for select domain action', () => {
 	it( 'should return state with undefined domain when provided domain is undefined', () => {
 		const originalState = Object.freeze( { domain: 'example.com' } ),
-			newState = checkout( originalState, { type: 'SELECT_DOMAIN' } );
+			newState = checkout( originalState, { type: SELECT_DOMAIN } );
 
 		expect( newState ).toEqual( { domain: undefined } );
 	} );
 
 	it( 'should return state with new domain', () => {
 		const originalState = Object.freeze( { domain: 'example.com' } ),
-			newState = checkout( originalState, { domain: 'wordpress.org', type: 'SELECT_DOMAIN' } );
+			newState = checkout( originalState, { domain: 'wordpress.org', type: SELECT_DOMAIN } );
 
 		expect( newState ).toEqual( { domain: 'wordpress.org' } );
 	} );
@@ -57,7 +63,7 @@ describe( 'checkout reducer for create site complete action', () => {
 			newState = checkout( originalState, {
 				blogId: 1234,
 				domain: 'example.com',
-				type: 'CREATE_SITE_COMPLETE'
+				type: CREATE_SITE_COMPLETE
 			} );
 
 		expect( newState ).toEqual( {
@@ -81,7 +87,7 @@ describe( 'checkout reducer for create transaction complete action', () => {
 					name: 'John Doe',
 					'postal-code': 12345
 				},
-				type: 'CREATE_TRANSACTION_COMPLETE'
+				type: CREATE_TRANSACTION_COMPLETE
 			} );
 
 		expect( newState ).toEqual( {
@@ -105,7 +111,7 @@ describe( 'checkout reducer for create user complete action', () => {
 				email: 'johndoe@example.com',
 				password: 'helloworld',
 				username: 'johndoe',
-				type: 'CREATE_USER_COMPLETE'
+				type: CREATE_USER_COMPLETE
 			} );
 
 		expect( newState ).toEqual( {

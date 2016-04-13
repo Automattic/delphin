@@ -10,6 +10,7 @@
     "build": "npm run build:client && npm run build:server",
     "lint": "eslint --max-warnings 0 app client server",
     "start": "npm install && npm run build && node build/server.bundle",
+    "prod": "HOSTNAME=0.0.0.0 NODE_ENV=production node build/server.bundle",
     "qs": "npm run build && node build/server.bundle",
     "postinstall": "npm run-script build"
   },

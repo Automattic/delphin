@@ -1,12 +1,9 @@
-import { selectDomain } from '../actions/index';
-import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
 import React from 'react';
-import WPCOM from 'wpcom';
 
 import SuggestionComponent from './suggestion';
-
-const wpcomAPI = WPCOM();
+import { reduxForm } from 'redux-form';
+import { fetchDomainSuggestions, selectDomain } from '../actions/index';
 
 const CSS = {
 	heading: {
@@ -21,46 +18,25 @@ const CSS = {
 
 CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
-const Search = React.createClass( {
+let Search = React.createClass( {
 	getInitialState() {
 		return {
-			query: '',
 			suggestions: []
 		};
 	},
 
 	componentDidMount() {
-		this.debouncedGetDomainSuggestions = debounce( this.getDomainSuggestions, 500 );
+		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 	},
 
-	onChange( event ) {
-		this.setState( {
-			query: event.target.value
-		}, this.debouncedGetDomainSuggestions );
+	componentWillReceiveProps( nextProps ) {
+		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
+			this.debouncedFetchResults( nextProps.fields.query.value );
+		}
 	},
 
-	getDomainSuggestions() {
-		this.fetchDomainSuggestions( ( error, response ) => {
-			this.setState( {
-				suggestions: response || []
-			} );
-		} );
-	},
-
-	fetchDomainSuggestions( callback ) {
-		const query = {
-			query: this.state.query,
-			quantity: 10,
-			include_wordpressdotcom: false,
-		};
-
-		wpcomAPI.req.get( '/domains/suggestions', query, function( error, response ) {
-			if ( error ) {
-				return callback( error );
-			}
-
-			return callback( null, response );
-		} );
+	fetchResults( query ) {
+		this.props.fetchDomainSuggestions( query );
 	},
 
 	selectDomain( name ) {
@@ -76,24 +52,46 @@ const Search = React.createClass( {
 		) );
 	},
 
+	renderResults() {
+		if ( ! this.props.results ) {
+			return null;
+		}
+
+		return this.props.results.map( ( suggestion ) => (
+			<SuggestionComponent
+				key={ suggestion.domain_name }
+				selectDomain={ this.selectDomain }
+				suggestion={ suggestion } />
+		) );
+	},
+
 	render() {
+		const { fields: { query } } = this.props;
+
 		return (
 			<div>
 				<h1 style={ CSS.h1 }>Find a domain</h1>
-				<input onChange={ this.onChange } style={ CSS.field } />
+				<input { ...query } style={ CSS.field } />
 				<h2 style={ CSS.heading }>Suggestions</h2>
 				<ul>
-					{ this.renderSuggestions() }
+					{ this.renderResults() }
 				</ul>
 			</div>
 		);
 	}
 } );
 
-export default connect(
-	undefined,
-	( dispatch ) => {
+export default reduxForm(
+	{
+		form: 'search',
+		fields: [ 'query' ]
+	},
+	state => ( { results: state.domainSearch.results } ),
+	dispatch => {
 		return {
+			fetchDomainSuggestions: query => {
+				dispatch( fetchDomainSuggestions( query ) );
+			},
 			selectDomain: name => {
 				dispatch( selectDomain( name ) );
 			}

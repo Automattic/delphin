@@ -167,3 +167,26 @@ export function createTransactionComplete( form ) {
 		form
 	};
 }
+
+export function fetchDomainSuggestions( query ) {
+	return dispatch => {
+		dispatch( { type: 'DOMAIN_SEARCH_FETCH' } );
+
+		const payload = {
+			query,
+			quantity: 10,
+			include_wordpressdotcom: false
+		};
+
+		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {
+			if ( error ) {
+				return;
+			}
+
+			dispatch( {
+				type: 'DOMAIN_SEARCH_FETCH_COMPLETED',
+				results
+			} );
+		} );
+	};
+}

@@ -139,9 +139,9 @@ export function createTransaction( form ) {
 							product_id: 6,
 							meta: form.domain,
 							volume: 1,
-							free_trial: false,
+							free_trial: false
 						}
-					],
+					]
 				},
 				domain_details: {
 					first_name: 'Wesley',
@@ -152,7 +152,7 @@ export function createTransaction( form ) {
 					postal_code: '02110',
 					country_code: 'US',
 					email: 'wesley@snipes.com',
-					phone: '666-666-666',
+					phone: '666-666-666'
 				}
 			}, () => {
 				dispatch( createTransactionComplete( form ) );

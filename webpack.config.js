@@ -35,7 +35,7 @@ module.exports = {
 				test: /\.scss$/,
 				loader: 'style!css!sass?sourceMap'
 			}
-		],
+		]
 	},
 	plugins: [
 		new webpack.DefinePlugin( {
@@ -65,5 +65,5 @@ module.exports = {
 		__filename: 'mock',
 		__dirname: 'mock',
 		fs: 'empty'
-	},
+	}
 };

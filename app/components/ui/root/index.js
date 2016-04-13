@@ -7,7 +7,7 @@ const CSS = {
 		fontFamily: 'Helvetica, Arial, sans-serif'
 	},
 	header: {
-		background: '#000',
+		background: '#000'
 	},
 	headerLink: {
 		color: '#fff',
@@ -17,7 +17,7 @@ const CSS = {
 	},
 	main: {
 		margin: '0 auto',
-		maxWidth: '960px',
+		maxWidth: '960px'
 	}
 };
 

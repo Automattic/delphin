@@ -3,7 +3,7 @@ import React from 'react';
 
 import SuggestionComponent from './suggestion';
 import { reduxForm } from 'redux-form';
-import { fetchDomainSuggestions, selectDomain } from '../actions/index';
+import { fetchDomainSuggestions, selectDomain } from 'actions';
 
 const CSS = {
 	heading: {

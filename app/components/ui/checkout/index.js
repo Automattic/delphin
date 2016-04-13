@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { push } from 'react-router-redux';
-import { createUser, createSite, createTransaction } from '../actions/index';
+
+import { createUser, createSite, createTransaction } from 'actions';
 
 const Checkout = React.createClass( {
 	getInitialState() {

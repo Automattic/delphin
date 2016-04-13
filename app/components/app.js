@@ -7,7 +7,12 @@ import { IndexRoute, Router, Route } from 'react-router';
 /**
  * Internal dependencies
  */
-import { About, Hello, Root, Search, Checkout, Success } from './components';
+import About from 'components/ui/about';
+import Hello from 'components/ui/hello';
+import Root from 'components/ui/root';
+import Search from 'components/ui/search';
+import Checkout from 'components/ui/checkout';
+import Success from 'components/ui/success';
 
 export default function App( { history } ) {
 	return (

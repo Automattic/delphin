@@ -7,7 +7,7 @@ var webpack = require( 'webpack' ),
 module.exports = {
 	entry: {
 		'bundle' : [
-			path.join( __dirname, 'client' ),
+			path.join( __dirname, 'client' )
 		]
     },
 	output: {
@@ -21,7 +21,11 @@ module.exports = {
 			{
 				test:   /\.jsx?$/,
 				loader: 'babel-loader',
-				include: path.join( __dirname, 'client' )
+				include: [
+					path.join( __dirname, 'app' ),
+					path.join( __dirname, 'client' ),
+					path.join( __dirname, 'lib' )
+				]
 			},
 			{
 				test: /\.json$/,
@@ -44,8 +48,9 @@ module.exports = {
 		extensions: [ '', '.json', '.js', '.jsx' ],
 		modulesDirectories: [
 			'node_modules',
-			path.join( __dirname, 'client' ),
 			path.join( __dirname, 'assets' ),
+			path.join( __dirname, 'app' ),
+			__dirname
 		]
 	},
 	devServer: {

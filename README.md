@@ -6,7 +6,7 @@ It’s built with JavaScript – a very light [node](https://nodejs.org) server,
 
 ### Getting started
 
-1. Make sure you have `git`, `node`, and `npm` installed
+1. Make sure you have `git`, `node` (v4.4.3), and `npm` installed
 2. Clone this repository locally: `git@github.com:Automattic/delphin.git`
 3. Install packages and start the server with `npm start`
 4. Open `localhost:1337` in your browser

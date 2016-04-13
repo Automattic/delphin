@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-var webpack = require( 'webpack' ),
-	path = require( 'path' );
+var path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 module.exports = {
 	entry: {

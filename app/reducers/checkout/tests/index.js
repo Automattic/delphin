@@ -1,3 +1,6 @@
+/**
+ * Internal dependencies
+ */
 import { checkout } from '..';
 
 jest.unmock( '..' );

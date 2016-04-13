@@ -1,6 +1,9 @@
+/**
+ * External dependencies
+ */
 import i18n from 'lib/i18n';
-import React from 'react';
 import { Link } from 'react-router';
+import React from 'react';
 
 const CSS = {
 	body: {

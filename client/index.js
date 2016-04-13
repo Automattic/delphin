@@ -2,12 +2,12 @@
  * External dependencies
  */
 import { browserHistory } from 'react-router';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerMiddleware, routerReducer, syncHistoryWithStore } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
 /**

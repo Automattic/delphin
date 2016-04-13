@@ -1,11 +1,16 @@
-
+/**
+ * External dependencies
+ */
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React from 'react';
-
-import SuggestionComponent from './suggestion';
 import { reduxForm } from 'redux-form';
+
+/**
+ * Internal dependencies
+ */
 import { fetchDomainSuggestions, selectDomain } from 'actions';
+import SuggestionComponent from './suggestion';
 
 const CSS = {
 	heading: {

@@ -1,8 +1,15 @@
+/**
+ * External dependencies
+ */
 import WPCOM from 'wpcom';
+
+/**
+ * Internal dependencies
+ */
+import paygateLoader from 'lib/paygate-loader';
+
 const CLIENT_ID = 39911;
 const CLIENT_SECRET = 'cOaYKdrkgXz8xY7aysv4fU6wL6sK5J8a6ojReEIAPwggsznj4Cb6mW0nffTxtYT8';
-
-import paygateLoader from 'lib/paygate-loader';
 
 let wpcomAPI = WPCOM();
 

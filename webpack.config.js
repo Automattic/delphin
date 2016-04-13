@@ -6,10 +6,10 @@ var webpack = require( 'webpack' ),
 
 module.exports = {
 	entry: {
-		'bundle' : [
+		'bundle': [
 			path.join( __dirname, 'client' )
 		]
-    },
+	},
 	output: {
 		path: path.join( __dirname, 'build' ),
 		publicPath: '/build/',
@@ -19,7 +19,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test:   /\.jsx?$/,
+				test: /\.jsx?$/,
 				loader: 'babel-loader',
 				include: [
 					path.join( __dirname, 'app' ),

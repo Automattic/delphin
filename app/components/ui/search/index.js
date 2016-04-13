@@ -2,10 +2,8 @@
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React from 'react';
-import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import { fetchDomainSuggestions, selectDomain } from 'actions';
 import SuggestionComponent from './suggestion';
 
 let CSS = {
@@ -96,20 +94,4 @@ const Search = React.createClass( {
 	}
 } );
 
-export default reduxForm(
-	{
-		form: 'search',
-		fields: [ 'query' ]
-	},
-	state => ( { results: state.domainSearch.results } ),
-	dispatch => {
-		return {
-			fetchDomainSuggestions: query => {
-				dispatch( fetchDomainSuggestions( query ) );
-			},
-			selectDomain: name => {
-				dispatch( selectDomain( name ) );
-			}
-		};
-	}
-)( Search );
+export default Search;

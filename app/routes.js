@@ -3,13 +3,13 @@ import About from 'components/ui/about';
 import Checkout from 'components/ui/checkout';
 import Hello from 'components/ui/hello';
 import Root from 'components/ui/root';
-import Search from 'components/ui/search';
+import SearchContainer from 'components/containers/search';
 import Success from 'components/ui/success';
 
 export default {
 	path: '/',
 	component: Root,
-	indexRoute: { component: Search },
+	indexRoute: { component: SearchContainer },
 	childRoutes: [
 		{
 			path: 'hello',
@@ -21,7 +21,7 @@ export default {
 		},
 		{
 			path: 'search',
-			component: Search
+			component: SearchContainer
 		},
 		{
 			path: 'checkout',

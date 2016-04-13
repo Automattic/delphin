@@ -17,23 +17,10 @@ isDevelopment = 'production' !== process.env.NODE_ENV;
 if ( isDevelopment ) {
 	app.set( 'backend-port', app.get( 'port' ) + 1 );
 
-	config = require( '../webpack.config' );
-	config.entry.bundle.unshift( 'webpack/hot/only-dev-server' );
-	config.entry.bundle.unshift( 'webpack-dev-server/client?/' );
-	config.plugins.push( new webpack.HotModuleReplacementPlugin() );
-
-	config.module.loaders.unshift( {
-		test: /\.jsx?$/,
-		loader: 'react-hot',
-		include: [
-			path.join( __dirname, '../app' ),
-			path.join( __dirname, '../client' ),
-			path.join( __dirname, '../lib' )
-		]
-	} );
-
 	WebpackDevServer = require( 'webpack-dev-server' );
+	config = require( '../webpack.config' );
 	compiler = webpack( config );
+
 	devServer = new WebpackDevServer( compiler, {
 		publicPath: config.output.publicPath,
 		hot: true,

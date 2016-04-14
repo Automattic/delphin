@@ -7,11 +7,16 @@ const CSS = {
 	body: {
 		fontFamily: 'Helvetica, Arial, sans-serif'
 	},
-	header: {
-		background: '#000'
+	footer: {
+		fontSize: '0.8rem',
+		position: 'absolute',
+			bottom: 0,
+			left: 0,
+			right: 0,
+		textAlign: 'center'
 	},
-	headerLink: {
-		color: '#fff',
+	footerLink: {
+		color: '#666',
 		display: 'inline-block',
 		margin: '0.5em 1em',
 		textDecoration: 'none'
@@ -26,11 +31,12 @@ const CSS = {
 export default function Root( { children } ) {
 	return (
 		<div style={ CSS.body }>
-			<header style={ CSS.header }>
-				<Link style={ CSS.headerLink } to="/search">{ i18n.translate( 'Search' ) }</Link>
-				<Link style={ CSS.headerLink } to="/about">{ i18n.translate( 'About' ) }</Link>
-			</header>
 			<div style={ CSS.main }>{ children }</div>
+			<footer style={ CSS.footer }>
+				<Link style={ CSS.footerLink } to="/search">{ i18n.translate( 'Search' ) }</Link>
+				<Link style={ CSS.footerLink } to="/about">{ i18n.translate( 'About' ) }</Link>
+				<Link style={ CSS.footerLink } to="http://automattic.com">{ i18n.translate( 'An Automattic production' ) }</Link>
+			</footer>
 		</div>
 	);
 }

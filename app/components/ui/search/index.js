@@ -17,6 +17,11 @@ let CSS = {
 		fontSize: '4em',
 		padding: 0,
 		width: '100%'
+	},
+	suggestionsList: {
+		listStyle: 'none',
+		margin: 0,
+		padding: 0
 	}
 };
 
@@ -61,12 +66,21 @@ const Search = React.createClass( {
 			return null;
 		}
 
-		return this.props.results.map( ( suggestion ) => (
+		const suggestions = this.props.results.map( ( suggestion ) => (
 			<SuggestionComponent
 				key={ suggestion.domain_name }
 				selectDomain={ this.selectDomain }
 				suggestion={ suggestion } />
 		) );
+
+		return (
+			<div>
+				<h2 style={ CSS.heading }>{ i18n.translate( 'Suggestions' ) }</h2>
+				<ul style={ CSS.suggestionsList }>
+					{ suggestions }
+				</ul>
+			</div>
+		);
 	},
 
 	render() {
@@ -76,10 +90,7 @@ const Search = React.createClass( {
 			<div>
 				<h1 style={ CSS.h1 }>{ i18n.translate( 'Enter a domain' ) }</h1>
 				<input { ...query } style={ CSS.field } />
-				<h2 style={ CSS.heading }>{ i18n.translate( 'Suggestions' ) }</h2>
-				<ul>
-					{ this.renderResults() }
-				</ul>
+				{ this.renderResults() }
 			</div>
 		);
 	}

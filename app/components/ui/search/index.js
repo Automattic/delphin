@@ -1,11 +1,12 @@
-
+// External dependencies
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React from 'react';
-
-import SuggestionComponent from './suggestion';
 import { reduxForm } from 'redux-form';
+
+// Internal dependencies
 import { fetchDomainSuggestions, selectDomain } from 'actions';
+import SuggestionComponent from './suggestion';
 
 const CSS = {
 	heading: {
@@ -20,7 +21,7 @@ const CSS = {
 
 CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
-let Search = React.createClass( {
+const Search = React.createClass( {
 	getInitialState() {
 		return {
 			suggestions: []

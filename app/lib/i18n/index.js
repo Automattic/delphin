@@ -1,6 +1,4 @@
-/**
- * External dependencies
- */
+// External dependencies
 import debugFactory from 'debug';
 import { EventEmitter } from 'events';
 import Jed from 'jed';
@@ -9,9 +7,7 @@ import tzDetect from './timezone';
 import moment from 'moment-timezone';
 import LRU from 'lru-cache';
 
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import config from 'config';
 import numberFormatPHPJS from './number-format';
 import interpolateComponents from 'lib/interpolate-components';

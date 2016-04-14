@@ -1,12 +1,8 @@
-/**
- * External dependencies
- */
+// External dependencies
 import React from 'react';
 import { Router } from 'react-router';
 
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import routes from './routes';
 
 export default function App( { history } ) {

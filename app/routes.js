@@ -1,11 +1,9 @@
-/**
- * Internal dependencies
- */
+// Internal dependencies
 import About from 'components/ui/about';
+import Checkout from 'components/ui/checkout';
 import Hello from 'components/ui/hello';
 import Root from 'components/ui/root';
 import Search from 'components/ui/search';
-import Checkout from 'components/ui/checkout';
 import Success from 'components/ui/success';
 
 export default {

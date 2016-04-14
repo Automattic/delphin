@@ -1,6 +1,4 @@
-/**
- * External dependencies
- */
+// External dependencies
 import jstz from 'jstimezonedetect';
 
 /**

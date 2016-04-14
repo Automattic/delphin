@@ -1,15 +1,13 @@
-/**
- * External dependencies
- */
-var webpack = require( 'webpack' ),
-	path = require( 'path' );
+// External dependencies
+var path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 module.exports = {
 	entry: {
-		'bundle' : [
+		'bundle': [
 			path.join( __dirname, 'client' )
 		]
-    },
+	},
 	output: {
 		path: path.join( __dirname, 'build' ),
 		publicPath: '/build/',
@@ -19,7 +17,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test:   /\.jsx?$/,
+				test: /\.jsx?$/,
 				loader: 'babel-loader',
 				include: [
 					path.join( __dirname, 'app' ),
@@ -35,7 +33,7 @@ module.exports = {
 				test: /\.scss$/,
 				loader: 'style!css!sass?sourceMap'
 			}
-		],
+		]
 	},
 	plugins: [
 		new webpack.DefinePlugin( {
@@ -65,5 +63,5 @@ module.exports = {
 		__filename: 'mock',
 		__dirname: 'mock',
 		fs: 'empty'
-	},
+	}
 };

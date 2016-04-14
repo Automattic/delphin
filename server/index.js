@@ -1,7 +1,8 @@
+// External dependencies
 var express = require( 'express' ),
+	app = express(),
 	path = require( 'path' ),
 	webpack = require( 'webpack' ),
-	app = express(),
 	isDevelopment, config, WebpackDevServer, compiler, devServer;
 
 app.set( 'port', process.env.PORT || 1337 );

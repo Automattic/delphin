@@ -1,14 +1,25 @@
+// External dependencies
 import WPCOM from 'wpcom';
+
+// Internal dependencies
+import {
+	CREATE_SITE_COMPLETE,
+	CREATE_TRANSACTION_COMPLETE,
+	CREATE_USER_COMPLETE,
+	DOMAIN_SEARCH_FETCH,
+	DOMAIN_SEARCH_FETCH_COMPLETED,
+	SELECT_DOMAIN
+} from 'reducers/action-types';
+import paygateLoader from 'lib/paygate-loader';
+
 const CLIENT_ID = 39911;
 const CLIENT_SECRET = 'cOaYKdrkgXz8xY7aysv4fU6wL6sK5J8a6ojReEIAPwggsznj4Cb6mW0nffTxtYT8';
-
-import paygateLoader from 'lib/paygate-loader';
 
 let wpcomAPI = WPCOM();
 
 export function selectDomain( domain ) {
 	return {
-		type: 'SELECT_DOMAIN',
+		type: SELECT_DOMAIN,
 		domain
 	};
 }
@@ -32,7 +43,7 @@ export function createUser( form ) {
 
 export function createUserComplete( form, bearerToken ) {
 	return {
-		type: 'CREATE_USER_COMPLETE',
+		type: CREATE_USER_COMPLETE,
 		username: form.username,
 		email: form.email,
 		password: form.password,
@@ -59,7 +70,7 @@ export function createSite( form ) {
 
 export function createSiteComplete( form ) {
 	return {
-		type: 'CREATE_SITE_COMPLETE',
+		type: CREATE_SITE_COMPLETE,
 		domain: form.domain,
 		blogId: form.blogId
 	};
@@ -85,7 +96,6 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 		}
 
 		paygateLoader.ready( configuration.js_url, function( innerError, Paygate ) {
-			var parameters;
 			if ( innerError ) {
 				callback( innerError );
 				return;
@@ -96,7 +106,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 			Paygate.setPublicKey( configuration.public_key );
 			Paygate.setEnvironment( configuration.environment );
 
-			parameters = getPaygateParameters( cardDetails );
+			const parameters = getPaygateParameters( cardDetails );
 			Paygate.createToken( parameters, onSuccess, onFailure );
 		} );
 	} );
@@ -139,9 +149,9 @@ export function createTransaction( form ) {
 							product_id: 6,
 							meta: form.domain,
 							volume: 1,
-							free_trial: false,
+							free_trial: false
 						}
-					],
+					]
 				},
 				domain_details: {
 					first_name: 'Wesley',
@@ -152,7 +162,7 @@ export function createTransaction( form ) {
 					postal_code: '02110',
 					country_code: 'US',
 					email: 'wesley@snipes.com',
-					phone: '666-666-666',
+					phone: '666-666-666'
 				}
 			}, () => {
 				dispatch( createTransactionComplete( form ) );
@@ -163,14 +173,14 @@ export function createTransaction( form ) {
 
 export function createTransactionComplete( form ) {
 	return {
-		type: 'CREATE_TRANSACTION_COMPLETE',
+		type: CREATE_TRANSACTION_COMPLETE,
 		form
 	};
 }
 
 export function fetchDomainSuggestions( query ) {
 	return dispatch => {
-		dispatch( { type: 'DOMAIN_SEARCH_FETCH' } );
+		dispatch( { type: DOMAIN_SEARCH_FETCH } );
 
 		const payload = {
 			query,
@@ -184,7 +194,7 @@ export function fetchDomainSuggestions( query ) {
 			}
 
 			dispatch( {
-				type: 'DOMAIN_SEARCH_FETCH_COMPLETED',
+				type: DOMAIN_SEARCH_FETCH_COMPLETED,
 				results
 			} );
 		} );

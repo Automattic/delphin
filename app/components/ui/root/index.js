@@ -1,13 +1,14 @@
+// External dependencies
 import i18n from 'lib/i18n';
-import React from 'react';
 import { Link } from 'react-router';
+import React from 'react';
 
 const CSS = {
 	body: {
 		fontFamily: 'Helvetica, Arial, sans-serif'
 	},
 	header: {
-		background: '#000',
+		background: '#000'
 	},
 	headerLink: {
 		color: '#fff',
@@ -17,7 +18,7 @@ const CSS = {
 	},
 	main: {
 		margin: '0 auto',
-		maxWidth: '960px',
+		maxWidth: '960px'
 	}
 };
 

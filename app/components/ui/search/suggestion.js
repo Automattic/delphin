@@ -1,3 +1,4 @@
+// External dependencies
 import { Link } from 'react-router';
 import React from 'react';
 

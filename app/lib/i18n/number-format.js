@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Exposes number format capability through i18n mixin
  *

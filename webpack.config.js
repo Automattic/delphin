@@ -9,6 +9,8 @@ module.exports = {
 		port: 1337,
 		historyApiFallback: true
 	},
+	devtool:
+		'eval',
 	entry: [
 		'webpack/hot/only-dev-server',
 		'webpack-dev-server/client?/',

@@ -10,7 +10,7 @@ import SuggestionComponent from './suggestion';
 
 let CSS = {
 	heading: {
-		fontFamily: 'Helvetica Neue',
+		fontFamily: 'Merriweather, Georgia, "Times New Roman", Times, serif',
 		fontWeight: '100'
 	},
 	field: {

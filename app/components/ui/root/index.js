@@ -5,6 +5,7 @@ import React from 'react';
 
 const CSS = {
 	body: {
+		color: '#404040',
 		fontFamily: 'Helvetica, Arial, sans-serif',
 		paddingBottom: '2em',
 		position: 'relative'

@@ -5,12 +5,18 @@ var express = require( 'express' ),
 	webpack = require( 'webpack' ),
 	isDevelopment = 'production' !== process.env.NODE_ENV,
 	port = process.env.PORT || 1337,
-	backendPort, config, WebpackDevServer, compiler, devServer;
+	pug = require( 'pug' ),
+	fs = require( 'fs' ),
+	backendPort, isDevelopment, config, WebpackDevServer, compiler, devServer, template, templateCompiler, templatePath;
 
 app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
 app.get( '/*', function( req, res ) {
-	res.sendFile( 'index.html', { root: path.join( __dirname, 'views' ) } );
+	templatePath = path.join( __dirname, 'views', 'index.pug' );
+	template = fs.readFileSync( templatePath, 'utf8' );
+	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
+
+	res.send( templateCompiler() );
 } );
 
 if ( isDevelopment ) {

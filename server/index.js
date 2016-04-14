@@ -1,11 +1,22 @@
 // External dependencies
+import { combineReducers, createStore } from 'redux';
 import express from 'express';
-import path from 'path';
-import webpack from 'webpack';
-import pug from 'pug';
 import fs from 'fs';
+import i18n from 'app/lib/i18n';
+import { match, RouterContext } from 'react-router';
+import reducers from 'app/reducers';
+import { routerReducer } from 'react-router-redux';
+import path from 'path';
+import { Provider } from 'react-redux';
+import pug from 'pug';
+import { renderToString } from 'react-dom/server';
+import React from 'react';
+import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+
+// Internal dependencies
 import config from '../webpack.config';
+import routes from 'app/routes';
 
 const app = express(),
 	port = process.env.PORT || 1337,
@@ -13,10 +24,29 @@ const app = express(),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
+i18n.initialize();
+
 app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
-app.get( '/*', ( req, res ) => {
-	res.send( templateCompiler() );
+app.use( '/favicon.ico', express.static( path.join( __dirname, '..', 'assets', 'favicon.ico' ) ) );
+
+app.get( '/*', ( request, response ) => {
+	match( { routes, location: request.url }, ( error, redirect, props ) => {
+		const store = createStore(
+			combineReducers( {
+				...reducers,
+				routing: routerReducer
+			} )
+		);
+
+		const appHtml = renderToString(
+			<Provider store={ store }>
+				<RouterContext { ...props } />
+			</Provider>
+		);
+
+		response.send( templateCompiler( { content: appHtml } ) );
+	} );
 } );
 
 const isDevelopment = 'production' !== process.env.NODE_ENV;

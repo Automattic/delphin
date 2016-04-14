@@ -18,7 +18,8 @@ const CSS = {
 	},
 	main: {
 		margin: '0 auto',
-		maxWidth: '960px'
+		maxWidth: '960px',
+		padding: '1em'
 	}
 };
 

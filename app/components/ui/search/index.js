@@ -8,13 +8,14 @@ import { reduxForm } from 'redux-form';
 import { fetchDomainSuggestions, selectDomain } from 'actions';
 import SuggestionComponent from './suggestion';
 
-const CSS = {
+let CSS = {
 	heading: {
 		fontFamily: 'Helvetica Neue',
 		fontWeight: '100'
 	},
 	field: {
 		fontSize: '4em',
+		padding: 0,
 		width: '100%'
 	}
 };

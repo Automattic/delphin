@@ -14,7 +14,7 @@ RUN     apt-get -y update && apt-get -y install \
           make \
           build-essential
 
-ENV NODE_VERSION 4.3.0
+ENV NODE_VERSION 4.4.3
 
 RUN     wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz && \
           tar -zxf node-v$NODE_VERSION-linux-x64.tar.gz -C /usr/local && \
@@ -30,12 +30,12 @@ COPY    ./package.json /delphin/package.json
 
 # Sometimes "npm install" fails the first time when the cache is empty, so we retry once if it failed
 RUN     npm install --production || npm install --production
-RUN     npm run build
 
 COPY    . /delphin
 
 # Build javascript bundles for each environment and change ownership
 RUN     npm build && \
+          npm run build && \
           chown -R nobody /delphin
 
 USER    nobody

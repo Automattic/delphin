@@ -14,7 +14,7 @@ describe( 'domain search reducer', () => {
 
 	it( 'should throw an error when action is undefined', () => {
 		expect( () => {
-			return domainSearch( {} )
+			return domainSearch( {} );
 		} ).toThrowError( TypeError );
 	} );
 
@@ -43,7 +43,7 @@ describe( 'domain search reducer', () => {
 			newState = domainSearch( originalState, { type: 'ORDER_CHEESE_BURGER' } );
 
 		expect( newState ).toEqual( originalState );
-	} )
+	} );
 } );
 
 describe( 'domain search reducer for domain search fetch action', () => {

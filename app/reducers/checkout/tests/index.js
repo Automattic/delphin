@@ -16,7 +16,7 @@ describe( 'checkout reducer', () => {
 
 	it( 'should throw an error when action is undefined', () => {
 		expect( () => {
-			return checkout( {} )
+			return checkout( {} );
 		} ).toThrowError( TypeError );
 	} );
 

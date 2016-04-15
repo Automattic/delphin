@@ -5,17 +5,17 @@ var webpack = require( 'webpack' ),
 	path = require( 'path' );
 
 module.exports = {
+	devServer: {
+		port: 1337,
+		historyApiFallback: true
+	},
+	devtool:
+		'eval',
 	entry: [
 		'webpack/hot/only-dev-server',
 		'webpack-dev-server/client?/',
 		path.join( __dirname, 'client' )
 	],
-	output: {
-		path: path.resolve( __dirname, 'build' ),
-		publicPath: '/build/',
-		filename: 'client.bundle.js',
-		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
-	},
 	module: {
 		loaders: [
 			{
@@ -31,7 +31,22 @@ module.exports = {
 				test: /\.scss$/,
 				loader: 'style!css!sass?sourceMap'
 			}
-		],
+		]
+	},
+	node: {
+		console: false,
+		process: true,
+		global: true,
+		Buffer: true,
+		__filename: 'mock',
+		__dirname: 'mock',
+		fs: 'empty'
+	},
+	output: {
+		path: path.resolve( __dirname, 'build' ),
+		publicPath: '/build/',
+		filename: 'client.bundle.js',
+		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
@@ -49,18 +64,5 @@ module.exports = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	},
-	devServer: {
-		port: 1337,
-		historyApiFallback: true
-	},
-	node: {
-		console: false,
-		process: true,
-		global: true,
-		Buffer: true,
-		__filename: 'mock',
-		__dirname: 'mock',
-		fs: 'empty'
-	},
+	}
 };

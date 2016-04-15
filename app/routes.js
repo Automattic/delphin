@@ -1,6 +1,7 @@
 // Internal dependencies
 import About from 'components/ui/about';
 import Checkout from 'components/ui/checkout';
+import NotFound from 'components/ui/not-found';
 import paths from 'paths';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
@@ -24,6 +25,10 @@ export default {
 		{
 			path: paths.success(),
 			component: Success
+		},
+		{
+			path: '*',
+			component: NotFound
 		}
 	]
 };

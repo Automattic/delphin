@@ -2,12 +2,13 @@
 import About from 'components/ui/about';
 import Checkout from 'components/ui/checkout';
 import Hello from 'components/ui/hello';
+import paths from 'paths';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
 import Success from 'components/ui/success';
 
 export default {
-	path: '/',
+	path: paths.home(),
 	component: Root,
 	indexRoute: { component: SearchContainer },
 	childRoutes: [
@@ -16,15 +17,15 @@ export default {
 			component: Hello
 		},
 		{
-			path: 'about',
+			path: paths.about(),
 			component: About
 		},
 		{
-			path: 'checkout',
+			path: paths.checkout(),
 			component: Checkout
 		},
 		{
-			path: 'success',
+			path: paths.success(),
 			component: Success
 		}
 	]
@@ -32,11 +33,11 @@ export default {
 
 export const serverRedirectRoutes = [
 	{
-		from: 'checkout',
-		to: 'search'
+		from: paths.checkout(),
+		to: paths.search()
 	},
 	{
-		from: 'success',
-		to: 'search'
+		from: paths.success(),
+		to: paths.search()
 	}
 ];

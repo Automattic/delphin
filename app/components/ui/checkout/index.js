@@ -6,6 +6,7 @@ import React from 'react';
 
 // Internal dependencies
 import { createSite, createTransaction, createUser } from 'actions';
+import paths from 'paths';
 
 const Checkout = React.createClass( {
 	getInitialState() {
@@ -23,7 +24,7 @@ const Checkout = React.createClass( {
 
 	componentDidMount() {
 		if ( ! this.props.checkout.domain ) {
-			this.props.redirect( '/' );
+			this.props.redirect( paths.search() );
 		}
 	},
 

@@ -26,14 +26,20 @@ export function selectDomain( domain ) {
 
 export function createUser( form ) {
 	return dispatch => {
-		wpcomAPI.req.post( '/users/new', {
+		const payload = {
 			username: form.username,
 			email: form.email,
 			password: form.password,
-			validate: false,
-			client_id: CLIENT_ID,
-			client_secret: CLIENT_SECRET
-		}, ( error, data ) => {
+			validate: false
+		};
+
+		request.post( '/users/new' ).send( payload ).end( ( error, results ) => {
+			if ( error ) {
+				return;
+			}
+
+			const data = JSON.parse( results.text );
+
 			wpcomAPI = WPCOM( data.bearer_token );
 
 			dispatch( createUserComplete( form, data.bearer_token ) );

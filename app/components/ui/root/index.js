@@ -40,7 +40,7 @@ export default function Root( { children } ) {
 			<footer style={ CSS.footer }>
 				<Link style={ CSS.footerLink } to="/search">{ i18n.translate( 'Search' ) }</Link>
 				<Link style={ CSS.footerLink } to="/about">{ i18n.translate( 'About' ) }</Link>
-				<Link style={ CSS.footerLink } to="http://wordpress.com">{ i18n.translate( 'A WordPress.com service' ) }</Link>
+				<Link style={ CSS.footerLink } to="https://wordpress.com">{ i18n.translate( 'A WordPress.com service' ) }</Link>
 			</footer>
 		</div>
 	);

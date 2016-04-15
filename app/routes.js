@@ -33,3 +33,14 @@ export default {
 		}
 	]
 };
+
+export const serverRedirectRoutes = [
+	{
+		from: 'checkout',
+		to: 'search'
+	},
+	{
+		from: 'success',
+		to: 'search'
+	}
+];

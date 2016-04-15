@@ -15,9 +15,9 @@ const CSS = {
 		boxShadow: '-1px -1px 1px rgba( 0, 0, 0, .2 )',
 		fontSize: '0.8rem',
 		position: 'fixed',
-			bottom: 0,
-			left: 0,
-			right: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
 		textAlign: 'center'
 	},
 	footerLink: {

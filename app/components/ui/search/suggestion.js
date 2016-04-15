@@ -2,7 +2,7 @@
 import { Link } from 'react-router';
 import React from 'react';
 
-export default React.createClass( {
+const Suggestion = React.createClass( {
 	getInitialState() {
 		return {
 			hovered: false
@@ -19,7 +19,7 @@ export default React.createClass( {
 				padding: '1em',
 				textDecoration: 'none'
 			}
-		}
+		};
 	},
 
 	selectDomain() {
@@ -53,3 +53,5 @@ export default React.createClass( {
 		);
 	}
 } );
+
+export default Suggestion;

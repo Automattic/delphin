@@ -1,5 +1,6 @@
 // External dependencies
 import { combineReducers, createStore } from 'redux';
+import find from 'lodash/find';
 import express from 'express';
 import fs from 'fs';
 import i18n from 'app/lib/i18n';
@@ -16,7 +17,7 @@ import WebpackDevServer from 'webpack-dev-server';
 
 // Internal dependencies
 import config from '../webpack.config';
-import routes from 'app/routes';
+import routes, { serverRedirectRoutes } from 'app/routes';
 
 const app = express(),
 	port = process.env.PORT || 1337,
@@ -31,7 +32,16 @@ app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 app.use( '/favicon.ico', express.static( path.join( __dirname, '..', 'assets', 'favicon.ico' ) ) );
 
 app.get( '/*', ( request, response ) => {
-	match( { routes, location: request.url }, ( error, redirect, props ) => {
+	match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
+		const redirect = find( serverRedirectRoutes, route => {
+			return request.url.substring( 1 ).startsWith( route.from );
+		} );
+
+		if ( redirect ) {
+			response.redirect( redirect.to );
+			return;
+		}
+
 		const store = createStore(
 			combineReducers( {
 				...reducers,

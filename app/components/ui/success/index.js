@@ -6,7 +6,7 @@ import React from 'react';
 const Success = React.createClass( {
 	componentWillMount() {
 		if ( ! this.props.transaction ) {
-			this.props.redirect( '/search' );
+			this.props.redirect( '/' );
 		}
 	},
 

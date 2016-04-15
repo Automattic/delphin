@@ -23,7 +23,7 @@ const Checkout = React.createClass( {
 
 	componentDidMount() {
 		if ( ! this.props.checkout.domain ) {
-			this.props.redirect( '/search' );
+			this.props.redirect( '/' );
 		}
 	},
 

@@ -20,10 +20,6 @@ export default {
 			component: About
 		},
 		{
-			path: 'search',
-			component: SearchContainer
-		},
-		{
 			path: 'checkout',
 			component: Checkout
 		},

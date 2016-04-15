@@ -40,8 +40,6 @@ export function createUser( form ) {
 
 			const data = JSON.parse( results.text );
 
-			wpcomAPI = WPCOM( data.bearer_token );
-
 			dispatch( createUserComplete( form, data.bearer_token ) );
 		} );
 	};
@@ -59,7 +57,7 @@ export function createUserComplete( form, bearerToken ) {
 
 export function createSite( form ) {
 	return dispatch => {
-		wpcomAPI.req.post( '/sites/new', {
+		const payload = {
 			blog_name: form.domain,
 			blog_title: form.domain,
 			lang_id: 1,
@@ -68,7 +66,11 @@ export function createSite( form ) {
 			find_available_url: true,
 			client_id: CLIENT_ID,
 			client_secret: CLIENT_SECRET
-		}, ( error, data ) => {
+		};
+
+		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {
+			const data = JSON.parse( results.text );
+
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
 		} );
 	};

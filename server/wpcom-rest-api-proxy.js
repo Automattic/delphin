@@ -1,6 +1,5 @@
 // External dependencies
 var express = require( 'express' ),
-	req = require( 'superagent' ),
 	bodyParser = require( 'body-parser' ),
 	WPCOM = require( 'wpcom' );
 
@@ -23,7 +22,6 @@ module.exports = function wpcomRestApiProxy() {
 			results.pop();
 			response.send( results );
 		} );
-
 	} );
 
 	app.use( bodyParser.json() ).post( '/users/new', function( request, response ) {
@@ -32,7 +30,21 @@ module.exports = function wpcomRestApiProxy() {
 		payload.client_secret = secrets.wordpress_rest_api_oauth_client_secret;
 
 		wpcomAPI.req.post( '/users/new', payload, function( error, results ) {
-			response.send( results );
+			if ( ! error ) {
+				wpcomAPI = WPCOM( results.bearer_token );
+			}
+
+			response.send( error || results );
+		} );
+	} );
+
+	app.use( bodyParser.json() ).post( '/sites/new', function( request, response ) {
+		var payload = request.body;
+		payload.client_id = secrets.wordpress_rest_api_client_id;
+		payload.client_secret = secrets.wordpress_rest_api_oauth_client_secret;
+
+		wpcomAPI.req.post( '/sites/new', payload, function( error, results ) {
+			response.send( error || results );
 		} );
 	} );
 

@@ -14,7 +14,7 @@ describe( 'domain search reducer', () => {
 
 	it( 'should throw an error when action is undefined', () => {
 		expect( () => {
-			return domainSearch( {} )
+			return domainSearch( {} );
 		} ).toThrowError( TypeError );
 	} );
 
@@ -43,7 +43,7 @@ describe( 'domain search reducer', () => {
 			newState = domainSearch( originalState, { type: 'ORDER_CHEESE_BURGER' } );
 
 		expect( newState ).toEqual( originalState );
-	} )
+	} );
 } );
 
 describe( 'domain search reducer for domain search fetch action', () => {
@@ -70,3 +70,32 @@ describe( 'domain search reducer for domain search fetch action', () => {
 	} );
 } );
 
+describe( 'domain search reducer for domain search fetch completed action', () => {
+	it( 'should return initial state with fetching disabled when state is undefined', () => {
+		const newState = domainSearch( undefined, {
+			results: [ 'example.com' ],
+			type: DOMAIN_SEARCH_FETCH_COMPLETED
+		} );
+
+		expect( newState ).toEqual( {
+			isFetching: false,
+			results: [ 'example.com' ]
+		} );
+	} );
+
+	it( 'should return original state with fetching disabled', () => {
+		const originalState = Object.freeze( {
+				isFetching: true,
+				results: [ 'example1.com', 'example2.com' ]
+			} ),
+			newState = domainSearch( originalState, {
+				results: [ 'example3.com' ],
+				type: DOMAIN_SEARCH_FETCH_COMPLETED
+			} );
+
+		expect( newState ).toEqual( {
+			isFetching: false,
+			results: [ 'example3.com' ]
+		} );
+	} );
+} );

@@ -1,9 +1,11 @@
-/*eslint-disable quote-props */
+/* eslint-disable quote-props */
 module.exports = {
 	'parser': 'babel-eslint',
 	'env': {
 		'browser': true,
 		'es6': true,
+		'jasmine': true,
+		'jest': true,
 		'mocha': true,
 		'node': true
 	},

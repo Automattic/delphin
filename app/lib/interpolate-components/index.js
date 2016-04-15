@@ -118,6 +118,6 @@ function interpolate( options ) {
 
 		return mixedString;
 	}
-};
+}
 
 export default interpolate;

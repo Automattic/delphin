@@ -5,8 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "test": "NODE_PATH=app jest",
-    "build:client": "node_modules/.bin/webpack --config webpack.config.js --progress --colors",
-    "build:server": "node_modules/.bin/webpack --config webpack.server.config.js --verbose --progress --colors",
+    "build:client": "webpack --config webpack.config.js --progress --colors",
+    "build:server": "webpack --config webpack.server.config.js --verbose --progress --colors",
     "build": "npm run build:client && npm run build:server",
     "lint": "eslint --max-warnings 0 app client server",
     "start": "npm install && npm run build && node build/server.bundle",

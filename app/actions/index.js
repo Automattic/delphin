@@ -12,9 +12,6 @@ import {
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-const CLIENT_ID = 39911;
-const CLIENT_SECRET = 'cOaYKdrkgXz8xY7aysv4fU6wL6sK5J8a6ojReEIAPwggsznj4Cb6mW0nffTxtYT8';
-
 let wpcomAPI = WPCOM();
 
 export function selectDomain( domain ) {
@@ -63,9 +60,7 @@ export function createSite( form ) {
 			lang_id: 1,
 			locale: 'en',
 			validate: false,
-			find_available_url: true,
-			client_id: CLIENT_ID,
-			client_secret: CLIENT_SECRET
+			find_available_url: true
 		};
 
 		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {

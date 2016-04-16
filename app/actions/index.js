@@ -138,7 +138,7 @@ export function createTransaction( form ) {
 
 	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
-			wpcomAPI.req.post( '/me/transactions', {
+			const payload = {
 				payment_key: response,
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',
@@ -167,7 +167,9 @@ export function createTransaction( form ) {
 					email: 'wesley@snipes.com',
 					phone: '666-666-666'
 				}
-			}, () => {
+			};
+			request.post( '/me/transactions' ).send( payload ).end( ( apiError, apiResults ) => {
+				console.log( apiError || apiResults );
 				dispatch( createTransactionComplete( form ) );
 			} );
 		} );

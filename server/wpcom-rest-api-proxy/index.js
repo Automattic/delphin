@@ -48,5 +48,12 @@ module.exports = function wpcomRestApiProxy() {
 		} );
 	} );
 
+	app.use( bodyParser.json() ).post( '/me/transactions', function( request, response ) {
+		const payload = request.body;
+		wpcomAPI.req.post( '/me/transactions', payload, ( error, results ) => {
+			response.send( error || results );
+		} );
+	} );
+
 	return app;
 };

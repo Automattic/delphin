@@ -4,7 +4,7 @@ var express = require( 'express' ),
 	WPCOM = require( 'wpcom' );
 
 // Internal dependencies
-var secrets = require( './secrets.json' );
+var secrets = require( 'server/secrets.json' );
 
 var wpcomAPI = WPCOM();
 

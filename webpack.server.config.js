@@ -34,15 +34,21 @@ module.exports = {
 	},
 
 	module: {
-		loaders: [ {
-			test: /\.jsx?$/,
-			loader: 'babel-loader',
-			include: [
-				path.join( __dirname, 'app' ),
-				path.join( __dirname, 'lib' ),
-				path.join( __dirname, 'server' )
-			]
-		} ]
+		loaders: [
+			{
+				test: /\.jsx?$/,
+				loader: 'babel-loader',
+				include: [
+					path.join( __dirname, 'app' ),
+					path.join( __dirname, 'lib' ),
+					path.join( __dirname, 'server' )
+				]
+			},
+			{
+				test: /\.json$/,
+				loader: 'json-loader'
+			}
+		]
 	},
 
 	resolve: {

@@ -33,6 +33,11 @@ app.use( '/favicon.ico', express.static( path.join( __dirname, '..', 'assets', '
 
 app.get( '/*', ( request, response ) => {
 	match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
+		if ( ! props ) {
+			response.status( 404 ).send( 'Not found.' );
+			return;
+		}
+
 		const redirect = find( serverRedirectRoutes, route => {
 			return request.url.substring( 1 ).startsWith( route.from );
 		} );

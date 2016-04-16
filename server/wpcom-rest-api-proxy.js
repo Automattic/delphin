@@ -1,12 +1,12 @@
 // External dependencies
-var express = require( 'express' ),
-	bodyParser = require( 'body-parser' ),
-	WPCOM = require( 'wpcom' );
+import express from 'express';
+import bodyParser from 'body-parser';
+import WPCOM from 'wpcom';
 
 // Internal dependencies
-var secrets = require( 'server/secrets.json' );
+import secrets from 'server/secrets.json';
 
-var wpcomAPI = WPCOM();
+let wpcomAPI = WPCOM();
 
 module.exports = function wpcomRestApiProxy() {
 	const app = express();
@@ -25,7 +25,7 @@ module.exports = function wpcomRestApiProxy() {
 	} );
 
 	app.use( bodyParser.json() ).post( '/users/new', function( request, response ) {
-		var payload = request.body;
+		let payload = request.body;
 		payload.client_id = secrets.wordpress_rest_api_client_id;
 		payload.client_secret = secrets.wordpress_rest_api_oauth_client_secret;
 
@@ -39,7 +39,7 @@ module.exports = function wpcomRestApiProxy() {
 	} );
 
 	app.use( bodyParser.json() ).post( '/sites/new', function( request, response ) {
-		var payload = request.body;
+		let payload = request.body;
 		payload.client_id = secrets.wordpress_rest_api_client_id;
 		payload.client_secret = secrets.wordpress_rest_api_oauth_client_secret;
 

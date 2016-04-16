@@ -18,6 +18,7 @@ import WebpackDevServer from 'webpack-dev-server';
 
 // Internal dependencies
 import config from 'config';
+import api from 'server/wpcom-rest-api-proxy';
 import routes, { serverRedirectRoutes } from 'app/routes';
 import webpackConfig from '../webpack.config';
 

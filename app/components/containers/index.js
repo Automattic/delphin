@@ -1,0 +1,1 @@
+export SearchContainer from './search';

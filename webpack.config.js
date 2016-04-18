@@ -2,15 +2,14 @@
  * External dependencies
  */
 var webpack = require( 'webpack' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	NODE_ENV = process.env.NODE_ENV || 'development';
 
-module.exports = {
+var config = {
 	devServer: {
 		port: 1337,
 		historyApiFallback: true
 	},
-	devtool:
-		'eval',
 	entry: [
 		path.join( __dirname, 'client' )
 	],
@@ -46,14 +45,7 @@ module.exports = {
 		filename: 'client.bundle.js',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.DefinePlugin( {
-			'process.env': {
-				WPCOM_API_KEY: '"' + process.env.WPCOM_API_KEY + '"'
-			}
-		} )
-	],
+	plugins: [],
 	resolve: {
 		extensions: [ '', '.json', '.js', '.jsx' ],
 		modulesDirectories: [
@@ -64,3 +56,19 @@ module.exports = {
 		]
 	}
 };
+
+if ( NODE_ENV === 'development' ) {
+	config.devtool = 'eval';
+}
+
+if ( NODE_ENV === 'production' ) {
+	config.plugins.push(
+		new webpack.optimize.UglifyJsPlugin( {
+			compress: {
+				warnings: false
+			}
+		} )
+	);
+}
+
+module.exports = config;

@@ -68,6 +68,20 @@ const isDevelopment = 'production' !== process.env.NODE_ENV;
 if ( isDevelopment ) {
 	const backendPort = port + 1;
 
+	config.entry.unshift( 'webpack/hot/only-dev-server' );
+	config.entry.unshift( 'webpack-dev-server/client?/' );
+	config.plugins.push( new webpack.HotModuleReplacementPlugin() );
+
+	config.module.loaders.unshift( {
+		test: /\.jsx?$/,
+		loader: 'react-hot',
+		include: [
+			path.join( __dirname, '../app' ),
+			path.join( __dirname, '../client' ),
+			path.join( __dirname, '../lib' )
+		]
+	} );
+
 	const devServer = new WebpackDevServer( webpack( config ), {
 		publicPath: config.output.publicPath,
 		hot: true,

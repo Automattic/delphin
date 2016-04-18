@@ -12,8 +12,6 @@ module.exports = {
 	devtool:
 		'eval',
 	entry: [
-		'webpack/hot/only-dev-server',
-		'webpack-dev-server/client?/',
 		path.join( __dirname, 'client' )
 	],
 	module: {

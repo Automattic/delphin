@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import React from 'react';
 
+// Internal dependencies
+import paths from 'paths';
+
 const Success = React.createClass( {
 	componentWillMount() {
 		if ( ! this.props.transaction ) {
-			this.props.redirect( '/search' );
+			this.props.redirect( paths.search() );
 		}
 	},
 

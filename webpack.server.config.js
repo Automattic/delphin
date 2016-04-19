@@ -1,3 +1,4 @@
+// External dependencies
 var fs = require( 'fs' ),
 	path = require( 'path' ),
 	webpack = require( 'webpack' );
@@ -38,7 +39,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				loader: 'babel-loader',
+				loader: 'babel',
 				include: [
 					path.join( __dirname, 'app' ),
 					path.join( __dirname, 'lib' ),
@@ -47,7 +48,7 @@ module.exports = {
 			},
 			{
 				test: /\.json$/,
-				loader: 'json-loader'
+				loader: 'json'
 			}
 		]
 	},

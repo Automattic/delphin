@@ -1,5 +1,6 @@
 var fs = require( 'fs' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 function getExternals() {
 	var externals = {};
@@ -53,5 +54,13 @@ module.exports = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	}
+	},
+
+	plugins: [
+		new webpack.DefinePlugin( {
+			'process.env': {
+				BROWSER: JSON.stringify( false )
+			}
+		} )
+	]
 };

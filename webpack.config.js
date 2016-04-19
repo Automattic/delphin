@@ -2,7 +2,8 @@
  * External dependencies
  */
 var webpack = require( 'webpack' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
 	devServer: {
@@ -50,6 +51,8 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.DefinePlugin( {
 			'process.env': {
+				NODE_ENV: JSON.stringify( NODE_ENV ),
+				BROWSER: JSON.stringify( true ),
 				WPCOM_API_KEY: '"' + process.env.WPCOM_API_KEY + '"'
 			}
 		} )

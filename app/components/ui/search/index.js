@@ -4,6 +4,7 @@ import i18n from 'lib/i18n';
 import React from 'react';
 
 // Internal dependencies
+import styles from './styles.scss';
 import SuggestionComponent from './suggestion';
 
 const Search = React.createClass( {
@@ -39,8 +40,8 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h2 className="search__suggestions-heading">{ i18n.translate( 'Suggestions' ) }</h2>
-				<ul className="search__suggestions-list">
+				<h2 className={ styles.suggestionsHeading }>{ i18n.translate( 'Suggestions' ) }</h2>
+				<ul className={ styles.suggestionsList }>
 					{ suggestions }
 				</ul>
 			</div>
@@ -52,8 +53,8 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h1 className="search__heading">{ i18n.translate( 'Enter a domain' ) }</h1>
-				<input { ...query } className="search__field" />
+				<h1 className={ styles.heading }>{ i18n.translate( 'Enter a domain' ) }</h1>
+				<input { ...query } className={ styles.field } />
 				{ this.renderResults() }
 			</div>
 		);

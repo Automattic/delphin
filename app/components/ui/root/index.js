@@ -5,15 +5,16 @@ import React from 'react';
 
 // Internal dependencies
 import paths from 'paths';
+import styles from './styles.scss';
 
 export default function Root( { children } ) {
 	return (
-		<div className="root">
-			<div className="root__main">{ children }</div>
-			<footer className="root__footer">
-				<Link className="root__footer-link" to={ paths.search() }>{ i18n.translate( 'Search' ) }</Link>
-				<Link className="root__footer-link" to={ paths.about() }>{ i18n.translate( 'About' ) }</Link>
-				<Link className="root__footer-link" to="https://wordpress.com">{ i18n.translate( 'A WordPress.com service' ) }</Link>
+		<div className={ styles.root }>
+			<div className={ styles.main }>{ children }</div>
+			<footer className={ styles.footer }>
+				<Link className={ styles.footerLink } to={ paths.search() }>{ i18n.translate( 'Search' ) }</Link>
+				<Link className={ styles.footerLink } to={ paths.about() }>{ i18n.translate( 'About' ) }</Link>
+				<Link className={ styles.footerLink } to="https://wordpress.com">{ i18n.translate( 'A WordPress.com service' ) }</Link>
 			</footer>
 		</div>
 	);

@@ -24,7 +24,11 @@ var config = {
 			},
 			{
 				test: /\.scss$/,
-				loader: 'style!css!sass?sourceMap'
+				loaders: [
+					'style',
+					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'sass?sourceMap'
+				]
 			}
 		]
 	},

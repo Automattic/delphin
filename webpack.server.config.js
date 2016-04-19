@@ -49,6 +49,13 @@ module.exports = {
 			{
 				test: /\.json$/,
 				loader: 'json'
+			},
+			{
+				test: /\.scss$/,
+				loaders: [
+					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'sass?sourceMap'
+				]
 			}
 		]
 	},

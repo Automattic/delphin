@@ -5,13 +5,13 @@
 	position: relative;
 }
 
-.root__main {
+.main {
 	margin: 0 auto;
 	max-width: 960px;
 	padding: 1em;
 }
 
-.root__footer {
+.footer {
 	background-color: #fff;
 	box-shadow: -1px -1px 1px rgba( 0, 0, 0, .2 );
 	font-size: 0.8rem;
@@ -22,7 +22,7 @@
 	text-align: center;
 }
 
-.root__footer-link {
+.footer-link {
 	color: #666;
 	display: inline-block;
 	margin: 0.5em 1em;

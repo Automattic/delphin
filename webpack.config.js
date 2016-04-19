@@ -52,6 +52,7 @@ module.exports = {
 		new webpack.DefinePlugin( {
 			'process.env': {
 				NODE_ENV: JSON.stringify( NODE_ENV ),
+				BROWSER: JSON.stringify( true ),
 				WPCOM_API_KEY: '"' + process.env.WPCOM_API_KEY + '"'
 			}
 		} )

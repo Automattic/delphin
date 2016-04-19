@@ -26,12 +26,6 @@ let CSS = {
 CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
 const Search = React.createClass( {
-	getInitialState() {
-		return {
-			suggestions: []
-		};
-	},
-
 	componentDidMount() {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 	},
@@ -48,15 +42,6 @@ const Search = React.createClass( {
 
 	selectDomain( name ) {
 		this.props.selectDomain( name );
-	},
-
-	renderSuggestions() {
-		return this.state.suggestions.map( ( suggestion ) => (
-			<SuggestionComponent
-				key={ suggestion.domain_name }
-				selectDomain={ this.selectDomain }
-				suggestion={ suggestion } />
-		) );
 	},
 
 	renderResults() {

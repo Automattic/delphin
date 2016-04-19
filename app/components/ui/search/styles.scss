@@ -1,0 +1,21 @@
+.search__heading,
+.search__suggestions-heading {
+	font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
+	font-weight: 100;
+}
+
+.search__heading {
+	text-align: center;
+}
+
+.search__field {
+	font-size: 4em;
+	padding: 0;
+	width: 100%;
+}
+
+.search__suggestions-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}

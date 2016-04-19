@@ -6,25 +6,6 @@ import React from 'react';
 // Internal dependencies
 import SuggestionComponent from './suggestion';
 
-let CSS = {
-	heading: {
-		fontFamily: 'Merriweather, Georgia, "Times New Roman", Times, serif',
-		fontWeight: '100'
-	},
-	field: {
-		fontSize: '4em',
-		padding: 0,
-		width: '100%'
-	},
-	suggestionsList: {
-		listStyle: 'none',
-		margin: 0,
-		padding: 0
-	}
-};
-
-CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
-
 const Search = React.createClass( {
 	componentDidMount() {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
@@ -58,8 +39,8 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h2 style={ CSS.heading }>{ i18n.translate( 'Suggestions' ) }</h2>
-				<ul style={ CSS.suggestionsList }>
+				<h2 className="search__suggestions-heading">{ i18n.translate( 'Suggestions' ) }</h2>
+				<ul className="search__suggestions-list">
 					{ suggestions }
 				</ul>
 			</div>
@@ -71,8 +52,8 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h1 style={ CSS.h1 }>{ i18n.translate( 'Enter a domain' ) }</h1>
-				<input { ...query } style={ CSS.field } />
+				<h1 className="search__heading">{ i18n.translate( 'Enter a domain' ) }</h1>
+				<input { ...query } className="search__field" />
 				{ this.renderResults() }
 			</div>
 		);

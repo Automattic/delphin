@@ -45,7 +45,13 @@ var config = {
 		filename: 'client.bundle.js',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},
-	plugins: [],
+	plugins: [
+		new webpack.DefinePlugin( {
+			'process.env': {
+				NODE_ENV: JSON.stringify( NODE_ENV )
+			}
+		} )
+	],
 	resolve: {
 		extensions: [ '', '.json', '.js', '.jsx' ],
 		modulesDirectories: [

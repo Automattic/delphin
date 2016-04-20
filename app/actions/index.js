@@ -1,4 +1,5 @@
 // External dependencies
+import request from 'superagent';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -49,7 +50,7 @@ export function createUser( form ) {
 	};
 }
 
-export function createUserComplete( form, bearerToken ) {
+export function createUserComplete( form ) {
 	return {
 		type: CREATE_USER_COMPLETE,
 		username: form.username,
@@ -178,7 +179,8 @@ export function createTransaction( form ) {
 					phone: '666-666-666'
 				}
 			};
-			request.post( '/me/transactions' ).send( payload ).end( ( apiError, apiResults ) => {
+
+			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
 				console.log( apiError || apiResults );
 				dispatch( createTransactionComplete( form ) );
 			} );

@@ -13,8 +13,6 @@ import isUndefined from 'lodash/isUndefined';
 import config, { isEnabled } from 'config';
 import { loadScript } from 'lib/load-script';
 
-let _superProps, _user;
-
 if ( process.env.BROWSER ) {
 	// Load tracking scripts
 	window._tkq = window._tkq || [];
@@ -70,18 +68,22 @@ window.addEventListener( 'popstate', function() {
 } );
 
 const analytics = {
+	user: null,
+
+	superProps: null,
+
 	initialize( user, superProps ) {
 		analytics.setUser( user );
 		analytics.setSuperProps( superProps );
 		analytics.identifyUser();
 	},
 
-	setUser( user ) {
-		_user = user;
+	setUser( { id, username } ) {
+		this.user = { id, username };
 	},
 
 	setSuperProps( superProps ) {
-		_superProps = superProps;
+		this.superProps = superProps;
 	},
 
 	mc: {
@@ -127,12 +129,10 @@ const analytics = {
 				return;
 			}
 
-			let superProperties;
-
-			if ( _superProps ) {
-				superProperties = _superProps.getAll();
-				debug( '- Super Props: %o', superProperties );
-				eventProperties = assign( {}, eventProperties, superProperties ); // assign to a new object so we don't modify the argument
+			const { superProps } = analytics;
+			if ( superProps ) {
+				debug( '- Super Props: %o', superProps );
+				eventProperties = assign( {}, eventProperties, superProps ); // assign to a new object so we don't modify the argument
 			}
 
 			// Remove properties that have an undefined value
@@ -199,10 +199,8 @@ const analytics = {
 			let parameters = {};
 
 			if ( ! analytics.ga.initialized && isEnabled( 'google_analytics_enabled' ) ) {
-				if ( _user && _user.get() ) {
-					parameters = {
-						userId: 'u-' + _user.get().ID
-					};
+				if ( this.user ) {
+					parameters = { userId: 'u-' + this.user.id };
 				}
 				window.ga( 'create', config( 'google_analytics_key' ), 'auto', parameters );
 				analytics.ga.initialized = true;
@@ -259,8 +257,8 @@ const analytics = {
 
 	identifyUser() {
 		// Don't identify the user if we don't have one
-		if ( _user && _user.initialized ) {
-			window._tkq.push( [ 'identifyUser', _user.get().ID, _user.get().username ] );
+		if ( this.user ) {
+			window._tkq.push( [ 'identifyUser', this.user.id, this.user.username ] );
 		}
 	},
 

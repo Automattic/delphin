@@ -18,6 +18,7 @@ import WebpackDevServer from 'webpack-dev-server';
 
 // Internal dependencies
 import config from 'config';
+import api from './wpcom-rest-api-proxy';
 import routes, { serverRedirectRoutes } from 'app/routes';
 import webpackConfig from '../webpack.config';
 
@@ -39,6 +40,8 @@ if ( config( 'env' ) === 'production' ) {
 app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
 app.use( '/favicon.ico', express.static( path.join( __dirname, '..', 'assets', 'favicon.ico' ) ) );
+
+app.use( api() );
 
 app.get( '/*', ( request, response ) => {
 	match( { routes, location: request.url }, ( error, redirectLocations, props ) => {

@@ -1,4 +1,5 @@
 // External dependencies
+import request from 'superagent';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -12,10 +13,8 @@ import {
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-const CLIENT_ID = 39911;
-const CLIENT_SECRET = 'cOaYKdrkgXz8xY7aysv4fU6wL6sK5J8a6ojReEIAPwggsznj4Cb6mW0nffTxtYT8';
-
-let wpcomAPI = WPCOM();
+let wpcomAPI = WPCOM(),
+	bearerToken;
 
 export function selectDomain( domain ) {
 	return {
@@ -26,22 +25,32 @@ export function selectDomain( domain ) {
 
 export function createUser( form ) {
 	return dispatch => {
-		wpcomAPI.req.post( '/users/new', {
+		const payload = {
 			username: form.username,
 			email: form.email,
 			password: form.password,
-			validate: false,
-			client_id: CLIENT_ID,
-			client_secret: CLIENT_SECRET
-		}, ( error, data ) => {
+			validate: false
+		};
+
+		request.post( '/users/new' ).send( payload ).end( ( error, results ) => {
+			if ( error ) {
+				return;
+			}
+
+			const data = JSON.parse( results.text );
+
+			// Reinitialize WPCOM so that future requests with be authed
 			wpcomAPI = WPCOM( data.bearer_token );
+
+			// Save the bearer token for future requests
+			bearerToken = data.bearer_token;
 
 			dispatch( createUserComplete( form, data.bearer_token ) );
 		} );
 	};
 }
 
-export function createUserComplete( form, bearerToken ) {
+export function createUserComplete( form ) {
 	return {
 		type: CREATE_USER_COMPLETE,
 		username: form.username,
@@ -53,16 +62,19 @@ export function createUserComplete( form, bearerToken ) {
 
 export function createSite( form ) {
 	return dispatch => {
-		wpcomAPI.req.post( '/sites/new', {
+		const payload = {
+			bearer_token: bearerToken,
 			blog_name: form.domain,
 			blog_title: form.domain,
 			lang_id: 1,
 			locale: 'en',
 			validate: false,
-			find_available_url: true,
-			client_id: CLIENT_ID,
-			client_secret: CLIENT_SECRET
-		}, ( error, data ) => {
+			find_available_url: true
+		};
+
+		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {
+			const data = JSON.parse( results.text );
+
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
 		} );
 	};
@@ -126,6 +138,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 
 export function createTransaction( form ) {
 	const cardDetails = {
+		bearer_token: bearerToken,
 		name: form.name,
 		number: form['credit-card-number'],
 		cvv: form.cvv,
@@ -135,7 +148,8 @@ export function createTransaction( form ) {
 
 	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
-			wpcomAPI.req.post( '/me/transactions', {
+			const payload = {
+				bearer_token: bearerToken,
 				payment_key: response,
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',
@@ -164,7 +178,10 @@ export function createTransaction( form ) {
 					email: 'wesley@snipes.com',
 					phone: '666-666-666'
 				}
-			}, () => {
+			};
+
+			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
+				console.log( apiError || apiResults );
 				dispatch( createTransactionComplete( form ) );
 			} );
 		} );

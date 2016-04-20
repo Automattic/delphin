@@ -40,3 +40,7 @@ node_modules
 
 # Optional unison directory
 .unison
+
+# Secrets
+server/secrets.json
+

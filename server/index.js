@@ -1,4 +1,5 @@
 // External dependencies
+import auth from 'http-auth';
 import { combineReducers, createStore } from 'redux';
 import find from 'lodash/find';
 import express from 'express';
@@ -16,8 +17,9 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 // Internal dependencies
-import config from '../webpack.config';
+import config from 'config';
 import routes, { serverRedirectRoutes } from 'app/routes';
+import webpackConfig from '../webpack.config';
 
 const app = express(),
 	port = process.env.PORT || 1337,
@@ -26,6 +28,13 @@ const app = express(),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
 i18n.initialize();
+
+if ( config( 'env' ) === 'production' ) {
+	app.use( auth.connect( auth.basic( {
+		realm: 'Delphin',
+		file: path.join( __dirname, 'credentials' )
+	} ) ) );
+}
 
 app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
@@ -64,15 +73,15 @@ app.get( '/*', ( request, response ) => {
 	} );
 } );
 
-const isDevelopment = 'production' !== process.env.NODE_ENV;
+const isDevelopment = 'production' !== config( 'env' );
 if ( isDevelopment ) {
 	const backendPort = port + 1;
 
-	config.entry.unshift( 'webpack/hot/only-dev-server' );
-	config.entry.unshift( 'webpack-dev-server/client?/' );
-	config.plugins.push( new webpack.HotModuleReplacementPlugin() );
+	webpackConfig.entry.unshift( 'webpack/hot/only-dev-server' );
+	webpackConfig.entry.unshift( 'webpack-dev-server/client?/' );
+	webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
 
-	config.module.loaders.unshift( {
+	webpackConfig.module.loaders.unshift( {
 		test: /\.jsx?$/,
 		loader: 'react-hot',
 		include: [
@@ -82,8 +91,8 @@ if ( isDevelopment ) {
 		]
 	} );
 
-	const devServer = new WebpackDevServer( webpack( config ), {
-		publicPath: config.output.publicPath,
+	const devServer = new WebpackDevServer( webpack( webpackConfig ), {
+		publicPath: webpackConfig.output.publicPath,
 		hot: true,
 		proxy: {
 			'*': 'http://localhost:' + backendPort

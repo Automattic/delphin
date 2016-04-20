@@ -26,13 +26,8 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
-	var i18nLocaleStringsObject = null;
-
-	// Initialize i18n
-	if ( window.i18nLocaleStrings ) {
-		i18nLocaleStringsObject = JSON.parse( window.i18nLocaleStrings );
-	}
-	i18n.initialize( i18nLocaleStringsObject );
+	const { i18nLocaleStrings } = window;
+	i18n.initialize( i18nLocaleStrings ? JSON.parse( i18nLocaleStrings ) : null );
 
 	injectTapEventPlugin();
 }

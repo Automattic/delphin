@@ -21,7 +21,7 @@ module.exports = function wpcomRestApiProxy() {
 				wpcomAPI = WPCOM( results.bearer_token );
 			}
 
-			response.send( error || results );
+			response.status( ( error && error.code ) || 200 ).send( error || response );
 		} );
 	} );
 
@@ -31,14 +31,14 @@ module.exports = function wpcomRestApiProxy() {
 		payload.client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 
 		wpcomAPI.req.post( '/sites/new', payload, function( error, results ) {
-			response.send( error || results );
+			response.status( ( error && error.code ) || 200 ).send( error || results );
 		} );
 	} );
 
 	app.use( bodyParser.json() ).post( '/me/transactions', function( request, response ) {
 		const payload = request.body;
 		wpcomAPI.req.post( '/me/transactions', payload, ( error, results ) => {
-			response.send( error || results );
+			response.status( ( error && error.code ) || 200 ).send( error || results );
 		} );
 	} );
 

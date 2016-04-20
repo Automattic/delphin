@@ -37,6 +37,9 @@ export function createUser( form ) {
 
 			const data = JSON.parse( results.text );
 
+			// Reinitialize WPCOM so that future requests with be authed
+			wpcomAPI = WPCOM( results.bearer_token );
+
 			dispatch( createUserComplete( form, data.bearer_token ) );
 		} );
 	};

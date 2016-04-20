@@ -18,7 +18,7 @@ module.exports = function wpcomRestApiProxy() {
 		} );
 
 		WPCOM().req.post( '/users/new', payload, function( error, results ) {
-			response.status( ( error && error.code ) || 200 ).send( error || results );
+			response.status( ( error && error.statusCode ) || 200 ).send( error || results );
 		} );
 	} );
 
@@ -33,7 +33,7 @@ module.exports = function wpcomRestApiProxy() {
 		}
 
 		WPCOM( payload.bearer_token ).req.post( '/sites/new', payload, function( error, results ) {
-			response.status( ( error && error.code ) || 200 ).send( error || results );
+			response.status( ( error && error.statusCode ) || 200 ).send( error || results );
 		} );
 	} );
 

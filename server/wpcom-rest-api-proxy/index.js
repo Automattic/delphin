@@ -13,7 +13,7 @@ module.exports = function wpcomRestApiProxy() {
 	app.use( bodyParser.json() );
 
 	app.post( '/users/new', function( request, response ) {
-		let payload = request.body;
+		let payload = Object.assign( {}, request.body );
 		payload.client_id = secrets.wordpress.rest_api_oauth_client_id;
 		payload.client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 
@@ -23,7 +23,7 @@ module.exports = function wpcomRestApiProxy() {
 	} );
 
 	app.post( '/sites/new', function( request, response ) {
-		let payload = request.body;
+		let payload = Object.assign( {}, request.body );
 		payload.client_id = secrets.wordpress.rest_api_oauth_client_id;
 		payload.client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 
@@ -37,7 +37,7 @@ module.exports = function wpcomRestApiProxy() {
 	} );
 
 	app.post( '/me/transactions', function( request, response ) {
-		const payload = request.body;
+		const payload = Object.assign( {}, request.body );
 
 		if ( ! payload.bearer_token ) {
 			response.status( 400 ).send( { message: 'Requests to this endpoint must be authenticated' } );

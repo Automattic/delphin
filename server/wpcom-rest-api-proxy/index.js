@@ -6,7 +6,6 @@ import WPCOM from 'wpcom';
 // Internal dependencies
 import secrets from 'server/secrets.json';
 
-let wpcomAPI = WPCOM();
 
 module.exports = function wpcomRestApiProxy() {
 	const app = express();
@@ -16,12 +15,8 @@ module.exports = function wpcomRestApiProxy() {
 		payload.client_id = secrets.wordpress.rest_api_oauth_client_id;
 		payload.client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 
-		wpcomAPI.req.post( '/users/new', payload, function( error, results ) {
-			if ( ! error ) {
-				wpcomAPI = WPCOM( results.bearer_token );
-			}
-
-			response.status( ( error && error.code ) || 200 ).send( error || response );
+		WPCOM().req.post( '/users/new', payload, function( error, results ) {
+			response.status( ( error && error.code ) || 200 ).send( error || results );
 		} );
 	} );
 
@@ -30,14 +25,23 @@ module.exports = function wpcomRestApiProxy() {
 		payload.client_id = secrets.wordpress.rest_api_oauth_client_id;
 		payload.client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 
-		wpcomAPI.req.post( '/sites/new', payload, function( error, results ) {
+		if ( ! payload.bearer_token ) {
+			response.status( 400 ).send( { message: 'Requests to this endpoint must be authenticated' } );
+		}
+
+		WPCOM( payload.bearer_token ).req.post( '/sites/new', payload, function( error, results ) {
 			response.status( ( error && error.code ) || 200 ).send( error || results );
 		} );
 	} );
 
 	app.use( bodyParser.json() ).post( '/me/transactions', function( request, response ) {
 		const payload = request.body;
-		wpcomAPI.req.post( '/me/transactions', payload, ( error, results ) => {
+
+		if ( ! payload.bearer_token ) {
+			response.status( 400 ).send( { message: 'Requests to this endpoint must be authenticated' } );
+		}
+
+		WPCOM( payload.bearer_token ).req.post( '/me/transactions', payload, ( error, results ) => {
 			response.status( ( error && error.code ) || 200 ).send( error || results );
 		} );
 	} );

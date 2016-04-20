@@ -12,7 +12,8 @@ import {
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-let wpcomAPI = WPCOM();
+let wpcomAPI = WPCOM(),
+	bearerToken;
 
 export function selectDomain( domain ) {
 	return {
@@ -38,7 +39,10 @@ export function createUser( form ) {
 			const data = JSON.parse( results.text );
 
 			// Reinitialize WPCOM so that future requests with be authed
-			wpcomAPI = WPCOM( results.bearer_token );
+			wpcomAPI = WPCOM( data.bearer_token );
+
+			// Save the bearer token for future requests
+			bearerToken = data.bearer_token;
 
 			dispatch( createUserComplete( form, data.bearer_token ) );
 		} );
@@ -58,6 +62,7 @@ export function createUserComplete( form, bearerToken ) {
 export function createSite( form ) {
 	return dispatch => {
 		const payload = {
+			bearer_token: bearerToken,
 			blog_name: form.domain,
 			blog_title: form.domain,
 			lang_id: 1,
@@ -132,6 +137,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 
 export function createTransaction( form ) {
 	const cardDetails = {
+		bearer_token: bearerToken,
 		name: form.name,
 		number: form['credit-card-number'],
 		cvv: form.cvv,
@@ -142,6 +148,7 @@ export function createTransaction( form ) {
 	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
+				bearer_token: bearerToken,
 				payment_key: response,
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',

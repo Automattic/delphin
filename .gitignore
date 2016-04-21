@@ -44,3 +44,5 @@ node_modules
 # Secrets
 server/secrets.json
 
+# Translations
+delphin_i18n_strings.php

@@ -8,8 +8,8 @@ import {
 	recordGooglePageView,
 	recordTracksEvent,
 	recordPageView
-} from '../actions';
-import { dispatcher as dispatch } from '../middleware';
+} from 'actions/analytics';
+import { dispatcher as dispatch } from '../index';
 import analytics from 'lib/analytics';
 
 describe( 'middleware', () => {

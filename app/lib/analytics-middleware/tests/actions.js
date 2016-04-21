@@ -7,7 +7,7 @@ import {
 	composeAnalytics,
 	withAnalytics,
 	bumpStat
-} from '../actions.js';
+} from 'actions/analytics';
 
 describe( 'middleware', () => {
 	describe( 'actions', () => {

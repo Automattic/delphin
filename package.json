@@ -12,7 +12,8 @@
     "start": "npm install && node build/server.bundle",
     "qs": "npm run build && node build/server.bundle",
     "prod": "NODE_ENV=production node build/server.bundle",
-    "postinstall": "npm run-script build"
+    "postinstall": "npm run-script build",
+    "translate": "bin/get-i18n delphin_i18n_strings.php delphin_i18n_strings build/client.bundle.js build/server.bundle.js"
   },
   "repository": {
     "type": "git",
@@ -25,11 +26,14 @@
   },
   "homepage": "https://github.com/Automattic/delphin#readme",
   "devDependencies": {
+    "async": "^2.0.0-rc.3",
     "babel-eslint": "^6.0.2",
+    "commander": "^2.9.0",
     "eslint": "^2.2.0",
     "eslint-plugin-react": "^4.3.0",
     "eslint-plugin-wpcalypso": "^1.1.3",
-    "node-sass": "^3.4.2"
+    "node-sass": "^3.4.2",
+    "xgettext-js": "^0.3.0"
   },
   "dependencies": {
     "babel-core": "^6.7.4",

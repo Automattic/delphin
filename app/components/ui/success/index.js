@@ -4,12 +4,12 @@ import { push } from 'react-router-redux';
 import React from 'react';
 
 // Internal dependencies
-import paths from 'paths';
+import getPath from 'routes';
 
 const Success = React.createClass( {
 	componentWillMount() {
 		if ( ! this.props.transaction ) {
-			this.props.redirect( paths.search() );
+			this.props.redirect( getPath( 'search' ) );
 		}
 	},
 

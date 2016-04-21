@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import React from 'react';
 
 // Internal dependencies
-import paths from 'paths';
+import { getPath } from 'routes';
 
 const Suggestion = React.createClass( {
 	getInitialState() {
@@ -45,7 +45,7 @@ const Suggestion = React.createClass( {
 		return (
 			<li>
 				<Link
-					to={ paths.checkout() }
+					to={ getPath( 'checkout' ) }
 					onMouseOver={ this.onMouseOver }
 					onMouseOut={ this.onMouseOut }
 					onClick={ this.selectDomain }

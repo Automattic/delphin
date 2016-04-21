@@ -1,4 +1,4 @@
-import analytics from 'lib/analytics';
+import analyticsModule from 'lib/analytics';
 import has from 'lodash/has';
 import invoke from 'lodash/invoke';
 
@@ -6,19 +6,19 @@ import {
 	ANALYTICS_EVENT_RECORD,
 	ANALYTICS_PAGE_VIEW_RECORD,
 	ANALYTICS_STAT_BUMP
-} from 'state/action-types';
+} from 'reducers/action-types';
 
 const eventServices = {
-	ga: ( { category, action, label, value } ) => analytics.ga.recordEvent( category, action, label, value ),
-	tracks: ( { name, properties } ) => analytics.tracks.recordEvent( name, properties )
+	ga: ( { category, action, label, value } ) => analyticsModule.ga.recordEvent( category, action, label, value ),
+	tracks: ( { name, properties } ) => analyticsModule.tracks.recordEvent( name, properties )
 };
 
 const pageViewServices = {
-	ga: ( { url, title } ) => analytics.ga.recordPageView( url, title ),
-	default: ( { url, title } ) => analytics.pageView.record( url, title )
+	ga: ( { url, title } ) => analyticsModule.ga.recordPageView( url, title ),
+	default: ( { url, title } ) => analyticsModule.pageView.record( url, title )
 };
 
-const statBump = ( { group, name } ) => analytics.mc.bumpStat( group, name );
+const statBump = ( { group, name } ) => analyticsModule.mc.bumpStat( group, name );
 
 export const dispatcher = ( { meta: { analytics } } ) => {
 	analytics.forEach( ( { type, payload } ) => {
@@ -34,7 +34,7 @@ export const dispatcher = ( { meta: { analytics } } ) => {
 			case ANALYTICS_STAT_BUMP:
 				return statBump( payload );
 		}
-	} )
+	} );
 };
 
 export const analyticsMiddleware = () => next => action => {

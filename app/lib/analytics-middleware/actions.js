@@ -11,7 +11,7 @@ import {
 	ANALYTICS_MULTI_TRACK,
 	ANALYTICS_PAGE_VIEW_RECORD,
 	ANALYTICS_STAT_BUMP
-} from 'state/action-types';
+} from 'reducers/action-types';
 
 const mergedMetaData = ( a, b ) => [
 	...get( a, 'meta.analytics', [] ),
@@ -20,7 +20,10 @@ const mergedMetaData = ( a, b ) => [
 
 const joinAnalytics = ( analytics, action ) =>
 	isFunction( action )
-		? dispatch => { dispatch( analytics ); action( dispatch ); }
+		? dispatch => {
+			dispatch( analytics );
+			action( dispatch );
+		}
 		: merge( {}, action, { meta: { analytics: mergedMetaData( analytics, action ) } } );
 
 export const composeAnalytics = ( ...analytics ) => ( {

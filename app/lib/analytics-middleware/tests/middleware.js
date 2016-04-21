@@ -1,8 +1,5 @@
-import React from 'react';
-import { expect } from 'chai';
-import { spy } from 'sinon';
-
-import useMockery from 'test/helpers/use-mockery';
+jest.disableAutomock();
+jest.mock( 'lib/analytics' );
 
 import {
 	withAnalytics,
@@ -12,61 +9,51 @@ import {
 	recordTracksEvent,
 	recordPageView
 } from '../actions';
-import analyticsMock from './helpers/analytics-mock';
+import { dispatcher as dispatch } from '../middleware';
+import analytics from 'lib/analytics';
 
 describe( 'middleware', () => {
 	describe( 'analytics dispatching', () => {
-		const mock = spy();
-		let dispatch;
-
-		useMockery( mockery => {
-			mockery.registerMock( 'lib/analytics', analyticsMock( mock ) );
-
-			dispatch = require( '../middleware.js' ).dispatcher;
-		} );
-
-		beforeEach( () => mock.reset() );
-
 		it( 'should call mc.bumpStat', () => {
 			dispatch( bumpStat( 'test', 'value' ) );
 
-			expect( mock ).to.have.been.calledWith( 'mc.bumpStat' );
+			expect( analytics.mc.bumpStat ).toBeCalled();
 		} );
 
 		it( 'should call tracks.recordEvent', () => {
 			dispatch( recordTracksEvent( 'test', { name: 'value' } ) );
 
-			expect( mock ).to.have.been.calledWith( 'tracks.recordEvent' );
+			expect( analytics.tracks.recordEvent ).toBeCalled();
 		} );
 
 		it( 'should call pageView.record', () => {
 			dispatch( recordPageView( 'path', 'title' ) );
 
-			expect( mock ).to.have.been.calledWith( 'pageView.record' );
+			expect( analytics.pageView.record ).toBeCalled();
 		} );
 
 		it( 'should call ga.recordEvent', () => {
 			dispatch( recordGoogleEvent( 'category', 'action' ) );
 
-			expect( mock ).to.have.been.calledWith( 'ga.recordEvent' );
+			expect( analytics.ga.recordEvent ).toBeCalled();
 		} );
 
 		it( 'should call ga.recordPageView', () => {
 			dispatch( recordGooglePageView( 'path', 'title' ) );
 
-			expect( mock ).to.have.been.calledWith( 'ga.recordPageView' );
+			expect( analytics.ga.recordPageView ).toBeCalled();
 		} );
 
 		it( 'should call tracks.recordEvent', () => {
 			dispatch( recordTracksEvent( 'event', { name: 'value' } ) );
 
-			expect( mock ).to.have.been.calledWith( 'tracks.recordEvent' );
+			expect( analytics.tracks.recordEvent ).toBeCalled();
 		} );
 
 		it( 'should call analytics events with wrapped actions', () => {
 			dispatch( withAnalytics( bumpStat( 'name', 'value' ), { type: 'TEST_ACTION'} ) );
 
-			expect( mock ).to.have.been.calledWith( 'mc.bumpStat' );
+			expect( analytics.mc.bumpStat ).toBeCalled();
 		} );
 	} );
 } );

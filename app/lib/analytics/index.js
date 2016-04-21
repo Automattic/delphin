@@ -1,11 +1,12 @@
 /**
  * External dependencies
  */
-import debug from 'debug';
 import assign from 'lodash/assign';
+import debugFactory from 'debug';
 import omit from 'lodash/omit';
 import startsWith from 'lodash/startsWith';
 import isUndefined from 'lodash/isUndefined';
+const debug = debugFactory( 'delphin:analytics' );
 
 /**
  * Internal dependencies
@@ -124,8 +125,8 @@ const analytics = {
 		recordEvent( eventName, eventProperties = {} ) {
 			debug( 'Record event "%s" called with props %o', eventName, eventProperties );
 
-			if ( eventName.indexOf( 'calypso_' ) !== 0 ) {
-				debug( '- Event name must be prefixed by "calypso_"' );
+			if ( eventName.indexOf( config( 'tracks_event_prefix' ) ) !== 0 ) {
+				debug( `- Event name must be prefixed by "${ config( 'tracks_event_prefix' ) }"` );
 				return;
 			}
 
@@ -145,7 +146,7 @@ const analytics = {
 		},
 
 		recordPageView: function( urlPath ) {
-			analytics.tracks.recordEvent( 'delphin_page_view', {
+			analytics.tracks.recordEvent( `${ config( 'tracks_event_prefix' ) }page_view`, {
 				path: urlPath
 			} );
 		}

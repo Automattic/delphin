@@ -5,7 +5,7 @@ import curry from 'lodash/curry';
 import find from 'lodash/find';
 import express from 'express';
 import fs from 'fs';
-import i18n from 'app/lib/i18n';
+import i18n from 'lib/i18n';
 import { match, RouterContext } from 'react-router';
 import reducers from 'app/reducers';
 import { routerReducer } from 'react-router-redux';

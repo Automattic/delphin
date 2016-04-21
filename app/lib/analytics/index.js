@@ -125,8 +125,8 @@ const analytics = {
 		recordEvent( eventName, eventProperties = {} ) {
 			debug( 'Record event "%s" called with props %o', eventName, eventProperties );
 
-			if ( eventName.indexOf( 'delphin_' ) !== 0 ) {
-				debug( '- Event name must be prefixed by "delphin_"' );
+			if ( eventName.indexOf( config( 'tracks_event_prefix' ) ) !== 0 ) {
+				debug( `- Event name must be prefixed by "${ config( 'tracks_event_prefix' ) }"` );
 				return;
 			}
 
@@ -146,7 +146,7 @@ const analytics = {
 		},
 
 		recordPageView: function( urlPath ) {
-			analytics.tracks.recordEvent( 'delphin_page_view', {
+			analytics.tracks.recordEvent( `${ config( 'tracks_event_prefix' ) }page_view`, {
 				path: urlPath
 			} );
 		}

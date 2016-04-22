@@ -69,12 +69,4 @@ module.exports = {
 			__dirname
 		]
 	},
-
-	plugins: [
-		new webpack.DefinePlugin( {
-			'process.env': {
-				BROWSER: JSON.stringify( false )
-			}
-		} )
-	]
 };

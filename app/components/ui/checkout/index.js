@@ -7,6 +7,7 @@ import React from 'react';
 // Internal dependencies
 import { createSite, createTransaction, createUser } from 'actions';
 import paths from 'paths';
+import styles from './styles.scss';
 
 const Checkout = React.createClass( {
 	getInitialState() {
@@ -120,7 +121,7 @@ const Checkout = React.createClass( {
 		}
 
 		return (
-			<form onChange={ this.updateForm } onSubmit={ this.checkout }>
+			<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
 				<label>{ i18n.translate( 'username' ) }</label>
 				<input type="text" name="username" />
 				<label>{ i18n.translate( 'email' ) }</label>

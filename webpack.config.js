@@ -1,6 +1,4 @@
-/**
- * External dependencies
- */
+// External dependencies
 var webpack = require( 'webpack' ),
 	path = require( 'path' ),
 	NODE_ENV = process.env.NODE_ENV || 'development';
@@ -17,16 +15,20 @@ var config = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				loaders: [ 'react-hot', 'babel-loader' ],
+				loaders: [ 'react-hot', 'babel' ],
 				exclude: /node_modules/
 			},
 			{
 				test: /\.json$/,
-				loader: 'json-loader'
+				loader: 'json'
 			},
 			{
 				test: /\.scss$/,
-				loader: 'style!css!sass?sourceMap'
+				loaders: [
+					'style',
+					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'sass?sourceMap'
+				]
 			}
 		]
 	},

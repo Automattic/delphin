@@ -1,0 +1,30 @@
+.root {
+	color: #404040;
+	font-family: Helvetica, Arial, sans-serif;
+	padding-bottom: 2em;
+	position: relative;
+}
+
+.main {
+	margin: 0 auto;
+	max-width: 960px;
+	padding: 1em;
+}
+
+.footer {
+	background-color: #fff;
+	box-shadow: -1px -1px 1px rgba( 0, 0, 0, .2 );
+	font-size: 0.8rem;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.footer-link {
+	color: #666;
+	display: inline-block;
+	margin: 0.5em 1em;
+	text-decoration: none;
+}

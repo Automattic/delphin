@@ -4,26 +4,8 @@ import i18n from 'lib/i18n';
 import React from 'react';
 
 // Internal dependencies
+import styles from './styles.scss';
 import SuggestionComponent from './suggestion';
-
-let CSS = {
-	heading: {
-		fontFamily: 'Merriweather, Georgia, "Times New Roman", Times, serif',
-		fontWeight: '100'
-	},
-	field: {
-		fontSize: '4em',
-		padding: 0,
-		width: '100%'
-	},
-	suggestionsList: {
-		listStyle: 'none',
-		margin: 0,
-		padding: 0
-	}
-};
-
-CSS.h1 = Object.assign( {}, CSS.heading, { textAlign: 'center' } );
 
 const Search = React.createClass( {
 	componentDidMount() {
@@ -58,8 +40,8 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h2 style={ CSS.heading }>{ i18n.translate( 'Suggestions' ) }</h2>
-				<ul style={ CSS.suggestionsList }>
+				<h2 className={ styles.suggestionsHeading }>{ i18n.translate( 'Suggestions' ) }</h2>
+				<ul className={ styles.suggestionsList }>
 					{ suggestions }
 				</ul>
 			</div>
@@ -71,8 +53,8 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h1 style={ CSS.h1 }>{ i18n.translate( 'Enter a domain' ) }</h1>
-				<input { ...query } style={ CSS.field } />
+				<h1 className={ styles.heading }>{ i18n.translate( 'Enter a domain' ) }</h1>
+				<input { ...query } className={ styles.field } />
 				{ this.renderResults() }
 			</div>
 		);

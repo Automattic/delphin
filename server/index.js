@@ -39,7 +39,7 @@ if ( config( 'env' ) === 'production' ) {
 
 app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
-app.use( '/favicon.ico', express.static( path.join( __dirname, '..', 'assets', 'favicon.ico' ) ) );
+app.use( express.static( path.join( __dirname, '..', 'assets' ) ) );
 
 app.use( api() );
 

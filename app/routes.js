@@ -40,12 +40,20 @@ export const routes = {
 	]
 };
 
+/**
+ * Builds a path for the given slug by recursively searching the given routes.
+ *
+ * @param {string} slug The unique identifier of the path to search for in the routes.
+ * @param {object} rootRoute A route object, which may contain child routes.
+ * @param {string} path A string that is prepended to the path, if it is found.
+ * @return {string|null} A string representing a path in the application.
+ */
 const buildPath = ( slug, rootRoute, path = '' ) => {
 	if ( rootRoute.slug === slug ) {
 		return rootRoute.path !== '/' ? `${ path }/${ rootRoute.path }` : rootRoute.path;
 	}
 
-	let match;
+	let match = null;
 	if ( rootRoute.childRoutes ) {
 		rootRoute.childRoutes.forEach( route => {
 			const potentialPath = buildPath( slug, route, path + rootRoute.path );
@@ -60,8 +68,17 @@ const buildPath = ( slug, rootRoute, path = '' ) => {
 	return match;
 };
 
-export const getPath = ( slug, values = {}, allRoutes = routes ) => {
-	const path = buildPath( slug, allRoutes );
+/**
+ * Gets the path with the given slug, replacing parameter placeholders with the given values.
+ *
+ * @param {string} slug The unique identifier of the path to search for in the routes.
+ * @param {object} values The values to use when replacing the route's placeholders.
+ * @param {object} rootRoute The route to search through.
+ * @return {string|null} A string representing a path in the application, with parameters
+ *	replaced by the given values.
+ */
+export const getPath = ( slug, values = {}, rootRoute = routes ) => {
+	const path = buildPath( slug, rootRoute );
 
 	if ( ! path ) {
 		return null;

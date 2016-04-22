@@ -68,5 +68,5 @@ module.exports = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	},
+	}
 };

@@ -8,7 +8,7 @@ let rest_api_oauth_client_id = process.env.REST_API_OAUTH_CLIENT_ID,
 	rest_api_oauth_client_secret = process.env.REST_API_OAUTH_CLIENT_SECRET;
 
 if ( ! rest_api_oauth_client_id && fileExists( 'server/secrets.json' ) ) {
-	const secrets = require( 'server/secrets.json' );
+	const secrets = JSON.parse( fs.readFileSync( 'server/secrets.json' ) );
 	rest_api_oauth_client_id = secrets.wordpress.rest_api_oauth_client_id;
 	rest_api_oauth_client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 }

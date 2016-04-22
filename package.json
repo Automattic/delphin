@@ -8,6 +8,7 @@
     "build:client": "webpack --config webpack.config.js --progress --colors",
     "build:server": "webpack --config webpack.server.config.js --verbose --progress --colors",
     "build": "npm run build:client && npm run build:server",
+    "build-prod": "NODE_ENV=production npm run build",
     "lint": "eslint --max-warnings 0 app client server",
     "start": "npm install && node build/server.bundle",
     "qs": "npm run build && node build/server.bundle",

@@ -73,6 +73,9 @@ if ( NODE_ENV === 'development' ) {
 if ( NODE_ENV === 'production' ) {
 	config.plugins.push(
 		new webpack.optimize.UglifyJsPlugin( {
+			output: {
+				comments: false
+			},
 			compress: {
 				warnings: false
 			}

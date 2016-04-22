@@ -3,8 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import WPCOM from 'wpcom';
 
-// Internal dependencies
-import secrets from 'server/secrets.json';
+const secrets = process.env.SECRETS ? JSON.parse( process.env.SECRETS ) : require( 'server/secrets.json' );
 
 module.exports = function wpcomRestApiProxy() {
 	const app = express();

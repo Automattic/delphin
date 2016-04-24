@@ -51,6 +51,7 @@ app.get( '/*', ( request, response ) => {
 
 		if ( redirect ) {
 			response.redirect( redirect.to );
+
 			return;
 		}
 
@@ -61,7 +62,7 @@ app.get( '/*', ( request, response ) => {
 			} )
 		);
 
-		const appHtml = renderToString(
+		const content = renderToString(
 			<Provider store={ store }>
 				<RouterContext { ...props } />
 			</Provider>
@@ -71,7 +72,7 @@ app.get( '/*', ( request, response ) => {
 			response.status( 404 );
 		}
 
-		response.send( templateCompiler( { content: appHtml } ) );
+		response.send( templateCompiler( { content } ) );
 	} );
 } );
 

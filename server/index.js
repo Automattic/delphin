@@ -90,16 +90,6 @@ if ( isDevelopment ) {
 	webpackConfig.entry.unshift( 'webpack-dev-server/client?/' );
 	webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
 
-	webpackConfig.module.loaders.unshift( {
-		test: /\.jsx?$/,
-		loader: 'react-hot',
-		include: [
-			path.join( __dirname, '../app' ),
-			path.join( __dirname, '../client' ),
-			path.join( __dirname, '../lib' )
-		]
-	} );
-
 	const devServer = new WebpackDevServer( webpack( webpackConfig ), {
 		publicPath: webpackConfig.output.publicPath,
 		hot: true,

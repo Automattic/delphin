@@ -3,6 +3,8 @@ html
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		script(src="/build/client.bundle.js" async)
+		style(type='text/css').
+			#{css}
 
 	body(style="margin: 0; padding: 0;")
 		#content!= content

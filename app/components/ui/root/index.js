@@ -2,12 +2,13 @@
 import i18n from 'lib/i18n';
 import { Link } from 'react-router';
 import React from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
-export default function Root( { children } ) {
+const Root = ( { children } ) => {
 	return (
 		<div className={ styles.root }>
 			<div className={ styles.main }>{ children }</div>
@@ -18,4 +19,6 @@ export default function Root( { children } ) {
 			</footer>
 		</div>
 	);
-}
+};
+
+export default withStyles( styles )( Root );

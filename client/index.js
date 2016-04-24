@@ -13,6 +13,7 @@ import { analyticsMiddleware } from 'lib/analytics-middleware';
 import App from 'app';
 import reducers from 'reducers';
 import i18n from 'lib/i18n';
+import Stylizer, { insertCss } from 'lib/stylizer';
 
 const store = createStore(
 	combineReducers( {
@@ -40,7 +41,9 @@ function init() {
 function render() {
 	ReactDOM.render(
 		<Provider store={ store }>
-			<App history={ history } />
+			<Stylizer onInsertCss={ insertCss }>
+				<App history={ history } />
+			</Stylizer>
 		</Provider>,
 		document.getElementById( 'content' )
 	);

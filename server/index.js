@@ -1,6 +1,7 @@
 // External dependencies
 import auth from 'http-auth';
 import { combineReducers, createStore } from 'redux';
+import curry from 'lodash/curry';
 import find from 'lodash/find';
 import express from 'express';
 import fs from 'fs';
@@ -20,6 +21,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import config from 'config';
 import api from './wpcom-rest-api-proxy';
 import { routes, serverRedirectRoutes } from 'app/routes';
+import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.config';
 
 const app = express(),
@@ -62,9 +64,13 @@ app.get( '/*', ( request, response ) => {
 			} )
 		);
 
+		const css = [];
+
 		const content = renderToString(
 			<Provider store={ store }>
-				<RouterContext { ...props } />
+				<Stylizer onInsertCss={ curry( addCss )( css ) }>
+					<RouterContext { ...props } />
+				</Stylizer>
 			</Provider>
 		);
 
@@ -72,7 +78,7 @@ app.get( '/*', ( request, response ) => {
 			response.status( 404 );
 		}
 
-		response.send( templateCompiler( { content } ) );
+		response.send( templateCompiler( { content, css: css.join( '' ) } ) );
 	} );
 } );
 
@@ -106,6 +112,7 @@ if ( isDevelopment ) {
 	devServer.listen( port, error => {
 		console.log( error || 'Server listening on http://localhost:' + port );
 	} );
+
 	app.listen( backendPort, 'localhost', error => {
 		console.log( error || 'Backend listening on http://localhost:' + backendPort );
 	} );

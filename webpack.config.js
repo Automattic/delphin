@@ -25,7 +25,7 @@ var config = {
 			{
 				test: /\.scss$/,
 				loaders: [
-					'style',
+					'isomorphic-style',
 					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
 					'sass?sourceMap'
 				]

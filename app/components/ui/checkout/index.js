@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import i18n from 'lib/i18n';
 import { push } from 'react-router-redux';
 import React from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { createSite, createTransaction, createUser } from 'actions';
@@ -177,4 +178,4 @@ export default connect(
 			}
 		};
 	}
-)( Checkout );
+)( withStyles( styles )( Checkout ) );

@@ -97,6 +97,7 @@ if ( isDevelopment ) {
 		proxy: {
 			'*': 'http://localhost:' + backendPort
 		},
+		noInfo: true, // suppress boring information
 		stats: { colors: true }
 	} );
 

@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import { buildPaths, getLocaleSlug } from 'lib/routes';
+import { buildPaths } from 'lib/routes';
 import Checkout from 'components/ui/checkout';
 import config from 'config';
 import i18n from 'lib/i18n';
@@ -79,8 +79,14 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 		return null;
 	}
 
+	const formattedPath = formatPattern( path, values ),
+		locale = i18n.getLocaleSlug();
 
-	return formatPattern( path, values );
+	if ( locale === config( 'i18n_default_locale_slug' ) || ! locale ) {
+		return formattedPath;
+	}
+
+	return `/${ i18n.getLocaleSlug() }${ formattedPath }`;
 };
 
 export const serverRedirectRoutes = [

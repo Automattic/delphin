@@ -48,7 +48,7 @@ export const fetch = callback => {
 			}
 		} );
 
-		callback && callback( errors, results );
+		callback && callback();
 	} );
 };
 

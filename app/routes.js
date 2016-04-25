@@ -31,6 +31,16 @@ const childRoutes = [
 	}
 ];
 
+const childRoutesWithoutSlug = childRoutes.map( route => omit( route, 'slug' ) );
+
+const localeRoutes = config( 'languages' ).map( language => {
+	return {
+		path: `/${ language.langSlug }`,
+		indexRoute: { component: SearchContainer },
+		childRoutes: childRoutesWithoutSlug
+	};
+} );
+
 export const routes = {
 	path: '/',
 	slug: 'search',
@@ -39,14 +49,12 @@ export const routes = {
 		component: SearchContainer
 	},
 	childRoutes: [
+		// In order to prevent `/:locale` from matching English routes like `/about`,
+		// we include the routes without a locale slug first.
 		...childRoutes,
-		{
-			path: ':locale',
-			indexRoute: {
-				component: SearchContainer
-			},
-			childRoutes: childRoutes.map( route => omit( route, 'slug' ) )
-		},
+		// We use a list of routes with each locale slug instead of a wildcard path
+		// fragment like `/:locale` so that routes like `/foobar/about` still 404.
+		...localeRoutes,
 		{
 			path: '*',
 			component: NotFound,

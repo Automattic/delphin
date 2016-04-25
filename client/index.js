@@ -32,8 +32,7 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
-	const { i18nLocaleStrings } = window;
-	i18n.initialize( i18nLocaleStrings ? JSON.parse( i18nLocaleStrings ) : null );
+	i18n.initialize( window.localeData );
 
 	injectTapEventPlugin();
 }

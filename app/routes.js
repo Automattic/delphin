@@ -38,10 +38,6 @@ export const routes = {
 	indexRoute: {
 		component: SearchContainer
 	},
-	onEnter: ( nextState ) => {
-		const locale = getLocaleSlug( nextState.location.pathname );
-		i18n.setLocaleSlug( locale || config( 'i18n_default_locale_slug' ) );
-	},
 	childRoutes: [
 		...childRoutes,
 		{
@@ -82,6 +78,7 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 	if ( ! path ) {
 		return null;
 	}
+
 
 	return formatPattern( path, values );
 };

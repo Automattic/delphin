@@ -1,11 +1,13 @@
 // External dependencies
 import { formatPattern } from 'react-router';
+import find from 'lodash/find';
 import omit from 'lodash/omit';
 
 // Internal dependencies
 import About from 'components/ui/about';
 import Checkout from 'components/ui/checkout';
 import config from 'config';
+import i18n from 'lib/i18n';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
@@ -103,6 +105,18 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 	}
 
 	return formatPattern( path, values );
+};
+
+/**
+ * Strips the locale slug from the beginning of a URL, e.g. `/fr/foobar`, if present.
+ *
+ * @param {string} url A URL.
+ * @return {string|undefined} The locale slug from the URL, if present.
+ */
+export const getLocaleSlug = url => {
+	return find( config( 'languages' ).map( language => language.langSlug ), localeSlug => (
+		url.startsWith( `/${ localeSlug }/` ) || url === `/${ localeSlug }`
+	) );
 };
 
 /**

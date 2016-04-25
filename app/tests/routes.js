@@ -8,7 +8,7 @@ jest.mock( 'components/ui/root', () => {} );
 jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/ui/success', () => {} );
 
-import { getPath, stripLocaleSlug } from 'routes';
+import { getPath, getLocaleSlug, stripLocaleSlug } from 'routes';
 
 const routes = {
 	path: '/',
@@ -63,6 +63,20 @@ describe( 'routes', () => {
 
 		it( 'should return null for a missing slug', () => {
 			expect( getPath( 'asdf', {}, routes ) ).toBe( null );
+		} );
+	} );
+
+	describe( 'getLocaleSlug', () => {
+		it( 'should get the locale slug, if present', () => {
+			expect( getLocaleSlug( '/fr/foobar' ) ).toBe( 'fr' );
+		} );
+
+		it( 'should return undefined if no locale slug is present', () => {
+			expect( getLocaleSlug( '/foobar' ) ).toBe( undefined );
+		} );
+
+		it( 'should return the locale slug for a URL with only the locale', () => {
+			expect( getLocaleSlug( '/fr' ) ).toBe( 'fr' );
 		} );
 	} );
 

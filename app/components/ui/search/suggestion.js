@@ -1,27 +1,16 @@
 // External dependencies
 import { Link } from 'react-router';
 import React from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
+import styles from './styles.scss';
 
 const Suggestion = React.createClass( {
 	getInitialState() {
 		return {
 			hovered: false
-		};
-	},
-
-	css() {
-		return {
-			link: {
-				backgroundColor: this.state.hovered ? '#ddd' : '#eee',
-				border: '1px solid #fff',
-				color: '#000',
-				display: 'block',
-				padding: '1em',
-				textDecoration: 'none'
-			}
 		};
 	},
 
@@ -45,11 +34,11 @@ const Suggestion = React.createClass( {
 		return (
 			<li>
 				<Link
+					className={ styles.suggestion }
 					to={ getPath( 'checkout' ) }
 					onMouseOver={ this.onMouseOver }
 					onMouseOut={ this.onMouseOut }
-					onClick={ this.selectDomain }
-					style={ this.css().link }>
+					onClick={ this.selectDomain }>
 					{ this.props.suggestion.domain_name }
 				</Link>
 			</li>
@@ -57,4 +46,4 @@ const Suggestion = React.createClass( {
 	}
 } );
 
-export default Suggestion;
+export default withStyles( styles )( Suggestion );

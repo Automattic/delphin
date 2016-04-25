@@ -11,7 +11,14 @@ import styles from './styles.scss';
 const Root = ( { children } ) => {
 	return (
 		<div className={ styles.root }>
-			<div className={ styles.main }>{ children }</div>
+			<header className={ styles.header }>
+				<h1 className={ styles.title }>MagicDomains</h1>
+			</header>
+
+			<div className={ styles.content }>
+				{ children }
+			</div>
+
 			<footer className={ styles.footer }>
 				<Link className={ styles.footerLink } to={ getPath( 'search' ) }>{ i18n.translate( 'Search' ) }</Link>
 				<Link className={ styles.footerLink } to={ getPath( 'about' ) }>{ i18n.translate( 'About' ) }</Link>

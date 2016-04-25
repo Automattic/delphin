@@ -57,7 +57,7 @@ describe( 'routes', () => {
 			expect( getPath( 'post', { id: 1, filter: 'published' }, routes ) ).toBe( '/post/1/published' );
 		} );
 
-		it( 'should ignore missing optional values, removing the leading slash', () => {
+		it( 'should ignore missing optional values', () => {
 			expect( getPath( 'post', { id: 1 }, routes ) ).toBe( '/post/1/' );
 		} );
 

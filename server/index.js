@@ -20,7 +20,8 @@ import WebpackDevServer from 'webpack-dev-server';
 // Internal dependencies
 import config from 'config';
 import api from './wpcom-rest-api-proxy';
-import { routes, serverRedirectRoutes, stripLocaleSlug } from 'app/routes';
+import { routes, serverRedirectRoutes } from 'app/routes';
+import { stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.config';
 

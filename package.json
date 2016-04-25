@@ -32,7 +32,7 @@
     "eslint": "^2.2.0",
     "eslint-plugin-react": "^4.3.0",
     "eslint-plugin-wpcalypso": "^1.1.3",
-    "glotpress-js": "0.0.4",
+    "glotpress-js": "0.0.6",
     "node-sass": "^3.4.2",
     "xgettext-js": "^0.3.0"
   },

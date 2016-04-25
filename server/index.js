@@ -20,8 +20,9 @@ import WebpackDevServer from 'webpack-dev-server';
 // Internal dependencies
 import config from 'config';
 import api from './wpcom-rest-api-proxy';
+import i18nCache from './i18n-cache';
 import { routes, serverRedirectRoutes } from 'app/routes';
-import { stripLocaleSlug } from 'lib/routes';
+import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.config';
 
@@ -31,7 +32,7 @@ const app = express(),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
-i18n.initialize();
+i18nCache.fetch( () => console.log( 'fetched i18n' ) );
 
 if ( config( 'env' ) === 'production' ) {
 	app.use( auth.connect( auth.basic( {
@@ -48,6 +49,11 @@ app.use( api() );
 
 app.get( '/*', ( request, response ) => {
 	match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
+		const locale = getLocaleSlug( request.url ),
+			localeData = i18nCache.get( locale );
+
+		i18n.initialize( localeData );
+
 		const redirect = find( serverRedirectRoutes, route => {
 			return stripLocaleSlug( request.url ).startsWith( route.from );
 		} );
@@ -79,7 +85,7 @@ app.get( '/*', ( request, response ) => {
 			response.status( 404 );
 		}
 
-		response.send( templateCompiler( { content, css: css.join( '' ) } ) );
+		response.send( templateCompiler( { content, localeData, css: css.join( '' ) } ) );
 	} );
 } );
 

@@ -37,6 +37,7 @@
     "xgettext-js": "^0.3.0"
   },
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "babel-core": "^6.7.4",
     "babel-jest": "^11.0.0",
     "babel-loader": "^6.2.4",

@@ -43,3 +43,6 @@ node_modules
 
 # Secrets
 server/secrets.json
+
+# i18n data
+server/i18n-cache/data/*.json

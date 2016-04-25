@@ -4,8 +4,10 @@ import omit from 'lodash/omit';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import { buildPaths } from 'lib/routes';
+import { buildPaths, getLocaleSlug } from 'lib/routes';
 import Checkout from 'components/ui/checkout';
+import config from 'config';
+import i18n from 'lib/i18n';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
@@ -35,6 +37,10 @@ export const routes = {
 	component: Root,
 	indexRoute: {
 		component: SearchContainer
+	},
+	onEnter: ( nextState ) => {
+		const locale = getLocaleSlug( nextState.location.pathname );
+		i18n.setLocaleSlug( locale || config( 'i18n_default_locale_slug' ) );
 	},
 	childRoutes: [
 		...childRoutes,

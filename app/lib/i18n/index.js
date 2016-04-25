@@ -53,7 +53,8 @@ function initialize( bootstrap ) {
  * @param  {string} localeSlug The string that represents this particular locale
  */
 function fetchLocale( localeSlug ) {
-	var localeJson = '//widgets.wp.com/languages/calypso/' + localeSlug + '.json';
+	var protocol = typeof window === 'undefined' ? 'https://' : '//', // use a protocol-relative path in the browser
+		localeJson = `${ protocol }widgets.wp.com/languages/calypso/${ localeSlug }.json`;
 
 	// If default locale, no need to retrieve translations
 	if ( config( 'i18n_default_locale_slug' ) === localeSlug ) {

@@ -148,7 +148,7 @@ const Checkout = React.createClass( {
 	render() {
 		return (
 			<div>
-				<h1>registering { this.props.checkout.domain }</h1>
+				<h2>registering { this.props.checkout.domain }</h2>
 				{ this.state.submitting && 'beep boop...' }
 				{ this.renderForm() }
 				{ this.renderUserDetails() }

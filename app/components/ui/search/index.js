@@ -41,7 +41,7 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h2 className={ styles.suggestionsHeading }>{ i18n.translate( 'Suggestions' ) }</h2>
+				<h3 className={ styles.suggestionsHeading }>{ i18n.translate( 'Suggestions' ) }</h3>
 				<ul className={ styles.suggestionsList }>
 					{ suggestions }
 				</ul>
@@ -54,7 +54,7 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h1 className={ styles.heading }>{ i18n.translate( 'Enter a domain' ) }</h1>
+				<h2 className={ styles.heading }>{ i18n.translate( 'Enter a domain' ) }</h2>
 				<input { ...query } className={ styles.field } />
 				{ this.renderResults() }
 			</div>

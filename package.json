@@ -13,7 +13,7 @@
     "qs": "npm run build && node build/server.bundle",
     "prod": "NODE_ENV=production node build/server.bundle",
     "postinstall": "npm run-script build",
-    "translate": "bin/get-i18n delphin_i18n_strings.php delphin_i18n_strings build/client.bundle.js build/server.bundle.js"
+    "translate": "glotpress-js -p delphin -e date -i build/client.bundle.js -i build/server.bundle.js -o build/delphin.pot"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "eslint": "^2.2.0",
     "eslint-plugin-react": "^4.3.0",
     "eslint-plugin-wpcalypso": "^1.1.3",
+    "glotpress-js": "0.0.4",
     "node-sass": "^3.4.2",
     "xgettext-js": "^0.3.0"
   },

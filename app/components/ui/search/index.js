@@ -2,6 +2,7 @@
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
@@ -61,4 +62,4 @@ const Search = React.createClass( {
 	}
 } );
 
-export default Search;
+export default withStyles( styles )( Search );

@@ -53,6 +53,7 @@ module.exports = {
 			{
 				test: /\.scss$/,
 				loaders: [
+					'isomorphic-style',
 					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
 					'sass?sourceMap'
 				]
@@ -68,5 +69,5 @@ module.exports = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	},
+	}
 };

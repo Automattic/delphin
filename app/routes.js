@@ -28,7 +28,8 @@ export default {
 		},
 		{
 			path: '*',
-			component: NotFound
+			component: NotFound,
+			slug: 'notFound'
 		}
 	]
 };

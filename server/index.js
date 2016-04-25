@@ -46,7 +46,7 @@ app.use( api() );
 app.get( '/*', ( request, response ) => {
 	match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
 		const redirect = find( serverRedirectRoutes, route => {
-			return request.url.substring( 1 ).startsWith( route.from );
+			return request.url.startsWith( route.from );
 		} );
 
 		if ( redirect ) {

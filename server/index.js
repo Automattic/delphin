@@ -47,7 +47,7 @@ const init = () => {
 	app.use( api() );
 
 	app.get( '/*', ( request, response ) => {
-		match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
+		match( { routes, location: request.url }, ( error, redirectLocation, props ) => {
 			const locale = getLocaleSlug( request.url ),
 				localeData = i18nCache.get( locale );
 

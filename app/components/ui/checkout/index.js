@@ -55,7 +55,7 @@ const Checkout = React.createClass( {
 		}
 
 		if ( checkout.transaction ) {
-			this.props.redirect( '/success' );
+			this.props.redirect( getPath( 'success' ) );
 		}
 	},
 

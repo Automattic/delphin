@@ -4,15 +4,15 @@
   "description": "A registrar client",
   "main": "server/index.js",
   "scripts": {
-    "test": "NODE_PATH=.:app jest",
+    "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --config webpack.config.js --progress --colors",
     "build:server": "webpack --config webpack.server.config.js --verbose --progress --colors",
-    "build": "npm run build:client && npm run build:server",
     "lint": "eslint --max-warnings 0 app client server",
-    "start": "npm install && node server/build/bundle",
-    "qs": "npm run build && node server/build/bundle",
-    "prod": "NODE_ENV=production REFRESH_I18N_CACHE=true node server/build/bundle",
     "postinstall": "npm run-script build",
+    "prod": "NODE_ENV=production REFRESH_I18N_CACHE=true node server/build/bundle",
+    "qs": "npm run build && node server/build/bundle",
+    "start": "npm install && node server/build/bundle",
+    "test": "NODE_PATH=.:app jest",
     "translate": "glotpress-js -p delphin -e date -i public/scripts/bundle.js -i server/build/bundle.js -o server/build/delphin.pot"
   },
   "repository": {

@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import i18n from 'lib/i18n';
 import { push } from 'react-router-redux';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -11,6 +11,14 @@ import { getPath } from 'routes';
 import styles from './styles.scss';
 
 const Checkout = React.createClass( {
+	propTypes: {
+		checkout: PropTypes.object.isRequired,
+		createSite: PropTypes.func.isRequired,
+		createTransaction: PropTypes.func.isRequired,
+		createUser: PropTypes.func.isRequired,
+		redirect: PropTypes.func.isRequired
+	},
+
 	getInitialState() {
 		return {
 			form: {

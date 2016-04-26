@@ -1,7 +1,7 @@
 // External dependencies
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -9,6 +9,13 @@ import styles from './styles.scss';
 import Suggestion from './suggestion';
 
 const Search = React.createClass( {
+	propTypes: {
+		fetchDomainSuggestions: PropTypes.func.isRequired,
+		fields: PropTypes.object.isRequired,
+		results: PropTypes.array,
+		selectDomain: PropTypes.func.isRequired
+	},
+
 	componentDidMount() {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 	},

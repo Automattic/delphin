@@ -23,8 +23,9 @@ coverage
 # node-waf configuration
 .lock-wscript
 
-# Compiled JS directory
-build
+# Compiled scripts and build directories
+public/scripts/bundle.js
+server/build
 
 # Dependency directory
 node_modules

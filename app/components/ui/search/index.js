@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
-import SuggestionComponent from './suggestion';
+import Suggestion from './suggestion';
 
 const Search = React.createClass( {
 	componentDidMount() {
@@ -33,7 +33,7 @@ const Search = React.createClass( {
 		}
 
 		const suggestions = this.props.results.map( ( suggestion ) => (
-			<SuggestionComponent
+			<Suggestion
 				key={ suggestion.domain_name }
 				selectDomain={ this.selectDomain }
 				suggestion={ suggestion } />

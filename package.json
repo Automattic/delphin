@@ -7,6 +7,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --config webpack.config.js --progress --colors",
     "build:server": "webpack --config webpack.server.config.js --verbose --progress --colors",
+    "clean": "rm -rf node_modules && rm -f public/scripts/bundle.js && rm -rf server/build && rm -f server/i18n-cache/data/*.*",
     "lint": "eslint --max-warnings 0 app client server",
     "postinstall": "npm run-script build",
     "prod": "NODE_ENV=production REFRESH_I18N_CACHE=true node server/build/bundle",

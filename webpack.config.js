@@ -65,7 +65,6 @@ var config = {
 		extensions: [ '', '.json', '.js', '.jsx' ],
 		modulesDirectories: [
 			'node_modules',
-			path.join( __dirname, 'assets' ),
 			path.join( __dirname, 'app' ),
 			__dirname
 		]

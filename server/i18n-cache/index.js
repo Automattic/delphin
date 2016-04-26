@@ -16,7 +16,7 @@ const getLocaleFilePath = locale => path.resolve( __dirname, 'data', `${ locale 
 
 const fetchLanguage = locale => {
 	return callback => {
-		if ( fs.existsSync( getLocaleFilePath( locale ) ) ) {
+		if ( ! process.env.REFRESH_I18N_CACHE && fs.existsSync( getLocaleFilePath( locale ) ) ) {
 			debug( `Using cached locale data for ${ locale }` );
 			callback();
 			return;

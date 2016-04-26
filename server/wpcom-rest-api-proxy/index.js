@@ -4,6 +4,9 @@ import bodyParser from 'body-parser';
 import WPCOM from 'wpcom';
 import fs from 'fs';
 
+// Internal dependencies
+import { fileExists } from '../utils';
+
 let rest_api_oauth_client_id = process.env.REST_API_OAUTH_CLIENT_ID,
 	rest_api_oauth_client_secret = process.env.REST_API_OAUTH_CLIENT_SECRET;
 
@@ -11,15 +14,6 @@ if ( ! rest_api_oauth_client_id && fileExists( 'server/secrets.json' ) ) {
 	const secrets = JSON.parse( fs.readFileSync( 'server/secrets.json' ) );
 	rest_api_oauth_client_id = secrets.wordpress.rest_api_oauth_client_id;
 	rest_api_oauth_client_secret = secrets.wordpress.rest_api_oauth_client_secret;
-}
-
-function fileExists( path ) {
-	try {
-		fs.accessSync( path, fs.R_OK );
-		return true;
-	} catch ( err ) {
-		return false;
-	}
 }
 
 module.exports = function wpcomRestApiProxy() {

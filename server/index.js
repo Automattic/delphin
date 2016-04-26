@@ -18,8 +18,9 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 // Internal dependencies
-import config from 'config';
 import api from './wpcom-rest-api-proxy';
+import config from 'config';
+import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
 import { routes, serverRedirectRoutes } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
@@ -30,7 +31,10 @@ const app = express(),
 	port = process.env.PORT || 1337,
 	templatePath = path.join( __dirname, 'views', 'index.pug' ),
 	template = fs.readFileSync( templatePath, 'utf8' ),
-	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
+	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } ),
+	staticPaths = [ '/', '/about', '/404' ];
+
+i18n.initialize();
 
 if ( config( 'env' ) === 'production' ) {
 	app.use( auth.connect( auth.basic( {
@@ -39,8 +43,60 @@ if ( config( 'env' ) === 'production' ) {
 	} ) ) );
 }
 
+function getCompiledTemplate( props, localeData ) {
+	const store = createStore(
+		combineReducers( {
+			...reducers,
+			routing: routerReducer
+		} )
+	);
+
+	const css = [];
+
+	const content = renderToString(
+		<Provider store={ store }>
+			<Stylizer onInsertCss={ curry( addCss )( css ) }>
+				<RouterContext { ...props } />
+			</Stylizer>
+		</Provider>
+	);
+
+	return templateCompiler( { content, localeData, css: css.join( '' ) } );
+}
+
+function generateStaticFile( filePath ) {
+	match( { routes, location: filePath }, ( error, redirectLocation, props ) => {
+		const locale = getLocaleSlug( filePath ),
+			localeData = i18nCache.get( locale ),
+			staticDirectory = path.join( __dirname, '..', 'public/static' ),
+			directory = path.join( __dirname, '..', 'public/static', filePath );
+
+		if ( ! fileExists( staticDirectory ) ) {
+			fs.mkdirSync( staticDirectory );
+		}
+
+		if ( ! fileExists( directory ) ) {
+			fs.mkdirSync( directory );
+		}
+
+		fs.writeFile( path.join( directory, 'index.html' ), getCompiledTemplate( props, localeData ), function( writeError ) {
+			if ( writeError ) {
+				return console.log( writeError );
+			}
+			console.log( filePath + ' written' );
+		} );
+	} );
+}
+
 const init = () => {
+	// generate static files
+	staticPaths.forEach( function( file ) {
+		generateStaticFile( file );
+	} );
+
 	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
+
+	app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
 	app.use( api() );
 
@@ -61,28 +117,11 @@ const init = () => {
 				return;
 			}
 
-			const store = createStore(
-				combineReducers( {
-					...reducers,
-					routing: routerReducer
-				} )
-			);
-
-			const css = [];
-
-			const content = renderToString(
-				<Provider store={ store }>
-					<Stylizer onInsertCss={ curry( addCss )( css ) }>
-						<RouterContext { ...props } />
-					</Stylizer>
-				</Provider>
-			);
-
 			if ( props.routes.some( route => route.slug === 'notFound' ) ) {
 				response.status( 404 );
 			}
 
-			response.send( templateCompiler( { content, localeData, css: css.join( '' ) } ) );
+			response.send( getCompiledTemplate( props, localeData ) );
 		} );
 	} );
 

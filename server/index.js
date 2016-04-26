@@ -32,8 +32,6 @@ const app = express(),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
-i18nCache.fetch( () => console.log( 'fetched i18n' ) );
-
 if ( config( 'env' ) === 'production' ) {
 	app.use( auth.connect( auth.basic( {
 		realm: 'Delphin',
@@ -41,81 +39,89 @@ if ( config( 'env' ) === 'production' ) {
 	} ) ) );
 }
 
-app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
+const init = () => {
+	app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
 
-app.use( express.static( path.join( __dirname, '..', 'assets' ) ) );
+	app.use( express.static( path.join( __dirname, '..', 'assets' ) ) );
 
-app.use( api() );
+	app.use( api() );
 
-app.get( '/*', ( request, response ) => {
-	match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
-		const locale = getLocaleSlug( request.url ),
-			localeData = i18nCache.get( locale );
+	app.get( '/*', ( request, response ) => {
+		match( { routes, location: request.url }, ( error, redirectLocations, props ) => {
+			const locale = getLocaleSlug( request.url ),
+				localeData = i18nCache.get( locale );
 
-		i18n.initialize( localeData );
+			i18n.initialize( localeData );
 
-		const redirect = find( serverRedirectRoutes, route => {
-			return stripLocaleSlug( request.url ).startsWith( route.from );
+			const redirect = find( serverRedirectRoutes, route => {
+				return stripLocaleSlug( request.url ).startsWith( route.from );
+			} );
+
+			if ( redirect ) {
+				response.redirect( redirect.to );
+
+				return;
+			}
+
+			const store = createStore(
+				combineReducers( {
+					...reducers,
+					routing: routerReducer
+				} )
+			);
+
+			const css = [];
+
+			const content = renderToString(
+				<Provider store={ store }>
+					<Stylizer onInsertCss={ curry( addCss )( css ) }>
+						<RouterContext { ...props } />
+					</Stylizer>
+				</Provider>
+			);
+
+			if ( props.routes.some( route => route.slug === 'notFound' ) ) {
+				response.status( 404 );
+			}
+
+			response.send( templateCompiler( { content, localeData, css: css.join( '' ) } ) );
+		} );
+	} );
+
+	const isDevelopment = 'production' !== config( 'env' );
+	if ( isDevelopment ) {
+		const backendPort = port + 1;
+
+		webpackConfig.entry.unshift( 'webpack/hot/only-dev-server' );
+		webpackConfig.entry.unshift( 'webpack-dev-server/client?/' );
+		webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
+
+		const devServer = new WebpackDevServer( webpack( webpackConfig ), {
+			publicPath: webpackConfig.output.publicPath,
+			hot: true,
+			proxy: {
+				'*': 'http://localhost:' + backendPort
+			},
+			noInfo: true, // suppress boring information
+			stats: { colors: true }
 		} );
 
-		if ( redirect ) {
-			response.redirect( redirect.to );
+		devServer.listen( port, error => {
+			console.log( error || 'Server listening on http://localhost:' + port );
+		} );
 
-			return;
-		}
+		app.listen( backendPort, 'localhost', error => {
+			console.log( error || 'Backend listening on http://localhost:' + backendPort );
+		} );
+	} else {
+		app.listen( port, error => {
+			console.log( error || 'Server listening on http://localhost:' + port );
+		} );
+	}
+};
 
-		const store = createStore(
-			combineReducers( {
-				...reducers,
-				routing: routerReducer
-			} )
-		);
-
-		const css = [];
-
-		const content = renderToString(
-			<Provider store={ store }>
-				<Stylizer onInsertCss={ curry( addCss )( css ) }>
-					<RouterContext { ...props } />
-				</Stylizer>
-			</Provider>
-		);
-
-		if ( props.routes.some( route => route.slug === 'notFound' ) ) {
-			response.status( 404 );
-		}
-
-		response.send( templateCompiler( { content, localeData, css: css.join( '' ) } ) );
-	} );
+i18nCache.fetch( () => {
+	console.log( 'i18n data fetched' );
+	init();
 } );
 
-const isDevelopment = 'production' !== config( 'env' );
-if ( isDevelopment ) {
-	const backendPort = port + 1;
-
-	webpackConfig.entry.unshift( 'webpack/hot/only-dev-server' );
-	webpackConfig.entry.unshift( 'webpack-dev-server/client?/' );
-	webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
-
-	const devServer = new WebpackDevServer( webpack( webpackConfig ), {
-		publicPath: webpackConfig.output.publicPath,
-		hot: true,
-		proxy: {
-			'*': 'http://localhost:' + backendPort
-		},
-		noInfo: true, // suppress boring information
-		stats: { colors: true }
-	} );
-
-	devServer.listen( port, error => {
-		console.log( error || 'Server listening on http://localhost:' + port );
-	} );
-
-	app.listen( backendPort, 'localhost', error => {
-		console.log( error || 'Backend listening on http://localhost:' + backendPort );
-	} );
-} else {
-	app.listen( port, error => {
-		console.log( error || 'Server listening on http://localhost:' + port );
-	} );
-}

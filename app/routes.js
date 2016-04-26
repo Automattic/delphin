@@ -1,16 +1,45 @@
 // External dependencies
 import { formatPattern } from 'react-router';
+import omit from 'lodash/omit';
 
 // Internal dependencies
 import About from 'components/ui/about';
+import { buildPaths } from 'lib/routes';
 import Checkout from 'components/ui/checkout';
+import config from 'config';
+import i18n from 'lib/i18n';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
 import Success from 'components/ui/success';
 
-// This will contain a map of paths once this module is evaluated
-let paths = {};
+const childRoutes = [
+	{
+		path: 'about',
+		slug: 'about',
+		component: About
+	},
+	{
+		path: 'checkout',
+		slug: 'checkout',
+		component: Checkout
+	},
+	{
+		path: 'success',
+		slug: 'success',
+		component: Success
+	}
+];
+
+const childRoutesWithoutSlug = childRoutes.map( route => omit( route, 'slug' ) );
+
+const localeRoutes = config( 'languages' ).map( language => {
+	return {
+		path: `/${ language.langSlug }`,
+		indexRoute: { component: SearchContainer },
+		childRoutes: childRoutesWithoutSlug
+	};
+} );
 
 export const routes = {
 	path: '/',
@@ -20,21 +49,12 @@ export const routes = {
 		component: SearchContainer
 	},
 	childRoutes: [
-		{
-			path: 'about',
-			slug: 'about',
-			component: About
-		},
-		{
-			path: 'checkout',
-			slug: 'checkout',
-			component: Checkout
-		},
-		{
-			path: 'success',
-			slug: 'success',
-			component: Success
-		},
+		// In order to prevent `/:locale` from matching English routes like `/about`,
+		// we include the routes without a locale slug first.
+		...childRoutes,
+		// We use a list of routes with each locale slug instead of a wildcard path
+		// fragment like `/:locale` so that routes like `/foobar/about` still 404.
+		...localeRoutes,
 		{
 			path: '*',
 			component: NotFound,
@@ -43,29 +63,7 @@ export const routes = {
 	]
 };
 
-/**
- * Returns a map of slugs to paths based on the given route.
- *
- * @param {object} rootRoute A route object, which may contain child routes.
- * @param {string} path A string that is prepended to the path.
- * @param {object} newPaths The current map of slugs to paths.
- * @return {object} A map of slugs to paths.
- */
-const buildPaths = ( rootRoute, path = '', newPaths = {} ) => {
-	path = rootRoute.path === '/' ? rootRoute.path : `${ path }/${ rootRoute.path }`;
-
-	Object.assign( newPaths, { [ rootRoute.slug ]: path } );
-
-	if ( rootRoute.childRoutes ) {
-		rootRoute.childRoutes.forEach( route => {
-			newPaths = Object.assign( newPaths, buildPaths( route, path, newPaths ) );
-		} );
-	}
-
-	return newPaths;
-};
-
-paths = buildPaths( routes );
+const paths = buildPaths( routes );
 
 /**
  * Gets the path with the given slug, replacing parameter placeholders with the given values.
@@ -89,7 +87,14 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 		return null;
 	}
 
-	return formatPattern( path, values );
+	const formattedPath = formatPattern( path, values ),
+		locale = i18n.getLocaleSlug();
+
+	if ( locale === config( 'i18n_default_locale_slug' ) || ! locale ) {
+		return formattedPath;
+	}
+
+	return `/${ i18n.getLocaleSlug() }${ formattedPath }`;
 };
 
 export const serverRedirectRoutes = [

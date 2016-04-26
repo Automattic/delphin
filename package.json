@@ -11,7 +11,7 @@
     "lint": "eslint --max-warnings 0 app client server",
     "start": "npm install && node build/server.bundle",
     "qs": "npm run build && node build/server.bundle",
-    "prod": "NODE_ENV=production node build/server.bundle",
+    "prod": "NODE_ENV=production REFRESH_I18N_CACHE=true node build/server.bundle",
     "postinstall": "npm run-script build",
     "translate": "glotpress-js -p delphin -e date -i build/client.bundle.js -i build/server.bundle.js -o build/delphin.pot"
   },
@@ -37,6 +37,7 @@
     "xgettext-js": "^0.3.0"
   },
   "dependencies": {
+    "async": "^2.0.0-rc.3",
     "babel-core": "^6.7.4",
     "babel-jest": "^11.0.0",
     "babel-loader": "^6.2.4",

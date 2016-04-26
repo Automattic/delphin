@@ -58,7 +58,7 @@ const init = () => {
 			} );
 
 			if ( redirect ) {
-				response.redirect( redirect.to );
+				response.redirect( locale ? `/${ locale }${ redirect.to }` : redirect.to );
 
 				return;
 			}

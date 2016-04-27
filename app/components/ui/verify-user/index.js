@@ -2,6 +2,7 @@
 import React from 'react';
 
 // Internal dependencies
+import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 
 const VerifyUser = React.createClass( {
@@ -13,17 +14,19 @@ const VerifyUser = React.createClass( {
 		const { fields, handleSubmit, user } = this.props;
 
 		return (
-			<form onSubmit={ handleSubmit( this.verifyUser ) }>
-				<div>
-					<label>{ i18n.translate( 'Confirmation code:' ) }</label>
-					<input { ...fields.code } />
-				</div>
-				<div>
-					<button isDisabled={ user.isUpdating }>
+			<Form
+				onSubmit={ handleSubmit( this.verifyUser ) }
+				fieldArea={
+					<fieldset>
+						<label>{ i18n.translate( 'Confirmation code:' ) }</label>
+						<input { ...fields.code } />
+					</fieldset>
+				}
+				submitArea={
+					<button disabled={ user.isUpdating }>
 						{ i18n.translate( 'Verify my email' ) }
 					</button>
-				</div>
-			</form>
+				} />
 		);
 	}
 } );

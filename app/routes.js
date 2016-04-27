@@ -5,13 +5,13 @@ import omit from 'lodash/omit';
 // Internal dependencies
 import About from 'components/ui/about';
 import { buildPaths } from 'lib/routes';
-import Checkout from 'components/ui/checkout';
+import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
 import i18n from 'lib/i18n';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
-import Success from 'components/ui/success';
+import SuccessContainer from 'components/containers/success';
 
 const childRoutes = [
 	{
@@ -22,12 +22,12 @@ const childRoutes = [
 	{
 		path: 'checkout',
 		slug: 'checkout',
-		component: Checkout
+		component: CheckoutContainer
 	},
 	{
 		path: 'success',
 		slug: 'success',
-		component: Success
+		component: SuccessContainer
 	}
 ];
 

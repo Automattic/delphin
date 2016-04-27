@@ -1,5 +1,6 @@
 // External dependencies
-var fs = require( 'fs' ),
+var autoprefixer = require( 'autoprefixer' ),
+	fs = require( 'fs' ),
 	path = require( 'path' ),
 	webpack = require( 'webpack' );
 
@@ -20,30 +21,14 @@ function getExternals() {
 module.exports = {
 	entry: path.resolve( __dirname, 'server/index.js' ),
 
-	output: {
-		path: path.resolve( __dirname, 'server/build' ),
-		filename: 'bundle.js'
-	},
-
-	target: 'node',
-
 	externals: getExternals(),
-
-	node: {
-		__filename: true,
-		__dirname: true
-	},
 
 	module: {
 		loaders: [
 			{
 				test: /\.jsx?$/,
 				loader: 'babel',
-				include: [
-					path.join( __dirname, 'app' ),
-					path.join( __dirname, 'lib' ),
-					path.join( __dirname, 'server' )
-				]
+				exclude: /node_modules/
 			},
 			{
 				test: /\.json$/,
@@ -54,10 +39,25 @@ module.exports = {
 				loaders: [
 					'isomorphic-style',
 					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'postcss',
 					'sass?sourceMap'
 				]
 			}
 		]
+	},
+
+	node: {
+		__filename: true,
+		__dirname: true
+	},
+
+	output: {
+		path: path.resolve( __dirname, 'server/build' ),
+		filename: 'bundle.js'
+	},
+
+	postcss() {
+		return [ autoprefixer ];
 	},
 
 	resolve: {
@@ -67,5 +67,7 @@ module.exports = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	}
+	},
+
+	target: 'node'
 };

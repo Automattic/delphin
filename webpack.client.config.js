@@ -1,5 +1,6 @@
 // External dependencies
-var webpack = require( 'webpack' ),
+var autoprefixer = require( 'autoprefixer' ),
+	webpack = require( 'webpack' ),
 	path = require( 'path' ),
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -29,6 +30,7 @@ var config = {
 				loaders: [
 					'isomorphic-style',
 					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'postcss',
 					'sass?sourceMap'
 				]
 			}
@@ -60,6 +62,10 @@ var config = {
 			}
 		} )
 	],
+
+	postcss() {
+		return [ autoprefixer ];
+	},
 
 	resolve: {
 		extensions: [ '', '.json', '.js', '.jsx' ],

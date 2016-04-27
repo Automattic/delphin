@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 import {
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
@@ -31,6 +32,8 @@ export const user = ( state = initialState, action ) => {
 			return merge( {}, state, {
 				data: { email }, isUpdating: false, wasCreated: true
 			} );
+		case REMOVE_USER:
+			return initialState;
 		case VERIFY_USER:
 			return merge( {}, state, { isUpdating: true } );
 		case VERIFY_USER_COMPLETE:

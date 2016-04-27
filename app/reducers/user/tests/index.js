@@ -2,6 +2,7 @@ jest.disableAutomock();
 
 // Internal dependencies
 import {
+	CLEAR_USER,
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 	VERIFY_USER,
@@ -48,5 +49,9 @@ describe( 'state.user', () => {
 		expect( result.isUpdating ).toBe( false );
 		expect( result.isLoggedIn ).toBe( true );
 		expect( result.data.bearerToken ).toBe( 'foobar' );
+	} );
+
+	it( 'should clear the user when a `CLEAR_USER` action appears', () => {
+		expect( user( undefined, { type: CLEAR_USER } ) ).toEqual( initialState );
 	} );
 } );

@@ -11,6 +11,7 @@ import {
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 	DOMAIN_SEARCH_FETCH,
 	DOMAIN_SEARCH_FETCH_COMPLETED,
+	REMOVE_USER,
 	SELECT_DOMAIN,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
@@ -25,6 +26,10 @@ export function selectDomain( domain ) {
 		type: SELECT_DOMAIN,
 		domain
 	};
+}
+
+export function removeUser() {
+	return { type: REMOVE_USER };
 }
 
 export function createUser( form ) {

@@ -16,6 +16,16 @@ const VerifyUser = React.createClass( {
 		return (
 			<Form
 				onSubmit={ handleSubmit( this.verifyUser ) }
+				noticeArea={
+					i18n.translate(
+						'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}. ' +
+						'Type that code below to verify your email address.',
+						{
+							args: { email: user.data.email },
+							components: { strong: <strong /> }
+						}
+					)
+				}
 				fieldArea={
 					<fieldset>
 						<label>{ i18n.translate( 'Confirmation code:' ) }</label>

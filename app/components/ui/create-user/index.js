@@ -6,6 +6,14 @@ import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 
 const CreateUser = React.createClass( {
+	componentDidMount() {
+		if ( this.props.user.isLoggedIn ) {
+			this.props.redirectToSearch();
+		} else {
+			this.props.removeUser();
+		}
+	},
+
 	componentWillReceiveProps( nextProps ) {
 		if ( ! this.props.user.wasCreated && nextProps.user.wasCreated ) {
 			this.props.redirectToVerifyUser();

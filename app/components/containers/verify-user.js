@@ -22,6 +22,9 @@ export default reduxForm(
 			},
 			redirectToNewUser() {
 				dispatch( push( getPath( 'createUser' ) ) );
+			},
+			redirectToSearch() {
+				dispatch( push( getPath( 'search' ) ) );
 			}
 		};
 	}

@@ -12,6 +12,12 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.user.isLoggedIn ) {
+			this.props.redirectToSearch();
+		}
+	},
+
 	verifyUser() {
 		this.props.verifyUser( this.props.user.data.email, this.props.fields.code.value );
 	},

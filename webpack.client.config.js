@@ -1,10 +1,11 @@
 // External dependencies
-var autoprefixer = require( 'autoprefixer' ),
-	webpack = require( 'webpack' ),
+var baseConfig = require( './webpack.base.config' ),
+	merge = require( 'webpack-merge' ),
 	path = require( 'path' ),
+	webpack = require( 'webpack' ),
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
-var config = {
+var config = merge.smart( baseConfig, {
 	devServer: {
 		port: 1337,
 		historyApiFallback: true
@@ -18,21 +19,7 @@ var config = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				loaders: [ 'react-hot', 'babel' ],
-				exclude: /node_modules/
-			},
-			{
-				test: /\.json$/,
-				loader: 'json'
-			},
-			{
-				test: /\.scss$/,
-				loaders: [
-					'isomorphic-style',
-					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
-					'postcss',
-					'sass?sourceMap'
-				]
+				loaders: [ 'react-hot' ]
 			}
 		]
 	},
@@ -50,7 +37,6 @@ var config = {
 	output: {
 		path: path.resolve( __dirname, 'public/scripts' ),
 		publicPath: '/scripts/',
-		filename: 'bundle.js',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},
 
@@ -61,21 +47,8 @@ var config = {
 				BROWSER: JSON.stringify( true )
 			}
 		} )
-	],
-
-	postcss() {
-		return [ autoprefixer ];
-	},
-
-	resolve: {
-		extensions: [ '', '.json', '.js', '.jsx' ],
-		modulesDirectories: [
-			'node_modules',
-			path.join( __dirname, 'app' ),
-			__dirname
-		]
-	}
-};
+	]
+} );
 
 if ( NODE_ENV === 'development' ) {
 	// Switches loaders to debug mode. This is required to make CSS hot reloading works correctly (see

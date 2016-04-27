@@ -1,8 +1,8 @@
 // External dependencies
-var autoprefixer = require( 'autoprefixer' ),
+var baseConfig = require( './webpack.base.config' ),
 	fs = require( 'fs' ),
-	path = require( 'path' ),
-	webpack = require( 'webpack' );
+	merge = require( 'webpack-merge' ),
+	path = require( 'path' );
 
 function getExternals() {
 	var externals = {};
@@ -18,33 +18,10 @@ function getExternals() {
 	return externals;
 }
 
-module.exports = {
+var config = merge.smart( baseConfig, {
 	entry: path.resolve( __dirname, 'server/index.js' ),
 
 	externals: getExternals(),
-
-	module: {
-		loaders: [
-			{
-				test: /\.jsx?$/,
-				loader: 'babel',
-				exclude: /node_modules/
-			},
-			{
-				test: /\.json$/,
-				loader: 'json'
-			},
-			{
-				test: /\.scss$/,
-				loaders: [
-					'isomorphic-style',
-					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
-					'postcss',
-					'sass?sourceMap'
-				]
-			}
-		]
-	},
 
 	node: {
 		__filename: true,
@@ -52,22 +29,10 @@ module.exports = {
 	},
 
 	output: {
-		path: path.resolve( __dirname, 'server/build' ),
-		filename: 'bundle.js'
-	},
-
-	postcss() {
-		return [ autoprefixer ];
-	},
-
-	resolve: {
-		extensions: [ '', '.json', '.js', '.jsx' ],
-		modulesDirectories: [
-			'node_modules',
-			path.join( __dirname, 'app' ),
-			__dirname
-		]
+		path: path.resolve( __dirname, 'server/build' )
 	},
 
 	target: 'node'
-};
+} );
+
+module.exports = config;

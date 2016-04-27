@@ -6,7 +6,7 @@ jest.mock( 'components/containers/checkout', () => {} );
 jest.mock( 'components/ui/not-found', () => {} );
 jest.mock( 'components/ui/root', () => {} );
 jest.mock( 'components/containers/search', () => {} );
-jest.mock( 'components/ui/success', () => {} );
+jest.mock( 'components/containers/success', () => {} );
 
 import { getPath } from 'routes';
 

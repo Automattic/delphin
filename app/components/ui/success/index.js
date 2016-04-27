@@ -1,6 +1,4 @@
 // External dependencies
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
@@ -44,17 +42,4 @@ const Success = React.createClass( {
 	}
 } );
 
-export default connect(
-	state => {
-		return {
-			transaction: state.checkout && state.checkout.transaction
-		};
-	},
-	dispatch => {
-		return {
-			redirect: url => {
-				dispatch( push( url ) );
-			}
-		};
-	}
-)( Success );
+export default Success;

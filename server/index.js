@@ -22,7 +22,7 @@ import api from './wpcom-rest-api-proxy';
 import config from 'config';
 import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
-import { routes, serverRedirectRoutes } from 'app/routes';
+import { routes, serverRedirectRoutes, staticPages } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.config';
@@ -31,8 +31,7 @@ const app = express(),
 	port = process.env.PORT || 1337,
 	templatePath = path.join( __dirname, 'views', 'index.pug' ),
 	template = fs.readFileSync( templatePath, 'utf8' ),
-	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } ),
-	staticPaths = [ '/', '/about', '/404' ];
+	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
 i18n.initialize();
 
@@ -89,10 +88,15 @@ function generateStaticFile( filePath ) {
 }
 
 const init = () => {
-	// generate static files
-	staticPaths.forEach( function( file ) {
-		generateStaticFile( file );
-	} );
+	if ( config( 'env' ) === 'static' ) {
+		// Generate static files
+		staticPages.forEach( function( file ) {
+			generateStaticFile( file );
+		} );
+
+		// No need to start the server
+		return;
+	}
 
 	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
 
@@ -161,4 +165,3 @@ i18nCache.fetch( () => {
 	console.log( 'i18n data fetched' );
 	init();
 } );
-

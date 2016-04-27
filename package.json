@@ -14,7 +14,7 @@
     "qs": "npm run build && node server/build/bundle",
     "start": "npm install && node server/build/bundle",
     "test": "NODE_PATH=.:app jest",
-    "static": "NODE_ENV=production rm -rf public/static && npm run build && node server/build/bundle",
+    "static": "NODE_ENV=production rm -rf public/static && npm run build && NODE_ENV=static node server/build/bundle",
     "translate": "glotpress-js -p delphin -e date -i public/scripts/bundle.js -i server/build/bundle.js -o server/build/delphin.pot"
   },
   "repository": {

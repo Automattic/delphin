@@ -1,5 +1,6 @@
 // External dependencies
-var fs = require( 'fs' ),
+var autoprefixer = require( 'autoprefixer' ),
+	fs = require( 'fs' ),
 	path = require( 'path' ),
 	webpack = require( 'webpack' );
 
@@ -54,10 +55,15 @@ module.exports = {
 				loaders: [
 					'isomorphic-style',
 					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'postcss',
 					'sass?sourceMap'
 				]
 			}
 		]
+	},
+
+	postcss() {
+		return [ autoprefixer ];
 	},
 
 	resolve: {

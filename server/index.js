@@ -40,9 +40,7 @@ if ( config( 'env' ) === 'production' ) {
 }
 
 const init = () => {
-	app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
-
-	app.use( express.static( path.join( __dirname, '..', 'assets' ) ) );
+	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
 
 	app.use( api() );
 

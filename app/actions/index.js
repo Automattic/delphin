@@ -196,6 +196,15 @@ export function createTransactionComplete( form ) {
 }
 
 export function fetchDomainSuggestions( query ) {
+	if ( query.trim() === '' ) {
+		return dispatch => {
+			dispatch( {
+				type: DOMAIN_SEARCH_FETCH_COMPLETED,
+				results: []
+			} );
+		};
+	}
+
 	return dispatch => {
 		dispatch( { type: DOMAIN_SEARCH_FETCH } );
 

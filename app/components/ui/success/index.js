@@ -1,12 +1,17 @@
 // External dependencies
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import getPath from 'routes';
 
 const Success = React.createClass( {
+	propTypes: {
+		redirect: PropTypes.func.isRequired,
+		transaction: PropTypes.object
+	},
+
 	componentWillMount() {
 		if ( ! this.props.transaction ) {
 			this.props.redirect( getPath( 'search' ) );

@@ -11,8 +11,8 @@ export default reduxForm(
 	{
 		form: 'create-user',
 		fields: [ 'email' ],
-		onSubmit( form, dispatch ) {
-			dispatch( createUserWithoutPassword( form.email ) );
+		onSubmit( fields, dispatch ) {
+			dispatch( createUserWithoutPassword( fields.email ) );
 		}
 	},
 	state => ( {

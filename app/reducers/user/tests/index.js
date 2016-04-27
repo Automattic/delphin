@@ -3,7 +3,9 @@ jest.disableAutomock();
 // Internal dependencies
 import {
 	CREATE_USER_WITHOUT_PASSWORD,
-	CREATE_USER_WITHOUT_PASSWORD_COMPLETE
+	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+	VERIFY_USER,
+	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
 import { user, initialState } from '..';
 
@@ -17,9 +19,10 @@ describe( 'state.user', () => {
 			type: CREATE_USER_WITHOUT_PASSWORD,
 			email: 'foo@bar.com'
 		} ) ).toEqual( {
+			isLoggedIn: false,
 			isUpdating: true,
 			wasCreated: false,
-			data: { email: 'foo@bar.com' }
+			data: { bearerToken: null, email: 'foo@bar.com' }
 		} );
 	} );
 
@@ -28,9 +31,22 @@ describe( 'state.user', () => {
 			type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 			email: 'foo@bar.com'
 		} ) ).toEqual( {
+			isLoggedIn: false,
 			isUpdating: false,
 			wasCreated: true,
-			data: { email: 'foo@bar.com' }
+			data: { bearerToken: null, email: 'foo@bar.com' }
 		} );
+	} );
+
+	it( 'should update `isUpdating` when verifying', () => {
+		expect( user( undefined, { type: VERIFY_USER } ).isUpdating ).toBe( true );
+	} );
+
+	it( 'should update `isUpdating`, `isLoggedIn`, and `bearerToken` when the user is verified', () => {
+		const result = user( undefined, { type: VERIFY_USER_COMPLETE, bearerToken: 'foobar' } );
+
+		expect( result.isUpdating ).toBe( false );
+		expect( result.isLoggedIn ).toBe( true );
+		expect( result.data.bearerToken ).toBe( 'foobar' );
 	} );
 } );

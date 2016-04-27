@@ -38,6 +38,8 @@ module.exports = function wpcomRestApiProxy() {
 
 	createEndpointProxy( app, '/users/email/new' );
 
+	createEndpointProxy( app, '/users/email/verification' );
+
 	app.post( '/sites/new', function( request, response ) {
 		const payload = Object.assign( {}, request.body, {
 			client_id: rest_api_oauth_client_id,

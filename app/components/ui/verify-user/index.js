@@ -6,6 +6,12 @@ import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 
 const VerifyUser = React.createClass( {
+	componentDidMount() {
+		if ( ! this.props.user.data.email ) {
+			this.props.redirectToNewUser();
+		}
+	},
+
 	verifyUser() {
 		this.props.verifyUser( this.props.user.data.email, this.props.fields.code.value );
 	},

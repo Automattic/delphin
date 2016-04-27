@@ -8,10 +8,12 @@ import { buildPaths } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
 import i18n from 'lib/i18n';
+import CreateUser from 'components/containers/create-user';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
 import SuccessContainer from 'components/containers/success';
+import VerifyUser from 'components/containers/verify-user';
 
 const childRoutes = [
 	{
@@ -23,6 +25,16 @@ const childRoutes = [
 		path: 'checkout',
 		slug: 'checkout',
 		component: CheckoutContainer
+	},
+	{
+		path: 'signup',
+		slug: 'createUser',
+		component: CreateUser
+	},
+	{
+		path: 'signup/verify',
+		slug: 'verifyUser',
+		component: VerifyUser
 	},
 	{
 		path: 'success',

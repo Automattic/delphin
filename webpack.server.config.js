@@ -21,19 +21,7 @@ function getExternals() {
 module.exports = {
 	entry: path.resolve( __dirname, 'server/index.js' ),
 
-	output: {
-		path: path.resolve( __dirname, 'server/build' ),
-		filename: 'bundle.js'
-	},
-
-	target: 'node',
-
 	externals: getExternals(),
-
-	node: {
-		__filename: true,
-		__dirname: true
-	},
 
 	module: {
 		loaders: [
@@ -62,6 +50,16 @@ module.exports = {
 		]
 	},
 
+	node: {
+		__filename: true,
+		__dirname: true
+	},
+
+	output: {
+		path: path.resolve( __dirname, 'server/build' ),
+		filename: 'bundle.js'
+	},
+
 	postcss() {
 		return [ autoprefixer ];
 	},
@@ -73,5 +71,7 @@ module.exports = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	}
+	},
+
+	target: 'node'
 };

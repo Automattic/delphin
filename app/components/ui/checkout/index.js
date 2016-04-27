@@ -1,12 +1,9 @@
 // External dependencies
-import { connect } from 'react-redux';
 import i18n from 'lib/i18n';
-import { push } from 'react-router-redux';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { createSite, createTransaction, createUser } from 'actions';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
@@ -166,24 +163,4 @@ const Checkout = React.createClass( {
 	}
 } );
 
-export default connect(
-	state => {
-		return { checkout: state.checkout };
-	},
-	dispatch => {
-		return {
-			redirect: url => {
-				dispatch( push( url ) );
-			},
-			createSite: form => {
-				dispatch( createSite( form ) );
-			},
-			createUser: ( form ) => {
-				dispatch( createUser( form ) );
-			},
-			createTransaction: ( form ) => {
-				dispatch( createTransaction( form ) );
-			}
-		};
-	}
-)( withStyles( styles )( Checkout ) );
+export default withStyles( styles )( Checkout );

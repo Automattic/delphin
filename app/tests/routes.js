@@ -2,7 +2,7 @@ jest.disableAutomock();
 
 // Until modules that import CSS can be imported with Jest, we need to manually mock them
 jest.mock( 'components/ui/about', () => {} );
-jest.mock( 'components/ui/checkout', () => {} );
+jest.mock( 'components/containers/checkout', () => {} );
 jest.mock( 'components/ui/not-found', () => {} );
 jest.mock( 'components/ui/root', () => {} );
 jest.mock( 'components/containers/search', () => {} );

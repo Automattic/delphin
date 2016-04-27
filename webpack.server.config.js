@@ -22,7 +22,6 @@ module.exports = {
 
 	output: {
 		path: path.resolve( __dirname, 'server/build' ),
-		publicPath: '/server/build/',
 		filename: 'bundle.js'
 	},
 

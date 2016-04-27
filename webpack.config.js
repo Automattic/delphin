@@ -47,7 +47,7 @@ var config = {
 
 	output: {
 		path: path.resolve( __dirname, 'public/scripts' ),
-		publicPath: '/public/scripts/',
+		publicPath: '/scripts/',
 		filename: 'bundle.js',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},

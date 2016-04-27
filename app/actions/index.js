@@ -7,6 +7,7 @@ import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
+	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 	DOMAIN_SEARCH_FETCH,
 	DOMAIN_SEARCH_FETCH_COMPLETED,
@@ -53,20 +54,21 @@ export function createUser( form ) {
 
 export function createUserWithoutPassword( email ) {
 	return dispatch => {
+		dispatch( {
+			type: CREATE_USER_WITHOUT_PASSWORD,
+			email
+		} );
+
 		request.post( '/users/email/new' ).send( { email } ).end( ( error ) => {
 			if ( error ) {
 				return;
 			}
 
-			dispatch( createUserWithoutPasswordComplete( email ) );
+			dispatch( {
+				type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+				email
+			} );
 		} );
-	};
-}
-
-function createUserWithoutPasswordComplete( email ) {
-	return {
-		type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-		email
 	};
 }
 

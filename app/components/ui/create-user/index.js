@@ -4,9 +4,9 @@ import React from 'react';
 // Internal dependencies
 import i18n from 'lib/i18n';
 
-const CreateUser = ( { fields } ) => {
+const CreateUser = ( { fields, handleSubmit } ) => {
 	return (
-		<div>
+		<form onSubmit={ handleSubmit }>
 			<div>
 				<label>{ i18n.translate( 'Email address:' ) }</label>
 				<input { ...fields.email } />
@@ -14,7 +14,7 @@ const CreateUser = ( { fields } ) => {
 			<div>
 				<button>{ i18n.translate( 'Next' ) }</button>
 			</div>
-		</div>
+		</form>
 	);
 };
 

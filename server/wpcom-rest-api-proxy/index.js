@@ -16,21 +16,27 @@ if ( ! rest_api_oauth_client_id && fileExists( 'server/secrets.json' ) ) {
 	rest_api_oauth_client_secret = secrets.wordpress.rest_api_oauth_client_secret;
 }
 
-module.exports = function wpcomRestApiProxy() {
-	const app = express();
-
-	app.use( bodyParser.json() );
-
-	app.post( '/users/new', function( request, response ) {
+const createEndpointProxy = ( app, endpoint ) => (
+	app.post( endpoint, ( request, response ) => {
 		const payload = Object.assign( {}, request.body, {
 			client_id: rest_api_oauth_client_id,
 			client_secret: rest_api_oauth_client_secret
 		} );
 
-		WPCOM().req.post( '/users/new', payload, function( error, results ) {
+		WPCOM().req.post( endpoint, payload, ( error, results ) => {
 			response.status( ( error && error.statusCode ) || 200 ).send( error || results );
 		} );
-	} );
+	} )
+);
+
+module.exports = function wpcomRestApiProxy() {
+	const app = express();
+
+	app.use( bodyParser.json() );
+
+	createEndpointProxy( app, '/users/new' );
+
+	createEndpointProxy( app, '/users/email/new' );
 
 	app.post( '/sites/new', function( request, response ) {
 		const payload = Object.assign( {}, request.body, {

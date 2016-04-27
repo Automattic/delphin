@@ -12,7 +12,9 @@ const Root = ( { children } ) => {
 	return (
 		<div className={ styles.root }>
 			<header className={ styles.header }>
-				<h1 className={ styles.title }>MagicDomains</h1>
+				<Link className={ styles.title } to={ getPath( 'search' ) }>
+					<h1>MagicDomains</h1>
+				</Link>
 			</header>
 
 			<div className={ styles.content }>

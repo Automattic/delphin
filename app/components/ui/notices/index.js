@@ -9,12 +9,11 @@ import styles from './styles.scss';
 const Notices = function( { notices, clearNotice } ) {
 	return (
 		<div className={ styles.notices }>
-			{ notices.map( ( notice, index ) => {
+			{ notices.map( ( notice ) => {
 				return <Notice
 					clearNotice={ clearNotice }
 					notice={ notice }
-					index={ index }
-					key={ index } />;
+					key={ notice.id } />;
 			} ) }
 		</div>
 	);

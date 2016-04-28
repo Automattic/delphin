@@ -9,12 +9,11 @@ import styles from './styles.scss';
 const Notice = React.createClass( {
 	propTypes: {
 		clearNotice: PropTypes.func.isRequired,
-		index: PropTypes.number.isRequired,
 		notice: PropTypes.object.isRequired
 	},
 
 	clear() {
-		this.props.clearNotice( this.props.index );
+		this.props.clearNotice( this.props.notice );
 	},
 
 	render() {

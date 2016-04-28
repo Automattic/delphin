@@ -15,7 +15,10 @@ export function notices( state = [], action ) {
 			];
 
 		case NOTICE_CLEAR:
-			state.splice( notice, 1 );
+			state = state.filter( stateNotice => {
+				return stateNotice.id !== notice.id;
+			} );
+
 			return [ ...state ];
 
 		default:

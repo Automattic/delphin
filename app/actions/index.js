@@ -1,5 +1,6 @@
 // External dependencies
 import request from 'superagent';
+import uniqueId from 'lodash/uniqueId';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -236,6 +237,7 @@ export function createTransactionComplete( form ) {
 }
 
 export function addNotice( notice ) {
+	notice.id = uniqueId();
 	return {
 		notice,
 		type: NOTICE_ADD

@@ -3,8 +3,8 @@ import WPCOM from 'wpcom';
 
 // Internal dependencies
 import {
-	DOMAIN_SEARCH_FETCH,
-	DOMAIN_SEARCH_FETCH_COMPLETED,
+	DOMAIN_SUGGESTIONS_FETCH,
+	DOMAIN_SUGGESTIONS_FETCH_COMPLETED,
 	SELECT_DOMAIN
 } from 'reducers/action-types';
 
@@ -14,14 +14,14 @@ export function fetchDomainSuggestions( query ) {
 	if ( query.trim() === '' ) {
 		return dispatch => {
 			dispatch( {
-				type: DOMAIN_SEARCH_FETCH_COMPLETED,
+				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED,
 				results: []
 			} );
 		};
 	}
 
 	return dispatch => {
-		dispatch( { type: DOMAIN_SEARCH_FETCH } );
+		dispatch( { type: DOMAIN_SUGGESTIONS_FETCH } );
 
 		const payload = {
 			query,
@@ -35,7 +35,7 @@ export function fetchDomainSuggestions( query ) {
 			}
 
 			dispatch( {
-				type: DOMAIN_SEARCH_FETCH_COMPLETED,
+				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED,
 				results
 			} );
 		} );

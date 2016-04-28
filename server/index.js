@@ -42,7 +42,7 @@ if ( config( 'env' ) === 'production' ) {
 	} ) ) );
 }
 
-function getCompiledTemplate( props, localeData ) {
+function renderPage( props, localeData ) {
 	const store = createStore(
 		combineReducers( {
 			...reducers,
@@ -78,7 +78,7 @@ function generateStaticFile( filePath ) {
 			fs.mkdirSync( directory );
 		}
 
-		fs.writeFile( path.join( directory, 'index.html' ), getCompiledTemplate( props, localeData ), function( writeError ) {
+		fs.writeFile( path.join( directory, 'index.html' ), renderPage( props, localeData ), function( writeError ) {
 			if ( writeError ) {
 				return console.log( writeError );
 			}
@@ -125,7 +125,7 @@ const init = () => {
 				response.status( 404 );
 			}
 
-			response.send( getCompiledTemplate( props, localeData ) );
+			response.send( renderPage( props, localeData ) );
 		} );
 	} );
 

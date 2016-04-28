@@ -3,9 +3,9 @@ import WPCOM from 'wpcom';
 
 // Internal dependencies
 import {
+	DOMAIN_SELECT,
 	DOMAIN_SUGGESTIONS_FETCH,
-	DOMAIN_SUGGESTIONS_FETCH_COMPLETED,
-	SELECT_DOMAIN
+	DOMAIN_SUGGESTIONS_FETCH_COMPLETED
 } from 'reducers/action-types';
 
 const wpcomAPI = WPCOM();
@@ -44,7 +44,7 @@ export function fetchDomainSuggestions( query ) {
 
 export function selectDomain( domain ) {
 	return {
-		type: SELECT_DOMAIN,
+		type: DOMAIN_SELECT,
 		domain
 	};
 }

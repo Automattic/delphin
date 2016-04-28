@@ -4,7 +4,7 @@ import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
-	SELECT_DOMAIN
+	DOMAIN_SELECT
 } from 'reducers/action-types';
 
 jest.unmock( '..' );
@@ -42,14 +42,14 @@ describe( 'checkout reducer', () => {
 describe( 'checkout reducer for select domain action', () => {
 	it( 'should return state with undefined domain when provided domain is undefined', () => {
 		const originalState = Object.freeze( { domain: 'example.com' } ),
-			newState = checkout( originalState, { type: SELECT_DOMAIN } );
+			newState = checkout( originalState, { type: DOMAIN_SELECT } );
 
 		expect( newState ).toEqual( { domain: undefined } );
 	} );
 
 	it( 'should return state with new domain', () => {
 		const originalState = Object.freeze( { domain: 'example.com' } ),
-			newState = checkout( originalState, { domain: 'wordpress.org', type: SELECT_DOMAIN } );
+			newState = checkout( originalState, { domain: 'wordpress.org', type: DOMAIN_SELECT } );
 
 		expect( newState ).toEqual( { domain: 'wordpress.org' } );
 	} );

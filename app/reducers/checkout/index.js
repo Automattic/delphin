@@ -3,7 +3,7 @@ import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
-	SELECT_DOMAIN
+	DOMAIN_SELECT
 } from 'reducers/action-types';
 
 export function checkout( state = {}, action ) {
@@ -33,7 +33,7 @@ export function checkout( state = {}, action ) {
 				}
 			} );
 
-		case SELECT_DOMAIN:
+		case DOMAIN_SELECT:
 			return { domain };
 
 		default:

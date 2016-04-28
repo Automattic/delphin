@@ -9,10 +9,7 @@ import {
 	CREATE_USER_COMPLETE,
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-	DOMAIN_SEARCH_FETCH,
-	DOMAIN_SEARCH_FETCH_COMPLETED,
 	REMOVE_USER,
-	SELECT_DOMAIN,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
@@ -20,13 +17,6 @@ import paygateLoader from 'lib/paygate-loader';
 
 let wpcomAPI = WPCOM(),
 	bearerToken;
-
-export function selectDomain( domain ) {
-	return {
-		type: SELECT_DOMAIN,
-		domain
-	};
-}
 
 export function removeUser() {
 	return { type: REMOVE_USER };
@@ -239,34 +229,3 @@ export function createTransactionComplete( form ) {
 	};
 }
 
-export function fetchDomainSuggestions( query ) {
-	if ( query.trim() === '' ) {
-		return dispatch => {
-			dispatch( {
-				type: DOMAIN_SEARCH_FETCH_COMPLETED,
-				results: []
-			} );
-		};
-	}
-
-	return dispatch => {
-		dispatch( { type: DOMAIN_SEARCH_FETCH } );
-
-		const payload = {
-			query,
-			quantity: 10,
-			include_wordpressdotcom: false
-		};
-
-		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {
-			if ( error ) {
-				return;
-			}
-
-			dispatch( {
-				type: DOMAIN_SEARCH_FETCH_COMPLETED,
-				results
-			} );
-		} );
-	};
-}

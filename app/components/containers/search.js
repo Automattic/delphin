@@ -2,7 +2,7 @@
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import { fetchDomainSuggestions, selectDomain } from 'actions';
+import { fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import Search from 'components/ui/search';
 
 export default reduxForm(

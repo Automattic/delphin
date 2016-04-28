@@ -9,6 +9,8 @@ import {
 	CREATE_USER_COMPLETE,
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+	NOTICE_ADD,
+	NOTICE_CLEAR,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
@@ -33,7 +35,7 @@ export function createUser( form ) {
 
 		request.post( '/users/new' ).send( payload ).end( ( error, results ) => {
 			if ( error ) {
-				return;
+				return dispatch( addNotice( error ) );
 			}
 
 			const data = JSON.parse( results.text );
@@ -107,6 +109,10 @@ export function createSite( form ) {
 		};
 
 		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {
+			if ( error ) {
+				return dispatch( addNotice( error ) );
+			}
+
 			const data = JSON.parse( results.text );
 
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
@@ -229,3 +235,16 @@ export function createTransactionComplete( form ) {
 	};
 }
 
+export function addNotice( notice ) {
+	return {
+		notice,
+		type: NOTICE_ADD
+	};
+}
+
+export function clearNotice( notice ) {
+	return {
+		notice,
+		type: NOTICE_CLEAR
+	};
+}

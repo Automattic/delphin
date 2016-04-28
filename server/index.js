@@ -24,7 +24,7 @@ import i18nCache from './i18n-cache';
 import { routes, serverRedirectRoutes } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
-import webpackConfig from '../webpack.config';
+import webpackConfig from '../webpack.client.config';
 
 const app = express(),
 	port = process.env.PORT || 1337,

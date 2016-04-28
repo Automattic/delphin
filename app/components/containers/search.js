@@ -10,7 +10,11 @@ export default reduxForm(
 		form: 'search',
 		fields: [ 'query' ]
 	},
-	state => ( { results: state.domainSearch.results } ),
+	state => {
+		return {
+			results: state.domainSearch.results
+		};
+	},
 	dispatch => {
 		return {
 			fetchDomainSuggestions: query => {

@@ -7,6 +7,7 @@ jest.mock( 'components/ui/not-found', () => {} );
 jest.mock( 'components/containers/create-user', () => {} );
 jest.mock( 'components/containers/verify-user', () => {} );
 jest.mock( 'components/ui/root', () => {} );
+jest.mock( 'components/containers/root', () => {} );
 jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 

@@ -100,8 +100,6 @@ const init = () => {
 
 	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
 
-	app.use( '/build', express.static( path.join( __dirname, '..', 'build' ) ) );
-
 	app.use( api() );
 
 	app.get( '/*', ( request, response ) => {

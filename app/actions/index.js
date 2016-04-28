@@ -11,7 +11,7 @@ import {
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 	NOTICE_ADD,
-	NOTICE_CLEAR,
+	NOTICE_REMOVE,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
@@ -244,9 +244,9 @@ export function addNotice( notice ) {
 	};
 }
 
-export function clearNotice( notice ) {
+export function removeNotice( notice ) {
 	return {
 		notice,
-		type: NOTICE_CLEAR
+		type: NOTICE_REMOVE
 	};
 }

@@ -9,7 +9,7 @@ import { getPath } from 'routes';
 import Notices from '../notices';
 import styles from './styles.scss';
 
-const Root = ( { children, notices, clearNotice } ) => {
+const Root = ( { children, notices } ) => {
 	return (
 		<div className={ styles.root }>
 			<header className={ styles.header }>
@@ -22,7 +22,7 @@ const Root = ( { children, notices, clearNotice } ) => {
 				{ children }
 			</div>
 
-			<Notices notices={ notices } clearNotice={ clearNotice } />
+			<Notices notices={ notices } />
 
 			<footer className={ styles.footer }>
 				<Link className={ styles.footerLink } to={ getPath( 'search' ) }>{ i18n.translate( 'Search' ) }</Link>

@@ -1,7 +1,7 @@
 // Internal dependencies
 import {
 	NOTICE_ADD,
-	NOTICE_CLEAR
+	NOTICE_REMOVE
 } from 'reducers/action-types';
 
 export function notices( state = [], action ) {
@@ -14,7 +14,7 @@ export function notices( state = [], action ) {
 				notice
 			];
 
-		case NOTICE_CLEAR:
+		case NOTICE_REMOVE:
 			state = state.filter( stateNotice => {
 				return stateNotice.id !== notice.id;
 			} );

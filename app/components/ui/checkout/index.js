@@ -129,7 +129,7 @@ const Checkout = React.createClass( {
 		return (
 			<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
 				<label>{ i18n.translate( 'username' ) }</label>
-				<input type="text" name="username" />
+				<input type="text" name="username" autoFocus />
 				<label>{ i18n.translate( 'email' ) }</label>
 				<input type="text" name="email" onChange={ this.updateForm } value={ this.state.form.email } />
 				<label>{ i18n.translate( 'password' ) }</label>

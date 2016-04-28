@@ -29,7 +29,7 @@ const CreateUser = React.createClass( {
 				fieldArea={
 					<div>
 						<label>{ i18n.translate( 'Email address:' ) }</label>
-						<input { ...fields.email } />
+						<input { ...fields.email } autoFocus />
 					</div>
 				}
 				submitArea={

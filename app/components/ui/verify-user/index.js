@@ -41,7 +41,7 @@ const VerifyUser = React.createClass( {
 				fieldArea={
 					<fieldset>
 						<label>{ i18n.translate( 'Confirmation code:' ) }</label>
-						<input { ...fields.code } />
+						<input { ...fields.code } autoFocus />
 					</fieldset>
 				}
 				submitArea={

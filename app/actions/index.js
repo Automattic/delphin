@@ -35,11 +35,11 @@ export function createUser( form ) {
 		};
 
 		request.post( '/users/new' ).send( payload ).end( ( error, results ) => {
-			if ( error ) {
-				return dispatch( addNotice( error ) );
-			}
-
 			const data = JSON.parse( results.text );
+
+			if ( error ) {
+				return dispatch( addNotice( data ) );
+			}
 
 			// Reinitialize WPCOM so that future requests with be authed
 			wpcomAPI = WPCOM( data.bearer_token );
@@ -110,11 +110,11 @@ export function createSite( form ) {
 		};
 
 		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {
-			if ( error ) {
-				return dispatch( addNotice( error ) );
-			}
-
 			const data = JSON.parse( results.text );
+
+			if ( error ) {
+				return dispatch( addNotice( data ) );
+			}
 
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
 		} );
@@ -222,7 +222,12 @@ export function createTransaction( form ) {
 			};
 
 			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
-				console.log( apiError || apiResults );
+				if ( apiError ) {
+					return dispatch( addNotice( apiError ) );
+				}
+
+				console.log( apiResults );
+
 				dispatch( createTransactionComplete( form ) );
 			} );
 		} );

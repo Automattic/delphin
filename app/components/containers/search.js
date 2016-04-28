@@ -2,7 +2,7 @@
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import { fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
+import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import Search from 'components/ui/search';
 
 export default reduxForm(
@@ -16,6 +16,9 @@ export default reduxForm(
 	} ),
 	dispatch => {
 		return {
+			clearDomainSuggestions: () => {
+				dispatch( clearDomainSuggestions() );
+			},
 			fetchDomainSuggestions: query => {
 				dispatch( fetchDomainSuggestions( query ) );
 			},

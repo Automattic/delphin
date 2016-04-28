@@ -18,10 +18,11 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 // Internal dependencies
-import config from 'config';
 import api from './wpcom-rest-api-proxy';
+import config from 'config';
+import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
-import { routes, serverRedirectRoutes } from 'app/routes';
+import { routes, serverRedirectRoutes, staticPages } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.client.config';
@@ -32,6 +33,8 @@ const app = express(),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
+i18n.initialize();
+
 if ( config( 'env' ) === 'production' ) {
 	app.use( auth.connect( auth.basic( {
 		realm: 'Delphin',
@@ -39,7 +42,62 @@ if ( config( 'env' ) === 'production' ) {
 	} ) ) );
 }
 
+function renderPage( props, localeData ) {
+	const store = createStore(
+		combineReducers( {
+			...reducers,
+			routing: routerReducer
+		} )
+	);
+
+	const css = [];
+
+	const content = renderToString(
+		<Provider store={ store }>
+			<Stylizer onInsertCss={ curry( addCss )( css ) }>
+				<RouterContext { ...props } />
+			</Stylizer>
+		</Provider>
+	);
+
+	return templateCompiler( { content, localeData, css: css.join( '' ) } );
+}
+
+function generateStaticFile( filePath ) {
+	match( { routes, location: filePath }, ( error, redirectLocation, props ) => {
+		const locale = getLocaleSlug( filePath ),
+			localeData = i18nCache.get( locale ),
+			staticDirectory = path.join( __dirname, '..', 'public/static' ),
+			directory = path.join( __dirname, '..', 'public/static', filePath );
+
+		if ( ! fileExists( staticDirectory ) ) {
+			fs.mkdirSync( staticDirectory );
+		}
+
+		if ( ! fileExists( directory ) ) {
+			fs.mkdirSync( directory );
+		}
+
+		fs.writeFile( path.join( directory, 'index.html' ), renderPage( props, localeData ), function( writeError ) {
+			if ( writeError ) {
+				return console.log( writeError );
+			}
+			console.log( filePath + ' written' );
+		} );
+	} );
+}
+
 const init = () => {
+	if ( process.env.BUILD_STATIC ) {
+		// Generate static files
+		staticPages.forEach( function( file ) {
+			generateStaticFile( file );
+		} );
+
+		// No need to start the server
+		return;
+	}
+
 	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
 
 	app.use( api() );
@@ -61,28 +119,11 @@ const init = () => {
 				return;
 			}
 
-			const store = createStore(
-				combineReducers( {
-					...reducers,
-					routing: routerReducer
-				} )
-			);
-
-			const css = [];
-
-			const content = renderToString(
-				<Provider store={ store }>
-					<Stylizer onInsertCss={ curry( addCss )( css ) }>
-						<RouterContext { ...props } />
-					</Stylizer>
-				</Provider>
-			);
-
 			if ( props.routes.some( route => route.slug === 'notFound' ) ) {
 				response.status( 404 );
 			}
 
-			response.send( templateCompiler( { content, localeData, css: css.join( '' ) } ) );
+			response.send( renderPage( props, localeData ) );
 		} );
 	} );
 
@@ -122,4 +163,3 @@ i18nCache.fetch( () => {
 	console.log( 'i18n data fetched' );
 	init();
 } );
-

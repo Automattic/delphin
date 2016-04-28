@@ -25,6 +25,7 @@ coverage
 
 # Compiled scripts and build directories
 public/scripts/bundle.js
+public/static
 server/build
 
 # Dependency directory

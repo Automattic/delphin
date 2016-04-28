@@ -65,6 +65,8 @@ export const routes = {
 
 const paths = buildPaths( routes );
 
+export const staticPages = [ '/', '/about', '/404' ];
+
 /**
  * Gets the path with the given slug, replacing parameter placeholders with the given values.
  *

@@ -88,7 +88,7 @@ function generateStaticFile( filePath ) {
 }
 
 const init = () => {
-	if ( config( 'env' ) === 'static' ) {
+	if ( process.env.BUILD_STATIC ) {
 		// Generate static files
 		staticPages.forEach( function( file ) {
 			generateStaticFile( file );

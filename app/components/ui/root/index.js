@@ -6,10 +6,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import Notices from '../notices';
+import Notices from '../../containers/notices';
 import styles from './styles.scss';
 
-const Root = ( { children, notices } ) => {
+const Root = ( { children } ) => {
 	return (
 		<div className={ styles.root }>
 			<header className={ styles.header }>
@@ -22,7 +22,7 @@ const Root = ( { children, notices } ) => {
 				{ children }
 			</div>
 
-			<Notices notices={ notices } />
+			<Notices />
 
 			<footer className={ styles.footer }>
 				<Link className={ styles.footerLink } to={ getPath( 'search' ) }>{ i18n.translate( 'Search' ) }</Link>

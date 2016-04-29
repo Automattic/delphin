@@ -2,8 +2,8 @@
 import { connect } from 'react-redux';
 
 // Internal dependencies
-import Root from 'components/ui/root';
+import Notices from 'components/ui/notices';
 
 export default connect(
 	state => ( { notices: state.notices } )
-)( Root );
+)( Notices );

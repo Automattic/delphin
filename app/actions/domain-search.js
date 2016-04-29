@@ -2,6 +2,7 @@
 import WPCOM from 'wpcom';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import {
 	DOMAIN_SELECT,
 	DOMAIN_SUGGESTIONS_CLEAR,
@@ -39,7 +40,10 @@ export function fetchDomainSuggestions( query ) {
 
 		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {
 			if ( error ) {
-				return;
+				return dispatch( addNotice( {
+					message: error.message,
+					status: 'error'
+				} ) );
 			}
 
 			dispatch( {

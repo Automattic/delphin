@@ -1,8 +1,11 @@
 // External dependencies
+import debugFactory from 'debug';
 import request from 'superagent';
 import WPCOM from 'wpcom';
+const debug = debugFactory( 'delphin:actions' );
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
@@ -32,11 +35,14 @@ export function createUser( form ) {
 		};
 
 		request.post( '/users/new' ).send( payload ).end( ( error, results ) => {
-			if ( error ) {
-				return;
-			}
-
 			const data = JSON.parse( results.text );
+
+			if ( error ) {
+				return dispatch( addNotice( {
+					message: data.message,
+					status: 'error'
+				} ) );
+			}
 
 			// Reinitialize WPCOM so that future requests with be authed
 			wpcomAPI = WPCOM( data.bearer_token );
@@ -108,6 +114,13 @@ export function createSite( form ) {
 
 		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {
 			const data = JSON.parse( results.text );
+
+			if ( error ) {
+				return dispatch( addNotice( {
+					message: data.message,
+					status: 'error'
+				} ) );
+			}
 
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
 		} );
@@ -215,7 +228,15 @@ export function createTransaction( form ) {
 			};
 
 			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
-				console.log( apiError || apiResults );
+				if ( apiError ) {
+					return dispatch( addNotice( {
+						message: apiError.message,
+						status: 'error'
+					} ) );
+				}
+
+				debug( apiResults );
+
 				dispatch( createTransactionComplete( form ) );
 			} );
 		} );
@@ -228,4 +249,3 @@ export function createTransactionComplete( form ) {
 		form
 	};
 }
-

@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
+import Notices from '../../containers/notices';
 import styles from './styles.scss';
 
 const Root = ( { children } ) => {
@@ -20,6 +21,8 @@ const Root = ( { children } ) => {
 			<div className={ styles.content }>
 				{ children }
 			</div>
+
+			<Notices />
 
 			<footer className={ styles.footer }>
 				<Link className={ styles.footerLink } to={ getPath( 'search' ) }>{ i18n.translate( 'Search' ) }</Link>

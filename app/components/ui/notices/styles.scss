@@ -1,0 +1,20 @@
+.notices {
+	position: fixed;
+		left: 1em;
+		right: 1em;
+		top: 1em;
+}
+
+.notice {
+	background: #ee4444;
+	color: #fff;
+	font-size: 1.4em;
+	margin-bottom: 1em;
+	padding: 1em;
+}
+
+.remove {
+	cursor: pointer;
+	position: absolute;
+		right: 1em;
+}

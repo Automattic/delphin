@@ -3,14 +3,13 @@ import request from 'superagent';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-	NOTICE_ADD,
-	NOTICE_REMOVE,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
@@ -252,19 +251,5 @@ export function createTransactionComplete( form ) {
 	return {
 		type: CREATE_TRANSACTION_COMPLETE,
 		form
-	};
-}
-
-export function addNotice( notice ) {
-	return {
-		notice: { message, status },
-		type: NOTICE_ADD
-	};
-}
-
-export function removeNotice( notice ) {
-	return {
-		notice,
-		type: NOTICE_REMOVE
 	};
 }

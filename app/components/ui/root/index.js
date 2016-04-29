@@ -24,6 +24,7 @@ const Root = ( { children } ) => {
 			<footer className={ styles.footer }>
 				<Link className={ styles.footerLink } to={ getPath( 'search' ) }>{ i18n.translate( 'Search' ) }</Link>
 				<Link className={ styles.footerLink } to={ getPath( 'about' ) }>{ i18n.translate( 'About' ) }</Link>
+				<Link className={ styles.footerLink } to={ getPath( 'createUser' ) }>{ i18n.translate( 'Signup' ) }</Link>
 				<Link className={ styles.footerLink } to="https://wordpress.com">{ i18n.translate( 'A WordPress.com service' ) }</Link>
 			</footer>
 		</div>

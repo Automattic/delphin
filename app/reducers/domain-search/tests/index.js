@@ -1,7 +1,8 @@
 // Internal dependencies
 import {
-	DOMAIN_SEARCH_FETCH,
-	DOMAIN_SEARCH_FETCH_COMPLETED
+	DOMAIN_SUGGESTIONS_CLEAR,
+	DOMAIN_SUGGESTIONS_FETCH,
+	DOMAIN_SUGGESTIONS_FETCH_COMPLETED
 } from 'reducers/action-types';
 import { domainSearch } from '..';
 
@@ -46,9 +47,37 @@ describe( 'domain search reducer', () => {
 	} );
 } );
 
-describe( 'domain search reducer for domain search fetch action', () => {
+describe( 'domain search reducer for domain suggestions clear action', () => {
+	it( 'should return initial state when state is undefined', () => {
+		const newState = domainSearch( undefined, {
+			type: DOMAIN_SUGGESTIONS_CLEAR
+		} );
+
+		expect( newState ).toEqual( {
+			isFetching: false,
+			results: null
+		} );
+	} );
+
+	it( 'should return initial state', () => {
+		const originalState = Object.freeze( {
+				isFetching: true,
+				results: [ 'example1.com', 'example2.com' ]
+			} ),
+			newState = domainSearch( originalState, {
+				type: DOMAIN_SUGGESTIONS_CLEAR
+			} );
+
+		expect( newState ).toEqual( {
+			isFetching: false,
+			results: null
+		} );
+	} );
+} );
+
+describe( 'domain search reducer for domain suggestions fetch action', () => {
 	it( 'should return initial state with fetching enabled when state is undefined', () => {
-		const newState = domainSearch( undefined, { type: DOMAIN_SEARCH_FETCH } );
+		const newState = domainSearch( undefined, { type: DOMAIN_SUGGESTIONS_FETCH } );
 
 		expect( newState ).toEqual( {
 			isFetching: true,
@@ -61,7 +90,7 @@ describe( 'domain search reducer for domain search fetch action', () => {
 				isFetching: false,
 				results: [ 'example1.com', 'example2.com' ]
 			} ),
-			newState = domainSearch( originalState, { type: DOMAIN_SEARCH_FETCH } );
+			newState = domainSearch( originalState, { type: DOMAIN_SUGGESTIONS_FETCH } );
 
 		expect( newState ).toEqual( {
 			isFetching: true,
@@ -70,11 +99,11 @@ describe( 'domain search reducer for domain search fetch action', () => {
 	} );
 } );
 
-describe( 'domain search reducer for domain search fetch completed action', () => {
+describe( 'domain search reducer for domain suggestions fetch completed action', () => {
 	it( 'should return initial state with fetching disabled when state is undefined', () => {
 		const newState = domainSearch( undefined, {
 			results: [ 'example.com' ],
-			type: DOMAIN_SEARCH_FETCH_COMPLETED
+			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED
 		} );
 
 		expect( newState ).toEqual( {
@@ -90,7 +119,7 @@ describe( 'domain search reducer for domain search fetch completed action', () =
 			} ),
 			newState = domainSearch( originalState, {
 				results: [ 'example3.com' ],
-				type: DOMAIN_SEARCH_FETCH_COMPLETED
+				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED
 			} );
 
 		expect( newState ).toEqual( {

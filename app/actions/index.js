@@ -59,13 +59,13 @@ export function createUser( form ) {
 	};
 }
 
-export function createUserComplete( form ) {
+export function createUserComplete( form, token ) {
 	return {
 		type: CREATE_USER_COMPLETE,
 		username: form.username,
 		email: form.email,
 		password: form.password,
-		bearerToken
+		bearerToken: token
 	};
 }
 

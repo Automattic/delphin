@@ -230,7 +230,7 @@ export function createTransaction( form ) {
 			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
 				if ( apiError ) {
 					return dispatch( addNotice( {
-						message: apiError,
+						message: apiError.message,
 						status: 'error'
 					} ) );
 				}

@@ -1,6 +1,5 @@
 // External dependencies
 import request from 'superagent';
-import uniqueId from 'lodash/uniqueId';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -38,7 +37,12 @@ export function createUser( form ) {
 			const data = JSON.parse( results.text );
 
 			if ( error ) {
-				return dispatch( addNotice( data ) );
+				const notice = {
+					message: data.message,
+					status: 'error'
+				};
+
+				return dispatch( addNotice( notice ) );
 			}
 
 			// Reinitialize WPCOM so that future requests with be authed
@@ -113,7 +117,12 @@ export function createSite( form ) {
 			const data = JSON.parse( results.text );
 
 			if ( error ) {
-				return dispatch( addNotice( data ) );
+				const notice = {
+					message: data.message,
+					status: 'error'
+				};
+
+				return dispatch( addNotice( notice ) );
 			}
 
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
@@ -223,7 +232,12 @@ export function createTransaction( form ) {
 
 			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
 				if ( apiError ) {
-					return dispatch( addNotice( apiError ) );
+					const notice = {
+						message: apiError,
+						status: 'error'
+					};
+
+					return dispatch( addNotice( notice ) );
 				}
 
 				console.log( apiResults );
@@ -242,9 +256,8 @@ export function createTransactionComplete( form ) {
 }
 
 export function addNotice( notice ) {
-	notice.id = uniqueId();
 	return {
-		notice,
+		notice: { message, status },
 		type: NOTICE_ADD
 	};
 }

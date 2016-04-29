@@ -1,3 +1,6 @@
+// External dependencies
+import uniqueId from 'lodash/uniqueId';
+
 // Internal dependencies
 import {
 	NOTICE_ADD,
@@ -11,15 +14,11 @@ export function notices( state = [], action ) {
 		case NOTICE_ADD:
 			return [
 				...state,
-				notice
+				Object.assign( {}, notice, { id: uniqueId() } )
 			];
 
 		case NOTICE_REMOVE:
-			state = state.filter( stateNotice => {
-				return stateNotice.id !== notice.id;
-			} );
-
-			return [ ...state ];
+			return [ ...state.filter( n => n.id !== notice.id ) ];
 
 		default:
 			return state;

@@ -56,10 +56,11 @@ const Search = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query } } = this.props;
+		const { fields: { query }, user } = this.props;
 
 		return (
 			<div>
+				{ user.isLoggedIn && <h3 className={ styles.heading }>Welcome, { user.data.email }!</h3> }
 				<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
 
 				<input

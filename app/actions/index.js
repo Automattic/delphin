@@ -7,9 +7,14 @@ import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
+	CREATE_USER_WITHOUT_PASSWORD,
+	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 	DOMAIN_SEARCH_FETCH,
 	DOMAIN_SEARCH_FETCH_COMPLETED,
-	SELECT_DOMAIN
+	REMOVE_USER,
+	SELECT_DOMAIN,
+	VERIFY_USER,
+	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
@@ -21,6 +26,10 @@ export function selectDomain( domain ) {
 		type: SELECT_DOMAIN,
 		domain
 	};
+}
+
+export function removeUser() {
+	return { type: REMOVE_USER };
 }
 
 export function createUser( form ) {
@@ -50,13 +59,48 @@ export function createUser( form ) {
 	};
 }
 
-export function createUserComplete( form ) {
+export function createUserComplete( form, token ) {
 	return {
 		type: CREATE_USER_COMPLETE,
 		username: form.username,
 		email: form.email,
 		password: form.password,
-		bearerToken
+		bearerToken: token
+	};
+}
+
+export function createUserWithoutPassword( email ) {
+	return dispatch => {
+		dispatch( {
+			type: CREATE_USER_WITHOUT_PASSWORD,
+			email
+		} );
+
+		request.post( '/users/email/new' ).send( { email } ).end( ( error ) => {
+			if ( error ) {
+				return;
+			}
+
+			dispatch( {
+				type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+				email
+			} );
+		} );
+	};
+}
+
+export function verifyUser( email, code ) {
+	return dispatch => {
+		dispatch( { type: VERIFY_USER } );
+
+		request.post( '/users/email/verification' ).send( { email, code } ).end( ( error, response ) => {
+			if ( error ) {
+				return;
+			}
+
+			bearerToken = response.body.token.access_token;
+			dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
+		} );
 	};
 }
 

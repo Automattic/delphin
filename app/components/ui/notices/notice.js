@@ -10,7 +10,7 @@ const Notice = function( { notice, removeNotice } ) {
 	return (
 		<div className={ styles.notice }>
 			{ notice.message }
-			<span className={ styles.clear } onClick={ removeNotice }>
+			<span className={ styles.remove } onClick={ removeNotice }>
 				{ i18n.translate( 'Hide' ) }
 			</span>
 		</div>

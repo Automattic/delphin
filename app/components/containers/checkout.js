@@ -11,17 +11,17 @@ export default connect(
 		checkout: state.checkout
 	} ),
 	dispatch => ( {
-		redirect: url => {
-			dispatch( push( url ) );
-		},
 		createSite: form => {
 			dispatch( createSite( form ) );
+		},
+		createTransaction: ( form ) => {
+			dispatch( createTransaction( form ) );
 		},
 		createUser: ( form ) => {
 			dispatch( createUser( form ) );
 		},
-		createTransaction: ( form ) => {
-			dispatch( createTransaction( form ) );
+		redirect: url => {
+			dispatch( push( url ) );
 		}
 	} )
 )( Checkout );

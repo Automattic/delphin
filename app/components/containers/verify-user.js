@@ -16,14 +16,14 @@ export default reduxForm(
 		user: state.user
 	} ),
 	dispatch => ( {
-		verifyUser( email, code ) {
-			dispatch( verifyUser( email, code ) );
-		},
 		redirectToNewUser() {
 			dispatch( push( getPath( 'createUser' ) ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );
+		},
+		verifyUser( email, code ) {
+			dispatch( verifyUser( email, code ) );
 		}
 	} )
 )( VerifyUser );

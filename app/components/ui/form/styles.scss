@@ -1,9 +1,12 @@
 .form {
 	display: block;
 	font-size: 1.4rem;
-	font-family: 'Open Sans', Helvetica, sans-serif;
 	margin: 0 auto;
 	max-width: 400px;
+
+	input, button {
+		font-family: inherit;
+	}
 
 	>:first-child {
 		border-top-left-radius: 2px;

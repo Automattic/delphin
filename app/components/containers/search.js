@@ -14,17 +14,15 @@ export default reduxForm(
 		results: state.domainSearch.results,
 		user: state.user
 	} ),
-	dispatch => {
-		return {
-			clearDomainSuggestions: () => {
-				dispatch( clearDomainSuggestions() );
-			},
-			fetchDomainSuggestions: query => {
-				dispatch( fetchDomainSuggestions( query ) );
-			},
-			selectDomain: name => {
-				dispatch( selectDomain( name ) );
-			}
-		};
-	}
+	dispatch => ( {
+		clearDomainSuggestions: () => {
+			dispatch( clearDomainSuggestions() );
+		},
+		fetchDomainSuggestions: query => {
+			dispatch( fetchDomainSuggestions( query ) );
+		},
+		selectDomain: name => {
+			dispatch( selectDomain( name ) );
+		}
+	} )
 )( Search );

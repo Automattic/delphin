@@ -12,20 +12,18 @@ export default reduxForm(
 		form: 'verify-user',
 		fields: [ 'code' ]
 	},
-	state => {
-		return { user: state.user };
-	},
-	dispatch => {
-		return {
-			verifyUser( email, code ) {
-				dispatch( verifyUser( email, code ) );
-			},
-			redirectToNewUser() {
-				dispatch( push( getPath( 'createUser' ) ) );
-			},
-			redirectToSearch() {
-				dispatch( push( getPath( 'search' ) ) );
-			}
-		};
-	}
+	state => ( {
+		user: state.user
+	} ),
+	dispatch => ( {
+		verifyUser( email, code ) {
+			dispatch( verifyUser( email, code ) );
+		},
+		redirectToNewUser() {
+			dispatch( push( getPath( 'createUser' ) ) );
+		},
+		redirectToSearch() {
+			dispatch( push( getPath( 'search' ) ) );
+		}
+	} )
 )( VerifyUser );

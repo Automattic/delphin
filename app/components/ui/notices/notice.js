@@ -1,5 +1,5 @@
 // External dependencies
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -15,6 +15,11 @@ const Notice = function( { notice, removeNotice } ) {
 			</span>
 		</div>
 	);
+};
+
+Notice.propTypes = {
+	notice: PropTypes.object.isRequired,
+	removeNotice: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( Notice );

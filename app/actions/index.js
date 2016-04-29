@@ -1,6 +1,8 @@
 // External dependencies
+import debugFactory from 'debug';
 import request from 'superagent';
 import WPCOM from 'wpcom';
+const debug = debugFactory( 'delphin:actions' );
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -36,12 +38,10 @@ export function createUser( form ) {
 			const data = JSON.parse( results.text );
 
 			if ( error ) {
-				const notice = {
+				return dispatch( addNotice( {
 					message: data.message,
 					status: 'error'
-				};
-
-				return dispatch( addNotice( notice ) );
+				} ) );
 			}
 
 			// Reinitialize WPCOM so that future requests with be authed
@@ -116,12 +116,10 @@ export function createSite( form ) {
 			const data = JSON.parse( results.text );
 
 			if ( error ) {
-				const notice = {
+				return dispatch( addNotice( {
 					message: data.message,
 					status: 'error'
-				};
-
-				return dispatch( addNotice( notice ) );
+				} ) );
 			}
 
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
@@ -231,15 +229,13 @@ export function createTransaction( form ) {
 
 			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
 				if ( apiError ) {
-					const notice = {
+					return dispatch( addNotice( {
 						message: apiError,
 						status: 'error'
-					};
-
-					return dispatch( addNotice( notice ) );
+					} ) );
 				}
 
-				console.log( apiResults );
+				debug( apiResults );
 
 				dispatch( createTransactionComplete( form ) );
 			} );

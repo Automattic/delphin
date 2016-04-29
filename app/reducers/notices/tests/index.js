@@ -28,7 +28,7 @@ describe( 'notices reducer for notice add action', () => {
 } );
 
 describe( 'notices reducer for notice remove action', () => {
-	it( 'should add a notice', () => {
+	it( 'should remove a notice', () => {
 		const originalState = Object.freeze( [ {
 				id: '1',
 				message: 'An error message',

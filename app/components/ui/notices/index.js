@@ -1,5 +1,5 @@
 // External dependencies
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -16,6 +16,10 @@ const Notices = function( { notices } ) {
 			} ) }
 		</div>
 	);
+};
+
+Notices.propTypes = {
+	notices: PropTypes.array.isRequired
 };
 
 export default withStyles( styles )( Notices );

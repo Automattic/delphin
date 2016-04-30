@@ -2,7 +2,7 @@
   "name": "delphin",
   "version": "0.0.1",
   "description": "A registrar client",
-  "main": "server/index.js",
+  "main": "server/build/bundle.js",
   "scripts": {
     "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --config webpack.client.config.js --progress --colors",

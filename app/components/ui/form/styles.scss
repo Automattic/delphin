@@ -30,6 +30,10 @@
 	background: #f3f6f8;
 	padding: 30px;
 
+	.is-error {
+		background: red;
+	}
+
 	label {
 		display: block;
 		font-size: 1.3rem;

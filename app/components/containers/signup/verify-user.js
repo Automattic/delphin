@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 // Internal dependencies
 import { getPath } from 'routes';
 import { createUserWithoutPassword, verifyUser } from 'actions';
-import VerifyUser from 'components/ui/verify-user';
+import VerifyUser from 'components/ui/signup/verify-user';
 
 export default reduxForm(
 	{

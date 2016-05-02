@@ -36,10 +36,10 @@ const CreateUser = React.createClass( {
 			<Form
 				onSubmit={ handleSubmit }
 				fieldArea={
-					<div>
+					<fieldset>
 						<label>{ i18n.translate( 'Email address:' ) }</label>
 						<input { ...fields.email } autoFocus />
-					</div>
+					</fieldset>
 				}
 				submitArea={
 					<button disabled={ user.isUpdating }>

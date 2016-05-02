@@ -1,0 +1,16 @@
+.legend {
+	color: #87a6bc;
+	font-size: 1.2rem;
+	font-style: italic;
+	margin-top: 5px;
+
+	a {
+		color: inherit;
+		cursor: pointer;
+		text-decoration: underline;
+
+		&:hover {
+			color: #2e4453;
+		}
+	}
+}

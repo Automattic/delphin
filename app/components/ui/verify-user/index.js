@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
+import ResendSignupEmail from './resend-signup-email';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
@@ -51,7 +52,12 @@ const VerifyUser = React.createClass( {
 				fieldArea={
 					<fieldset>
 						<label>{ i18n.translate( 'Confirmation code:' ) }</label>
+
 						<input { ...fields.code } autoFocus />
+
+						<ResendSignupEmail
+							createUserWithoutPassword={ this.props.createUserWithoutPassword }
+							email={ this.props.user.data.email } />
 					</fieldset>
 				}
 				submitArea={

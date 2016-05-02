@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import { verifyUser } from 'actions';
+import { createUserWithoutPassword, verifyUser } from 'actions';
 import VerifyUser from 'components/ui/verify-user';
 
 export default reduxForm(
@@ -16,6 +16,9 @@ export default reduxForm(
 		user: state.user
 	} ),
 	dispatch => ( {
+		createUserWithoutPassword( email, callback ) {
+			dispatch( createUserWithoutPassword( email, callback ) );
+		},
 		redirectToNewUser() {
 			dispatch( push( getPath( 'createUser' ) ) );
 		},

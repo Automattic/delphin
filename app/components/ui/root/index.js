@@ -1,7 +1,7 @@
 // External dependencies
 import i18n from 'lib/i18n';
 import { Link } from 'react-router';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -32,6 +32,10 @@ const Root = ( { children } ) => {
 			</footer>
 		</div>
 	);
+};
+
+Root.propTypes = {
+	children: PropTypes.node.isRequired
 };
 
 export default withStyles( styles )( Root );

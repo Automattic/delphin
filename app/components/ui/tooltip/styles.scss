@@ -1,34 +1,33 @@
 .tooltip {
-	box-sizing: border-box;
 	position: relative;
 
 	&:hover .text {
-		display: block;
-
-		&:after {
-			border: 6px solid;
-			border-color: #2e4453 transparent transparent;
-			content: '';
-			display: block;
-			position: absolute;
-				left: calc(50% - 10px);
-				top: 100%;
-		}
+		bottom: calc( 100% + 8px );
+		opacity: 0.9;
 	}
 }
 
 .text {
-	animation-duration: 0.2s;
 	background: #2e4453;
 	border-radius: 3px;
-	background-clip: padding-box;
 	color: #fff;
-	display: none;
 	font-size: 0.8em;
-	width: 200px;
-	opacity: 0.9;
+	opacity: 0;
 	padding: 10px;
+	pointer-events: none;
 	position: absolute;
-		bottom: calc(100% + 8px);
+		bottom: calc( 100% + 40px );
 		left: calc( 50% - 110px );
+	transition: all 0.3s ease-in-out;
+	width: 200px;
+
+	&:after {
+		border: 6px solid;
+		border-color: #2e4453 transparent transparent;
+		content: '';
+		position: absolute;
+			left: calc( 50% - 10px );
+			top: 100%;
+		transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+	}
 }

@@ -1,12 +1,10 @@
 // External dependencies
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
-import styles from './styles.scss';
-import Tooltip from 'components/ui/tooltip';
 
 const CreateUser = React.createClass( {
 	propTypes: {
@@ -36,7 +34,7 @@ const CreateUser = React.createClass( {
 		const { handleSubmit, fields, user } = this.props;
 
 		return (
-			<div className={ styles.createUser }>
+			<div>
 				<Form
 					onSubmit={ handleSubmit }
 					fieldArea={
@@ -50,16 +48,11 @@ const CreateUser = React.createClass( {
 							{ i18n.translate( 'Next' ) }
 						</button>
 					} />
-				<Tooltip
-					href="https://wordpress.com"
-					target="_blank"
-					className={ styles.tooltip }
-					text={ i18n.translate( 'Your account will be linked with a new or existing account on WordPress.com.' ) }>
-					{ i18n.translate( 'Powered by WordPress.com' ) }
-				</Tooltip>
+
+				<Footer />
 			</div>
 		);
 	}
 } );
 
-export default withStyles( styles )( CreateUser );
+export default CreateUser;

@@ -5,15 +5,16 @@ import validator from 'validator';
 
 // Internal dependencies
 import CreateUser from 'components/ui/signup/create-user';
+import i18n from 'lib/i18n';
 import { removeUser, createUserWithoutPassword } from 'actions';
 import { getPath } from 'routes';
 
 const validate = values => {
 	const errors = {};
 	if ( ! values.email ) {
-		errors.email = 'Required';
+		errors.email = i18n.translate( 'Required' );
 	} else if ( ! validator.isEmail( values.email ) ) {
-		errors.email = 'Invalid email address';
+		errors.email = i18n.translate( 'Invalid email address' );
 	}
 
 	return errors;

@@ -4,6 +4,7 @@ import React from 'react';
 // Internal dependencies
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
+import styles from 'components/ui/form/styles.scss';
 
 const CreateUser = React.createClass( {
 	componentDidMount() {
@@ -28,10 +29,10 @@ const CreateUser = React.createClass( {
 			<Form
 				onSubmit={ handleSubmit }
 				fieldArea={
-					<div className={ emailValidationError ? 'is-error' : null }>
+					<div>
 						<label>{ i18n.translate( 'Email address:' ) }</label>
 						<input { ...fields.email } autoFocus />
-						{ emailValidationError && <div>{ fields.email.error }</div> }
+						{ emailValidationError && <div className={ styles.validationError }>{ fields.email.error }</div> }
 					</div>
 				}
 				submitArea={

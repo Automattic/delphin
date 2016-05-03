@@ -1,3 +1,5 @@
+@import '../../../styles/colors.scss';
+
 .form {
 	display: block;
 	font-size: 1.4rem;
@@ -30,8 +32,9 @@
 	background: #f3f6f8;
 	padding: 30px;
 
-	.is-error {
-		background: red;
+	.validationError {
+		color: $red;
+		margin-top: 4px;
 	}
 
 	label {

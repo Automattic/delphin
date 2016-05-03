@@ -10,14 +10,11 @@ import { removeUser, createUserWithoutPassword } from 'actions';
 import { getPath } from 'routes';
 
 const validate = values => {
-	const errors = {};
 	if ( ! values.email ) {
-		errors.email = i18n.translate( 'Required' );
+		return { email: i18n.translate( 'Please enter an email address' ) };
 	} else if ( ! validator.isEmail( values.email ) ) {
-		errors.email = i18n.translate( 'Invalid email address' );
+		return { email: i18n.translate( 'This is an invalid email address' ) };
 	}
-
-	return errors;
 };
 
 export default reduxForm(

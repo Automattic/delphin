@@ -7,25 +7,21 @@ import Checkout from 'components/ui/checkout';
 import { createSite, createTransaction, createUser } from 'actions';
 
 export default connect(
-	state => {
-		return {
-			checkout: state.checkout
-		};
-	},
-	dispatch => {
-		return {
-			redirect: url => {
-				dispatch( push( url ) );
-			},
-			createSite: form => {
-				dispatch( createSite( form ) );
-			},
-			createUser: ( form ) => {
-				dispatch( createUser( form ) );
-			},
-			createTransaction: ( form ) => {
-				dispatch( createTransaction( form ) );
-			}
-		};
-	}
+	state => ( {
+		checkout: state.checkout
+	} ),
+	dispatch => ( {
+		createSite: form => {
+			dispatch( createSite( form ) );
+		},
+		createTransaction: ( form ) => {
+			dispatch( createTransaction( form ) );
+		},
+		createUser: ( form ) => {
+			dispatch( createUser( form ) );
+		},
+		redirect: url => {
+			dispatch( push( url ) );
+		}
+	} )
 )( Checkout );

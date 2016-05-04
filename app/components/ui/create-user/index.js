@@ -1,11 +1,20 @@
 // External dependencies
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 
 const CreateUser = React.createClass( {
+	propTypes: {
+		fields: PropTypes.object.isRequired,
+		handleSubmit: PropTypes.func.isRequired,
+		redirectToSearch: PropTypes.func.isRequired,
+		redirectToVerifyUser: PropTypes.func.isRequired,
+		removeUser: PropTypes.func.isRequired,
+		user: PropTypes.object.isRequired
+	},
+
 	componentDidMount() {
 		if ( this.props.user.isLoggedIn ) {
 			this.props.redirectToSearch();

@@ -65,7 +65,14 @@ export function createUserComplete( form, token ) {
 	};
 }
 
-export function createUserWithoutPassword( email ) {
+/**
+ * Initiates creation of new user account by sending a confirmation code to the specified email.
+ *
+ * @param {string} email address of the user
+ * @param {function} [callback] optional callback to call upon success
+ * @returns {function} the corresponding action thunk
+ */
+export function createUserWithoutPassword( email, callback ) {
 	return dispatch => {
 		dispatch( {
 			type: CREATE_USER_WITHOUT_PASSWORD,
@@ -81,6 +88,8 @@ export function createUserWithoutPassword( email ) {
 				type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 				email
 			} );
+
+			callback && callback();
 		} );
 	};
 }

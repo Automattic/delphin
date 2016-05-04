@@ -6,16 +6,12 @@ import { push } from 'react-router-redux';
 import Success from 'components/ui/success';
 
 export default connect(
-	state => {
-		return {
-			transaction: state.checkout && state.checkout.transaction
-		};
-	},
-	dispatch => {
-		return {
-			redirect: url => {
-				dispatch( push( url ) );
-			}
-		};
-	}
+	state => ( {
+		transaction: state.checkout && state.checkout.transaction
+	} ),
+	dispatch => ( {
+		redirect: url => {
+			dispatch( push( url ) );
+		}
+	} )
 )( Success );

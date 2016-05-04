@@ -1,9 +1,22 @@
 .form {
 	display: block;
 	font-size: 1.4rem;
-	font-family: 'Open Sans', Helvetica, sans-serif;
 	margin: 0 auto;
 	max-width: 400px;
+
+	input, button {
+		font-family: inherit;
+	}
+
+	>:first-child {
+		border-top-left-radius: 2px;
+		border-top-right-radius: 2px;
+	}
+
+	>:last-child {
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+	}
 }
 
 .notice-area {
@@ -52,11 +65,15 @@
 		padding: 15px;
 		text-align: center;
 		text-transform: uppercase;
-		font-weight: 100;
+		transition: all 0.3s;
 		width: 100%;
 
 		&:disabled {
 			opacity: 0.3;
+		}
+
+		&:hover {
+			background: #97b2c5;
 		}
 	}
 }

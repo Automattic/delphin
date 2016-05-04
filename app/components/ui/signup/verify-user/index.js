@@ -31,7 +31,25 @@ const VerifyUser = React.createClass( {
 	},
 
 	verifyUser() {
-		this.props.verifyUser( this.props.user.data.email, this.props.fields.code.value );
+		this.props.verifyUser(
+			this.props.user.data.email,
+			this.props.fields.code.value,
+			this.props.fields.twoFactorAuthenticationCode.value
+		);
+	},
+
+	twoFactorFields() {
+		const { fields, user } = this.props;
+
+		if ( user.data.twoFactorAuthenticationEnabled ) {
+			return (
+				<div>
+					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
+
+					<input { ...fields.twoFactorAuthenticationCode } />
+				</div>
+			)
+		}
 	},
 
 	render() {
@@ -60,6 +78,8 @@ const VerifyUser = React.createClass( {
 							<ResendSignupEmail
 								createUserWithoutPassword={ this.props.createUserWithoutPassword }
 								email={ this.props.user.data.email } />
+
+							{ this.twoFactorFields() }
 						</fieldset>
 					}
 					submitArea={

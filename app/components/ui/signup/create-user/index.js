@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
+import styles from 'components/ui/form/styles.scss';
 
 const CreateUser = React.createClass( {
 	propTypes: {
@@ -31,7 +32,8 @@ const CreateUser = React.createClass( {
 	},
 
 	render() {
-		const { handleSubmit, fields, user } = this.props;
+		const { handleSubmit, fields, user } = this.props,
+			emailValidationError = fields.email.touched && fields.email.error;
 
 		return (
 			<div>
@@ -41,6 +43,7 @@ const CreateUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Email address:' ) }</label>
 							<input { ...fields.email } autoFocus />
+							{ emailValidationError && <div className={ styles.validationError }>{ fields.email.error }</div> }
 						</fieldset>
 					}
 					submitArea={

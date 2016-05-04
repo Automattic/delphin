@@ -15,6 +15,7 @@ const validate = values => {
 	} else if ( ! validator.isEmail( values.email ) ) {
 		return { email: i18n.translate( 'This is an invalid email address' ) };
 	}
+	return {};
 };
 
 export default reduxForm(

@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
+import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 
@@ -33,19 +34,23 @@ const CreateUser = React.createClass( {
 		const { handleSubmit, fields, user } = this.props;
 
 		return (
-			<Form
-				onSubmit={ handleSubmit }
-				fieldArea={
-					<div>
-						<label>{ i18n.translate( 'Email address:' ) }</label>
-						<input { ...fields.email } autoFocus />
-					</div>
-				}
-				submitArea={
-					<button disabled={ user.isUpdating }>
-						{ i18n.translate( 'Next' ) }
-					</button>
-				} />
+			<div>
+				<Form
+					onSubmit={ handleSubmit }
+					fieldArea={
+						<fieldset>
+							<label>{ i18n.translate( 'Email address:' ) }</label>
+							<input { ...fields.email } autoFocus />
+						</fieldset>
+					}
+					submitArea={
+						<button disabled={ user.isUpdating }>
+							{ i18n.translate( 'Next' ) }
+						</button>
+					} />
+
+				<Footer />
+			</div>
 		);
 	}
 } );

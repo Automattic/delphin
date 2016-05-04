@@ -8,12 +8,12 @@ import { buildPaths } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
 import i18n from 'lib/i18n';
-import CreateUserContainer from 'components/containers/create-user';
+import CreateUserContainer from 'components/containers/signup/create-user';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
 import SuccessContainer from 'components/containers/success';
-import VerifyUserContainer from 'components/containers/verify-user';
+import VerifyUserContainer from 'components/containers/signup/verify-user';
 
 const childRoutes = [
 	{

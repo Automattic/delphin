@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import CreateUser from 'components/ui/create-user';
+import CreateUser from 'components/ui/signup/create-user';
 import { removeUser, createUserWithoutPassword } from 'actions';
 import { getPath } from 'routes';
 

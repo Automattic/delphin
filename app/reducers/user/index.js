@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 import {
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+	CREATE_USER_WITHOUT_PASSWORD_FAIL,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
@@ -22,7 +23,7 @@ export const initialState = {
 };
 
 export const user = ( state = initialState, action ) => {
-	const { bearerToken, email, type, twoFactorAuthenticationEnabled } = action;
+	const { bearerToken, email, message, type, twoFactorAuthenticationEnabled } = action;
 
 	switch ( type ) {
 		case CREATE_USER_WITHOUT_PASSWORD:
@@ -32,6 +33,10 @@ export const user = ( state = initialState, action ) => {
 		case CREATE_USER_WITHOUT_PASSWORD_COMPLETE:
 			return merge( {}, state, {
 				data: { email, twoFactorAuthenticationEnabled }, isUpdating: false, wasCreated: true
+			} );
+		case CREATE_USER_WITHOUT_PASSWORD_FAIL:
+			return merge( {}, state, {
+				data: { email, message }, isUpdating: false, wasCreated: false
 			} );
 		case REMOVE_USER:
 			return initialState;

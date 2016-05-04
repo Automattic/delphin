@@ -1,19 +1,15 @@
 // External dependencies
-import classNames from 'classnames';
 import React, { PropTypes } from 'react';
-import omit from 'lodash/omit';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
 
 const Tooltip = props => {
-	const { children, text } = props,
-		newProps = omit( props, 'className' ),
-		className = classNames( props.className, styles.tooltip );
+	const { children, text } = props;
 
 	return (
-		<a className={ className } { ...newProps }>
+		<a className={ styles.tooltip } { ...props }>
 			{ children }
 
 			<div className={ styles.text }>

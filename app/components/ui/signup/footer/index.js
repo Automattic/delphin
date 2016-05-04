@@ -11,7 +11,6 @@ const Footer = () => {
 	return (
 		<div className={ styles.footer }>
 			<Tooltip
-				className={ styles.link }
 				href="https://wordpress.com"
 				target="_blank"
 				text={ i18n.translate( 'Your account will be linked with a new or existing account on WordPress.com.' ) }>

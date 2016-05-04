@@ -8,7 +8,8 @@ import {
 	CREATE_USER_WITHOUT_PASSWORD_FAIL,
 	REMOVE_USER,
 	VERIFY_USER,
-	VERIFY_USER_COMPLETE
+	VERIFY_USER_COMPLETE,
+	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 
 export const initialState = {
@@ -49,6 +50,10 @@ export const user = ( state = initialState, action ) => {
 				data: {
 					bearerToken
 				}
+			} );
+		case VERIFY_USER_FAIL:
+			return merge( {}, state, {
+				data: { message }, isLoggedIn: false, isUpdating: false
 			} );
 		default:
 			return state;

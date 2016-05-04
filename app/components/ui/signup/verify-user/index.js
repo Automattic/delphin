@@ -62,6 +62,10 @@ const VerifyUser = React.createClass( {
 			codeValidationMessage = fields.code.error;
 		}
 
+		if ( user.data.message ) {
+			codeValidationMessage = user.data.message;
+		}
+
 		return (
 			<div>
 				<Form

@@ -15,7 +15,8 @@ import {
 	CREATE_USER_WITHOUT_PASSWORD_FAIL,
 	REMOVE_USER,
 	VERIFY_USER,
-	VERIFY_USER_COMPLETE
+	VERIFY_USER_COMPLETE,
+	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
@@ -108,8 +109,13 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 		const payload = { email, code, two_factor_authentication_code: twoFactorAuthenticationCode };
 
 		request.post( '/users/email/verification' ).send( payload ).end( ( error, response ) => {
+			const data = JSON.parse( response.text );
+
 			if ( error ) {
-				return;
+				return dispatch( {
+					type: VERIFY_USER_FAIL,
+					message: data.message
+				} );
 			}
 
 			bearerToken = response.body.token.access_token;

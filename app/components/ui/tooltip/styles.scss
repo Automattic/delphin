@@ -19,7 +19,7 @@
 	position: absolute;
 		bottom: calc( 100% + 40px );
 		left: calc( 50% - 110px );
-	transition: all 0.3s ease-in-out;
+	transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
 	width: 200px;
 
 	&:after {

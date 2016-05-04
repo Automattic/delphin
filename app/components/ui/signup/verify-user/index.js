@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
+import formStyles from 'components/ui/form/styles.scss';
 import i18n from 'lib/i18n';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
@@ -56,6 +57,11 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, user } = this.props;
 
+		let codeValidationMessage;
+		if ( fields.code.touched && fields.code.error ) {
+			codeValidationMessage = fields.code.error;
+		}
+
 		return (
 			<div>
 				<Form
@@ -75,6 +81,8 @@ const VerifyUser = React.createClass( {
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
 							<input { ...fields.code } autoFocus />
+
+							{ codeValidationMessage && <div className={ formStyles.validationError }>{ codeValidationMessage }</div> }
 
 							<ResendSignupEmail
 								createUserWithoutPassword={ this.props.createUserWithoutPassword }

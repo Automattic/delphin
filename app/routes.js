@@ -27,6 +27,11 @@ const childRoutes = [
 		component: CheckoutContainer
 	},
 	{
+		path: 'login',
+		slug: 'loginUser',
+		component: CreateUserContainer
+	},
+	{
 		path: 'signup',
 		slug: 'createUser',
 		component: CreateUserContainer

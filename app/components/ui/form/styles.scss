@@ -32,11 +32,6 @@
 	background: #f3f6f8;
 	padding: 30px;
 
-	.validationError {
-		color: $red;
-		margin-top: 4px;
-	}
-
 	label {
 		display: block;
 		font-size: 1.3rem;
@@ -52,6 +47,11 @@
 		padding: 10px 12px;
 		width: 100%;
 	}
+}
+
+.validationError {
+	color: $red;
+	margin-top: 4px;
 }
 
 .submit-area {

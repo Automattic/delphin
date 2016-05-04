@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
+import styles from 'components/ui/form/styles.scss';
 
 const CreateUser = React.createClass( {
 	propTypes: {

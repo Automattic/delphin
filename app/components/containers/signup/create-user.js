@@ -5,9 +5,9 @@ import validator from 'validator';
 
 // Internal dependencies
 import CreateUser from 'components/ui/signup/create-user';
+import { getPath } from 'routes';
 import i18n from 'lib/i18n';
 import { removeUser, createUserWithoutPassword } from 'actions';
-import { getPath } from 'routes';
 
 const validate = values => {
 	if ( ! values.email ) {

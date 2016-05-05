@@ -11,7 +11,7 @@ import VerifyUser from 'components/ui/signup/verify-user';
 const validate = values => {
 	if ( ! values.code ) {
 		return { code: i18n.translate( 'Please enter your verification code' ) };
-	} else if ( !/[-0-9]{6}$/i.test( values.code ) ) {
+	} else if ( ! /^[0-9]{6}$/i.test( values.code ) ) {
 		return { code: i18n.translate( 'This is an invalid verification code' ) };
 	}
 	return {};

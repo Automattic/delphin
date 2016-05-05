@@ -33,7 +33,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	verifyUser() {
-		this.props.verifyUser(
+		return this.props.verifyUser(
 			this.props.user.data.email,
 			this.props.fields.code.value,
 			this.props.fields.twoFactorAuthenticationCode.value
@@ -57,15 +57,6 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, user } = this.props;
 
-		let codeValidationMessage;
-		if ( fields.code.touched && fields.code.error ) {
-			codeValidationMessage = fields.code.error;
-		}
-
-		if ( user.data.message ) {
-			codeValidationMessage = user.data.message;
-		}
-
 		return (
 			<div>
 				<Form
@@ -86,7 +77,7 @@ const VerifyUser = React.createClass( {
 
 							<input { ...fields.code } autoFocus />
 
-							{ codeValidationMessage && <div className={ formStyles.validationError }>{ codeValidationMessage }</div> }
+							{ fields.code.touched && fields.code.error && <div className={ formStyles.validationError }>{ fields.code.error }</div> }
 
 							<ResendSignupEmail
 								createUserWithoutPassword={ this.props.createUserWithoutPassword }

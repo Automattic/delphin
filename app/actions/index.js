@@ -81,23 +81,26 @@ export function createUserWithoutPassword( email, callback ) {
 			email
 		} );
 
-		request.post( '/users/email/new' ).send( { email } ).end( ( error, response ) => {
-			const data = JSON.parse( response.text );
+		return new Promise( ( resolve, reject ) => {
+			request.post( '/users/email/new' ).send( { email } ).end( ( error, response ) => {
+				const data = JSON.parse( response.text );
 
-			if ( error ) {
-				return dispatch( {
-					type: CREATE_USER_WITHOUT_PASSWORD_FAIL,
-					message: data.message
+				if ( error ) {
+					dispatch( { type: CREATE_USER_WITHOUT_PASSWORD_FAIL } );
+
+					return reject( { email: data.message } );
+				}
+
+				dispatch( {
+					email,
+					twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled,
+					type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE
 				} );
-			}
 
-			dispatch( {
-				type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-				email,
-				twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled
+				callback && callback();
+
+				resolve();
 			} );
-
-			callback && callback();
 		} );
 	};
 }
@@ -106,20 +109,26 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	return dispatch => {
 		dispatch( { type: VERIFY_USER } );
 
-		const payload = { email, code, two_factor_authentication_code: twoFactorAuthenticationCode };
+		return new Promise( ( resolve, reject ) => {
+			const payload = { email, code, two_factor_authentication_code: twoFactorAuthenticationCode };
 
-		request.post( '/users/email/verification' ).send( payload ).end( ( error, response ) => {
-			const data = JSON.parse( response.text );
+			request.post( '/users/email/verification' ).send( payload ).end( ( error, response ) => {
+				const data = JSON.parse( response.text );
 
-			if ( error ) {
-				return dispatch( {
-					type: VERIFY_USER_FAIL,
-					message: data.message
-				} );
-			}
+				if ( error ) {
+					dispatch( {
+						type: VERIFY_USER_FAIL,
+						message: data.message
+					} );
 
-			bearerToken = response.body.token.access_token;
-			dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
+					return reject( { code: data.message } );
+				}
+
+				bearerToken = response.body.token.access_token;
+				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
+
+				resolve();
+			} );
 		} );
 	};
 }

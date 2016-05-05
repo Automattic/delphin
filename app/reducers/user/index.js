@@ -24,7 +24,7 @@ export const initialState = {
 };
 
 export const user = ( state = initialState, action ) => {
-	const { bearerToken, email, message, type, twoFactorAuthenticationEnabled } = action;
+	const { bearerToken, email, type, twoFactorAuthenticationEnabled } = action;
 
 	switch ( type ) {
 		case CREATE_USER_WITHOUT_PASSWORD:
@@ -37,7 +37,7 @@ export const user = ( state = initialState, action ) => {
 			} );
 		case CREATE_USER_WITHOUT_PASSWORD_FAIL:
 			return merge( {}, state, {
-				data: { email, message }, isUpdating: false, wasCreated: false
+				isUpdating: false, wasCreated: false
 			} );
 		case REMOVE_USER:
 			return initialState;
@@ -53,7 +53,7 @@ export const user = ( state = initialState, action ) => {
 			} );
 		case VERIFY_USER_FAIL:
 			return merge( {}, state, {
-				data: { message }, isLoggedIn: false, isUpdating: false
+				isLoggedIn: false, isUpdating: false
 			} );
 		default:
 			return state;

@@ -28,7 +28,7 @@ export default reduxForm(
 	} ),
 	dispatch => ( {
 		createUserWithoutPassword( email, callback ) {
-			dispatch( createUserWithoutPassword( email, callback ) );
+			return dispatch( createUserWithoutPassword( email, callback ) );
 		},
 		redirectToNewUser() {
 			dispatch( push( getPath( 'createUser' ) ) );
@@ -37,7 +37,7 @@ export default reduxForm(
 			dispatch( push( getPath( 'search' ) ) );
 		},
 		verifyUser( email, code, twoFactorAuthenticationCode ) {
-			dispatch( verifyUser( email, code, twoFactorAuthenticationCode ) );
+			return dispatch( verifyUser( email, code, twoFactorAuthenticationCode ) );
 		}
 	} )
 )( VerifyUser );

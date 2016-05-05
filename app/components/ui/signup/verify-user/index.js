@@ -57,20 +57,24 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, user } = this.props;
 
+		let notice = i18n.translate(
+			'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}. ' +
+			'Type that code below to verify your email address.',
+			{
+				args: { email: user.data.email },
+				components: { strong: <strong /> }
+			}
+		);
+
+		if ( user.data.notice ) {
+			notice = user.data.notice;
+		}
+
 		return (
 			<div>
 				<Form
 					onSubmit={ handleSubmit( this.verifyUser ) }
-					noticeArea={
-						i18n.translate(
-							'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}. ' +
-							'Type that code below to verify your email address.',
-							{
-								args: { email: user.data.email },
-								components: { strong: <strong /> }
-							}
-						)
-					}
+					noticeArea={ notice }
 					fieldArea={
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>

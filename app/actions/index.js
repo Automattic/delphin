@@ -13,6 +13,7 @@ import {
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
 	CREATE_USER_WITHOUT_PASSWORD_FAIL,
+	CREATE_USER_WITHOUT_PASSWORD_WARNING,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -89,6 +90,13 @@ export function createUserWithoutPassword( email, callback ) {
 					dispatch( { type: CREATE_USER_WITHOUT_PASSWORD_FAIL } );
 
 					return reject( { email: data.message } );
+				}
+
+				if ( data.warning ) {
+					dispatch( {
+						notice: data.message,
+						type: CREATE_USER_WITHOUT_PASSWORD_WARNING
+					} );
 				}
 
 				dispatch( {

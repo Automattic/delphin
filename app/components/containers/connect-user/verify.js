@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import { connectUser, verifyUser } from 'actions';
 import { getPath } from 'routes';
 import i18n from 'lib/i18n';
-import VerifyUser from 'components/ui/connect-user/verify';
+import VerifyUser from 'components/ui/connect-user/verify-user';
 
 const validate = values => {
 	if ( ! values.code ) {

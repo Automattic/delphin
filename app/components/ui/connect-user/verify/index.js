@@ -48,7 +48,7 @@ const VerifyUser = React.createClass( {
 				<div className={ styles.twoFactorFields }>
 					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
 
-					<input { ...fields.twoFactorAuthenticationCode } />
+					<input { ...fields.twoFactorAuthenticationCode } autoComplete="off" />
 				</div>
 			);
 		}
@@ -74,7 +74,7 @@ const VerifyUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<input { ...fields.code } autoFocus />
+							<input { ...fields.code } autoFocus autoComplete="off" />
 
 							{ fields.code.touched && fields.code.error && <div className={ formStyles.validationError }>{ fields.code.error }</div> }
 

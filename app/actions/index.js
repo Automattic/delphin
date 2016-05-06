@@ -7,13 +7,13 @@ const debug = debugFactory( 'delphin:actions' );
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
+	CONNECT_USER,
+	CONNECT_USER_COMPLETE,
+	CONNECT_USER_FAIL,
+	CONNECT_USER_WARNING,
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
-	CONNECT_USER_WITHOUT_PASSWORD,
-	CONNECT_USER_WITHOUT_PASSWORD_COMPLETE,
-	CONNECT_USER_WITHOUT_PASSWORD_FAIL,
-	CONNECT_USER_WITHOUT_PASSWORD_WARNING,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -79,7 +79,7 @@ export function createUserComplete( form, token ) {
 export function connectUser( email, intention, callback ) {
 	return dispatch => {
 		dispatch( {
-			type: CONNECT_USER_WITHOUT_PASSWORD,
+			type: CONNECT_USER,
 			email
 		} );
 
@@ -93,7 +93,7 @@ export function connectUser( email, intention, callback ) {
 				const data = JSON.parse( response.text );
 
 				if ( error ) {
-					dispatch( { type: CONNECT_USER_WITHOUT_PASSWORD_FAIL } );
+					dispatch( { type: CONNECT_USER_FAIL } );
 
 					return reject( { email: data.message } );
 				}
@@ -101,14 +101,14 @@ export function connectUser( email, intention, callback ) {
 				if ( data.warning ) {
 					dispatch( {
 						notice: data.message,
-						type: CONNECT_USER_WITHOUT_PASSWORD_WARNING
+						type: CONNECT_USER_WARNING
 					} );
 				}
 
 				dispatch( {
 					email,
 					twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled,
-					type: CONNECT_USER_WITHOUT_PASSWORD_COMPLETE
+					type: CONNECT_USER_COMPLETE
 				} );
 
 				callback && callback();

@@ -5,9 +5,12 @@ import merge from 'lodash/merge';
 import {
 	CREATE_USER_WITHOUT_PASSWORD,
 	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+	CREATE_USER_WITHOUT_PASSWORD_FAIL,
+	CREATE_USER_WITHOUT_PASSWORD_WARNING,
 	REMOVE_USER,
 	VERIFY_USER,
-	VERIFY_USER_COMPLETE
+	VERIFY_USER_COMPLETE,
+	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 
 export const initialState = {
@@ -22,7 +25,7 @@ export const initialState = {
 };
 
 export const user = ( state = initialState, action ) => {
-	const { bearerToken, email, type, twoFactorAuthenticationEnabled } = action;
+	const { bearerToken, email, notice, type, twoFactorAuthenticationEnabled } = action;
 
 	switch ( type ) {
 		case CREATE_USER_WITHOUT_PASSWORD:
@@ -32,6 +35,14 @@ export const user = ( state = initialState, action ) => {
 		case CREATE_USER_WITHOUT_PASSWORD_COMPLETE:
 			return merge( {}, state, {
 				data: { email, twoFactorAuthenticationEnabled }, isUpdating: false, wasCreated: true
+			} );
+		case CREATE_USER_WITHOUT_PASSWORD_FAIL:
+			return merge( {}, state, {
+				isUpdating: false, wasCreated: false
+			} );
+		case CREATE_USER_WITHOUT_PASSWORD_WARNING:
+			return merge( {}, state, {
+				data: { notice }
 			} );
 		case REMOVE_USER:
 			return initialState;
@@ -44,6 +55,10 @@ export const user = ( state = initialState, action ) => {
 				data: {
 					bearerToken
 				}
+			} );
+		case VERIFY_USER_FAIL:
+			return merge( {}, state, {
+				isLoggedIn: false, isUpdating: false
 			} );
 		default:
 			return state;

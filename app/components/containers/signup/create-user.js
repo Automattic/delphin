@@ -29,7 +29,7 @@ export default reduxForm(
 	} ),
 	( dispatch ) => ( {
 		onSubmit( fields ) {
-			dispatch( createUserWithoutPassword( fields.email ) );
+			return dispatch( createUserWithoutPassword( fields.email ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );

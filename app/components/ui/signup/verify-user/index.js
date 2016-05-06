@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
+import formStyles from 'components/ui/form/styles.scss';
 import i18n from 'lib/i18n';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
@@ -32,7 +33,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	verifyUser() {
-		this.props.verifyUser(
+		return this.props.verifyUser(
 			this.props.user.data.email,
 			this.props.fields.code.value,
 			this.props.fields.twoFactorAuthenticationCode.value
@@ -54,27 +55,28 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, user } = this.props;
+		const { fields, handleSubmit, user } = this.props,
+			notice = user.data.notice || i18n.translate(
+				'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}. ' +
+				'Type that code below to verify your email address.',
+				{
+					args: { email: user.data.email },
+					components: { strong: <strong /> }
+				}
+			);
 
 		return (
 			<div>
 				<Form
 					onSubmit={ handleSubmit( this.verifyUser ) }
-					noticeArea={
-						i18n.translate(
-							'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}. ' +
-							'Type that code below to verify your email address.',
-							{
-								args: { email: user.data.email },
-								components: { strong: <strong /> }
-							}
-						)
-					}
+					noticeArea={ notice }
 					fieldArea={
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
 							<input { ...fields.code } autoFocus />
+
+							{ fields.code.touched && fields.code.error && <div className={ formStyles.validationError }>{ fields.code.error }</div> }
 
 							<ResendSignupEmail
 								createUserWithoutPassword={ this.props.createUserWithoutPassword }

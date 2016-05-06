@@ -32,8 +32,7 @@ const CreateUser = React.createClass( {
 	},
 
 	render() {
-		const { handleSubmit, fields, user } = this.props,
-			emailValidationError = fields.email.touched && fields.email.error;
+		const { handleSubmit, fields, user } = this.props;
 
 		return (
 			<div>
@@ -43,7 +42,7 @@ const CreateUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Email address:' ) }</label>
 							<input { ...fields.email } autoFocus />
-							{ emailValidationError && <div className={ styles.validationError }>{ fields.email.error }</div> }
+							{ fields.email.touched && fields.email.error && <div className={ styles.validationError }>{ fields.email.error }</div> }
 						</fieldset>
 					}
 					submitArea={

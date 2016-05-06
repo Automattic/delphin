@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import validator from 'validator';
 
 // Internal dependencies
-import CreateUser from 'components/ui/signup/create-user';
+import ConnectUserEmail from 'components/ui/connect-user/email';
 import { getPath } from 'routes';
 import i18n from 'lib/i18n';
 import { removeUser, createUserWithoutPassword } from 'actions';
@@ -41,4 +41,4 @@ export default reduxForm(
 			dispatch( removeUser() );
 		}
 	} )
-)( CreateUser );
+)( ConnectUserEmail );

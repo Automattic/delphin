@@ -125,8 +125,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 
 				if ( error ) {
 					dispatch( {
-						type: VERIFY_USER_FAIL,
-						message: data.message
+						type: VERIFY_USER_FAIL
 					} );
 
 					return reject( { code: data.message } );

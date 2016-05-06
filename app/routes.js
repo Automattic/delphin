@@ -38,7 +38,7 @@ const childRoutes = [
 		component: SignupContainer
 	},
 	{
-		path: 'signup/verify',
+		path: 'verify',
 		slug: 'verifyUser',
 		component: VerifyUserContainer
 	},

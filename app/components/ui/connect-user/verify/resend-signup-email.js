@@ -17,7 +17,7 @@ const ResendSignupEmail = React.createClass( {
 	},
 
 	connectUser() {
-		this.props.connectUser( this.props.email, 'login|signup', () => {
+		this.props.connectUser( this.props.email, this.props.intention, () => {
 			this.setState( { sent: true } );
 		} );
 	},

@@ -80,7 +80,8 @@ export function connectUser( email, intention, callback ) {
 	return dispatch => {
 		dispatch( {
 			type: CONNECT_USER,
-			email
+			email,
+			intention
 		} );
 
 		return new Promise( ( resolve, reject ) => {

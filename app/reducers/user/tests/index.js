@@ -20,6 +20,7 @@ describe( 'state.user', () => {
 			type: CONNECT_USER,
 			email: 'foo@bar.com'
 		} ) ).toEqual( {
+			intention: null,
 			isLoggedIn: false,
 			isUpdating: true,
 			wasCreated: false,
@@ -33,6 +34,7 @@ describe( 'state.user', () => {
 			email: 'foo@bar.com',
 			twoFactorAuthenticationEnabled: false
 		} ) ).toEqual( {
+			intention: null,
 			isLoggedIn: false,
 			isUpdating: false,
 			wasCreated: true,

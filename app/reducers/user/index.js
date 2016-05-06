@@ -14,6 +14,7 @@ import {
 } from 'reducers/action-types';
 
 export const initialState = {
+	intention: null,
 	isLoggedIn: false,
 	isUpdating: false,
 	wasCreated: false,
@@ -25,12 +26,12 @@ export const initialState = {
 };
 
 export const user = ( state = initialState, action ) => {
-	const { bearerToken, email, notice, type, twoFactorAuthenticationEnabled } = action;
+	const { bearerToken, email, intention, notice, type, twoFactorAuthenticationEnabled } = action;
 
 	switch ( type ) {
 		case CONNECT_USER:
 			return merge( {}, state, {
-				data: { email }, isUpdating: true
+				data: { email }, isUpdating: true, intention
 			} );
 		case CONNECT_USER_COMPLETE:
 			return merge( {}, state, {

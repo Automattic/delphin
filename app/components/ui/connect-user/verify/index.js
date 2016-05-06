@@ -80,7 +80,8 @@ const VerifyUser = React.createClass( {
 
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }
-								email={ user.data.email } />
+								email={ user.data.email }
+								intention={ user.intention } />
 
 							{ this.twoFactorFields() }
 						</fieldset>

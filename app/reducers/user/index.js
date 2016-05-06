@@ -3,10 +3,10 @@ import merge from 'lodash/merge';
 
 // Internal dependencies
 import {
-	CREATE_USER_WITHOUT_PASSWORD,
-	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-	CREATE_USER_WITHOUT_PASSWORD_FAIL,
-	CREATE_USER_WITHOUT_PASSWORD_WARNING,
+	CONNECT_USER_WITHOUT_PASSWORD,
+	CONNECT_USER_WITHOUT_PASSWORD_COMPLETE,
+	CONNECT_USER_WITHOUT_PASSWORD_FAIL,
+	CONNECT_USER_WITHOUT_PASSWORD_WARNING,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -28,19 +28,19 @@ export const user = ( state = initialState, action ) => {
 	const { bearerToken, email, notice, type, twoFactorAuthenticationEnabled } = action;
 
 	switch ( type ) {
-		case CREATE_USER_WITHOUT_PASSWORD:
+		case CONNECT_USER_WITHOUT_PASSWORD:
 			return merge( {}, state, {
 				data: { email }, isUpdating: true
 			} );
-		case CREATE_USER_WITHOUT_PASSWORD_COMPLETE:
+		case CONNECT_USER_WITHOUT_PASSWORD_COMPLETE:
 			return merge( {}, state, {
 				data: { email, twoFactorAuthenticationEnabled }, isUpdating: false, wasCreated: true
 			} );
-		case CREATE_USER_WITHOUT_PASSWORD_FAIL:
+		case CONNECT_USER_WITHOUT_PASSWORD_FAIL:
 			return merge( {}, state, {
 				isUpdating: false, wasCreated: false
 			} );
-		case CREATE_USER_WITHOUT_PASSWORD_WARNING:
+		case CONNECT_USER_WITHOUT_PASSWORD_WARNING:
 			return merge( {}, state, {
 				data: { notice }
 			} );

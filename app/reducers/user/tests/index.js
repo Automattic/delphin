@@ -3,8 +3,8 @@ jest.disableAutomock();
 // Internal dependencies
 import {
 	CLEAR_USER,
-	CREATE_USER_WITHOUT_PASSWORD,
-	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+	CONNECT_USER_WITHOUT_PASSWORD,
+	CONNECT_USER_WITHOUT_PASSWORD_COMPLETE,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
@@ -17,7 +17,7 @@ describe( 'state.user', () => {
 
 	it( 'should update `email` and `isUpdating` when the user is created', () => {
 		expect( user( undefined, {
-			type: CREATE_USER_WITHOUT_PASSWORD,
+			type: CONNECT_USER_WITHOUT_PASSWORD,
 			email: 'foo@bar.com'
 		} ) ).toEqual( {
 			isLoggedIn: false,
@@ -29,7 +29,7 @@ describe( 'state.user', () => {
 
 	it( 'should update `wasCreated` when the user creation completes', () => {
 		expect( user( undefined, {
-			type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
+			type: CONNECT_USER_WITHOUT_PASSWORD_COMPLETE,
 			email: 'foo@bar.com',
 			twoFactorAuthenticationEnabled: false
 		} ) ).toEqual( {

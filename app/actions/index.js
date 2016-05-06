@@ -10,10 +10,10 @@ import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
 	CREATE_USER_COMPLETE,
-	CREATE_USER_WITHOUT_PASSWORD,
-	CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-	CREATE_USER_WITHOUT_PASSWORD_FAIL,
-	CREATE_USER_WITHOUT_PASSWORD_WARNING,
+	CONNECT_USER_WITHOUT_PASSWORD,
+	CONNECT_USER_WITHOUT_PASSWORD_COMPLETE,
+	CONNECT_USER_WITHOUT_PASSWORD_FAIL,
+	CONNECT_USER_WITHOUT_PASSWORD_WARNING,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -69,17 +69,17 @@ export function createUserComplete( form, token ) {
 }
 
 /**
- * Initiates creation of new user account by sending a confirmation code to the specified email.
+ * Connects a user to a new or existing accout by sending a confirmation code to the specified email.
  *
  * @param {string} email address of the user
  * @param {string} intention of the user - login or signup
  * @param {function} [callback] optional callback to call upon success
  * @returns {function} the corresponding action thunk
  */
-export function createUserWithoutPassword( email, intention, callback ) {
+export function connectUserWithoutPassword( email, intention, callback ) {
 	return dispatch => {
 		dispatch( {
-			type: CREATE_USER_WITHOUT_PASSWORD,
+			type: CONNECT_USER_WITHOUT_PASSWORD,
 			email
 		} );
 
@@ -93,7 +93,7 @@ export function createUserWithoutPassword( email, intention, callback ) {
 				const data = JSON.parse( response.text );
 
 				if ( error ) {
-					dispatch( { type: CREATE_USER_WITHOUT_PASSWORD_FAIL } );
+					dispatch( { type: CONNECT_USER_WITHOUT_PASSWORD_FAIL } );
 
 					return reject( { email: data.message } );
 				}
@@ -101,14 +101,14 @@ export function createUserWithoutPassword( email, intention, callback ) {
 				if ( data.warning ) {
 					dispatch( {
 						notice: data.message,
-						type: CREATE_USER_WITHOUT_PASSWORD_WARNING
+						type: CONNECT_USER_WITHOUT_PASSWORD_WARNING
 					} );
 				}
 
 				dispatch( {
 					email,
 					twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled,
-					type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE
+					type: CONNECT_USER_WITHOUT_PASSWORD_COMPLETE
 				} );
 
 				callback && callback();

@@ -7,7 +7,7 @@ import validator from 'validator';
 import ConnectUserEmail from 'components/ui/connect-user/email';
 import { getPath } from 'routes';
 import i18n from 'lib/i18n';
-import { removeUser, createUserWithoutPassword } from 'actions';
+import { removeUser, connectUserWithoutPassword } from 'actions';
 
 const validate = values => {
 	if ( ! values.email ) {
@@ -29,7 +29,7 @@ export default reduxForm(
 	} ),
 	( dispatch, ownProps ) => ( {
 		onSubmit( fields ) {
-			return dispatch( createUserWithoutPassword( fields.email, ownProps.intention ) );
+			return dispatch( connectUserWithoutPassword( fields.email, ownProps.intention ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );

@@ -31,7 +31,7 @@ export default reduxForm(
 			return dispatch( connectUser( email, intention, callback ) );
 		},
 		redirectToNewUser() {
-			dispatch( push( getPath( 'createUser' ) ) );
+			dispatch( push( getPath( 'signupUser' ) ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );

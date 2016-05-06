@@ -34,7 +34,7 @@ const childRoutes = [
 	},
 	{
 		path: 'signup',
-		slug: 'createUser',
+		slug: 'signupUser',
 		component: SignupContainer
 	},
 	{

@@ -4,6 +4,7 @@ jest.disableAutomock();
 jest.mock( 'components/ui/about', () => {} );
 jest.mock( 'components/containers/checkout', () => {} );
 jest.mock( 'components/ui/not-found', () => {} );
+jest.mock( 'components/containers/connect-user/login', () => {} );
 jest.mock( 'components/containers/connect-user/signup', () => {} );
 jest.mock( 'components/containers/connect-user/verify', () => {} );
 jest.mock( 'components/ui/root', () => {} );

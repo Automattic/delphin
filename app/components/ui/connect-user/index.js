@@ -2,12 +2,12 @@
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
-import Footer from 'components/ui/signup/footer';
+import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 import styles from 'components/ui/form/styles.scss';
 
-const CreateUser = React.createClass( {
+const ConnectUser = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
@@ -57,4 +57,4 @@ const CreateUser = React.createClass( {
 	}
 } );
 
-export default CreateUser;
+export default ConnectUser;

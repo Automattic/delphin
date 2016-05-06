@@ -4,10 +4,10 @@ import { reduxForm } from 'redux-form';
 import validator from 'validator';
 
 // Internal dependencies
-import CreateUser from 'components/ui/signup/create-user';
+import ConnectUser from 'components/ui/connect-user';
 import { getPath } from 'routes';
 import i18n from 'lib/i18n';
-import { removeUser, createUserWithoutPassword } from 'actions';
+import { removeUser, connectUser } from 'actions';
 
 const validate = values => {
 	if ( ! values.email ) {
@@ -20,16 +20,16 @@ const validate = values => {
 
 export default reduxForm(
 	{
-		form: 'create-user',
+		form: 'connect-user',
 		fields: [ 'email' ],
 		validate
 	},
 	state => ( {
 		user: state.user
 	} ),
-	( dispatch ) => ( {
+	( dispatch, ownProps ) => ( {
 		onSubmit( fields ) {
-			return dispatch( createUserWithoutPassword( fields.email ) );
+			return dispatch( connectUser( fields.email, ownProps.intention ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );
@@ -41,4 +41,4 @@ export default reduxForm(
 			dispatch( removeUser() );
 		}
 	} )
-)( CreateUser );
+)( ConnectUser );

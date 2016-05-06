@@ -3,10 +3,10 @@ import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import { createUserWithoutPassword, verifyUser } from 'actions';
+import { connectUser, verifyUser } from 'actions';
 import { getPath } from 'routes';
 import i18n from 'lib/i18n';
-import VerifyUser from 'components/ui/signup/verify-user';
+import VerifyUser from 'components/ui/connect-user/verify-user';
 
 const validate = values => {
 	if ( ! values.code ) {
@@ -27,11 +27,11 @@ export default reduxForm(
 		user: state.user
 	} ),
 	dispatch => ( {
-		createUserWithoutPassword( email, callback ) {
-			return dispatch( createUserWithoutPassword( email, callback ) );
+		connectUser( email, intention, callback ) {
+			return dispatch( connectUser( email, intention, callback ) );
 		},
 		redirectToNewUser() {
-			dispatch( push( getPath( 'createUser' ) ) );
+			dispatch( push( getPath( 'signupUser' ) ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );

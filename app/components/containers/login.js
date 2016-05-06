@@ -6,6 +6,6 @@ import ConnectUser from 'components/containers/connect-user';
 
 export default connect(
 	() => ( {
-		intention: 'signup'
+		intention: 'login'
 	} )
 )( ConnectUser );

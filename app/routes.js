@@ -9,6 +9,7 @@ import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
 import i18n from 'lib/i18n';
 import CreateUserContainer from 'components/containers/signup/create-user';
+import LoginContainer from 'components/containers/login';
 import NotFound from 'components/ui/not-found';
 import Root from 'components/ui/root';
 import SearchContainer from 'components/containers/search';
@@ -29,7 +30,7 @@ const childRoutes = [
 	{
 		path: 'login',
 		slug: 'loginUser',
-		component: CreateUserContainer
+		component: LoginContainer
 	},
 	{
 		path: 'signup',

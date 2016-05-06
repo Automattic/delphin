@@ -72,10 +72,11 @@ export function createUserComplete( form, token ) {
  * Initiates creation of new user account by sending a confirmation code to the specified email.
  *
  * @param {string} email address of the user
+ * @param {string} intention of the user - login or signup
  * @param {function} [callback] optional callback to call upon success
  * @returns {function} the corresponding action thunk
  */
-export function createUserWithoutPassword( email, callback ) {
+export function createUserWithoutPassword( email, intention, callback ) {
 	return dispatch => {
 		dispatch( {
 			type: CREATE_USER_WITHOUT_PASSWORD,
@@ -83,7 +84,12 @@ export function createUserWithoutPassword( email, callback ) {
 		} );
 
 		return new Promise( ( resolve, reject ) => {
-			request.post( '/users/email/new' ).send( { email } ).end( ( error, response ) => {
+			let url = '/users/email';
+			if ( intention === 'signup' ) {
+				url += '/new';
+			}
+
+			request.post( url ).send( { email } ).end( ( error, response ) => {
 				const data = JSON.parse( response.text );
 
 				if ( error ) {

@@ -17,7 +17,7 @@ const ResendSignupEmail = React.createClass( {
 	},
 
 	createUserWithoutPassword() {
-		this.props.createUserWithoutPassword( this.props.email, () => {
+		this.props.createUserWithoutPassword( this.props.email, 'login', () => {
 			this.setState( { sent: true } );
 		} );
 	},

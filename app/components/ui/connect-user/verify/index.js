@@ -11,7 +11,7 @@ import styles from './styles.scss';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
-		createUserWithoutPassword: PropTypes.func.isRequired,
+		connectUser: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToNewUser: PropTypes.func.isRequired,
@@ -79,7 +79,7 @@ const VerifyUser = React.createClass( {
 							{ fields.code.touched && fields.code.error && <div className={ formStyles.validationError }>{ fields.code.error }</div> }
 
 							<ResendSignupEmail
-								createUserWithoutPassword={ this.props.createUserWithoutPassword }
+								connectUser={ this.props.connectUser }
 								email={ user.data.email } />
 
 							{ this.twoFactorFields() }

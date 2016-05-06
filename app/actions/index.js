@@ -76,7 +76,7 @@ export function createUserComplete( form, token ) {
  * @param {function} [callback] optional callback to call upon success
  * @returns {function} the corresponding action thunk
  */
-export function connectUserWithoutPassword( email, intention, callback ) {
+export function connectUser( email, intention, callback ) {
 	return dispatch => {
 		dispatch( {
 			type: CONNECT_USER_WITHOUT_PASSWORD,

@@ -8,7 +8,7 @@ import styles from './styles.scss';
 
 const ResendSignupEmail = React.createClass( {
 	propTypes: {
-		createUserWithoutPassword: PropTypes.func.isRequired,
+		connectUser: PropTypes.func.isRequired,
 		email: PropTypes.string.isRequired
 	},
 
@@ -16,8 +16,8 @@ const ResendSignupEmail = React.createClass( {
 		return { sent: false };
 	},
 
-	createUserWithoutPassword() {
-		this.props.createUserWithoutPassword( this.props.email, 'login', () => {
+	connectUser() {
+		this.props.connectUser( this.props.email, 'login|signup', () => {
 			this.setState( { sent: true } );
 		} );
 	},
@@ -31,7 +31,7 @@ const ResendSignupEmail = React.createClass( {
 			text = i18n.translate(
 				"Can't find the email? {{a}}Resend it{{/a}}.",
 				{
-					components: { a: <a onClick={ this.createUserWithoutPassword } /> }
+					components: { a: <a onClick={ this.connectUser } /> }
 				}
 			);
 		}

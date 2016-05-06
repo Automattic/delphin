@@ -16,7 +16,8 @@ export const initialState = {
 	wasCreated: false,
 	data: {
 		bearerToken: null,
-		email: null
+		email: null,
+		twoFactorAuthenticationEnabled: null
 	}
 };
 

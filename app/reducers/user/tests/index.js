@@ -23,19 +23,20 @@ describe( 'state.user', () => {
 			isLoggedIn: false,
 			isUpdating: true,
 			wasCreated: false,
-			data: { bearerToken: null, email: 'foo@bar.com' }
+			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: null }
 		} );
 	} );
 
 	it( 'should update `wasCreated` when the user creation completes', () => {
 		expect( user( undefined, {
 			type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-			email: 'foo@bar.com'
+			email: 'foo@bar.com',
+			twoFactorAuthenticationEnabled: false
 		} ) ).toEqual( {
 			isLoggedIn: false,
 			isUpdating: false,
 			wasCreated: true,
-			data: { bearerToken: null, email: 'foo@bar.com' }
+			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: false }
 		} );
 	} );
 

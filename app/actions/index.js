@@ -79,14 +79,17 @@ export function createUserWithoutPassword( email, callback ) {
 			email
 		} );
 
-		request.post( '/users/email/new' ).send( { email } ).end( ( error ) => {
+		request.post( '/users/email/new' ).send( { email } ).end( ( error, response ) => {
+			const data = JSON.parse( response.text );
+
 			if ( error ) {
 				return;
 			}
 
 			dispatch( {
 				type: CREATE_USER_WITHOUT_PASSWORD_COMPLETE,
-				email
+				email,
+				twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled
 			} );
 
 			callback && callback();
@@ -94,11 +97,13 @@ export function createUserWithoutPassword( email, callback ) {
 	};
 }
 
-export function verifyUser( email, code ) {
+export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	return dispatch => {
 		dispatch( { type: VERIFY_USER } );
 
-		request.post( '/users/email/verification' ).send( { email, code } ).end( ( error, response ) => {
+		const payload = { email, code, two_factor_authentication_code: twoFactorAuthenticationCode };
+
+		request.post( '/users/email/verification' ).send( payload ).end( ( error, response ) => {
 			if ( error ) {
 				return;
 			}

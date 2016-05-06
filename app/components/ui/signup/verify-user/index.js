@@ -6,6 +6,7 @@ import Footer from 'components/ui/signup/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
 import ResendSignupEmail from './resend-signup-email';
+import styles from './styles.scss';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
@@ -31,7 +32,25 @@ const VerifyUser = React.createClass( {
 	},
 
 	verifyUser() {
-		this.props.verifyUser( this.props.user.data.email, this.props.fields.code.value );
+		this.props.verifyUser(
+			this.props.user.data.email,
+			this.props.fields.code.value,
+			this.props.fields.twoFactorAuthenticationCode.value
+		);
+	},
+
+	twoFactorFields() {
+		const { fields, user } = this.props;
+
+		if ( user.data.twoFactorAuthenticationEnabled ) {
+			return (
+				<div className={ styles.twoFactorFields }>
+					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
+
+					<input { ...fields.twoFactorAuthenticationCode } />
+				</div>
+			);
+		}
 	},
 
 	render() {
@@ -59,7 +78,9 @@ const VerifyUser = React.createClass( {
 
 							<ResendSignupEmail
 								createUserWithoutPassword={ this.props.createUserWithoutPassword }
-								email={ this.props.user.data.email } />
+								email={ user.data.email } />
+
+							{ this.twoFactorFields() }
 						</fieldset>
 					}
 					submitArea={

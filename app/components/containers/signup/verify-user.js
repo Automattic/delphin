@@ -10,7 +10,7 @@ import VerifyUser from 'components/ui/signup/verify-user';
 export default reduxForm(
 	{
 		form: 'verify-user',
-		fields: [ 'code' ]
+		fields: [ 'code', 'twoFactorAuthenticationCode' ]
 	},
 	state => ( {
 		user: state.user
@@ -25,8 +25,8 @@ export default reduxForm(
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );
 		},
-		verifyUser( email, code ) {
-			dispatch( verifyUser( email, code ) );
+		verifyUser( email, code, twoFactorAuthenticationCode ) {
+			dispatch( verifyUser( email, code, twoFactorAuthenticationCode ) );
 		}
 	} )
 )( VerifyUser );

@@ -4,7 +4,6 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getPath } from 'routes';
 import styles from './styles.scss';
 
 const Checkout = React.createClass( {
@@ -13,7 +12,8 @@ const Checkout = React.createClass( {
 		createSite: PropTypes.func.isRequired,
 		createTransaction: PropTypes.func.isRequired,
 		createUser: PropTypes.func.isRequired,
-		redirect: PropTypes.func.isRequired
+		redirectToSearch: PropTypes.func.isRequired,
+		redirectToSuccess: PropTypes.func.isRequired
 	},
 
 	getInitialState() {
@@ -31,7 +31,7 @@ const Checkout = React.createClass( {
 
 	componentDidMount() {
 		if ( ! this.props.checkout.domain ) {
-			this.props.redirect( getPath( 'search' ) );
+			this.props.redirectToSearch();
 		}
 	},
 
@@ -52,7 +52,7 @@ const Checkout = React.createClass( {
 		}
 
 		if ( checkout.transaction ) {
-			this.props.redirect( getPath( 'success' ) );
+			this.props.redirectToSuccess();
 		}
 	},
 

@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
 import { createSite, createTransaction, createUser } from 'actions';
+import { getPath } from 'routes';
 
 export default connect(
 	state => ( {
@@ -20,8 +21,11 @@ export default connect(
 		createUser( form ) {
 			dispatch( createUser( form ) );
 		},
-		redirect( url ) {
-			dispatch( push( url ) );
+		redirectToSearch() {
+			dispatch( push( getPath( 'search' ) ) );
+		},
+		redirectToSuccess() {
+			dispatch( push( getPath( 'success' ) ) );
 		}
 	} )
 )( Checkout );

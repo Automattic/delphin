@@ -1,18 +1,15 @@
 // External dependencies
 import React, { PropTypes } from 'react';
 
-// Internal dependencies
-import getPath from 'routes';
-
 const Success = React.createClass( {
 	propTypes: {
-		redirect: PropTypes.func.isRequired,
+		redirectToSearch: PropTypes.func.isRequired,
 		transaction: PropTypes.object
 	},
 
 	componentWillMount() {
 		if ( ! this.props.transaction ) {
-			this.props.redirect( getPath( 'search' ) );
+			this.props.redirectToSearch();
 		}
 	},
 

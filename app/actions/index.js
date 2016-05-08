@@ -13,7 +13,6 @@ import {
 	CONNECT_USER_WARNING,
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
-	CREATE_USER_COMPLETE,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -26,46 +25,6 @@ let wpcomAPI = WPCOM(),
 
 export function removeUser() {
 	return { type: REMOVE_USER };
-}
-
-export function createUser( form ) {
-	return dispatch => {
-		const payload = {
-			username: form.username,
-			email: form.email,
-			password: form.password,
-			validate: false
-		};
-
-		request.post( '/users/new' ).send( payload ).end( ( error, results ) => {
-			const data = JSON.parse( results.text );
-
-			if ( error ) {
-				return dispatch( addNotice( {
-					message: data.message,
-					status: 'error'
-				} ) );
-			}
-
-			// Reinitialize WPCOM so that future requests with be authed
-			wpcomAPI = WPCOM( data.bearer_token );
-
-			// Save the bearer token for future requests
-			bearerToken = data.bearer_token;
-
-			dispatch( createUserComplete( form, data.bearer_token ) );
-		} );
-	};
-}
-
-export function createUserComplete( form, token ) {
-	return {
-		type: CREATE_USER_COMPLETE,
-		username: form.username,
-		email: form.email,
-		password: form.password,
-		bearerToken: token
-	};
 }
 
 /**
@@ -154,6 +113,10 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 				}
 
 				bearerToken = response.body.token.access_token;
+
+				// Reinitialize WPCOM so that future requests will be authenticated
+				wpcomAPI = WPCOM( bearerToken );
+
 				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
 
 				resolve();

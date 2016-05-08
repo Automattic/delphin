@@ -11,15 +11,15 @@ const Checkout = React.createClass( {
 		checkout: PropTypes.object.isRequired,
 		createSite: PropTypes.func.isRequired,
 		createTransaction: PropTypes.func.isRequired,
-		createUser: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
-		redirectToSuccess: PropTypes.func.isRequired
+		redirectToSignup: PropTypes.func.isRequired,
+		redirectToSuccess: PropTypes.func.isRequired,
+		user: PropTypes.object.isRequired
 	},
 
 	getInitialState() {
 		return {
 			form: {
-				email: `drew.blaisdell+${ Math.ceil( Math.random() * 999999 ) }@automattic.com`,
 				'credit-card-number': 4446186116594038,
 				'postal-code': 97227,
 				'expiration-date': '03/17',
@@ -33,6 +33,10 @@ const Checkout = React.createClass( {
 		if ( ! this.props.checkout.domain ) {
 			this.props.redirectToSearch();
 		}
+
+		if ( ! this.props.user.isLoggedIn ) {
+			this.props.redirectToSignup();
+		}
 	},
 
 	componentWillReceiveProps( nextProps ) {
@@ -41,10 +45,6 @@ const Checkout = React.createClass( {
 
 		if ( ! checkout ) {
 			return;
-		}
-
-		if ( checkout.user && ! checkout.site ) {
-			return this.props.createSite( Object.assign( {}, this.state.form, { domain: checkout.domain } ) );
 		}
 
 		if ( checkout.site && ! checkout.transaction ) {
@@ -60,27 +60,6 @@ const Checkout = React.createClass( {
 		const rand = Math.ceil( Math.random() * 990000 );
 
 		this.props.createSite( `foobarbaz${ rand }` );
-	},
-
-	renderUserDetails() {
-		if ( ! this.props.checkout.user ) {
-			return null;
-		}
-
-		const { username, email, password, bearerToken } = this.props.checkout.user;
-
-		return (
-			<div>
-				{ username },
-				{ ' ' }
-				{ email },
-				{ ' ' }
-				{ password },
-				{ ' ' }
-				{ bearerToken },
-				{ ' ' }
-			</div>
-		);
 	},
 
 	renderSiteDetails() {
@@ -108,7 +87,7 @@ const Checkout = React.createClass( {
 
 		this.setState( { submitting: true } );
 
-		this.props.createUser( this.state.form );
+		this.props.createSite( Object.assign( {}, this.state.form, { domain: this.props.checkout.domain } ) );
 	},
 
 	renderForm() {
@@ -118,12 +97,6 @@ const Checkout = React.createClass( {
 
 		return (
 			<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
-				<label>{ i18n.translate( 'username' ) }</label>
-				<input type="text" name="username" autoFocus />
-				<label>{ i18n.translate( 'email' ) }</label>
-				<input type="text" name="email" onChange={ this.updateForm } value={ this.state.form.email } />
-				<label>{ i18n.translate( 'password' ) }</label>
-				<input type="text" name="password" />
 				<label>{ i18n.translate( 'name' ) }</label>
 				<input type="text" name="name" />
 				<label>{ i18n.translate( 'credit card #' ) }</label>
@@ -146,7 +119,6 @@ const Checkout = React.createClass( {
 				<h2>registering { this.props.checkout.domain }</h2>
 				{ this.state.submitting && 'beep boop...' }
 				{ this.renderForm() }
-				{ this.renderUserDetails() }
 				{ this.renderSiteDetails() }
 			</div>
 		);

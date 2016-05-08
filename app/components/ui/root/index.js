@@ -5,7 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import Menu from 'components/ui/menu';
+import Menu from 'components/containers/menu';
 import Notices from 'components/containers/notices';
 import styles from './styles.scss';
 

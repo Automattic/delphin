@@ -56,16 +56,6 @@ const Checkout = React.createClass( {
 		}
 	},
 
-	createUser() {
-		const rand = Math.ceil( Math.random() * 100000 );
-
-		this.props.createUser(
-			'test' + rand,
-			`drew.blaisdell+${ rand }@automattic.com`,
-			'thisisaTERRIBLEpassword'
-		);
-	},
-
 	createSite() {
 		const rand = Math.ceil( Math.random() * 990000 );
 

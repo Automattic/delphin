@@ -11,8 +11,7 @@ export default reduxForm(
 		fields: [ 'query' ]
 	},
 	state => ( {
-		results: state.domainSearch.results,
-		user: state.user
+		results: state.domainSearch.results
 	} ),
 	dispatch => ( {
 		clearDomainSuggestions: () => {

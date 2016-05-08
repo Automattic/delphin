@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import Notices from '../../containers/notices';
+import Notices from 'components/containers/notices';
 import styles from './styles.scss';
 
 const Root = ( { children } ) => {

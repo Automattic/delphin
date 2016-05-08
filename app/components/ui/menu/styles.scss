@@ -1,0 +1,20 @@
+.menu {
+	background-color: #fff;
+	box-shadow: -1px -1px 1px rgba( 0, 0, 0, .2 );
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-left: 0;
+	position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	text-align: center;
+}
+
+.link {
+	color: #666;
+	display: inline-block;
+	font-size: 1.2rem;
+	padding: 10px;
+	text-decoration: none;
+}

@@ -11,16 +11,16 @@ export default connect(
 		checkout: state.checkout
 	} ),
 	dispatch => ( {
-		createSite: form => {
+		createSite( form ) {
 			dispatch( createSite( form ) );
 		},
-		createTransaction: ( form ) => {
+		createTransaction( form ) {
 			dispatch( createTransaction( form ) );
 		},
-		createUser: ( form ) => {
+		createUser( form ) {
 			dispatch( createUser( form ) );
 		},
-		redirect: url => {
+		redirect( url ) {
 			dispatch( push( url ) );
 		}
 	} )

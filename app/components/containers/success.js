@@ -10,7 +10,7 @@ export default connect(
 		transaction: state.checkout && state.checkout.transaction
 	} ),
 	dispatch => ( {
-		redirect: url => {
+		redirect( url ) {
 			dispatch( push( url ) );
 		}
 	} )

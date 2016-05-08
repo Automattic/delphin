@@ -14,13 +14,13 @@ export default reduxForm(
 		results: state.domainSearch.results
 	} ),
 	dispatch => ( {
-		clearDomainSuggestions: () => {
+		clearDomainSuggestions() {
 			dispatch( clearDomainSuggestions() );
 		},
-		fetchDomainSuggestions: query => {
+		fetchDomainSuggestions( query ) {
 			dispatch( fetchDomainSuggestions( query ) );
 		},
-		selectDomain: name => {
+		selectDomain( name ) {
 			dispatch( selectDomain( name ) );
 		}
 	} )

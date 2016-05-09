@@ -82,7 +82,9 @@ const Search = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit } = this.props;
+		const { fields: { query }, handleSubmit, hasSearched } = this.props,
+			attemptedEmptySearch = hasSearched && this.isSearchPage(),
+			searchContainerClass = attemptedEmptySearch ? styles.hasAttemptedEmptySearch : '';
 
 		return (
 			<form onSubmit={ handleSubmit( this.fetchResults ) }>
@@ -90,11 +92,21 @@ const Search = React.createClass( {
 					<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
 				) }
 
-				<input
-					{ ...query }
-					autoFocus
-					className={ styles.field }
-					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+				<div className={ searchContainerClass }>
+					<input
+						{ ...query }
+						autoFocus
+						className={ styles.field }
+						placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+
+					{ attemptedEmptySearch && (
+						<div className={ styles.emptySearchNotice }>
+							{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
+								args: { randomQuery: 'travel mom foodie' }
+							} ) }
+						</div>
+					) }
+				</div>
 
 				{ ! this.isResultsPage() && (
 					<button className={ styles.button }>

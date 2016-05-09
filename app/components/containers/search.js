@@ -15,6 +15,7 @@ export default reduxForm(
 		destroyOnUnmount: false
 	},
 	state => ( {
+		hasSearched: state.domainSearch.hasSearched,
 		results: state.domainSearch.results
 	} ),
 	dispatch => ( {

@@ -70,3 +70,20 @@
 		color: #f3f6f8;
 	}
 }
+
+.has-attempted-empty-search {
+	.field {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.empty-search-notice {
+	background: #2e4453;
+	border-radius: 0 0 3px 3px;
+	background-clip: padding-box;
+	color: white;
+	font-size: 1.3rem;
+	padding: 10px;
+	text-align: left;
+}

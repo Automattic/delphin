@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import i18n from 'lib/i18n';
-import styles from 'components/ui/form/styles.scss';
+import ValidationError from 'components/ui/form/validation-error';
 
 const ConnectUser = React.createClass( {
 	propTypes: {
@@ -42,7 +42,7 @@ const ConnectUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Email address:' ) }</label>
 							<input { ...fields.email } autoFocus />
-							{ fields.email.touched && fields.email.error && <div className={ styles.validationError }>{ fields.email.error }</div> }
+							<ValidationError field={ fields.email } />
 						</fieldset>
 					}
 					submitArea={

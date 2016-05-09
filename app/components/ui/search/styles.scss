@@ -51,3 +51,22 @@
 		border-color: #4F6E84;
 	}
 }
+
+.button {
+	background: #87a6bc;
+	border: 0;
+	border-radius: 4px;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 16px;
+	font-weight: normal;
+	margin: 30px auto 0 auto;
+	outline: none;
+	padding: 18px 40px;
+	text-transform: uppercase;
+
+	&:hover {
+		color: #f3f6f8;
+	}
+}

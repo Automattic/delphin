@@ -25,13 +25,13 @@ const Search = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
-			this.debouncedFetchResults( nextProps.fields.query.value );
+		if ( this.props.values.query !== nextProps.values.query ) {
+			this.debouncedFetchResults( nextProps.values );
 		}
 	},
 
-	fetchResults( query ) {
-		this.props.fetchDomainSuggestions( query );
+	fetchResults( formValues ) {
+		this.props.fetchDomainSuggestions( formValues.query );
 	},
 
 	selectDomain( name ) {
@@ -60,10 +60,10 @@ const Search = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query } } = this.props;
+		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<div>
+			<form onSubmit={ handleSubmit( this.fetchResults ) }>
 				<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
 
 				<input
@@ -72,8 +72,14 @@ const Search = React.createClass( {
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
 
+				{ ! this.props.results && (
+					<button className={ styles.button }>
+						{ i18n.translate( "Let's find an address" ) }
+					</button>
+				) }
+
 				{ this.renderResults() }
-			</div>
+			</form>
 		);
 	}
 } );

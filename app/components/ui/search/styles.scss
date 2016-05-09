@@ -87,3 +87,21 @@
 	padding: 10px;
 	text-align: left;
 }
+
+.empty-search-notice-enter {
+	opacity: 0.01;
+}
+
+.empty-search-notice-enter-active {
+	opacity: 1;
+	transition: opacity 500ms ease-in;
+}
+
+.empty-search-notice-leave {
+	opacity: 1;
+}
+
+.empty-search-notice-leave-active {
+	opacity: 0.01;
+	transition: opacity 1ms ease-in;
+}

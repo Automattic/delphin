@@ -2,6 +2,7 @@
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -86,6 +87,11 @@ const Search = React.createClass( {
 			attemptedEmptySearch = hasSearched && this.isSearchPage(),
 			searchContainerClass = attemptedEmptySearch ? styles.hasAttemptedEmptySearch : '';
 
+		if ( this.props.results && this.isSearchPage() ) {
+			// Don't render on the search page until the results are cleared
+			return null;
+		}
+
 		return (
 			<form onSubmit={ handleSubmit( this.fetchResults ) }>
 				{ ! this.isResultsPage() && (
@@ -99,13 +105,18 @@ const Search = React.createClass( {
 						className={ styles.field }
 						placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
 
-					{ attemptedEmptySearch && (
-						<div className={ styles.emptySearchNotice }>
-							{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
-								args: { randomQuery: 'travel mom foodie' }
-							} ) }
-						</div>
-					) }
+					<ReactCSSTransitionGroup
+						transitionName={ styles.emptySearchNotice }
+						transitionEnterTimeout={ 500 }
+						transitionLeaveTimeout={ 1 }>
+						{ attemptedEmptySearch && (
+							<div className={ styles.emptySearchNotice }>
+								{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
+									args: { randomQuery: 'travel mom foodie' }
+								} ) }
+							</div>
+						) }
+					</ReactCSSTransitionGroup>
 				</div>
 
 				{ ! this.isResultsPage() && (

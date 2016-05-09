@@ -108,7 +108,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 
 		expect( newState ).toEqual( {
 			isFetching: false,
-			results: [ 'example.com' ]
+			results: null
 		} );
 	} );
 

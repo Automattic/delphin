@@ -23,6 +23,11 @@ export function domainSearch( state = initialState, action ) {
 			} );
 
 		case DOMAIN_SUGGESTIONS_FETCH_COMPLETED:
+			if ( ! state.isFetching ) {
+				// this action is from a stale callback
+				return state;
+			}
+
 			return Object.assign( {}, state, {
 				isFetching: false,
 				results: results

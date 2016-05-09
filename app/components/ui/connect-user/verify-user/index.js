@@ -89,7 +89,7 @@ const VerifyUser = React.createClass( {
 						</fieldset>
 					}
 					submitArea={
-						<button disabled={ user.isUpdating }>
+						<button disabled={ user.isRequesting }>
 							{ i18n.translate( 'Verify my email' ) }
 						</button>
 					} />

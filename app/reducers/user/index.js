@@ -16,7 +16,7 @@ import {
 export const initialState = {
 	intention: null,
 	isLoggedIn: false,
-	isUpdating: false,
+	isRequesting: false,
 	wasCreated: false,
 	data: {
 		bearerToken: null,
@@ -32,20 +32,20 @@ export const user = ( state = initialState, action ) => {
 		case CONNECT_USER:
 			return merge( {}, state, {
 				data: { email },
-				isUpdating: true,
+				isRequesting: true,
 				intention
 			} );
 
 		case CONNECT_USER_COMPLETE:
 			return merge( {}, state, {
 				data: { email, twoFactorAuthenticationEnabled },
-				isUpdating: false,
+				isRequesting: false,
 				wasCreated: true
 			} );
 
 		case CONNECT_USER_FAIL:
 			return merge( {}, state, {
-				isUpdating: false,
+				isRequesting: false,
 				wasCreated: false
 			} );
 
@@ -59,13 +59,13 @@ export const user = ( state = initialState, action ) => {
 
 		case VERIFY_USER:
 			return merge( {}, state, {
-				isUpdating: true
+				isRequesting: true
 			} );
 
 		case VERIFY_USER_COMPLETE:
 			return merge( {}, state, {
 				isLoggedIn: true,
-				isUpdating: false,
+				isRequesting: false,
 				data: {
 					bearerToken
 				}
@@ -74,7 +74,7 @@ export const user = ( state = initialState, action ) => {
 		case VERIFY_USER_FAIL:
 			return merge( {}, state, {
 				isLoggedIn: false,
-				isUpdating: false
+				isRequesting: false
 			} );
 
 		default:

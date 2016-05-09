@@ -34,8 +34,6 @@ module.exports = function wpcomRestApiProxy() {
 
 	app.use( bodyParser.json() );
 
-	createEndpointProxy( app, '/users/new' );
-
 	createEndpointProxy( app, '/users/email' );
 
 	createEndpointProxy( app, '/users/email/new' );

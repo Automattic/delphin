@@ -3,7 +3,6 @@ import { checkout } from '..';
 import {
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
-	CREATE_USER_COMPLETE,
 	DOMAIN_SELECT
 } from 'reducers/action-types';
 
@@ -96,29 +95,6 @@ describe( 'checkout reducer for create transaction complete action', () => {
 				'expiration-date': '03/18',
 				name: 'John Doe',
 				'postal-code': 12345
-			}
-		} );
-	} );
-} );
-
-describe( 'checkout reducer for create user complete action', () => {
-	it( 'should return state with new user', () => {
-		const originalState = Object.freeze( { domain: 'example.com' } ),
-			newState = checkout( originalState, {
-				bearerToken: 'token',
-				email: 'johndoe@example.com',
-				password: 'helloworld',
-				username: 'johndoe',
-				type: CREATE_USER_COMPLETE
-			} );
-
-		expect( newState ).toEqual( {
-			domain: 'example.com',
-			user: {
-				bearerToken: 'token',
-				email: 'johndoe@example.com',
-				password: 'helloworld',
-				username: 'johndoe'
 			}
 		} );
 	} );

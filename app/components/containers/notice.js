@@ -7,11 +7,9 @@ import Notice from 'components/ui/notices/notice';
 
 export default connect(
 	null,
-	( dispatch, { notice } ) => {
-		return {
-			removeNotice() {
-				dispatch( removeNotice( notice ) );
-			}
-		};
-	}
+	( dispatch, { notice } ) => ( {
+		removeNotice() {
+			dispatch( removeNotice( notice ) );
+		}
+	} )
 )( Notice );

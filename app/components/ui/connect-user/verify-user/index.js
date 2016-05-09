@@ -14,15 +14,15 @@ const VerifyUser = React.createClass( {
 		connectUser: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		redirectToNewUser: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
+		redirectToSignup: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
 
 	componentDidMount() {
 		if ( ! this.props.user.data.email ) {
-			this.props.redirectToNewUser();
+			this.props.redirectToSignup();
 		}
 	},
 

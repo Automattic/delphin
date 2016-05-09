@@ -56,12 +56,6 @@ const Checkout = React.createClass( {
 		}
 	},
 
-	createSite() {
-		const rand = Math.ceil( Math.random() * 990000 );
-
-		this.props.createSite( `foobarbaz${ rand }` );
-	},
-
 	renderSiteDetails() {
 		const { site } = this.props.checkout;
 

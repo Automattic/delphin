@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import styles from './styles.scss';
 import Suggestion from './suggestion';
 
@@ -25,13 +26,26 @@ const Search = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( this.props.values.query !== nextProps.values.query ) {
+		if ( nextProps.values.query && this.props.values.query !== nextProps.values.query ) {
+			if ( ! this.isResultsPage( nextProps ) && nextProps.values.query.trim() !== '' ) {
+				this.props.redirectToSearchResults();
+			}
+
 			this.debouncedFetchResults( nextProps.values );
+		}
+
+		if ( ! this.isResultsPage( nextProps ) ) {
+			this.props.clearDomainSuggestions();
+			this.props.destroyForm();
 		}
 	},
 
 	fetchResults( formValues ) {
 		this.props.fetchDomainSuggestions( formValues.query );
+	},
+
+	isResultsPage( props = this.props ) {
+		return props.location.pathname === getPath( 'searchResults' );
 	},
 
 	selectDomain( name ) {
@@ -64,7 +78,9 @@ const Search = React.createClass( {
 
 		return (
 			<form onSubmit={ handleSubmit( this.fetchResults ) }>
-				<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
+				{ ! this.isResultsPage() && (
+					<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
+				) }
 
 				<input
 					{ ...query }
@@ -72,7 +88,7 @@ const Search = React.createClass( {
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
 
-				{ ! this.props.results && (
+				{ ! this.isResultsPage() && (
 					<button className={ styles.button }>
 						{ i18n.translate( "Let's find an address" ) }
 					</button>

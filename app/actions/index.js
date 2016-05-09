@@ -135,7 +135,22 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 						type: VERIFY_USER_FAIL
 					} );
 
-					return reject( { code: data.message } );
+					if ( data.error === 'invalid_verification_code' ) {
+						return reject( { code: data.message } );
+					}
+
+					if ( data.error === 'invalid_2FA_code' ) {
+						return reject( { twoFactorAuthenticationCode: data.message } );
+					}
+
+					// If the error isn't invalid_verification_code or invalid_2FA_code
+					// Then add it as a global notice
+					dispatch( addNotice( {
+						message: data.message,
+						status: 'error'
+					} ) );
+
+					return reject();
 				}
 
 				bearerToken = response.body.token.access_token;

@@ -6,10 +6,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import formStyles from 'components/ui/form/styles.scss';
 
 const ValidationError = function( { field } ) {
-	return field.touched && field.error && (
-		<div className={ formStyles.validationError }>
-			{ field.error }
-		</div>
+	return ( field.touched && field.error ? (
+			<div className={ formStyles.validationError }>
+				{ field.error }
+			</div>
+		) : null
 	);
 };
 

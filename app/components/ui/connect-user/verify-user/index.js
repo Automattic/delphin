@@ -4,10 +4,10 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
-import formStyles from 'components/ui/form/styles.scss';
 import i18n from 'lib/i18n';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
+import ValidationError from 'components/ui/form/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
@@ -50,7 +50,7 @@ const VerifyUser = React.createClass( {
 
 					<input { ...fields.twoFactorAuthenticationCode } autoComplete="off" />
 
-					{ fields.twoFactorAuthenticationCode.touched && fields.twoFactorAuthenticationCode.error && <div className={ formStyles.validationError }>{ fields.twoFactorAuthenticationCode.error }</div> }
+					<ValidationError field={ fields.twoFactorAuthenticationCode } />
 				</div>
 			);
 		}
@@ -78,7 +78,7 @@ const VerifyUser = React.createClass( {
 
 							<input { ...fields.code } autoFocus autoComplete="off" />
 
-							{ fields.code.touched && fields.code.error && <div className={ formStyles.validationError }>{ fields.code.error }</div> }
+							<ValidationError field={ fields.code } />
 
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }

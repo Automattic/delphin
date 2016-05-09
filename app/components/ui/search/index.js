@@ -19,6 +19,10 @@ const Search = React.createClass( {
 
 	componentDidMount() {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
+
+		if ( this.isSearchPage() ) {
+			this.clearFormAndSuggestions();
+		}
 	},
 
 	componentWillReceiveProps( nextProps ) {
@@ -30,14 +34,22 @@ const Search = React.createClass( {
 			this.debouncedFetchResults( nextProps.values );
 		}
 
-		if ( ! this.isResultsPage( nextProps ) ) {
-			this.props.clearDomainSuggestions();
-			this.props.destroyForm();
+		if ( ! this.isSearchPage() && this.isSearchPage( nextProps ) ) {
+			this.clearFormAndSuggestions();
 		}
+	},
+
+	clearFormAndSuggestions() {
+		this.props.clearDomainSuggestions();
+		this.props.destroyForm();
 	},
 
 	fetchResults( formValues ) {
 		this.props.fetchDomainSuggestions( formValues.query );
+	},
+
+	isSearchPage( props = this.props ) {
+		return props.location.pathname === getPath( 'search' );
 	},
 
 	isResultsPage( props = this.props ) {

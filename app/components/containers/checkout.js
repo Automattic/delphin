@@ -13,11 +13,11 @@ export default connect(
 		user: state.user
 	} ),
 	dispatch => ( {
-		createSite( form ) {
-			dispatch( createSite( form ) );
+		createSite( user, form ) {
+			dispatch( createSite( user, form ) );
 		},
-		createTransaction( form ) {
-			dispatch( createTransaction( form ) );
+		createTransaction( user, form ) {
+			dispatch( createTransaction( user, form ) );
 		},
 		redirectToSearch() {
 			dispatch( push( getPath( 'search' ) ) );

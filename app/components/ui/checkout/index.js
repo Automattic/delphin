@@ -48,7 +48,7 @@ const Checkout = React.createClass( {
 		}
 
 		if ( checkout.site && ! checkout.transaction ) {
-			return this.props.createTransaction( Object.assign( {}, form, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
+			return this.props.createTransaction( this.props.user, Object.assign( {}, form, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
 		}
 
 		if ( checkout.transaction ) {
@@ -81,7 +81,7 @@ const Checkout = React.createClass( {
 
 		this.setState( { submitting: true } );
 
-		this.props.createSite( Object.assign( {}, this.state.form, { domain: this.props.checkout.domain } ) );
+		this.props.createSite( this.props.user, Object.assign( {}, this.state.form, { domain: this.props.checkout.domain } ) );
 	},
 
 	renderForm() {

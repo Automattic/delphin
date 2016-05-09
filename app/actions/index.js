@@ -20,8 +20,7 @@ import {
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-let wpcomAPI = WPCOM(),
-	bearerToken;
+let wpcomAPI = WPCOM();
 
 export function removeUser() {
 	return { type: REMOVE_USER };
@@ -112,7 +111,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 					return reject();
 				}
 
-				bearerToken = response.body.token.access_token;
+				const bearerToken = response.body.token.access_token;
 
 				// Reinitialize WPCOM so that future requests will be authenticated
 				wpcomAPI = WPCOM( bearerToken );
@@ -125,10 +124,10 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	};
 }
 
-export function createSite( form ) {
+export function createSite( user, form ) {
 	return dispatch => {
 		const payload = {
-			bearer_token: bearerToken,
+			bearer_token: user.data.bearerToken,
 			blog_name: form.domain,
 			blog_title: form.domain,
 			lang_id: 1,
@@ -208,9 +207,9 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	}
 }
 
-export function createTransaction( form ) {
+export function createTransaction( user, form ) {
 	const cardDetails = {
-		bearer_token: bearerToken,
+		bearer_token: user.data.bearerToken,
 		name: form.name,
 		number: form['credit-card-number'],
 		cvv: form.cvv,
@@ -221,7 +220,7 @@ export function createTransaction( form ) {
 	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
-				bearer_token: bearerToken,
+				bearer_token: user.data.bearerToken,
 				payment_key: response,
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',

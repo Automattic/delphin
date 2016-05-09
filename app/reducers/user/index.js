@@ -31,24 +31,37 @@ export const user = ( state = initialState, action ) => {
 	switch ( type ) {
 		case CONNECT_USER:
 			return merge( {}, state, {
-				data: { email }, isUpdating: true, intention
+				data: { email },
+				isUpdating: true,
+				intention
 			} );
+
 		case CONNECT_USER_COMPLETE:
 			return merge( {}, state, {
-				data: { email, twoFactorAuthenticationEnabled }, isUpdating: false, wasCreated: true
+				data: { email, twoFactorAuthenticationEnabled },
+				isUpdating: false,
+				wasCreated: true
 			} );
+
 		case CONNECT_USER_FAIL:
 			return merge( {}, state, {
-				isUpdating: false, wasCreated: false
+				isUpdating: false,
+				wasCreated: false
 			} );
+
 		case CONNECT_USER_WARNING:
 			return merge( {}, state, {
 				data: { notice }
 			} );
+
 		case REMOVE_USER:
 			return initialState;
+
 		case VERIFY_USER:
-			return merge( {}, state, { isUpdating: true } );
+			return merge( {}, state, {
+				isUpdating: true
+			} );
+
 		case VERIFY_USER_COMPLETE:
 			return merge( {}, state, {
 				isLoggedIn: true,
@@ -57,10 +70,13 @@ export const user = ( state = initialState, action ) => {
 					bearerToken
 				}
 			} );
+
 		case VERIFY_USER_FAIL:
 			return merge( {}, state, {
-				isLoggedIn: false, isUpdating: false
+				isLoggedIn: false,
+				isUpdating: false
 			} );
+
 		default:
 			return state;
 	}

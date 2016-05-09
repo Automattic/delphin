@@ -21,10 +21,6 @@ const Search = React.createClass( {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 	},
 
-	componentWillUnmount() {
-		this.props.clearDomainSuggestions();
-	},
-
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.values.query && this.props.values.query !== nextProps.values.query ) {
 			if ( ! this.isResultsPage( nextProps ) && nextProps.values.query.trim() !== '' ) {

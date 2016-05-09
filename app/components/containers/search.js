@@ -10,7 +10,9 @@ import Search from 'components/ui/search';
 export default reduxForm(
 	{
 		form: 'search',
-		fields: [ 'query' ]
+		fields: [ 'query' ],
+		// we want these searches to persist on the results route, otherwise we'll destroy them manually
+		destroyOnUnmount: false
 	},
 	state => ( {
 		results: state.domainSearch.results

@@ -18,6 +18,11 @@ import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 const childRoutes = [
 	{
+		path: 'search',
+		slug: 'searchResults',
+		component: SearchContainer
+	},
+	{
 		path: 'about',
 		slug: 'about',
 		component: About

@@ -2,9 +2,11 @@
 import debounce from 'lodash/debounce';
 import i18n from 'lib/i18n';
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import styles from './styles.scss';
 import Suggestion from './suggestion';
 
@@ -18,20 +20,41 @@ const Search = React.createClass( {
 
 	componentDidMount() {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
-	},
 
-	componentWillUnmount() {
-		this.props.clearDomainSuggestions();
-	},
-
-	componentWillReceiveProps( nextProps ) {
-		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
-			this.debouncedFetchResults( nextProps.fields.query.value );
+		if ( this.isSearchPage() ) {
+			this.clearFormAndSuggestions();
 		}
 	},
 
-	fetchResults( query ) {
-		this.props.fetchDomainSuggestions( query );
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.values.query && this.props.values.query !== nextProps.values.query ) {
+			if ( ! this.isResultsPage( nextProps ) && nextProps.values.query.trim() !== '' ) {
+				this.props.redirectToSearchResults();
+			}
+
+			this.debouncedFetchResults( nextProps.values );
+		}
+
+		if ( ! this.isSearchPage() && this.isSearchPage( nextProps ) ) {
+			this.clearFormAndSuggestions();
+		}
+	},
+
+	clearFormAndSuggestions() {
+		this.props.clearDomainSuggestions();
+		this.props.destroyForm();
+	},
+
+	fetchResults( formValues ) {
+		this.props.fetchDomainSuggestions( formValues.query );
+	},
+
+	isSearchPage( props = this.props ) {
+		return props.location.pathname === getPath( 'search' );
+	},
+
+	isResultsPage( props = this.props ) {
+		return props.location.pathname === getPath( 'searchResults' );
 	},
 
 	selectDomain( name ) {
@@ -60,20 +83,50 @@ const Search = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query } } = this.props;
+		const { fields: { query }, handleSubmit, hasSearched } = this.props,
+			attemptedEmptySearch = hasSearched && this.isSearchPage(),
+			searchContainerClass = attemptedEmptySearch ? styles.hasAttemptedEmptySearch : '';
+
+		if ( this.props.results && this.isSearchPage() ) {
+			// Don't render on the search page until the results are cleared
+			return null;
+		}
 
 		return (
-			<div>
-				<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
+			<form onSubmit={ handleSubmit( this.fetchResults ) }>
+				{ ! this.isResultsPage() && (
+					<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
+				) }
 
-				<input
-					{ ...query }
-					autoFocus
-					className={ styles.field }
-					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+				<div className={ searchContainerClass }>
+					<input
+						{ ...query }
+						autoFocus
+						className={ styles.field }
+						placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+
+					<ReactCSSTransitionGroup
+						transitionName={ styles.emptySearchNotice }
+						transitionEnterTimeout={ 500 }
+						transitionLeaveTimeout={ 1 }>
+						{ attemptedEmptySearch && (
+							<div className={ styles.emptySearchNotice }>
+								{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
+									args: { randomQuery: 'travel mom foodie' }
+								} ) }
+							</div>
+						) }
+					</ReactCSSTransitionGroup>
+				</div>
+
+				{ ! this.isResultsPage() && (
+					<button className={ styles.button }>
+						{ i18n.translate( "Let's find an address" ) }
+					</button>
+				) }
 
 				{ this.renderResults() }
-			</div>
+			</form>
 		);
 	}
 } );

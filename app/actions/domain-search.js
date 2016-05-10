@@ -23,14 +23,12 @@ export function clearDomainSuggestions() {
 	};
 }
 export function fetchDomainSuggestions( query ) {
-	if ( query.trim() === '' ) {
-		return dispatch => {
-			dispatch( clearDomainSuggestions() );
-		};
-	}
-
 	return dispatch => {
-		dispatch( { type: DOMAIN_SUGGESTIONS_FETCH } );
+		dispatch( { type: DOMAIN_SUGGESTIONS_FETCH, query } );
+
+		if ( ! query ) {
+			return;
+		}
 
 		const payload = {
 			query,

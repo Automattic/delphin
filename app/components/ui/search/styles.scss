@@ -51,3 +51,57 @@
 		border-color: #4F6E84;
 	}
 }
+
+.button {
+	background: #87a6bc;
+	border: 0;
+	border-radius: 4px;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 16px;
+	font-weight: normal;
+	margin: 30px auto 0 auto;
+	outline: none;
+	padding: 18px 40px;
+	text-transform: uppercase;
+
+	&:hover {
+		color: #f3f6f8;
+	}
+}
+
+.has-attempted-empty-search {
+	.field {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.empty-search-notice {
+	background: #2e4453;
+	border-radius: 0 0 3px 3px;
+	background-clip: padding-box;
+	color: white;
+	font-size: 1.3rem;
+	padding: 10px;
+	text-align: left;
+}
+
+.empty-search-notice-enter {
+	opacity: 0.01;
+}
+
+.empty-search-notice-enter-active {
+	opacity: 1;
+	transition: opacity 500ms ease-in;
+}
+
+.empty-search-notice-leave {
+	opacity: 1;
+}
+
+.empty-search-notice-leave-active {
+	opacity: 0.01;
+	transition: opacity 1ms ease-in;
+}

@@ -64,8 +64,6 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
-
 				<input
 					{ ...query }
 					autoFocus

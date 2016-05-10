@@ -1,3 +1,11 @@
+.heading {
+	font-family: Merriweather, Georgia, 'Times New Roman', Times, serif;
+	font-size: 3.0rem;
+	font-weight: 600;
+	margin-top: 45px;
+	text-align: center;
+}
+
 .field {
 	background-color: #f3f6f8;
 	border: 1px solid #a8bece;
@@ -22,24 +30,5 @@
 		background-color: #fff;
 		outline: none;
 		box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.3);
-	}
-}
-
-.suggestions {
-	margin-top: 30px;
-}
-
-.suggestion {
-	border: 1px solid #c8d7e1;
-	border-radius: 2px;
-	color: #2e4453;
-	display: block;
-	font-size: 1.4rem;
-	margin-top: 15px;
-	padding: 10px;
-	text-decoration: none;
-
-	&:hover {
-		border-color: #4F6E84;
 	}
 }

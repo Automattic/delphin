@@ -7,6 +7,7 @@ import About from 'components/ui/about';
 import { buildPaths } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
+import HomeContainer from 'components/containers/home';
 import i18n from 'lib/i18n';
 import LoginContainer from 'components/containers/connect-user/login';
 import NotFound from 'components/ui/not-found';
@@ -33,6 +34,11 @@ const childRoutes = [
 		component: LoginContainer
 	},
 	{
+		path: 'search',
+		slug: 'search',
+		component: SearchContainer
+	},
+	{
 		path: 'signup',
 		slug: 'signupUser',
 		component: SignupContainer
@@ -54,17 +60,17 @@ const childRoutesWithoutSlug = childRoutes.map( route => omit( route, 'slug' ) )
 const localeRoutes = config( 'languages' ).map( language => {
 	return {
 		path: `/${ language.langSlug }`,
-		indexRoute: { component: SearchContainer },
+		indexRoute: { component: HomeContainer },
 		childRoutes: childRoutesWithoutSlug
 	};
 } );
 
 export const routes = {
 	path: '/',
-	slug: 'search',
+	slug: 'home',
 	component: Root,
 	indexRoute: {
-		component: SearchContainer
+		component: HomeContainer
 	},
 	childRoutes: [
 		// In order to prevent `/:locale` from matching English routes like `/about`,
@@ -120,10 +126,10 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 export const serverRedirectRoutes = [
 	{
 		from: getPath( 'checkout' ),
-		to: getPath( 'search' )
+		to: getPath( 'home' )
 	},
 	{
 		from: getPath( 'success' ),
-		to: getPath( 'search' )
+		to: getPath( 'home' )
 	}
 ];

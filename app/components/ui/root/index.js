@@ -13,7 +13,7 @@ const Root = ( { children } ) => {
 	return (
 		<div className={ styles.root }>
 			<header className={ styles.header }>
-				<Link className={ styles.title } to={ getPath( 'search' ) }>
+				<Link className={ styles.title } to={ getPath( 'home' ) }>
 					<h1>MagicDomains</h1>
 				</Link>
 			</header>

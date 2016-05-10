@@ -32,6 +32,7 @@ const Home = React.createClass( {
 
 				<input
 					{ ...query }
+					autoComplete="off"
 					autoFocus
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) }

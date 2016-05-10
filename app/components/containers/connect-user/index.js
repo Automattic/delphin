@@ -31,7 +31,7 @@ export default reduxForm(
 		onSubmit( fields ) {
 			return dispatch( connectUser( fields.email, ownProps.intention ) );
 		},
-		redirectToSearch() {
+		redirectToHome() {
 			dispatch( push( getPath( 'search' ) ) );
 		},
 		redirectToVerifyUser() {

@@ -10,8 +10,9 @@ export default reduxForm(
 		form: 'search',
 		fields: [ 'query' ]
 	},
-	state => ( {
-		results: state.domainSearch.results
+	( state, ownProps ) => ( {
+		results: state.domainSearch.results,
+		initialValues: { query: ownProps.location.query.q }
 	} ),
 	dispatch => ( {
 		clearDomainSuggestions() {

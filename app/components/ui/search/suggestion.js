@@ -13,26 +13,8 @@ const Suggestion = React.createClass( {
 		suggestion: PropTypes.object.isRequired
 	},
 
-	getInitialState() {
-		return {
-			hovered: false
-		};
-	},
-
 	selectDomain() {
 		this.props.selectDomain( this.props.suggestion.domain_name );
-	},
-
-	onMouseOver() {
-		this.setState( {
-			hovered: true
-		} );
-	},
-
-	onMouseOut() {
-		this.setState( {
-			hovered: false
-		} );
 	},
 
 	render() {
@@ -41,8 +23,6 @@ const Suggestion = React.createClass( {
 				<Link
 					className={ styles.suggestion }
 					to={ getPath( 'checkout' ) }
-					onMouseOver={ this.onMouseOver }
-					onMouseOut={ this.onMouseOut }
 					onClick={ this.selectDomain }>
 					{ this.props.suggestion.domain_name }
 				</Link>

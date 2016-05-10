@@ -6,6 +6,7 @@ const debug = debugFactory( 'delphin:actions' );
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
+import { removeBearerCookie, saveTokenInBearerCookie } from 'lib/bearer-cookie';
 import {
 	CONNECT_USER,
 	CONNECT_USER_COMPLETE,
@@ -13,6 +14,9 @@ import {
 	CONNECT_USER_WARNING,
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
+	FETCH_USER,
+	FETCH_USER_COMPLETE,
+	FETCH_USER_FAIL,
 	REMOVE_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -78,6 +82,50 @@ export function connectUser( email, intention, callback ) {
 	};
 }
 
+/**
+ * Fetches the user profile with the specified access token.
+ *
+ * @param {string} bearerToken - access token
+ * @returns {function} the corresponding action thunk
+ */
+export function fetchUser( bearerToken ) {
+	return dispatch => {
+		dispatch( {
+			type: FETCH_USER
+		} );
+
+		const wpcom = WPCOM( bearerToken );
+		const me = wpcom.me();
+
+		me.get( ( error, results ) => {
+			if ( error ) {
+				dispatch( { type: FETCH_USER_FAIL } );
+
+				removeBearerCookie();
+
+				return;
+			}
+
+			dispatch( { type: FETCH_USER_COMPLETE, bearerToken, email: results.email } );
+		} );
+	};
+}
+
+/**
+ * Logs the user out and deletes any bearer cookie.
+ *
+ * @returns {function} the corresponding action thunk
+ */
+export function logoutUser() {
+	return dispatch => {
+		dispatch( {
+			type: REMOVE_USER
+		} );
+
+		removeBearerCookie();
+	};
+}
+
 export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	return dispatch => {
 		dispatch( { type: VERIFY_USER } );
@@ -115,6 +163,8 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 
 				// Reinitialize WPCOM so that future requests will be authenticated
 				wpcomAPI = WPCOM( bearerToken );
+
+				saveTokenInBearerCookie( bearerToken );
 
 				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
 

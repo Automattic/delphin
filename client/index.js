@@ -1,6 +1,6 @@
 // External dependencies
-import { browserHistory } from 'react-router';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { browserHistory } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -11,8 +11,10 @@ import thunk from 'redux-thunk';
 // Internal dependencies
 import { analyticsMiddleware } from 'lib/analytics-middleware';
 import App from 'app';
-import reducers from 'reducers';
+import { fetchUser } from 'actions';
+import { getTokenFromBearerCookie } from 'lib/bearer-cookie';
 import i18n from 'lib/i18n';
+import reducers from 'reducers';
 import Stylizer, { insertCss } from 'lib/stylizer';
 
 const store = createStore(
@@ -33,6 +35,12 @@ const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
 	i18n.initialize( window.localeData );
+
+	const bearerToken = getTokenFromBearerCookie();
+
+	if ( bearerToken ) {
+		store.dispatch( fetchUser( bearerToken ) );
+	}
 
 	injectTapEventPlugin();
 }

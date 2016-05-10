@@ -11,11 +11,17 @@ const Home = React.createClass( {
 		fields: PropTypes.object.isRequired
 	},
 
+	handleSubmit( { query } ) {
+		if ( query && query.trim() !== '' ) {
+			this.props.redirectToSearch();
+		}
+	},
+
 	render() {
-		const { fields: { query } } = this.props;
+		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<div>
+			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
 				<h2 className={ styles.heading }>
 					{ i18n.translate( 'Find your perfect site address.' ) }
 				</h2>
@@ -29,7 +35,7 @@ const Home = React.createClass( {
 				<button className={ styles.button }>
 					{ i18n.translate( "Let's find an address" ) }
 				</button>
-			</div>
+			</form>
 		);
 	}
 } );

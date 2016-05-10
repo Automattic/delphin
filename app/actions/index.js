@@ -6,7 +6,6 @@ const debug = debugFactory( 'delphin:actions' );
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
-import { removeBearerCookie, saveTokenInBearerCookie } from 'client/bearer-cookie';
 import {
 	CONNECT_USER,
 	CONNECT_USER_COMPLETE,
@@ -100,9 +99,6 @@ export function fetchUser( bearerToken ) {
 		me.get( ( error, results ) => {
 			if ( error ) {
 				dispatch( { type: FETCH_USER_FAIL } );
-
-				removeBearerCookie();
-
 				return;
 			}
 
@@ -112,18 +108,12 @@ export function fetchUser( bearerToken ) {
 }
 
 /**
- * Logs the user out and deletes any bearer cookie.
+ * Logs the user out and deletes any bearer cookie on the client.
  *
- * @returns {function} the corresponding action thunk
+ * @returns {object} the corresponding action object
  */
 export function logoutUser() {
-	return dispatch => {
-		dispatch( {
-			type: REMOVE_USER
-		} );
-
-		removeBearerCookie();
-	};
+	return { type: REMOVE_USER };
 }
 
 export function verifyUser( email, code, twoFactorAuthenticationCode ) {
@@ -163,8 +153,6 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 
 				// Reinitialize WPCOM so that future requests will be authenticated
 				wpcomAPI = WPCOM( bearerToken );
-
-				saveTokenInBearerCookie( bearerToken );
 
 				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
 

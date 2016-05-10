@@ -12,10 +12,11 @@ import thunk from 'redux-thunk';
 import { analyticsMiddleware } from './analytics-middleware';
 import App from 'app';
 import { fetchUser } from 'actions';
-import { getTokenFromBearerCookie } from 'lib/bearer-cookie';
+import { getTokenFromBearerCookie } from './bearer-cookie';
 import i18n from 'lib/i18n';
 import reducers from 'reducers';
 import Stylizer, { insertCss } from 'lib/stylizer';
+import { userMiddleware } from './user-middleware';
 
 const store = createStore(
 	combineReducers( {
@@ -26,7 +27,8 @@ const store = createStore(
 	applyMiddleware(
 		routerMiddleware( browserHistory ),
 		thunk,
-		analyticsMiddleware
+		analyticsMiddleware,
+		userMiddleware
 	)
 );
 

@@ -24,6 +24,12 @@ export default reduxForm(
 		redirectToCheckout() {
 			dispatch( push( getPath( 'checkout' ) ) );
 		},
+		redirectToSearch( query ) {
+			dispatch( push( {
+				pathname: getPath( 'search' ),
+				query: { q: query }
+			} ) );
+		},
 		redirectToSignup() {
 			dispatch( push( getPath( 'signupUser' ) ) );
 		},

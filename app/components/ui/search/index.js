@@ -27,6 +27,7 @@ const Search = React.createClass( {
 	},
 
 	fetchResults( query ) {
+		this.props.redirectToSearch( query );
 		this.props.fetchDomainSuggestions( query );
 	},
 

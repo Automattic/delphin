@@ -2,6 +2,7 @@
 import i18n from 'lib/i18n';
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -15,6 +16,8 @@ const Home = React.createClass( {
 	handleSubmit( { query } ) {
 		if ( query && query.trim() !== '' ) {
 			this.props.redirectToSearch();
+		} else {
+			ReactDOM.findDOMNode( this.refs.query ).focus();
 		}
 	},
 
@@ -31,7 +34,8 @@ const Home = React.createClass( {
 					{ ...query }
 					autoFocus
 					className={ styles.field }
-					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+					placeholder={ i18n.translate( 'Type a few keywords or an address' ) }
+					ref="query" />
 
 				<ReactCSSTransitionGroup
 					transitionName={ styles.emptySearchNotice }

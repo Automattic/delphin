@@ -1,5 +1,8 @@
 // External dependencies
 import debugFactory from 'debug';
+import config from '../../config';
+import { default as getPath } from 'lodash/get';
+import noop from 'lodash/noop';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -29,7 +32,7 @@ function addLocaleQueryParam( locale, query ) {
         return query;
     }
 
-    return Object.assign( query, { locale } );
+    return Object.assign( {}, query, { locale } );
 }
 
 /***
@@ -40,7 +43,7 @@ function addLocaleQueryParam( locale, query ) {
  */
 function getWpcomInstance( token ) {
     if ( ! token && wpcomApi.instanceToken !== token ) {
-        debug( 'switching wpcom instance for tokenized ' + token );
+        debug( 'switching wpcom instance for token ' + token );
         wpcomApi.instance = WPCOM( token );
         wpcomApi.instanceToken = token;
     }
@@ -55,11 +58,16 @@ function getWpcomInstance( token ) {
  * @returns {Promise} promise from WPCOM
  */
 function makeWpcomRequest( state, action ) {
-    // get those from state
-    const token = null;
-    const locale = null;
+    let token;
+    let locale;
 
-    const api = getWpcomInstance( );
+    // get token and locale from state if user logged in
+    if ( getPath( state, 'user.isLoggedIn' ) ) {
+        token = getPath( state, 'user.data.bearerToken' );
+        locale = getPath( state, 'user.data.locale' );
+    }
+
+    const api = getWpcomInstance( token );
 
     let { method, params, query, payload } = action;
 
@@ -74,15 +82,22 @@ function makeWpcomRequest( state, action ) {
         };
     }
 
-    query = query ? query : {};
-    query = addLocaleQueryParam( locale, query );
+	const wordpressConfig = config( 'wordpress' );
+	if ( wordpressConfig && method != 'get' ) {
+		payload = Object.assign( {}, payload, {
+			client_id: wordpressConfig.rest_api_oauth_client_id,
+			client_secret: wordpressConfig.rest_api_oauth_client_secret
+		} );
+	}
+    query = query ? addLocaleQueryParam( locale, query ) : {};
 
     const reqArgs = [ params, query ];
 
-    if ( ! payload ) {
+    if ( payload ) {
         reqArgs.push( payload );
     }
 
+	debug( 'requesting', reqArgs );
     return api.req[ method ].apply( api.req, reqArgs );
 }
 
@@ -90,7 +105,7 @@ function makeWpcomRequest( state, action ) {
  * Helper to get an action creator for action field, if supplied actionCreator
  * is already a function, nothing is done, it's simply returned, if it's a string,
  * action creator function is created.
- * @param {Function|String} actionCreator actionCretor function or an action string
+ * @param {Function|String} actionCreator actionCreator function or an action string
  * @returns {Function} action creator
  */
 function getActionCreator( actionCreator ) {
@@ -99,8 +114,10 @@ function getActionCreator( actionCreator ) {
     }
 
     if ( typeof actionCreator === 'string' ) {
-        return () => ( { type: actionCreator } );
+        return () =>( { type: actionCreator } );
     }
+
+    return noop;
 }
 
 /***
@@ -114,9 +131,11 @@ const wpcomMiddleware = store => next => action => {
 
         // the return of the promise used here mainly for testing
         return makeWpcomRequest( store.getState(), action ).then( ( data ) => {
+            debug( 'request success', action );
             // dispatch success:
             store.dispatch( getActionCreator( action.success )( data ) );
         } ).catch( ( err ) => {
+            debug( 'request failed', action, err );
             // dispatch failure:
             store.dispatch( getActionCreator( action.fail )( err ) );
         } );

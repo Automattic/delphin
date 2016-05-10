@@ -6,7 +6,7 @@ const debug = debugFactory( 'delphin:actions' );
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
-import { removeBearerCookie, saveTokenInBearerCookie } from 'lib/bearer-cookie';
+import { removeBearerCookie, saveTokenInBearerCookie } from 'client/bearer-cookie';
 import {
 	CONNECT_USER,
 	CONNECT_USER_COMPLETE,

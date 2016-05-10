@@ -1,8 +1,6 @@
 // External dependencies
 import debugFactory from 'debug';
 import WPCOM from 'wpcom';
-import qs from 'querystring';
-const debug = debugFactory( 'delphin:wpcom-proxy' );
 
 // Internal dependencies
 import {
@@ -10,6 +8,7 @@ import {
 } from 'reducers/action-types';
 
 // Module variables
+const debug = debugFactory( 'delphin:wpcom-middleware' );
 let wpcomApi = {
     instance: WPCOM(),
     instanceToken: null
@@ -33,9 +32,15 @@ function addLocaleQueryParam( locale, query ) {
     return Object.assign( query, { locale } );
 }
 
-
+/***
+ * Gets an instance of WPCOM according to supplied token,
+ * if the instance wasn't previously instantiated with that token a new instance is created
+ * @param token bearer token for WPCOM
+ * @returns {WPCOM} wpcom instance
+ */
 function getWpcomInstance( token ) {
     if ( ! token && wpcomApi.instanceToken !== token ) {
+        debug( 'switching wpcom instance for tokenized ' + token );
         wpcomApi.instance = WPCOM( token );
         wpcomApi.instanceToken = token;
     }
@@ -43,12 +48,12 @@ function getWpcomInstance( token ) {
     return wpcomApi.instance;
 }
 
-function wpcomRequestCallbackFactory( resolve, reject ) {
-    return function wpcomRequestCallback() {
-
-    };
-}
-
+/***
+ * Performs a wpcom request using the state for bearer token and locale
+ * @param state application redux state
+ * @param action the WPCOM_REQUEST action
+ * @returns {Promise} promise from WPCOM
+ */
 function makeWpcomRequest( state, action ) {
     // get those from state
     const token = null;
@@ -78,9 +83,16 @@ function makeWpcomRequest( state, action ) {
         reqArgs.push( payload );
     }
 
-    return api.req[ method ].call( api.req, reqArgs );
+    return api.req[ method ].apply( api.req, reqArgs );
 }
 
+/***
+ * Helper to get an action creator for action field, if supplied actionCreator
+ * is already a function, nothing is done, it's simply returned, if it's a string,
+ * action creator function is created.
+ * @param {Function|String} actionCreator actionCretor function or an action string
+ * @returns {Function} action creator
+ */
 function getActionCreator( actionCreator ) {
     if ( typeof actionCreator === 'function' ) {
         return actionCreator;
@@ -91,12 +103,17 @@ function getActionCreator( actionCreator ) {
     }
 }
 
+/***
+ * Middleware that handles WPCOM_REQUEST
+ * @param {Object} store redux store
+ */
 const wpcomMiddleware = store => next => action => {
     if ( action.type === WPCOM_REQUEST ) {
         // dispatch loading action:
         store.dispatch( getActionCreator( action.loading )() );
 
-        makeWpcomRequest( store.getState(), action ).then( ( data ) => {
+        // the return of the promise used here mainly for testing
+        return makeWpcomRequest( store.getState(), action ).then( ( data ) => {
             // dispatch success:
             store.dispatch( getActionCreator( action.success )( data ) );
         } ).catch( ( err ) => {

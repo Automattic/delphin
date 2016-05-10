@@ -9,7 +9,7 @@ import { routerMiddleware, routerReducer, syncHistoryWithStore } from 'react-rou
 import thunk from 'redux-thunk';
 
 // Internal dependencies
-import { analyticsMiddleware } from 'lib/analytics-middleware';
+import { analyticsMiddleware } from './analytics-middleware';
 import App from 'app';
 import { fetchUser } from 'actions';
 import { getTokenFromBearerCookie } from 'lib/bearer-cookie';

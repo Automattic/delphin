@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'lib/i18n';
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -31,6 +32,19 @@ const Home = React.createClass( {
 					autoFocus
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+
+				<ReactCSSTransitionGroup
+					transitionName={ styles.emptySearchNotice }
+					transitionEnterTimeout={ 500 }
+					transitionLeaveTimeout={ 1 }>
+					{ this.state.isEmptySearch && (
+						<div className={ styles.emptySearchNotice }>
+							{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
+								args: { randomQuery: 'travel mom foodie' }
+							} ) }
+						</div>
+					) }
+				</ReactCSSTransitionGroup>
 
 				<button className={ styles.button }>
 					{ i18n.translate( "Let's find an address" ) }

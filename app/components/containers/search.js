@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
+import { fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Search from 'components/ui/search';
 
@@ -18,9 +18,6 @@ export default reduxForm(
 		user: state.user
 	} ),
 	dispatch => ( {
-		clearDomainSuggestions() {
-			dispatch( clearDomainSuggestions() );
-		},
 		fetchDomainSuggestions( query ) {
 			dispatch( fetchDomainSuggestions( query ) );
 		},

@@ -13,8 +13,11 @@ export default reduxForm(
 	},
 	undefined,
 	dispatch => ( {
-		redirectToSearch() {
-			dispatch( push( getPath( 'search' ) ) );
+		redirectToSearch( query ) {
+			dispatch( push( {
+				pathname: getPath( 'search' ),
+				query: { q: query }
+			} ) );
 		}
 	} )
 )( Home );

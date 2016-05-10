@@ -15,7 +15,7 @@ const Home = React.createClass( {
 
 	handleSubmit( { query } ) {
 		if ( query && query.trim() !== '' ) {
-			this.props.redirectToSearch();
+			this.props.redirectToSearch( query );
 		} else {
 			ReactDOM.findDOMNode( this.refs.query ).focus();
 		}

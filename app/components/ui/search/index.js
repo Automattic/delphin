@@ -36,6 +36,12 @@ const Search = React.createClass( {
 
 	selectDomain( name ) {
 		this.props.selectDomain( name );
+
+		if ( this.props.user.isLoggedIn ) {
+			this.props.redirectToCheckout();
+		} else {
+			this.props.redirectToSignup();
+		}
 	},
 
 	renderResults() {

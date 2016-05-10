@@ -25,6 +25,10 @@ const Home = React.createClass( {
 					autoFocus
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+
+				<button className={ styles.button }>
+					{ i18n.translate( "Let's find an address" ) }
+				</button>
 			</div>
 		);
 	}

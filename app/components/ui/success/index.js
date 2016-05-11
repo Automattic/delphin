@@ -3,13 +3,13 @@ import React, { PropTypes } from 'react';
 
 const Success = React.createClass( {
 	propTypes: {
-		redirectToSearch: PropTypes.func.isRequired,
+		redirectToHome: PropTypes.func.isRequired,
 		transaction: PropTypes.object
 	},
 
 	componentWillMount() {
 		if ( ! this.props.transaction ) {
-			this.props.redirectToSearch();
+			this.props.redirectToHome();
 		}
 	},
 

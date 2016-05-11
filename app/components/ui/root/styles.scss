@@ -1,6 +1,8 @@
+@import 'app/styles/fonts.scss';
+
 .root {
 	color: #2e4453;
-	font-family: Helvetica, sans-serif;
+	font-family: $body-font;
 }
 
 .header {
@@ -25,4 +27,8 @@
 	strong {
 		font-weight: bold;
 	}
+}
+
+a {
+	cursor: pointer;
 }

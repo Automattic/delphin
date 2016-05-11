@@ -20,10 +20,6 @@ const Search = React.createClass( {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 	},
 
-	componentWillUnmount() {
-		this.props.clearDomainSuggestions();
-	},
-
 	componentWillReceiveProps( nextProps ) {
 		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
 			this.debouncedFetchResults( nextProps.fields.query.value );
@@ -31,11 +27,18 @@ const Search = React.createClass( {
 	},
 
 	fetchResults( query ) {
+		this.props.redirectToSearch( query );
 		this.props.fetchDomainSuggestions( query );
 	},
 
 	selectDomain( name ) {
 		this.props.selectDomain( name );
+
+		if ( this.props.user.isLoggedIn ) {
+			this.props.redirectToCheckout();
+		} else {
+			this.props.redirectToSignup();
+		}
 	},
 
 	renderResults() {
@@ -64,8 +67,6 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<h2 className={ styles.heading }>{ i18n.translate( 'Find your perfect site address.' ) }</h2>
-
 				<input
 					{ ...query }
 					autoFocus

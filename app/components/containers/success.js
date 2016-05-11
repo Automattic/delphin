@@ -11,8 +11,8 @@ export default connect(
 		transaction: state.checkout && state.checkout.transaction
 	} ),
 	dispatch => ( {
-		redirectToSearch() {
-			dispatch( push( getPath( 'search' ) ) );
+		redirectToHome() {
+			dispatch( push( getPath( 'home' ) ) );
 		}
 	} )
 )( Success );

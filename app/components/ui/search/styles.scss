@@ -1,18 +1,13 @@
-.heading {
-	font-family: Merriweather, Georgia, 'Times New Roman', Times, serif;
-	font-size: 3.0rem;
-	font-weight: 600;
-	margin-top: 45px;
-	text-align: center;
-}
+@import 'app/styles/colors.scss';
+@import 'app/styles/fonts.scss';
 
 .field {
-	background-color: #f3f6f8;
-	border: 1px solid #a8bece;
+	background-color: $light-blue;
+	border: 1px solid $border-blue;
 	border-radius: 3px;
 	box-sizing: border-box;
 	color: #555;
-	font-family: "Open Sans", Helvetica, sans-serif;
+	font-family: $body-font;
 	font-size: 1.8rem;
 	margin-top: 30px;
 	padding: 16px 15px;

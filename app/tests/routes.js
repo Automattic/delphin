@@ -2,6 +2,7 @@ jest.disableAutomock();
 
 // Until modules that import CSS can be imported with Jest, we need to manually mock them
 jest.mock( 'components/ui/about', () => {} );
+jest.mock( 'components/containers/home', () => {} );
 jest.mock( 'components/containers/checkout', () => {} );
 jest.mock( 'components/ui/not-found', () => {} );
 jest.mock( 'components/containers/connect-user/login', () => {} );
@@ -16,7 +17,7 @@ import { getPath } from 'routes';
 
 const routes = {
 	path: '/',
-	slug: 'search',
+	slug: 'home',
 	childRoutes: [
 		{
 			path: 'foo',
@@ -42,7 +43,7 @@ const routes = {
 describe( 'routes', () => {
 	describe( 'getPath', () => {
 		it( 'should return the top level route', () => {
-			expect( getPath( 'search', {}, routes ) ).toBe( '/' );
+			expect( getPath( 'home', {}, routes ) ).toBe( '/' );
 		} );
 
 		it( 'should return a static nested route', () => {

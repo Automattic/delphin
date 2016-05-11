@@ -16,7 +16,7 @@ import {
 	FETCH_USER,
 	FETCH_USER_COMPLETE,
 	FETCH_USER_FAIL,
-	REMOVE_USER,
+	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
 	VERIFY_USER_FAIL
@@ -24,10 +24,6 @@ import {
 import paygateLoader from 'lib/paygate-loader';
 
 let wpcomAPI = WPCOM();
-
-export function removeUser() {
-	return { type: REMOVE_USER };
-}
 
 /**
  * Connects a user to a new or existing accout by sending a confirmation code to the specified email.
@@ -113,7 +109,7 @@ export function fetchUser( bearerToken ) {
  * @returns {object} the corresponding action object
  */
 export function logoutUser() {
-	return { type: REMOVE_USER };
+	return { type: LOGOUT_USER };
 }
 
 export function verifyUser( email, code, twoFactorAuthenticationCode ) {

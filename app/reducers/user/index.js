@@ -10,7 +10,7 @@ import {
 	FETCH_USER,
 	FETCH_USER_COMPLETE,
 	FETCH_USER_FAIL,
-	REMOVE_USER,
+	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
 	VERIFY_USER_FAIL
@@ -75,7 +75,7 @@ export const user = ( state = initialState, action ) => {
 		case FETCH_USER_FAIL:
 			return initialState;
 
-		case REMOVE_USER:
+		case LOGOUT_USER:
 			return initialState;
 
 		case VERIFY_USER:

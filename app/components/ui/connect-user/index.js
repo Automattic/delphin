@@ -13,15 +13,12 @@ const ConnectUser = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToVerifyUser: PropTypes.func.isRequired,
-		removeUser: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
 		if ( this.props.user.isLoggedIn ) {
 			this.props.redirectToHome();
-		} else {
-			this.props.removeUser();
 		}
 	},
 

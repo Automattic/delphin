@@ -3,7 +3,7 @@ import { removeBearerCookie, saveTokenInBearerCookie } from 'client/bearer-cooki
 import {
 	FETCH_USER_COMPLETE,
 	FETCH_USER_FAIL,
-	REMOVE_USER,
+	LOGOUT_USER,
 	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
 
@@ -12,7 +12,7 @@ export const userMiddleware = () => next => action => {
 
 	switch ( type ) {
 		case FETCH_USER_FAIL:
-		case REMOVE_USER:
+		case LOGOUT_USER:
 			removeBearerCookie();
 			break;
 		case FETCH_USER_COMPLETE:

@@ -7,7 +7,7 @@ import validator from 'validator';
 import ConnectUser from 'components/ui/connect-user';
 import { getPath } from 'routes';
 import i18n from 'lib/i18n';
-import { removeUser, connectUser } from 'actions';
+import { connectUser } from 'actions';
 
 const validate = values => {
 	if ( ! values.email ) {
@@ -36,9 +36,6 @@ export default reduxForm(
 		},
 		redirectToVerifyUser() {
 			dispatch( push( getPath( 'verifyUser' ) ) );
-		},
-		removeUser() {
-			dispatch( removeUser() );
 		}
 	} )
 )( ConnectUser );

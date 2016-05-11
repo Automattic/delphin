@@ -33,7 +33,9 @@ const app = express(),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
-i18n.initialize();
+i18n.configure( {
+	defaultLocaleSlug: config( 'i18n_default_locale_slug' )
+} );
 
 if ( config( 'env' ) === 'production' ) {
 	app.use( auth.connect( auth.basic( {

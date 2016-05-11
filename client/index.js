@@ -13,6 +13,7 @@ import { analyticsMiddleware } from './analytics-middleware';
 import App from 'app';
 import { fetchUser } from 'actions';
 import { getTokenFromBearerCookie } from './bearer-cookie';
+import config from 'config';
 import reducers from 'reducers';
 import i18n from 'i18n-calypso';
 import Stylizer, { insertCss } from 'lib/stylizer';
@@ -37,6 +38,9 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
+	i18n.configure( {
+		defaultLocaleSlug: config( 'i18n_default_locale_slug' )
+	} );
 	i18n.initialize( window.localeData );
 
 	const bearerToken = getTokenFromBearerCookie();

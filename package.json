@@ -55,6 +55,7 @@
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "http-auth": "^2.3.1",
+    "i18n-calypso": "0.0.3",
     "inherits": "^2.0.1",
     "isomorphic-style-loader": "^1.0.0",
     "jed": "1.0.2",

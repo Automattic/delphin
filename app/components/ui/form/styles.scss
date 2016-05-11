@@ -79,24 +79,3 @@
 		}
 	}
 }
-
-.empty-search-notice {
-	background: #2e4453;
-	border-radius: 0 0 3px 3px;
-	box-sizing: border-box;
-	color: white;
-	display: inline-block;
-	font-size: 1.3rem;
-	margin-top: -2px;
-	padding: 10px;
-	width: 100%;
-}
-
-.empty-search-notice-enter {
-	opacity: 0.01;
-}
-
-.empty-search-notice-enter-active {
-	opacity: 1;
-	transition: opacity 500ms ease-in;
-}

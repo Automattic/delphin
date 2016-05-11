@@ -1,8 +1,8 @@
 // External dependencies
 import i18n from 'lib/i18n';
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactDOM from 'react-dom';
-import ValidationError from 'components/ui/form/validation-error';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -22,7 +22,8 @@ const Home = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit } = this.props;
+		const { fields: { query }, handleSubmit } = this.props,
+			showEmptySearchNotice = query.touched && query.error;
 
 		return (
 			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -38,7 +39,16 @@ const Home = React.createClass( {
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) }
 					ref="query" />
 
-				<ValidationError field={ query } />
+				<ReactCSSTransitionGroup
+					transitionName={ styles.emptySearchNotice }
+					transitionEnterTimeout={ 500 }
+					transitionLeaveTimeout={ 1 }>
+					{ showEmptySearchNotice && (
+						<div className={ styles.emptySearchNotice }>
+							{ query.error }
+						</div>
+					) }
+				</ReactCSSTransitionGroup>
 
 				<button className={ styles.button }>
 					{ i18n.translate( "Let's find an address" ) }

@@ -35,7 +35,8 @@ export function fetchDomainSuggestions( query ) {
 		const payload = {
 			query,
 			quantity: 10,
-			include_wordpressdotcom: false
+			include_wordpressdotcom: false,
+			vendor: 'domainsbot'
 		};
 
 		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {

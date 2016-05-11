@@ -6,8 +6,8 @@ import validator from 'validator';
 // Internal dependencies
 import ConnectUser from 'components/ui/connect-user';
 import { getPath } from 'routes';
-import i18n from 'lib/i18n';
 import { connectUser } from 'actions';
+import i18n from 'i18n-calypso';
 
 const validate = values => {
 	if ( ! values.email ) {

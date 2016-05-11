@@ -13,9 +13,10 @@ import { analyticsMiddleware } from './analytics-middleware';
 import App from 'app';
 import { fetchUser } from 'actions';
 import { getTokenFromBearerCookie } from './bearer-cookie';
-import i18n from 'lib/i18n';
 import reducers from 'reducers';
+import i18n from 'i18n-calypso';
 import Stylizer, { insertCss } from 'lib/stylizer';
+import switchLocale from './switch-locale';
 import { userMiddleware } from './user-middleware';
 
 const store = createStore(
@@ -62,9 +63,9 @@ function boot() {
 	init();
 
 	render();
-	i18n.observer.on( 'change', render );
+	i18n.stateObserver.on( 'change', render );
 
-	window.i18n = i18n;
+	window.switchLocale = switchLocale;
 }
 
 boot();

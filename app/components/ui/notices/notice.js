@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import i18n from 'lib/i18n';
+import i18n from 'i18n-calypso';
 import styles from './styles.scss';
 
 const Notice = function( { notice, removeNotice } ) {

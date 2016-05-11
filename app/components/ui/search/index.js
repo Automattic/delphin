@@ -1,6 +1,6 @@
 // External dependencies
 import debounce from 'lodash/debounce';
-import i18n from 'lib/i18n';
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 

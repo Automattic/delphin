@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
-import i18n from 'lib/i18n';
+import i18n from 'i18n-calypso';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';

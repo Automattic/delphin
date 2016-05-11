@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 // Internal dependencies
 import { connectUser, verifyUser } from 'actions';
 import { getPath } from 'routes';
-import i18n from 'lib/i18n';
+import i18n from 'i18n-calypso';
 import VerifyUser from 'components/ui/connect-user/verify-user';
 
 const validate = values => {

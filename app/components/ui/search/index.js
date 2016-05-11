@@ -5,10 +5,9 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import config from 'config';
 import styles from './styles.scss';
 import Suggestion from './suggestion';
-
-const initialNumberOfResultsToDisplay = 6;
 
 const Search = React.createClass( {
 	propTypes: {
@@ -20,7 +19,7 @@ const Search = React.createClass( {
 	},
 
 	getDefaultProps() {
-		return { numberOfResultsToDisplay: initialNumberOfResultsToDisplay };
+		return { numberOfResultsToDisplay: config( 'initial_number_of_search_results' ) };
 	},
 
 	componentDidMount() {
@@ -53,7 +52,7 @@ const Search = React.createClass( {
 
 		this.props.redirectToSearch(
 			this.props.values.query,
-			this.props.numberOfResultsToDisplay + initialNumberOfResultsToDisplay
+			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' )
 		);
 	},
 

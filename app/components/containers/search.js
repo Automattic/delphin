@@ -3,11 +3,10 @@ import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
+import config from 'config';
 import { fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Search from 'components/ui/search';
-
-const initialNumberOfResultsToDisplay = 6;
 
 export default reduxForm(
 	{
@@ -28,7 +27,7 @@ export default reduxForm(
 			dispatch( push( getPath( 'checkout' ) ) );
 		},
 		redirectToSearch( query, numberOfResultsToDisplay ) {
-			if ( query !== ownProps.location.query.q || initialNumberOfResultsToDisplay === numberOfResultsToDisplay ) {
+			if ( query !== ownProps.location.query.q || config( 'initial_number_of_search_results' ) === numberOfResultsToDisplay ) {
 				// reset the result count when the query changes and hide it from the url if it is the default
 				numberOfResultsToDisplay = undefined;
 			}

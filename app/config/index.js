@@ -6,6 +6,8 @@ const NODE_ENV = process.env.NODE_ENV,
 
 const config = {
 	env: NODE_ENV || 'development',
+	i18n_default_locale_slug: 'en',
+	initial_number_of_search_results: 6,
 	tracks_event_prefix: 'delphin_',
 	languages,
 	features: {

@@ -46,3 +46,17 @@
 		border-color: #4F6E84;
 	}
 }
+
+.additional-results-link-container {
+	margin: 20px 0 15px;
+	text-align: center;
+}
+
+.additional-results-link {
+	color: $dark-blue;
+	font-size: 2.1rem;
+
+	&:focus {
+		outline: none;
+	}
+}

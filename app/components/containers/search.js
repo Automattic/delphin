@@ -15,7 +15,8 @@ export default reduxForm(
 	( state, ownProps ) => ( {
 		results: state.domainSearch.results,
 		initialValues: { query: ownProps.location.query.q },
-		user: state.user
+		user: state.user,
+		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined
 	} ),
 	dispatch => ( {
 		fetchDomainSuggestions( query ) {
@@ -24,10 +25,10 @@ export default reduxForm(
 		redirectToCheckout() {
 			dispatch( push( getPath( 'checkout' ) ) );
 		},
-		redirectToSearch( query ) {
+		redirectToSearch( query, numberOfResultsToDisplay ) {
 			dispatch( push( {
 				pathname: getPath( 'search' ),
-				query: { q: query }
+				query: { q: query, r: numberOfResultsToDisplay }
 			} ) );
 		},
 		redirectToSignup() {

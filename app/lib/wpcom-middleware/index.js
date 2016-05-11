@@ -2,7 +2,6 @@
 import debugFactory from 'debug';
 import config from '../../config';
 import { default as getPath } from 'lodash/get';
-import noop from 'lodash/noop';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -38,10 +37,10 @@ function addLocaleQueryParam( locale, query ) {
 /**
  * Gets an instance of WPCOM according to supplied token,
  * if the instance wasn't previously instantiated with that token a new instance is created
- * @param token bearer token for WPCOM
+ * @param {String} token bearer token for WPCOM
  * @returns {WPCOM} wpcom instance
  */
-function getWpcomInstance( token ) {
+function getWPCOMInstance( token ) {
 	if ( ! token && wpcomApi.instanceToken !== token ) {
 		debug( 'switching wpcom instance for token ' + token );
 		wpcomApi.instance = WPCOM( token );
@@ -53,8 +52,8 @@ function getWpcomInstance( token ) {
 
 /**
  * Performs a wpcom request using the state for bearer token and locale
- * @param state application redux state
- * @param action the WPCOM_REQUEST action
+ * @param {Object} state application redux state
+ * @param {Object} action the WPCOM_REQUEST action
  * @returns {Promise} promise from WPCOM
  */
 function makeWpcomRequest( state, action ) {
@@ -67,7 +66,7 @@ function makeWpcomRequest( state, action ) {
 		locale = getPath( state, 'user.data.locale' );
 	}
 
-	const api = getWpcomInstance( token );
+	const api = getWPCOMInstance( token );
 
 	let { method, params, query, payload } = action;
 
@@ -83,7 +82,7 @@ function makeWpcomRequest( state, action ) {
 	}
 
 	const wordpressConfig = config( 'wordpress' );
-	if ( wordpressConfig && method != 'get' ) {
+	if ( wordpressConfig && method !== 'get' ) {
 		payload = Object.assign( {}, payload, {
 			client_id: wordpressConfig.rest_api_oauth_client_id,
 			client_secret: wordpressConfig.rest_api_oauth_client_secret
@@ -117,12 +116,21 @@ function getActionCreator( actionCreator ) {
 		return () =>( { type: actionCreator } );
 	}
 
-	return noop;
+	// return passthru lambda, so we'll keep the chain
+	return ( param ) => {
+		// we want to keep the promise in rejected state as a default behaviour
+		if ( param instanceof Error ) {
+			throw param;
+		}
+
+		return param;
+	};
 }
 
 /**
  * Middleware that handles WPCOM_REQUEST
  * @param {Object} store redux store
+ * @returns {Function} middleware function
  */
 const wpcomMiddleware = store => next => action => {
 

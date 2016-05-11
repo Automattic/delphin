@@ -1,12 +1,12 @@
 
 function createMockFunctionWithResolvedPromise( rejectPromise ) {
-	return jest.genMockFunction().mockImplementation(() => {
-		return new Promise(function(resolve, reject) {
+	return jest.genMockFunction().mockImplementation( () => {
+		return new Promise( ( resolve, reject ) => {
 			if ( rejectPromise ) {
-				return reject();
+				return reject( new Error( ':-(' ) );
 			}
 
-			return resolve();
+			return resolve( { great_success: true } );
 		} );
 	} );
 }
@@ -20,11 +20,11 @@ fakeApi.req = {
 	delete: createMockFunctionWithResolvedPromise()
 };
 
-function fakeWPCOM() {
+function FakeWPCOM() {
 	return fakeApi;
 }
-fakeWPCOM.prototype.__replaceImpl = function replaceFakeImplementation( impl ) {
+FakeWPCOM.prototype.__replaceImpl = function replaceFakeImplementation( impl ) {
 	fakeApi = impl;
 };
 
-export default fakeWPCOM;
+export default FakeWPCOM;

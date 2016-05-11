@@ -214,7 +214,6 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 		},
 		fail: ( error ) => {
 			callback && callback( error );
-			throw error; // don't swallow the error
 		}
 	};
 }
@@ -228,7 +227,7 @@ export function createTransaction( user, form ) {
 		'postal-code': form['postal-code']
 	};
 
-	return ( dispatch, getState ) => {
+	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
 				bearer_token: user.data.bearerToken,
@@ -272,8 +271,8 @@ export function createTransaction( user, form ) {
 					debug( data );
 					return createTransactionComplete( form );
 				},
-				fail: ( error ) => addNotice( {
-					message: error.message,
+				fail: ( apiError ) => addNotice( {
+					message: apiError.message,
 					status: 'error'
 				} )
 			} );

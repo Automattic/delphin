@@ -9,7 +9,7 @@ import { default as middleware } from '../index';
 import { WPCOM_REQUEST } from '../../../reducers/action-types.js';
 import WPCOM from 'wpcom';
 
-describe( 'middleware', () => {
+describe( 'wpcom-middleware', () => {
 	describe( 'unrelated action', () => {
 		it( 'should call next middleware', () => {
 			const store = {
@@ -39,8 +39,7 @@ describe( 'middleware', () => {
 		} );
 	} );
 
-	describe( 'wpcom request', () => {
-
+	describe( 'wpcom request action', () => {
 		const method = 'post';
 		const params = { path: '/users/email' };
 		const payload = { email: 'hello@somedomain.com' };
@@ -63,9 +62,8 @@ describe( 'middleware', () => {
 				success: SUCCESS_ACTION,
 				fail: FAIL_ACTION
 			} );
-console.log( WPCOM().req[ method ].calls );
-			expect( WPCOM().req[ method ] ).toBeCalledWith( params, {}, payload );
 
+			expect( WPCOM().req[ method ] ).toBeCalledWith( params, {}, payload );
 		} );
 
 		pit( 'should dispatch success action', () => {
@@ -73,7 +71,6 @@ console.log( WPCOM().req[ method ].calls );
 				getState: jest.genMockFunction().mockReturnValue( {} ),
 				dispatch: jest.genMockFunction()
 			};
-
 
 			const promise = middleware( store )( () => {} )( {
 				type: WPCOM_REQUEST,
@@ -84,7 +81,6 @@ console.log( WPCOM().req[ method ].calls );
 				success: SUCCESS_ACTION,
 				fail: FAIL_ACTION
 			} );
-
 
 			expect( WPCOM().req[ method ] ).toBeCalled();
 			expect( store.dispatch ).toBeCalledWith( { type: LOADING_ACTION } );
@@ -108,11 +104,136 @@ console.log( WPCOM().req[ method ].calls );
 				fail: FAIL_ACTION
 			} );
 
-
 			expect( WPCOM().req[ method ] ).toBeCalled();
 			expect( store.dispatch ).toBeCalledWith( { type: LOADING_ACTION } );
 
 			return promise.then( () => expect( store.dispatch ).toBeCalledWith( { type: FAIL_ACTION } ) );
+		} );
+
+		pit( 'should propagate result of inner action dispatch on success', () => {
+			const dummyAction = { type: 'DUMMY' };
+			const dummyActionResult = { result: 'Hurray!' };
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => {
+					if ( action && action.type === dummyAction.type ) {
+						return Promise.resolve( dummyActionResult );
+					}
+				} )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method: 'get',
+				params,
+				payload,
+				loading: LOADING_ACTION,
+				success: () => dummyAction,
+				fail: FAIL_ACTION
+			} );
+
+			return promise.then( res => expect( res ).toEqual( dummyActionResult ) );
+		} );
+
+		pit( 'should propagate result of inner action dispatch on failure', () => {
+			const dummyAction = { type: 'DUMMY' };
+			const dummyActionResult = { result: 'Hurray!' };
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => {
+					if ( action && action.type === dummyAction.type ) {
+						return Promise.resolve( dummyActionResult );
+					}
+				} )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method: 'put', // hardcoded to fail in the mock
+				params,
+				payload,
+				loading: LOADING_ACTION,
+				success: SUCCESS_ACTION,
+				fail: () => dummyAction
+			} );
+
+			return promise.then( res => expect( res ).toEqual( dummyActionResult ) );
+		} );
+
+		pit( 'should propagate whatever success action creator returns', () => {
+			const dummyValue = 42;
+
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => action )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params,
+				payload,
+				loading: LOADING_ACTION,
+				success: () => dummyValue,
+				fail: FAIL_ACTION
+			} );
+
+			return promise.then( res => expect( res ).toEqual( dummyValue ) );
+		} );
+
+		pit( 'should propagate whatever fail action creator returns', () => {
+			const dummyValue = 42;
+
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => action )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method: 'put', // hardcoded to fail in the mock
+				params,
+				payload,
+				loading: LOADING_ACTION,
+				fail: () => dummyValue,
+				success: FAIL_ACTION
+			} );
+
+			return promise.then( res => expect( res ).toEqual( dummyValue ) );
+		} );
+
+		pit( 'default action creator just passes threw the success result', () => {
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => action )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params,
+				payload
+			} );
+
+			expect( WPCOM().req[ method ] ).toBeCalled();
+			return promise.then( res => expect( res ).toEqual( { great_success: true } ) );
+		} );
+
+		pit( 'default action creator just passes threw the error object', () => {
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => action )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method: 'put', // hardcoded to fail in the mock
+				params,
+				payload
+			} );
+
+			expect( WPCOM().req[ method ] ).toBeCalled();
+			return promise.catch( res => expect( res instanceof Error ).toBeTruthy() );
 		} );
 	} );
 } );

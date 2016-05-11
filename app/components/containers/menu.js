@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import Menu from 'components/ui/menu';
-import { removeUser } from 'actions';
+import { logoutUser } from 'actions';
 
 export default connect(
 	state => ( {
@@ -11,7 +11,7 @@ export default connect(
 	} ),
 	dispatch => ( {
 		logoutUser() {
-			return dispatch( removeUser() );
+			return dispatch( logoutUser() );
 		}
 	} )
 )( Menu );

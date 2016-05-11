@@ -7,7 +7,10 @@ import {
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
-	REMOVE_USER,
+	FETCH_USER,
+	FETCH_USER_COMPLETE,
+	FETCH_USER_FAIL,
+	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
 	VERIFY_USER_FAIL
@@ -16,7 +19,7 @@ import {
 export const initialState = {
 	intention: null,
 	isLoggedIn: false,
-	isUpdating: false,
+	isRequesting: false,
 	wasCreated: false,
 	data: {
 		bearerToken: null,
@@ -31,36 +34,70 @@ export const user = ( state = initialState, action ) => {
 	switch ( type ) {
 		case CONNECT_USER:
 			return merge( {}, state, {
-				data: { email }, isUpdating: true, intention
+				data: { email },
+				isRequesting: true,
+				intention
 			} );
+
 		case CONNECT_USER_COMPLETE:
 			return merge( {}, state, {
-				data: { email, twoFactorAuthenticationEnabled }, isUpdating: false, wasCreated: true
+				data: { email, twoFactorAuthenticationEnabled },
+				isRequesting: false,
+				wasCreated: true
 			} );
+
 		case CONNECT_USER_FAIL:
 			return merge( {}, state, {
-				isUpdating: false, wasCreated: false
+				isRequesting: false,
+				wasCreated: false
 			} );
+
 		case CONNECT_USER_WARNING:
 			return merge( {}, state, {
 				data: { notice }
 			} );
-		case REMOVE_USER:
+
+		case FETCH_USER:
+			return merge( {}, state, {
+				isRequesting: true
+			} );
+
+		case FETCH_USER_COMPLETE:
+			return merge( {}, state, {
+				isLoggedIn: true,
+				isRequesting: false,
+				data: {
+					bearerToken,
+					email
+				}
+			} );
+
+		case FETCH_USER_FAIL:
 			return initialState;
+
+		case LOGOUT_USER:
+			return initialState;
+
 		case VERIFY_USER:
-			return merge( {}, state, { isUpdating: true } );
+			return merge( {}, state, {
+				isRequesting: true
+			} );
+
 		case VERIFY_USER_COMPLETE:
 			return merge( {}, state, {
 				isLoggedIn: true,
-				isUpdating: false,
+				isRequesting: false,
 				data: {
 					bearerToken
 				}
 			} );
+
 		case VERIFY_USER_FAIL:
 			return merge( {}, state, {
-				isLoggedIn: false, isUpdating: false
+				isLoggedIn: false,
+				isRequesting: false
 			} );
+
 		default:
 			return state;
 	}

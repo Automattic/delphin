@@ -13,19 +13,17 @@ import {
 	CONNECT_USER_WARNING,
 	CREATE_SITE_COMPLETE,
 	CREATE_TRANSACTION_COMPLETE,
-	REMOVE_USER,
+	FETCH_USER,
+	FETCH_USER_COMPLETE,
+	FETCH_USER_FAIL,
+	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
 	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-let wpcomAPI = WPCOM(),
-	bearerToken;
-
-export function removeUser() {
-	return { type: REMOVE_USER };
-}
+let wpcomAPI = WPCOM();
 
 /**
  * Connects a user to a new or existing accout by sending a confirmation code to the specified email.
@@ -79,6 +77,41 @@ export function connectUser( email, intention, callback ) {
 	};
 }
 
+/**
+ * Fetches the user profile with the specified access token.
+ *
+ * @param {string} bearerToken - access token
+ * @returns {function} the corresponding action thunk
+ */
+export function fetchUser( bearerToken ) {
+	return dispatch => {
+		dispatch( {
+			type: FETCH_USER
+		} );
+
+		const wpcom = WPCOM( bearerToken );
+		const me = wpcom.me();
+
+		me.get( ( error, results ) => {
+			if ( error ) {
+				dispatch( { type: FETCH_USER_FAIL } );
+				return;
+			}
+
+			dispatch( { type: FETCH_USER_COMPLETE, bearerToken, email: results.email } );
+		} );
+	};
+}
+
+/**
+ * Logs the user out and deletes any bearer cookie on the client.
+ *
+ * @returns {object} the corresponding action object
+ */
+export function logoutUser() {
+	return { type: LOGOUT_USER };
+}
+
 export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	return dispatch => {
 		dispatch( { type: VERIFY_USER } );
@@ -112,7 +145,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 					return reject();
 				}
 
-				bearerToken = response.body.token.access_token;
+				const bearerToken = response.body.token.access_token;
 
 				// Reinitialize WPCOM so that future requests will be authenticated
 				wpcomAPI = WPCOM( bearerToken );
@@ -125,10 +158,10 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	};
 }
 
-export function createSite( form ) {
+export function createSite( user, form ) {
 	return dispatch => {
 		const payload = {
-			bearer_token: bearerToken,
+			bearer_token: user.data.bearerToken,
 			blog_name: form.domain,
 			blog_title: form.domain,
 			lang_id: 1,
@@ -208,9 +241,9 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	}
 }
 
-export function createTransaction( form ) {
+export function createTransaction( user, form ) {
 	const cardDetails = {
-		bearer_token: bearerToken,
+		bearer_token: user.data.bearerToken,
 		name: form.name,
 		number: form['credit-card-number'],
 		cvv: form.cvv,
@@ -221,7 +254,7 @@ export function createTransaction( form ) {
 	return dispatch => {
 		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
-				bearer_token: bearerToken,
+				bearer_token: user.data.bearerToken,
 				payment_key: response,
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',

@@ -40,11 +40,11 @@ export default reduxForm(
 		connectUser( email, intention, callback ) {
 			return dispatch( connectUser( email, intention, callback ) );
 		},
+		redirectToHome() {
+			dispatch( push( getPath( 'search' ) ) );
+		},
 		redirectToSignup() {
 			dispatch( push( getPath( 'signupUser' ) ) );
-		},
-		redirectToSearch() {
-			dispatch( push( getPath( 'search' ) ) );
 		},
 		verifyUser( email, code, twoFactorAuthenticationCode ) {
 			return dispatch( verifyUser( email, code, twoFactorAuthenticationCode ) );

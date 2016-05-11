@@ -11,21 +11,22 @@ const ConnectUser = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		redirectToSearch: PropTypes.func.isRequired,
+		redirectToHome: PropTypes.func.isRequired,
 		redirectToVerifyUser: PropTypes.func.isRequired,
-		removeUser: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
 		if ( this.props.user.isLoggedIn ) {
-			this.props.redirectToSearch();
-		} else {
-			this.props.removeUser();
+			this.props.redirectToHome();
 		}
 	},
 
 	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.user.isLoggedIn ) {
+			this.props.redirectToHome();
+		}
+
 		if ( ! this.props.user.wasCreated && nextProps.user.wasCreated ) {
 			this.props.redirectToVerifyUser();
 		}
@@ -46,7 +47,7 @@ const ConnectUser = React.createClass( {
 						</fieldset>
 					}
 					submitArea={
-						<button disabled={ user.isUpdating }>
+						<button disabled={ user.isRequesting }>
 							{ i18n.translate( 'Next' ) }
 						</button>
 					} />

@@ -15,14 +15,14 @@ describe( 'state.user', () => {
 		expect( user( undefined, { type: 'RANDOM' } ) ).toEqual( initialState );
 	} );
 
-	it( 'should update `email` and `isUpdating` when the user is created', () => {
+	it( 'should update `email` and `isRequesting` when the user is created', () => {
 		expect( user( undefined, {
 			type: CONNECT_USER,
 			email: 'foo@bar.com'
 		} ) ).toEqual( {
 			intention: null,
 			isLoggedIn: false,
-			isUpdating: true,
+			isRequesting: true,
 			wasCreated: false,
 			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: null }
 		} );
@@ -36,20 +36,20 @@ describe( 'state.user', () => {
 		} ) ).toEqual( {
 			intention: null,
 			isLoggedIn: false,
-			isUpdating: false,
+			isRequesting: false,
 			wasCreated: true,
 			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: false }
 		} );
 	} );
 
-	it( 'should update `isUpdating` when verifying', () => {
-		expect( user( undefined, { type: VERIFY_USER } ).isUpdating ).toBe( true );
+	it( 'should update `isRequesting` when verifying', () => {
+		expect( user( undefined, { type: VERIFY_USER } ).isRequesting ).toBe( true );
 	} );
 
-	it( 'should update `isUpdating`, `isLoggedIn`, and `bearerToken` when the user is verified', () => {
+	it( 'should update `isRequesting`, `isLoggedIn`, and `bearerToken` when the user is verified', () => {
 		const result = user( undefined, { type: VERIFY_USER_COMPLETE, bearerToken: 'foobar' } );
 
-		expect( result.isUpdating ).toBe( false );
+		expect( result.isRequesting ).toBe( false );
 		expect( result.isLoggedIn ).toBe( true );
 		expect( result.data.bearerToken ).toBe( 'foobar' );
 	} );

@@ -29,7 +29,7 @@
 }
 
 .field-area {
-	background: #f3f6f8;
+	background: $light-blue;
 	padding: 30px;
 
 	label {
@@ -39,7 +39,7 @@
 	}
 
 	input {
-		border: 1px solid #a8bece;
+		border: 1px solid $border-blue;
 		border-radius: 2px;
 		box-sizing: border-box;
 		display: block;

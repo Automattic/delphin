@@ -134,11 +134,11 @@ const wpcomMiddleware = store => next => action => {
 		return makeWpcomRequest( store.getState(), action ).then( ( data ) => {
 			debug( 'request success', action );
 			// dispatch success:
-			store.dispatch( getActionCreator( action.success )( data ) );
+			return store.dispatch( getActionCreator( action.success )( data ) );
 		} ).catch( ( err ) => {
 			debug( 'request failed', action, err );
 			// dispatch failure:
-			store.dispatch( getActionCreator( action.fail )( err ) );
+			return store.dispatch( getActionCreator( action.fail )( err ) );
 		} );
 	}
 

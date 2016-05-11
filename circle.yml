@@ -1,4 +1,12 @@
+machine:
+  node:
+    version: 5.6.0
+
 deployment:
+  production:
+    branch: production
+    commands:
+      - ./deploy_prod.sh
   staging:
     branch: master
     heroku:

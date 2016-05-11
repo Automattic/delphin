@@ -151,8 +151,8 @@ export function createSite( user, form ) {
 		},
 		loading: VERIFY_USER,
 		success: ( data ) => createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ),
-		fail: ( err ) => addNotice( {
-			message: err.message,
+		fail: ( error ) => addNotice( {
+			message: error.message,
 			status: 'error'
 		} )
 	};

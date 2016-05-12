@@ -53,7 +53,9 @@ export function connectUser( email, intention, callback ) {
 				if ( error ) {
 					dispatch( { type: CONNECT_USER_FAIL } );
 
-					return reject( { email: data.message } );
+					reject( { email: data.message } );
+
+					return;
 				}
 
 				if ( data.warning ) {
@@ -95,6 +97,7 @@ export function fetchUser( bearerToken ) {
 		me.get( ( error, results ) => {
 			if ( error ) {
 				dispatch( { type: FETCH_USER_FAIL } );
+
 				return;
 			}
 
@@ -128,11 +131,15 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 					} );
 
 					if ( data.error === 'invalid_verification_code' ) {
-						return reject( { code: data.message } );
+						reject( { code: data.message } );
+
+						return;
 					}
 
 					if ( data.error === 'invalid_2FA_code' ) {
-						return reject( { twoFactorAuthenticationCode: data.message } );
+						reject( { twoFactorAuthenticationCode: data.message } );
+
+						return;
 					}
 
 					// If the error isn't invalid_verification_code or invalid_2FA_code
@@ -142,7 +149,9 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 						status: 'error'
 					} ) );
 
-					return reject();
+					reject();
+
+					return;
 				}
 
 				const bearerToken = response.body.token.access_token;
@@ -174,10 +183,12 @@ export function createSite( user, form ) {
 			const data = JSON.parse( results.text );
 
 			if ( error ) {
-				return dispatch( addNotice( {
+				dispatch( addNotice( {
 					message: data.message,
 					status: 'error'
 				} ) );
+
+				return;
 			}
 
 			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
@@ -209,12 +220,14 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	wpcomAPI.req.get( '/me/paygate-configuration', { request_type: requestType }, function( error, configuration ) {
 		if ( error ) {
 			callback( error );
+
 			return;
 		}
 
 		paygateLoader.ready( configuration.js_url, function( innerError, Paygate ) {
 			if ( innerError ) {
 				callback( innerError );
+
 				return;
 			}
 
@@ -230,7 +243,9 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 
 	function onSuccess( data ) {
 		if ( data.is_error ) {
-			return callback( new Error( 'Paygate Response Error: ' + data.error_msg ) );
+			callback( new Error( 'Paygate Response Error: ' + data.error_msg ) );
+
+			return;
 		}
 
 		callback( null, data.token );
@@ -287,10 +302,12 @@ export function createTransaction( user, form ) {
 
 			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
 				if ( apiError ) {
-					return dispatch( addNotice( {
+					dispatch( addNotice( {
 						message: apiError.message,
 						status: 'error'
 					} ) );
+
+					return;
 				}
 
 				debug( apiResults );

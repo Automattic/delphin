@@ -41,10 +41,12 @@ export function fetchDomainSuggestions( query ) {
 
 		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {
 			if ( error ) {
-				return dispatch( addNotice( {
+				dispatch( addNotice( {
 					message: error.message,
 					status: 'error'
 				} ) );
+
+				return;
 			}
 
 			dispatch( {

@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import config from 'config';
 import styles from './styles.scss';
-import Suggestion from './suggestion';
+import Suggestions from './suggestions';
 
 const Search = React.createClass( {
 	propTypes: {
@@ -58,29 +58,6 @@ const Search = React.createClass( {
 		);
 	},
 
-	renderResults() {
-		if ( ! this.props.results ) {
-			return null;
-		}
-
-		const suggestions = this.props.results
-			.slice( 0, this.props.numberOfResultsToDisplay )
-			.map( ( suggestion ) => (
-				<Suggestion
-					key={ suggestion.domain_name }
-					selectDomain={ this.selectDomain }
-					suggestion={ suggestion } />
-			) );
-
-		return (
-			<div>
-				<ul className={ styles.suggestions }>
-					{ suggestions }
-				</ul>
-			</div>
-		);
-	},
-
 	render() {
 		const { fields: { query } } = this.props,
 			showAdditionalResultsLink = this.props.results &&
@@ -94,7 +71,10 @@ const Search = React.createClass( {
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
 
-				{ this.renderResults() }
+				<Suggestions
+					count={ this.props.numberOfResultsToDisplay }
+					results={ this.props.results }
+					selectDomain={ this.selectDomain } />
 
 				{ showAdditionalResultsLink && (
 					<div className={ styles.additionalResultsLinkContainer }>

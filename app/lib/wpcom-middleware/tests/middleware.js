@@ -202,7 +202,7 @@ describe( 'wpcom-middleware', () => {
 			return promise.then( res => expect( res ).toEqual( dummyValue ) );
 		} );
 
-		pit( 'default action creator just passes threw the success result', () => {
+		pit( 'default action creator just passes through the success result', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {} ),
 				dispatch: jest.genMockFunction().mockImplementation( action => action )
@@ -219,7 +219,7 @@ describe( 'wpcom-middleware', () => {
 			return promise.then( res => expect( res ).toEqual( { great_success: true } ) );
 		} );
 
-		pit( 'default action creator just passes threw the error object', () => {
+		pit( 'default action creator just passes through the error object', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {} ),
 				dispatch: jest.genMockFunction().mockImplementation( action => action )

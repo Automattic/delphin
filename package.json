@@ -94,7 +94,9 @@
     "testDirectoryName": "tests",
     "verbose": true,
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/lodash"
+      "i18n",
+      "<rootDir>/node_modules/lodash",
+      "react"
     ]
   }
 }

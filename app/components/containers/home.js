@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import i18n from 'lib/i18n';
+import i18n from 'i18n-calypso';
 import Home from 'components/ui/home';
 
 const validate = values => {

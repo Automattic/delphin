@@ -13,9 +13,10 @@ import { analyticsMiddleware } from './analytics-middleware';
 import App from 'app';
 import { fetchUser } from 'actions';
 import { getTokenFromBearerCookie } from './bearer-cookie';
-import i18n from 'lib/i18n';
 import reducers from 'reducers';
+import i18n from 'i18n-calypso';
 import Stylizer, { insertCss } from 'lib/stylizer';
+import switchLocale from './switch-locale';
 import { userMiddleware } from './user-middleware';
 
 const store = createStore(
@@ -36,7 +37,9 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
-	i18n.initialize( window.localeData );
+	if ( window.localeData ) {
+		i18n.setLocale( window.localeData );
+	}
 
 	const bearerToken = getTokenFromBearerCookie();
 
@@ -48,13 +51,15 @@ function init() {
 }
 
 function render() {
+	var containerElement = document.getElementById( 'content' );
+	ReactDOM.unmountComponentAtNode( containerElement );
 	ReactDOM.render(
 		<Provider store={ store }>
 			<Stylizer onInsertCss={ insertCss }>
 				<App history={ history } />
 			</Stylizer>
 		</Provider>,
-		document.getElementById( 'content' )
+		containerElement
 	);
 }
 
@@ -62,9 +67,9 @@ function boot() {
 	init();
 
 	render();
-	i18n.observer.on( 'change', render );
+	i18n.stateObserver.on( 'change', render );
 
-	window.i18n = i18n;
+	window.switchLocale = switchLocale;
 }
 
 boot();

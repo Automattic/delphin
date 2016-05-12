@@ -5,7 +5,7 @@ import curry from 'lodash/curry';
 import find from 'lodash/find';
 import express from 'express';
 import fs from 'fs';
-import i18n from 'app/lib/i18n';
+import i18n from 'i18n-calypso';
 import { match, RouterContext } from 'react-router';
 import reducers from 'app/reducers';
 import { routerReducer } from 'react-router-redux';
@@ -32,8 +32,6 @@ const app = express(),
 	templatePath = path.join( __dirname, 'views', 'index.pug' ),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
-
-i18n.initialize();
 
 if ( config( 'env' ) === 'production' ) {
 	app.use( auth.connect( auth.basic( {
@@ -107,7 +105,7 @@ const init = () => {
 			const locale = getLocaleSlug( request.url ),
 				localeData = i18nCache.get( locale );
 
-			i18n.initialize( localeData );
+			i18n.setLocale( localeData );
 
 			const redirect = find( serverRedirectRoutes, route => {
 				return stripLocaleSlug( request.url ).startsWith( route.from );

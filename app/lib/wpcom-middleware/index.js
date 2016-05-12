@@ -62,8 +62,8 @@ function makeWpcomRequest( state, action ) {
 
 	// get token and locale from state if user logged in
 	if ( getPath( state, 'user.isLoggedIn' ) ) {
-		token = getPath( state, 'user.data.bearerToken' );
-		locale = getPath( state, 'user.data.locale' );
+		token = state.user.data.bearerToken;
+		locale = state.user.data.locale;
 	}
 
 	// If there's no language for the user, get if from the URL
@@ -124,7 +124,7 @@ function getActionCreator( actionCreator ) {
 	}
 
 	if ( typeof actionCreator === 'string' ) {
-		return () =>( { type: actionCreator } );
+		return () => ( { type: actionCreator } );
 	}
 
 	// return passthru lambda, so we'll keep the chain
@@ -144,7 +144,6 @@ function getActionCreator( actionCreator ) {
  * @returns {Function} middleware function
  */
 const wpcomMiddleware = store => next => action => {
-
 	if ( action.type === WPCOM_REQUEST ) {
 		// dispatch loading action:
 		store.dispatch( getActionCreator( action.loading )() );

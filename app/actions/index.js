@@ -76,7 +76,8 @@ export function fetchUser( bearerToken ) {
 		success: ( data ) => ( {
 			type: FETCH_USER_COMPLETE,
 			bearerToken,
-			email: data.email
+			email: data.email,
+			locale: data.language
 		} ),
 		fail: FETCH_USER_FAIL
 	};

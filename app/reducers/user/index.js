@@ -29,7 +29,7 @@ export const initialState = {
 };
 
 export const user = ( state = initialState, action ) => {
-	const { bearerToken, email, intention, notice, type, twoFactorAuthenticationEnabled } = action;
+	const { bearerToken, email, intention, locale, notice, type, twoFactorAuthenticationEnabled } = action;
 
 	switch ( type ) {
 		case CONNECT_USER:
@@ -68,7 +68,8 @@ export const user = ( state = initialState, action ) => {
 				isRequesting: false,
 				data: {
 					bearerToken,
-					email
+					email,
+					locale
 				}
 			} );
 

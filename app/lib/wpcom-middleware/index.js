@@ -2,6 +2,7 @@
 import debugFactory from 'debug';
 import config from '../../config';
 import { default as getPath } from 'lodash/get';
+import i18n from 'i18n-calypso';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
@@ -67,6 +68,12 @@ function makeWpcomRequest( state, action ) {
 		locale = getPath( state, 'user.data.locale' );
 	}
 
+	// If there's no language for the user, get if from the URL
+	if ( ! locale ) {
+		locale = i18n.getLocaleSlug();
+	}
+
+	// If there's no token for the user get it from the cookie
 	if ( ! token ) {
 		token = getTokenFromBearerCookie();
 	}
@@ -93,7 +100,8 @@ function makeWpcomRequest( state, action ) {
 			client_secret: wordpressConfig.rest_api_oauth_client_secret
 		} );
 	}
-	query = query ? addLocaleQueryParam( locale, query ) : {};
+
+	query = query ? addLocaleQueryParam( locale, query ) : { locale };
 
 	const reqArgs = [ params, query ];
 

@@ -5,6 +5,7 @@ import { default as getPath } from 'lodash/get';
 import WPCOM from 'wpcom';
 
 // Internal dependencies
+import { getTokenFromBearerCookie } from 'client/bearer-cookie';
 import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';
@@ -41,7 +42,7 @@ function addLocaleQueryParam( locale, query ) {
  * @returns {WPCOM} wpcom instance
  */
 function getWPCOMInstance( token ) {
-	if ( ! token && wpcomApi.instanceToken !== token ) {
+	if ( token && wpcomApi.instanceToken !== token ) {
 		debug( 'switching wpcom instance for token ' + token );
 		wpcomApi.instance = WPCOM( token );
 		wpcomApi.instanceToken = token;
@@ -64,6 +65,10 @@ function makeWpcomRequest( state, action ) {
 	if ( getPath( state, 'user.isLoggedIn' ) ) {
 		token = getPath( state, 'user.data.bearerToken' );
 		locale = getPath( state, 'user.data.locale' );
+	}
+
+	if ( ! token ) {
+		token = getTokenFromBearerCookie();
 	}
 
 	const api = getWPCOMInstance( token );

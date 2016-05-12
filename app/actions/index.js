@@ -21,14 +21,8 @@ import {
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-
 // Module variables
 const debug = debugFactory( 'delphin:actions' );
-let wpcomAPI = WPCOM();
-
-export function removeUser() {
-	return { type: REMOVE_USER };
-}
 
 /**
  * Connects a user to a new or existing accout by sending a confirmation code to the specified email.
@@ -74,22 +68,17 @@ export function connectUser( email, intention, callback ) {
  * @returns {function} the corresponding action thunk
  */
 export function fetchUser( bearerToken ) {
-	return dispatch => {
-		dispatch( {
-			type: FETCH_USER
-		} );
-
-		const wpcom = WPCOM( bearerToken );
-		const me = wpcom.me();
-
-		me.get( ( error, results ) => {
-			if ( error ) {
-				dispatch( { type: FETCH_USER_FAIL } );
-				return;
-			}
-
-			dispatch( { type: FETCH_USER_COMPLETE, bearerToken, email: results.email } );
-		} );
+	return {
+		type: WPCOM_REQUEST,
+		method: 'get',
+		params: { path: '/me' },
+		loading: FETCH_USER,
+		success: ( data ) => ( {
+			type: FETCH_USER_COMPLETE,
+			bearerToken,
+			email: data.email
+		} ),
+		fail: FETCH_USER_FAIL
 	};
 }
 

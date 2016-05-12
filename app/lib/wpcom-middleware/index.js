@@ -82,7 +82,7 @@ function makeWpcomRequest( state, action ) {
 
 	// not supplied method or unsupported, revert to GET
 	if ( SUPPORTED_API_METHODS.indexOf( method ) === -1 ) {
-		method = SUPPORTED_API_METHODS[0];
+		method = 'get';
 	}
 
 	if ( typeof params === 'string' ) {

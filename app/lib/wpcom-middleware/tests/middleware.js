@@ -63,7 +63,7 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalledWith( params, {}, payload );
+			expect( WPCOM().req[ method ] ).toBeCalledWith( params, { locale: 'en' }, payload );
 		} );
 
 		pit( 'should dispatch success action', () => {

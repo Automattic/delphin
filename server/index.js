@@ -105,7 +105,7 @@ const init = () => {
 			const locale = getLocaleSlug( request.url ),
 				localeData = i18nCache.get( locale );
 
-			i18n.initialize( localeData );
+			i18n.setLocale( localeData );
 
 			const redirect = find( serverRedirectRoutes, route => {
 				return stripLocaleSlug( request.url ).startsWith( route.from );

@@ -14,7 +14,7 @@ function switchLocale( localeSlug ) {
 			console.error( 'Encountered an error loading locale file for ' + localeSlug + '. Falling back to English.' );
 			return;
 		}
-		i18n.setLocale( localeSlug, response.body );
+		i18n.setLocale( response.body );
 	} );
 }
 

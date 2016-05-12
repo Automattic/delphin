@@ -1,5 +1,5 @@
 // External dependencies
-import i18n from 'lib/i18n';
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactDOM from 'react-dom';

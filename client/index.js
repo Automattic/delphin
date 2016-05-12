@@ -37,7 +37,9 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
-	i18n.initialize( window.localeData );
+	if ( window.localeData ) {
+		i18n.setLocale( window.localeData );
+	}
 
 	const bearerToken = getTokenFromBearerCookie();
 

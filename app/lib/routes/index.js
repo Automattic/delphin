@@ -5,25 +5,50 @@ import find from 'lodash/find';
 import config from 'config';
 
 /**
- * Returns a map of slugs to paths based on the given route.
+ * Retrieves the path of the specified route.
  *
- * @param {object} rootRoute A route object, which may contain child routes.
- * @param {string} path A string that is prepended to the path.
- * @param {object} newPaths The current map of slugs to paths.
- * @return {object} A map of slugs to paths.
+ * @param {object} route - route object
+ * @param {string} prefix - fragment that is prepended to the path
+ * @returns {string} - the path of the route
  */
-export const buildPaths = ( rootRoute, path = '', newPaths = {} ) => {
-	path = rootRoute.path === '/' ? rootRoute.path : `${ path }/${ rootRoute.path }`;
+const getPath = ( route, prefix = '' ) => {
+	if ( route.path === '/' ) {
+		return route.path;
+	}
 
-	Object.assign( newPaths, { [ rootRoute.slug ]: path } );
+	return `${ prefix }/${ route.path }`;
+};
 
-	if ( rootRoute.childRoutes ) {
-		rootRoute.childRoutes.forEach( route => {
-			newPaths = Object.assign( newPaths, buildPaths( route, path, newPaths ) );
+/**
+ * Return a new map of slugs to paths with the path of the given route added.
+ *
+ * @param {object} route - route object, which may contain child routes
+ * @param {string} prefix - fragment that is prepended to the path
+ * @param {object} paths - current map of slugs to paths
+ * @return {object} - a new map of slugs to paths
+ */
+const addPath = ( route, prefix = '', paths ) => {
+	const path = getPath( route, prefix );
+
+	let newPaths = Object.assign( {}, paths, { [ route.slug ]: path } );
+
+	if ( route.childRoutes ) {
+		route.childRoutes.forEach( childRoute => {
+			newPaths = addPath( childRoute, path, newPaths );
 		} );
 	}
 
 	return newPaths;
+};
+
+/**
+ * Returns a map of slugs to paths based on the given route.
+ *
+ * @param {object} route - route object, which may contain child routes
+ * @return {object} - a map of slugs to paths
+ */
+export const buildPaths = ( route ) => {
+	return addPath( route, '', {} );
 };
 
 /**

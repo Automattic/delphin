@@ -9,6 +9,7 @@ const config = {
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
 	tracks_event_prefix: 'delphin_',
+	default_search_sort: 'recommended',
 	languages,
 	features: {
 		boom_analytics_enabled: productionOnly,

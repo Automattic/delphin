@@ -66,3 +66,19 @@
 		outline: none;
 	}
 }
+
+.sort {
+	background: $light-blue;
+	font-size: 1.8rem;
+	padding: 30px 0;
+	text-align: center;
+}
+
+.sort-select {
+	appearance: none;
+	background: url( /images/form-ui-select.png ) no-repeat right center;
+	background-size: 50px 63px;
+	font-size: 1.8rem;
+	height: 61px;
+	padding: 0 70px 0 20px;
+}

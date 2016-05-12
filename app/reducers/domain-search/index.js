@@ -6,7 +6,7 @@ import {
 } from 'reducers/action-types';
 
 const initialState = {
-	isFetching: false,
+	isRequesting: false,
 	results: null
 };
 
@@ -19,13 +19,13 @@ export function domainSearch( state = initialState, action ) {
 
 		case DOMAIN_SUGGESTIONS_FETCH:
 			return Object.assign( {}, state, {
-				isFetching: true,
+				isRequesting: true,
 				results: null
 			} );
 
 		case DOMAIN_SUGGESTIONS_FETCH_COMPLETED:
 			return Object.assign( {}, state, {
-				isFetching: false,
+				isRequesting: false,
 				results: results
 			} );
 

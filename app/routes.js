@@ -116,7 +116,7 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 	const formattedPath = formatPattern( path, values ),
 		locale = i18n.getLocaleSlug();
 
-	if ( locale === config( 'i18n_default_locale_slug' ) || ! locale ) {
+	if ( ! locale || locale === 'en' ) {
 		return formattedPath;
 	}
 

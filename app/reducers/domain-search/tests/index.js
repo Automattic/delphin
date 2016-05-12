@@ -21,14 +21,14 @@ describe( 'domain search reducer', () => {
 
 	it( 'should return initial state when state is undefined and action is empty', () => {
 		expect( domainSearch( undefined, {} ) ).toEqual( {
-			isFetching: false,
+			isRequesting: false,
 			results: null
 		} );
 	} );
 
 	it( 'should return original state when action is empty', () => {
 		const originalState = Object.freeze( {
-				isFetching: false,
+				isRequesting: false,
 				results: [ 'example1.com', 'example2.com' ]
 			} ),
 			newState = domainSearch( originalState, {} );
@@ -38,7 +38,7 @@ describe( 'domain search reducer', () => {
 
 	it( 'should return original state when action type is not supported', () => {
 		const originalState = Object.freeze( {
-				isFetching: false,
+				isRequesting: false,
 				results: [ 'example1.com', 'example2.com' ]
 			} ),
 			newState = domainSearch( originalState, { type: 'ORDER_CHEESE_BURGER' } );
@@ -54,14 +54,14 @@ describe( 'domain search reducer for domain suggestions clear action', () => {
 		} );
 
 		expect( newState ).toEqual( {
-			isFetching: false,
+			isRequesting: false,
 			results: null
 		} );
 	} );
 
 	it( 'should return initial state', () => {
 		const originalState = Object.freeze( {
-				isFetching: true,
+				isRequesting: true,
 				results: [ 'example1.com', 'example2.com' ]
 			} ),
 			newState = domainSearch( originalState, {
@@ -69,7 +69,7 @@ describe( 'domain search reducer for domain suggestions clear action', () => {
 			} );
 
 		expect( newState ).toEqual( {
-			isFetching: false,
+			isRequesting: false,
 			results: null
 		} );
 	} );
@@ -80,20 +80,20 @@ describe( 'domain search reducer for domain suggestions fetch action', () => {
 		const newState = domainSearch( undefined, { type: DOMAIN_SUGGESTIONS_FETCH } );
 
 		expect( newState ).toEqual( {
-			isFetching: true,
+			isRequesting: true,
 			results: null
 		} );
 	} );
 
 	it( 'should clear the results when fetching', () => {
 		const originalState = Object.freeze( {
-				isFetching: false,
+				isRequesting: false,
 				results: [ 'example1.com', 'example2.com' ]
 			} ),
 			newState = domainSearch( originalState, { type: DOMAIN_SUGGESTIONS_FETCH } );
 
 		expect( newState ).toEqual( {
-			isFetching: true,
+			isRequesting: true,
 			results: null
 		} );
 	} );
@@ -107,14 +107,14 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 		} );
 
 		expect( newState ).toEqual( {
-			isFetching: false,
+			isRequesting: false,
 			results: [ 'example.com' ]
 		} );
 	} );
 
 	it( 'should return original state with fetching disabled', () => {
 		const originalState = Object.freeze( {
-				isFetching: true,
+				isRequesting: true,
 				results: [ 'example1.com', 'example2.com' ]
 			} ),
 			newState = domainSearch( originalState, {
@@ -123,7 +123,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 			} );
 
 		expect( newState ).toEqual( {
-			isFetching: false,
+			isRequesting: false,
 			results: [ 'example3.com' ]
 		} );
 	} );

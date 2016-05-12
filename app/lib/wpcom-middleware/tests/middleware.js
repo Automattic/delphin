@@ -2,10 +2,10 @@
 jest.unmock( '..' );
 
 // Breaks jest for some reason:
-//jest.unmock( 'wpcom' ); - replaced by a manual mock
+// jest.unmock( 'wpcom' ); - replaced by a manual mock
 jest.unmock( 'debug' );
 
-import { default as middleware } from '../index';
+import middleware from '../index';
 import { WPCOM_REQUEST } from '../../../reducers/action-types.js';
 import WPCOM from 'wpcom';
 

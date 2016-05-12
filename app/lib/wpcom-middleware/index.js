@@ -13,10 +13,8 @@ import {
 
 // Module variables
 const debug = debugFactory( 'delphin:wpcom-middleware' );
-let wpcomApi = {
-	instance: WPCOM(),
-	instanceToken: null
-};
+let wpcomApiInstance = WPCOM();
+let wpcomApiInstanceToken = null;
 
 const SUPPORTED_API_METHODS = [ 'get', 'post', 'put', 'delete' ];
 
@@ -43,13 +41,13 @@ function addLocaleQueryParam( locale, query ) {
  * @returns {WPCOM} wpcom instance
  */
 function getWPCOMInstance( token ) {
-	if ( token && wpcomApi.instanceToken !== token ) {
+	if ( token && wpcomApiInstanceToken !== token ) {
 		debug( 'switching wpcom instance for token ' + token );
-		wpcomApi.instance = WPCOM( token );
-		wpcomApi.instanceToken = token;
+		wpcomApiInstance = WPCOM( token );
+		wpcomApiInstanceToken = token;
 	}
 
-	return wpcomApi.instance;
+	return wpcomApiInstance;
 }
 
 /**

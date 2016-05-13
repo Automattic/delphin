@@ -1,5 +1,6 @@
 // External dependencies
 import { formatPattern } from 'react-router';
+import filter from 'lodash/filter';
 import omit from 'lodash/omit';
 
 // Internal dependencies
@@ -17,7 +18,7 @@ import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
-const childRoutes = [
+const defaultRoutes = [
 	{
 		path: 'about',
 		slug: 'about',
@@ -55,9 +56,11 @@ const childRoutes = [
 	}
 ];
 
-const childRoutesWithoutSlug = childRoutes.map( route => omit( route, 'slug' ) );
+const childRoutesWithoutSlug = defaultRoutes.map( route => omit( route, 'slug' ) );
 
-const localeRoutes = config( 'languages' ).map( language => {
+const localizedRoutes = filter( config( 'languages' ), language => {
+	return language.langSlug !== 'en';
+} ).map( language => {
 	return {
 		path: `/${ language.langSlug }`,
 		indexRoute: { component: HomeContainer },
@@ -75,10 +78,10 @@ export const routes = {
 	childRoutes: [
 		// In order to prevent `/:locale` from matching English routes like `/about`,
 		// we include the routes without a locale slug first.
-		...childRoutes,
+		...defaultRoutes,
 		// We use a list of routes with each locale slug instead of a wildcard path
 		// fragment like `/:locale` so that routes like `/foobar/about` still 404.
-		...localeRoutes,
+		...localizedRoutes,
 		{
 			path: '*',
 			component: NotFound,

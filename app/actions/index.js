@@ -38,7 +38,7 @@ export function connectUser( email, intention, callback ) {
 		method: 'post',
 		params: { path: intention === 'signup' ? '/users/email/new' : '/users/email' },
 		payload: { email },
-		loading: () => ( { type: CONNECT_USER, email, intention } ),
+		loading: { type: CONNECT_USER, email, intention },
 		success: ( data ) => {
 			return dispatch => {
 				if ( data.warning ) {

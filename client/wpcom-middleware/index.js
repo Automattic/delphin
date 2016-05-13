@@ -115,7 +115,7 @@ function makeWpcomRequest( state, action ) {
  * Helper to get an action creator for action field, if supplied actionCreator
  * is already a function, nothing is done, it's simply returned, if it's a string,
  * action creator function is created.
- * @param {Function|String} actionCreator actionCreator function or an action string
+ * @param {Function|String} actionCreator function, action string, or action object.
  * @returns {Function} action creator
  */
 function getActionCreator( actionCreator ) {
@@ -125,6 +125,10 @@ function getActionCreator( actionCreator ) {
 
 	if ( typeof actionCreator === 'string' ) {
 		return () => ( { type: actionCreator } );
+	}
+
+	if ( typeof actionCreator === 'object' ) {
+		return () => actionCreator;
 	}
 
 	// return passthru lambda, so we'll keep the chain

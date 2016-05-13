@@ -11,7 +11,7 @@ import HomeContainer from 'components/containers/home';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
 import NotFound from 'components/ui/not-found';
-import Root from 'components/ui/root';
+import Layout from 'components/ui/layout';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
@@ -68,7 +68,7 @@ const localeRoutes = config( 'languages' ).map( language => {
 export const routes = {
 	path: '/',
 	slug: 'home',
-	component: Root,
+	component: Layout,
 	indexRoute: {
 		component: HomeContainer
 	},

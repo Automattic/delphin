@@ -9,9 +9,9 @@ import Menu from 'components/containers/menu';
 import Notices from 'components/containers/notices';
 import styles from './styles.scss';
 
-const Root = ( { children } ) => {
+const Layout = ( { children } ) => {
 	return (
-		<div className={ styles.root }>
+		<div className={ styles.layout }>
 			<header className={ styles.header }>
 				<Link className={ styles.title } to={ getPath( 'home' ) }>
 					<h1>MagicDomains</h1>
@@ -29,8 +29,8 @@ const Root = ( { children } ) => {
 	);
 };
 
-Root.propTypes = {
+Layout.propTypes = {
 	children: PropTypes.node.isRequired
 };
 
-export default withStyles( styles )( Root );
+export default withStyles( styles )( Layout );

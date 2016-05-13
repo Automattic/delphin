@@ -2,7 +2,6 @@ jest.disableAutomock();
 
 // Internal dependencies
 import {
-	CLEAR_USER,
 	CONNECT_USER,
 	CONNECT_USER_COMPLETE,
 	VERIFY_USER,
@@ -52,9 +51,5 @@ describe( 'state.user', () => {
 		expect( result.isRequesting ).toBe( false );
 		expect( result.isLoggedIn ).toBe( true );
 		expect( result.data.bearerToken ).toBe( 'foobar' );
-	} );
-
-	it( 'should clear the user when a `CLEAR_USER` action appears', () => {
-		expect( user( undefined, { type: CLEAR_USER } ) ).toEqual( initialState );
 	} );
 } );

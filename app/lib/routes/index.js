@@ -28,9 +28,17 @@ const getPath = ( route, prefix = '' ) => {
  * @return {object} - a new map of slugs to paths
  */
 const addPath = ( route, prefix, paths ) => {
-	const path = getPath( route, prefix );
+	let path, newPaths;
 
-	let newPaths = Object.assign( {}, paths, { [ route.slug ]: path } );
+	if ( route.path ) {
+		path = getPath( route, prefix );
+
+		newPaths = Object.assign( {}, paths, { [ route.slug ]: path } );
+	} else {
+		path = prefix;
+
+		newPaths = Object.assign( {}, paths );
+	}
 
 	if ( route.childRoutes ) {
 		route.childRoutes.forEach( childRoute => {

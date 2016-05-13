@@ -36,6 +36,18 @@ const routes = {
 		{
 			path: 'post/:id/(:filter)',
 			slug: 'post'
+		},
+		{
+			childRoutes: [
+				{
+					path: 'sell',
+					slug: 'sell'
+				},
+				{
+					path: 'buy',
+					slug: 'buy'
+				}
+			]
 		}
 	]
 };
@@ -48,6 +60,10 @@ describe( 'routes', () => {
 
 		it( 'should return a static nested route', () => {
 			expect( getPath( 'bar', {}, routes ) ).toBe( '/foo/bar/' );
+		} );
+
+		it( 'should return a static nested route with a parent route with no path', () => {
+			expect( getPath( 'buy', {}, routes ) ).toBe( '/buy' );
 		} );
 
 		it( 'should fill in optional values', () => {

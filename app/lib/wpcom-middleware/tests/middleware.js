@@ -5,6 +5,9 @@ jest.unmock( '..' );
 // jest.unmock( 'wpcom' ); - replaced by a manual mock
 jest.unmock( 'debug' );
 
+jest.unmock( 'i18n-calypso' );
+
+import i18n from 'i18n-calypso';
 import middleware from '../index';
 import { WPCOM_REQUEST } from '../../../reducers/action-types.js';
 import WPCOM from 'wpcom';
@@ -47,7 +50,7 @@ describe( 'wpcom-middleware', () => {
 		const SUCCESS_ACTION = 'SUCCESS_ACTION';
 		const FAIL_ACTION = 'FAIL_ACTION';
 
-		it( 'should make proper api request', () => {
+		it( 'should make proper api request with the default locale', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {} ),
 				dispatch: jest.genMockFunction()
@@ -64,6 +67,29 @@ describe( 'wpcom-middleware', () => {
 			} );
 
 			expect( WPCOM().req[ method ] ).toBeCalledWith( params, { locale: 'en' }, payload );
+		} );
+
+		it( 'should make a request with the locale when it changes', () => {
+			i18n.setLocale( {
+				'': { localeSlug: 'fr' }
+			} );
+
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction()
+			};
+
+			middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params,
+				payload,
+				loading: LOADING_ACTION,
+				success: SUCCESS_ACTION,
+				fail: FAIL_ACTION
+			} );
+
+			expect( WPCOM().req[ method ] ).toBeCalledWith( params, { locale: 'fr' }, payload );
 		} );
 
 		pit( 'should dispatch success action', () => {

@@ -5,14 +5,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import SearchForm from './form';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 
 const Search = React.createClass( {
 	propTypes: {
-		fetchDomainSuggestions: PropTypes.func.isRequired,
-		fields: PropTypes.object.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
 		redirectToCheckout: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
@@ -49,11 +46,6 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<SearchForm
-					fetchDomainSuggestions={ this.props.fetchDomainSuggestions }
-					fields={ this.props.fields }
-					redirectToSearch={ this.props.redirectToSearch } />
-
 				<Suggestions
 					count={ this.props.numberOfResultsToDisplay }
 					results={ this.props.results }

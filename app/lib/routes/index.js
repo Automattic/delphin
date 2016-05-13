@@ -72,6 +72,37 @@ export const getLocaleSlug = url => {
 };
 
 /**
+ * Retrieves a localized version of the given route based on the specified language.
+ *
+ * @param {object} route - route object, which may contain child routes
+ * @param {object} language - language
+ * @returns {object} a localized route
+ */
+export const getLocalizedRoute = ( route, language ) => {
+	const localizedRoute = {};
+
+	if ( route.component ) {
+		localizedRoute.component = route.component;
+	}
+
+	if ( route.path ) {
+		localizedRoute.path = language.langSlug;
+
+		if ( route.path !== '/' ) {
+			localizedRoute.path = `${ language.langSlug }/${ route.path }`;
+		}
+	}
+
+	if ( route.childRoutes ) {
+		localizedRoute.childRoutes = route.childRoutes.map( childRoute => {
+			return getLocalizedRoute( childRoute, language );
+		} );
+	}
+
+	return localizedRoute;
+};
+
+/**
  * Strips the locale slug from the beginning of a URL, e.g. `/fr/foobar`, if present.
  *
  * @param {string} url A URL.

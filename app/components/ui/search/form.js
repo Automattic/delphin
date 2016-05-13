@@ -19,6 +19,8 @@ const SearchForm = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
+		//console.log(this.props.fields.query.value, nextProps.fields.query.value);
+		
 		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
 			this.debouncedFetchResults( nextProps.fields.query.value );
 		}

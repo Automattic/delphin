@@ -9,6 +9,14 @@ import config from 'config';
 import styles from './styles.scss';
 import Suggestion from './suggestion';
 
+/**
+ * Strips all non-digits/decimals from a string and casts it to a number.
+ *
+ * @param {string} price A price, e.g. '$18.99'
+ * @return {number} A number representing the given price, e.g. 18.99
+ */
+const getNumberFromPrice = price => Number( price.replace( /[^0-9.]/g, '' ) );
+
 const Search = React.createClass( {
 	propTypes: {
 		fetchDomainSuggestions: PropTypes.func.isRequired,
@@ -69,7 +77,22 @@ const Search = React.createClass( {
 		const sortFunctions = {
 				recommended: ( a, b ) => b.relevance - a.relevance,
 				unique: ( a, b ) => a.relevance - b.relevance,
-				short: ( a, b ) => a.domain_name.length - b.domain_name.length
+				short: ( a, b ) => a.domain_name.length - b.domain_name.length,
+				affordable: ( a, b ) => {
+					const costA = getNumberFromPrice( a.cost ),
+						costB = getNumberFromPrice( b.cost );
+
+					if ( costA > costB ) {
+						return 1;
+					}
+
+					if ( costB > costA ) {
+						return -1;
+					}
+
+					// if the prices are the same, use relevance as a tie breaker
+					return sortFunctions.recommended( a, b );
+				}
 			},
 			{ results, sort } = this.props;
 
@@ -112,6 +135,10 @@ const Search = React.createClass( {
 			{
 				value: 'short',
 				text: i18n.translate( 'short' )
+			},
+			{
+				value: 'affordable',
+				text: i18n.translate( 'affordable' )
 			}
 		];
 

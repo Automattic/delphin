@@ -5,7 +5,7 @@ import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import { buildPaths } from 'lib/routes';
+import { buildPaths, getLocalizedRoute } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
 import HomeContainer from 'components/containers/home';
@@ -13,6 +13,8 @@ import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
 import NotFound from 'components/ui/not-found';
 import Layout from 'components/ui/layout';
+import DefaultHeader from 'components/ui/layout/header/default';
+import SearchHeader from 'components/ui/layout/header/search';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
@@ -20,44 +22,54 @@ import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 const defaultRoutes = [
 	{
-		path: '/',
-		slug: 'home',
-		component: HomeContainer
+		component: DefaultHeader,
+		childRoutes: [
+			{
+				path: '/',
+				slug: 'home',
+				component: HomeContainer
+			},
+			{
+				path: 'about',
+				slug: 'about',
+				component: About
+			},
+			{
+				path: 'checkout',
+				slug: 'checkout',
+				component: CheckoutContainer
+			},
+			{
+				path: 'login',
+				slug: 'loginUser',
+				component: LoginContainer
+			},
+			{
+				path: 'signup',
+				slug: 'signupUser',
+				component: SignupContainer
+			},
+			{
+				path: 'verify',
+				slug: 'verifyUser',
+				component: VerifyUserContainer
+			},
+			{
+				path: 'success',
+				slug: 'success',
+				component: SuccessContainer
+			}
+		]
 	},
 	{
-		path: 'about',
-		slug: 'about',
-		component: About
-	},
-	{
-		path: 'checkout',
-		slug: 'checkout',
-		component: CheckoutContainer
-	},
-	{
-		path: 'login',
-		slug: 'loginUser',
-		component: LoginContainer
-	},
-	{
-		path: 'search',
-		slug: 'search',
-		component: SearchContainer
-	},
-	{
-		path: 'signup',
-		slug: 'signupUser',
-		component: SignupContainer
-	},
-	{
-		path: 'verify',
-		slug: 'verifyUser',
-		component: VerifyUserContainer
-	},
-	{
-		path: 'success',
-		slug: 'success',
-		component: SuccessContainer
+		component: SearchHeader,
+		childRoutes: [
+			{
+				path: 'search',
+				slug: 'search',
+				component: SearchContainer
+			}
+		]
 	}
 ];
 
@@ -81,16 +93,7 @@ const localizedRoutes = flatten( filter( config( 'languages' ), language => {
 	return language.langSlug !== 'en';
 } ).map( language => {
 	return defaultRoutes.map( route => {
-		const localizedRoute = {
-			component: route.component,
-			path: language.langSlug
-		};
-
-		if ( route.path !== '/' ) {
-			localizedRoute.path = `${ language.langSlug }/${ route.path }`;
-		}
-
-		return localizedRoute;
+		return getLocalizedRoute( route, language );
 	} );
 } ) );
 
@@ -122,7 +125,7 @@ export const staticPages = [ '/', '/about', '/404' ];
  * @param {object} values The values to use when replacing the route's placeholders.
  * @param {object} overrideRoutes The routes to search through.
  * @return {string|null} A string representing a path in the application, with parameters
- *	replaced by the given values.
+ *    replaced by the given values.
  */
 export const getPath = ( slug, values = {}, overrideRoutes ) => {
 	let pathMap = paths;

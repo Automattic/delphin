@@ -1,7 +1,7 @@
 // External dependencies
 import { formatPattern } from 'react-router';
 import filter from 'lodash/filter';
-import omit from 'lodash/omit';
+import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import About from 'components/ui/about';
@@ -19,6 +19,11 @@ import SuccessContainer from 'components/containers/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 const defaultRoutes = [
+	{
+		path: '/',
+		slug: 'home',
+		component: HomeContainer
+	},
 	{
 		path: 'about',
 		slug: 'about',
@@ -56,25 +61,41 @@ const defaultRoutes = [
 	}
 ];
 
-const childRoutesWithoutSlug = defaultRoutes.map( route => omit( route, 'slug' ) );
-
-const localizedRoutes = filter( config( 'languages' ), language => {
+/**
+ * Builds a list of routes that are similar to the default routes except that they are prefixed by an identifier from
+ * one of the many language we support:
+ *
+ *   {
+ *     "path": "fr"
+ *   },
+ *   {
+ *     "path": "fr/about"
+ *   },
+ *   {
+ *     "path": "fr/checkout"
+ *   },
+ *   ...
+ *
+ */
+const localizedRoutes = flatten( filter( config( 'languages' ), language => {
 	return language.langSlug !== 'en';
 } ).map( language => {
-	return {
-		path: `/${ language.langSlug }`,
-		indexRoute: { component: HomeContainer },
-		childRoutes: childRoutesWithoutSlug
-	};
-} );
+	return defaultRoutes.map( route => {
+		const localizedRoute = {
+			component: route.component,
+			path: language.langSlug
+		};
+
+		if ( route.path !== '/' ) {
+			localizedRoute.path = `${ language.langSlug }/${ route.path }`;
+		}
+
+		return localizedRoute;
+	} );
+} ) );
 
 export const routes = {
-	path: '/',
-	slug: 'home',
 	component: Layout,
-	indexRoute: {
-		component: HomeContainer
-	},
 	childRoutes: [
 		// In order to prevent `/:locale` from matching English routes like `/about`,
 		// we include the routes without a locale slug first.

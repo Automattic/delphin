@@ -1,6 +1,6 @@
 // External dependencies
 import debugFactory from 'debug';
-import config from '../../config';
+import config from 'config';
 import { default as getPath } from 'lodash/get';
 import i18n from 'i18n-calypso';
 import WPCOM from 'wpcom';

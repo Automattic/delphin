@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 
 // Internal dependencies
 import { analyticsMiddleware } from './analytics-middleware';
-import { default as wpcomMiddleware } from 'lib/wpcom-middleware';
+import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
 import { fetchUser } from 'actions';
 import { getTokenFromBearerCookie } from './bearer-cookie';

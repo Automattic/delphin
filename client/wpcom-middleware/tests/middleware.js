@@ -8,8 +8,8 @@ jest.unmock( 'debug' );
 jest.unmock( 'i18n-calypso' );
 
 import i18n from 'i18n-calypso';
-import middleware from '../index';
-import { WPCOM_REQUEST } from '../../../reducers/action-types.js';
+import middleware from '..';
+import { WPCOM_REQUEST } from 'reducers/action-types.js';
 import WPCOM from 'wpcom';
 
 describe( 'wpcom-middleware', () => {

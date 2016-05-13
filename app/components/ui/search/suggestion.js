@@ -17,7 +17,7 @@ const Suggestion = React.createClass( {
 
 	render() {
 		return (
-			<li>
+			<li className={ styles.suggestionListItem }>
 				<a
 					className={ styles.suggestion }
 					onClick={ this.selectDomain }>

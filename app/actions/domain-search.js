@@ -34,7 +34,7 @@ export function fetchDomainSuggestions( query ) {
 
 		const payload = {
 			query,
-			quantity: 10,
+			quantity: 36,
 			include_wordpressdotcom: false,
 			vendor: 'domainsbot'
 		};

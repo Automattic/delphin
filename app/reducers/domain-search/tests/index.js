@@ -85,7 +85,7 @@ describe( 'domain search reducer for domain suggestions fetch action', () => {
 		} );
 	} );
 
-	it( 'should return original state with fetching enabled', () => {
+	it( 'should clear the results when fetching', () => {
 		const originalState = Object.freeze( {
 				isFetching: false,
 				results: [ 'example1.com', 'example2.com' ]
@@ -94,7 +94,7 @@ describe( 'domain search reducer for domain suggestions fetch action', () => {
 
 		expect( newState ).toEqual( {
 			isFetching: true,
-			results: [ 'example1.com', 'example2.com' ]
+			results: null
 		} );
 	} );
 } );

@@ -19,7 +19,8 @@ export function domainSearch( state = initialState, action ) {
 
 		case DOMAIN_SUGGESTIONS_FETCH:
 			return Object.assign( {}, state, {
-				isFetching: true
+				isFetching: true,
+				results: null
 			} );
 
 		case DOMAIN_SUGGESTIONS_FETCH_COMPLETED:

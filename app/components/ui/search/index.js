@@ -63,9 +63,7 @@ const Search = React.createClass( {
 		}
 	},
 
-	showAdditionalResults( event ) {
-		event.preventDefault();
-
+	showAdditionalResults() {
 		this.props.redirectToSearch(
 			this.props.values.query,
 			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' ),

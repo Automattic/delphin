@@ -36,7 +36,8 @@ export function fetchDomainSuggestions( query ) {
 			query,
 			quantity: 36,
 			include_wordpressdotcom: false,
-			vendor: 'domainsbot'
+			vendor: 'domainsbot',
+			tlds: [ 'live' ]
 		};
 
 		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {

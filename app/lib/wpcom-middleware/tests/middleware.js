@@ -66,10 +66,10 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalledWith( params, { locale: 'en' }, payload );
+			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'en' }, payload );
 		} );
 
-		it( 'should make a request with the locale when it changes', () => {
+		it( 'should make a request with the locale when it changes in the `i18n` module', () => {
 			i18n.setLocale( {
 				'': { localeSlug: 'fr' }
 			} );
@@ -89,7 +89,34 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalledWith( params, { locale: 'fr' }, payload );
+			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'fr' }, payload );
+		} );
+
+		it( 'should make a request with the locale of the user if present', () => {
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {
+					user: {
+						isLoggedIn: true,
+						data: {
+							locale: 'pt-br',
+							bearerToken: 'foobar'
+						}
+					}
+				} ),
+				dispatch: jest.genMockFunction()
+			};
+
+			middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params,
+				payload,
+				loading: LOADING_ACTION,
+				success: SUCCESS_ACTION,
+				fail: FAIL_ACTION
+			} );
+
+			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'pt-br' }, payload );
 		} );
 
 		pit( 'should dispatch success action', () => {
@@ -109,9 +136,9 @@ describe( 'wpcom-middleware', () => {
 			} );
 
 			expect( WPCOM().req[ method ] ).toBeCalled();
-			expect( store.dispatch ).toBeCalledWith( { type: LOADING_ACTION } );
+			expect( store.dispatch ).lastCalledWith( { type: LOADING_ACTION } );
 
-			return promise.then( () => expect( store.dispatch ).toBeCalledWith( { type: SUCCESS_ACTION } ) );
+			return promise.then( () => expect( store.dispatch ).lastCalledWith( { type: SUCCESS_ACTION } ) );
 		} );
 
 		pit( 'should dispatch fail action', () => {
@@ -131,9 +158,9 @@ describe( 'wpcom-middleware', () => {
 			} );
 
 			expect( WPCOM().req[ method ] ).toBeCalled();
-			expect( store.dispatch ).toBeCalledWith( { type: LOADING_ACTION } );
+			expect( store.dispatch ).lastCalledWith( { type: LOADING_ACTION } );
 
-			return promise.then( () => expect( store.dispatch ).toBeCalledWith( { type: FAIL_ACTION } ) );
+			return promise.then( () => expect( store.dispatch ).lastCalledWith( { type: FAIL_ACTION } ) );
 		} );
 
 		pit( 'should propagate result of inner action dispatch on success', () => {

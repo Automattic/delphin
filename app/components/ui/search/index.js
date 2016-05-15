@@ -1,4 +1,5 @@
 // External dependencies
+import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
 import some from 'lodash/some';
 import React, { PropTypes } from 'react';
@@ -9,9 +10,12 @@ import config from 'config';
 import { isDomainSearch, secondLevelDomainOf, isValidSecondLevelDomain } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
+import SearchHeader from './header';
 
 const Search = React.createClass( {
 	propTypes: {
+		fetchDomainSuggestions: PropTypes.func.isRequired,
+		query: PropTypes.string.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
 		redirectToCheckout: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
@@ -29,10 +33,14 @@ const Search = React.createClass( {
 		};
 	},
 
-	componentWillReceiveProps( nextProps ) {
-		if ( this.props.query !== nextProps.query ) {
-			this.props.clearDomainSuggestions();
-		}
+	componentWillMount() {
+		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
+		this.fetchResults( this.props.query );
+	},
+
+	fetchResults( query ) {
+		this.props.redirectToSearch( query, this.props.numberOfResultsToDisplay, this.props.sort );
+		this.props.fetchDomainSuggestions( query );
 	},
 
 	selectDomain( name ) {
@@ -119,12 +127,17 @@ const Search = React.createClass( {
 	},
 
 	render() {
-		const showAdditionalResultsLink = this.props.results &&
-				this.props.results.length > this.props.numberOfResultsToDisplay,
-			exactMatchUnavailable = this.isExactMatchUnavailable();
+		const query = this.props.query,
+			exactMatchUnavailable = this.isExactMatchUnavailable(),
+			showAdditionalResultsLink = this.props.results &&
+				this.props.results.length > this.props.numberOfResultsToDisplay;
 
 		return (
-			<div>
+			<div className={ styles.search }>
+				<SearchHeader
+					{ ... { query } }
+					onQueryChange={ this.debouncedFetchResults } />
+
 				{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
 				<div className={ styles.sort }>

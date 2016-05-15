@@ -10,10 +10,11 @@ jest.mock( 'components/containers/connect-user/signup', () => {} );
 jest.mock( 'components/containers/connect-user/verify', () => {} );
 jest.mock( 'components/ui/layout', () => {} );
 jest.mock( 'components/ui/layout/header/default', () => {} );
-jest.mock( 'components/ui/layout/header/search', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
+
+jest.unmock( 'routes' );
 
 import { getPath } from 'routes';
 

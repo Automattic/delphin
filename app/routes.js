@@ -14,7 +14,6 @@ import LoginContainer from 'components/containers/connect-user/login';
 import NotFound from 'components/ui/not-found';
 import Layout from 'components/ui/layout';
 import DefaultHeader from 'components/ui/layout/header/default';
-import SearchHeader from 'components/ui/layout/header/search';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
@@ -62,7 +61,6 @@ const defaultRoutes = [
 		]
 	},
 	{
-		component: SearchHeader,
 		childRoutes: [
 			{
 				path: 'search',

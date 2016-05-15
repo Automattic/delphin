@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
-import { clearDomainSuggestions } from 'actions/domain-search';
-import { selectDomain } from 'actions/domain-search';
+import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Search from 'components/ui/search';
 
@@ -54,6 +53,9 @@ export default connect(
 		},
 		selectDomain( name ) {
 			dispatch( selectDomain( name ) );
+		},
+		fetchDomainSuggestions( query ) {
+			dispatch( fetchDomainSuggestions( query ) );
 		}
 	} )
 )( Search );

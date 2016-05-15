@@ -96,7 +96,11 @@ const Search = React.createClass( {
 			},
 			{ results, sort } = this.props;
 
-		return results.sort( sortFunctions[ sort ] );
+		// Because Array.prototype.sort is not guaranteed to be stable
+		// we create a shallow copy of the array via slice()
+		// sort that copy and return it without modifying the original results array
+		// on the next call we sort it again from the original, which makes the sort "stable"
+		return results.slice().sort( sortFunctions[ sort ] );
 	},
 
 	renderResults() {

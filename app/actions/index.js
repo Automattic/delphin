@@ -64,18 +64,17 @@ export function connectUser( email, intention, callback ) {
 /**
  * Fetches the user profile with the specified access token.
  *
- * @param {string} bearerToken - access token
- * @returns {function} the corresponding action thunk
+ * @returns {Object} fetch user action
  */
-export function fetchUser( bearerToken ) {
+export function fetchUser() {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
 		params: { path: '/me' },
 		loading: FETCH_USER,
-		success: ( data ) => ( {
+		success: ( data, requestArguments, requestToken ) => ( {
 			type: FETCH_USER_COMPLETE,
-			bearerToken,
+			bearerToken: requestToken,
 			email: data.email,
 			locale: data.language
 		} ),

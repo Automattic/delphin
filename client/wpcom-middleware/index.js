@@ -108,7 +108,8 @@ function makeWpcomRequest( state, action ) {
 	}
 
 	debug( 'requesting', reqArgs );
-	return api.req[ method ].apply( api.req, reqArgs );
+	return api.req[ method ].apply( api.req, reqArgs )
+			.then( ( data ) => ( { data: data, requestArguments: reqArgs, requestToken: token } ) );
 }
 
 /**
@@ -152,14 +153,16 @@ const wpcomMiddleware = store => next => action => {
 		// dispatch loading action:
 		store.dispatch( getActionCreator( action.loading )() );
 
-		// the return of the promise used here mainly for testing
-		return makeWpcomRequest( store.getState(), action ).then( ( data ) => {
+		// The return of the promise here makes sure the chain of dispatch is kept
+		// so the result of dispatch( ... ) will return the result of store.dispatch
+		// on request success / failure.
+		return makeWpcomRequest( store.getState(), action ).then( ( result ) => {
 			debug( 'request success', action );
-			// dispatch success:
-			return store.dispatch( getActionCreator( action.success )( data ) );
+			// The result from here will be returned to the original dispatch:
+			return store.dispatch( getActionCreator( action.success )( result.data, result.requestArguments, result.requestToken ) );
 		} ).catch( ( err ) => {
 			debug( 'request failed', action, err );
-			// dispatch failure:
+			// The result from here will be returned to the original dispatch:
 			return store.dispatch( getActionCreator( action.fail )( err ) );
 		} );
 	}

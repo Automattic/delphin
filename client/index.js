@@ -45,8 +45,10 @@ function init() {
 
 	const bearerToken = getTokenFromBearerCookie();
 
+	// if user has prev. bearer token, we'll dispatch the fetch user action
+	// the internals will handle the bearer token.
 	if ( bearerToken ) {
-		store.dispatch( fetchUser( bearerToken ) );
+		store.dispatch( fetchUser() );
 	}
 
 	injectTapEventPlugin();

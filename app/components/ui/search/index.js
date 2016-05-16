@@ -9,17 +9,29 @@ import config from 'config';
 import styles from './styles.scss';
 import Suggestion from './suggestion';
 
+/**
+ * Strips all non-digits/decimals from a string and casts it to a number.
+ *
+ * @param {string} price A price, e.g. '$18.99'
+ * @return {number} A number representing the given price, e.g. 18.99
+ */
+const getNumberFromPrice = price => Number( price.replace( /[^0-9.]/g, '' ) );
+
 const Search = React.createClass( {
 	propTypes: {
 		fetchDomainSuggestions: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
+		numberOfResultsToDisplay: PropTypes.number,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
-		numberOfResultsToDisplay: PropTypes.number
+		sort: PropTypes.string
 	},
 
 	getDefaultProps() {
-		return { numberOfResultsToDisplay: config( 'initial_number_of_search_results' ) };
+		return {
+			numberOfResultsToDisplay: config( 'initial_number_of_search_results' ),
+			sort: config( 'default_search_sort' )
+		};
 	},
 
 	componentDidMount() {
@@ -33,7 +45,7 @@ const Search = React.createClass( {
 	},
 
 	fetchResults( query ) {
-		this.props.redirectToSearch( query, this.props.numberOfResultsToDisplay );
+		this.props.redirectToSearch( query, this.props.numberOfResultsToDisplay, this.props.sort );
 		this.props.fetchDomainSuggestions( query );
 	},
 
@@ -52,8 +64,43 @@ const Search = React.createClass( {
 
 		this.props.redirectToSearch(
 			this.props.values.query,
-			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' )
+			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' ),
+			this.props.sort
 		);
+	},
+
+	sortChange( event ) {
+		this.props.redirectToSearch( this.props.values.query, config( 'initial_number_of_search_results' ), event.target.value );
+	},
+
+	getSortedResults() {
+		const sortFunctions = {
+				recommended: ( a, b ) => b.relevance - a.relevance,
+				unique: ( a, b ) => a.relevance - b.relevance,
+				short: ( a, b ) => a.domain_name.length - b.domain_name.length,
+				affordable: ( a, b ) => {
+					const costA = getNumberFromPrice( a.cost ),
+						costB = getNumberFromPrice( b.cost );
+
+					if ( costA > costB ) {
+						return 1;
+					}
+
+					if ( costB > costA ) {
+						return -1;
+					}
+
+					// if the prices are the same, use relevance as a tie breaker
+					return sortFunctions.recommended( a, b );
+				}
+			},
+			{ results, sort } = this.props;
+
+		// Because Array.prototype.sort is not guaranteed to be stable
+		// we create a shallow copy of the array via slice()
+		// sort that copy and return it without modifying the original results array
+		// on the next call we sort it again from the original, which makes the sort "stable"
+		return results.slice().sort( sortFunctions[ sort ] );
 	},
 
 	renderResults() {
@@ -61,7 +108,7 @@ const Search = React.createClass( {
 			return null;
 		}
 
-		const suggestions = this.props.results
+		const suggestions = this.getSortedResults()
 			.slice( 0, this.props.numberOfResultsToDisplay )
 			.map( ( suggestion ) => (
 				<Suggestion
@@ -79,6 +126,38 @@ const Search = React.createClass( {
 		);
 	},
 
+	renderSortOptions() {
+		const sortOptions = [
+			{
+				value: 'recommended',
+				text: i18n.translate( 'recommended' )
+			},
+			{
+				value: 'unique',
+				text: i18n.translate( 'unique' )
+			},
+			{
+				value: 'short',
+				text: i18n.translate( 'short' )
+			},
+			{
+				value: 'affordable',
+				text: i18n.translate( 'affordable' )
+			}
+		];
+
+		return (
+			<select
+				className={ styles.sortSelect }
+				onChange={ this.sortChange }
+				value={ this.props.sort }>
+				{ sortOptions.map( sort => (
+					<option key={ sort.value } value={ sort.value }>{ sort.text }</option>
+				) ) }
+			</select>
+		);
+	},
+
 	render() {
 		const { fields: { query } } = this.props,
 			showAdditionalResultsLink = this.props.results &&
@@ -91,6 +170,17 @@ const Search = React.createClass( {
 					autoFocus
 					className={ styles.field }
 					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+
+				<div className={ styles.sort }>
+					{
+						i18n.translate( 'Show me {{sortOption/}} addresses for my blog:', {
+							components: {
+								context: 'sortOption will be one of "recommended", "unique" or "short"',
+								sortOption: this.renderSortOptions()
+							}
+						} )
+					}
+				</div>
 
 				{ this.renderResults() }
 

@@ -92,6 +92,11 @@
   },
   "jest": {
     "testDirectoryName": "tests",
-    "verbose": true
+    "verbose": true,
+    "unmockedModulePathPatterns": [
+      "i18n",
+      "<rootDir>/node_modules/lodash",
+      "react"
+    ]
   }
 }

@@ -1,8 +1,5 @@
 // External dependencies
 import debugFactory from 'debug';
-import request from 'superagent';
-import WPCOM from 'wpcom';
-const debug = debugFactory( 'delphin:actions' );
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -19,11 +16,13 @@ import {
 	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
-	VERIFY_USER_FAIL
+	VERIFY_USER_FAIL,
+	WPCOM_REQUEST
 } from 'reducers/action-types';
 import paygateLoader from 'lib/paygate-loader';
 
-let wpcomAPI = WPCOM();
+// Module variables
+const debug = debugFactory( 'delphin:actions' );
 
 /**
  * Connects a user to a new or existing accout by sending a confirmation code to the specified email.
@@ -34,28 +33,14 @@ let wpcomAPI = WPCOM();
  * @returns {function} the corresponding action thunk
  */
 export function connectUser( email, intention, callback ) {
-	return dispatch => {
-		dispatch( {
-			type: CONNECT_USER,
-			email,
-			intention
-		} );
-
-		return new Promise( ( resolve, reject ) => {
-			let url = '/users/email';
-			if ( intention === 'signup' ) {
-				url += '/new';
-			}
-
-			request.post( url ).send( { email } ).end( ( error, response ) => {
-				const data = JSON.parse( response.text );
-
-				if ( error ) {
-					dispatch( { type: CONNECT_USER_FAIL } );
-
-					return reject( { email: data.message } );
-				}
-
+	return {
+		type: WPCOM_REQUEST,
+		method: 'post',
+		params: { path: intention === 'signup' ? '/users/email/new' : '/users/email' },
+		payload: { email },
+		loading: { type: CONNECT_USER, email, intention },
+		success: ( data ) => {
+			return dispatch => {
 				if ( data.warning ) {
 					dispatch( {
 						notice: data.message,
@@ -70,36 +55,30 @@ export function connectUser( email, intention, callback ) {
 				} );
 
 				callback && callback();
-
-				resolve();
-			} );
-		} );
+			};
+		},
+		fail: CONNECT_USER_FAIL
 	};
 }
 
 /**
  * Fetches the user profile with the specified access token.
  *
- * @param {string} bearerToken - access token
- * @returns {function} the corresponding action thunk
+ * @returns {Object} fetch user action
  */
-export function fetchUser( bearerToken ) {
-	return dispatch => {
-		dispatch( {
-			type: FETCH_USER
-		} );
-
-		const wpcom = WPCOM( bearerToken );
-		const me = wpcom.me();
-
-		me.get( ( error, results ) => {
-			if ( error ) {
-				dispatch( { type: FETCH_USER_FAIL } );
-				return;
-			}
-
-			dispatch( { type: FETCH_USER_COMPLETE, bearerToken, email: results.email } );
-		} );
+export function fetchUser() {
+	return {
+		type: WPCOM_REQUEST,
+		method: 'get',
+		params: { path: '/me' },
+		loading: FETCH_USER,
+		success: ( data, requestArguments, requestToken ) => ( {
+			type: FETCH_USER_COMPLETE,
+			bearerToken: requestToken,
+			email: data.email,
+			locale: data.language
+		} ),
+		fail: FETCH_USER_FAIL
 	};
 }
 
@@ -113,54 +92,44 @@ export function logoutUser() {
 }
 
 export function verifyUser( email, code, twoFactorAuthenticationCode ) {
-	return dispatch => {
-		dispatch( { type: VERIFY_USER } );
+	return {
+		type: WPCOM_REQUEST,
+		method: 'post',
+		params: { path: '/users/email/verification' },
+		payload: { email, code, two_factor_authentication_code: twoFactorAuthenticationCode },
+		loading: VERIFY_USER,
+		success: ( data ) => ( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.access_token } ),
+		fail: ( error ) => {
+			return dispatch => {
+				dispatch( {
+					type: VERIFY_USER_FAIL
+				} );
 
-		return new Promise( ( resolve, reject ) => {
-			const payload = { email, code, two_factor_authentication_code: twoFactorAuthenticationCode };
-
-			request.post( '/users/email/verification' ).send( payload ).end( ( error, response ) => {
-				const data = JSON.parse( response.text );
-
-				if ( error ) {
-					dispatch( {
-						type: VERIFY_USER_FAIL
-					} );
-
-					if ( data.error === 'invalid_verification_code' ) {
-						return reject( { code: data.message } );
-					}
-
-					if ( data.error === 'invalid_2FA_code' ) {
-						return reject( { twoFactorAuthenticationCode: data.message } );
-					}
-
-					// If the error isn't invalid_verification_code or invalid_2FA_code
-					// Then add it as a global notice
-					dispatch( addNotice( {
-						message: data.message,
-						status: 'error'
-					} ) );
-
-					return reject();
+				if ( error.error === 'invalid_verification_code' ) {
+					return Promise.reject( { code: error.message } );
 				}
 
-				const bearerToken = response.body.token.access_token;
+				if ( error.error === 'invalid_2FA_code' ) {
+					return Promise.reject( { twoFactorAuthenticationCode: error.message } );
+				}
 
-				// Reinitialize WPCOM so that future requests will be authenticated
-				wpcomAPI = WPCOM( bearerToken );
-
-				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken } );
-
-				resolve();
-			} );
-		} );
+				// If the error isn't invalid_verification_code or invalid_2FA_code
+				// Then add it as a global notice
+				dispatch( addNotice( {
+					message: error.message,
+					status: 'error'
+				} ) );
+			};
+		}
 	};
 }
 
 export function createSite( user, form ) {
-	return dispatch => {
-		const payload = {
+	return {
+		type: WPCOM_REQUEST,
+		method: 'post',
+		params: { path: '/sites/new' },
+		payload: {
 			bearer_token: user.data.bearerToken,
 			blog_name: form.domain,
 			blog_title: form.domain,
@@ -168,20 +137,13 @@ export function createSite( user, form ) {
 			locale: 'en',
 			validate: false,
 			find_available_url: true
-		};
-
-		request.post( '/sites/new' ).send( payload ).end( ( error, results ) => {
-			const data = JSON.parse( results.text );
-
-			if ( error ) {
-				return dispatch( addNotice( {
-					message: data.message,
-					status: 'error'
-				} ) );
-			}
-
-			dispatch( createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ) );
-		} );
+		},
+		loading: VERIFY_USER,
+		success: ( data ) => createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ),
+		fail: ( error ) => addNotice( {
+			message: error.message,
+			status: 'error'
+		} )
 	};
 }
 
@@ -206,28 +168,6 @@ function getPaygateParameters( cardDetails ) {
 }
 
 function createPaygateToken( requestType, cardDetails, callback ) {
-	wpcomAPI.req.get( '/me/paygate-configuration', { request_type: requestType }, function( error, configuration ) {
-		if ( error ) {
-			callback( error );
-			return;
-		}
-
-		paygateLoader.ready( configuration.js_url, function( innerError, Paygate ) {
-			if ( innerError ) {
-				callback( innerError );
-				return;
-			}
-
-			Paygate.setProcessor( configuration.processor );
-			Paygate.setApiUrl( configuration.api_url );
-			Paygate.setPublicKey( configuration.public_key );
-			Paygate.setEnvironment( configuration.environment );
-
-			const parameters = getPaygateParameters( cardDetails );
-			Paygate.createToken( parameters, onSuccess, onFailure );
-		} );
-	} );
-
 	function onSuccess( data ) {
 		if ( data.is_error ) {
 			return callback( new Error( 'Paygate Response Error: ' + data.error_msg ) );
@@ -239,11 +179,36 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	function onFailure() {
 		callback( new Error( 'Paygate Request Error' ) );
 	}
+
+	return {
+		method: 'get',
+		params: { path: '/me/paygate-configuration' },
+		query: { request_type: requestType },
+		success: ( data ) => {
+			const configuration = data;
+			paygateLoader.ready( configuration.js_url, function( error, Paygate ) {
+				if ( error ) {
+					callback( error );
+					return;
+				}
+
+				Paygate.setProcessor( configuration.processor );
+				Paygate.setApiUrl( configuration.api_url );
+				Paygate.setPublicKey( configuration.public_key );
+				Paygate.setEnvironment( configuration.environment );
+
+				const parameters = getPaygateParameters( cardDetails );
+				Paygate.createToken( parameters, onSuccess, onFailure );
+			} );
+		},
+		fail: ( error ) => {
+			callback && callback( error );
+		}
+	};
 }
 
 export function createTransaction( user, form ) {
 	const cardDetails = {
-		bearer_token: user.data.bearerToken,
 		name: form.name,
 		number: form['credit-card-number'],
 		cvv: form.cvv,
@@ -285,17 +250,20 @@ export function createTransaction( user, form ) {
 				}
 			};
 
-			wpcomAPI.req.post( '/me/transactions', payload, ( apiError, apiResults ) => {
-				if ( apiError ) {
-					return dispatch( addNotice( {
-						message: apiError.message,
-						status: 'error'
-					} ) );
-				}
-
-				debug( apiResults );
-
-				dispatch( createTransactionComplete( form ) );
+			dispatch( {
+				type: WPCOM_REQUEST,
+				method: 'post',
+				params: { path: '/me/transactions' },
+				payload,
+				loading: VERIFY_USER,
+				success: ( data ) => {
+					debug( data );
+					return createTransactionComplete( form );
+				},
+				fail: ( apiError ) => addNotice( {
+					message: apiError.message,
+					status: 'error'
+				} )
 			} );
 		} );
 	};

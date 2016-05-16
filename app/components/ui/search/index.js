@@ -164,7 +164,7 @@ const Search = React.createClass( {
 				this.props.results.length > this.props.numberOfResultsToDisplay;
 
 		return (
-			<div>
+			<div className={ styles.search }>
 				<input
 					{ ...query }
 					autoFocus

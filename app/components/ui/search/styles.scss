@@ -49,22 +49,25 @@
 }
 
 .suggestion {
-	border: 1px solid #c8d7e1;
+	border: 1px solid lighten( $blue, 40% );
 	border-radius: 2px;
 	color: #2e4453;
+	cursor: pointer;
 	display: block;
 	font-size: 1.4rem;
 	margin-top: 15px;
-	padding: 10px;
+	padding: 0;
 	text-decoration: none;
+	transition: all 150ms ease-in;
+	width: 100%;
 
 	&:hover {
-		border-color: #4F6E84;
-	}
-}
+		border-color: $blue;
 
-.suggestion-list-item {
-	width: 100%;
+		.buy-button {
+			background: $blue;
+		}
+	}
 
 	@include breakpoint( '>660px' ) {
 		width: 48%;
@@ -73,6 +76,26 @@
 	@include breakpoint( '>960px' ) {
 		width: 31%;
 	}
+}
+
+.suggestion-title {
+	font-size: 1.4em;
+	overflow: hidden;
+	padding: 25px 30px 50px 15px;
+	text-overflow: ellipsis;
+}
+
+.buy-button {
+	background: lighten( $blue, 20% );
+	color: $white;
+	font-size: 1.4rem;
+	padding: 10px;
+	text-transform: uppercase;
+	transition: all 150ms ease-in;
+}
+
+.cost {
+	float: right;
 }
 
 .additional-results-link-container {

@@ -1,4 +1,5 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -17,12 +18,16 @@ const Suggestion = React.createClass( {
 
 	render() {
 		return (
-			<li className={ styles.suggestionListItem }>
-				<a
-					className={ styles.suggestion }
-					onClick={ this.selectDomain }>
-					{ this.props.suggestion.domain_name } - { this.props.suggestion.cost }
-				</a>
+			<li className={ styles.suggestion } onClick={ this.selectDomain }>
+				<div className={ styles.suggestionTitle }>
+					{ this.props.suggestion.domain_name }
+				</div>
+				<div className={ styles.buyButton }>
+					{ i18n.translate( 'Get it' ) }
+					<div className={ styles.cost }>
+						{ this.props.suggestion.cost }
+					</div>
+				</div>
 			</li>
 		);
 	}

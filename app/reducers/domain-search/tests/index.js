@@ -2,7 +2,7 @@
 import {
 	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
-	DOMAIN_SUGGESTIONS_FETCH_COMPLETED
+	DOMAIN_SUGGESTIONS_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { domainSearch } from '..';
 
@@ -103,7 +103,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 	it( 'should return initial state with fetching disabled when state is undefined', () => {
 		const newState = domainSearch( undefined, {
 			results: [ 'example.com' ],
-			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED
+			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE
 		} );
 
 		expect( newState ).toEqual( {
@@ -119,7 +119,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 			} ),
 			newState = domainSearch( originalState, {
 				results: [ 'example3.com' ],
-				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED
+				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE
 			} );
 
 		expect( newState ).toEqual( {

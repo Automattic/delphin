@@ -2,7 +2,8 @@
 import {
 	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
-	DOMAIN_SUGGESTIONS_FETCH_COMPLETED
+	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+	DOMAIN_SUGGESTIONS_FETCH_FAIL
 } from 'reducers/action-types';
 
 const initialState = {
@@ -23,10 +24,15 @@ export function domainSearch( state = initialState, action ) {
 				results: null
 			} );
 
-		case DOMAIN_SUGGESTIONS_FETCH_COMPLETED:
+		case DOMAIN_SUGGESTIONS_FETCH_COMPLETE:
 			return Object.assign( {}, state, {
 				isFetching: false,
 				results: results
+			} );
+
+		case DOMAIN_SUGGESTIONS_FETCH_FAIL:
+			return Object.assign( {}, state, {
+				isFetching: false
 			} );
 
 		default:

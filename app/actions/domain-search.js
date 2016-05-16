@@ -1,16 +1,13 @@
-// External dependencies
-import WPCOM from 'wpcom';
-
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
+	WPCOM_REQUEST,
 	DOMAIN_SELECT,
 	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
-	DOMAIN_SUGGESTIONS_FETCH_COMPLETED
+	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+	DOMAIN_SUGGESTIONS_FETCH_FAIL
 } from 'reducers/action-types';
-
-const wpcomAPI = WPCOM();
 
 /**
  * Returns an action object to be used in signalling that domain suggestions have been cleared.
@@ -22,36 +19,36 @@ export function clearDomainSuggestions() {
 		type: DOMAIN_SUGGESTIONS_CLEAR
 	};
 }
-export function fetchDomainSuggestions( query ) {
-	if ( query.trim() === '' ) {
-		return dispatch => {
-			dispatch( clearDomainSuggestions() );
-		};
+
+export function fetchDomainSuggestions( domainQuery ) {
+	if ( domainQuery.trim() === '' ) {
+		return clearDomainSuggestions();
 	}
 
-	return dispatch => {
-		dispatch( { type: DOMAIN_SUGGESTIONS_FETCH } );
-
-		const payload = {
-			query,
+	return {
+		type: WPCOM_REQUEST,
+		method: 'get',
+		params: { path: '/domains/suggestions' },
+		query: {
+			query: domainQuery,
 			quantity: 36,
 			include_wordpressdotcom: false,
-			vendor: 'domainsbot'
-		};
-
-		wpcomAPI.req.get( '/domains/suggestions', payload, ( error, results ) => {
-			if ( error ) {
-				return dispatch( addNotice( {
+			vendor: 'domainsbot',
+			tlds: [ 'live' ]
+		},
+		loading: DOMAIN_SUGGESTIONS_FETCH,
+		success: ( results ) => ( { type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE, results } ),
+		fail: ( error ) => {
+			return dispatch => {
+				dispatch( {
+					type: DOMAIN_SUGGESTIONS_FETCH_FAIL
+				} );
+				dispatch( addNotice( {
 					message: error.message,
 					status: 'error'
 				} ) );
-			}
-
-			dispatch( {
-				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETED,
-				results
-			} );
-		} );
+			};
+		}
 	};
 }
 

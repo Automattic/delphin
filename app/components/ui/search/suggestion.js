@@ -21,7 +21,7 @@ const Suggestion = React.createClass( {
 				<a
 					className={ styles.suggestion }
 					onClick={ this.selectDomain }>
-					{ this.props.suggestion.domain_name }
+					{ this.props.suggestion.domain_name } - { this.props.suggestion.cost }
 				</a>
 			</li>
 		);

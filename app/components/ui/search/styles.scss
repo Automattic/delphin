@@ -114,9 +114,13 @@
 
 .sort {
 	background: $light-blue;
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	padding: 30px 0;
 	text-align: center;
+
+	@include breakpoint( '>660px' ) {
+		font-size: 1.8em;
+	}
 }
 
 .sort-select {

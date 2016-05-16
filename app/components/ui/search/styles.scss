@@ -125,3 +125,15 @@
 	height: 61px;
 	padding: 0 70px 0 20px;
 }
+
+.search-info {
+	background: $light-blue;
+	padding: 20px 0 0 0;
+	text-align: center;
+	font-size: 1.7rem;
+}
+
+.no-exact-match {
+	font-weight: 600;
+	color: #016F94;
+}

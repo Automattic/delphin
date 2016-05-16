@@ -11,6 +11,7 @@ import Search from 'components/ui/search';
 export default connect(
 	( state, ownProps ) => ( {
 		results: state.domainSearch.results,
+		isFetching: state.domainSearch.isFetching,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
 		query: ownProps.location.query.q,

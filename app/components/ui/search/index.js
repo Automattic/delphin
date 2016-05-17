@@ -46,9 +46,9 @@ const Search = React.createClass( {
 	},
 
 	isExactMatchUnavailable() {
-		const { query, isFetching, results } = this.props;
+		const { query, isRequesting, results } = this.props;
 
-		return ! isFetching &&
+		return ! isRequesting &&
 			isAvailableDomain( query ) &&
 			! some( results, ( result ) => {
 				return result.domain_name === query;

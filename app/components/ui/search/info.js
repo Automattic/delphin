@@ -25,10 +25,10 @@ const Info = ( props ) => {
 
 	return (
 		<div className={ styles.searchInfo }>
-			{ i18n.translate( 'Darn, {{i}}%(query)s{{/i}} has already been snatched up!', {
+			{ i18n.translate( 'Darn, {{em}}%(query)s{{/em}} has already been snatched up!', {
 				args: { query },
 				components: {
-					i: <i />
+					em: <em />
 				}
 			} ) }
 		</div>

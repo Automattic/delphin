@@ -22,9 +22,13 @@ const Search = React.createClass( {
 		fetchDomainSuggestions: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
+		redirectToCheckout: PropTypes.func.isRequired,
+		redirectToSearch: PropTypes.func.isRequired,
+		redirectToSignup: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
-		sort: PropTypes.string
+		sort: PropTypes.string,
+		user: PropTypes.object.isRequired
 	},
 
 	getDefaultProps() {
@@ -39,8 +43,8 @@ const Search = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
-			this.debouncedFetchResults( nextProps.fields.query.value );
+		if ( this.props.values.query !== nextProps.values.query ) {
+			this.debouncedFetchResults( nextProps.values.query );
 		}
 	},
 
@@ -59,9 +63,7 @@ const Search = React.createClass( {
 		}
 	},
 
-	showAdditionalResults( event ) {
-		event.preventDefault();
-
+	showAdditionalResults() {
 		this.props.redirectToSearch(
 			this.props.values.query,
 			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' ),

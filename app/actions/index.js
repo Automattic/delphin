@@ -106,11 +106,15 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 				} );
 
 				if ( error.error === 'invalid_verification_code' ) {
-					return Promise.reject( { code: error.message } );
+					Promise.reject( { code: error.message } );
+
+					return;
 				}
 
 				if ( error.error === 'invalid_2FA_code' ) {
-					return Promise.reject( { twoFactorAuthenticationCode: error.message } );
+					Promise.reject( { twoFactorAuthenticationCode: error.message } );
+
+					return;
 				}
 
 				// If the error isn't invalid_verification_code or invalid_2FA_code
@@ -170,7 +174,9 @@ function getPaygateParameters( cardDetails ) {
 function createPaygateToken( requestType, cardDetails, callback ) {
 	function onSuccess( data ) {
 		if ( data.is_error ) {
-			return callback( new Error( 'Paygate Response Error: ' + data.error_msg ) );
+			callback( new Error( 'Paygate Response Error: ' + data.error_msg ) );
+
+			return;
 		}
 
 		callback( null, data.token );
@@ -189,6 +195,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 			paygateLoader.ready( configuration.js_url, function( error, Paygate ) {
 				if ( error ) {
 					callback( error );
+
 					return;
 				}
 

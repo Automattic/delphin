@@ -7,7 +7,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import config from 'config';
 import { isAvailableDomainName } from 'lib/domains';
-import SearchForm from './form';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 
@@ -31,7 +30,7 @@ const Search = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
+		if ( this.props.query !== nextProps.query ) {
 			this.props.clearDomainSuggestions();
 		}
 	},
@@ -122,11 +121,6 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<SearchForm
-					fetchDomainSuggestions={ this.props.fetchDomainSuggestions }
-					fields={ this.props.fields }
-					redirectToSearch={ this.props.redirectToSearch } />
-
 				{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
 				<div className={ styles.sort }>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
+import { clearDomainSuggestions } from 'actions/domain-search';
 import { selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Search from 'components/ui/search';
@@ -19,6 +20,10 @@ export default connect(
 		user: state.user
 	} ),
 	( dispatch, ownProps ) => ( {
+		clearDomainSuggestions( query ) {
+			dispatch( clearDomainSuggestions( query ) );
+		},
+
 		redirectToCheckout() {
 			dispatch( push( getPath( 'checkout' ) ) );
 		},

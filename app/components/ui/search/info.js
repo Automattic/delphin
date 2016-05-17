@@ -16,9 +16,7 @@ function isExactMatchUnAvailable( query, results, isFetching ) {
 		} );
 }
 
-const Info = ( props ) => {
-	const { values: { query }, domainSearch: { isFetching }, results } = props;
-
+const Info = ( { values: { query }, isFetching, results } ) => {
 	if ( ! isExactMatchUnAvailable( query, results, isFetching ) ) {
 		return null;
 	}

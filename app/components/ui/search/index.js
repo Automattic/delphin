@@ -169,7 +169,7 @@ const Search = React.createClass( {
 					{ ...query }
 					autoFocus
 					className={ styles.field }
-					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+					placeholder={ i18n.translate( 'Type a few keywords or a domain' ) } />
 
 				<div className={ styles.sort }>
 					{

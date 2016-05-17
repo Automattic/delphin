@@ -9,10 +9,14 @@ const domainEndsInAvailableTldRegEx = new RegExp( '\\.(?:' + config( 'available_
  * @param {string} value - the string to test
  * @returns {boolean}    - the result of the test
  */
-export function isDomainName( value ) {
+export function isDomain( value ) {
 	return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,251}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/i.test( value );
 }
 
-export function isAvailableDomainName( value ) {
-	return isDomainName( value ) && domainEndsInAvailableTldRegEx.test( value );
+export function isSecondLevelDomain( value ) {
+	return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,251}[a-zA-Z0-9]$/i.test( value );
+}
+
+export function isAvailableDomain( value ) {
+	return isSecondLevelDomain( value ) || ( isDomain( value ) && domainEndsInAvailableTldRegEx.test( value ) );
 }

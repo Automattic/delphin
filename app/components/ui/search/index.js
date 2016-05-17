@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import { isAvailableDomainName } from 'lib/domains';
+import { isAvailableDomain } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 
@@ -49,7 +49,7 @@ const Search = React.createClass( {
 		const { query, isFetching, results } = this.props;
 
 		return ! isFetching &&
-			isAvailableDomainName( query ) &&
+			isAvailableDomain( query ) &&
 			! some( results, ( result ) => {
 				return result.domain_name === query;
 			} );

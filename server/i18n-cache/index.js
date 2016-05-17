@@ -10,7 +10,7 @@ const debug = debugFactory( 'delphin:i18n-cache' );
 // Internal dependencies
 import config from 'config';
 
-const getLanguageUrl = locale => `https://widgets.wp.com/languages/calypso/${ locale }.json`;
+const getLanguageUrl = locale => `https://widgets.wp.com/languages/delphin/${ locale }.json`;
 
 const getLocaleFilePath = locale => path.resolve( __dirname, 'data', `${ locale }.json` );
 

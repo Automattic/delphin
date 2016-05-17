@@ -5,7 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import i18n from 'i18n-calypso';
-import styles from './info.scss';
+import styles from './domain-unavailable-message.scss';
 import { isAvailableDomainName } from 'lib/domains';
 
 function isExactMatchUnAvailable( query, results, isFetching ) {
@@ -16,7 +16,7 @@ function isExactMatchUnAvailable( query, results, isFetching ) {
 		} );
 }
 
-const Info = ( { values: { query }, isFetching, results } ) => {
+const DomainUnavailableMessage = ( { values: { query }, isFetching, results } ) => {
 	if ( ! isExactMatchUnAvailable( query, results, isFetching ) ) {
 		return null;
 	}
@@ -33,4 +33,4 @@ const Info = ( { values: { query }, isFetching, results } ) => {
 	);
 };
 
-export default withStyles( styles )( Info );
+export default withStyles( styles )( DomainUnavailableMessage );

@@ -13,6 +13,7 @@ export default connect(
 		results: state.domainSearch.results,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
+		query: ownProps.location.query.q,
 		sort: ownProps.location.query.sort,
 		user: state.user
 	} ),

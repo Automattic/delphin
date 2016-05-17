@@ -39,14 +39,14 @@ const Search = React.createClass( {
 
 	showAdditionalResults() {
 		this.props.redirectToSearch(
-			this.props.values.query,
+			this.props.query,
 			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' ),
 			this.props.sort
 		);
 	},
 
 	sortChange( event ) {
-		this.props.redirectToSearch( this.props.values.query, config( 'initial_number_of_search_results' ), event.target.value );
+		this.props.redirectToSearch( this.props.query, config( 'initial_number_of_search_results' ), event.target.value );
 	},
 
 	renderSortOptions() {
@@ -87,11 +87,6 @@ const Search = React.createClass( {
 
 		return (
 			<div>
-				<SearchForm
-					fetchDomainSuggestions={ this.props.fetchDomainSuggestions }
-					fields={ this.props.fields }
-					redirectToSearch={ this.props.redirectToSearch } />
-
 				<div className={ styles.sort }>
 					{
 						i18n.translate( 'Show me {{sortOption/}} addresses for my blog:', {

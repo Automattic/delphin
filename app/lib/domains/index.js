@@ -1,6 +1,6 @@
 import config from 'config';
 
-const availableTLDsRegExp = new RegExp( '.(?:' + config( 'available_tlds' ).join( '|' ) + ')$', 'i' );
+const domainEndsInAvailableTldRegEx = new RegExp( '\\.(?:' + config( 'available_tlds' ).join( '|' ) + ')$', 'i' );
 
 /**
  * Check if a string is a valid domain name.
@@ -10,9 +10,9 @@ const availableTLDsRegExp = new RegExp( '.(?:' + config( 'available_tlds' ).join
  * @returns {boolean}    - the result of the test
  */
 export function isDomainName( value ) {
-	return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,252}\.[a-zA-Z]{2,}$/i.test( value );
+	return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,251}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/i.test( value );
 }
 
 export function isAvailableDomainName( value ) {
-	return isDomainName( value ) && availableTLDsRegExp.test( value );
+	return isDomainName( value ) && domainEndsInAvailableTldRegEx.test( value );
 }

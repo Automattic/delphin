@@ -9,8 +9,6 @@ describe( 'lib/domains', () => {
 			expect( isDomainName( 'hello.world' ) ).toBe( true );
 			expect( isDomainName( 'hello-world.com' ) ).toBe( true );
 			expect( isDomainName( 'hell-o.com' ) ).toBe( true );
-			expect( isDomainName( 'hello-.com' ) ).toBe( true ); // should not be allowed
-			expect( isDomainName( 'h.ello' ) ).toBe( true );
 		} );
 
 		it( 'should not match unvalid domain names', () => {
@@ -21,7 +19,9 @@ describe( 'lib/domains', () => {
 			expect( isDomainName( 'hello.world.com' ) ).toBe( false );
 			expect( isDomainName( '.world.com' ) ).toBe( false );
 			expect( isDomainName( '-hello.com' ) ).toBe( false );
-			expect( isDomainName( 'hello.w' ) ).toBe( false );
+			expect( isDomainName( 'hello-.com' ) ).toBe( false );
+			expect( isDomainName( 'hello.w' ) ).toBe( false ); // 1-letter tlds not allowed
+			expect( isDomainName( 'h.ello' ) ).toBe( false ); // 1-letter domain names not allowed
 		} );
 	} );
 } );

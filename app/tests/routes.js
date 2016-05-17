@@ -8,7 +8,9 @@ jest.mock( 'components/ui/not-found', () => {} );
 jest.mock( 'components/containers/connect-user/login', () => {} );
 jest.mock( 'components/containers/connect-user/signup', () => {} );
 jest.mock( 'components/containers/connect-user/verify', () => {} );
-jest.mock( 'components/ui/root', () => {} );
+jest.mock( 'components/ui/layout', () => {} );
+jest.mock( 'components/ui/layout/header/default', () => {} );
+jest.mock( 'components/ui/layout/header/search', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
@@ -36,6 +38,18 @@ const routes = {
 		{
 			path: 'post/:id/(:filter)',
 			slug: 'post'
+		},
+		{
+			childRoutes: [
+				{
+					path: 'sell',
+					slug: 'sell'
+				},
+				{
+					path: 'buy',
+					slug: 'buy'
+				}
+			]
 		}
 	]
 };
@@ -48,6 +62,10 @@ describe( 'routes', () => {
 
 		it( 'should return a static nested route', () => {
 			expect( getPath( 'bar', {}, routes ) ).toBe( '/foo/bar/' );
+		} );
+
+		it( 'should return a static nested route with a parent route with no path', () => {
+			expect( getPath( 'buy', {}, routes ) ).toBe( '/buy' );
 		} );
 
 		it( 'should fill in optional values', () => {

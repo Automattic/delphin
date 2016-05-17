@@ -1,32 +1,28 @@
 // External dependencies
 import { push } from 'react-router-redux';
-import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
-import { fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
+import { selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Search from 'components/ui/search';
 
-export default reduxForm(
-	{
-		form: 'search',
-		fields: [ 'query' ]
-	},
+export default connect(
 	( state, ownProps ) => ( {
 		results: state.domainSearch.results,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
+		query: ownProps.location.query.q,
 		sort: ownProps.location.query.sort,
 		user: state.user
 	} ),
 	( dispatch, ownProps ) => ( {
-		fetchDomainSuggestions( query ) {
-			dispatch( fetchDomainSuggestions( query ) );
-		},
 		redirectToCheckout() {
 			dispatch( push( getPath( 'checkout' ) ) );
 		},
+
+		// TODO: remove duplicate in search-form.js
 		redirectToSearch( query, numberOfResultsToDisplay, sort ) {
 			if ( query !== ownProps.location.query.q || config( 'initial_number_of_search_results' ) === numberOfResultsToDisplay ) {
 				// reset the result count when the query changes and hide it from the url if it is the default
@@ -45,6 +41,7 @@ export default reduxForm(
 				}
 			} ) );
 		},
+
 		redirectToSignup() {
 			dispatch( push( getPath( 'signupUser' ) ) );
 		},

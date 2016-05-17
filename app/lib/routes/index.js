@@ -28,9 +28,17 @@ const getPath = ( route, prefix = '' ) => {
  * @return {object} - a new map of slugs to paths
  */
 const addPath = ( route, prefix, paths ) => {
-	const path = getPath( route, prefix );
+	let path, newPaths;
 
-	let newPaths = Object.assign( {}, paths, { [ route.slug ]: path } );
+	if ( route.path ) {
+		path = getPath( route, prefix );
+
+		newPaths = Object.assign( {}, paths, { [ route.slug ]: path } );
+	} else {
+		path = prefix;
+
+		newPaths = Object.assign( {}, paths );
+	}
 
 	if ( route.childRoutes ) {
 		route.childRoutes.forEach( childRoute => {
@@ -61,6 +69,37 @@ export const getLocaleSlug = url => {
 	return find( config( 'languages' ).map( language => language.langSlug ), localeSlug => (
 		url.startsWith( `/${ localeSlug }/` ) || url === `/${ localeSlug }`
 	) );
+};
+
+/**
+ * Retrieves a localized version of the given route based on the specified language.
+ *
+ * @param {object} route - route object, which may contain child routes
+ * @param {object} language - language
+ * @returns {object} a localized route
+ */
+export const getLocalizedRoute = ( route, language ) => {
+	const localizedRoute = {};
+
+	if ( route.component ) {
+		localizedRoute.component = route.component;
+	}
+
+	if ( route.path ) {
+		localizedRoute.path = language.langSlug;
+
+		if ( route.path !== '/' ) {
+			localizedRoute.path = `${ language.langSlug }/${ route.path }`;
+		}
+	}
+
+	if ( route.childRoutes ) {
+		localizedRoute.childRoutes = route.childRoutes.map( childRoute => {
+			return getLocalizedRoute( childRoute, language );
+		} );
+	}
+
+	return localizedRoute;
 };
 
 /**

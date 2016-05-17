@@ -1,5 +1,6 @@
 @import 'app/styles/colors.scss';
 @import 'app/styles/fonts.scss';
+@import 'app/styles/breakpoints.scss';
 
 .field {
 	background-color: $light-blue;
@@ -8,8 +9,8 @@
 	box-sizing: border-box;
 	color: #555;
 	font-family: $body-font;
-	font-size: 1.8rem;
-	margin-top: 30px;
+	font-size: 1.6rem;
+	margin: 30px;
 	padding: 16px 15px;
 	transition: all .15s ease-in-out;
 	width: 100%;
@@ -26,35 +27,73 @@
 		outline: none;
 		box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.3);
 	}
-}
 
-.suggestions {
-	margin-top: 30px;
-}
-
-.suggestion {
-	border: 1px solid #c8d7e1;
-	border-radius: 2px;
-	color: #2e4453;
-	display: block;
-	font-size: 1.4rem;
-	margin-top: 15px;
-	padding: 10px;
-	text-decoration: none;
-
-	&:hover {
-		border-color: #4F6E84;
+	@include breakpoint( '>660px' ) {
+		font-size: 1.8rem;
 	}
 }
 
-.suggestion-list-item {
-	display: inline-block;
-	margin: 0 1.5%;
-	width: 30%;
+.suggestions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin: 30px auto 0 auto;
+	max-width: 940px;
+	padding: 0 10px;
+}
+
+.suggestion {
+	border: 1px solid lighten( $blue, 40% );
+	border-radius: 2px;
+	color: #2e4453;
+	cursor: pointer;
+	display: block;
+	font-size: 1.4rem;
+	margin-top: 15px;
+	padding: 0;
+	text-decoration: none;
+	transition: all 150ms ease-in;
+	width: 100%;
+
+	&:hover {
+		border-color: $blue;
+
+		.buy-button {
+			background: $blue;
+		}
+	}
+
+	@include breakpoint( '>660px' ) {
+		width: 48%;
+	}
+
+	@include breakpoint( '>960px' ) {
+		width: 31%;
+	}
+}
+
+.suggestion-title {
+	font-size: 1.4rem;
+	overflow: hidden;
+	padding: 25px 30px 50px 15px;
+	text-overflow: ellipsis;
+}
+
+.buy-button {
+	background: lighten( $blue, 20% );
+	color: $white;
+	font-size: 1.4rem;
+	padding: 10px;
+	text-transform: uppercase;
+	transition: all 150ms ease-in;
+}
+
+.cost {
+	float: right;
 }
 
 .additional-results-link-container {
-	margin: 20px 0 15px;
+	margin: 30px 0 20px 0;
 	text-align: center;
 }
 
@@ -69,9 +108,13 @@
 
 .sort {
 	background: $light-blue;
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	padding: 30px 0;
 	text-align: center;
+
+	@include breakpoint( '>660px' ) {
+		font-size: 1.8rem;
+	}
 }
 
 .sort-select {

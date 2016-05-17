@@ -8,11 +8,11 @@ import { getPath } from 'routes';
 import SearchForm from 'components/containers/search-form';
 import styles from './styles.scss';
 
-const SearchHeader = ( { children } ) => {
+const SearchHeader = ( props ) => {
 	return (
 		<div>
 			<header className={ styles.header }>
-				<SearchForm />
+				<SearchForm { ...props } />
 
 				<Link className={ styles.title } to={ getPath( 'home' ) }>
 					<h1>MagicDomains</h1>
@@ -20,7 +20,7 @@ const SearchHeader = ( { children } ) => {
 			</header>
 
 			<div className={ styles.content }>
-				{ children }
+				{ props.children }
 			</div>
 		</div>
 	);

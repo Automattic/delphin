@@ -41,7 +41,6 @@ export default connect(
 			} ) );
 		},
 
-
 		redirectToSignup() {
 			dispatch( push( getPath( 'signupUser' ) ) );
 		},

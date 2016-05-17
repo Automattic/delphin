@@ -43,8 +43,8 @@ const Search = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( this.props.fields.query.value !== nextProps.fields.query.value ) {
-			this.debouncedFetchResults( nextProps.fields.query.value );
+		if ( this.props.values.query !== nextProps.values.query ) {
+			this.debouncedFetchResults( nextProps.values.query );
 		}
 	},
 

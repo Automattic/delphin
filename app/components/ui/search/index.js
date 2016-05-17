@@ -140,6 +140,7 @@ const Search = React.createClass( {
 							}
 						} )
 					) }
+
 				</div>
 
 				<Suggestions

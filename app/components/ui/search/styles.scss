@@ -2,14 +2,6 @@
 @import 'app/styles/fonts.scss';
 @import 'app/styles/breakpoints.scss';
 
-.search {
-	padding-bottom: 35px;
-
-	@include breakpoint( '>480px' ) {
-		padding-bottom: 0;
-	}
-}
-
 .field {
 	background-color: $light-blue;
 	border: 1px solid $border-blue;
@@ -79,7 +71,7 @@
 }
 
 .suggestion-title {
-	font-size: 1.4em;
+	font-size: 1.4rem;
 	overflow: hidden;
 	padding: 25px 30px 50px 15px;
 	text-overflow: ellipsis;
@@ -119,7 +111,7 @@
 	text-align: center;
 
 	@include breakpoint( '>660px' ) {
-		font-size: 1.8em;
+		font-size: 1.8rem;
 	}
 }
 

@@ -1,3 +1,5 @@
+@import 'app/styles/breakpoints';
+
 .menu {
 	background-color: #fff;
 	box-shadow: -1px -1px 1px rgba( 0, 0, 0, .2 );
@@ -16,6 +18,10 @@
 	cursor: pointer;
 	display: inline-block;
 	font-size: 1.2rem;
-	padding: 10px;
+	padding: 10px 4px;
 	text-decoration: none;
+
+	@include breakpoint( '>480px' ) {
+		padding: 10px;
+	}
 }

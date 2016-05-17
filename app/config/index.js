@@ -6,6 +6,7 @@ const NODE_ENV = process.env.NODE_ENV,
 
 const config = {
 	available_tlds: [ 'live' ],
+	default_tld: 'live',
 	default_search_sort: 'recommended',
 	env: NODE_ENV || 'development',
 	i18n_default_locale_slug: 'en',

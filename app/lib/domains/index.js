@@ -13,10 +13,14 @@ export function isDomain( value ) {
 	return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,251}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/i.test( value );
 }
 
-export function isSecondLevelDomain( value ) {
+export function isValidSecondLevelDomain( value ) {
 	return /^[a-zA-Z0-9][a-zA-Z0-9-]{0,251}[a-zA-Z0-9]$/i.test( value );
 }
 
-export function isAvailableDomain( value ) {
-	return isSecondLevelDomain( value ) || ( isDomain( value ) && domainEndsInAvailableTldRegEx.test( value ) );
+export function isDomainSearch( value ) {
+	return isValidSecondLevelDomain( value ) || ( isDomain( value ) && domainEndsInAvailableTldRegEx.test( value ) );
+}
+
+export function secondLevelDomainOf( validHostname ) {
+	return validHostname.split( '.' ).pop();
 }

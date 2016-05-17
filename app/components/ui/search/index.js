@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import { isAvailableDomain } from 'lib/domains';
+import { isDomainSearch, secondLevelDomainOf, isValidSecondLevelDomain } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 
@@ -49,14 +49,18 @@ const Search = React.createClass( {
 		const { query, isRequesting, results } = this.props;
 
 		return ! isRequesting &&
-			isAvailableDomain( query ) &&
+			isDomainSearch( query ) &&
 			! some( results, ( result ) => {
-				return result.domain_name === query;
+				return result.domain_name === query || secondLevelDomainOf( result.domain_name ) === query;
 			} );
 	},
 
 	renderDomainUnavailableMessage() {
-		const { query } = this.props;
+		let { query } = this.props;
+
+		if ( isValidSecondLevelDomain( query ) ) {
+			query = `${ query }.${ this.props.defaultTLD }`;
+		}
 
 		return (
 			<div className={ styles.searchInfo }>

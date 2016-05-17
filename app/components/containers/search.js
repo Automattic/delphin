@@ -17,7 +17,8 @@ export default connect(
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
 		query: ownProps.location.query.q,
 		sort: ownProps.location.query.sort,
-		user: state.user
+		user: state.user,
+		defaultTLD: config( 'default_tld' )
 	} ),
 	( dispatch, ownProps ) => ( {
 		clearDomainSuggestions( query ) {

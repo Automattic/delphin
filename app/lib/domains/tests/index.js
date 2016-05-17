@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { isDomain, isSecondLevelDomain } from '..';
+import { isDomain, isValidSecondLevelDomain } from '..';
 
 describe( 'lib/domains', () => {
 	describe( 'isDomainName', () => {
@@ -26,21 +26,21 @@ describe( 'lib/domains', () => {
 	} );
 	describe( 'isSecondLevelDomain', () => {
 		it( 'should match valid second-level domains', () => {
-			expect( isSecondLevelDomain( 'hello' ) ).toBe( true );
-			expect( isSecondLevelDomain( 'hello-world' ) ).toBe( true );
-			expect( isSecondLevelDomain( 'hell-o' ) ).toBe( true );
-			expect( isSecondLevelDomain( '0hell-o' ) ).toBe( true );
-			expect( isSecondLevelDomain( 'hello1' ) ).toBe( true );
+			expect( isValidSecondLevelDomain( 'hello' ) ).toBe( true );
+			expect( isValidSecondLevelDomain( 'hello-world' ) ).toBe( true );
+			expect( isValidSecondLevelDomain( 'hell-o' ) ).toBe( true );
+			expect( isValidSecondLevelDomain( '0hell-o' ) ).toBe( true );
+			expect( isValidSecondLevelDomain( 'hello1' ) ).toBe( true );
 		} );
 
 		it( 'should not match unvalid second-level domains', () => {
-			expect( isSecondLevelDomain( 'hello.world' ) ).toBe( false );
-			expect( isSecondLevelDomain( 'hello_world' ) ).toBe( false );
-			expect( isSecondLevelDomain( '/hello-world' ) ).toBe( false );
-			expect( isSecondLevelDomain( '.hello' ) ).toBe( false );
-			expect( isSecondLevelDomain( '-hello' ) ).toBe( false );
-			expect( isSecondLevelDomain( 'hello-' ) ).toBe( false );
-			expect( isSecondLevelDomain( 'h' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( 'hello.world' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( 'hello_world' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( '/hello-world' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( '.hello' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( '-hello' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( 'hello-' ) ).toBe( false );
+			expect( isValidSecondLevelDomain( 'h' ) ).toBe( false );
 		} );
 	} );
 } );

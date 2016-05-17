@@ -10,7 +10,7 @@
 	color: #555;
 	font-family: $body-font;
 	font-size: 1.6rem;
-	margin-top: 30px;
+	margin: 30px;
 	padding: 16px 15px;
 	transition: all .15s ease-in-out;
 	width: 100%;
@@ -37,7 +37,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	margin-top: 30px;
+	margin: 30px auto 0 auto;
+	max-width: 940px;
+	padding: 0 10px;
 }
 
 .suggestion {

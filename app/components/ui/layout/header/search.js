@@ -19,7 +19,7 @@ const SearchHeader = ( props ) => {
 				</Link>
 			</header>
 
-			<div className={ styles.content }>
+			<div className={ styles.contentWithSearchHeader }>
 				{ props.children }
 			</div>
 		</div>

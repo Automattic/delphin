@@ -37,7 +37,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	margin-top: 30px;
+	margin: 30px auto 0 auto;
+	max-width: 940px;
+	padding: 0 10px;
 }
 
 .suggestion {

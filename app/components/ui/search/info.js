@@ -9,7 +9,6 @@ import styles from './info.scss';
 import { isAvailableDomainName } from 'lib/domains';
 
 function isExactMatchUnAvailable( query, results, isFetching ) {
-	console.log( isAvailableDomainName( query ) );
 	return ! isFetching &&
 		isAvailableDomainName( query ) &&
 		results && ! some( results, ( result ) => {

@@ -32,7 +32,7 @@ export function domainSearch( state = initialState, action ) {
 
 		case DOMAIN_SUGGESTIONS_FETCH_FAIL:
 			return Object.assign( {}, state, {
-				isFetching: false
+				isRequesting: false
 			} );
 
 		default:

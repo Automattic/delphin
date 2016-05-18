@@ -50,7 +50,7 @@ const Search = React.createClass( {
 
 		return ! isRequesting &&
 			isDomainSearch( query ) &&
-			! some( results, ( result ) => {
+			results && ! some( results, ( result ) => {
 				return result.domain_name === query || secondLevelDomainOf( result.domain_name ) === query;
 			} );
 	},

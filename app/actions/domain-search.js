@@ -1,5 +1,6 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
+import config from 'config';
 import {
 	WPCOM_REQUEST,
 	DOMAIN_SELECT,
@@ -8,6 +9,8 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL
 } from 'reducers/action-types';
+
+const availableTLDs = config( 'available_tlds' );
 
 /**
  * Returns an action object to be used in signalling that domain suggestions have been cleared.
@@ -34,7 +37,7 @@ export function fetchDomainSuggestions( domainQuery ) {
 			quantity: 36,
 			include_wordpressdotcom: false,
 			vendor: 'domainsbot',
-			tlds: [ 'live' ]
+			tlds: availableTLDs
 		},
 		loading: DOMAIN_SUGGESTIONS_FETCH,
 		success: ( results ) => ( { type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE, results } ),

@@ -1,10 +1,12 @@
 // External dependencies
 import i18n from 'i18n-calypso';
+import some from 'lodash/some';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
+import { isDomainSearch, secondLevelDomainOf, isValidSecondLevelDomain } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 
@@ -27,6 +29,12 @@ const Search = React.createClass( {
 		};
 	},
 
+	componentWillReceiveProps( nextProps ) {
+		if ( this.props.query !== nextProps.query ) {
+			this.props.clearDomainSuggestions();
+		}
+	},
+
 	selectDomain( name ) {
 		this.props.selectDomain( name );
 
@@ -35,6 +43,35 @@ const Search = React.createClass( {
 		} else {
 			this.props.redirectToSignup();
 		}
+	},
+
+	isExactMatchUnavailable() {
+		const { query, isRequesting, results } = this.props;
+
+		return ! isRequesting &&
+			isDomainSearch( query ) &&
+			results && ! some( results, ( result ) => {
+				return result.domain_name === query || secondLevelDomainOf( result.domain_name ) === query;
+			} );
+	},
+
+	renderDomainUnavailableMessage() {
+		let { query } = this.props;
+
+		if ( isValidSecondLevelDomain( query ) ) {
+			query = `${ query }.${ this.props.defaultTLD }`;
+		}
+
+		return (
+			<div className={ styles.searchInfo }>
+				{ i18n.translate( 'Darn, {{em}}%(query)s{{/em}} has already been snatched up!', {
+					args: { query },
+					components: {
+						em: <em />
+					}
+				} ) }
+			</div>
+		);
 	},
 
 	showAdditionalResults() {
@@ -83,19 +120,31 @@ const Search = React.createClass( {
 
 	render() {
 		const showAdditionalResultsLink = this.props.results &&
-				this.props.results.length > this.props.numberOfResultsToDisplay;
+				this.props.results.length > this.props.numberOfResultsToDisplay,
+			exactMatchUnavailable = this.isExactMatchUnavailable();
 
 		return (
 			<div>
+				{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
+
 				<div className={ styles.sort }>
-					{
+					{ exactMatchUnavailable && (
+						i18n.translate( "Don't fret, check out these {{sortOption/}} addresses:", {
+							components: {
+								context: 'sortOption will be one of "recommended", "unique" or "short"',
+								sortOption: this.renderSortOptions()
+							}
+						} )
+					) }
+					{ ! exactMatchUnavailable && (
 						i18n.translate( 'Show me {{sortOption/}} addresses for my blog:', {
 							components: {
 								context: 'sortOption will be one of "recommended", "unique" or "short"',
 								sortOption: this.renderSortOptions()
 							}
 						} )
-					}
+					) }
+
 				</div>
 
 				<Suggestions

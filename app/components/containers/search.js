@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
+import { clearDomainSuggestions } from 'actions/domain-search';
 import { selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Search from 'components/ui/search';
@@ -11,13 +12,19 @@ import Search from 'components/ui/search';
 export default connect(
 	( state, ownProps ) => ( {
 		results: state.domainSearch.results,
+		isRequesting: state.domainSearch.isRequesting,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
 		query: ownProps.location.query.q,
 		sort: ownProps.location.query.sort,
-		user: state.user
+		user: state.user,
+		defaultTLD: config( 'default_tld' )
 	} ),
 	( dispatch, ownProps ) => ( {
+		clearDomainSuggestions( query ) {
+			dispatch( clearDomainSuggestions( query ) );
+		},
+
 		redirectToCheckout() {
 			dispatch( push( getPath( 'checkout' ) ) );
 		},

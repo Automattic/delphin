@@ -67,6 +67,7 @@
     "lru-cache": "^4.0.1",
     "moment-timezone": "^0.5.3",
     "node-sass": "^3.5.3",
+    "parse-domain": "^0.2.1",
     "postcss-loader": "^0.8.2",
     "pug": "^2.0.0-alpha3",
     "react": "^15.0.2",

@@ -1,6 +1,6 @@
 // External dependencies
 import { push } from 'react-router-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, change } from 'redux-form';
 
 // Internal dependencies
 import { getPath } from 'routes';
@@ -25,6 +25,10 @@ export default reduxForm(
 	},
 	undefined,
 	dispatch => ( {
+		changeQuery( query ) {
+			dispatch( change( 'search', 'query', query ) );
+		},
+
 		redirectToSearch( query ) {
 			dispatch( push( {
 				pathname: getPath( 'search' ),

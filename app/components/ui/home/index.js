@@ -1,5 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
+import randomWords from 'random-words';
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactDOM from 'react-dom';
@@ -19,6 +20,18 @@ const Home = React.createClass( {
 		} else {
 			ReactDOM.findDOMNode( this.refs.query ).focus();
 		}
+	},
+
+	generateRandomQuery() {
+		this.props.changeQuery( randomWords( 3 ).join( ' ' ) );
+	},
+
+	needSomeInspiration() {
+		return (
+			<a onClick={ this.generateRandomQuery } className={ styles.needInspiration }>
+				{ i18n.translate( 'Need some inspiration?' ) }
+			</a>
+		);
 	},
 
 	render() {
@@ -46,6 +59,7 @@ const Home = React.createClass( {
 					{ showEmptySearchNotice && (
 						<div className={ styles.emptySearchNotice }>
 							{ query.error }
+							{ this.needSomeInspiration() }
 						</div>
 					) }
 				</ReactCSSTransitionGroup>

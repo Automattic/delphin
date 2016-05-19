@@ -47,7 +47,7 @@
 }
 
 .suggestion {
-	border: 1px solid lighten( $blue, 40% );
+	border: 1px solid $gray-blue;
 	border-radius: 2px;
 	color: #2e4453;
 	cursor: pointer;
@@ -60,7 +60,7 @@
 	width: 100%;
 
 	&:hover {
-		border-color: $blue;
+		border-color: $dark-gray-blue;
 
 		.buy-button {
 			background: $blue;
@@ -84,7 +84,7 @@
 }
 
 .buy-button {
-	background: lighten( $blue, 20% );
+	background: $gray-blue;
 	color: $white;
 	font-size: 1.4rem;
 	padding: 10px;

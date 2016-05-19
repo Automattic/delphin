@@ -28,7 +28,7 @@
 }
 
 .keyword {
-	background: #87a6bc;
+	background: $gray-blue;
 	border-radius: 5px;
 	color: white;
 	cursor: pointer;
@@ -51,11 +51,11 @@
 }
 
 .keyword-delete {
-	background: url('/images/trash.svg') center no-repeat #7a9cb5;
+	background: url('/images/trash.svg') center no-repeat $dark-gray-blue;
 }
 
 .keyword-select {
-	background: url('/images/right-arrow.svg') center no-repeat #7a9cb5;
+	background: url('/images/right-arrow.svg') center no-repeat $dark-gray-blue;
 }
 
 .domain-delete {
@@ -75,12 +75,10 @@
 .synonyms {
 	background: white;
 	border: 1px solid $search-border-blue;
-	opacity: 1;
 	padding: 25px 10px;
 	position: absolute;
 		left: -1px;
 		top: 51px;
-	transition: all 0.25s ease-in-out;
 	width: calc(100% - 20px);
 
 	h3 {
@@ -88,8 +86,26 @@
 	}
 }
 
+.synonyms-enter {
+	opacity: 0.01;
+}
+
+.synonyms-enter-active {
+	opacity: 1;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.synonyms-leave {
+	opacity: 1;
+}
+
+.synonyms-leave-active {
+	opacity: 0.01;
+	transition: opacity 0.2s ease-in-out;
+}
+
 .synonyms-list-item {
-	background: #87a6bc;
+	background: $gray-blue;
 	border-radius: 5px;
 	color: white;
 	cursor: pointer;

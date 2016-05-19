@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 import KeywordsContainer from 'components/containers/keywords';
-import SynonymsContainer from 'components/containers/synonyms';
+import Synonyms from './synonyms';
 
 class SearchInput extends React.Component {
 	constructor( props ) {
@@ -53,7 +53,11 @@ class SearchInput extends React.Component {
 					transitionName={ styles.synonyms }
 					transitionEnterTimeout={ 200 }
 					transitionLeaveTimeout={ 200 }>
-					{ this.props.selectedKeyword && <SynonymsContainer /> }
+					{ this.props.selectedKeyword && (
+						<Synonyms
+							target={ this.props.selectedKeyword }
+							replace={ this.props.replace } />
+					) }
 				</ReactCSSTransitionGroup>
 				<input
 					ref="searchInput"

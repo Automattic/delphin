@@ -11,13 +11,15 @@ import styles from './styles.scss';
 const SearchHeader = ( props ) => {
 	return (
 		<div>
-			<header className={ styles.header }>
-				<SearchForm { ...props } />
+			<div className={ styles.searchHeaderWrapper }>
+				<header className={ styles.searchHeader }>
+					<SearchForm { ...props } />
 
-				<Link className={ styles.title } to={ getPath( 'home' ) }>
-					<h1>MagicDomains</h1>
-				</Link>
-			</header>
+					<Link className={ styles.title } to={ getPath( 'home' ) }>
+						<h1>MagicDomains</h1>
+					</Link>
+				</header>
+			</div>
 
 			<div className={ styles.contentWithSearchHeader }>
 				{ props.children }

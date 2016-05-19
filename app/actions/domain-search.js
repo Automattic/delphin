@@ -3,6 +3,7 @@ import { addNotice } from 'actions/notices';
 import config from 'config';
 import {
 	WPCOM_REQUEST,
+	DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT,
 	DOMAIN_SELECT,
 	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
@@ -61,3 +62,5 @@ export function selectDomain( domain ) {
 		domain
 	};
 }
+
+export const submitEmptySearch = () => ( { type: DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT } );

@@ -4,26 +4,15 @@ import { reduxForm, change } from 'redux-form';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import i18n from 'i18n-calypso';
 import Home from 'components/ui/home';
-
-const validate = values => {
-	if ( ! values.query ) {
-		return { query: i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
-			args: { randomQuery: 'travel mom foodie' }
-		} ) };
-	}
-
-	return {};
-};
+import { submitEmptySearch } from 'actions/domain-search';
 
 export default reduxForm(
 	{
 		form: 'search',
-		fields: [ 'query' ],
-		validate
+		fields: [ 'query' ]
 	},
-	undefined,
+	state => ( { showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice } ),
 	dispatch => ( {
 		changeQuery( query ) {
 			dispatch( change( 'search', 'query', query ) );
@@ -34,6 +23,10 @@ export default reduxForm(
 				pathname: getPath( 'search' ),
 				query: { q: query }
 			} ) );
+		},
+
+		submitEmptySearch() {
+			dispatch( submitEmptySearch() );
 		}
 	} )
 )( Home );

@@ -18,6 +18,8 @@ const Home = React.createClass( {
 		if ( query && query.trim() !== '' ) {
 			this.props.redirectToSearch( query );
 		} else {
+			this.props.submitEmptySearch();
+
 			ReactDOM.findDOMNode( this.refs.query ).focus();
 		}
 	},
@@ -35,8 +37,7 @@ const Home = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit } = this.props,
-			showEmptySearchNotice = query.touched && query.error;
+		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
 			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -56,9 +57,11 @@ const Home = React.createClass( {
 					transitionName={ styles.emptySearchNotice }
 					transitionEnterTimeout={ 500 }
 					transitionLeaveTimeout={ 1 }>
-					{ showEmptySearchNotice && (
+					{ this.props.showEmptySearchNotice && (
 						<div className={ styles.emptySearchNotice }>
-							{ query.error }
+							{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
+								args: { randomQuery: 'travel mom foodie' }
+							} ) }
 							{ this.needSomeInspiration() }
 						</div>
 					) }

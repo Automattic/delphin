@@ -2,6 +2,10 @@
 @import 'app/styles/fonts.scss';
 @import 'app/styles/breakpoints.scss';
 
+.search {
+	margin-bottom: 60px;
+}
+
 .field {
 	background-color: $light-blue;
 	border: 1px solid $border-blue;
@@ -133,4 +137,11 @@
 	text-align: center;
 	font-size: 1.7rem;
 	font-weight: 600;
+}
+
+.title {
+	color: #fff;
+	font-size: 2.0rem;
+	padding: 30px;
+	text-decoration: none;
 }

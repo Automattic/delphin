@@ -4,6 +4,13 @@ import config from 'config';
 import {
 	WPCOM_REQUEST,
 	DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT,
+	DOMAIN_SEARCH_KEYWORD_REMOVE,
+	DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
+	DOMAIN_SEARCH_KEYWORD_SELECT,
+	DOMAIN_SEARCH_KEYWORD_DESELECT,
+	DOMAIN_SEARCH_INPUT_CHANGE,
+	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
+	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SELECT,
 	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
@@ -63,4 +70,37 @@ export function selectDomain( domain ) {
 	};
 }
 
+export function selectKeyword( value ) {
+	return {
+		type: DOMAIN_SEARCH_KEYWORD_SELECT,
+		value
+	};
+}
+
+export function deselectKeyword() {
+	return { type: DOMAIN_SEARCH_KEYWORD_DESELECT };
+}
+
+export function domainSearchInputChange( value ) {
+	return {
+		type: DOMAIN_SEARCH_INPUT_CHANGE,
+		value
+	};
+}
+
+export function domainSearchSubmit() {
+	return { type: DOMAIN_SEARCH_SUBMIT };
+}
+
+export function domainSearchLastKeywordRemove() {
+	return { type: DOMAIN_SEARCH_LAST_KEYWORD_REMOVE };
+}
+
+export function domainSearchKeywordRemove( value ) {
+	return { type: DOMAIN_SEARCH_KEYWORD_REMOVE, value };
+}
+
+export function domainSearchKeywordReplaceSelected( value ) {
+	return { type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED, value };
+}
 export const submitEmptySearch = () => ( { type: DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT } );

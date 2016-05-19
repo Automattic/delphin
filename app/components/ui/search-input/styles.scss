@@ -1,0 +1,101 @@
+@import 'app/styles/colors.scss';
+@import 'app/styles/fonts.scss';
+
+.search-wrapper {
+	background: white;
+	border: 1px solid $search-border-blue;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	position: relative;
+	width: 100%;
+
+	input {
+		background: transparent;
+		border: none;
+		display: inline-block;
+		font-size: 18px;
+		margin-top: 3px;
+		outline: none;
+		padding: 3px;
+		vertical-align: top;
+		width: 100%;
+	}
+}
+
+.keywords {
+	display: flex;
+}
+
+.keyword {
+	background: #87a6bc;
+	border-radius: 5px;
+	color: white;
+	cursor: pointer;
+	font-size: 15px;
+	line-height: 21px;
+	margin-right: 5px;
+	padding: 5px 34px 5px 10px;
+	position: relative;
+}
+
+.keyword-action {
+	border: none;
+	border-radius: 0px 5px 5px 0px;
+	font-size: 16px;
+	height: 100%;
+	position: absolute;
+		right: 0;
+		top: 0;
+	width: 28px;
+}
+
+.keyword-delete {
+	background: url('/images/trash.svg') center no-repeat #7a9cb5;
+}
+
+.keyword-select {
+	background: url('/images/right-arrow.svg') center no-repeat #7a9cb5;
+}
+
+.domain-delete {
+	color: $white;
+	line-height: 31px;
+	text-align: center;
+}
+
+.keyword-hidden {
+	display: none;
+}
+
+.keyword-selected {
+ 	background: #2e4453;
+}
+
+.synonyms {
+	background: white;
+	border: 1px solid $search-border-blue;
+	opacity: 1;
+	padding: 25px 10px;
+	position: absolute;
+		left: -1px;
+		top: 51px;
+	transition: all 0.25s ease-in-out;
+	width: calc(100% - 20px);
+
+	h3 {
+		font-size: 16px;
+	}
+}
+
+.synonyms-list-item {
+	background: #87a6bc;
+	border-radius: 5px;
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 5px;
+	margin-right: 10px;
+	padding: 5px 10px;
+}

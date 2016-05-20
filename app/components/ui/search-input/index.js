@@ -60,6 +60,7 @@ class SearchInput extends React.Component {
 					) }
 				</ReactCSSTransitionGroup>
 				<input
+					autoFocus
 					ref="searchInput"
 					type="text"
 					className="search"

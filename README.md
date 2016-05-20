@@ -19,3 +19,12 @@ For now, our coding guidelines mirror [Calypso's guidelines](https://github.com/
 ## Browser Support
 
 We support the latest two versions of all major browsers, except IE, where we currently only support 11 and Edge (see [Browse Happy](http://browsehappy.com) for current latest versions).
+
+## Testing
+Code in `/lib` and `/reducers` should have unit tests.
+
+We use Jest for writing tests. Tests live in a `/test` directory inside the corresponding module.
+
+Tests can be run with `npm test`.
+
+We encourage all code to be written using TDD.

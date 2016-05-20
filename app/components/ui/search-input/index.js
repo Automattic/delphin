@@ -1,12 +1,13 @@
 // External dependencies
 import intersection from 'lodash/intersection';
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
 import KeywordsContainer from 'components/containers/keywords';
-import SynonymsContainer from 'components/containers/synonyms';
+import Synonyms from './synonyms';
 
 class SearchInput extends React.Component {
 	constructor( props ) {
@@ -48,9 +49,16 @@ class SearchInput extends React.Component {
 		return (
 			<form className={ styles.searchWrapper } onSubmit={ this.handleSubmitBound }>
 				<KeywordsContainer />
-				{
-					this.props.selectedKeyword && <SynonymsContainer />
-				}
+				<ReactCSSTransitionGroup
+					transitionName={ styles.synonyms }
+					transitionEnterTimeout={ 200 }
+					transitionLeaveTimeout={ 200 }>
+					{ this.props.selectedKeyword && (
+						<Synonyms
+							target={ this.props.selectedKeyword }
+							replace={ this.props.replace } />
+					) }
+				</ReactCSSTransitionGroup>
 				<input
 					ref="searchInput"
 					type="text"

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import SearchInput from 'components/ui/search-input';
 import {
+	domainSearchKeywordReplaceSelected,
 	domainSearchLastKeywordRemove,
 	domainSearchInputChange,
 	domainSearchSubmit
@@ -29,6 +30,9 @@ export default connect(
 		},
 		changeInput( value ) {
 			dispatch( domainSearchInputChange( value ) );
+		},
+		replace( value ) {
+			dispatch( domainSearchKeywordReplaceSelected( value ) );
 		}
 	} )
 )( SearchInput );

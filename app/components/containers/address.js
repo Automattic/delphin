@@ -5,19 +5,19 @@ import { push } from 'react-router-redux';
 // Internal dependencies
 import Address from 'components/ui/address';
 import { getPath } from 'routes';
+import { isLoggedOut } from 'reducers/user/selectors';
 
 export default reduxForm(
 	{
 		form: 'address',
 		fields: [ 'name', 'addressLine1', 'addressLine2', 'city', 'state', 'country', 'phone' ]
 	},
-	null,
+	state => ( {
+		isLoggedOut: isLoggedOut( state )
+	} ),
 	dispatch => ( {
-		redirectToSignup() {
-			dispatch( push( getPath( 'signupUser' ) ) );
-		},
-		redirectToCheckout() {
-			dispatch( push( getPath( 'checkout' ) ) );
+		redirectToHome() {
+			dispatch( push( getPath( 'home' ) ) );
 		}
 	} )
 )( Address );

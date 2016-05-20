@@ -5,6 +5,7 @@ import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import About from 'components/ui/about';
+import Address from 'components/containers/address';
 import { buildPaths, getLocalizedRoute } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import config from 'config';
@@ -32,6 +33,11 @@ const defaultRoutes = [
 				path: 'about',
 				slug: 'about',
 				component: About
+			},
+			{
+				path: 'address',
+				slug: 'address',
+				component: Address
 			},
 			{
 				path: 'checkout',

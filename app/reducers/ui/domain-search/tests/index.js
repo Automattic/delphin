@@ -49,7 +49,7 @@ describe( 'ui.domainSearch reducer', () => {
 
 	it( 'should be possible to select a keyword', () => {
 		const initialState = {
-			value: '',
+			inputValue: '',
 			keywords: [ { value: 'foobar', isSelected: false } ]
 		};
 
@@ -57,28 +57,28 @@ describe( 'ui.domainSearch reducer', () => {
 			type: DOMAIN_SEARCH_KEYWORD_SELECT,
 			value: 'foobar'
 		} ) ).toEqual( {
-			value: '',
+			inputValue: '',
 			keywords: [ { value: 'foobar', isSelected: true } ]
 		} );
 	} );
 
 	it( 'should be possible to deselect a keyword', () => {
 		const initialState = {
-			value: '',
+			inputValue: '',
 			keywords: [ { value: 'foobar', isSelected: true } ]
 		};
 
 		expect( domainSearch( initialState, {
 			type: DOMAIN_SEARCH_KEYWORD_DESELECT
 		} ) ).toEqual( {
-			value: '',
+			inputValue: '',
 			keywords: [ { value: 'foobar', isSelected: false } ]
 		} );
 	} );
 
 	it( 'should be possible to remove a keyword', () => {
 		const initialState = {
-			value: 'foobaz',
+			inputValue: 'foobaz',
 			keywords: [
 				{ value: 'foobar', isSelected: false },
 				{ value: 'barbaz', isSelected: false }
@@ -89,14 +89,14 @@ describe( 'ui.domainSearch reducer', () => {
 			type: DOMAIN_SEARCH_KEYWORD_REMOVE,
 			value: 'foobar'
 		} ) ).toEqual( {
-			value: 'foobaz',
+			inputValue: 'foobaz',
 			keywords: [ { value: 'barbaz', isSelected: false } ]
 		} );
 	} );
 
 	it( 'should be possible to remove the last keyword', () => {
 		const initialState = {
-			value: '',
+			inputValue: '',
 			keywords: [
 				{ value: 'foobar', isSelected: false },
 				{ value: 'barbaz', isSelected: false }
@@ -106,7 +106,7 @@ describe( 'ui.domainSearch reducer', () => {
 		expect( domainSearch( initialState, {
 			type: DOMAIN_SEARCH_LAST_KEYWORD_REMOVE
 		} ) ).toEqual( {
-			value: '',
+			inputValue: '',
 			keywords: [ { value: 'foobar', isSelected: false } ]
 		} );
 	} );

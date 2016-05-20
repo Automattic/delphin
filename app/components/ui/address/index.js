@@ -80,11 +80,11 @@ class Address extends React.Component {
 								placeholder={ i18n.translate( 'Zip' ) }
 							/>
 						</div>
-						<input
+						<select
 							{ ...fields.country }
-							className={ styles.country }
-							placeholder={ i18n.translate( 'Country' ) }
-						/>
+							className={ styles.country }>
+							<option>{ i18n.translate( 'Country' ) }</option>
+						</select>
 					</fieldset>
 
 					<fieldset className={ styles.fieldset }>

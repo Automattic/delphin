@@ -1,0 +1,76 @@
+@import 'app/styles/colors.scss';
+@import 'app/styles/fonts.scss';
+
+.address {
+	text-align: center;
+}
+
+.header {
+	font-family: $heading-font;
+	font-size: 3rem;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.sub-header {
+	color: $blue;
+	font-size: 2.1rem;
+	margin-bottom: 25px;
+}
+
+.form {
+	background: $light-blue;
+	margin: 0 auto;
+	max-width: 320px;
+	padding: 20px;
+	text-align: left;
+}
+
+.name,
+.addressLineOne,
+.addressLineTwo,
+.city,
+.state,
+.zip,
+.country,
+.phone {
+	border: solid 1px $border-blue;
+	border-radius: 2px;
+	box-sizing: border-box;
+	font-size: 1.5rem;
+	margin: 0 0 10px 0;
+	padding: 10px 12px;
+	width: 100%;
+}
+
+.city, .state, .zip {
+	display: inline-block;
+}
+
+.state {
+	margin: 0 10px 10px 10px;
+}
+
+.city {
+	width: 140%;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.label {
+	display: block;
+	font-size: 1.3rem;
+	margin: 0 0 5px 0;
+}
+
+.fieldset {
+	display: block;
+	margin-bottom: 15px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

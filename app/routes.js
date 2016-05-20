@@ -5,9 +5,9 @@ import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import Address from 'components/containers/address';
 import { buildPaths, getLocalizedRoute } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
+import ContactInformation from 'components/containers/contact-information';
 import config from 'config';
 import HomeContainer from 'components/containers/home';
 import i18n from 'i18n-calypso';
@@ -35,9 +35,9 @@ const defaultRoutes = [
 				component: About
 			},
 			{
-				path: 'address',
-				slug: 'address',
-				component: Address
+				path: 'contact-information',
+				slug: 'ContactInformation',
+				component: ContactInformation
 			},
 			{
 				path: 'checkout',

@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-class Address extends React.Component {
+class ContactInformation extends React.Component {
 	constructor( props ) {
 		super( props );
 	}
@@ -110,4 +110,4 @@ class Address extends React.Component {
 	}
 }
 
-export default withStyles( styles )( Address );
+export default withStyles( styles )( ContactInformation );

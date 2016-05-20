@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
 
 // Internal dependencies
-import Address from 'components/ui/address';
+import ContactInformation from 'components/ui/contact-information';
 import { getPath } from 'routes';
 import { isLoggedOut } from 'reducers/user/selectors';
 
@@ -20,4 +20,4 @@ export default reduxForm(
 			dispatch( push( getPath( 'home' ) ) );
 		}
 	} )
-)( Address );
+)( ContactInformation );

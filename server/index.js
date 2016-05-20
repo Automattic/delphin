@@ -161,3 +161,18 @@ i18nCache.fetch( () => {
 	console.log( 'i18n data fetched' );
 	init();
 } );
+
+console.log( '                                         __' );
+console.log( '                                     _.-~  )' );
+console.log( '                          _..--~~~~,\'   ,-/     _' );
+console.log( '                       .-\'. . . .\'   ,-\',\'    ,\' )' );
+console.log( '                     ,\'. . . _   ,--~,-\'__..-\'  ,\'' );
+console.log( '                   ,\'. . .  (@)\' ---~~~~      ,\'' );
+console.log( '                  /. . . . \'~~             ,-\'' );
+console.log( '                 /. . . . .             ,-\'' );
+console.log( '                ; . . . .  - .        ,\'' );
+console.log( '               : . . . .       _     /' );
+console.log( '              . . . . .          `-.:' );
+console.log( '             . . . ./  - .          )' );
+console.log( '            .  . . |  _____..---.._/ ____ δελφίνια _' );
+console.log( '      ~---~~~~----~~~~             ~~ ' );

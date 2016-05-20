@@ -1,12 +1,16 @@
 // External dependencies
-import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
 
 // Internal dependencies
 import Address from 'components/ui/address';
 import { getPath } from 'routes';
 
-export default connect(
+export default reduxForm(
+	{
+		form: 'address',
+		fields: [ 'name', 'addressLine1', 'addressLine2', 'city', 'state', 'country', 'phone' ]
+	},
 	null,
 	dispatch => ( {
 		redirectToSignup() {

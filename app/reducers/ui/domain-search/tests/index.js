@@ -1,3 +1,6 @@
+// External dependencies
+import { LOCATION_CHANGE } from 'react-router-redux';
+
 // Internal dependencies
 import {
 	DOMAIN_SEARCH_SUBMIT,
@@ -15,6 +18,20 @@ jest.unmock( '..' );
 describe( 'ui.domainSearch reducer', () => {
 	it( 'should have an empty `inputValue` initially', () => {
 		expect( domainSearch( undefined, { type: 'NOT_AN_ACTION' } ).inputValue ).toBe( '' );
+	} );
+
+	it( 'should return initial state when `q` query parameter is undefined', () => {
+		expect( domainSearch( undefined, {
+			type: LOCATION_CHANGE,
+			payload: {
+				pathname: '/search',
+				query: {}
+			}
+		} ) ).toEqual( {
+			inputValue: '',
+			keywords: [],
+			showEmptySearchNotice: false
+		} );
 	} );
 
 	it( 'should change `inputValue` when the input changes', () => {

@@ -1,1 +1,3 @@
-export const getPath = () => false;
+export const getPath = ( slug ) => {
+	return slug === 'search';
+};

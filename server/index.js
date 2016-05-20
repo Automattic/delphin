@@ -22,7 +22,7 @@ import api from './wpcom-rest-api-proxy';
 import config from 'config';
 import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
-import { routes, serverRedirectRoutes, staticPages } from 'app/routes';
+import { routes, serverRedirectRoutes } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.client.config';
@@ -85,12 +85,20 @@ function generateStaticFile( filePath ) {
 	} );
 }
 
+function iterateRoutesToBuildStaticPages( childRoutes ) {
+	childRoutes.forEach( function( childRoute ) {
+		if ( Array.isArray( childRoute.childRoutes ) ) {
+			iterateRoutesToBuildStaticPages( childRoute.childRoutes );
+		} else if ( childRoute.static ) {
+			generateStaticFile( childRoute.path );
+		}
+	} );
+}
+
 const init = () => {
 	if ( process.env.BUILD_STATIC ) {
 		// Generate static files
-		staticPages.forEach( function( file ) {
-			generateStaticFile( file );
-		} );
+		iterateRoutesToBuildStaticPages( routes.childRoutes );
 
 		// No need to start the server
 		return;

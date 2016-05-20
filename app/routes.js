@@ -27,11 +27,13 @@ const defaultRoutes = [
 			{
 				path: '/',
 				slug: 'home',
+				static: true,
 				component: HomeContainer
 			},
 			{
 				path: 'about',
 				slug: 'about',
+				static: true,
 				component: About
 			},
 			{
@@ -42,26 +44,31 @@ const defaultRoutes = [
 			{
 				path: 'checkout',
 				slug: 'checkout',
+				static: false,
 				component: CheckoutContainer
 			},
 			{
 				path: 'login',
 				slug: 'loginUser',
+				static: true,
 				component: LoginContainer
 			},
 			{
 				path: 'signup',
 				slug: 'signupUser',
+				static: true,
 				component: SignupContainer
 			},
 			{
 				path: 'verify',
 				slug: 'verifyUser',
+				static: false,
 				component: VerifyUserContainer
 			},
 			{
 				path: 'success',
 				slug: 'success',
+				static: false,
 				component: SuccessContainer
 			}
 		]
@@ -71,6 +78,7 @@ const defaultRoutes = [
 			{
 				path: 'search',
 				slug: 'search',
+				static: true,
 				component: SearchContainer
 			}
 		]
@@ -113,14 +121,13 @@ export const routes = {
 		{
 			path: '*',
 			component: NotFound,
+			static: true,
 			slug: 'notFound'
 		}
 	]
 };
 
 const paths = buildPaths( routes );
-
-export const staticPages = [ '/', '/about', '/404' ];
 
 /**
  * Gets the path with the given slug, replacing parameter placeholders with the given values.

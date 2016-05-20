@@ -32,7 +32,7 @@ export function clearDomainSuggestions() {
 }
 
 export function fetchDomainSuggestions( domainQuery ) {
-	if ( domainQuery.trim() === '' ) {
+	if ( ! domainQuery || domainQuery.trim() === '' ) {
 		return clearDomainSuggestions();
 	}
 

@@ -93,6 +93,8 @@ export const getLocalizedRoute = ( route, language ) => {
 		}
 	}
 
+	localizedRoute.static = route.static;
+
 	if ( route.childRoutes ) {
 		localizedRoute.childRoutes = route.childRoutes.map( childRoute => {
 			return getLocalizedRoute( childRoute, language );

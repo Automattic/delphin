@@ -43,6 +43,15 @@ class Address extends React.Component {
 					</fieldset>
 
 					<fieldset className={ styles.fieldset }>
+						<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
+						<input
+							{ ...fields.name }
+							className={ styles.organization }
+							placeholder={ i18n.translate( 'Organization' ) }
+						/>
+					</fieldset>
+
+					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
 						<input
 							{ ...fields.addressLine1 }
@@ -75,6 +84,15 @@ class Address extends React.Component {
 							{ ...fields.country }
 							className={ styles.country }
 							placeholder={ i18n.translate( 'Country' ) }
+						/>
+					</fieldset>
+
+					<fieldset className={ styles.fieldset }>
+						<label className={ styles.label }>{ i18n.translate( 'Fax' ) }</label>
+						<input
+							{ ...fields.phone }
+							className={ styles.fax }
+							placeholder={ i18n.translate( 'Fax' ) }
 						/>
 					</fieldset>
 

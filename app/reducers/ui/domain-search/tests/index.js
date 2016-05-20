@@ -106,7 +106,7 @@ describe( 'ui.domainSearch reducer', () => {
 		expect( domainSearch( initialState, {
 			type: DOMAIN_SEARCH_LAST_KEYWORD_REMOVE
 		} ) ).toEqual( {
-			inputValue: '',
+			inputValue: 'barba',
 			keywords: [ { value: 'foobar', isSelected: false } ]
 		} );
 	} );

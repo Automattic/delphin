@@ -31,6 +31,9 @@ class SearchInput extends React.Component {
 
 	handleInputKeydown( event ) {
 		if ( event.keyCode === 8 && event.target.value.length === 0 ) { // backspace
+			// Stops propagation to avoid removing two letters instead of just one
+			event.preventDefault();
+
 			this.props.removeLastKeyword();
 		}
 	}

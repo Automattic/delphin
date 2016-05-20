@@ -1,5 +1,6 @@
 // External dependencies
 import find from 'lodash/find';
+import last from 'lodash/last';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
@@ -120,7 +121,10 @@ export const domainSearch = ( state = initialState, action ) => {
 			return state;
 
 		case DOMAIN_SEARCH_LAST_KEYWORD_REMOVE:
+			const { value: keywordValue } = last( state.keywords );
+
 			return Object.assign( {}, state, {
+				inputValue: keywordValue.substring( 0, keywordValue.length - 1 ),
 				keywords: state.keywords.slice( 0, state.keywords.length - 1 )
 			} );
 

@@ -101,7 +101,7 @@ class ContactInformation extends React.Component {
 						<input
 							{ ...fields.phone }
 							className={ styles.phone }
-							placeholder={ i18n.translate( 'Phone' ) }k
+							placeholder={ i18n.translate( 'Phone' ) }
 						/>
 					</fieldset>
 				</form>

@@ -90,7 +90,7 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Fax' ) }</label>
 						<input
-							{ ...fields.phone }
+							{ ...fields.fax }
 							className={ styles.fax }
 							placeholder={ i18n.translate( 'Fax' ) }
 						/>

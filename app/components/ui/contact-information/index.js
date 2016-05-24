@@ -45,7 +45,7 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
 						<input
-							{ ...fields.name }
+							{ ...fields.organization }
 							className={ styles.organization }
 							placeholder={ i18n.translate( 'Organization' ) }
 						/>

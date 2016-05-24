@@ -10,7 +10,7 @@ import { isLoggedOut } from 'reducers/user/selectors';
 export default reduxForm(
 	{
 		form: 'address',
-		fields: [ 'name', 'addressLine1', 'addressLine2', 'city', 'state', 'country', 'fax', 'phone' ]
+		fields: [ 'name', 'organization', 'addressLine1', 'addressLine2', 'city', 'state', 'country', 'fax', 'phone' ]
 	},
 	state => ( {
 		isLoggedOut: isLoggedOut( state )

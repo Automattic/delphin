@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
+import StepsProgressbar from 'components/ui/steps-progressbar';
 
 const Home = React.createClass( {
 	propTypes: {
@@ -44,6 +45,8 @@ const Home = React.createClass( {
 				<h2 className={ styles.heading }>
 					{ i18n.translate( 'Find your perfect site address.' ) }
 				</h2>
+
+				<StepsProgressbar steps={ [ 'search', 'sign in', 'profile', 'checkout' ] } currentStep="search" />
 
 				<input
 					{ ...query }

@@ -12,7 +12,7 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
-		if ( ! this.props.countries.hasLoadedFromServer ) {
+		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
 		}
 		this.redirectIfLoggedOut();

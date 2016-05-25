@@ -3,6 +3,7 @@ import { addNotice } from 'actions/notices';
 import {
 	COUNTRIES_FETCH,
 	COUNTRIES_FETCH_COMPLETE,
+	COUNTRIES_FETCH_ERROR,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 
@@ -17,6 +18,8 @@ export const fetchCountries = () => ( {
 				message: error.message,
 				status: 'error'
 			} ) );
+
+			dispatch( { type: COUNTRIES_FETCH_ERROR, error: error.message } );
 		}
 	)
 } );

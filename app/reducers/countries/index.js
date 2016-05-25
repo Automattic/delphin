@@ -1,5 +1,9 @@
 // Internal dependencies
-import { COUNTRIES_FETCH, COUNTRIES_FETCH_COMPLETE } from 'reducers/action-types';
+import {
+	COUNTRIES_FETCH,
+	COUNTRIES_FETCH_COMPLETE,
+	COUNTRIES_FETCH_ERROR
+} from 'reducers/action-types';
 
 const initialState = {
 	isRequesting: false,
@@ -18,6 +22,10 @@ export const countries = ( state = initialState, action ) => {
 				isRequesting: false,
 				hasLoadedFromServer: true,
 				data
+			} );
+		case COUNTRIES_FETCH_ERROR:
+			return Object.assign( {}, state, {
+				isRequesting: false
 			} );
 		default:
 			return state;

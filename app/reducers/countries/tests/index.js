@@ -1,7 +1,11 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { COUNTRIES_FETCH, COUNTRIES_FETCH_COMPLETE } from 'reducers/action-types';
+import {
+	COUNTRIES_FETCH,
+	COUNTRIES_FETCH_COMPLETE,
+	COUNTRIES_FETCH_ERROR
+} from 'reducers/action-types';
 import { countries } from '..';
 
 describe( 'state.countries', () => {
@@ -26,6 +30,18 @@ describe( 'state.countries', () => {
 			isRequesting: false,
 			hasLoadedFromServer: true,
 			data: [ { code: 'IT', name: 'Italy' } ]
+		} );
+	} );
+
+	it( 'should reset isRequesting flag on error', () => {
+		expect( countries( {
+			isRequesting: true,
+			hasLoadedFromServer: false,
+			data: null
+		}, { type: COUNTRIES_FETCH_ERROR } ) ).toEqual( {
+			isRequesting: false,
+			hasLoadedFromServer: false,
+			data: null
 		} );
 	} );
 } );

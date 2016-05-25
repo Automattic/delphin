@@ -18,6 +18,7 @@ $inner-dot-color: $gray-blue;
 	height: $step-line-size;
 
 	position: absolute;
+		left: 0;
 		bottom: ( $step-inner-dot-size - ( $step-line-size/2 ) );
 
 	z-index: -2;

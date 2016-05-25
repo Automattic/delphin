@@ -26,7 +26,7 @@ function getStepClassName( currentStepIndex, stepIndex ) {
 function Progressbar( props ) {
 	const currentStepIndex = props.currentStep ? props.steps.indexOf( props.currentStep ) : null;
 
-	return <ol className={ styles.progressbar }>
+	return <ol className={ props.className + ' ' + styles.progressbar }>
 		{
 			props.steps.map( ( step, index ) => <li className={ getStepClassName( currentStepIndex, index ) }>
 				<div className={ styles.progressbarStepCaption }>{ step }</div>

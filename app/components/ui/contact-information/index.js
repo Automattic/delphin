@@ -12,6 +12,9 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
+		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
+			this.props.fetchCountries();
+		}
 		this.redirectIfLoggedOut();
 	}
 
@@ -26,7 +29,7 @@ class ContactInformation extends React.Component {
 	}
 
 	render() {
-		const { fields } = this.props;
+		const { fields, countries } = this.props;
 
 		return (
 			<div className={ styles.address }>
@@ -82,8 +85,15 @@ class ContactInformation extends React.Component {
 						</div>
 						<select
 							{ ...fields.country }
+							disabled={ ! countries.hasLoadedFromServer }
 							className={ styles.country }>
-							<option>{ i18n.translate( 'Country' ) }</option>
+							<option>{ i18n.translate( 'Select Country' ) }</option>
+							<option value=" " key="separator" disabled />
+							{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
+								country.name
+								? <option value={ country.code } key={ country.code }>{ country.name }</option>
+								: <option value=" " key={ index } disabled />
+							) ) }
 						</select>
 					</fieldset>
 

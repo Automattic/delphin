@@ -19,7 +19,7 @@ export const fetchCountries = () => ( {
 				status: 'error'
 			} ) );
 
-			dispatch( { type: COUNTRIES_FETCH_ERROR, error: error.message } );
+			dispatch( { type: COUNTRIES_FETCH_ERROR } );
 		}
 	)
 } );

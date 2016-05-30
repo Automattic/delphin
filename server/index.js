@@ -113,6 +113,9 @@ const init = () => {
 	if ( process.env.BUILD_STATIC ) {
 		generateStaticFiles( defaultRoutes );
 
+		// we need to explicitly generate a 404 page because it isn't in in the default routes
+		generateStaticFile( '*' );
+
 		// No need to start the server
 		return;
 	}

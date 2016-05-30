@@ -20,7 +20,7 @@ import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
-const defaultRoutes = [
+export const defaultRoutes = [
 	{
 		component: DefaultHeader,
 		childRoutes: [
@@ -34,7 +34,15 @@ const defaultRoutes = [
 				path: 'about',
 				slug: 'about',
 				static: true,
-				component: About
+				component: About,
+				childRoutes: [
+					{
+						path: 'testnest',
+						slug: 'testnest',
+						component: About,
+						static: true
+					}
+				]
 			},
 			{
 				path: 'contact-information',
@@ -134,15 +142,15 @@ const paths = buildPaths( routes );
  *
  * @param {string} slug The unique identifier of the path to search for in the routes.
  * @param {object} values The values to use when replacing the route's placeholders.
- * @param {object} overrideRoutes The routes to search through.
+ * @param {object} overrides The routes to search through.
  * @return {string|null} A string representing a path in the application, with parameters
  *    replaced by the given values.
  */
-export const getPath = ( slug, values = {}, overrideRoutes ) => {
+export const getPath = ( slug, values = {}, overrides = {} ) => {
 	let pathMap = paths;
 
-	if ( overrideRoutes ) {
-		pathMap = buildPaths( overrideRoutes );
+	if ( overrides.routes ) {
+		pathMap = buildPaths( overrides.routes );
 	}
 
 	const path = pathMap[ slug ];
@@ -151,14 +159,19 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 		return null;
 	}
 
-	const formattedPath = formatPattern( path, values ),
-		locale = i18n.getLocaleSlug();
+	const formattedPath = formatPattern( path, values );
+
+	let locale = i18n.getLocaleSlug();
+
+	if ( overrides.locale ) {
+		locale = overrides.locale;
+	}
 
 	if ( ! locale || locale === 'en' ) {
 		return formattedPath;
 	}
 
-	return `/${ i18n.getLocaleSlug() }${ formattedPath }`;
+	return `/${ locale }${ formattedPath }`;
 };
 
 export const serverRedirectRoutes = [

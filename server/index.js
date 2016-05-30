@@ -22,7 +22,7 @@ import api from './wpcom-rest-api-proxy';
 import config from 'config';
 import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
-import { routes, serverRedirectRoutes } from 'app/routes';
+import { getPath, defaultRoutes, routes, serverRedirectRoutes } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.client.config';
@@ -61,7 +61,7 @@ function renderPage( props, localeData ) {
 	return templateCompiler( { content, localeData, css: css.join( '' ) } );
 }
 
-function generateStaticFile( filePath ) {
+const generateStaticFile = filePath => {
 	match( { routes, location: filePath }, ( error, redirectLocation, props ) => {
 		const locale = getLocaleSlug( filePath ),
 			localeData = i18nCache.get( locale ),
@@ -85,22 +85,33 @@ function generateStaticFile( filePath ) {
 			console.log( filePath + ' written' );
 		} );
 	} );
-}
+};
 
-function iterateRoutesToBuildStaticPages( childRoutes ) {
-	childRoutes.forEach( function( childRoute ) {
-		if ( Array.isArray( childRoute.childRoutes ) ) {
-			iterateRoutesToBuildStaticPages( childRoute.childRoutes );
-		} else if ( childRoute.static ) {
-			generateStaticFile( '/' + childRoute.path );
-		}
+const generateStaticFiles = rootRoutes => {
+	let staticSlugs = [];
+
+	const addStaticSlugs = innerRoutes => {
+		innerRoutes.forEach( route => {
+			if ( route.static ) {
+				staticSlugs.push( route.slug );
+			}
+
+			if ( route.childRoutes ) {
+				addStaticSlugs( route.childRoutes );
+			}
+		} );
+	};
+
+	addStaticSlugs( rootRoutes );
+
+	config( 'languages' ).map( language => language.langSlug ).forEach( locale => {
+		staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
 	} );
-}
+};
 
 const init = () => {
 	if ( process.env.BUILD_STATIC ) {
-		// Generate static files
-		iterateRoutesToBuildStaticPages( routes.childRoutes );
+		generateStaticFiles( defaultRoutes );
 
 		// No need to start the server
 		return;

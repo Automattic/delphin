@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
+import Header from 'components/ui/connect-user/header';
 import i18n from 'i18n-calypso';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
@@ -71,6 +72,8 @@ const VerifyUser = React.createClass( {
 
 		return (
 			<div>
+				<Header intention={ 'verifyUser' } />
+
 				<Form
 					onSubmit={ handleSubmit( this.verifyUser ) }
 					noticeArea={ notice }

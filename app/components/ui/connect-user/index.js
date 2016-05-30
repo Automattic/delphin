@@ -1,16 +1,18 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
-import i18n from 'i18n-calypso';
+import Header from 'components/ui/connect-user/header';
 import ValidationError from 'components/ui/form/validation-error';
 
 const ConnectUser = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		intention: PropTypes.string.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToVerifyUser: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
@@ -37,6 +39,8 @@ const ConnectUser = React.createClass( {
 
 		return (
 			<div>
+				<Header intention={ this.props.intention } />
+
 				<Form
 					onSubmit={ handleSubmit }
 					fieldArea={

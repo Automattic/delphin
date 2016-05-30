@@ -1,7 +1,9 @@
 jest.disableAutomock();
+// External dependencies
+import find from 'lodash/find';
 
 // Internal dependencies
-import { getLocaleSlug, stripLocaleSlug } from '..';
+import { getLocaleSlug, getLocalizedRoutes, stripLocaleSlug } from '..';
 
 describe( 'lib/routes', () => {
 	describe( 'getLocaleSlug', () => {
@@ -33,6 +35,45 @@ describe( 'lib/routes', () => {
 
 		it( 'should return root for a URL with only the locale', () => {
 			expect( stripLocaleSlug( '/fr' ) ).toBe( '/' );
+		} );
+	} );
+
+	describe( 'getLocalizedRoutes', () => {
+		it( 'should prefix each top-level route with a locale slug', () => {
+			const localizedRoutes = getLocalizedRoutes( [
+				{
+					path: '/'
+				},
+				{
+					path: 'foo'
+				}
+			] );
+
+			expect( find( localizedRoutes, { path: 'fr/foo' } ) ).toEqual( {
+				path: 'fr/foo'
+			} );
+
+			expect( find( localizedRoutes, { path: 'fr' } ) ).toEqual( {
+				path: 'fr'
+			} );
+		} );
+
+		it( 'should not prefix nested routes', () => {
+			const localizedRoutes = getLocalizedRoutes( [
+				{
+					path: '/'
+				},
+				{
+					path: 'foo',
+					childRoutes: [ {
+						path: 'bar'
+					} ]
+				}
+			] );
+
+			expect( find( localizedRoutes, { path: 'fr/foo' } ).childRoutes ).toEqual( [ {
+				path: 'bar'
+			} ] );
 		} );
 	} );
 } );

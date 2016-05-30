@@ -78,7 +78,7 @@ export const getLocaleSlug = url => {
  * @param {array} routes - An array of routes.
  * @return {array} An array of routes with `slug` omitted.
  */
-export const omitSlugFromRoutes = routes => {
+const omitSlugFromRoutes = routes => {
 	return routes.map( route => {
 		let newRoute;
 		if ( route.childRoutes ) {

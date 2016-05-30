@@ -2,7 +2,8 @@
 var baseConfig = require( './webpack.base.config' ),
 	fs = require( 'fs' ),
 	merge = require( 'webpack-merge' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 function getExternals() {
 	var externals = {};
@@ -32,7 +33,16 @@ var config = merge.smart( baseConfig, {
 		path: path.resolve( __dirname, 'server/build' )
 	},
 
-	target: 'node'
+	target: 'node',
+
+	// Enables source maps
+	// This is fine since the server won't be used in production
+	devtool: 'sourcemap',
+
+	plugins: [
+		// inject source map support on top of the build file
+		new webpack.BannerPlugin( 'require("source-map-support").install();', { raw: true, entryOnly: false } )
+	]
 } );
 
 module.exports = config;

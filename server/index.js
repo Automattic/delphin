@@ -68,6 +68,8 @@ function generateStaticFile( filePath ) {
 			staticDirectory = path.join( __dirname, '..', 'public/static' ),
 			directory = path.join( __dirname, '..', 'public/static', filePath );
 
+		i18n.setLocale( localeData );
+
 		if ( ! fileExists( staticDirectory ) ) {
 			fs.mkdirSync( staticDirectory );
 		}
@@ -90,7 +92,7 @@ function iterateRoutesToBuildStaticPages( childRoutes ) {
 		if ( Array.isArray( childRoute.childRoutes ) ) {
 			iterateRoutesToBuildStaticPages( childRoute.childRoutes );
 		} else if ( childRoute.static ) {
-			generateStaticFile( childRoute.path );
+			generateStaticFile( '/' + childRoute.path );
 		}
 	} );
 }

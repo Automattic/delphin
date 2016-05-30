@@ -16,6 +16,7 @@
     "start": "npm install && node server/build/bundle",
     "test": "NODE_PATH=.:app jest",
     "static": "rm -rf public/static && NODE_ENV=production npm run build && BUILD_STATIC=true node server/build/bundle",
+    "static-server": "npm run static && node server/static",
     "translate": "glotpress-js -p delphin -e date -i public/scripts/bundle.js -i server/build/bundle.js -o server/build/delphin.pot"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "eslint-plugin-wpcalypso": "^1.1.3",
     "glotpress-js": "0.0.6",
     "node-sass": "^3.4.2",
+    "serve-static": "^1.10.2",
     "xgettext-js": "^0.3.0"
   },
   "dependencies": {

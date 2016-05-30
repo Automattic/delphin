@@ -1,5 +1,6 @@
 // External dependencies
 import find from 'lodash/find';
+import omit from 'lodash/omit';
 
 // Internal dependencies
 import config from 'config';
@@ -72,36 +73,45 @@ export const getLocaleSlug = url => {
 };
 
 /**
- * Retrieves a localized version of the given route based on the specified language.
+ * Returns a new array of routes, omitting the `slug` property from each route.
  *
- * @param {object} route - route object, which may contain child routes
- * @param {object} language - language
- * @returns {object} a localized route
+ * @param {array} routes - An array of routes.
+ * @return {array} An array of routes with `slug` omitted.
  */
-export const getLocalizedRoute = ( route, language ) => {
-	const localizedRoute = {};
-
-	if ( route.component ) {
-		localizedRoute.component = route.component;
-	}
-
-	if ( route.path ) {
-		localizedRoute.path = language.langSlug;
-
-		if ( route.path !== '/' ) {
-			localizedRoute.path = `${ language.langSlug }/${ route.path }`;
+export const omitSlugFromRoutes = routes => {
+	return routes.map( route => {
+		let newRoute;
+		if ( route.childRoutes ) {
+			newRoute = Object.assign( {}, route, {
+				childRoutes: omitSlugFromRoutes( route.childRoutes )
+			} );
+		} else {
+			newRoute = route;
 		}
-	}
 
-	localizedRoute.static = route.static;
+		return omit( newRoute, 'slug' );
+	} );
+};
 
-	if ( route.childRoutes ) {
-		localizedRoute.childRoutes = route.childRoutes.map( childRoute => {
-			return getLocalizedRoute( childRoute, language );
-		} );
-	}
+/**
+ * Returns a new array of routes with the top level routes prefixed by a locale slug.
+ *
+ * @param {array} routes - An array of routes.
+ * @return {array} An array of routes.
+ */
+export const getLocalizedRoutes = routes => {
+	const routesWithoutSlug = omitSlugFromRoutes( routes );
 
-	return localizedRoute;
+	let localizedRoutes = [];
+	config( 'languages' ).forEach( language => {
+		localizedRoutes = localizedRoutes.concat( routesWithoutSlug.map( route => (
+			Object.assign( {}, route, {
+				path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path }`
+			} )
+		) ) );
+	} );
+
+	return localizedRoutes;
 };
 
 /**

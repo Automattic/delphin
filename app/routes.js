@@ -1,14 +1,11 @@
 // External dependencies
 import { formatPattern } from 'react-router';
-import filter from 'lodash/filter';
-import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import { buildPaths, getLocalizedRoute } from 'lib/routes';
+import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformation from 'components/containers/contact-information';
-import config from 'config';
 import HomeContainer from 'components/containers/home';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
@@ -23,13 +20,13 @@ import VerifyUserContainer from 'components/containers/connect-user/verify';
 export const defaultRoutes = [
 	{
 		component: DefaultHeader,
+		indexRoute: {
+			component: HomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
 		childRoutes: [
-			{
-				path: '/',
-				slug: 'home',
-				static: true,
-				component: HomeContainer
-			},
 			{
 				path: 'about',
 				slug: 'about',
@@ -82,40 +79,14 @@ export const defaultRoutes = [
 		]
 	},
 	{
-		childRoutes: [
-			{
-				path: 'search',
-				slug: 'search',
-				static: true,
-				component: SearchContainer
-			}
-		]
+		path: 'search',
+		slug: 'search',
+		static: true,
+		component: SearchContainer
 	}
 ];
 
-/**
- * Builds a list of routes that are similar to the default routes except that they are prefixed by an identifier from
- * one of the many language we support:
- *
- *   {
- *     "path": "fr"
- *   },
- *   {
- *     "path": "fr/about"
- *   },
- *   {
- *     "path": "fr/checkout"
- *   },
- *   ...
- *
- */
-const localizedRoutes = flatten( filter( config( 'languages' ), language => {
-	return language.langSlug !== 'en';
-} ).map( language => {
-	return defaultRoutes.map( route => {
-		return getLocalizedRoute( route, language );
-	} );
-} ) );
+const localizedRoutes = getLocalizedRoutes( defaultRoutes );
 
 export const routes = {
 	component: Layout,

@@ -5,6 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
+import StepsProgressbar from 'components/ui/steps-progressbar';
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
@@ -30,9 +31,17 @@ class ContactInformation extends React.Component {
 
 	render() {
 		const { fields, countries } = this.props;
+		const steps = [
+			i18n.translate( 'search' ),
+			i18n.translate( 'sign in' ),
+			i18n.translate( 'profile' ),
+			i18n.translate( 'checkout' )
+		];
 
 		return (
 			<div className={ styles.address }>
+				<StepsProgressbar className={ styles.progress } steps={ steps } currentStep={ steps[ 2 ] } />
+
 				<h2 className={ styles.header }>{ i18n.translate( 'Registration Profile' ) }</h2>
 				<h3 className={ styles.subHeader }>{ i18n.translate( 'We need your contact information to claim your new domain.' ) }</h3>
 				<form className={ styles.form }>

@@ -8,6 +8,9 @@ import styles from './styles.scss';
 import RelatedWord from './related-word';
 
 const RelatedWords = ( { target, replace, relatedWords } ) => {
+	if ( ! relatedWords ) {
+		return null;
+	}
 	const showRelatedWords = relatedWords.hasLoadedFromServer && relatedWords.data.length > 0,
 		{ isRequesting } = relatedWords;
 
@@ -51,7 +54,7 @@ RelatedWords.propTypes = {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
 	} ).isRequired,
-	relatedWords: PropTypes.object.isRequired,
+	relatedWords: PropTypes.object,
 	replace: PropTypes.func.isRequired
 };
 

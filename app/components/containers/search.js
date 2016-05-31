@@ -14,7 +14,7 @@ export default connect(
 		isRequesting: state.domainSearch.isRequesting,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
-		query: ownProps.location.query.q,
+		query: ownProps.location.query.q || '',
 		sort: ownProps.location.query.sort,
 		user: state.user,
 		defaultTLD: config( 'default_tld' )

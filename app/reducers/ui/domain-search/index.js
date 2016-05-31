@@ -1,5 +1,6 @@
 // External dependencies
 import find from 'lodash/find';
+import isEmpty from 'lodash/isEmpty';
 import last from 'lodash/last';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
@@ -50,8 +51,7 @@ export const domainSearch = ( state = initialState, action ) => {
 	switch ( type ) {
 		// sync keywords from the url if the url is different
 		case LOCATION_CHANGE:
-			if ( action.payload.pathname === getPath( 'search' ) &&
-				action.payload.query.q.length > 0 ) {
+			if ( action.payload.pathname === getPath( 'search' ) && ! isEmpty( action.payload.query.q ) ) {
 				const queryKeywords = action.payload.query.q.split( ' ' );
 
 				if ( state.keywords.length !== queryKeywords.length ||
@@ -61,6 +61,7 @@ export const domainSearch = ( state = initialState, action ) => {
 					} );
 				}
 			}
+
 			return state;
 
 		case DOMAIN_SEARCH_SUBMIT:

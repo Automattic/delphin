@@ -5,7 +5,9 @@ import {
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_KEYWORD_SELECT,
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
-	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE
+	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
+	RELATED_WORD_FETCH,
+	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { domainSearch } from '..';
 
@@ -31,6 +33,7 @@ describe( 'ui.domainSearch reducer', () => {
 		} ) ).toEqual( {
 			inputValue: '',
 			keywords: [ { value: 'foobar', isSelected: false } ],
+			relatedWords: [],
 			showEmptySearchNotice: false
 		} );
 	} );
@@ -108,6 +111,103 @@ describe( 'ui.domainSearch reducer', () => {
 		} ) ).toEqual( {
 			inputValue: 'barba',
 			keywords: [ { value: 'foobar', isSelected: false } ]
+		} );
+	} );
+
+	describe( 'related words', () => {
+		it( 'should be an empty array at first', () => {
+			expect( domainSearch( undefined, { type: 'NOT_AN_ACTION' } ).relatedWords ).toEqual( [] );
+		} );
+
+		it( 'should add a word when it is fetched', () => {
+			expect( domainSearch( undefined, { type: RELATED_WORD_FETCH, word: 'foobar' } ).relatedWords ).toEqual( [ {
+				word: 'foobar',
+				data: null,
+				isRequesting: true,
+				hasLoadedFromServer: false
+			} ] );
+		} );
+
+		it( 'should not add the same word twice', () => {
+			expect( domainSearch( {
+				relatedWords: [ {
+					word: 'foobar',
+					data: null,
+					isRequesting: true,
+					hasLoadedFromServer: false
+				} ]
+			}, { type: RELATED_WORD_FETCH, word: 'foobar' } ).relatedWords ).toEqual( [ {
+				word: 'foobar',
+				data: null,
+				isRequesting: true,
+				hasLoadedFromServer: false
+			} ] );
+		} );
+
+		it( 'should add related words when the request completes', () => {
+			const initialState = {
+				relatedWords: [ {
+					word: 'foobar',
+					data: null,
+					isRequesting: true,
+					hasLoadedFromServer: false
+				} ]
+			};
+
+			expect( domainSearch( initialState, {
+				type: RELATED_WORD_FETCH_COMPLETE,
+				word: 'foobar',
+				data: [ 'foo', 'bar', 'baz' ]
+			} ).relatedWords ).toEqual( [ {
+				word: 'foobar',
+				data: [ 'foo', 'bar', 'baz' ],
+				isRequesting: false,
+				hasLoadedFromServer: true
+			} ] );
+		} );
+
+		it( 'should remove duplicate related words when adding them', () => {
+			const initialState = {
+				relatedWords: [ {
+					word: 'foobar',
+					data: null,
+					isRequesting: true,
+					hasLoadedFromServer: false
+				} ]
+			};
+
+			expect( domainSearch( initialState, {
+				type: RELATED_WORD_FETCH_COMPLETE,
+				word: 'foobar',
+				data: [ 'foo', 'foo', 'baz' ]
+			} ).relatedWords ).toEqual( [ {
+				word: 'foobar',
+				data: [ 'foo', 'baz' ],
+				isRequesting: false,
+				hasLoadedFromServer: true
+			} ] );
+		} );
+
+		it( 'should replace related words if they are already in the store', () => {
+			const initialState = {
+				relatedWords: [ {
+					word: 'foobar',
+					data: [ 'foo' ],
+					isRequesting: false,
+					hasLoadedFromServer: true
+				} ]
+			};
+
+			expect( domainSearch( initialState, {
+				type: RELATED_WORD_FETCH_COMPLETE,
+				word: 'foobar',
+				data: [ 'foo', 'bar', 'baz' ]
+			} ).relatedWords ).toEqual( [ {
+				word: 'foobar',
+				data: [ 'foo', 'bar', 'baz' ],
+				isRequesting: false,
+				hasLoadedFromServer: true
+			} ] );
 		} );
 	} );
 } );

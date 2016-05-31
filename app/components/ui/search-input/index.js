@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 import KeywordsContainer from 'components/containers/keywords';
-import Synonyms from './synonyms';
+import RelatedWords from './related-words';
 
 class SearchInput extends React.Component {
 	constructor( props ) {
@@ -54,11 +54,11 @@ class SearchInput extends React.Component {
 			<form className={ styles.searchWrapper } onSubmit={ this.handleSubmitBound }>
 				<KeywordsContainer />
 				<ReactCSSTransitionGroup
-					transitionName={ styles.synonyms }
+					transitionName={ styles.relatedWords }
 					transitionEnterTimeout={ 200 }
 					transitionLeaveTimeout={ 200 }>
 					{ this.props.selectedKeyword && (
-						<Synonyms
+						<RelatedWords
 							relatedWords={ find( this.props.relatedWords, { word: this.props.selectedKeyword.value } ) }
 							target={ this.props.selectedKeyword }
 							replace={ this.props.replace } />
@@ -88,6 +88,7 @@ SearchInput.propTypes = {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
 	} ),
+	relatedWords: PropTypes.array.isRequired,
 	removeLastKeyword: PropTypes.func.isRequired,
 	submit: PropTypes.func.isRequired,
 	changeInput: PropTypes.func.isRequired

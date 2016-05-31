@@ -1,14 +1,11 @@
 // External dependencies
 import { formatPattern } from 'react-router';
-import filter from 'lodash/filter';
-import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import { buildPaths, getLocalizedRoute } from 'lib/routes';
+import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformation from 'components/containers/contact-information';
-import config from 'config';
 import HomeContainer from 'components/containers/home';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
@@ -20,19 +17,29 @@ import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
-const defaultRoutes = [
+export const defaultRoutes = [
 	{
 		component: DefaultHeader,
+		indexRoute: {
+			component: HomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
 		childRoutes: [
-			{
-				path: '/',
-				slug: 'home',
-				component: HomeContainer
-			},
 			{
 				path: 'about',
 				slug: 'about',
-				component: About
+				static: true,
+				component: About,
+				childRoutes: [
+					{
+						path: 'testnest',
+						slug: 'testnest',
+						component: About,
+						static: true
+					}
+				]
 			},
 			{
 				path: 'contact-information',
@@ -42,64 +49,44 @@ const defaultRoutes = [
 			{
 				path: 'checkout',
 				slug: 'checkout',
+				static: false,
 				component: CheckoutContainer
 			},
 			{
 				path: 'login',
 				slug: 'loginUser',
+				static: true,
 				component: LoginContainer
 			},
 			{
 				path: 'signup',
 				slug: 'signupUser',
+				static: true,
 				component: SignupContainer
 			},
 			{
 				path: 'verify',
 				slug: 'verifyUser',
+				static: false,
 				component: VerifyUserContainer
 			},
 			{
 				path: 'success',
 				slug: 'success',
+				static: false,
 				component: SuccessContainer
 			}
 		]
 	},
 	{
-		childRoutes: [
-			{
-				path: 'search',
-				slug: 'search',
-				component: SearchContainer
-			}
-		]
+		path: 'search',
+		slug: 'search',
+		static: true,
+		component: SearchContainer
 	}
 ];
 
-/**
- * Builds a list of routes that are similar to the default routes except that they are prefixed by an identifier from
- * one of the many language we support:
- *
- *   {
- *     "path": "fr"
- *   },
- *   {
- *     "path": "fr/about"
- *   },
- *   {
- *     "path": "fr/checkout"
- *   },
- *   ...
- *
- */
-const localizedRoutes = flatten( filter( config( 'languages' ), language => {
-	return language.langSlug !== 'en';
-} ).map( language => {
-	return defaultRoutes.map( route => {
-		return getLocalizedRoute( route, language );
-	} );
-} ) );
+const localizedRoutes = getLocalizedRoutes( defaultRoutes );
 
 export const routes = {
 	component: Layout,
@@ -113,6 +100,7 @@ export const routes = {
 		{
 			path: '*',
 			component: NotFound,
+			static: true,
 			slug: 'notFound'
 		}
 	]
@@ -120,22 +108,20 @@ export const routes = {
 
 const paths = buildPaths( routes );
 
-export const staticPages = [ '/', '/about', '/404' ];
-
 /**
  * Gets the path with the given slug, replacing parameter placeholders with the given values.
  *
  * @param {string} slug The unique identifier of the path to search for in the routes.
  * @param {object} values The values to use when replacing the route's placeholders.
- * @param {object} overrideRoutes The routes to search through.
+ * @param {object} overrides The routes to search through.
  * @return {string|null} A string representing a path in the application, with parameters
  *    replaced by the given values.
  */
-export const getPath = ( slug, values = {}, overrideRoutes ) => {
+export const getPath = ( slug, values = {}, overrides = {} ) => {
 	let pathMap = paths;
 
-	if ( overrideRoutes ) {
-		pathMap = buildPaths( overrideRoutes );
+	if ( overrides.routes ) {
+		pathMap = buildPaths( overrides.routes );
 	}
 
 	const path = pathMap[ slug ];
@@ -144,14 +130,19 @@ export const getPath = ( slug, values = {}, overrideRoutes ) => {
 		return null;
 	}
 
-	const formattedPath = formatPattern( path, values ),
-		locale = i18n.getLocaleSlug();
+	const formattedPath = formatPattern( path, values );
+
+	let locale = i18n.getLocaleSlug();
+
+	if ( overrides.locale ) {
+		locale = overrides.locale;
+	}
 
 	if ( ! locale || locale === 'en' ) {
 		return formattedPath;
 	}
 
-	return `/${ i18n.getLocaleSlug() }${ formattedPath }`;
+	return `/${ locale }${ formattedPath }`;
 };
 
 export const serverRedirectRoutes = [

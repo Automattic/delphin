@@ -22,7 +22,7 @@ import api from './wpcom-rest-api-proxy';
 import config from 'config';
 import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
-import { routes, serverRedirectRoutes, staticPages } from 'app/routes';
+import { getPath, defaultRoutes, routes, serverRedirectRoutes } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.client.config';
@@ -61,12 +61,14 @@ function renderPage( props, localeData ) {
 	return templateCompiler( { content, localeData, css: css.join( '' ) } );
 }
 
-function generateStaticFile( filePath ) {
+const generateStaticFile = filePath => {
 	match( { routes, location: filePath }, ( error, redirectLocation, props ) => {
 		const locale = getLocaleSlug( filePath ),
 			localeData = i18nCache.get( locale ),
 			staticDirectory = path.join( __dirname, '..', 'public/static' ),
 			directory = path.join( __dirname, '..', 'public/static', filePath );
+
+		i18n.setLocale( localeData );
 
 		if ( ! fileExists( staticDirectory ) ) {
 			fs.mkdirSync( staticDirectory );
@@ -83,14 +85,36 @@ function generateStaticFile( filePath ) {
 			console.log( filePath + ' written' );
 		} );
 	} );
-}
+};
+
+const generateStaticFiles = rootRoutes => {
+	let staticSlugs = [];
+
+	const addStaticSlugs = innerRoutes => {
+		innerRoutes.forEach( route => {
+			if ( route.static ) {
+				staticSlugs.push( route.slug );
+			}
+
+			if ( route.childRoutes ) {
+				addStaticSlugs( route.childRoutes );
+			}
+		} );
+	};
+
+	addStaticSlugs( rootRoutes );
+
+	config( 'languages' ).map( language => language.langSlug ).forEach( locale => {
+		staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
+	} );
+};
 
 const init = () => {
 	if ( process.env.BUILD_STATIC ) {
-		// Generate static files
-		staticPages.forEach( function( file ) {
-			generateStaticFile( file );
-		} );
+		generateStaticFiles( defaultRoutes );
+
+		// we need to explicitly generate a 404 page because it isn't in in the default routes
+		generateStaticFile( '*' );
 
 		// No need to start the server
 		return;

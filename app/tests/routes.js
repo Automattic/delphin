@@ -57,35 +57,35 @@ const routes = {
 describe( 'routes', () => {
 	describe( 'getPath', () => {
 		it( 'should return the top level route', () => {
-			expect( getPath( 'home', {}, routes ) ).toBe( '/' );
+			expect( getPath( 'home', {}, { routes } ) ).toBe( '/' );
 		} );
 
 		it( 'should return a static nested route', () => {
-			expect( getPath( 'bar', {}, routes ) ).toBe( '/foo/bar/' );
+			expect( getPath( 'bar', {}, { routes } ) ).toBe( '/foo/bar/' );
 		} );
 
 		it( 'should return a static nested route with a parent route with no path', () => {
-			expect( getPath( 'buy', {}, routes ) ).toBe( '/buy' );
+			expect( getPath( 'buy', {}, { routes } ) ).toBe( '/buy' );
 		} );
 
 		it( 'should fill in optional values', () => {
-			expect( getPath( 'bar', { optional: 12345 }, routes ) ).toBe( '/foo/bar/12345' );
+			expect( getPath( 'bar', { optional: 12345 }, { routes } ) ).toBe( '/foo/bar/12345' );
 		} );
 
 		it( 'should fill in required values', () => {
-			expect( getPath( 'receipt', { id: 2 }, routes ) ).toBe( '/receipt/2' );
+			expect( getPath( 'receipt', { id: 2 }, { routes } ) ).toBe( '/receipt/2' );
 		} );
 
 		it( 'should fill in a mix of optional and required values', () => {
-			expect( getPath( 'post', { id: 1, filter: 'published' }, routes ) ).toBe( '/post/1/published' );
+			expect( getPath( 'post', { id: 1, filter: 'published' }, { routes } ) ).toBe( '/post/1/published' );
 		} );
 
 		it( 'should ignore missing optional values', () => {
-			expect( getPath( 'post', { id: 1 }, routes ) ).toBe( '/post/1/' );
+			expect( getPath( 'post', { id: 1 }, { routes } ) ).toBe( '/post/1/' );
 		} );
 
 		it( 'should return null for a missing slug', () => {
-			expect( getPath( 'asdf', {}, routes ) ).toBe( null );
+			expect( getPath( 'asdf', {}, { routes } ) ).toBe( null );
 		} );
 	} );
 } );

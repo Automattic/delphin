@@ -74,7 +74,7 @@
  	background: #2e4453;
 }
 
-.synonyms {
+.related-words {
 	background: white;
 	border: 1px solid $search-border-blue;
 	padding: 25px 10px;
@@ -88,25 +88,25 @@
 	}
 }
 
-.synonyms-enter {
+.related-words-enter {
 	opacity: 0.01;
 }
 
-.synonyms-enter-active {
+.related-words-enter-active {
 	opacity: 1;
 	transition: opacity 0.2s ease-in-out;
 }
 
-.synonyms-leave {
+.related-words-leave {
 	opacity: 1;
 }
 
-.synonyms-leave-active {
+.related-words-leave-active {
 	opacity: 0.01;
 	transition: opacity 0.2s ease-in-out;
 }
 
-.synonyms-list-item {
+.related-words-list-item {
 	background: $gray-blue;
 	border-radius: 5px;
 	color: white;

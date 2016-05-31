@@ -19,6 +19,7 @@ import i18n from 'i18n-calypso';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
 import { userMiddleware } from './user-middleware';
+import { relatedWordsMiddleware } from './related-words-middleware';
 
 const store = createStore(
 	combineReducers( {
@@ -31,7 +32,8 @@ const store = createStore(
 		thunk,
 		analyticsMiddleware,
 		userMiddleware,
-		wpcomMiddleware
+		wpcomMiddleware,
+		relatedWordsMiddleware
 	)
 );
 

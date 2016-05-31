@@ -1,4 +1,5 @@
 // External dependencies
+import find from 'lodash/find';
 import intersection from 'lodash/intersection';
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -58,6 +59,7 @@ class SearchInput extends React.Component {
 					transitionLeaveTimeout={ 200 }>
 					{ this.props.selectedKeyword && (
 						<Synonyms
+							relatedWords={ find( this.props.relatedWords, { word: this.props.selectedKeyword.value } ) }
 							target={ this.props.selectedKeyword }
 							replace={ this.props.replace } />
 					) }

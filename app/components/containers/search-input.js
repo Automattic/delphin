@@ -12,13 +12,15 @@ import {
 import {
 	getInputValue,
 	getSelectedKeyword,
-	getKeywords
+	getKeywords,
+	getRelatedWords
 } from 'reducers/ui/domain-search/selectors';
 
 export default connect(
 	state => ( {
 		inputValue: getInputValue( state ),
 		keywords: getKeywords( state ),
+		relatedWords: getRelatedWords( state ),
 		selectedKeyword: getSelectedKeyword( state )
 	} ),
 	dispatch => ( {

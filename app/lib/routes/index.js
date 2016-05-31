@@ -1,6 +1,7 @@
 // External dependencies
 import find from 'lodash/find';
 import omit from 'lodash/omit';
+import flatten from 'lodash/flatten';
 
 // Internal dependencies
 import config from 'config';
@@ -118,7 +119,7 @@ export const getLocalizedRoutes = routes => {
 	const localizedRoutesArray = config( 'languages' )
 		.map( language => routesWithoutSlug.map( route => getRouteWithLanguageSlug( language, route ) ) );
 
-	return Array.prototype.concat.apply( [], localizedRoutesArray );
+	return flatten( localizedRoutesArray );
 };
 
 /**

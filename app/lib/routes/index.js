@@ -98,7 +98,7 @@ const omitSlugFromRoutes = routes => {
  *
  * @param {Object} language language configuration that includes a `langSlug`
  * @param {Object} route route configuration that includes a `path`
- * @returns {Object} new route including language slug
+ * @returns {Object} new route with a path including a language slug
  */
 function getRouteWithLanguageSlug( language, route ) {
 	return Object.assign( {}, route, {
@@ -116,7 +116,7 @@ export const getLocalizedRoutes = routes => {
 	const routesWithoutSlug = omitSlugFromRoutes( routes );
 
 	const localizedRoutesArray = config( 'languages' )
-		.map( language => routesWithoutSlug.map( getRouteWithLanguageSlug.bind( null, language ) ) );
+		.map( language => routesWithoutSlug.map( route => getRouteWithLanguageSlug( language, route ) ) );
 
 	return Array.prototype.concat.apply( [], localizedRoutesArray );
 };

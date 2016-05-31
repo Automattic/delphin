@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -8,8 +9,9 @@ import styles from './styles.scss';
 
 const Notice = function( { notice, removeNotice } ) {
 	return (
-		<div className={ styles.notice }>
+		<div className={ classNames( styles.notice, notice.status ) }>
 			{ notice.message }
+
 			<span className={ styles.remove } onClick={ removeNotice }>
 				{ i18n.translate( 'Hide' ) }
 			</span>
@@ -19,7 +21,7 @@ const Notice = function( { notice, removeNotice } ) {
 
 Notice.propTypes = {
 	notice: PropTypes.object.isRequired,
-	removeNotice: PropTypes.func.isRequired,
+	removeNotice: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( Notice );

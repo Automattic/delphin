@@ -1,5 +1,6 @@
 // External dependencies
 import debugFactory from 'debug';
+import i18n from 'i18n-calypso';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -98,7 +99,16 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 		params: { path: '/users/email/verification' },
 		payload: { email, code, two_factor_authentication_code: twoFactorAuthenticationCode },
 		loading: VERIFY_USER,
-		success: ( data ) => ( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.access_token } ),
+		success: ( data ) => {
+			return dispatch => {
+				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.access_token } );
+
+				dispatch( addNotice( {
+					message: i18n.translate( 'You were successfully logged in!' ),
+					status: 'success'
+				} ) );
+			};
+		},
 		fail: ( error ) => {
 			return dispatch => {
 				dispatch( {

@@ -93,6 +93,19 @@ const omitSlugFromRoutes = routes => {
 	} );
 };
 
+/***
+ * Creates a new route based on an existing route and a language configuration
+ *
+ * @param {Object} language language configuration that includes a `langSlug`
+ * @param {Object} route route configuration that includes a `path`
+ * @returns {Object} new route including language slug
+ */
+function getRouteWithLanguageSlug( language, route ) {
+	return Object.assign( {}, route, {
+		path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path }`
+	} );
+}
+
 /**
  * Returns a new array of routes with the top level routes prefixed by a locale slug.
  *
@@ -102,16 +115,10 @@ const omitSlugFromRoutes = routes => {
 export const getLocalizedRoutes = routes => {
 	const routesWithoutSlug = omitSlugFromRoutes( routes );
 
-	let localizedRoutes = [];
-	config( 'languages' ).forEach( language => {
-		localizedRoutes = localizedRoutes.concat( routesWithoutSlug.map( route => (
-			Object.assign( {}, route, {
-				path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path }`
-			} )
-		) ) );
-	} );
+	const localizedRoutesArray = config( 'languages' )
+		.map( language => routesWithoutSlug.map( getRouteWithLanguageSlug.bind( null, language ) ) );
 
-	return localizedRoutes;
+	return Array.prototype.concat.apply( [], localizedRoutesArray );
 };
 
 /**

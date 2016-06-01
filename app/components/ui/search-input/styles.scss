@@ -64,8 +64,16 @@
 	display: none;
 }
 
-.keyword-selected {
+.keyword-is-selected {
  	background: #2e4453;
+}
+
+.keyword-is-domain {
+	padding-right: 10px;
+
+	&.keyword-is-selected {
+		padding-right: 34px;
+	}
 }
 
 .related-words {

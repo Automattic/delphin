@@ -21,15 +21,19 @@ describe( 'domain search reducer', () => {
 
 	it( 'should return initial state when state is undefined and action is empty', () => {
 		expect( domainSearch( undefined, {} ) ).toEqual( {
+			hasLoadedFromServer: false,
 			isRequesting: false,
-			results: null
+			results: null,
+			query: null
 		} );
 	} );
 
 	it( 'should return original state when action is empty', () => {
 		const originalState = Object.freeze( {
+				hasLoadedFromServer: false,
 				isRequesting: false,
-				results: [ 'example1.com', 'example2.com' ]
+				results: [ 'example1.com', 'example2.com' ],
+				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {} );
 
@@ -38,8 +42,10 @@ describe( 'domain search reducer', () => {
 
 	it( 'should return original state when action type is not supported', () => {
 		const originalState = Object.freeze( {
+				hasLoadedFromServer: false,
 				isRequesting: false,
-				results: [ 'example1.com', 'example2.com' ]
+				results: [ 'example1.com', 'example2.com' ],
+				query: 'example'
 			} ),
 			newState = domainSearch( originalState, { type: 'ORDER_CHEESE_BURGER' } );
 
@@ -54,77 +60,102 @@ describe( 'domain search reducer for domain suggestions clear action', () => {
 		} );
 
 		expect( newState ).toEqual( {
+			hasLoadedFromServer: false,
 			isRequesting: false,
-			results: null
+			results: null,
+			query: null
 		} );
 	} );
 
 	it( 'should return initial state', () => {
 		const originalState = Object.freeze( {
+				hasLoadedFromServer: false,
 				isRequesting: true,
-				results: [ 'example1.com', 'example2.com' ]
+				results: [ 'example1.com', 'example2.com' ],
+				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {
 				type: DOMAIN_SUGGESTIONS_CLEAR
 			} );
 
 		expect( newState ).toEqual( {
+			hasLoadedFromServer: false,
 			isRequesting: false,
-			results: null
+			results: null,
+			query: null
 		} );
 	} );
 } );
 
 describe( 'domain search reducer for domain suggestions fetch action', () => {
 	it( 'should return initial state with fetching enabled when state is undefined', () => {
-		const newState = domainSearch( undefined, { type: DOMAIN_SUGGESTIONS_FETCH } );
+		const newState = domainSearch( undefined, {
+			type: DOMAIN_SUGGESTIONS_FETCH,
+			query: 'foobar'
+		} );
 
 		expect( newState ).toEqual( {
+			hasLoadedFromServer: false,
 			isRequesting: true,
-			results: null
+			results: null,
+			query: 'foobar'
 		} );
 	} );
 
 	it( 'should clear the results when fetching', () => {
 		const originalState = Object.freeze( {
 				isRequesting: false,
-				results: [ 'example1.com', 'example2.com' ]
+				results: [ 'example1.com', 'example2.com' ],
+				query: 'example'
 			} ),
-			newState = domainSearch( originalState, { type: DOMAIN_SUGGESTIONS_FETCH } );
+			newState = domainSearch( originalState, {
+				type: DOMAIN_SUGGESTIONS_FETCH,
+				query: 'foobar'
+			} );
 
 		expect( newState ).toEqual( {
+			hasLoadedFromServer: false,
 			isRequesting: true,
-			results: null
+			results: null,
+			query: 'foobar'
 		} );
 	} );
 } );
 
 describe( 'domain search reducer for domain suggestions fetch completed action', () => {
-	it( 'should return initial state with fetching disabled when state is undefined', () => {
-		const newState = domainSearch( undefined, {
+	it( 'should return initial state with fetching disabled when the given query matches state.query', () => {
+		const newState = domainSearch( {
+			results: null,
+			hasLoadedFromServer: false,
+			isRequesting: true,
+			query: 'example'
+		}, {
 			results: [ 'example.com' ],
-			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE
+			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+			query: 'example'
 		} );
 
 		expect( newState ).toEqual( {
+			hasLoadedFromServer: true,
 			isRequesting: false,
-			results: [ 'example.com' ]
+			results: [ 'example.com' ],
+			query: 'example'
 		} );
 	} );
 
-	it( 'should return original state with fetching disabled', () => {
+	it( 'should return original state when the given query does not match state.query', () => {
 		const originalState = Object.freeze( {
+				hasLoadedFromServer: false,
 				isRequesting: true,
-				results: [ 'example1.com', 'example2.com' ]
+				results: [ 'example1.com', 'example2.com' ],
+				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {
-				results: [ 'example3.com' ],
-				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE
+				results: [ 'foobar.com' ],
+				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+				query: 'foobar'
 			} );
 
-		expect( newState ).toEqual( {
-			isRequesting: false,
-			results: [ 'example3.com' ]
-		} );
+		expect( newState ).toEqual( originalState );
 	} );
 } );

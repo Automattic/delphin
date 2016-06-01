@@ -3,3 +3,8 @@ deployment:
     branch: master
     heroku:
       appname: delphin
+  production:
+    branch: add/circle-ci-artifact
+    commands:
+      - npm run prod:static
+      - tar cvzf $CIRCLE_ARTIFACTS/public.tar.gz -C public .

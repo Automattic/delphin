@@ -61,6 +61,17 @@ export function isDomainSearch( value ) {
 }
 
 /**
+ * Returns a boolean representing whether the results contain a match for the query.
+ *
+ * @param {array} results - An array of domain suggestions
+ * @param {string} query - A search query
+ * @returns {boolean} - Whether there is a match for the given query.
+ */
+export const queryIsInResults = ( results, query ) => (
+	results.some( result => result.domain_name === query || secondLevelDomainOf( result.domain_name ) === query )
+);
+
+/**
  * Strips all characters after the last period
  *
  * @param {string} string - the string to update

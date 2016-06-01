@@ -50,8 +50,12 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 			vendor: 'domainsbot',
 			tlds: availableTLDs
 		},
-		loading: DOMAIN_SUGGESTIONS_FETCH,
-		success: ( results ) => ( { type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE, results } ),
+		loading: () => ( { type: DOMAIN_SUGGESTIONS_FETCH, query: domainQuery } ),
+		success: ( results ) => ( {
+			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+			results,
+			query: domainQuery
+		} ),
 		fail: ( error ) => {
 			return dispatch => {
 				dispatch( {

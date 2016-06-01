@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { isDomain } from 'lib/domains';
 import styles from './styles.scss';
 
 class Keyword extends React.Component {
@@ -26,8 +27,10 @@ class Keyword extends React.Component {
 
 	render() {
 		const { keyword } = this.props,
+			keywordIsDomain = isDomain( keyword.value ),
 			keywordClassName = classNames( styles.keyword, {
-				[ styles.keywordSelected ]: keyword.isSelected
+				[ styles.keywordIsSelected ]: keyword.isSelected,
+				[ styles.keywordIsDomain ]: keywordIsDomain
 			} );
 
 		return (
@@ -40,7 +43,7 @@ class Keyword extends React.Component {
 						className={ styles.keywordAction + ' ' + styles.keywordDelete }
 						onClick={ this.onRemoveClickBound } />
 				) }
-				{ ! keyword.isSelected && (
+				{ ! keyword.isSelected && ! keywordIsDomain && (
 					<span className={ styles.keywordAction + ' ' + styles.keywordSelect } />
 				) }
 			</li>

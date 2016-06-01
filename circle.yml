@@ -1,8 +1,4 @@
 deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: delphin
   production:
     branch: master
     commands:

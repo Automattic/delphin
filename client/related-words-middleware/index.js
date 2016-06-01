@@ -32,9 +32,7 @@ export const relatedWordsMiddleware = store => next => action => {
 					'&limitPerRelationshipType=3' +
 					`&api_key=${ config( 'wordnik_api_key' ) }` )
 				.end( ( error, response ) => {
-					const data = response.body.reduce( ( result, current ) => {
-						return result.concat( current.words );
-					}, [] );
+					const data = response.body.reduce( ( result, current ) => result.concat( current.words ), [] );
 
 					store.dispatch( {
 						type: RELATED_WORD_FETCH_COMPLETE,

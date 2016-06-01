@@ -4,7 +4,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
-import { isDomain } from 'lib/domains';
 
 class Keyword extends React.Component {
 	constructor( props ) {
@@ -26,30 +25,19 @@ class Keyword extends React.Component {
 
 	render() {
 		const { keyword } = this.props;
-
-		const keywordIsDomain = isDomain( keyword.value );
-
 		const keywordClassName = styles.keyword + ' ' + ( keyword.isSelected ? styles.keywordSelected : '' ) + ' ' + ( keyword.isHidden ? styles.keywordHidden : '' );
-		const keywordClickHandler = keywordIsDomain ? null : this.onKeywordClickBound;
 
 		return (
 			<li
 				className={ keywordClassName }
-				onClick={ keywordClickHandler }>
+				onClick={ this.onKeywordClickBound }>
 				{ keyword.value }
-				{ keywordIsDomain && (
-					<span
-						className={ styles.keywordAction + ' ' + styles.domainDelete }
-						onClick={ this.onRemoveClickBound }>
-						x
-					</span>
-				) }
-				{ ! keywordIsDomain && keyword.isSelected && (
+				{ keyword.isSelected && (
 					<span
 						className={ styles.keywordAction + ' ' + styles.keywordDelete }
 						onClick={ this.onRemoveClickBound } />
 				) }
-				{ ! keywordIsDomain && ! keyword.isSelected && (
+				{ ! keyword.isSelected && (
 					<span className={ styles.keywordAction + ' ' + styles.keywordSelect } />
 				) }
 			</li>

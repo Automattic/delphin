@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { isDomain, isValidSecondLevelDomain, secondLevelDomainOf, omitTld } from '..';
+import { isDomain, isValidSecondLevelDomain, secondLevelDomainOf, omitTld, queryIsInResults } from '..';
 
 describe( 'lib/domains', () => {
 	describe( 'isDomain', () => {
@@ -55,6 +55,29 @@ describe( 'lib/domains', () => {
 			expect( secondLevelDomainOf( 'helloworld' ) ).toBe( '' );
 			expect( secondLevelDomainOf( 'hello_world.com' ) ).toBe( 'hello_world' );
 			expect( secondLevelDomainOf( '.com' ) ).toBe( '' );
+		} );
+	} );
+
+	describe( 'queryIsInResults', () => {
+		it( 'should return true if the query is a domain that exists in the given results', () => {
+			expect( queryIsInResults( [
+				{ domain_name: 'foo.com' },
+				{ domain_name: 'baz.com' }
+			], 'foo.com' ) ).toBe( true );
+		} );
+
+		it( 'should return true if the query is a second level domain that exists in the given results', () => {
+			expect( queryIsInResults( [
+				{ domain_name: 'foo.com' },
+				{ domain_name: 'baz.com' }
+			], 'foo' ) ).toBe( true );
+		} );
+
+		it( 'should return true if the query is not in the given results', () => {
+			expect( queryIsInResults( [
+				{ domain_name: 'foo.com' },
+				{ domain_name: 'baz.com' }
+			], 'not' ) ).toBe( false );
 		} );
 	} );
 

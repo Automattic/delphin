@@ -24,10 +24,6 @@ export default connect(
 			dispatch( clearDomainSuggestions( query ) );
 		},
 
-		redirectToCheckout() {
-			dispatch( push( getPath( 'checkout' ) ) );
-		},
-
 		// TODO: remove duplicate in search-form.js
 		redirectToSearch( query, numberOfResultsToDisplay, sort ) {
 			if ( query !== ownProps.location.query.q || config( 'initial_number_of_search_results' ) === numberOfResultsToDisplay ) {
@@ -48,14 +44,23 @@ export default connect(
 			} ) );
 		},
 
-		redirectToSignup() {
-			dispatch( push( getPath( 'signupUser' ) ) );
-		},
-		selectDomain( name ) {
+		selectDomain( name, isUserLoggedIn ) {
 			dispatch( selectDomain( name ) );
+
+			if ( isUserLoggedIn ) {
+				dispatch( push( getPath( 'checkout' ) ) );
+			} else {
+				dispatch( push( getPath( 'signupUser' ) ) );
+			}
 		},
+
 		fetchDomainSuggestions( query ) {
 			dispatch( fetchDomainSuggestions( query ) );
+		}
+	} ),
+	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
+		selectDomain( name ) {
+			dispatchProps.selectDomain( name, stateProps.user.isLoggedIn );
 		}
 	} )
 )( Search );

@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { isDomain, isValidSecondLevelDomain, secondLevelDomainOf } from '..';
+import { isDomain, isValidSecondLevelDomain, secondLevelDomainOf, omitTld } from '..';
 
 describe( 'lib/domains', () => {
 	describe( 'isDomain', () => {
@@ -55,6 +55,24 @@ describe( 'lib/domains', () => {
 			expect( secondLevelDomainOf( 'helloworld' ) ).toBe( '' );
 			expect( secondLevelDomainOf( 'hello_world.com' ) ).toBe( 'hello_world' );
 			expect( secondLevelDomainOf( '.com' ) ).toBe( '' );
+		} );
+	} );
+
+	describe( 'omitTld', () => {
+		it( 'should return an empty string if no string is given', () => {
+			expect( omitTld() ).toEqual( '' );
+		} );
+
+		it( 'should not change strings without a TLD', () => {
+			expect( omitTld( 'foobar' ) ).toBe( 'foobar' );
+			expect( omitTld( '!@#!@$@!#!@$' ) ).toBe( '!@#!@$@!#!@$' );
+		} );
+
+		it( 'should remove all characters including and after the first period', () => {
+			expect( omitTld( 'foo.com' ) ).toBe( 'foo' );
+			expect( omitTld( 'foo.thisisalongtld' ) ).toBe( 'foo' );
+			expect( omitTld( 'baz.' ) ).toBe( 'baz' );
+			expect( omitTld( 'foo.co.uk' ) ).toBe( 'foo' );
 		} );
 	} );
 } );

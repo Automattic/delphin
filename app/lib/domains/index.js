@@ -59,3 +59,11 @@ export function secondLevelDomainOf( validDomain ) {
 export function isDomainSearch( value ) {
 	return isValidSecondLevelDomain( value ) || ( isDomain( value ) && domainEndsInAvailableTldRegEx.test( value ) );
 }
+
+/**
+ * Strips all characters after the last period
+ *
+ * @param {string} string - the string to update
+ * @return {string} - the updated string
+ */
+export const omitTld = ( string = '' ) => string.replace( /\.(.*)/g, '' );

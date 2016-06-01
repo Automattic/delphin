@@ -32,6 +32,7 @@ describe( 'ui.domainSearch reducer', () => {
 		} ) ).toEqual( {
 			inputValue: '',
 			keywords: [],
+			relatedWords: [],
 			showEmptySearchNotice: false
 		} );
 	} );

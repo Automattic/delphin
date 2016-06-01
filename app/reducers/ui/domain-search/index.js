@@ -3,6 +3,7 @@ import find from 'lodash/find';
 import isEmpty from 'lodash/isEmpty';
 import last from 'lodash/last';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import union from 'lodash/union';
 
 // Internal dependencies
 import {
@@ -13,19 +14,29 @@ import {
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
-	DOMAIN_SEARCH_SUBMIT
+	DOMAIN_SEARCH_SUBMIT,
+	RELATED_WORD_FETCH,
+	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { getPath } from 'routes';
 
 const initialState = {
 	inputValue: '',
 	keywords: [],
+	relatedWords: [],
 	showEmptySearchNotice: false
 };
 
 const initialKeywordState = {
 	value: '',
 	isSelected: false
+};
+
+const initialRelatedWordsState = {
+	word: null,
+	data: null,
+	isRequesting: false,
+	hasLoadedFromServer: false
 };
 
 const isValidKeyword = value => typeof value === 'string' && value.trim().length > 0;
@@ -45,8 +56,30 @@ const addKeyword = ( state, value ) => {
 	} );
 };
 
+const addRelatedWord = ( state, word, properties ) => {
+	if ( find( state.relatedWords, { word } ) ) {
+		return Object.assign( {}, state, {
+			relatedWords: state.relatedWords.map( relatedWord => {
+				if ( relatedWord.word === word ) {
+					return Object.assign( {}, relatedWord, properties );
+				}
+				return relatedWord;
+			} )
+		} );
+	}
+
+	return Object.assign( {}, state, {
+		relatedWords: state.relatedWords.concat( Object.assign(
+			{},
+			initialRelatedWordsState,
+			properties,
+			{ word }
+		) )
+	} );
+};
+
 export const domainSearch = ( state = initialState, action ) => {
-	const { type, value } = action;
+	const { type, value, word, data } = action;
 
 	switch ( type ) {
 		// sync keywords from the url if the url is different
@@ -127,6 +160,18 @@ export const domainSearch = ( state = initialState, action ) => {
 			return Object.assign( {}, state, {
 				inputValue: keywordValue.substring( 0, keywordValue.length - 1 ),
 				keywords: state.keywords.slice( 0, state.keywords.length - 1 )
+			} );
+
+		case RELATED_WORD_FETCH:
+			return addRelatedWord( state, word, {
+				isRequesting: true
+			} );
+
+		case RELATED_WORD_FETCH_COMPLETE:
+			return addRelatedWord( state, word, {
+				data: union( data ),
+				isRequesting: false,
+				hasLoadedFromServer: true
 			} );
 
 		default:

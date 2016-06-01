@@ -22,6 +22,7 @@ const config = {
 		rest_api_oauth_client_id: 46199,
 		rest_api_oauth_client_secret: '7FVcj4q9nDvX3ic812oAGDR2oZFjSk0woryR0rRmNIO5Gn7k6HibTIlhvC7Wmof9'
 	},
+	wordnik_api_key: '0a2ae295fc390957bd00807a19d093fb5c8ea6aaa2f1d55a0'
 };
 
 export default function( key ) {

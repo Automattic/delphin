@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -24,8 +25,10 @@ class Keyword extends React.Component {
 	}
 
 	render() {
-		const { keyword } = this.props;
-		const keywordClassName = styles.keyword + ' ' + ( keyword.isSelected ? styles.keywordSelected : '' ) + ' ' + ( keyword.isHidden ? styles.keywordHidden : '' );
+		const { keyword } = this.props,
+			keywordClassName = classNames( styles.keyword, {
+				[ styles.keywordSelected ]: keyword.isSelected
+			} );
 
 		return (
 			<li

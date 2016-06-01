@@ -53,7 +53,7 @@ export const defaultRoutes = [
 				component: CheckoutContainer
 			},
 			{
-				path: 'login',
+				path: 'log-in',
 				slug: 'loginUser',
 				static: true,
 				component: LoginContainer

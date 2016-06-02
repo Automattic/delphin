@@ -6,6 +6,7 @@ import i18n from 'i18n-calypso';
 import { addNotice } from 'actions/notices';
 import {
 	CONNECT_USER,
+	CONNECT_USER_CLEAR,
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
@@ -24,6 +25,15 @@ import paygateLoader from 'lib/paygate-loader';
 
 // Module variables
 const debug = debugFactory( 'delphin:actions' );
+
+/**
+ * Resets the flag indicating the a user was connected successfully.
+ *
+ * @returns {object} the corresponding action object
+ */
+export function clearConnectUser() {
+	return { type: CONNECT_USER_CLEAR };
+}
 
 /**
  * Connects a user to a new or existing accout by sending a confirmation code to the specified email.

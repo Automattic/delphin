@@ -24,7 +24,7 @@ const VerifyUser = React.createClass( {
 	componentDidMount() {
 		if ( this.props.user.isLoggedIn ) {
 			this.props.redirectToHome();
-		} else if ( ! this.props.user.data.email ) {
+		} else if ( ! this.props.user.wasCreated ) {
 			this.props.redirectToSignup();
 		}
 	},

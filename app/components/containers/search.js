@@ -49,7 +49,7 @@ export default connect(
 			dispatch( selectDomain( name ) );
 
 			if ( isUserLoggedIn ) {
-				dispatch( push( getPath( 'checkout' ) ) );
+				dispatch( push( getPath( 'contactInformation' ) ) );
 			} else {
 				dispatch( push( getPath( 'signupUser' ) ) );
 			}

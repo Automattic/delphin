@@ -25,6 +25,7 @@ export default reduxForm(
 		validate
 	},
 	state => ( {
+		initialValues: { email: state.user.data.email },
 		user: state.user
 	} ),
 	( dispatch, ownProps ) => ( {

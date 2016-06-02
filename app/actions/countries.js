@@ -10,6 +10,7 @@ import {
 export const fetchCountries = () => ( {
 	type: WPCOM_REQUEST,
 	params: { path: '/me/transactions/supported-countries' },
+	query: { flag_my_country: true },
 	loading: COUNTRIES_FETCH,
 	success: data => ( { type: COUNTRIES_FETCH_COMPLETE, data } ),
 	fail: error => (

@@ -10,6 +10,7 @@ import Search from 'components/ui/search';
 
 export default connect(
 	( state, ownProps ) => ( {
+		lastQuery: state.domainSearch.query,
 		results: state.domainSearch.results,
 		isRequesting: state.domainSearch.isRequesting,
 		initialValues: { query: ownProps.location.query.q },
@@ -61,6 +62,15 @@ export default connect(
 	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
 		selectDomain( name ) {
 			dispatchProps.selectDomain( name, stateProps.user.isLoggedIn );
+		},
+
+		fetchDomainSuggestions( query ) {
+			if ( query === stateProps.lastQuery ) {
+				// no need to fetch the cached query repeatedly
+				return;
+			}
+
+			dispatchProps.fetchDomainSuggestions( query );
 		}
 	} )
 )( Search );

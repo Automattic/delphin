@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { isDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 
 const Home = React.createClass( {
@@ -14,13 +15,32 @@ const Home = React.createClass( {
 		fields: PropTypes.object.isRequired
 	},
 
+	componentWillReceiveProps( nextProps ) {
+		if ( ! this.props.domainSearch.hasLoadedFromServer && nextProps.domainSearch.hasLoadedFromServer ) {
+			const { results, query } = nextProps.domainSearch;
+
+			if ( isDomain( query ) && queryIsInResults( results, query ) ) {
+				this.props.selectDomain( query );
+			} else {
+				this.props.redirectToSearch( query );
+			}
+		}
+	},
+
 	handleSubmit( { query } ) {
-		if ( query && query.trim() !== '' ) {
-			this.props.redirectToSearch( query );
-		} else {
+		if ( ! query ) {
 			this.props.submitEmptySearch();
 
 			ReactDOM.findDOMNode( this.refs.query ).focus();
+			return;
+		}
+
+		query = query.trim();
+
+		if ( isDomain( query ) ) {
+			this.props.fetchDomainSuggestions( query );
+		} else if ( query !== '' ) {
+			this.props.redirectToSearch( query );
 		}
 	},
 
@@ -37,7 +57,11 @@ const Home = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit } = this.props;
+		const {
+			fields: { query },
+			handleSubmit,
+			domainSearch: { isRequesting }
+		} = this.props;
 
 		return (
 			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -67,7 +91,9 @@ const Home = React.createClass( {
 					) }
 				</ReactCSSTransitionGroup>
 
-				<button className={ styles.button }>
+				<button
+					disabled={ isRequesting }
+					className={ styles.button }>
 					{ i18n.translate( "Let's find an address" ) }
 				</button>
 			</form>

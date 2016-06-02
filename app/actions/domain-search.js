@@ -17,6 +17,7 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL
 } from 'reducers/action-types';
+import { omitTld } from 'lib/domains';
 
 const availableTLDs = config( 'available_tlds' );
 
@@ -31,24 +32,30 @@ export function clearDomainSuggestions() {
 	};
 }
 
-export function fetchDomainSuggestions( domainQuery ) {
-	if ( ! domainQuery || domainQuery.trim() === '' ) {
+export function fetchDomainSuggestions( domainQuery = '' ) {
+	if ( domainQuery.trim() === '' ) {
 		return clearDomainSuggestions();
 	}
+
+	const queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );
 
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
 		params: { path: '/domains/suggestions' },
 		query: {
-			query: domainQuery,
+			query: queryWithoutTlds,
 			quantity: 36,
 			include_wordpressdotcom: false,
 			vendor: 'domainsbot',
 			tlds: availableTLDs
 		},
-		loading: DOMAIN_SUGGESTIONS_FETCH,
-		success: ( results ) => ( { type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE, results } ),
+		loading: () => ( { type: DOMAIN_SUGGESTIONS_FETCH, query: domainQuery } ),
+		success: ( results ) => ( {
+			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+			results,
+			query: domainQuery
+		} ),
 		fail: ( error ) => {
 			return dispatch => {
 				dispatch( {

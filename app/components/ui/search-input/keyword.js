@@ -1,10 +1,11 @@
 // External dependencies
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import styles from './styles.scss';
 import { isDomain } from 'lib/domains';
+import styles from './styles.scss';
 
 class Keyword extends React.Component {
 	constructor( props ) {
@@ -25,31 +26,24 @@ class Keyword extends React.Component {
 	}
 
 	render() {
-		const { keyword } = this.props;
-
-		const keywordIsDomain = isDomain( keyword.value );
-
-		const keywordClassName = styles.keyword + ' ' + ( keyword.isSelected ? styles.keywordSelected : '' ) + ' ' + ( keyword.isHidden ? styles.keywordHidden : '' );
-		const keywordClickHandler = keywordIsDomain ? null : this.onKeywordClickBound;
+		const { keyword } = this.props,
+			keywordIsDomain = isDomain( keyword.value ),
+			keywordClassName = classNames( styles.keyword, {
+				[ styles.keywordIsSelected ]: keyword.isSelected,
+				[ styles.keywordIsDomain ]: keywordIsDomain
+			} );
 
 		return (
 			<li
 				className={ keywordClassName }
-				onClick={ keywordClickHandler }>
+				onClick={ this.onKeywordClickBound }>
 				{ keyword.value }
-				{ keywordIsDomain && (
-					<span
-						className={ styles.keywordAction + ' ' + styles.domainDelete }
-						onClick={ this.onRemoveClickBound }>
-						x
-					</span>
-				) }
-				{ ! keywordIsDomain && keyword.isSelected && (
+				{ keyword.isSelected && (
 					<span
 						className={ styles.keywordAction + ' ' + styles.keywordDelete }
 						onClick={ this.onRemoveClickBound } />
 				) }
-				{ ! keywordIsDomain && ! keyword.isSelected && (
+				{ ! keyword.isSelected && ! keywordIsDomain && (
 					<span className={ styles.keywordAction + ' ' + styles.keywordSelect } />
 				) }
 			</li>

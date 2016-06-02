@@ -4,6 +4,7 @@ import merge from 'lodash/merge';
 // Internal dependencies
 import {
 	CONNECT_USER,
+	CONNECT_USER_CLEAR,
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
@@ -37,6 +38,11 @@ export const user = ( state = initialState, action ) => {
 				data: { email },
 				isRequesting: true,
 				intention
+			} );
+
+		case CONNECT_USER_CLEAR:
+			return merge( {}, state, {
+				wasCreated: false
 			} );
 
 		case CONNECT_USER_COMPLETE:

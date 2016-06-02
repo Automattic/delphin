@@ -7,12 +7,14 @@ import {
 } from 'reducers/action-types';
 
 const initialState = {
+	hasLoadedFromServer: false,
 	isRequesting: false,
-	results: null
+	results: null,
+	query: null
 };
 
 export function domainSearch( state = initialState, action ) {
-	const { results, type } = action;
+	const { results, query, type } = action;
 
 	switch ( type ) {
 		case DOMAIN_SUGGESTIONS_CLEAR:
@@ -20,12 +22,20 @@ export function domainSearch( state = initialState, action ) {
 
 		case DOMAIN_SUGGESTIONS_FETCH:
 			return Object.assign( {}, state, {
+				hasLoadedFromServer: false,
 				isRequesting: true,
-				results: null
+				results: null,
+				query
 			} );
 
 		case DOMAIN_SUGGESTIONS_FETCH_COMPLETE:
+			if ( query !== state.query ) {
+				// this is a stale response, ignore it
+				return state;
+			}
+
 			return Object.assign( {}, state, {
+				hasLoadedFromServer: true,
 				isRequesting: false,
 				results: results
 			} );

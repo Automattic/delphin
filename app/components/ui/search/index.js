@@ -1,13 +1,12 @@
 // External dependencies
 import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
-import some from 'lodash/some';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import { isDomainSearch, secondLevelDomainOf, isValidSecondLevelDomain } from 'lib/domains';
+import { isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
@@ -17,9 +16,7 @@ const Search = React.createClass( {
 		fetchDomainSuggestions: PropTypes.func.isRequired,
 		query: PropTypes.string.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
-		redirectToCheckout: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
-		redirectToSignup: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
 		sort: PropTypes.string,
@@ -45,12 +42,6 @@ const Search = React.createClass( {
 
 	selectDomain( name ) {
 		this.props.selectDomain( name );
-
-		if ( this.props.user.isLoggedIn ) {
-			this.props.redirectToCheckout();
-		} else {
-			this.props.redirectToSignup();
-		}
 	},
 
 	isExactMatchUnavailable() {
@@ -58,9 +49,7 @@ const Search = React.createClass( {
 
 		return ! isRequesting &&
 			isDomainSearch( query ) &&
-			results && ! some( results, ( result ) => {
-				return result.domain_name === query || secondLevelDomainOf( result.domain_name ) === query;
-			} );
+			results && ! queryIsInResults( results, query );
 	},
 
 	renderDomainUnavailableMessage() {

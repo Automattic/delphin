@@ -60,18 +60,20 @@
 	background: url( http://s.wordpress.com/i/delphin/right-arrow.svg ) center no-repeat $dark-gray-blue;
 }
 
-.domain-delete {
-	color: $white;
-	line-height: 31px;
-	text-align: center;
-}
-
 .keyword-hidden {
 	display: none;
 }
 
-.keyword-selected {
+.keyword-is-selected {
  	background: #2e4453;
+}
+
+.keyword-is-domain {
+	padding-right: 10px;
+
+	&.keyword-is-selected {
+		padding-right: 34px;
+	}
 }
 
 .related-words {

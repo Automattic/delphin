@@ -50,6 +50,9 @@ class SearchInput extends React.Component {
 	}
 
 	render() {
+		const { selectedKeyword } = this.props,
+			relatedWordsForSelectedKeyword = selectedKeyword && find( this.props.relatedWords, { word: selectedKeyword.value } );
+
 		return (
 			<form className={ styles.searchWrapper } onSubmit={ this.handleSubmitBound }>
 				<KeywordsContainer />
@@ -57,10 +60,10 @@ class SearchInput extends React.Component {
 					transitionName={ styles.relatedWords }
 					transitionEnterTimeout={ 200 }
 					transitionLeaveTimeout={ 200 }>
-					{ this.props.selectedKeyword && (
+					{ selectedKeyword && relatedWordsForSelectedKeyword && (
 						<RelatedWords
-							relatedWords={ find( this.props.relatedWords, { word: this.props.selectedKeyword.value } ) }
-							target={ this.props.selectedKeyword }
+							relatedWords={ relatedWordsForSelectedKeyword }
+							target={ selectedKeyword }
 							replace={ this.props.replace } />
 					) }
 				</ReactCSSTransitionGroup>

@@ -3,16 +3,20 @@ import { push } from 'react-router-redux';
 import { reduxForm, change } from 'redux-form';
 
 // Internal dependencies
+import { fetchDomainSuggestions, selectDomain, submitEmptySearch } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Home from 'components/ui/home';
-import { submitEmptySearch } from 'actions/domain-search';
 
 export default reduxForm(
 	{
 		form: 'search',
 		fields: [ 'query' ]
 	},
-	state => ( { showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice } ),
+	state => ( {
+		domainSearch: state.domainSearch,
+		showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice,
+		user: state.user
+	} ),
 	dispatch => ( {
 		changeQuery( query ) {
 			dispatch( change( 'search', 'query', query ) );
@@ -27,6 +31,25 @@ export default reduxForm(
 
 		submitEmptySearch() {
 			dispatch( submitEmptySearch() );
+		},
+
+		fetchDomainSuggestions( query ) {
+			dispatch( fetchDomainSuggestions( query ) );
+		},
+
+		selectDomain( name, isUserLoggedIn ) {
+			dispatch( selectDomain( name ) );
+
+			if ( isUserLoggedIn ) {
+				dispatch( push( getPath( 'checkout' ) ) );
+			} else {
+				dispatch( push( getPath( 'signupUser' ) ) );
+			}
+		}
+	} ),
+	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
+		selectDomain( name ) {
+			dispatchProps.selectDomain( name, stateProps.user.isLoggedIn );
 		}
 	} )
 )( Home );

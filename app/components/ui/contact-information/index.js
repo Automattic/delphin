@@ -17,15 +17,31 @@ class ContactInformation extends React.Component {
 			this.props.fetchCountries();
 		}
 		this.redirectIfLoggedOut();
+
+		if ( this.props.user.isLoggedIn ) {
+			this.changeNameToMatchUserData();
+		}
 	}
 
 	componentWillReceiveProps( nextProps ) {
 		this.redirectIfLoggedOut( nextProps );
+
+		if ( ! this.props.user.isLoggedIn && nextProps.user.isLoggedIn ) {
+			this.changeNameToMatchUserData( nextProps );
+		}
 	}
 
 	redirectIfLoggedOut( props = this.props ) {
 		if ( props.isLoggedOut ) {
 			props.redirectToHome();
+		}
+	}
+
+	changeNameToMatchUserData( props = this.props ) {
+		const { user } = props;
+
+		if ( user.data.firstName && user.data.lastName ) {
+			props.fields.name.onChange( `${ user.data.firstName } ${ user.data.lastName }` );
 		}
 	}
 

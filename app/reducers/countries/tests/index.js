@@ -44,4 +44,19 @@ describe( 'state.countries', () => {
 			data: null
 		} );
 	} );
+
+	it( 'should store the `your_country` property, if present', () => {
+		expect( countries( {
+			isRequesting: true,
+			hasLoadedFromServer: false,
+			data: null
+		}, {
+			type: COUNTRIES_FETCH_COMPLETE,
+			data: [ { code: 'US', name: 'United States', your_country: true } ]
+		} ) ).toEqual( {
+			isRequesting: false,
+			hasLoadedFromServer: true,
+			data: [ { code: 'US', name: 'United States', your_country: true } ]
+		} );
+	} );
 } );

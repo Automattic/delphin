@@ -43,8 +43,9 @@ export const defaultRoutes = [
 			},
 			{
 				path: 'contact-information',
-				slug: 'ContactInformation',
-				component: ContactInformation
+				slug: 'contactInformation',
+				component: ContactInformation,
+				static: false
 			},
 			{
 				path: 'checkout',

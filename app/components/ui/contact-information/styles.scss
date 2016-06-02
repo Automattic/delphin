@@ -21,9 +21,9 @@
 .form {
 	background: $light-blue;
 	margin: 0 auto;
-	max-width: 320px;
 	padding: 20px;
 	text-align: left;
+	width: 320px;
 }
 
 .addressLineOne,
@@ -45,21 +45,24 @@
 	width: 100%;
 }
 
-.city, .state, .zip {
-	display: inline-block;
-}
-
-.state {
-	margin: 0 10px 10px 10px;
-}
-
-.city {
-	width: 140%;
-}
-
 .row {
-	display: flex;
-	justify-content: space-between;
+	.city, .state, .zip {
+		display: inline-block;
+	}
+
+	.city {
+		width: 150px;
+	}
+
+	.state {
+		margin-left: 10px;
+		width: 70px;
+	}
+
+	.zip {
+		margin-left: 10px;
+		width: 80px;
+	}
 }
 
 .label {
@@ -69,7 +72,6 @@
 }
 
 .fieldset {
-	display: block;
 	margin-bottom: 15px;
 
 	&:last-child {

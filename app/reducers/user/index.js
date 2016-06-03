@@ -41,7 +41,7 @@ export const user = ( state = initialState, action ) => {
 			} );
 
 		case CONNECT_USER_CLEAR:
-			return merge( {}, state, {
+			return Object.assign( {}, state, {
 				wasCreated: false
 			} );
 
@@ -53,7 +53,7 @@ export const user = ( state = initialState, action ) => {
 			} );
 
 		case CONNECT_USER_FAIL:
-			return merge( {}, state, {
+			return Object.assign( {}, state, {
 				isRequesting: false,
 				wasCreated: false
 			} );
@@ -64,7 +64,7 @@ export const user = ( state = initialState, action ) => {
 			} );
 
 		case FETCH_USER:
-			return merge( {}, state, {
+			return Object.assign( {}, state, {
 				isRequesting: true
 			} );
 
@@ -86,7 +86,7 @@ export const user = ( state = initialState, action ) => {
 			return initialState;
 
 		case VERIFY_USER:
-			return merge( {}, state, {
+			return Object.assign( {}, state, {
 				isRequesting: true
 			} );
 
@@ -100,7 +100,7 @@ export const user = ( state = initialState, action ) => {
 			} );
 
 		case VERIFY_USER_FAIL:
-			return merge( {}, state, {
+			return Object.assign( {}, state, {
 				isLoggedIn: false,
 				isRequesting: false
 			} );

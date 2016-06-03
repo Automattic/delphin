@@ -65,6 +65,7 @@ class ContactInformation extends React.Component {
 						<label className={ styles.label }>{ i18n.translate( 'Name' ) }</label>
 						<input
 							{ ...fields.name }
+							autoFocus
 							className={ styles.name }
 							placeholder={ i18n.translate( 'Name' ) }
 						/>

@@ -7,10 +7,13 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 import StepsProgressbar from 'components/ui/steps-progressbar';
+import ValidationError from 'components/ui/form/validation-error';
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
 		super( props );
+
+		this.validateContactInformationBound = this.validateContactInformation.bind( this );
 	}
 
 	componentWillMount() {
@@ -23,6 +26,10 @@ class ContactInformation extends React.Component {
 		}
 
 		this.props.resetInputVisibility();
+
+		if ( ! this.props.domain ) {
+			this.props.redirectToHome();
+		}
 
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
@@ -82,8 +89,19 @@ class ContactInformation extends React.Component {
 		return organizationInputIsVisible || organization.initialValue;
 	}
 
+	validateContactInformation() {
+		const contactInformation = Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
+			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
+		}, {} );
+
+		return this.props.validateContactInformation(
+			this.props.domain,
+			contactInformation
+		);
+	}
+
 	render() {
-		const { fields, countries } = this.props;
+		const { fields, handleSubmit, countries } = this.props;
 		const steps = [
 			i18n.translate( 'search' ),
 			i18n.translate( 'sign in' ),
@@ -97,7 +115,8 @@ class ContactInformation extends React.Component {
 
 				<h2 className={ styles.header }>{ i18n.translate( 'Registration Profile' ) }</h2>
 				<h3 className={ styles.subHeader }>{ i18n.translate( 'We need your contact information to claim your new domain.' ) }</h3>
-				<form className={ styles.form }>
+
+				<form className={ styles.form } onSubmit={ handleSubmit( this.validateContactInformationBound ) }>
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Name' ) }</label>
 						<input
@@ -107,6 +126,7 @@ class ContactInformation extends React.Component {
 							className={ styles.name }
 							placeholder={ i18n.translate( 'Name' ) }
 						/>
+						<ValidationError field={ fields.name } />
 					</fieldset>
 
 					{ ! this.organizationInputIsVisible() && (
@@ -124,17 +144,20 @@ class ContactInformation extends React.Component {
 								disabled={ this.isDataLoading() }
 								placeholder={ i18n.translate( 'Organization' ) }
 							/>
+							<ValidationError field={ fields.organization } />
 						</fieldset>
 					) }
 
 					<fieldset className={ classNames( styles.fieldset, { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
+
 						<input
 							{ ...fields.address1 }
 							className={ styles.addressOne }
 							disabled={ this.isDataLoading() }
 							placeholder={ i18n.translate( 'Address Line 1' ) }
 						/>
+						<ValidationError field={ fields.address1 } />
 
 						{ ! this.address2InputIsVisible() && (
 							<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
@@ -151,6 +174,8 @@ class ContactInformation extends React.Component {
 							/>
 						) }
 
+						<ValidationError field={ fields.address2 } />
+
 						<div className={ styles.row }>
 							<input
 								disabled={ this.isDataLoading() }
@@ -158,19 +183,25 @@ class ContactInformation extends React.Component {
 								className={ styles.city }
 								placeholder={ i18n.translate( 'City' ) }
 							/>
+							<ValidationError field={ fields.city } />
+
 							<input
 								disabled={ this.isDataLoading() }
 								{ ...fields.state }
 								className={ styles.state }
 								placeholder={ i18n.translate( 'State' ) }
 							/>
+							<ValidationError field={ fields.state } />
+
 							<input
 								disabled={ this.isDataLoading() }
 								{ ...fields.postalCode }
 								className={ styles.postalCode }
 								placeholder={ i18n.translate( 'Zip' ) }
 							/>
+							<ValidationError field={ fields.postalCode } />
 						</div>
+
 						<select
 							{ ...fields.countryCode }
 							disabled={ this.isDataLoading() }
@@ -183,6 +214,7 @@ class ContactInformation extends React.Component {
 								: <option value=" " key={ index } disabled />
 							) ) }
 						</select>
+						<ValidationError field={ fields.countryCode } />
 					</fieldset>
 
 					<fieldset className={ styles.fieldset }>
@@ -193,7 +225,12 @@ class ContactInformation extends React.Component {
 							className={ styles.phone }
 							placeholder={ i18n.translate( 'Phone' ) }
 						/>
+						<ValidationError field={ fields.phone } />
 					</fieldset>
+
+					<button>
+						{ i18n.translate( 'Continue to Checkout' ) }
+					</button>
 				</form>
 			</div>
 		);
@@ -203,8 +240,10 @@ class ContactInformation extends React.Component {
 ContactInformation.propTypes = {
 	contactInformation: PropTypes.object.isRequired,
 	countries: PropTypes.object.isRequired,
+	domain: PropTypes.string,
 	fetchCountries: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
@@ -212,7 +251,8 @@ ContactInformation.propTypes = {
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,
-	user: PropTypes.object.isRequired
+	user: PropTypes.object.isRequired,
+	validateContactInformation: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( ContactInformation );

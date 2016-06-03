@@ -39,6 +39,11 @@ class ContactInformation extends React.Component {
 	}
 
 	changeNameToMatchUserData( props = this.props ) {
+		if ( props.fields.name.dirty ) {
+			// only update if the user hasn't started editing the name
+			return;
+		}
+
 		const { user: { data: { firstName, lastName } } } = props,
 			names = [];
 

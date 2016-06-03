@@ -1,5 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
+import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -38,10 +39,19 @@ class ContactInformation extends React.Component {
 	}
 
 	changeNameToMatchUserData( props = this.props ) {
-		const { user } = props;
+		const { user: { data: { firstName, lastName } } } = props,
+			names = [];
 
-		if ( user.data.firstName && user.data.lastName ) {
-			props.fields.name.onChange( `${ user.data.firstName } ${ user.data.lastName }` );
+		if ( firstName ) {
+			names.push( firstName );
+		}
+
+		if ( lastName ) {
+			names.push( lastName );
+		}
+
+		if ( ! isEmpty( names ) ) {
+			props.fields.name.onChange( names.join( ' ' ) );
 		}
 	}
 

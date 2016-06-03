@@ -1,7 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -155,5 +155,14 @@ class ContactInformation extends React.Component {
 		);
 	}
 }
+
+ContactInformation.propTypes = {
+	countries: PropTypes.object.isRequired,
+	fetchCountries: PropTypes.func.isRequired,
+	fields: PropTypes.object.isRequired,
+	isLoggedOut: PropTypes.bool.isRequired,
+	redirectToHome: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired
+};
 
 export default withStyles( styles )( ContactInformation );

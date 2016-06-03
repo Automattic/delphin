@@ -60,11 +60,11 @@ describe( 'state.user', () => {
 		expect( user( undefined, { type: VERIFY_USER } ).isRequesting ).toBe( true );
 	} );
 
-	it( 'should update `isRequesting`, `isLoggedIn`, and `bearerToken` when the user is verified', () => {
+	it( 'should update `isRequesting` and `bearerToken`, but not `isLoggedIn`, when the user is verified', () => {
 		const result = user( undefined, { type: VERIFY_USER_COMPLETE, bearerToken: 'foobar' } );
 
 		expect( result.isRequesting ).toBe( false );
-		expect( result.isLoggedIn ).toBe( true );
+		expect( result.isLoggedIn ).toBe( false );
 		expect( result.data.bearerToken ).toBe( 'foobar' );
 	} );
 

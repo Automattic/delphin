@@ -26,16 +26,16 @@
 	width: 320px;
 }
 
-.addressLineOne,
-.addressLineTwo,
+.address-one,
+.address-two,
 .city,
-.country,
+.countryCode,
 .fax,
 .name,
 .organization,
 .phone,
 .state,
-.zip {
+.postal-code {
 	border: solid 1px $border-blue;
 	border-radius: 2px;
 	box-sizing: border-box;
@@ -59,7 +59,7 @@
 		width: 70px;
 	}
 
-	.zip {
+	.postal-code {
 		margin-left: 10px;
 		width: 80px;
 	}

@@ -100,7 +100,6 @@ export const user = ( state = initialState, action ) => {
 
 		case VERIFY_USER_COMPLETE:
 			return merge( {}, state, {
-				isLoggedIn: true,
 				isRequesting: false,
 				data: {
 					bearerToken

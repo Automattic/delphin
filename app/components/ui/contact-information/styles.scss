@@ -43,6 +43,10 @@
 	margin: 0 0 10px 0;
 	padding: 10px 12px;
 	width: 100%;
+
+	&:disabled {
+		background: darken( $white, 2% );
+	}
 }
 
 .row {

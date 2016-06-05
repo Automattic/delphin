@@ -117,14 +117,24 @@ function makeWpcomRequest( state, action ) {
  * is already a function, nothing is done, it's simply returned, if it's a string,
  * action creator function is created.
  * @param {Function|String} actionCreator function, action string, or action object.
+ * @param {String} type actionCreator's type: success|fail
  * @returns {Function} action creator
  */
-function getActionCreator( actionCreator ) {
+function getActionCreator( actionCreator, type ) {
 	if ( typeof actionCreator === 'function' ) {
 		return actionCreator;
 	}
 
 	if ( typeof actionCreator === 'string' ) {
+		if ( type === 'fail' ) {
+			// For failure, the default action creator
+			// dispatches the fail action and then
+			// throws the error so it will propagate to the original dispatch() call
+			return error => dispatch => {
+				dispatch( { type: actionCreator } );
+				return Promise.reject( error );
+			};
+		}
 		return () => ( { type: actionCreator } );
 	}
 
@@ -159,11 +169,11 @@ const wpcomMiddleware = store => next => action => {
 		return makeWpcomRequest( store.getState(), action ).then( ( result ) => {
 			debug( 'request success', action );
 			// The result from here will be returned to the original dispatch:
-			return store.dispatch( getActionCreator( action.success )( result.data, result.requestArguments, result.requestToken ) );
-		} ).catch( ( err ) => {
-			debug( 'request failed', action, err );
+			return store.dispatch( getActionCreator( action.success, 'success' )( result.data, result.requestArguments, result.requestToken ) );
+		} ).catch( ( error ) => {
+			debug( 'request failed', action, error );
 			// The result from here will be returned to the original dispatch:
-			return store.dispatch( getActionCreator( action.fail )( err ) );
+			return store.dispatch( getActionCreator( action.fail, 'fail' )( error ) );
 		} );
 	}
 

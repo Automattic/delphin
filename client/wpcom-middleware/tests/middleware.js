@@ -144,7 +144,7 @@ describe( 'wpcom-middleware', () => {
 		pit( 'should dispatch fail action', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {} ),
-				dispatch: jest.genMockFunction()
+				dispatch: jest.genMockFunction().mockImplementation( action => typeof action === 'function' ? action( store.dispatch ) : action )
 			};
 
 			const promise = middleware( store )( () => {} )( {
@@ -160,7 +160,7 @@ describe( 'wpcom-middleware', () => {
 			expect( WPCOM().req[ method ] ).toBeCalled();
 			expect( store.dispatch ).lastCalledWith( { type: LOADING_ACTION } );
 
-			return promise.then( () => expect( store.dispatch ).lastCalledWith( { type: FAIL_ACTION } ) );
+			return promise.catch( () => expect( store.dispatch ).lastCalledWith( { type: FAIL_ACTION } ) );
 		} );
 
 		pit( 'should propagate result of inner action dispatch on success', () => {
@@ -286,7 +286,35 @@ describe( 'wpcom-middleware', () => {
 			} );
 
 			expect( WPCOM().req[ method ] ).toBeCalled();
-			return promise.catch( res => expect( res instanceof Error ).toBeTruthy() );
+
+			return promise.then( result => {
+				throw new Error( 'We expected a rejected promise, but got a successful one: ' + result );
+			}, result => {
+				expect( result instanceof Error ).toBeTruthy();
+			} );
+		} );
+
+		pit( 'should not swallow errors by default for string actions', () => {
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction().mockImplementation( action => typeof action === 'function' ? action() : action )
+			};
+
+			const promise = middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method: 'put', // hardcoded to fail in the mock
+				fail: 'THIS_ACTION_FAILED',
+				params,
+				payload
+			} );
+
+			expect( WPCOM().req[ method ] ).toBeCalled();
+			//expect( store.dispatch ).toBeCalledWith( { type: 'THIS_ACTION_FAILED' } );
+			return promise.then( result => {
+				throw new Error( 'We expected a rejected promise, but got a successful one: ' + result );
+			}, result => {
+				expect( result instanceof Error ).toBeTruthy();
+			} );
 		} );
 	} );
 } );

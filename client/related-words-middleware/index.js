@@ -14,6 +14,7 @@ import {
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { isDomain } from 'lib/domains';
+import { translateWord } from 'lib/translate';
 
 function requestRelatedWords( word ) {
 	return new Promise( ( resolve, reject ) => {
@@ -29,24 +30,6 @@ function requestRelatedWords( word ) {
 				}
 
 				resolve( response.body.reduce( ( result, current ) => result.concat( current.words ), [] ) );
-			} );
-	} );
-}
-
-function translateWord( word, targetLangauge, sourceLangugage ) {
-	return new Promise( ( resolve, reject ) => {
-		request.get( 'https://www.googleapis.com/language/translate/v2' )
-			.query( {
-				key: config( 'google_translate_api_key' ),
-				target: targetLangauge,
-				source: sourceLangugage || 'en',
-				q: word
-			} ).end( ( error, response ) => {
-				if ( error ) {
-					return reject( new Error( error ) );
-				}
-
-				resolve( response.body.data.translations[ 0 ].translatedText );
 			} );
 	} );
 }

@@ -1,3 +1,6 @@
+// External dependencies
+import i18n from 'i18n-calypso';
+
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import config from 'config';
@@ -18,6 +21,8 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH_FAIL
 } from 'reducers/action-types';
 import { omitTld } from 'lib/domains';
+import { getUserLocale } from 'reducers/user/selectors';
+import { translateWord } from 'lib/translate';
 
 const availableTLDs = config( 'available_tlds' );
 
@@ -32,13 +37,7 @@ export function clearDomainSuggestions() {
 	};
 }
 
-export function fetchDomainSuggestions( domainQuery = '' ) {
-	if ( domainQuery.trim() === '' ) {
-		return clearDomainSuggestions();
-	}
-
-	const queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );
-
+function requestDomainSuggestions( queryWithoutTlds, domainQuery ) {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
@@ -66,6 +65,25 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 					status: 'error'
 				} ) );
 			};
+		}
+	};
+}
+
+export function fetchDomainSuggestions( domainQuery = '' ) {
+	if ( domainQuery.trim() === '' ) {
+		return clearDomainSuggestions();
+	}
+
+	return ( dispatch, getState ) => {
+		let queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );
+		const locale = getUserLocale( getState() ) || i18n.getLocaleSlug();
+
+		if ( locale !== 'en' ) {
+			Promise.all( queryWithoutTlds.split( ' ' ).map( ( word ) => translateWord( word, 'en', locale ) ) )
+				.then( ( ...translatedWords ) => translatedWords.join( ' ' ) )
+				.then( ( translatedQueryWithoutTlds ) => dispatch( requestDomainSuggestions( translatedQueryWithoutTlds, domainQuery ) ) );
+		} else {
+			dispatch( requestDomainSuggestions( queryWithoutTlds, domainQuery ) );
 		}
 	};
 }

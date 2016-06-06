@@ -51,6 +51,11 @@
 	&:first-child {
 		margin-top: 0;
 	}
+
+	&:focus {
+		border-color: darken( $dark-gray-blue, 10% );
+		outline: none;
+	}
 }
 
 .address-two {

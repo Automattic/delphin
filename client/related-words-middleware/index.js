@@ -49,7 +49,7 @@ export const relatedWordsMiddleware = store => next => action => {
 			} );
 
 			new Promise( ( resolve ) => {
-				if ( locale === 'en' ) {
+				if ( ! locale || locale === 'en' ) {
 					return resolve( word );
 				}
 
@@ -57,7 +57,7 @@ export const relatedWordsMiddleware = store => next => action => {
 			} )
 			.then( requestRelatedWords )
 			.then( words => {
-				if ( locale === 'en' ) {
+				if ( ! locale || locale === 'en' ) {
 					return words;
 				}
 

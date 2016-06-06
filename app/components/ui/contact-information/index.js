@@ -21,6 +21,8 @@ class ContactInformation extends React.Component {
 			this.initializeContactInformation();
 		}
 
+		this.props.resetInputVisibility();
+
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
 		}
@@ -94,15 +96,23 @@ class ContactInformation extends React.Component {
 						/>
 					</fieldset>
 
-					<fieldset className={ styles.fieldset }>
-						<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.organization }
-							className={ styles.organization }
-							placeholder={ i18n.translate( 'Organization' ) }
-						/>
-					</fieldset>
+					{ ! this.props.inputVisibility.organizationInputIsVisible && (
+						<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
+							{ i18n.translate( 'Registering for a company? Add Organization name' ) }
+						</a>
+					) }
+
+					{ this.props.inputVisibility.organizationInputIsVisible && (
+						<fieldset className={ styles.fieldset }>
+							<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
+							<input
+								{ ...fields.organization }
+								className={ styles.organization }
+								disabled={ this.isDataLoading() }
+								placeholder={ i18n.translate( 'Organization' ) }
+							/>
+						</fieldset>
+					) }
 
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
@@ -112,12 +122,22 @@ class ContactInformation extends React.Component {
 							className={ styles.addressOne }
 							placeholder={ i18n.translate( 'Address Line 1' ) }
 						/>
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.address2 }
-							className={ styles.addressTwo }
-							placeholder={ i18n.translate( 'Address Line 2' ) }
-						/>
+
+						{ ! this.props.inputVisibility.address2InputIsVisible && (
+							<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
+								{ i18n.translate( '+ Add Address Line 2' ) }
+							</a>
+						) }
+
+						{ this.props.inputVisibility.address2InputIsVisible && (
+							<input
+								{ ...fields.addressLine2 }
+								className={ styles.addressLineTwo }
+								disabled={ this.isDataLoading() }
+								placeholder={ i18n.translate( 'Address Line 2' ) }
+							/>
+						) }
+
 						<div className={ styles.row }>
 							<input
 								disabled={ this.isDataLoading() }
@@ -182,9 +202,14 @@ ContactInformation.propTypes = {
 	countries: PropTypes.object.isRequired,
 	fetchCountries: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	inputVisibility: PropTypes.object.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
-	redirectToHome: PropTypes.func.isRequired
+	redirectToHome: PropTypes.func.isRequired,
+	resetInputVisibility: PropTypes.func.isRequired,
+	showAddress2Input: PropTypes.func.isRequired,
+	showOrganizationInput: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired
 };
 
 export default withStyles( styles )( ContactInformation );

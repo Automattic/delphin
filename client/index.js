@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import { analyticsMiddleware } from './analytics-middleware';
 import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
-import { fetchUser } from 'actions';
+import { fetchUser } from 'actions/user';
 import { getTokenFromBearerCookie } from './bearer-cookie';
 import reducers from 'reducers';
 import i18n from 'i18n-calypso';

@@ -6,7 +6,7 @@ import validator from 'validator';
 // Internal dependencies
 import ConnectUser from 'components/ui/connect-user';
 import { getPath } from 'routes';
-import { clearConnectUser, connectUser } from 'actions';
+import { clearConnectUser, connectUser } from 'actions/user';
 import i18n from 'i18n-calypso';
 
 const validate = values => {

@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -114,12 +115,12 @@ class ContactInformation extends React.Component {
 						</fieldset>
 					) }
 
-					<fieldset className={ styles.fieldset }>
+					<fieldset className={ classNames( styles.fieldset, { [ styles.addressTwoIsVisible ]: this.props.address2InputIsVisible } ) }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
 						<input
-							disabled={ this.isDataLoading() }
 							{ ...fields.address1 }
 							className={ styles.addressOne }
+							disabled={ this.isDataLoading() }
 							placeholder={ i18n.translate( 'Address Line 1' ) }
 						/>
 
@@ -131,8 +132,8 @@ class ContactInformation extends React.Component {
 
 						{ this.props.inputVisibility.address2InputIsVisible && (
 							<input
-								{ ...fields.addressLine2 }
-								className={ styles.addressLineTwo }
+								{ ...fields.address2 }
+								className={ styles.addressTwo }
 								disabled={ this.isDataLoading() }
 								placeholder={ i18n.translate( 'Address Line 2' ) }
 							/>

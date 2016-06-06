@@ -123,15 +123,11 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 				} );
 
 				if ( error.error === 'invalid_verification_code' ) {
-					Promise.reject( { code: error.message } );
-
-					return;
+					return Promise.reject( { code: error.message } );
 				}
 
 				if ( error.error === 'invalid_2FA_code' ) {
-					Promise.reject( { twoFactorAuthenticationCode: error.message } );
-
-					return;
+					return Promise.reject( { twoFactorAuthenticationCode: error.message } );
 				}
 
 				// If the error isn't invalid_verification_code or invalid_2FA_code

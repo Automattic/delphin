@@ -24,7 +24,6 @@ export default reduxForm(
 			'state',
 			'countryCode',
 			'postalCode',
-			'fax',
 			'phone'
 		]
 	},

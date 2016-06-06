@@ -5,6 +5,8 @@ import {
 	CONNECT_USER,
 	CONNECT_USER_CLEAR,
 	CONNECT_USER_COMPLETE,
+	FETCH_USER,
+	FETCH_USER_COMPLETE,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
@@ -24,7 +26,13 @@ describe( 'state.user', () => {
 			isLoggedIn: false,
 			isRequesting: true,
 			wasCreated: false,
-			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: null }
+			data: {
+				bearerToken: null,
+				firstName: null,
+				lastName: null,
+				email: 'foo@bar.com',
+				twoFactorAuthenticationEnabled: null
+			}
 		} );
 	} );
 
@@ -38,7 +46,13 @@ describe( 'state.user', () => {
 			isLoggedIn: false,
 			isRequesting: false,
 			wasCreated: true,
-			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: false }
+			data: {
+				bearerToken: null,
+				firstName: null,
+				lastName: null,
+				email: 'foo@bar.com',
+				twoFactorAuthenticationEnabled: false
+			}
 		} );
 	} );
 
@@ -46,11 +60,11 @@ describe( 'state.user', () => {
 		expect( user( undefined, { type: VERIFY_USER } ).isRequesting ).toBe( true );
 	} );
 
-	it( 'should update `isRequesting`, `isLoggedIn`, and `bearerToken` when the user is verified', () => {
+	it( 'should update `isRequesting` and `bearerToken`, but not `isLoggedIn`, when the user is verified', () => {
 		const result = user( undefined, { type: VERIFY_USER_COMPLETE, bearerToken: 'foobar' } );
 
 		expect( result.isRequesting ).toBe( false );
-		expect( result.isLoggedIn ).toBe( true );
+		expect( result.isLoggedIn ).toBe( false );
 		expect( result.data.bearerToken ).toBe( 'foobar' );
 	} );
 
@@ -67,6 +81,32 @@ describe( 'state.user', () => {
 			isRequesting: false,
 			wasCreated: false,
 			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: false }
+		} );
+	} );
+
+	it( 'should update `isRequesting` when the user is fetched', () => {
+		expect( user( undefined, { type: FETCH_USER } ).isRequesting ).toBe( true );
+	} );
+
+	it( 'should update multiple user properties when when the user fetching is completed', () => {
+		expect( user( Object.assign( {}, initialState, { isRequesting: true } ), {
+			type: FETCH_USER_COMPLETE,
+			bearerToken: 'foo',
+			firstName: 'Foo',
+			lastName: 'Bar',
+			email: 'foo@bar.com'
+		} ) ).toEqual( {
+			intention: null,
+			isLoggedIn: true,
+			isRequesting: false,
+			wasCreated: false,
+			data: {
+				bearerToken: 'foo',
+				firstName: 'Foo',
+				lastName: 'Bar',
+				email: 'foo@bar.com',
+				twoFactorAuthenticationEnabled: null
+			}
 		} );
 	} );
 } );

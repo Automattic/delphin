@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import React from 'react';
+import isEmpty from 'lodash/isEmpty';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -17,15 +18,45 @@ class ContactInformation extends React.Component {
 			this.props.fetchCountries();
 		}
 		this.redirectIfLoggedOut();
+
+		if ( this.props.user.isLoggedIn ) {
+			this.changeNameToMatchUserData();
+		}
 	}
 
 	componentWillReceiveProps( nextProps ) {
 		this.redirectIfLoggedOut( nextProps );
+
+		if ( ! this.props.user.isLoggedIn && nextProps.user.isLoggedIn ) {
+			this.changeNameToMatchUserData( nextProps );
+		}
 	}
 
 	redirectIfLoggedOut( props = this.props ) {
 		if ( props.isLoggedOut ) {
 			props.redirectToHome();
+		}
+	}
+
+	changeNameToMatchUserData( props = this.props ) {
+		if ( props.fields.name.dirty ) {
+			// only update if the user hasn't started editing the name
+			return;
+		}
+
+		const { user: { data: { firstName, lastName } } } = props,
+			names = [];
+
+		if ( firstName ) {
+			names.push( firstName );
+		}
+
+		if ( lastName ) {
+			names.push( lastName );
+		}
+
+		if ( ! isEmpty( names ) ) {
+			props.fields.name.onChange( names.join( ' ' ) );
 		}
 	}
 
@@ -49,6 +80,7 @@ class ContactInformation extends React.Component {
 						<label className={ styles.label }>{ i18n.translate( 'Name' ) }</label>
 						<input
 							{ ...fields.name }
+							autoFocus
 							className={ styles.name }
 							placeholder={ i18n.translate( 'Name' ) }
 						/>
@@ -128,5 +160,14 @@ class ContactInformation extends React.Component {
 		);
 	}
 }
+
+ContactInformation.propTypes = {
+	countries: PropTypes.object.isRequired,
+	fetchCountries: PropTypes.func.isRequired,
+	fields: PropTypes.object.isRequired,
+	isLoggedOut: PropTypes.bool.isRequired,
+	redirectToHome: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired
+};
 
 export default withStyles( styles )( ContactInformation );

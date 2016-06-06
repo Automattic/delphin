@@ -15,7 +15,8 @@ export default reduxForm(
 	},
 	state => ( {
 		countries: state.countries,
-		isLoggedOut: isLoggedOut( state )
+		isLoggedOut: isLoggedOut( state ),
+		user: state.user
 	} ),
 	dispatch => ( {
 		fetchCountries() {

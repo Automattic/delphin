@@ -28,8 +28,7 @@ export default reduxForm(
 	state => ( {
 		contactInformation: state.contactInformation,
 		countries: state.countries,
-		isLoggedOut: isLoggedOut( state ),
-		user: state.user
+		isLoggedOut: isLoggedOut( state )
 	} ),
 	dispatch => ( {
 		fetchContactInformation() {

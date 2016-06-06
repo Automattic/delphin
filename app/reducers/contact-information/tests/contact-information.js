@@ -3,7 +3,8 @@ jest.disableAutomock();
 // Internal dependencies
 import {
 	CONTACT_INFORMATION_FETCH,
-	CONTACT_INFORMATION_FETCH_COMPLETE
+	CONTACT_INFORMATION_FETCH_COMPLETE,
+	LOGOUT_USER
 } from 'reducers/action-types';
 import { contactInformation, initialState } from '..';
 
@@ -48,5 +49,15 @@ describe( 'state.user.contactInformation reducer', () => {
 				first_name: 'Foo'
 			}
 		} ).data ).toEqual( { firstName: 'Foo' } );
+	} );
+
+	it( 'should return the initial state after the user is logged out', () => {
+		expect( contactInformation( {
+			isRequesting: false,
+			hasLoadedFromServer: true,
+			data: { firstName: 'Foo' }
+		}, {
+			type: LOGOUT_USER
+		} ) ).toEqual( initialState );
 	} );
 } );

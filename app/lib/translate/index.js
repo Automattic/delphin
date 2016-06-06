@@ -35,7 +35,7 @@ function requestWordTranslation( word, targetLanguage, sourceLanguage ) {
 	} );
 }
 
-const englishWordRegex = /[\w-\s0-9]+/i;
+const englishWordRegex = /^[\w-\s0-9']+$/i;
 
 /***
  * Returns whether that's an "English" word (including -, space, and numbers

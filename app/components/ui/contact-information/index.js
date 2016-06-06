@@ -1,4 +1,5 @@
 // External dependencies
+import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -21,6 +22,15 @@ class ContactInformation extends React.Component {
 
 	componentWillReceiveProps( nextProps ) {
 		this.redirectIfLoggedOut( nextProps );
+
+		const { countries } = nextProps;
+		if ( ! this.props.countries.hasLoadedFromServer && nextProps.countries.hasLoadedFromServer ) {
+			const currentCountry = find( countries.data, { your_country: true } );
+
+			if ( currentCountry ) {
+				nextProps.fields.country.onChange( currentCountry.code );
+			}
+		}
 	}
 
 	redirectIfLoggedOut( props = this.props ) {
@@ -96,7 +106,13 @@ class ContactInformation extends React.Component {
 							{ ...fields.country }
 							disabled={ ! countries.hasLoadedFromServer }
 							className={ styles.country }>
-							<option>{ i18n.translate( 'Select Country' ) }</option>
+							<option>
+								{
+									countries.hasLoadedFromServer
+									? i18n.translate( 'Select Country' )
+									: i18n.translate( 'Loading…' )
+								}
+							</option>
 							<option value=" " key="separator" disabled />
 							{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
 								country.name

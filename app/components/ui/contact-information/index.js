@@ -36,12 +36,18 @@ class ContactInformation extends React.Component {
 		this.redirectIfLoggedOut( nextProps );
 	}
 
+	getName( props ) {
+		const { firstName, lastName } = props.contactInformation.data;
+
+		return [ firstName, lastName ].filter( name => name ).join( ' ' );
+	}
+
 	initializeContactInformation( props = this.props ) {
 		const form = Object.keys( props.fields ).reduce( ( result, fieldName ) => {
 			if ( fieldName === 'name' ) {
 				// combine the first and last name into a single `name` field
 				return Object.assign( result, {
-					name: props.contactInformation.data.firstName + ' ' + props.contactInformation.data.lastName
+					name: this.getName( props )
 				} );
 			}
 

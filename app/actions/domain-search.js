@@ -22,7 +22,7 @@ import {
 } from 'reducers/action-types';
 import { omitTld } from 'lib/domains';
 import { getUserLocale } from 'reducers/user/selectors';
-import { translateWord } from 'lib/translate';
+import { isEnglishWord, translateWord } from 'lib/translate';
 
 const availableTLDs = config( 'available_tlds' );
 
@@ -74,17 +74,14 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 		return clearDomainSuggestions();
 	}
 
-	return ( dispatch, getState ) => {
-		let queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );
-		const locale = getUserLocale( getState() ) || i18n.getLocaleSlug();
+	return dispatch => {
+		const queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );
 
-		if ( locale !== 'en' ) {
-			Promise.all( queryWithoutTlds.split( ' ' ).map( ( word ) => translateWord( word, 'en', locale ) ) )
-				.then( ( ...translatedWords ) => translatedWords.join( ' ' ) )
-				.then( ( translatedQueryWithoutTlds ) => dispatch( requestDomainSuggestions( translatedQueryWithoutTlds, domainQuery ) ) );
-		} else {
-			dispatch( requestDomainSuggestions( queryWithoutTlds, domainQuery ) );
-		}
+		Promise.all( queryWithoutTlds.split( ' ' ).map( ( word ) => isEnglishWord( word )
+			? Promise.resolve( { word: word, sourceLanguage: 'en' } )
+			: translateWord( word, 'en' ) )
+		).then( ( translations ) => translations.map( translation => translation.word ).join( ' ' ) )
+		.then( ( translatedQueryWithoutTlds ) => dispatch( requestDomainSuggestions( translatedQueryWithoutTlds, domainQuery ) ) );
 	};
 }
 

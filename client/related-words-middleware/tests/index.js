@@ -18,7 +18,7 @@ import {
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { getUserLocale } from 'reducers/user/selectors';
-import { translateWord } from 'lib/translate';
+import { isEnglishWord, translateWord } from 'lib/translate';
 
 describe( 'related-words-middleware', () => {
 	it( 'should do nothing on unrelated action', () => {
@@ -69,6 +69,7 @@ describe( 'related-words-middleware', () => {
 	} );
 
 	pit( 'should dispatch related word fetch complete', () => {
+		isEnglishWord.mockImplementation( () => true );
 		const word = 'one';
 		const relatedWords = [ 'hello' ];
 		const moreRelatedWords = [ 'bye' ];
@@ -114,20 +115,20 @@ describe( 'related-words-middleware', () => {
 			one: 'один'
 		};
 
-		// Mock locale for translation to be used
-		getUserLocale.mockImplementation( () => 'ru' );
+		// make it translate
+		isEnglishWord.mockImplementation( () => false );
 
 		// Mock translation to not go out for API
 		translateWord.mockImplementation( ( word, targetLanguage ) => {
 			return new Promise( ( resolve, reject ) => {
 				if ( targetLanguage === 'ru' ) {
 					if ( word in dictionary ) {
-						return resolve( dictionary[ word ] );
+						return resolve( { word: dictionary[ word ], sourceLanguage: 'en' } );
 					}
 				}
 
 				if ( targetLanguage === 'en' && word === dictionary.one ) {
-					return resolve( 'one' );
+					return resolve( { word: 'one', sourceLanguage: 'ru' } );
 				}
 
 				return reject( new Error( 'Can not translate' ) );

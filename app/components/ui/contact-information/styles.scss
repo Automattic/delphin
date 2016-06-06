@@ -53,6 +53,17 @@
 	}
 }
 
+.address-two {
+	border-top: none;
+	border-radius: 0 0 2px 2px;
+	margin: 0;
+}
+
+.address-two-is-visible .address-one {
+	border-radius: 2px 2px 0 0;
+	margin-bottom: 0;
+}
+
 .row {
 	margin-top: 5px;
 

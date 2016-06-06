@@ -2,7 +2,8 @@
 import { camelize } from 'lib/formatters';
 import {
 	CONTACT_INFORMATION_FETCH,
-	CONTACT_INFORMATION_FETCH_COMPLETE
+	CONTACT_INFORMATION_FETCH_COMPLETE,
+	LOGOUT_USER
 } from 'reducers/action-types';
 
 export const initialState = {
@@ -24,6 +25,9 @@ export const contactInformation = ( state = initialState, action ) => {
 				hasLoadedFromServer: true,
 				data: camelize( data )
 			} );
+
+		case LOGOUT_USER:
+			return initialState;
 
 		default:
 			return state;

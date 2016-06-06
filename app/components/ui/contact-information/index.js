@@ -1,6 +1,5 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -27,10 +26,6 @@ class ContactInformation extends React.Component {
 		}
 
 		this.redirectIfLoggedOut();
-
-		if ( this.props.user.isLoggedIn ) {
-			this.changeNameToMatchUserData();
-		}
 	}
 
 	componentWillReceiveProps( nextProps ) {
@@ -39,22 +34,18 @@ class ContactInformation extends React.Component {
 		}
 
 		this.redirectIfLoggedOut( nextProps );
-
-		if ( ! this.props.user.isLoggedIn && nextProps.user.isLoggedIn ) {
-			this.changeNameToMatchUserData( nextProps );
-		}
 	}
 
 	initializeContactInformation( props = this.props ) {
-		const form = Object.keys( props.fields ).reduce( ( result, field ) => {
-			if ( field === 'name' ) {
+		const form = Object.keys( props.fields ).reduce( ( result, fieldName ) => {
+			if ( fieldName === 'name' ) {
 				// combine the first and last name into a single `name` field
 				return Object.assign( result, {
 					name: props.contactInformation.data.firstName + ' ' + props.contactInformation.data.lastName
 				} );
 			}
 
-			return Object.assign( result, { [ field ]: props.contactInformation.data[ field ] || '' } );
+			return Object.assign( result, { [ fieldName ]: props.contactInformation.data[ fieldName ] || '' } );
 		}, {} );
 
 		props.initializeForm( form );
@@ -67,28 +58,6 @@ class ContactInformation extends React.Component {
 	redirectIfLoggedOut( props = this.props ) {
 		if ( props.isLoggedOut ) {
 			props.redirectToHome();
-		}
-	}
-
-	changeNameToMatchUserData( props = this.props ) {
-		if ( props.fields.name.dirty ) {
-			// only update if the user hasn't started editing the name
-			return;
-		}
-
-		const { user: { data: { firstName, lastName } } } = props,
-			names = [];
-
-		if ( firstName ) {
-			names.push( firstName );
-		}
-
-		if ( lastName ) {
-			names.push( lastName );
-		}
-
-		if ( ! isEmpty( names ) ) {
-			props.fields.name.onChange( names.join( ' ' ) );
 		}
 	}
 
@@ -207,8 +176,7 @@ ContactInformation.propTypes = {
 	fetchCountries: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
-	redirectToHome: PropTypes.func.isRequired,
-	user: PropTypes.object.isRequired
+	redirectToHome: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( ContactInformation );

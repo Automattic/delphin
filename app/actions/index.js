@@ -75,17 +75,21 @@ export function connectUser( email, intention, callback ) {
 /**
  * Fetches the user profile with the specified access token.
  *
+ * @param {object} options - Contains a parameter, `displaySuccessNotice`, which determines if a success
+ * notice is displayed after the user is fetched.
  * @returns {Object} fetch user action
  */
 export function fetchUser() {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
-		params: { path: '/me' },
+		params: { path: '/me/settings' },
 		loading: FETCH_USER,
 		success: ( data, requestArguments, requestToken ) => ( {
 			type: FETCH_USER_COMPLETE,
 			bearerToken: requestToken,
+			firstName: data.first_name,
+			lastName: data.last_name,
 			email: data.email,
 			locale: data.language
 		} ),
@@ -113,10 +117,12 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 			return dispatch => {
 				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.access_token } );
 
-				dispatch( addNotice( {
-					message: i18n.translate( 'You were successfully logged in!' ),
-					status: 'success'
-				} ) );
+				// Wait for fetch user action to complete, then display a notice
+				dispatch( fetchUser() )
+					.then( () => dispatch( addNotice( {
+						message: i18n.translate( 'You were successfully logged in!' ),
+						status: 'success'
+					} ) ) );
 			};
 		},
 		fail: ( error ) => {

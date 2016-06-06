@@ -20,7 +20,7 @@ import {
 } from 'reducers/action-types';
 
 /**
- * Resets the flag indicating the a user was connected successfully.
+ * Resets the flag indicating that a user was connected successfully.
  *
  * @returns {object} the corresponding action object
  */
@@ -29,12 +29,12 @@ export function clearConnectUser() {
 }
 
 /**
- * Connects a user to a new or existing accout by sending a confirmation code to the specified email.
+ * Connects a user to a new or existing account by sending a confirmation code to the specified email.
  *
  * @param {string} email address of the user
- * @param {string} intention of the user - login or signup
+ * @param {string} intention of the user (e.g. 'login' or 'signup')
  * @param {function} [callback] optional callback to call upon success
- * @returns {function} the corresponding action thunk
+ * @returns {object} the corresponding action object
  */
 export function connectUser( email, intention, callback ) {
 	return {
@@ -66,11 +66,9 @@ export function connectUser( email, intention, callback ) {
 }
 
 /**
- * Fetches the user profile with the specified access token.
+ * Fetches the user profile.
  *
- * @param {object} options - Contains a parameter, `displaySuccessNotice`, which determines if a success
- * notice is displayed after the user is fetched.
- * @returns {Object} fetch user action
+ * @returns {object} the corresponding action object
  */
 export function fetchUser() {
 	return {

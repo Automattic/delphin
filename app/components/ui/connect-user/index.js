@@ -10,6 +10,7 @@ import ValidationError from 'components/ui/form/validation-error';
 
 const ConnectUser = React.createClass( {
 	propTypes: {
+		clearConnectUser: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		intention: PropTypes.string.isRequired,
@@ -21,6 +22,8 @@ const ConnectUser = React.createClass( {
 	componentDidMount() {
 		if ( this.props.user.isLoggedIn ) {
 			this.props.redirectToHome();
+		} else {
+			this.props.clearConnectUser();
 		}
 	},
 

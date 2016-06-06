@@ -6,7 +6,7 @@ import validator from 'validator';
 // Internal dependencies
 import ConnectUser from 'components/ui/connect-user';
 import { getPath } from 'routes';
-import { connectUser } from 'actions';
+import { clearConnectUser, connectUser } from 'actions';
 import i18n from 'i18n-calypso';
 
 const validate = values => {
@@ -25,9 +25,13 @@ export default reduxForm(
 		validate
 	},
 	state => ( {
+		initialValues: { email: state.user.data.email },
 		user: state.user
 	} ),
 	( dispatch, ownProps ) => ( {
+		clearConnectUser() {
+			dispatch( clearConnectUser() );
+		},
 		onSubmit( fields ) {
 			return dispatch( connectUser( fields.email, ownProps.intention ) );
 		},

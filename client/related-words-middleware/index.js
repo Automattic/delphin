@@ -26,7 +26,7 @@ export const relatedWordsMiddleware = store => next => action => {
 			} );
 
 			request
-				.get( `http://api.wordnik.com/v4/word.json/${ word }/relatedWords` +
+				.get( `https://api.wordnik.com/v4/word.json/${ word }/relatedWords` +
 					'?useCanonical=true' +
 					'&relationshipTypes=same-context,synonym' +
 					'&limitPerRelationshipType=3' +

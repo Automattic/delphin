@@ -1,20 +1,17 @@
 // External dependencies
 import config from 'config';
 import difference from 'lodash/difference';
-import flatten from 'lodash/flatten';
 import request from 'superagent';
-import i18n from 'i18n-calypso';
 
 // Internal dependencies
 import { getKeywords, getRelatedWords } from 'reducers/ui/domain-search/selectors';
-import { getUserLocale } from 'reducers/user/selectors';
 import {
 	DOMAIN_SUGGESTIONS_FETCH,
 	RELATED_WORD_FETCH,
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { isDomain } from 'lib/domains';
-import { translateWord } from 'lib/translate';
+import { isEnglishWord, translateWord } from 'lib/translate';
 
 function requestRelatedWords( word ) {
 	return new Promise( ( resolve, reject ) => {
@@ -37,41 +34,47 @@ function requestRelatedWords( word ) {
 export const relatedWordsMiddleware = store => next => action => {
 	if ( action.type === DOMAIN_SUGGESTIONS_FETCH ) {
 		const state = store.getState(),
-			locale = getUserLocale( state ) || i18n.getLocaleSlug(),
 			keywords = getKeywords( state ).map( keyword => keyword.value ),
 			existingRelatedWords = getRelatedWords( state ).map( relatedWord => relatedWord.word ),
 			wordsToFetch = difference( keywords, existingRelatedWords );
 
-		wordsToFetch.filter( word => ! isDomain( word ) ).forEach( word => {
+		wordsToFetch.filter( word => ! isDomain( word ) ).forEach( originalWord => {
 			store.dispatch( {
 				type: RELATED_WORD_FETCH,
-				word
+				word: originalWord
 			} );
 
 			new Promise( ( resolve ) => {
-				if ( ! locale || locale === 'en' ) {
-					return resolve( word );
+				// the word is in english - no need to translate
+				if ( isEnglishWord( originalWord ) ) {
+					return resolve( { word: originalWord, sourceLanguage: 'en' } );
 				}
 
-				return resolve( translateWord( word, 'en', locale ) );
+				return resolve( translateWord( originalWord, 'en' ) );
 			} )
-			.then( requestRelatedWords )
-			.then( words => {
-				if ( ! locale || locale === 'en' ) {
-					return words;
+			.then( ( translation ) => requestRelatedWords( translation.word )
+					.then( ( relatedWords ) => ( { relatedWords, sourceLanguage: translation.sourceLanguage } ) )
+			)
+			.then( params => {
+				const { relatedWords, sourceLanguage } = params;
+
+				// if the original word was in english, we shouldn't translate the related words
+				if ( isEnglishWord( originalWord ) ) {
+					return relatedWords;
 				}
 
-				return Promise.all( words.map( englishWord => translateWord( englishWord, locale, 'en' ) ) )
-					.then( ( ...translatedWords ) => flatten( translatedWords ) );
+				return Promise.all( relatedWords.map( englishWord => translateWord( englishWord, sourceLanguage, 'en' ) ) )
+					.then( ( translations ) => translations.map( ( translation ) => translation.word ) );
 			} )
 			.then( words =>	store.dispatch( {
 				type: RELATED_WORD_FETCH_COMPLETE,
-				word,
+				word: originalWord,
 				data: words
-			} ) ).catch( () => store.dispatch( {
+			} ) ).catch( ( error ) => store.dispatch( {
 				type: RELATED_WORD_FETCH_COMPLETE,
-				word,
-				data: null
+				word: originalWord,
+				data: null,
+				error: error.toString()
 			} ) );
 		} );
 	}

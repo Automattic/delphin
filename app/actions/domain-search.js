@@ -1,6 +1,3 @@
-// External dependencies
-import i18n from 'i18n-calypso';
-
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import config from 'config';
@@ -21,7 +18,6 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH_FAIL
 } from 'reducers/action-types';
 import { omitTld } from 'lib/domains';
-import { getUserLocale } from 'reducers/user/selectors';
 import { isEnglishWord, translateWord } from 'lib/translate';
 
 const availableTLDs = config( 'available_tlds' );

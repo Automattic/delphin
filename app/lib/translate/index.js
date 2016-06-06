@@ -18,7 +18,7 @@ function requestWordTranslation( word, targetLanguage, sourceLanguage ) {
 			q: word
 		};
 
-		if ( targetLanguage !== 'en' ) {
+		if ( sourceLanguage ) {
 			requestParams.source = sourceLanguage;
 		}
 

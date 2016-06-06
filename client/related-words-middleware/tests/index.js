@@ -9,6 +9,7 @@ jest.unmock( 'config' );
 // Breaks jest for some reason:
 // jest.unmock( 'wpcom' ); - replaced by a manual mock
 jest.unmock( 'debug' );
+jest.useRealTimers(); // needed for 'should dispatch related word fetch complete'
 
 import { relatedWordsMiddleware } from '..';
 import {
@@ -70,7 +71,7 @@ describe( 'related-words-middleware', () => {
 		const relatedWords = [ 'hello' ];
 		const moreRelatedWords = [ 'bye' ];
 		const store = {
-			getState: jest.genMockFunction().mockReturnValue( {
+			getState: jest.fn( () => ( {
 				ui: {
 					domainSearch: {
 						domainKeywords: {
@@ -83,8 +84,8 @@ describe( 'related-words-middleware', () => {
 						relatedWords: []
 					}
 				}
-			} ),
-			dispatch: jasmine.createSpy( 'dispatch' )
+			} ) ),
+			dispatch: jest.fn()
 		};
 		const next = jasmine.createSpy( 'next' );
 
@@ -96,11 +97,11 @@ describe( 'related-words-middleware', () => {
 		} );
 		relatedWordsMiddleware( store )( next )( { type: DOMAIN_SUGGESTIONS_FETCH } );
 
-		return new Promise( ( resolve ) => {
-			// that guaranteed to work because of the mocked superagent has no async
-			expect( store.dispatch ).toBeCalledWith( { type: RELATED_WORD_FETCH_COMPLETE, word, data: relatedWords.concat( moreRelatedWords ) } );
-
-			resolve();
-		} );
+		// real timers should be used for that test to work
+		return new Promise( ( resolve ) => setImmediate( resolve ) )
+			.then( () => {
+				// that guaranteed to work because of the mocked superagent has no async
+				expect( store.dispatch ).lastCalledWith( { type: RELATED_WORD_FETCH_COMPLETE, word, data: relatedWords.concat( moreRelatedWords ) } );
+			} );
 	} );
 } );

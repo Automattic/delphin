@@ -39,8 +39,8 @@ const englishWordRegex = /[\w-\s0-9]+/i;
 
 /***
  * Returns whether that's an "English" word (including -, space, and numbers
- * @param word
- * @returns {*}
+ * @param {String} word a word
+ * @returns {Boolean} true if the word is with english characters
  */
 export function isEnglishWord( word ) {
 	return word.match( englishWordRegex );

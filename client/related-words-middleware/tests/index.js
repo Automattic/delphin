@@ -17,7 +17,6 @@ import {
 	RELATED_WORD_FETCH,
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
-import { getUserLocale } from 'reducers/user/selectors';
 import { isEnglishWord, translateWord } from 'lib/translate';
 
 describe( 'related-words-middleware', () => {

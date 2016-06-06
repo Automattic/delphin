@@ -17,6 +17,8 @@ import {
 	RELATED_WORD_FETCH,
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
+import { getUserLocale } from 'reducers/user/selectors';
+import { translateWord } from 'lib/translate';
 
 describe( 'related-words-middleware', () => {
 	it( 'should do nothing on unrelated action', () => {
@@ -102,6 +104,73 @@ describe( 'related-words-middleware', () => {
 			.then( () => {
 				// that guaranteed to work because of the mocked superagent has no async
 				expect( store.dispatch ).lastCalledWith( { type: RELATED_WORD_FETCH_COMPLETE, word, data: relatedWords.concat( moreRelatedWords ) } );
+			} );
+	} );
+
+	pit( 'should localize words', () => {
+		const dictionary = {
+			hello: 'привет',
+			bye: 'пока',
+			one: 'один'
+		};
+
+		// Mock locale for translation to be used
+		getUserLocale.mockImplementation( () => 'ru' );
+
+		// Mock translation to not go out for API
+		translateWord.mockImplementation( ( word, targetLanguage ) => {
+			return new Promise( ( resolve, reject ) => {
+				if ( targetLanguage === 'ru' ) {
+					if ( word in dictionary ) {
+						return resolve( dictionary[ word ] );
+					}
+				}
+
+				if ( targetLanguage === 'en' && word === dictionary.one ) {
+					return resolve( 'one' );
+				}
+
+				return reject( new Error( 'Can not translate' ) );
+			} );
+		} );
+
+		const word = dictionary.one;
+		const relatedWords = [ 'hello' ];
+		const moreRelatedWords = [ 'bye' ];
+		const store = {
+			getState: jest.fn( () => ( {
+				ui: {
+					domainSearch: {
+						domainKeywords: {
+							keywords: [
+								{
+									value: word
+								}
+							]
+						},
+						relatedWords: []
+					}
+				}
+			} ) ),
+			dispatch: jest.fn()
+		};
+		const next = jasmine.createSpy( 'next' );
+
+		request.__setMockResponse( {
+			body: [
+				{ words: relatedWords },
+				{ words: moreRelatedWords }
+			]
+		} );
+		relatedWordsMiddleware( store )( next )( { type: DOMAIN_SUGGESTIONS_FETCH } );
+
+		// real timers should be used for that test to work
+		return new Promise( ( resolve ) => setImmediate( resolve ) )
+			.then( () => {
+				const translatedData = relatedWords.concat( moreRelatedWords ).map( ( englishWord ) => dictionary[ englishWord ] );
+
+				// that guaranteed to work because of the mocked superagent has no async
+				expect( store.dispatch ).lastCalledWith( { type: RELATED_WORD_FETCH_COMPLETE, word, data: translatedData } );
 			} );
 	} );
 } );

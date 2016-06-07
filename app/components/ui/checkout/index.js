@@ -11,6 +11,7 @@ const Checkout = React.createClass( {
 		checkout: PropTypes.object.isRequired,
 		createSite: PropTypes.func.isRequired,
 		createTransaction: PropTypes.func.isRequired,
+		isLoggedIn: PropTypes.bool.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		redirectToSignup: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
@@ -34,7 +35,7 @@ const Checkout = React.createClass( {
 			this.props.redirectToSearch();
 		}
 
-		if ( ! this.props.user.isLoggedIn ) {
+		if ( ! this.props.isLoggedIn ) {
 			this.props.redirectToSignup();
 		}
 	},

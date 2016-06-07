@@ -70,6 +70,18 @@ class ContactInformation extends React.Component {
 		}
 	}
 
+	address2InputIsVisible() {
+		const { inputVisibility: { address2InputIsVisible }, fields: { address2 } } = this.props;
+
+		return address2InputIsVisible || address2.initialValue;
+	}
+
+	organizationInputIsVisible() {
+		const { inputVisibility: { organizationInputIsVisible }, fields: { organization } } = this.props;
+
+		return organizationInputIsVisible || organization.initialValue;
+	}
+
 	render() {
 		const { fields, countries } = this.props;
 		const steps = [
@@ -97,13 +109,13 @@ class ContactInformation extends React.Component {
 						/>
 					</fieldset>
 
-					{ ! this.props.inputVisibility.organizationInputIsVisible && (
+					{ ! this.organizationInputIsVisible() && (
 						<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
 							{ i18n.translate( 'Registering for a company? Add Organization name' ) }
 						</a>
 					) }
 
-					{ this.props.inputVisibility.organizationInputIsVisible && (
+					{ this.organizationInputIsVisible() && (
 						<fieldset className={ styles.fieldset }>
 							<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
 							<input
@@ -115,7 +127,7 @@ class ContactInformation extends React.Component {
 						</fieldset>
 					) }
 
-					<fieldset className={ classNames( styles.fieldset, { [ styles.addressTwoIsVisible ]: this.props.address2InputIsVisible } ) }>
+					<fieldset className={ classNames( styles.fieldset, { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
 						<input
 							{ ...fields.address1 }
@@ -124,13 +136,13 @@ class ContactInformation extends React.Component {
 							placeholder={ i18n.translate( 'Address Line 1' ) }
 						/>
 
-						{ ! this.props.inputVisibility.address2InputIsVisible && (
+						{ ! this.address2InputIsVisible() && (
 							<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
 								{ i18n.translate( '+ Add Address Line 2' ) }
 							</a>
 						) }
 
-						{ this.props.inputVisibility.address2InputIsVisible && (
+						{ this.address2InputIsVisible() && (
 							<input
 								{ ...fields.address2 }
 								className={ styles.addressTwo }

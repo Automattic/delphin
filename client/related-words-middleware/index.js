@@ -59,7 +59,7 @@ export const relatedWordsMiddleware = store => next => action => {
 				const { relatedWords, sourceLanguage } = params;
 
 				// if the original word was in english, we shouldn't translate the related words
-				if ( isEnglishWord( originalWord ) ) {
+				if ( sourceLanguage === 'en' ) {
 					return relatedWords;
 				}
 

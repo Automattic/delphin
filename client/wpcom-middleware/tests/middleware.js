@@ -4,7 +4,7 @@ jest.unmock( '..' );
 // Breaks jest for some reason:
 // jest.unmock( 'wpcom' ); - replaced by a manual mock
 jest.unmock( 'debug' );
-
+jest.unmock( 'reducers/user/selectors' );
 jest.unmock( 'i18n-calypso' );
 
 import i18n from 'i18n-calypso';
@@ -97,9 +97,15 @@ describe( 'wpcom-middleware', () => {
 				getState: jest.genMockFunction().mockReturnValue( {
 					user: {
 						isLoggedIn: true,
-						data: {
-							locale: 'pt-br',
-							bearerToken: 'foobar'
+						connect: {
+							data: {
+								bearerToken: 'foobar'
+							}
+						},
+						settings: {
+							data: {
+								locale: 'pt-br'
+							}
 						}
 					}
 				} ),

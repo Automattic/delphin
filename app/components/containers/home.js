@@ -14,8 +14,7 @@ export default reduxForm(
 	},
 	state => ( {
 		domainSearch: state.domainSearch,
-		showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice,
-		user: state.user
+		showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice
 	} ),
 	dispatch => ( {
 		changeQuery( query ) {

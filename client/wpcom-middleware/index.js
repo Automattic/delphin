@@ -7,6 +7,7 @@ import WPCOM from 'wpcom';
 
 // Internal dependencies
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
+import { getUserConnect, getUserSettings } from 'reducers/user/selectors';
 import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';
@@ -62,8 +63,8 @@ function makeWpcomRequest( state, action ) {
 
 	// get token and locale from state if user logged in
 	if ( getPath( state, 'user.isLoggedIn' ) ) {
-		token = state.user.data.bearerToken;
-		locale = state.user.data.locale;
+		token = getUserConnect( state ).data.bearerToken;
+		locale = getUserSettings( state ).data.locale;
 	}
 
 	// If there's no language for the user, get if from the URL

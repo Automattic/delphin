@@ -2,6 +2,7 @@
 import config from 'config';
 import difference from 'lodash/difference';
 import request from 'superagent';
+import i18n from 'i18n-calypso';
 
 // Internal dependencies
 import { getKeywords, getRelatedWords } from 'reducers/ui/domain-search/selectors';
@@ -12,6 +13,7 @@ import {
 } from 'reducers/action-types';
 import { isDomain } from 'lib/domains';
 import { isEnglishWord, translateWord } from 'lib/translate';
+import { getUserLocale } from 'reducers/user/selectors';
 
 function requestRelatedWords( word ) {
 	return new Promise( ( resolve, reject ) => {
@@ -34,6 +36,7 @@ function requestRelatedWords( word ) {
 export const relatedWordsMiddleware = store => next => action => {
 	if ( action.type === DOMAIN_SUGGESTIONS_FETCH ) {
 		const state = store.getState(),
+			locale = getUserLocale( state ) || i18n.getLocaleSlug(),
 			keywords = getKeywords( state ).map( keyword => keyword.value ),
 			existingRelatedWords = getRelatedWords( state ).map( relatedWord => relatedWord.word ),
 			wordsToFetch = difference( keywords, existingRelatedWords );
@@ -45,12 +48,12 @@ export const relatedWordsMiddleware = store => next => action => {
 			} );
 
 			new Promise( ( resolve ) => {
-				// the word is in english - no need to translate
-				if ( isEnglishWord( originalWord ) ) {
-					return resolve( { word: originalWord, sourceLanguage: 'en' } );
+				// If we're on non english site or the word has non english alphabet - translate it
+				if ( ( locale && locale !== 'en' ) || ! isEnglishWord( originalWord ) ) {
+					resolve( translateWord( originalWord, 'en' ) );
 				}
 
-				return resolve( translateWord( originalWord, 'en' ) );
+				return resolve( { word: originalWord, sourceLanguage: 'en' } );
 			} )
 			.then( ( translation ) => requestRelatedWords( translation.word )
 					.then( ( relatedWords ) => ( { relatedWords, sourceLanguage: translation.sourceLanguage } ) )

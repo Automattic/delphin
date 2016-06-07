@@ -1,6 +1,5 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -14,49 +13,57 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
+		if ( ! this.props.contactInformation.isRequesting && ! this.props.contactInformation.hasLoadedFromServer ) {
+			this.props.fetchContactInformation();
+		}
+
+		if ( this.props.contactInformation.hasLoadedFromServer ) {
+			this.initializeContactInformation();
+		}
+
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
 		}
-		this.redirectIfLoggedOut();
 
-		if ( this.props.user.isLoggedIn ) {
-			this.changeNameToMatchUserData();
-		}
+		this.redirectIfLoggedOut();
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		this.redirectIfLoggedOut( nextProps );
-
-		if ( ! this.props.user.isLoggedIn && nextProps.user.isLoggedIn ) {
-			this.changeNameToMatchUserData( nextProps );
+		if ( ! this.props.contactInformation.hasLoadedFromServer && nextProps.contactInformation.hasLoadedFromServer ) {
+			this.initializeContactInformation( nextProps );
 		}
+
+		this.redirectIfLoggedOut( nextProps );
+	}
+
+	getName( props ) {
+		const { firstName, lastName } = props.contactInformation.data;
+
+		return [ firstName, lastName ].filter( name => name ).join( ' ' );
+	}
+
+	initializeContactInformation( props = this.props ) {
+		const form = Object.keys( props.fields ).reduce( ( result, fieldName ) => {
+			if ( fieldName === 'name' ) {
+				// combine the first and last name into a single `name` field
+				return Object.assign( result, {
+					name: this.getName( props )
+				} );
+			}
+
+			return Object.assign( result, { [ fieldName ]: props.contactInformation.data[ fieldName ] || '' } );
+		}, {} );
+
+		props.initializeForm( form );
+	}
+
+	isDataLoading() {
+		return ! this.props.contactInformation.hasLoadedFromServer || ! this.props.countries.hasLoadedFromServer;
 	}
 
 	redirectIfLoggedOut( props = this.props ) {
 		if ( props.isLoggedOut ) {
 			props.redirectToHome();
-		}
-	}
-
-	changeNameToMatchUserData( props = this.props ) {
-		if ( props.fields.name.dirty ) {
-			// only update if the user hasn't started editing the name
-			return;
-		}
-
-		const { user: { data: { firstName, lastName } } } = props,
-			names = [];
-
-		if ( firstName ) {
-			names.push( firstName );
-		}
-
-		if ( lastName ) {
-			names.push( lastName );
-		}
-
-		if ( ! isEmpty( names ) ) {
-			props.fields.name.onChange( names.join( ' ' ) );
 		}
 	}
 
@@ -79,6 +86,7 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Name' ) }</label>
 						<input
+							disabled={ this.isDataLoading() }
 							{ ...fields.name }
 							autoFocus
 							className={ styles.name }
@@ -89,6 +97,7 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
 						<input
+							disabled={ this.isDataLoading() }
 							{ ...fields.organization }
 							className={ styles.organization }
 							placeholder={ i18n.translate( 'Organization' ) }
@@ -98,36 +107,41 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
 						<input
-							{ ...fields.addressLine1 }
-							className={ styles.addressLineOne }
+							disabled={ this.isDataLoading() }
+							{ ...fields.address1 }
+							className={ styles.addressOne }
 							placeholder={ i18n.translate( 'Address Line 1' ) }
 						/>
 						<input
-							{ ...fields.addressLine2 }
-							className={ styles.addressLineTwo }
+							disabled={ this.isDataLoading() }
+							{ ...fields.address2 }
+							className={ styles.addressTwo }
 							placeholder={ i18n.translate( 'Address Line 2' ) }
 						/>
 						<div className={ styles.row }>
 							<input
+								disabled={ this.isDataLoading() }
 								{ ...fields.city }
 								className={ styles.city }
 								placeholder={ i18n.translate( 'City' ) }
 							/>
 							<input
+								disabled={ this.isDataLoading() }
 								{ ...fields.state }
 								className={ styles.state }
 								placeholder={ i18n.translate( 'State' ) }
 							/>
 							<input
-								{ ...fields.zip }
-								className={ styles.zip }
+								disabled={ this.isDataLoading() }
+								{ ...fields.postalCode }
+								className={ styles.postalCode }
 								placeholder={ i18n.translate( 'Zip' ) }
 							/>
 						</div>
 						<select
-							{ ...fields.country }
-							disabled={ ! countries.hasLoadedFromServer }
-							className={ styles.country }>
+							{ ...fields.countryCode }
+							disabled={ this.isDataLoading() }
+							className={ styles.countryCode }>
 							<option>{ i18n.translate( 'Select Country' ) }</option>
 							<option value=" " key="separator" disabled />
 							{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
@@ -141,6 +155,7 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Fax' ) }</label>
 						<input
+							disabled={ this.isDataLoading() }
 							{ ...fields.fax }
 							className={ styles.fax }
 							placeholder={ i18n.translate( 'Fax' ) }
@@ -150,6 +165,7 @@ class ContactInformation extends React.Component {
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Phone' ) }</label>
 						<input
+							disabled={ this.isDataLoading() }
 							{ ...fields.phone }
 							className={ styles.phone }
 							placeholder={ i18n.translate( 'Phone' ) }
@@ -166,8 +182,7 @@ ContactInformation.propTypes = {
 	fetchCountries: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
-	redirectToHome: PropTypes.func.isRequired,
-	user: PropTypes.object.isRequired
+	redirectToHome: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( ContactInformation );

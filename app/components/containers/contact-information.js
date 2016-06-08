@@ -1,4 +1,5 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
 
@@ -8,6 +9,8 @@ import { fetchContactInformation } from 'actions/contact-information';
 import { fetchCountries } from 'actions/countries';
 import { getPath } from 'routes';
 import { getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
+import { inputVisibility } from 'reducers/ui/contact-information/selectors';
+import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
 
 export default reduxForm(
 	{
@@ -21,7 +24,6 @@ export default reduxForm(
 			'state',
 			'countryCode',
 			'postalCode',
-			'fax',
 			'phone'
 		]
 	},
@@ -30,17 +32,17 @@ export default reduxForm(
 		countries: state.countries,
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),
+		inputVisibility: inputVisibility( state ),
 		user: getUserSettings( state )
 	} ),
-	dispatch => ( {
-		fetchContactInformation() {
-			dispatch( fetchContactInformation() );
-		},
-		fetchCountries() {
-			dispatch( fetchCountries() );
-		},
-		redirectToHome() {
-			dispatch( push( getPath( 'home' ) ) );
-		}
-	} )
+	dispatch => (
+		bindActionCreators( {
+			fetchContactInformation,
+			fetchCountries,
+			showAddress2Input,
+			showOrganizationInput,
+			resetInputVisibility,
+			redirectToHome: () => push( getPath( 'home' ) )
+		}, dispatch )
+	)
 )( ContactInformation );

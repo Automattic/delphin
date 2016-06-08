@@ -18,6 +18,7 @@ import {
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
 import { isEnglishWord, translateWord } from 'lib/translate';
+import { getUserLocale } from 'reducers/user/selectors';
 
 describe( 'related-words-middleware', () => {
 	it( 'should do nothing on unrelated action', () => {
@@ -107,7 +108,7 @@ describe( 'related-words-middleware', () => {
 			} );
 	} );
 
-	pit( 'should localize words', () => {
+	pit( 'should localize words according to locale', () => {
 		const dictionary = {
 			hello: 'привет',
 			bye: 'пока',
@@ -116,6 +117,9 @@ describe( 'related-words-middleware', () => {
 
 		// make it translate
 		isEnglishWord.mockImplementation( () => false );
+
+		// results should be according to locale:
+		getUserLocale.mockImplementation( () => 'ru' );
 
 		// Mock translation to not go out for API
 		translateWord.mockImplementation( ( word, targetLanguage ) => {

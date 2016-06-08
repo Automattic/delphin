@@ -15,7 +15,7 @@ import { validateContactInformation } from 'actions/contact-information';
 
 export default reduxForm(
 	{
-		form: 'address',
+		form: 'contact-information',
 		fields: [
 			'name',
 			'organization',

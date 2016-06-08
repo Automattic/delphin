@@ -8,7 +8,8 @@ import {
 	CONTACT_INFORMATION_FETCH_COMPLETE,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
-import { camelize, snakeify } from 'lib/formatters';
+import { normalizeValidationErrors } from 'lib/contact-information';
+import { snakeify } from 'lib/formatters';
 
 export const fetchContactInformation = () => ( {
 	type: WPCOM_REQUEST,
@@ -42,7 +43,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 		success: data => {
 			return dispatch => {
 				const { success, messages } = data,
-					errors = ! success ? camelize( messages ) : undefined;
+					errors = ! success ? normalizeValidationErrors( messages ) : undefined;
 
 				dispatch( stopAsyncValidation( 'contact-information', errors ) );
 			};

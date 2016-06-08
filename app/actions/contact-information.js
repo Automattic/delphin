@@ -8,8 +8,7 @@ import {
 	CONTACT_INFORMATION_FETCH_COMPLETE,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
-import { normalizeValidationErrors } from 'lib/contact-information';
-import { snakeify } from 'lib/formatters';
+import { normalizePayload, normalizeValidationErrors } from 'lib/contact-information';
 
 export const fetchContactInformation = () => ( {
 	type: WPCOM_REQUEST,
@@ -34,7 +33,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 		type: WPCOM_REQUEST,
 		method: 'post',
 		params: { path: '/me/domain-contact-information/validate' },
-		payload: snakeify( { domainNames, contactInformation } ),
+		payload: normalizePayload( domainNames, contactInformation ),
 		loading: () => {
 			return dispatch => {
 				dispatch( startAsyncValidation( 'contact-information' ) );

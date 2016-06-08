@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { isDomain, isValidSecondLevelDomain, secondLevelDomainOf, omitTld, queryIsInResults } from '..';
+import { isDomain, isDomainSearch, isValidSecondLevelDomain, secondLevelDomainOf, omitTld, queryIsInResults } from '..';
 
 describe( 'lib/domains', () => {
 	describe( 'isDomain', () => {
@@ -96,6 +96,27 @@ describe( 'lib/domains', () => {
 			expect( omitTld( 'foo.thisisalongtld' ) ).toBe( 'foo' );
 			expect( omitTld( 'baz.' ) ).toBe( 'baz' );
 			expect( omitTld( 'foo.co.uk' ) ).toBe( 'foo' );
+		} );
+	} );
+
+	describe( 'isDomainSearch', () => {
+		it( 'should return true for valid .live domains', () => {
+			expect( isDomainSearch( 'foo.live' ) ).toBe( true );
+			expect( isDomainSearch( 'foo-bar.live' ) ).toBe( true );
+			expect( isDomainSearch( 'foo0.live' ) ).toBe( true );
+		} );
+
+		it( 'should return false for invalid .live domains', () => {
+			expect( isDomainSearch( 'foo-.live' ) ).toBe( false );
+			expect( isDomainSearch( 'foo bar.live' ) ).toBe( false );
+		} );
+
+		it( 'should return false for non-.live domains', () => {
+			expect( isDomainSearch( 'foo.com' ) ).toBe( false );
+		} );
+
+		it( 'should return false for strings without a TLD suffix', () => {
+			expect( isDomainSearch( 'foo' ) ).toBe( false );
 		} );
 	} );
 } );

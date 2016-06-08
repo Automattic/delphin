@@ -121,32 +121,23 @@ function makeWpcomRequest( state, action ) {
  * @returns {Function} action creator
  */
 function getActionCreator( actionCreator, type ) {
+	// A function action creator can override the dispatch behavior
 	if ( typeof actionCreator === 'function' ) {
 		return actionCreator;
 	}
 
-	if ( typeof actionCreator === 'string' ) {
-		if ( type === 'fail' ) {
-			// For failure, the default action creator
-			// dispatches the fail action and then
-			// throws the error so it will propagate to the original dispatch() call
-			return error => dispatch => {
-				dispatch( { type: actionCreator } );
-				return Promise.reject( error );
-			};
+	// Default action creator will be a thunk
+	return param => dispatch => {
+		if ( typeof actionCreator === 'string' ) {
+			dispatch( { type: actionCreator } );
 		}
-		return () => ( { type: actionCreator } );
-	}
 
-	if ( typeof actionCreator === 'object' ) {
-		return () => actionCreator;
-	}
+		if ( typeof actionCreator === 'object' ) {
+			dispatch( actionCreator );
+		}
 
-	// return passthru lambda, so we'll keep the chain
-	return ( param ) => {
-		// we want to keep the promise in rejected state as a default behaviour
-		if ( param instanceof Error ) {
-			throw param;
+		if ( type === 'fail' ) {
+			return Promise.reject( param );
 		}
 
 		return param;

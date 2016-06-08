@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -20,6 +21,8 @@ class ContactInformation extends React.Component {
 		if ( this.props.contactInformation.hasLoadedFromServer ) {
 			this.initializeContactInformation();
 		}
+
+		this.props.resetInputVisibility();
 
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
@@ -67,6 +70,18 @@ class ContactInformation extends React.Component {
 		}
 	}
 
+	address2InputIsVisible() {
+		const { inputVisibility: { address2InputIsVisible }, fields: { address2 } } = this.props;
+
+		return address2InputIsVisible || address2.initialValue;
+	}
+
+	organizationInputIsVisible() {
+		const { inputVisibility: { organizationInputIsVisible }, fields: { organization } } = this.props;
+
+		return organizationInputIsVisible || organization.initialValue;
+	}
+
 	render() {
 		const { fields, countries } = this.props;
 		const steps = [
@@ -94,30 +109,48 @@ class ContactInformation extends React.Component {
 						/>
 					</fieldset>
 
-					<fieldset className={ styles.fieldset }>
-						<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.organization }
-							className={ styles.organization }
-							placeholder={ i18n.translate( 'Organization' ) }
-						/>
-					</fieldset>
+					{ ! this.organizationInputIsVisible() && (
+						<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
+							{ i18n.translate( 'Registering for a company? Add Organization name' ) }
+						</a>
+					) }
 
-					<fieldset className={ styles.fieldset }>
+					{ this.organizationInputIsVisible() && (
+						<fieldset className={ styles.fieldset }>
+							<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
+							<input
+								{ ...fields.organization }
+								className={ styles.organization }
+								disabled={ this.isDataLoading() }
+								placeholder={ i18n.translate( 'Organization' ) }
+							/>
+						</fieldset>
+					) }
+
+					<fieldset className={ classNames( styles.fieldset, { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
 						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
 						<input
-							disabled={ this.isDataLoading() }
 							{ ...fields.address1 }
 							className={ styles.addressOne }
+							disabled={ this.isDataLoading() }
 							placeholder={ i18n.translate( 'Address Line 1' ) }
 						/>
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.address2 }
-							className={ styles.addressTwo }
-							placeholder={ i18n.translate( 'Address Line 2' ) }
-						/>
+
+						{ ! this.address2InputIsVisible() && (
+							<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
+								{ i18n.translate( '+ Add Address Line 2' ) }
+							</a>
+						) }
+
+						{ this.address2InputIsVisible() && (
+							<input
+								{ ...fields.address2 }
+								className={ styles.addressTwo }
+								disabled={ this.isDataLoading() }
+								placeholder={ i18n.translate( 'Address Line 2' ) }
+							/>
+						) }
+
 						<div className={ styles.row }>
 							<input
 								disabled={ this.isDataLoading() }
@@ -153,16 +186,6 @@ class ContactInformation extends React.Component {
 					</fieldset>
 
 					<fieldset className={ styles.fieldset }>
-						<label className={ styles.label }>{ i18n.translate( 'Fax' ) }</label>
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.fax }
-							className={ styles.fax }
-							placeholder={ i18n.translate( 'Fax' ) }
-						/>
-					</fieldset>
-
-					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Phone' ) }</label>
 						<input
 							disabled={ this.isDataLoading() }
@@ -182,9 +205,14 @@ ContactInformation.propTypes = {
 	countries: PropTypes.object.isRequired,
 	fetchCountries: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	inputVisibility: PropTypes.object.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
-	redirectToHome: PropTypes.func.isRequired
+	redirectToHome: PropTypes.func.isRequired,
+	resetInputVisibility: PropTypes.func.isRequired,
+	showAddress2Input: PropTypes.func.isRequired,
+	showOrganizationInput: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired
 };
 
 export default withStyles( styles )( ContactInformation );

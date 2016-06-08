@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 
 // Internal dependencies
+import { contactInformation } from './contact-information';
 import domainSearch from './domain-search';
 
-export default combineReducers( { domainSearch } );
+export default combineReducers( { contactInformation, domainSearch } );

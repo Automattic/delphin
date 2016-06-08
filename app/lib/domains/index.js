@@ -57,7 +57,7 @@ export function secondLevelDomainOf( validDomain ) {
  * @returns {boolean}    - the result of the test
  */
 export function isDomainSearch( value ) {
-	return isValidSecondLevelDomain( value ) || ( isDomain( value ) && domainEndsInAvailableTldRegEx.test( value ) );
+	return isDomain( value ) && domainEndsInAvailableTldRegEx.test( value );
 }
 
 /**

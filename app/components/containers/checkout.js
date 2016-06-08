@@ -6,11 +6,13 @@ import { push } from 'react-router-redux';
 import Checkout from 'components/ui/checkout';
 import { createSite, createTransaction } from 'actions';
 import { getPath } from 'routes';
+import { isLoggedIn, getUserSettings } from 'reducers/user/selectors';
 
 export default connect(
 	state => ( {
 		checkout: state.checkout,
-		user: state.user
+		isLoggedIn: isLoggedIn( state ),
+		user: getUserSettings( state )
 	} ),
 	dispatch => ( {
 		createSite( user, form ) {

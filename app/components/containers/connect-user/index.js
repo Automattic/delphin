@@ -6,6 +6,7 @@ import validator from 'validator';
 // Internal dependencies
 import ConnectUser from 'components/ui/connect-user';
 import { getPath } from 'routes';
+import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
 import i18n from 'i18n-calypso';
 
@@ -25,8 +26,9 @@ export default reduxForm(
 		validate
 	},
 	state => ( {
-		initialValues: { email: state.user.data.email },
-		user: state.user
+		initialValues: { email: getUserConnect( state ).data.email },
+		isLoggedIn: isLoggedIn( state ),
+		user: getUserConnect( state )
 	} ),
 	( dispatch, ownProps ) => ( {
 		clearConnectUser() {

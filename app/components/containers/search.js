@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import config from 'config';
 import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import { getPath } from 'routes';
+import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
 
 export default connect(
@@ -17,7 +18,7 @@ export default connect(
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
 		query: ownProps.location.query.q || '',
 		sort: ownProps.location.query.sort,
-		user: state.user,
+		isLoggedIn: isLoggedIn( state ),
 		defaultTLD: config( 'default_tld' )
 	} ),
 	( dispatch, ownProps ) => ( {
@@ -61,7 +62,7 @@ export default connect(
 	} ),
 	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
 		selectDomain( name ) {
-			dispatchProps.selectDomain( name, stateProps.user.isLoggedIn );
+			dispatchProps.selectDomain( name, stateProps.isLoggedIn );
 		},
 
 		fetchDomainSuggestions( query ) {

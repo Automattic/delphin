@@ -14,13 +14,14 @@ const ConnectUser = React.createClass( {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		intention: PropTypes.string.isRequired,
+		isLoggedIn: PropTypes.bool.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToVerifyUser: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
-		if ( this.props.user.isLoggedIn ) {
+		if ( this.props.isLoggedIn ) {
 			this.props.redirectToHome();
 		} else {
 			this.props.clearConnectUser();
@@ -28,7 +29,7 @@ const ConnectUser = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.user.isLoggedIn ) {
+		if ( nextProps.isLoggedIn ) {
 			this.props.redirectToHome();
 		}
 

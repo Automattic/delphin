@@ -19,8 +19,7 @@ const Search = React.createClass( {
 		redirectToSearch: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
-		sort: PropTypes.string,
-		user: PropTypes.object.isRequired
+		sort: PropTypes.string
 	},
 
 	getDefaultProps() {

@@ -29,11 +29,11 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillReceiveProps( nextProps ) {
+		this.redirectIfLoggedOut( nextProps );
+
 		if ( ! this.props.contactInformation.hasLoadedFromServer && nextProps.contactInformation.hasLoadedFromServer ) {
 			this.initializeContactInformation( nextProps );
 		}
-
-		this.redirectIfLoggedOut( nextProps );
 	}
 
 	getName( props ) {
@@ -178,9 +178,11 @@ class ContactInformation extends React.Component {
 }
 
 ContactInformation.propTypes = {
+	contactInformation: PropTypes.object.isRequired,
 	countries: PropTypes.object.isRequired,
 	fetchCountries: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
 	redirectToHome: PropTypes.func.isRequired
 };

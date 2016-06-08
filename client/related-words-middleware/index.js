@@ -59,14 +59,14 @@ export const relatedWordsMiddleware = store => next => action => {
 					.then( ( relatedWords ) => ( { relatedWords, sourceLanguage: translation.sourceLanguage } ) )
 			)
 			.then( params => {
-				const { relatedWords, sourceLanguage } = params;
+				const { relatedWords } = params;
 
-				// if the original word was in english, we shouldn't translate the related words
-				if ( sourceLanguage === 'en' ) {
+				// We should translate the related words according to user's locale
+				if ( ! locale || locale === 'en' ) {
 					return relatedWords;
 				}
 
-				return Promise.all( relatedWords.map( englishWord => translateWord( englishWord, sourceLanguage, 'en' ) ) )
+				return Promise.all( relatedWords.map( englishWord => translateWord( englishWord, locale, 'en' ) ) )
 					.then( ( translations ) => translations.map( ( translation ) => translation.word ) );
 			} )
 			.then( words =>	store.dispatch( {

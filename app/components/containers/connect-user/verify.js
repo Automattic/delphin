@@ -1,4 +1,5 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
@@ -38,18 +39,10 @@ export default reduxForm(
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
 	} ),
-	dispatch => ( {
-		connectUser( email, intention, callback ) {
-			return dispatch( connectUser( email, intention, callback ) );
-		},
-		redirectToSignup() {
-			dispatch( push( getPath( 'signupUser' ) ) );
-		},
-		redirectToHome() {
-			dispatch( push( getPath( 'home' ) ) );
-		},
-		verifyUser( email, code, twoFactorAuthenticationCode ) {
-			return dispatch( verifyUser( email, code, twoFactorAuthenticationCode ) );
-		}
-	} )
+	dispatch => bindActionCreators( {
+		connectUser,
+		redirectToHome: () => push( getPath( 'home' ) ),
+		redirectToSignup: () => push( getPath( 'signupUser' ) ),
+		verifyUser
+	}, dispatch )
 )( VerifyUser );

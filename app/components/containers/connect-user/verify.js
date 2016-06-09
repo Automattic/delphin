@@ -41,8 +41,7 @@ export default reduxForm(
 	} ),
 	dispatch => bindActionCreators( {
 		connectUser,
-		redirectToHome: () => push( getPath( 'home' ) ),
-		redirectToSignup: () => push( getPath( 'signupUser' ) ),
+		redirect: pathSlug => push( getPath( pathSlug ) ),
 		verifyUser
 	}, dispatch )
 )( VerifyUser );

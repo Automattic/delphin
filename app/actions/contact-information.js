@@ -1,4 +1,5 @@
 // External dependencies
+import camelCase from 'lodash/camelCase';
 import { startAsyncValidation, stopAsyncValidation } from 'redux-form';
 
 // Internal dependencies
@@ -8,7 +9,7 @@ import {
 	CONTACT_INFORMATION_FETCH_COMPLETE,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
-import { normalizePayload, normalizeValidationErrors } from 'lib/contact-information';
+import { snakeifyKeys } from 'lib/formatters';
 
 export const fetchContactInformation = () => ( {
 	type: WPCOM_REQUEST,
@@ -33,7 +34,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 		type: WPCOM_REQUEST,
 		method: 'post',
 		params: { path: '/me/domain-contact-information/validate' },
-		payload: normalizePayload( domainNames, contactInformation ),
+		payload: snakeifyKeys( { domainNames, contactInformation } ),
 		loading: () => {
 			return dispatch => {
 				dispatch( startAsyncValidation( 'contact-information' ) );
@@ -41,8 +42,18 @@ export function validateContactInformation( domainNames, contactInformation ) {
 		},
 		success: data => {
 			return dispatch => {
-				const { success, messages } = data,
-					errors = ! success ? normalizeValidationErrors( messages ) : undefined;
+				const { success, messages } = data;
+				let errors;
+
+				if ( ! success ) {
+					errors = Object.keys( messages ).reduce( ( result, fieldName ) => {
+						// redux-form only allows objects or strings as error values, so we nest the array of errors
+						// under an arbitrary `data` property.
+						result[ camelCase( fieldName ) ] = { data: messages[ fieldName ] };
+
+						return result;
+					}, {} );
+				}
 
 				dispatch( stopAsyncValidation( 'contact-information', errors ) );
 			};

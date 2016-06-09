@@ -17,7 +17,8 @@ export default reduxForm(
 	{
 		form: 'contact-information',
 		fields: [
-			'name',
+			'firstName',
+			'lastName',
 			'organization',
 			'address1',
 			'address2',

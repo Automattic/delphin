@@ -46,21 +46,8 @@ class ContactInformation extends React.Component {
 		}
 	}
 
-	getName( props ) {
-		const { firstName, lastName } = props.contactInformation.data;
-
-		return [ firstName, lastName ].filter( name => name ).join( ' ' );
-	}
-
 	initializeContactInformation( props = this.props ) {
 		const form = Object.keys( props.fields ).reduce( ( result, fieldName ) => {
-			if ( fieldName === 'name' ) {
-				// combine the first and last name into a single `name` field
-				return Object.assign( result, {
-					name: this.getName( props )
-				} );
-			}
-
 			return Object.assign( result, { [ fieldName ]: props.contactInformation.data[ fieldName ] || '' } );
 		}, {} );
 
@@ -119,14 +106,23 @@ class ContactInformation extends React.Component {
 				<form className={ styles.form } onSubmit={ handleSubmit( this.validateContactInformationBound ) }>
 					<fieldset className={ styles.fieldset }>
 						<label className={ styles.label }>{ i18n.translate( 'Name' ) }</label>
+
 						<input
 							disabled={ this.isDataLoading() }
-							{ ...fields.name }
+							{ ...fields.firstName }
 							autoFocus
-							className={ styles.name }
-							placeholder={ i18n.translate( 'Name' ) }
+							className={ styles.firstName }
+							placeholder={ i18n.translate( 'First Name' ) }
 						/>
-						<ValidationError field={ fields.name } />
+						<ValidationError field={ fields.firstName } />
+
+						<input
+							disabled={ this.isDataLoading() }
+							{ ...fields.lastName }
+							className={ styles.lastName }
+							placeholder={ i18n.translate( 'Last Name' ) }
+						/>
+						<ValidationError field={ fields.lastName } />
 					</fieldset>
 
 					{ ! this.organizationInputIsVisible() && (

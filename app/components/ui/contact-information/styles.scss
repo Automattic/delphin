@@ -31,7 +31,8 @@
 .city,
 .countryCode,
 .fax,
-.name,
+.firstName,
+.lastName,
 .organization,
 .phone,
 .state,
@@ -56,6 +57,15 @@
 		border-color: darken( $dark-gray-blue, 10% );
 		outline: none;
 	}
+}
+
+.firstName,
+.lastName {
+	width: 155px;
+}
+
+.lastName {
+	margin-left: 10px;
 }
 
 .address-two {

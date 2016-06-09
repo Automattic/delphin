@@ -1,5 +1,5 @@
 // Internal dependencies
-import { camelize, snakeify } from 'lib/formatters';
+import { camelizeKeys, snakeifyKeys } from 'lib/formatters';
 
 /**
  * Resolves discrepencies between mismatched key names for contact information between Delphin and the API.
@@ -10,7 +10,7 @@ import { camelize, snakeify } from 'lib/formatters';
  * @return {object} - New map of errors.
  */
 export const normalizeValidationErrors = errors => {
-	errors = camelize( errors );
+	errors = camelizeKeys( errors );
 
 	return Object.keys( errors ).reduce( ( result, fieldName ) => {
 		let newFieldName;
@@ -76,5 +76,5 @@ export const normalizePayload = ( domainNames, contactInformation ) => {
 		return Object.assign( result, { [ fieldName ]: contactInformation[ fieldName ] } );
 	}, {} );
 
-	return snakeify( { domainNames, contactInformation: normalizedContactInformation } );
+	return snakeifyKeys( { domainNames, contactInformation: normalizedContactInformation } );
 };

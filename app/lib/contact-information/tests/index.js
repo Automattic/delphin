@@ -17,7 +17,7 @@ describe( 'normalize functions for contact information', () => {
 	} );
 
 	describe( 'normalizePayload', () => {
-		it( 'should extract `name` into `firstName` and `lastName` and snakeify keys', () => {
+		it( 'should extract `name` into `firstName` and `lastName` and snakeifyKeys keys', () => {
 			expect( normalizePayload( [ 'foo.com' ], {
 				name: 'Foo Bar',
 				address1: '123 Baz St.'

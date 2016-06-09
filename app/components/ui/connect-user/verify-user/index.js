@@ -18,6 +18,7 @@ const VerifyUser = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		redirect: PropTypes.func.isRequired,
+		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
 
@@ -43,7 +44,8 @@ const VerifyUser = React.createClass( {
 		return this.props.verifyUser(
 			this.props.user.data.email,
 			this.props.fields.code.value,
-			this.props.fields.twoFactorAuthenticationCode.value
+			this.props.fields.twoFactorAuthenticationCode.value,
+			{ showSuccessNotice: this.props.user.intention === 'login' }
 		);
 	},
 

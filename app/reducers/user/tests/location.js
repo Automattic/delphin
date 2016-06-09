@@ -3,7 +3,8 @@ jest.disableAutomock();
 // Internal dependencies
 import {
 	USER_LOCATION_FETCH,
-	USER_LOCATION_FETCH_COMPLETE
+	USER_LOCATION_FETCH_COMPLETE,
+	USER_LOCATION_FETCH_FAIL
 } from 'reducers/action-types';
 import { location, initialState } from '../location';
 
@@ -18,6 +19,7 @@ describe( 'state.user.location', () => {
 
 	it( 'should update `isRequesting`, `hasLoadedFromServer`, and the country when it is fetched', () => {
 		expect( location( {
+			hasFailedToLoad: false,
 			hasLoadedFromServer: false,
 			isRequesting: true,
 			data: null
@@ -25,9 +27,26 @@ describe( 'state.user.location', () => {
 			type: USER_LOCATION_FETCH_COMPLETE,
 			countryCode: 'ES'
 		} ) ).toEqual( {
+			hasFailedToLoad: false,
 			hasLoadedFromServer: true,
 			isRequesting: false,
 			data: { countryCode: 'ES' }
+		} );
+	} );
+
+	it( 'should update `isRequesting` and `hasFailedToLoad` if the fetch fails', () => {
+		expect( location( {
+			hasFailedToLoad: false,
+			hasLoadedFromServer: false,
+			isRequesting: true,
+			data: null
+		}, {
+			type: USER_LOCATION_FETCH_FAIL
+		} ) ).toEqual( {
+			hasFailedToLoad: true,
+			hasLoadedFromServer: false,
+			isRequesting: false,
+			data: null
 		} );
 	} );
 } );

@@ -1,6 +1,6 @@
 // External dependencies
 import auth from 'http-auth';
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import curry from 'lodash/curry';
 import find from 'lodash/find';
 import express from 'express';
@@ -16,6 +16,7 @@ import { renderToString } from 'react-dom/server';
 import React from 'react';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import thunk from 'redux-thunk';
 
 // Internal dependencies
 import api from './wpcom-rest-api-proxy';
@@ -45,7 +46,8 @@ function renderPage( props, localeData ) {
 		combineReducers( {
 			...reducers,
 			routing: routerReducer
-		} )
+		} ),
+		applyMiddleware( thunk )
 	);
 
 	const css = [];

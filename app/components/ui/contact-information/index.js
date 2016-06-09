@@ -17,6 +17,10 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
+		if ( ! this.props.location.isRequesting && ! this.props.location.hasLoadedFromServer ) {
+			this.props.fetchLocation();
+		}
+
 		if ( ! this.props.contactInformation.isRequesting && ! this.props.contactInformation.hasLoadedFromServer ) {
 			this.props.fetchContactInformation();
 		}
@@ -41,8 +45,10 @@ class ContactInformation extends React.Component {
 	componentWillReceiveProps( nextProps ) {
 		this.redirectIfLoggedOut( nextProps );
 
-		if ( ! this.props.contactInformation.hasLoadedFromServer && nextProps.contactInformation.hasLoadedFromServer ) {
+		if ( this.isDataLoading() && ! this.isDataLoading( nextProps ) ) {
 			this.initializeContactInformation( nextProps );
+
+			nextProps.fields.countryCode.onChange( nextProps.location.data.countryCode );
 		}
 	}
 
@@ -54,8 +60,10 @@ class ContactInformation extends React.Component {
 		props.initializeForm( form );
 	}
 
-	isDataLoading() {
-		return ! this.props.contactInformation.hasLoadedFromServer || ! this.props.countries.hasLoadedFromServer;
+	isDataLoading( props = this.props ) {
+		return ! props.contactInformation.hasLoadedFromServer ||
+			! props.countries.hasLoadedFromServer ||
+			! props.location.hasLoadedFromServer;
 	}
 
 	redirectIfLoggedOut( props = this.props ) {
@@ -238,11 +246,13 @@ ContactInformation.propTypes = {
 	countries: PropTypes.object.isRequired,
 	domain: PropTypes.string,
 	fetchCountries: PropTypes.func.isRequired,
+	fetchLocation: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
+	location: PropTypes.object.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,

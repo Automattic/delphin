@@ -7,7 +7,7 @@ import WPCOM from 'wpcom';
 
 // Internal dependencies
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
-import { getUserConnect, getUserLocale, getUserSettings } from 'reducers/user/selectors';
+import { getUserConnect, getUserLocale } from 'reducers/user/selectors';
 import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';

@@ -14,10 +14,10 @@ import {
 
 // Module variables
 const debug = debugFactory( 'delphin:wpcom-middleware' );
-let wpcomApiInstance = WPCOM();
-let wpcomApiInstanceToken = null;
 
 const SUPPORTED_API_METHODS = [ 'get', 'post', 'put', 'delete' ];
+
+const UNAUTHENTICATED_NAMESPACES = [ 'geo/' ];
 
 /**
  * Given a WPCOM parameter set, modifies the query such that a non-default
@@ -33,22 +33,6 @@ function addLocaleQueryParam( locale, query ) {
 	}
 
 	return Object.assign( {}, query, { locale } );
-}
-
-/**
- * Gets an instance of WPCOM according to supplied token,
- * if the instance wasn't previously instantiated with that token a new instance is created
- * @param {String} token bearer token for WPCOM
- * @returns {WPCOM} wpcom instance
- */
-function getWPCOMInstance( token ) {
-	if ( token && wpcomApiInstanceToken !== token ) {
-		debug( 'switching wpcom instance for token ' + token );
-		wpcomApiInstance = WPCOM( token );
-		wpcomApiInstanceToken = token;
-	}
-
-	return wpcomApiInstance;
 }
 
 /**
@@ -77,9 +61,10 @@ function makeWpcomRequest( state, action ) {
 		token = getTokenFromBearerCookie();
 	}
 
-	const api = getWPCOMInstance( token );
-
 	let { method, params, query, payload } = action;
+
+	// Endpoints are authenticated by default, with the exception of UNAUTHENTICATED_NAMESPACES
+	const api = WPCOM( UNAUTHENTICATED_NAMESPACES.indexOf( params.apiNamespace ) === -1 ? token : undefined );
 
 	// not supplied method or unsupported, revert to GET
 	if ( SUPPORTED_API_METHODS.indexOf( method ) === -1 ) {

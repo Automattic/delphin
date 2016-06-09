@@ -47,8 +47,10 @@ class ContactInformation extends React.Component {
 
 		if ( this.isDataLoading() && ! this.isDataLoading( nextProps ) ) {
 			this.initializeContactInformation( nextProps );
+		}
 
-			nextProps.fields.countryCode.onChange( nextProps.location.data.countryCode );
+		if ( ! this.canUpdateCountryFromLocation() && this.canUpdateCountryFromLocation( nextProps ) ) {
+			this.setCountryCode( nextProps );
 		}
 	}
 
@@ -60,10 +62,32 @@ class ContactInformation extends React.Component {
 		props.initializeForm( form );
 	}
 
+	setCountryCode( props ) {
+		let countryCode;
+
+		// Use the GEO location
+		if ( props.location.hasLoadedFromServer ) {
+			countryCode = props.location.data.countryCode;
+		}
+
+		if ( props.contactInformation.hasLoadedFromServer && props.contactInformation.data.countryCode ) {
+			// Over-ride the GEO location if the user has contact information.
+			countryCode = props.contactInformation.data.countryCode;
+		}
+
+		if ( countryCode ) {
+			props.fields.countryCode.onChange( countryCode );
+		}
+	}
+
+	canUpdateCountryFromLocation( props = this.props ) {
+		return ! this.isDataLoading( props ) &&
+			( props.location.hasLoadedFromServer || props.location.hasFailedToLoad );
+	}
+
 	isDataLoading( props = this.props ) {
 		return ! props.contactInformation.hasLoadedFromServer ||
-			! props.countries.hasLoadedFromServer ||
-			! props.location.hasLoadedFromServer;
+			! props.countries.hasLoadedFromServer;
 	}
 
 	redirectIfLoggedOut( props = this.props ) {

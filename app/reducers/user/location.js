@@ -1,10 +1,12 @@
 // Internal dependencies
 import {
 	USER_LOCATION_FETCH,
-	USER_LOCATION_FETCH_COMPLETE
+	USER_LOCATION_FETCH_COMPLETE,
+	USER_LOCATION_FETCH_FAIL
 } from 'reducers/action-types';
 
 export const initialState = {
+	hasFailedToLoad: false,
 	hasLoadedFromServer: false,
 	isRequesting: false,
 	data: null
@@ -22,6 +24,12 @@ export const location = ( state = initialState, action ) => {
 				hasLoadedFromServer: true,
 				isRequesting: false,
 				data: { countryCode }
+			} );
+
+		case USER_LOCATION_FETCH_FAIL:
+			return Object.assign( {}, state, {
+				hasFailedToLoad: true,
+				isRequesting: false
 			} );
 
 		default:

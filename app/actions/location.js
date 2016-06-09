@@ -2,6 +2,7 @@
 import {
 	USER_LOCATION_FETCH,
 	USER_LOCATION_FETCH_COMPLETE,
+	USER_LOCATION_FETCH_FAIL,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 
@@ -13,6 +14,9 @@ export const fetchLocation = () => ( {
 		apiNamespace: 'geo/',
 		path: ''
 	},
+	fail: () => ( {
+		type: USER_LOCATION_FETCH_FAIL
+	} ),
 	success: data => ( {
 		type: USER_LOCATION_FETCH_COMPLETE,
 		countryCode: data.country_short

@@ -18,7 +18,7 @@ import { getUserLocale } from 'reducers/user/selectors';
 function requestRelatedWords( word ) {
 	return new Promise( ( resolve, reject ) => {
 		request
-			.get( `http://api.wordnik.com/v4/word.json/${ encodeURIComponent( word ) }/relatedWords` +
+			.get( `https://api.wordnik.com/v4/word.json/${ encodeURIComponent( word ) }/relatedWords` +
 				'?useCanonical=true' +
 				'&relationshipTypes=same-context,synonym' +
 				'&limitPerRelationshipType=3' +

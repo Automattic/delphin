@@ -12,6 +12,7 @@ import ValidationError from 'components/ui/form/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
+		domain: PropTypes.string,
 		connectUser: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
@@ -30,7 +31,11 @@ const VerifyUser = React.createClass( {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedIn ) {
-			this.props.redirect( 'home' );
+			if ( nextProps.domain ) {
+				this.props.redirect( 'contactInformation' );
+			} else {
+				this.props.redirect( 'home' );
+			}
 		}
 	},
 

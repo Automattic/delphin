@@ -6,4 +6,4 @@ export const isLoggedIn = state => state.user.isLoggedIn;
 
 export const getUserConnect = state => state.user.connect;
 export const getUserSettings = state => state.user.settings;
-export const getUserLocale = state => ! state.user.isLoggedIn ? null : state.user.data.locale;
+export const getUserLocale = state => ! isLoggedIn( state ) ? null : state.user.settings.data.locale;

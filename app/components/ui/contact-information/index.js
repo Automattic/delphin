@@ -139,11 +139,18 @@ class ContactInformation extends React.Component {
 		];
 
 		return (
-			<div className={ styles.address }>
+			<div>
 				<StepsProgressbar className={ styles.progress } steps={ steps } currentStep={ steps[ 2 ] } />
 
-				<h2 className={ styles.header }>{ i18n.translate( 'Registration Profile' ) }</h2>
-				<h3 className={ styles.subHeader }>{ i18n.translate( 'We need your contact information to claim your new domain.' ) }</h3>
+				<div className={ styles.header }>
+					<h2 className={ styles.heading }>
+						{ i18n.translate( 'Registration Profile' ) }
+					</h2>
+
+					<h3 className={ styles.text }>
+						{ i18n.translate( 'We need your contact information to claim your new domain.' ) }
+					</h3>
+				</div>
 
 				<Form
 					onSubmit={ handleSubmit( this.validateContactInformationBound ) }

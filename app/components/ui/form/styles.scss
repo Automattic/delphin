@@ -57,7 +57,13 @@
 		width: 100%;
 
 		&:disabled {
-			background: darken( $white, 2% );
+			background: darken( $white, 3% );
+			color: darken( $white, 12% );
+			cursor: not-allowed;
+
+			&::placeholder {
+				color: darken( $white, 12% );
+			}
 		}
 
 		&:focus {

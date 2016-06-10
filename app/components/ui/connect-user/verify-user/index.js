@@ -12,26 +12,31 @@ import ValidationError from 'components/ui/form/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
+		domain: PropTypes.string,
 		connectUser: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
-		redirectToHome: PropTypes.func.isRequired,
-		redirectToSignup: PropTypes.func.isRequired,
+		redirect: PropTypes.func.isRequired,
+		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
 
 	componentDidMount() {
 		if ( this.props.isLoggedIn ) {
-			this.props.redirectToHome();
+			this.props.redirect( 'home' );
 		} else if ( ! this.props.user.wasCreated ) {
-			this.props.redirectToSignup();
+			this.props.redirect( 'signupUser' );
 		}
 	},
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedIn ) {
-			this.props.redirectToHome();
+			if ( nextProps.domain ) {
+				this.props.redirect( 'contactInformation' );
+			} else {
+				this.props.redirect( 'home' );
+			}
 		}
 	},
 
@@ -39,7 +44,8 @@ const VerifyUser = React.createClass( {
 		return this.props.verifyUser(
 			this.props.user.data.email,
 			this.props.fields.code.value,
-			this.props.fields.twoFactorAuthenticationCode.value
+			this.props.fields.twoFactorAuthenticationCode.value,
+			{ showSuccessNotice: this.props.user.intention === 'login' }
 		);
 	},
 

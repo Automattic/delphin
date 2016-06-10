@@ -97,7 +97,7 @@ export function logoutUser() {
 	return { type: LOGOUT_USER };
 }
 
-export function verifyUser( email, code, twoFactorAuthenticationCode ) {
+export function verifyUser( email, code, twoFactorAuthenticationCode, { showSuccessNotice } = { showSuccessNotice: true } ) {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'post',
@@ -110,10 +110,16 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 
 				// Wait for fetch user action to complete, then display a notice
 				dispatch( fetchUser() )
-					.then( () => dispatch( addNotice( {
-						message: i18n.translate( 'You were successfully logged in!' ),
-						status: 'success'
-					} ) ) );
+					.then( () => {
+						if ( ! showSuccessNotice ) {
+							return;
+						}
+
+						dispatch( addNotice( {
+							message: i18n.translate( 'You were successfully logged in!' ),
+							status: 'success'
+						} ) );
+					} );
 			};
 		},
 		fail: ( error ) => {

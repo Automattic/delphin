@@ -1,9 +1,11 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { connectUser, verifyUser } from 'actions/user';
+import { getCheckout } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import i18n from 'i18n-calypso';
@@ -35,21 +37,13 @@ export default reduxForm(
 		validate
 	},
 	state => ( {
+		domain: getCheckout( state ).domain,
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
 	} ),
-	dispatch => ( {
-		connectUser( email, intention, callback ) {
-			return dispatch( connectUser( email, intention, callback ) );
-		},
-		redirectToSignup() {
-			dispatch( push( getPath( 'signupUser' ) ) );
-		},
-		redirectToHome() {
-			dispatch( push( getPath( 'home' ) ) );
-		},
-		verifyUser( email, code, twoFactorAuthenticationCode ) {
-			return dispatch( verifyUser( email, code, twoFactorAuthenticationCode ) );
-		}
-	} )
+	dispatch => bindActionCreators( {
+		connectUser,
+		redirect: pathSlug => push( getPath( pathSlug ) ),
+		verifyUser
+	}, dispatch )
 )( VerifyUser );

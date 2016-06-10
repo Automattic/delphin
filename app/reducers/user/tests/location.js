@@ -34,6 +34,23 @@ describe( 'state.user.location', () => {
 		} );
 	} );
 
+	it( 'should map `GB` to `UK` country codes', () => {
+		expect( location( {
+			hasFailedToLoad: false,
+			hasLoadedFromServer: false,
+			isRequesting: true,
+			data: null
+		}, {
+			type: USER_LOCATION_FETCH_COMPLETE,
+			countryCode: 'GB'
+		} ) ).toEqual( {
+			hasFailedToLoad: false,
+			hasLoadedFromServer: true,
+			isRequesting: false,
+			data: { countryCode: 'UK' }
+		} );
+	} );
+
 	it( 'should update `isRequesting` and `hasFailedToLoad` if the fetch fails', () => {
 		expect( location( {
 			hasFailedToLoad: false,

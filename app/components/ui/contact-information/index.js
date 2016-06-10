@@ -29,6 +29,10 @@ class ContactInformation extends React.Component {
 			this.initializeContactInformation();
 		}
 
+		if ( this.canUpdateCountryFromLocation() ) {
+			this.setCountryCode();
+		}
+
 		this.props.resetInputVisibility();
 
 		if ( ! this.props.domain ) {
@@ -62,7 +66,7 @@ class ContactInformation extends React.Component {
 		props.initializeForm( form );
 	}
 
-	setCountryCode( props ) {
+	setCountryCode( props = this.props ) {
 		let countryCode;
 
 		// Use the GEO location

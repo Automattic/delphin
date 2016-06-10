@@ -12,8 +12,17 @@ export const initialState = {
 	data: null
 };
 
+function mapCountryCodeForComainContactInformation( countryCode ) {
+	if ( countryCode === 'GB' ) {
+		return 'UK';
+	}
+
+	return countryCode;
+}
+
 export const location = ( state = initialState, action ) => {
-	const { type, countryCode } = action;
+	const { type } = action,
+		countryCode = mapCountryCodeForComainContactInformation( action.countryCode );
 
 	switch ( type ) {
 		case USER_LOCATION_FETCH:

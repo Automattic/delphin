@@ -17,6 +17,12 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
+		if ( ! this.props.domain ) {
+			this.props.redirectToHome();
+		}
+
+		this.redirectIfLoggedOut();
+
 		if ( ! this.props.location.isRequesting && ! this.props.location.hasLoadedFromServer ) {
 			this.props.fetchLocation();
 		}
@@ -35,15 +41,9 @@ class ContactInformation extends React.Component {
 
 		this.props.resetInputVisibility();
 
-		if ( ! this.props.domain ) {
-			this.props.redirectToHome();
-		}
-
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
 		}
-
-		this.redirectIfLoggedOut();
 	}
 
 	componentWillReceiveProps( nextProps ) {

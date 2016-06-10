@@ -1,6 +1,7 @@
 // External dependencies
 import classNames from 'classnames';
 import i18n from 'i18n-calypso';
+import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -120,7 +121,11 @@ class ContactInformation extends React.Component {
 		return this.props.validateContactInformation(
 			this.props.domain,
 			contactInformation
-		);
+		).then( () => {
+			if ( isEmpty( this.props.errors ) ) {
+				this.props.redirectToCheckout();
+			}
+		} );
 	}
 
 	render() {
@@ -281,6 +286,7 @@ ContactInformation.propTypes = {
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
 	location: PropTypes.object.isRequired,
+	redirectToCheckout: PropTypes.func.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,

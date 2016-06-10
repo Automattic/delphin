@@ -31,7 +31,8 @@
 .city,
 .countryCode,
 .fax,
-.name,
+.firstName,
+.lastName,
 .organization,
 .phone,
 .state,
@@ -58,6 +59,15 @@
 	}
 }
 
+.firstName,
+.lastName {
+	width: 155px;
+}
+
+.lastName {
+	margin-left: 10px;
+}
+
 .address-two {
 	border-top: none;
 	border-radius: 0 0 2px 2px;
@@ -72,7 +82,7 @@
 .row {
 	margin-top: 5px;
 
-	.city, .state, .zip {
+	.city, .state, .postal-code {
 		display: inline-block;
 	}
 

@@ -278,9 +278,15 @@ class ContactInformation extends React.Component {
 						</div>
 					}
 					submitArea={
-						<button disabled={ this.props.submitting }>
-							{ i18n.translate( 'Continue to Checkout' ) }
-						</button>
+						<div>
+							<p className={ styles.disclaimer }>
+								{ i18n.translate( 'Some providers charge a fee to keep this information private, but we protect your privacy free of charge.' ) }
+							</p>
+
+							<button disabled={ this.props.submitting }>
+								{ i18n.translate( 'Continue to Checkout' ) }
+							</button>
+						</div>
 					} />
 			</div>
 		);

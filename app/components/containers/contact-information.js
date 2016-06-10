@@ -11,12 +11,14 @@ import { getPath } from 'routes';
 import { getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
+import { validateContactInformation } from 'actions/contact-information';
 
 export default reduxForm(
 	{
-		form: 'address',
+		form: 'contact-information',
 		fields: [
-			'name',
+			'firstName',
+			'lastName',
 			'organization',
 			'address1',
 			'address2',
@@ -30,6 +32,7 @@ export default reduxForm(
 	state => ( {
 		contactInformation: state.contactInformation,
 		countries: state.countries,
+		domain: state.checkout.domain,
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),
@@ -42,7 +45,10 @@ export default reduxForm(
 			showAddress2Input,
 			showOrganizationInput,
 			resetInputVisibility,
-			redirectToHome: () => push( getPath( 'home' ) )
+			redirectToHome: () => push( getPath( 'home' ) ),
+			validateContactInformation: ( domainName, contactInformation ) => (
+				validateContactInformation( [ domainName ], contactInformation )
+			)
 		}, dispatch )
 	)
 )( ContactInformation );

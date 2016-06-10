@@ -1,5 +1,5 @@
 // Internal dependencies
-import { camelize } from 'lib/formatters';
+import { camelizeKeys } from 'lib/formatters';
 import {
 	CONTACT_INFORMATION_FETCH,
 	CONTACT_INFORMATION_FETCH_COMPLETE,
@@ -23,7 +23,7 @@ export const contactInformation = ( state = initialState, action ) => {
 			return Object.assign( {}, state, {
 				isRequesting: false,
 				hasLoadedFromServer: true,
-				data: camelize( data )
+				data: camelizeKeys( data )
 			} );
 
 		case LOGOUT_USER:

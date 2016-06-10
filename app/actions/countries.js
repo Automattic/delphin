@@ -9,7 +9,7 @@ import {
 
 export const fetchCountries = () => ( {
 	type: WPCOM_REQUEST,
-	params: { path: '/me/transactions/supported-countries' },
+	params: { path: '/domains/supported-countries' },
 	loading: COUNTRIES_FETCH,
 	success: data => ( { type: COUNTRIES_FETCH_COMPLETE, data } ),
 	fail: error => (

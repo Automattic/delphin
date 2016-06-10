@@ -32,13 +32,22 @@
 	background: $light-blue;
 	padding: 30px;
 
+	fieldset {
+		margin-top: 20px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
 	label {
 		display: block;
 		font-size: 1.3rem;
 		margin-bottom: 5px;
 	}
 
-	input {
+	input,
+	select {
 		border: 1px solid $border-blue;
 		border-radius: 2px;
 		box-sizing: border-box;
@@ -46,6 +55,15 @@
 		font-size: 1.5rem;
 		padding: 10px 12px;
 		width: 100%;
+
+		&:disabled {
+			background: darken( $white, 2% );
+		}
+
+		&:focus {
+			border-color: $border-light-blue;
+			outline: none;
+		}
 	}
 }
 

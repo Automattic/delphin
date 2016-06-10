@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Form from 'components/ui/form';
 import styles from './styles.scss';
 import StepsProgressbar from 'components/ui/steps-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
@@ -144,131 +145,136 @@ class ContactInformation extends React.Component {
 				<h2 className={ styles.header }>{ i18n.translate( 'Registration Profile' ) }</h2>
 				<h3 className={ styles.subHeader }>{ i18n.translate( 'We need your contact information to claim your new domain.' ) }</h3>
 
-				<form className={ styles.form } onSubmit={ handleSubmit( this.validateContactInformationBound ) }>
-					<fieldset className={ styles.fieldset }>
-						<label className={ styles.label }>{ i18n.translate( 'Name' ) }</label>
+				<Form
+					onSubmit={ handleSubmit( this.validateContactInformationBound ) }
+					fieldArea={
+						<div>
+							<fieldset>
+								<label>{ i18n.translate( 'Name' ) }</label>
 
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.firstName }
-							autoFocus
-							className={ styles.firstName }
-							placeholder={ i18n.translate( 'First Name' ) }
-						/>
-						<ValidationError field={ fields.firstName } />
+								<input
+									disabled={ this.isDataLoading() }
+									{ ...fields.firstName }
+									autoFocus
+									className={ styles.firstName }
+									placeholder={ i18n.translate( 'First Name' ) }
+								/>
+								<ValidationError field={ fields.firstName } />
 
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.lastName }
-							className={ styles.lastName }
-							placeholder={ i18n.translate( 'Last Name' ) }
-						/>
-						<ValidationError field={ fields.lastName } />
-					</fieldset>
+								<input
+									disabled={ this.isDataLoading() }
+									{ ...fields.lastName }
+									className={ styles.lastName }
+									placeholder={ i18n.translate( 'Last Name' ) }
+								/>
+								<ValidationError field={ fields.lastName } />
+							</fieldset>
 
-					{ ! this.organizationInputIsVisible() && (
-						<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
-							{ i18n.translate( 'Registering for a company? Add Organization name' ) }
-						</a>
-					) }
+							{ ! this.organizationInputIsVisible() && (
+								<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
+									{ i18n.translate( 'Registering for a company? Add Organization name' ) }
+								</a>
+							) }
 
-					{ this.organizationInputIsVisible() && (
-						<fieldset className={ styles.fieldset }>
-							<label className={ styles.label }>{ i18n.translate( 'Organization' ) }</label>
-							<input
-								{ ...fields.organization }
-								className={ styles.organization }
-								disabled={ this.isDataLoading() }
-								placeholder={ i18n.translate( 'Organization' ) }
-							/>
-							<ValidationError field={ fields.organization } />
-						</fieldset>
-					) }
+							{ this.organizationInputIsVisible() && (
+								<fieldset>
+									<label>{ i18n.translate( 'Organization' ) }</label>
+									<input
+										{ ...fields.organization }
+										className={ styles.organization }
+										disabled={ this.isDataLoading() }
+										placeholder={ i18n.translate( 'Organization' ) }
+									/>
+									<ValidationError field={ fields.organization } />
+								</fieldset>
+							) }
 
-					<fieldset className={ classNames( styles.fieldset, { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
-						<label className={ styles.label }>{ i18n.translate( 'Address' ) }</label>
+							<fieldset className={ classNames( { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
+								<label>{ i18n.translate( 'Address' ) }</label>
 
-						<input
-							{ ...fields.address1 }
-							className={ styles.addressOne }
-							disabled={ this.isDataLoading() }
-							placeholder={ i18n.translate( 'Address Line 1' ) }
-						/>
-						<ValidationError field={ fields.address1 } />
+								<input
+									{ ...fields.address1 }
+									className={ styles.addressOne }
+									disabled={ this.isDataLoading() }
+									placeholder={ i18n.translate( 'Address Line 1' ) }
+								/>
+								<ValidationError field={ fields.address1 } />
 
-						{ ! this.address2InputIsVisible() && (
-							<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
-								{ i18n.translate( '+ Add Address Line 2' ) }
-							</a>
-						) }
+								{ ! this.address2InputIsVisible() && (
+									<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
+										{ i18n.translate( '+ Add Address Line 2' ) }
+									</a>
+								) }
 
-						{ this.address2InputIsVisible() && (
-							<input
-								{ ...fields.address2 }
-								className={ styles.addressTwo }
-								disabled={ this.isDataLoading() }
-								placeholder={ i18n.translate( 'Address Line 2' ) }
-							/>
-						) }
+								{ this.address2InputIsVisible() && (
+									<input
+										{ ...fields.address2 }
+										className={ styles.addressTwo }
+										disabled={ this.isDataLoading() }
+										placeholder={ i18n.translate( 'Address Line 2' ) }
+									/>
+								) }
 
-						<ValidationError field={ fields.address2 } />
+								<ValidationError field={ fields.address2 } />
 
-						<div className={ styles.row }>
-							<input
-								disabled={ this.isDataLoading() }
-								{ ...fields.city }
-								className={ styles.city }
-								placeholder={ i18n.translate( 'City' ) }
-							/>
-							<ValidationError field={ fields.city } />
+								<div className={ styles.row }>
+									<input
+										disabled={ this.isDataLoading() }
+										{ ...fields.city }
+										className={ styles.city }
+										placeholder={ i18n.translate( 'City' ) }
+									/>
+									<ValidationError field={ fields.city } />
 
-							<input
-								disabled={ this.isDataLoading() }
-								{ ...fields.state }
-								className={ styles.state }
-								placeholder={ i18n.translate( 'State' ) }
-							/>
-							<ValidationError field={ fields.state } />
+									<input
+										disabled={ this.isDataLoading() }
+										{ ...fields.state }
+										className={ styles.state }
+										placeholder={ i18n.translate( 'State' ) }
+									/>
+									<ValidationError field={ fields.state } />
 
-							<input
-								disabled={ this.isDataLoading() }
-								{ ...fields.postalCode }
-								className={ styles.postalCode }
-								placeholder={ i18n.translate( 'Zip' ) }
-							/>
-							<ValidationError field={ fields.postalCode } />
+									<input
+										disabled={ this.isDataLoading() }
+										{ ...fields.postalCode }
+										className={ styles.postalCode }
+										placeholder={ i18n.translate( 'Zip' ) }
+									/>
+									<ValidationError field={ fields.postalCode } />
+								</div>
+
+								<select
+									{ ...fields.countryCode }
+									disabled={ this.isDataLoading() }
+									className={ styles.countryCode }>
+									<option>{ i18n.translate( 'Select Country' ) }</option>
+									<option value=" " key="separator" disabled />
+									{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
+										country.name
+										? <option value={ country.code } key={ country.code }>{ country.name }</option>
+										: <option value=" " key={ index } disabled />
+									) ) }
+								</select>
+								<ValidationError field={ fields.countryCode } />
+							</fieldset>
+
+							<fieldset>
+								<label>{ i18n.translate( 'Phone' ) }</label>
+								<input
+									disabled={ this.isDataLoading() }
+									{ ...fields.phone }
+									className={ styles.phone }
+									placeholder={ i18n.translate( 'Phone' ) }
+								/>
+								<ValidationError field={ fields.phone } />
+							</fieldset>
 						</div>
-
-						<select
-							{ ...fields.countryCode }
-							disabled={ this.isDataLoading() }
-							className={ styles.countryCode }>
-							<option>{ i18n.translate( 'Select Country' ) }</option>
-							<option value=" " key="separator" disabled />
-							{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
-								country.name
-								? <option value={ country.code } key={ country.code }>{ country.name }</option>
-								: <option value=" " key={ index } disabled />
-							) ) }
-						</select>
-						<ValidationError field={ fields.countryCode } />
-					</fieldset>
-
-					<fieldset className={ styles.fieldset }>
-						<label className={ styles.label }>{ i18n.translate( 'Phone' ) }</label>
-						<input
-							disabled={ this.isDataLoading() }
-							{ ...fields.phone }
-							className={ styles.phone }
-							placeholder={ i18n.translate( 'Phone' ) }
-						/>
-						<ValidationError field={ fields.phone } />
-					</fieldset>
-
-					<button disabled={ this.props.submitting }>
-						{ i18n.translate( 'Continue to Checkout' ) }
-					</button>
-				</form>
+					}
+					submitArea={
+						<button disabled={ this.props.submitting }>
+							{ i18n.translate( 'Continue to Checkout' ) }
+						</button>
+					} />
 			</div>
 		);
 	}

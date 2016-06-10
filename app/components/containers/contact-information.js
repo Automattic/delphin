@@ -48,6 +48,7 @@ export default reduxForm(
 			showAddress2Input,
 			showOrganizationInput,
 			resetInputVisibility,
+			redirectToCheckout: () => push( getPath( 'checkout' ) ),
 			redirectToHome: () => push( getPath( 'home' ) ),
 			validateContactInformation: ( domainName, contactInformation ) => (
 				validateContactInformation( [ domainName ], contactInformation )

@@ -12,7 +12,13 @@ export const initialState = {
 	data: null
 };
 
-function mapCountryCodeForComainContactInformation( countryCode ) {
+/**
+ * Maps country codes from the /geo endpoint to /domains/supported-countries
+ *
+ * @param {string} countryCode - the country code from the /geo/ endpoint
+ * @returns {string} - the country code for the domain contact information form
+ */
+function normalizeCountryCode( countryCode ) {
 	if ( countryCode === 'GB' ) {
 		return 'UK';
 	}
@@ -22,7 +28,7 @@ function mapCountryCodeForComainContactInformation( countryCode ) {
 
 export const location = ( state = initialState, action ) => {
 	const { type } = action,
-		countryCode = mapCountryCodeForComainContactInformation( action.countryCode );
+		countryCode = normalizeCountryCode( action.countryCode );
 
 	switch ( type ) {
 		case USER_LOCATION_FETCH:

@@ -260,7 +260,7 @@ class ContactInformation extends React.Component {
 						<ValidationError field={ fields.phone } />
 					</fieldset>
 
-					<button>
+					<button disabled={ this.props.submitting }>
 						{ i18n.translate( 'Continue to Checkout' ) }
 					</button>
 				</form>
@@ -285,6 +285,7 @@ ContactInformation.propTypes = {
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
 	user: PropTypes.object.isRequired,
 	validateContactInformation: PropTypes.func.isRequired
 };

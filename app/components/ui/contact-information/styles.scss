@@ -18,18 +18,6 @@
 	margin-bottom: 25px;
 }
 
-.address {
-	.firstName,
-	.lastName {
-		display: inline-block;
-		width: 165px;
-	}
-
-	.lastName {
-		margin-left: 10px;
-	}
-}
-
 .address-two {
 	border-top: none;
 	border-radius: 0 0 2px 2px;
@@ -42,10 +30,19 @@
 }
 
 .row {
-	margin-top: 5px;
+	.firstName,
+	.lastName {
+		display: inline-block;
+		width: 165px;
+	}
+
+	.lastName {
+		margin-left: 10px;
+	}
 
 	.city, .state, .postal-code {
 		display: inline-block;
+		margin-top: 5px;
 	}
 
 	.city {

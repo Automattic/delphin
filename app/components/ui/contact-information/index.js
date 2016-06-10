@@ -149,7 +149,7 @@ class ContactInformation extends React.Component {
 					onSubmit={ handleSubmit( this.validateContactInformationBound ) }
 					fieldArea={
 						<div>
-							<fieldset>
+							<fieldset className={ styles.row }>
 								<label>{ i18n.translate( 'Name' ) }</label>
 
 								<input

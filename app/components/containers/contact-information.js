@@ -7,8 +7,9 @@ import { push } from 'react-router-redux';
 import ContactInformation from 'components/ui/contact-information';
 import { fetchContactInformation } from 'actions/contact-information';
 import { fetchCountries } from 'actions/countries';
+import { fetchLocation } from 'actions/location';
 import { getPath } from 'routes';
-import { getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
+import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
 import { validateContactInformation } from 'actions/contact-information';
@@ -36,12 +37,14 @@ export default reduxForm(
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),
+		location: getUserLocation( state ),
 		user: getUserSettings( state )
 	} ),
 	dispatch => (
 		bindActionCreators( {
 			fetchContactInformation,
 			fetchCountries,
+			fetchLocation,
 			showAddress2Input,
 			showOrganizationInput,
 			resetInputVisibility,

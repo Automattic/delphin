@@ -17,6 +17,16 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
+		if ( ! this.props.domain ) {
+			this.props.redirectToHome();
+		}
+
+		this.redirectIfLoggedOut();
+
+		if ( ! this.props.location.isRequesting && ! this.props.location.hasLoadedFromServer ) {
+			this.props.fetchLocation();
+		}
+
 		if ( ! this.props.contactInformation.isRequesting && ! this.props.contactInformation.hasLoadedFromServer ) {
 			this.props.fetchContactInformation();
 		}
@@ -25,24 +35,26 @@ class ContactInformation extends React.Component {
 			this.initializeContactInformation();
 		}
 
-		this.props.resetInputVisibility();
-
-		if ( ! this.props.domain ) {
-			this.props.redirectToHome();
+		if ( this.canUpdateCountryFromLocation() ) {
+			this.setCountryCode();
 		}
+
+		this.props.resetInputVisibility();
 
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
 		}
-
-		this.redirectIfLoggedOut();
 	}
 
 	componentWillReceiveProps( nextProps ) {
 		this.redirectIfLoggedOut( nextProps );
 
-		if ( ! this.props.contactInformation.hasLoadedFromServer && nextProps.contactInformation.hasLoadedFromServer ) {
+		if ( this.isDataLoading() && ! this.isDataLoading( nextProps ) ) {
 			this.initializeContactInformation( nextProps );
+		}
+
+		if ( ! this.canUpdateCountryFromLocation() && this.canUpdateCountryFromLocation( nextProps ) ) {
+			this.setCountryCode( nextProps );
 		}
 	}
 
@@ -54,8 +66,32 @@ class ContactInformation extends React.Component {
 		props.initializeForm( form );
 	}
 
-	isDataLoading() {
-		return ! this.props.contactInformation.hasLoadedFromServer || ! this.props.countries.hasLoadedFromServer;
+	setCountryCode( props = this.props ) {
+		let countryCode;
+
+		// Use the GEO location
+		if ( props.location.hasLoadedFromServer ) {
+			countryCode = props.location.data.countryCode;
+		}
+
+		if ( props.contactInformation.hasLoadedFromServer && props.contactInformation.data.countryCode ) {
+			// Over-ride the GEO location if the user has contact information.
+			countryCode = props.contactInformation.data.countryCode;
+		}
+
+		if ( countryCode ) {
+			props.fields.countryCode.onChange( countryCode );
+		}
+	}
+
+	canUpdateCountryFromLocation( props = this.props ) {
+		return ! this.isDataLoading( props ) &&
+			( props.location.hasLoadedFromServer || props.location.hasFailedToLoad );
+	}
+
+	isDataLoading( props = this.props ) {
+		return ! props.contactInformation.hasLoadedFromServer ||
+			! props.countries.hasLoadedFromServer;
 	}
 
 	redirectIfLoggedOut( props = this.props ) {
@@ -238,11 +274,13 @@ ContactInformation.propTypes = {
 	countries: PropTypes.object.isRequired,
 	domain: PropTypes.string,
 	fetchCountries: PropTypes.func.isRequired,
+	fetchLocation: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
+	location: PropTypes.object.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,

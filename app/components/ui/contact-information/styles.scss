@@ -19,15 +19,17 @@
 	margin-top: 10px;
 }
 
-.address-two {
-	border-top: none;
-	border-radius: 0 0 2px 2px;
-	margin: 0;
-}
+.address-two-is-visible {
+	.address-two {
+		border-top: none;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
 
-.address-two-is-visible .address-one {
-	border-radius: 2px 2px 0 0;
-	margin-bottom: 0;
+	.address-one {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 }
 
 .row {
@@ -43,7 +45,7 @@
 
 	.city, .state, .postal-code {
 		display: inline-block;
-		margin-top: 5px;
+		margin-top: 10px;
 	}
 
 	.city {

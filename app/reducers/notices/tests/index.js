@@ -33,15 +33,23 @@ describe( 'notices reducer for notice remove action', () => {
 				id: '1',
 				message: 'An error message',
 				status: 'error'
-			} ] ),
-			notice = {
-				id: '1',
+			}, {
+				id: '2',
 				message: 'Another error message',
 				status: 'error'
+			} ] ),
+			notice = {
+				id: '1'
 			},
 			newState = notices( originalState, { notice, type: NOTICE_REMOVE } );
 
-		expect( newState ).toEqual( [] );
+		expect( newState ).toEqual( [
+			{
+				id: '2',
+				message: 'Another error message',
+				status: 'error'
+			}
+		] );
 	} );
 } );
 

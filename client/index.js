@@ -1,7 +1,8 @@
 // External dependencies
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { browserHistory } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -27,15 +28,20 @@ const store = createStore(
 		routing: routerReducer
 	} ),
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
-	applyMiddleware(
-		routerMiddleware( browserHistory ),
-		thunk,
-		analyticsMiddleware,
-		userMiddleware,
-		wpcomMiddleware,
-		relatedWordsMiddleware
+	compose(
+		autoRehydrate(),
+		applyMiddleware(
+			routerMiddleware( browserHistory ),
+			thunk,
+			analyticsMiddleware,
+			userMiddleware,
+			wpcomMiddleware,
+			relatedWordsMiddleware
+		)
 	)
 );
+
+persistStore( store );
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );

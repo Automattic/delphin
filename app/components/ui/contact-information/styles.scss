@@ -39,8 +39,17 @@
 	}
 
 	@include breakpoint( '<480px' ) {
-		input {
+		.firstName,
+		.address1,
+		.city,
+		.phone {
 			margin-top: 10px;
+		}
+
+		.lastName,
+		.state,
+		.postal-code {
+			border-top: none;
 		}
 	}
 

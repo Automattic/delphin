@@ -74,15 +74,13 @@ export function fetchUser() {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
-		params: { path: '/me/settings' },
+		params: { path: '/me' },
 		loading: FETCH_USER,
 		success: ( data, requestArguments, requestToken ) => ( {
 			type: FETCH_USER_COMPLETE,
 			bearerToken: requestToken,
-			firstName: data.first_name,
-			lastName: data.last_name,
 			email: data.email,
-			locale: data.language
+			language: data.language
 		} ),
 		fail: FETCH_USER_FAIL
 	};

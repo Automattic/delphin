@@ -134,7 +134,7 @@ class ContactInformation extends React.Component {
 
 		return (
 			<div>
-				<StepsProgressbar className={ styles.progress } currentStep={ 2 } />
+				<StepsProgressbar currentStep={ 2 } />
 
 				<div className={ styles.header }>
 					<h2 className={ styles.heading }>

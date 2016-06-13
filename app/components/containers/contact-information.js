@@ -6,7 +6,7 @@ import { push } from 'react-router-redux';
 // Internal dependencies
 import ContactInformation from 'components/ui/contact-information';
 import { fetchContactInformation } from 'actions/contact-information';
-import { fetchCountries } from 'actions/countries';
+import { fetchCountries } from 'actions/territories';
 import { fetchLocation } from 'actions/location';
 import { getPath } from 'routes';
 import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
@@ -32,7 +32,7 @@ export default reduxForm(
 	},
 	state => ( {
 		contactInformation: state.contactInformation,
-		countries: state.countries,
+		countries: state.territories.countries,
 		domain: state.checkout.domain,
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),

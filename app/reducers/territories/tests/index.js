@@ -6,7 +6,7 @@ import {
 	COUNTRIES_FETCH_COMPLETE,
 	COUNTRIES_FETCH_ERROR
 } from 'reducers/action-types';
-import { countries } from '..';
+import { countries } from '../countries';
 
 describe( 'state.countries', () => {
 	it( 'should return an empty list at first', () => {

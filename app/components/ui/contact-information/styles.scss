@@ -81,6 +81,11 @@
 			border-radius: 0 2px 2px 0;
 			width: 95px;
 		}
+
+		.has-error {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 	}
 }
 
@@ -100,4 +105,8 @@
 	color: $dark-gray-blue;
 	font-size: 1.3rem;
 	margin-bottom: 20px;
+}
+
+input.has-error {
+	border-color: $yellow !important;
 }

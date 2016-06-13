@@ -165,14 +165,14 @@ class ContactInformation extends React.Component {
 									disabled={ this.isDataLoading() }
 									{ ...fields.firstName }
 									autoFocus
-									className={ styles.firstName }
+									className={ classNames( styles.firstName, { [ styles.hasError ]: fields.firstName.error } ) }
 									placeholder={ i18n.translate( 'First Name' ) }
 								/>
 
 								<input
 									disabled={ this.isDataLoading() }
 									{ ...fields.lastName }
-									className={ styles.lastName }
+									className={ classNames( styles.lastName, { [ styles.hasError ]: fields.lastName.error } ) }
 									placeholder={ i18n.translate( 'Last Name' ) }
 								/>
 								<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
@@ -189,7 +189,7 @@ class ContactInformation extends React.Component {
 									<label>{ i18n.translate( 'Organization' ) }</label>
 									<input
 										{ ...fields.organization }
-										className={ styles.organization }
+										className={ classNames( styles.organization, { [ styles.hasError ]: fields.organization.error } ) }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Organization' ) }
 									/>
@@ -202,11 +202,21 @@ class ContactInformation extends React.Component {
 
 								<input
 									{ ...fields.address1 }
-									className={ styles.addressOne }
+									className={ classNames( styles.addressOne, { [ styles.hasError ]: fields.address1.error } ) }
 									disabled={ this.isDataLoading() }
 									placeholder={ i18n.translate( 'Address Line 1' ) }
 								/>
-								<ValidationError field={ fields.address1 } />
+
+								{ this.address2InputIsVisible() && (
+									<input
+										{ ...fields.address2 }
+										className={ classNames( styles.addressTwo, { [ styles.hasError ]: fields.address2.error } ) }
+										disabled={ this.isDataLoading() }
+										placeholder={ i18n.translate( 'Address Line 2' ) }
+									/>
+								) }
+
+								<ValidationError fields={ [ fields.address1, fields.address2 ] } />
 
 								{ ! this.address2InputIsVisible() && (
 									<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
@@ -214,34 +224,24 @@ class ContactInformation extends React.Component {
 									</a>
 								) }
 
-								{ this.address2InputIsVisible() && (
-									<input
-										{ ...fields.address2 }
-										className={ styles.addressTwo }
-										disabled={ this.isDataLoading() }
-										placeholder={ i18n.translate( 'Address Line 2' ) }
-									/>
-								) }
-
-								<ValidationError field={ fields.address2 } />
-
 								<div className={ styles.row }>
 									<input
 										disabled={ this.isDataLoading() }
 										{ ...fields.city }
-										className={ styles.city }
+										className={ classNames( styles.city, { [ styles.hasError ]: fields.city.error } ) }
 										placeholder={ i18n.translate( 'City' ) }
 									/>
 
 									<State
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
+										className={ classNames( styles.state, { [ styles.hasError ]: fields.state.error } ) }
 										states={ this.props.states } />
 
 									<input
 										disabled={ this.isDataLoading() }
 										{ ...fields.postalCode }
-										className={ styles.postalCode }
+										className={ classNames( styles.postalCode, { [ styles.hasError ]: fields.postalCode.error } ) }
 										placeholder={ i18n.translate( 'Zip' ) }
 									/>
 									<ValidationError
@@ -265,7 +265,6 @@ class ContactInformation extends React.Component {
 										: <option value=" " key={ index } disabled />
 									) ) }
 								</select>
-								<ValidationError field={ fields.countryCode } />
 							</fieldset>
 
 							<fieldset>
@@ -273,7 +272,7 @@ class ContactInformation extends React.Component {
 								<input
 									disabled={ this.isDataLoading() }
 									{ ...fields.phone }
-									className={ styles.phone }
+									className={ classNames( styles.phone, { [ styles.hasError ]: fields.phone.error } ) }
 									placeholder={ i18n.translate( 'Phone' ) }
 								/>
 								<ValidationError field={ fields.phone } />

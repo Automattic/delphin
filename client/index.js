@@ -1,6 +1,7 @@
 // External dependencies
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { browserHistory } from 'react-router';
+import createLogger from 'redux-logger';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { Provider } from 'react-redux';
@@ -11,6 +12,7 @@ import thunk from 'redux-thunk';
 
 // Internal dependencies
 import { analyticsMiddleware } from './analytics-middleware';
+import config from 'config';
 import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
 import { fetchUser } from 'actions/user';
@@ -22,6 +24,30 @@ import switchLocale from './switch-locale';
 import { userMiddleware } from './user-middleware';
 import { relatedWordsMiddleware } from './related-words-middleware';
 
+const middlewares = [
+	routerMiddleware( browserHistory ),
+	thunk,
+	analyticsMiddleware,
+	userMiddleware,
+	wpcomMiddleware,
+	relatedWordsMiddleware
+];
+
+const isDevelopment = 'production' !== config( 'env' );
+
+if ( isDevelopment ) {
+	middlewares.push( createLogger( {
+		collapsed: true,
+		level: {
+			action: 'log',
+			error: 'log',
+			prevState: false,
+			nextState: 'log'
+		},
+		timestamp: false
+	} ) );
+}
+
 const store = createStore(
 	combineReducers( {
 		...reducers,
@@ -30,14 +56,7 @@ const store = createStore(
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
 	compose(
 		autoRehydrate(),
-		applyMiddleware(
-			routerMiddleware( browserHistory ),
-			thunk,
-			analyticsMiddleware,
-			userMiddleware,
-			wpcomMiddleware,
-			relatedWordsMiddleware
-		)
+		applyMiddleware( ...middlewares )
 	)
 );
 

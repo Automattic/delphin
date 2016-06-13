@@ -1,5 +1,6 @@
 // External dependencies
 import uniqueId from 'lodash/uniqueId';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
 import {
@@ -11,6 +12,10 @@ export function notices( state = [], action ) {
 	const { notice, type } = action;
 
 	switch ( type ) {
+		case LOCATION_CHANGE:
+			// Clears all notices whenever the user is presented with a new page
+			return [];
+
 		case NOTICE_ADD:
 			return [
 				...state,

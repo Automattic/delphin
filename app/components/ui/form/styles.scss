@@ -105,6 +105,14 @@
 }
 
 .validation-error {
-	color: $red;
-	margin-top: 5px;
+	background: $yellow;
+	border-radius: 0 0 3px 3px;
+	color: $black;
+	padding: 10px;
+}
+
+.arrow {
+	font-size: 1.5rem;
+	margin: 1px 5px;
+	display: inline-block;
 }

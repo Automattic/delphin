@@ -35,7 +35,14 @@ const ValidationError = ( { field, fields } ) => {
 	} else {
 		errorsMarkup = (
 			<ul>
-				{ errors.map( error => <li key={ error }>{ error }</li> ) }
+				{ errors.map( error => (
+					<li key={ error }>
+						<div className={ formStyles.arrow }>
+							{ '\u25B8' }
+						</div>
+						{ error }
+					</li>
+				) ) }
 			</ul>
 		);
 	}

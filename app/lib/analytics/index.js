@@ -178,7 +178,7 @@ const analytics = {
 				} else if ( startsWith( featureSlug, 'read_post_id_' ) ) {
 					featureSlug = 'read_post_id__id';
 				} else if ( ( matched = featureSlug.match( /^start_(.*)_(..)$/ ) ) != null ) {
-					featureSlug = `start_${matched[1]}`;
+					featureSlug = `start_${matched[ 1 ]}`;
 				}
 
 				const json = JSON.stringify( {

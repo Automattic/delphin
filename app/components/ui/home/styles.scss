@@ -20,7 +20,7 @@
 	font-size: 1.6rem;
 	margin-top: 30px;
 	padding: 16px 15px;
-	transition: all .15s ease-in-out;
+	transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 	width: 100%;
 
 	&:hover {
@@ -29,11 +29,11 @@
 	}
 
 	&:focus {
-		color: #5c6671;
-		border-color: #0087be;
 		background-color: #fff;
-		outline: none;
+		border-color: #0087be;
 		box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+		color: #5c6671;
+		outline: none;
 	}
 
 	@include breakpoint( '>660px' ) {

@@ -5,31 +5,52 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import formStyles from 'components/ui/form/styles.scss';
 
-const ValidationError = ( { field } ) => {
-	let errors;
+const ValidationError = ( { field, fields } ) => {
+	let allFields;
 
-	if ( typeof field.error === 'string' ) {
-		errors = field.error;
+	if ( Array.isArray( fields ) ) {
+		allFields = fields;
 	}
 
-	if ( typeof field.error === 'object' ) {
-		errors = (
+	if ( field ) {
+		allFields = [ field ];
+	}
+
+	let errors = allFields.reduce( ( result, currentField ) => {
+		if ( typeof currentField.error === 'string' ) {
+			return result.concat( currentField.error );
+		}
+
+		if ( typeof currentField.error === 'object' ) {
+			return result.concat( currentField.error.data );
+		}
+
+		return result;
+	}, [] );
+
+	let errorsMarkup;
+
+	if ( errors.length === 1 ) {
+		errorsMarkup = errors.shift();
+	} else {
+		errorsMarkup = (
 			<ul>
-				{ field.error.data.map( error => <li key={ error }>{ error }</li> ) }
+				{ errors.map( error => <li key={ error }>{ error }</li> ) }
 			</ul>
 		);
 	}
 
-	return ( field.touched && field.error ? (
+	return ( allFields.some( currentField => currentField.touched ) && errors.length > 0 ? (
 			<div className={ formStyles.validationError }>
-				{ errors }
+				{ errorsMarkup }
 			</div>
 		) : null
 	);
 };
 
 ValidationError.propTypes = {
-	field: PropTypes.object.isRequired
+	field: PropTypes.object,
+	fields: PropTypes.array
 };
 
 export default withStyles( formStyles )( ValidationError );

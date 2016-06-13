@@ -48,11 +48,16 @@
 		.firstName,
 		.lastName {
 			display: inline-block;
-			width: 165px;
+			width: 170px;
+		}
+
+		.firstName {
+			border-radius: 2px 0 0 2px;
 		}
 
 		.lastName {
-			margin-left: 10px;
+			border-left: none;
+			border-radius: 0 2px 2px 0;
 		}
 
 		.city, .state, .postal-code {
@@ -61,17 +66,20 @@
 		}
 
 		.city {
-			width: 160px;
+			border-radius: 2px 0 0 2px;
+			width: 165px;
 		}
 
 		.state {
-			margin-left: 10px;
-			width: 70px;
+			border-left: none;
+			border-radius: 0;
+			width: 80px;
 		}
 
 		.postal-code {
-			margin-left: 10px;
-			width: 90px;
+			border-left: none;
+			border-radius: 0 2px 2px 0;
+			width: 95px;
 		}
 	}
 }

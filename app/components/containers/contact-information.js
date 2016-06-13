@@ -8,6 +8,7 @@ import ContactInformation from 'components/ui/contact-information';
 import { fetchContactInformation } from 'actions/contact-information';
 import { fetchCountries } from 'actions/territories';
 import { fetchLocation } from 'actions/location';
+import { getCountries } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
 import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
@@ -32,7 +33,7 @@ export default reduxForm(
 	},
 	state => ( {
 		contactInformation: state.contactInformation,
-		countries: state.territories.countries,
+		countries: getCountries( state ),
 		domain: state.checkout.domain,
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),

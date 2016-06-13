@@ -95,7 +95,7 @@ const Checkout = React.createClass( {
 
 		return (
 			<div>
-				<StepsProgressbar className={ styles.progress } currentStep={ 3 } />
+				<StepsProgressbar currentStep={ 3 } />
 
 				<Form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }
 				fieldArea={

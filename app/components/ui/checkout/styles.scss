@@ -1,4 +1,12 @@
-.form label {
-	font-weight: bold;
-	display: block;
+.expiration {
+	display: flex;
+	justify-content: space-between;
+
+	.expiration-month {
+		flex: 0 1 60%;
+	}
+
+	.expiration-year {
+		flex: 0 1 35%;
+	}
 }

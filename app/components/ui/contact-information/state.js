@@ -8,10 +8,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const State = ( { disabled, field, states, className } ) => {
+const State = ( { disabled, field, states, onBlur, className } ) => {
 	if ( ! states.hasLoadedFromServer ) {
 		return (
 			<input
+				onBlur={ onBlur }
 				className={ classNames( styles.state, className ) }
 				placeholder={ i18n.translate( 'State' ) }
 				disabled
@@ -23,6 +24,7 @@ const State = ( { disabled, field, states, className } ) => {
 		return (
 			<input
 				{ ...field }
+				onBlur={ onBlur }
 				className={ classNames( styles.state, className ) }
 				disabled={ disabled }
 				placeholder={ i18n.translate( 'State' ) } />
@@ -32,6 +34,7 @@ const State = ( { disabled, field, states, className } ) => {
 	return (
 		<select
 			{ ...field }
+			onBlur={ onBlur }
 			className={ classNames( styles.state, className ) }
 			disabled={ disabled }>
 			<option value="" disabled>{ i18n.translate( 'State' ) }</option>
@@ -47,6 +50,7 @@ State.propTypes = {
 	className: PropTypes.string,
 	disabled: PropTypes.bool.isRequired,
 	field: PropTypes.object.isRequired,
+	onBlur: PropTypes.func,
 	states: PropTypes.object.isRequired
 };
 

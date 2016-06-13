@@ -1,5 +1,6 @@
 // External dependencies
 import classNames from 'classnames';
+import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -17,6 +18,8 @@ class ContactInformation extends React.Component {
 		super( props );
 
 		this.validateContactInformationBound = this.validateContactInformation.bind( this );
+		this.debouncedValidateContactInformationBound = debounce( this.validateContactInformationBound, 500 );
+		this.handleBlurBound = this.handleBlur.bind( this );
 	}
 
 	componentWillMount() {
@@ -127,13 +130,25 @@ class ContactInformation extends React.Component {
 			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
 		}, {} );
 
-		return this.props.validateContactInformation(
+		this.props.validateContactInformation(
 			this.props.domain,
 			contactInformation
 		).then( () => {
 			if ( isEmpty( this.props.errors ) ) {
 				this.props.redirectToCheckout();
 			}
+		} );
+	}
+
+	handleBlur( event ) {
+		this.debouncedValidateContactInformationBound();
+
+		this.props.fields[ event.target.name ].onBlur();
+	}
+
+	getFieldClassName( field ) {
+		return classNames( styles[ field.name ], {
+			[ styles.hasError ]: field.touched && field.error
 		} );
 	}
 
@@ -165,14 +180,16 @@ class ContactInformation extends React.Component {
 									disabled={ this.isDataLoading() }
 									{ ...fields.firstName }
 									autoFocus
-									className={ classNames( styles.firstName, { [ styles.hasError ]: fields.firstName.error } ) }
+									onBlur={ this.handleBlurBound }
+									className={ this.getFieldClassName( fields.firstName ) }
 									placeholder={ i18n.translate( 'First Name' ) }
 								/>
 
 								<input
 									disabled={ this.isDataLoading() }
 									{ ...fields.lastName }
-									className={ classNames( styles.lastName, { [ styles.hasError ]: fields.lastName.error } ) }
+									onBlur={ this.handleBlurBound }
+									className={ this.getFieldClassName( fields.lastName ) }
 									placeholder={ i18n.translate( 'Last Name' ) }
 								/>
 								<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
@@ -189,7 +206,8 @@ class ContactInformation extends React.Component {
 									<label>{ i18n.translate( 'Organization' ) }</label>
 									<input
 										{ ...fields.organization }
-										className={ classNames( styles.organization, { [ styles.hasError ]: fields.organization.error } ) }
+										onBlur={ this.handleBlurBound }
+										className={ this.getFieldClassName( fields.organization ) }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Organization' ) }
 									/>
@@ -202,7 +220,8 @@ class ContactInformation extends React.Component {
 
 								<input
 									{ ...fields.address1 }
-									className={ classNames( styles.addressOne, { [ styles.hasError ]: fields.address1.error } ) }
+									onBlur={ this.handleBlurBound }
+									className={ this.getFieldClassName( fields.address1 ) }
 									disabled={ this.isDataLoading() }
 									placeholder={ i18n.translate( 'Address Line 1' ) }
 								/>
@@ -210,7 +229,8 @@ class ContactInformation extends React.Component {
 								{ this.address2InputIsVisible() && (
 									<input
 										{ ...fields.address2 }
-										className={ classNames( styles.addressTwo, { [ styles.hasError ]: fields.address2.error } ) }
+										onBlur={ this.handleBlurBound }
+										className={ this.getFieldClassName( fields.address2 ) }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 2' ) }
 									/>
@@ -228,20 +248,23 @@ class ContactInformation extends React.Component {
 									<input
 										disabled={ this.isDataLoading() }
 										{ ...fields.city }
-										className={ classNames( styles.city, { [ styles.hasError ]: fields.city.error } ) }
+										onBlur={ this.handleBlurBound }
+										className={ this.getFieldClassName( fields.city ) }
 										placeholder={ i18n.translate( 'City' ) }
 									/>
 
 									<State
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
-										className={ classNames( styles.state, { [ styles.hasError ]: fields.state.error } ) }
+										className={ this.getFieldClassName( fields.state ) }
+										onBlur={ this.handleBlurBound }
 										states={ this.props.states } />
 
 									<input
 										disabled={ this.isDataLoading() }
 										{ ...fields.postalCode }
-										className={ classNames( styles.postalCode, { [ styles.hasError ]: fields.postalCode.error } ) }
+										onBlur={ this.handleBlurBound }
+										className={ this.getFieldClassName( fields.postalCode ) }
 										placeholder={ i18n.translate( 'Zip' ) }
 									/>
 									<ValidationError
@@ -265,6 +288,7 @@ class ContactInformation extends React.Component {
 										: <option value=" " key={ index } disabled />
 									) ) }
 								</select>
+								<ValidationError field={ fields.countryCode } />
 							</fieldset>
 
 							<fieldset>
@@ -272,7 +296,8 @@ class ContactInformation extends React.Component {
 								<input
 									disabled={ this.isDataLoading() }
 									{ ...fields.phone }
-									className={ classNames( styles.phone, { [ styles.hasError ]: fields.phone.error } ) }
+									onBlur={ this.handleBlurBound }
+									className={ this.getFieldClassName( fields.phone ) }
 									placeholder={ i18n.translate( 'Phone' ) }
 								/>
 								<ValidationError field={ fields.phone } />

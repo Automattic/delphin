@@ -7,7 +7,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Form from 'components/ui/form';
 import StepsProgressbar from 'components/ui/steps-progressbar';
 import styles from './styles.scss';
-import ValidationError from 'components/ui/form/validation-error';
 
 const Checkout = React.createClass( {
 	propTypes: {

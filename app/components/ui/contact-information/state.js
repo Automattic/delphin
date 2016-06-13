@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -7,11 +8,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const State = ( { disabled, field, states } ) => {
+const State = ( { disabled, field, states, className } ) => {
 	if ( ! states.hasLoadedFromServer ) {
 		return (
 			<input
-				className={ styles.state }
+				className={ classNames( styles.state, className ) }
 				placeholder={ i18n.translate( 'State' ) }
 				disabled
 			/>
@@ -22,7 +23,7 @@ const State = ( { disabled, field, states } ) => {
 		return (
 			<input
 				{ ...field }
-				className={ styles.state }
+				className={ classNames( styles.state, className ) }
 				disabled={ disabled }
 				placeholder={ i18n.translate( 'State' ) } />
 		);
@@ -31,7 +32,7 @@ const State = ( { disabled, field, states } ) => {
 	return (
 		<select
 			{ ...field }
-			className={ styles.state }
+			className={ classNames( styles.state, className ) }
 			disabled={ disabled }>
 			<option value="" disabled>{ i18n.translate( 'State' ) }</option>
 			<option disabled />
@@ -43,6 +44,7 @@ const State = ( { disabled, field, states } ) => {
 };
 
 State.propTypes = {
+	className: PropTypes.string,
 	disabled: PropTypes.bool.isRequired,
 	field: PropTypes.object.isRequired,
 	states: PropTypes.object.isRequired

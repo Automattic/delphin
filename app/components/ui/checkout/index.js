@@ -95,13 +95,13 @@ const Checkout = React.createClass( {
 				<label>{ i18n.translate( 'name' ) }</label>
 				<input type="text" name="name" />
 				<label>{ i18n.translate( 'credit card #' ) }</label>
-				<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
+				<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form[ 'credit-card-number' ] } />
 				<label>{ i18n.translate( 'cvv' ) }</label>
 				<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
 				<label>{ i18n.translate( 'expiration date in MM/YY format' ) }</label>
-				<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form['expiration-date'] } placeholder="01/20" />
+				<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form[ 'expiration-date' ] } placeholder="01/20" />
 				<label>{ i18n.translate( 'postal code' ) }</label>
-				<input type="text" name="postal-code" onChange={ this.updateForm } value={ this.state.form['postal-code'] } />
+				<input type="text" name="postal-code" onChange={ this.updateForm } value={ this.state.form[ 'postal-code' ] } />
 				<br />
 				<button>Checkout</button>
 			</form>

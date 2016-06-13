@@ -50,10 +50,10 @@ function getPaygateParameters( cardDetails ) {
 		name: cardDetails.name,
 		number: cardDetails.number,
 		cvc: cardDetails.cvv,
-		zip: cardDetails['postal-code'],
+		zip: cardDetails[ 'postal-code' ],
 		country: cardDetails.country,
-		exp_month: cardDetails['expiration-date'].substring( 0, 2 ),
-		exp_year: '20' + cardDetails['expiration-date'].substring( 3, 5 )
+		exp_month: cardDetails[ 'expiration-date' ].substring( 0, 2 ),
+		exp_year: '20' + cardDetails[ 'expiration-date' ].substring( 3, 5 )
 	};
 }
 
@@ -103,10 +103,10 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 export function createTransaction( user, form ) {
 	const cardDetails = {
 		name: form.name,
-		number: form['credit-card-number'],
+		number: form[ 'credit-card-number' ],
 		cvv: form.cvv,
-		'expiration-date': form['expiration-date'],
-		'postal-code': form['postal-code']
+		'expiration-date': form[ 'expiration-date' ],
+		'postal-code': form[ 'postal-code' ]
 	};
 
 	return dispatch => {

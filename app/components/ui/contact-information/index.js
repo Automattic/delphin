@@ -17,9 +17,10 @@ class ContactInformation extends React.Component {
 	constructor( props ) {
 		super( props );
 
-		this.validateContactInformationBound = this.validateContactInformation.bind( this );
-		this.debouncedValidateContactInformationBound = debounce( this.validateContactInformationBound, 500 );
+		this.validateBound = this.validate.bind( this );
 		this.handleBlurBound = this.handleBlur.bind( this );
+		this.debouncedValidateBound = debounce( this.validateBound, 500 );
+		this.validateAndSubmitBound = this.validateAndSubmit.bind( this );
 	}
 
 	componentWillMount() {
@@ -125,7 +126,7 @@ class ContactInformation extends React.Component {
 		return organizationInputIsVisible || organization.initialValue;
 	}
 
-	validateContactInformation() {
+	validate( onComplete = () => {} ) {
 		const contactInformation = Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
 			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
 		}, {} );
@@ -133,7 +134,11 @@ class ContactInformation extends React.Component {
 		this.props.validateContactInformation(
 			this.props.domain,
 			contactInformation
-		).then( () => {
+		).then( onComplete );
+	}
+
+	validateAndSubmit() {
+		this.validate( () => {
 			if ( isEmpty( this.props.errors ) ) {
 				this.props.redirectToCheckout();
 			}
@@ -141,7 +146,7 @@ class ContactInformation extends React.Component {
 	}
 
 	handleBlur( event ) {
-		this.debouncedValidateContactInformationBound();
+		this.debouncedValidateBound();
 
 		this.props.fields[ event.target.name ].onBlur();
 	}
@@ -170,7 +175,7 @@ class ContactInformation extends React.Component {
 				</div>
 
 				<Form
-					onSubmit={ handleSubmit( this.validateContactInformationBound ) }
+					onSubmit={ handleSubmit( this.validateAndSubmitBound ) }
 					fieldArea={
 						<div>
 							<fieldset className={ styles.row }>

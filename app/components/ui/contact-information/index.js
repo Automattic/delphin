@@ -168,7 +168,6 @@ class ContactInformation extends React.Component {
 									className={ styles.firstName }
 									placeholder={ i18n.translate( 'First Name' ) }
 								/>
-								<ValidationError field={ fields.firstName } />
 
 								<input
 									disabled={ this.isDataLoading() }
@@ -176,7 +175,7 @@ class ContactInformation extends React.Component {
 									className={ styles.lastName }
 									placeholder={ i18n.translate( 'Last Name' ) }
 								/>
-								<ValidationError field={ fields.lastName } />
+								<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
 							</fieldset>
 
 							{ ! this.organizationInputIsVisible() && (
@@ -233,13 +232,11 @@ class ContactInformation extends React.Component {
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
 									/>
-									<ValidationError field={ fields.city } />
 
 									<State
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
 										states={ this.props.states } />
-									<ValidationError field={ fields.state } />
 
 									<input
 										disabled={ this.isDataLoading() }
@@ -247,7 +244,13 @@ class ContactInformation extends React.Component {
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Zip' ) }
 									/>
-									<ValidationError field={ fields.postalCode } />
+									<ValidationError
+										fields={ [
+											fields.city,
+											fields.state,
+											fields.postalCode
+										] }
+									/>
 								</div>
 
 								<select

@@ -31,7 +31,7 @@ const ValidationError = ( { field, fields } ) => {
 	let errorsMarkup;
 
 	if ( errors.length === 1 ) {
-		errorsMarkup = errors.shift();
+		errorsMarkup = errors[ 0 ];
 	} else {
 		errorsMarkup = (
 			<ul>

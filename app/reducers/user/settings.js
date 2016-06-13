@@ -18,8 +18,6 @@ export const initialState = {
 export const settings = ( state = initialState, action ) => {
 	const {
 		email,
-		firstName,
-		lastName,
 		locale,
 		type
 	} = action;
@@ -35,8 +33,6 @@ export const settings = ( state = initialState, action ) => {
 				hasLoadedFromServer: true,
 				isRequesting: false,
 				data: {
-					firstName,
-					lastName,
 					email,
 					locale
 				}

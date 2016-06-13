@@ -22,7 +22,7 @@ const validate = values => {
 	if ( values.twoFactorAuthenticationCode !== undefined ) {
 		if ( ! values.twoFactorAuthenticationCode ) {
 			errors.twoFactorAuthenticationCode = i18n.translate( 'Please enter your two factor authentication code' );
-		} else if ( ! /^[0-9]{6}$/i.test( values.twoFactorAuthenticationCode ) ) {
+		} else if ( ! /^[0-9]{6,7}$/i.test( values.twoFactorAuthenticationCode ) ) {
 			errors.twoFactorAuthenticationCode = i18n.translate( 'This is an invalid two factor authentication code' );
 		}
 	}

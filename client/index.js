@@ -35,7 +35,7 @@ const middlewares = [
 
 const isDevelopment = 'production' !== config( 'env' );
 
-if ( isDevelopment ) {
+if ( isDevelopment && localStorage.ENABLE_REDUX_LOGGER ) {
 	middlewares.push( createLogger( {
 		collapsed: true,
 		level: {

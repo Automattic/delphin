@@ -4,7 +4,10 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Form from 'components/ui/form';
+import StepsProgressbar from 'components/ui/steps-progressbar';
 import styles from './styles.scss';
+import ValidationError from 'components/ui/form/validation-error';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -90,21 +93,36 @@ const Checkout = React.createClass( {
 			return null;
 		}
 
+		const steps = [
+			i18n.translate( 'search' ),
+			i18n.translate( 'sign in' ),
+			i18n.translate( 'profile' ),
+			i18n.translate( 'checkout' )
+		];
+
 		return (
-			<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
-				<label>{ i18n.translate( 'name' ) }</label>
-				<input type="text" name="name" />
-				<label>{ i18n.translate( 'credit card #' ) }</label>
-				<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form[ 'credit-card-number' ] } />
-				<label>{ i18n.translate( 'cvv' ) }</label>
-				<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
-				<label>{ i18n.translate( 'expiration date in MM/YY format' ) }</label>
-				<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form[ 'expiration-date' ] } placeholder="01/20" />
-				<label>{ i18n.translate( 'postal code' ) }</label>
-				<input type="text" name="postal-code" onChange={ this.updateForm } value={ this.state.form[ 'postal-code' ] } />
-				<br />
-				<button>Checkout</button>
-			</form>
+			<div>
+				<StepsProgressbar className={ styles.progress } steps={ steps } currentStep={ steps[ 3 ] } />
+
+				<Form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }
+				fieldArea={
+					<fieldset>
+						<label>{ i18n.translate( 'name' ) }</label>
+						<input type="text" name="name" />
+						<label>{ i18n.translate( 'credit card #' ) }</label>
+						<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
+						<label>{ i18n.translate( 'cvv' ) }</label>
+						<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
+						<label>{ i18n.translate( 'expiration date in MM/YY format' ) }</label>
+						<input type="text" name="expiration-date" onChange={ this.updateForm } value={ this.state.form['expiration-date'] } placeholder="01/20" />
+						<label>{ i18n.translate( 'postal code' ) }</label>
+						<input type="text" name="postal-code" onChange={ this.updateForm } value={ this.state.form['postal-code'] } />
+					</fieldset>
+				}
+				submitArea={
+					<button>{ i18n.translate( 'Checkout' ) }</button>
+				} />
+			</div>
 		);
 	},
 

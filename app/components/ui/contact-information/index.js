@@ -131,16 +131,10 @@ class ContactInformation extends React.Component {
 
 	render() {
 		const { fields, handleSubmit, countries } = this.props;
-		const steps = [
-			i18n.translate( 'search' ),
-			i18n.translate( 'sign in' ),
-			i18n.translate( 'profile' ),
-			i18n.translate( 'checkout' )
-		];
 
 		return (
 			<div>
-				<StepsProgressbar className={ styles.progress } steps={ steps } currentStep={ steps[ 2 ] } />
+				<StepsProgressbar className={ styles.progress } currentStep={ 2 } />
 
 				<div className={ styles.header }>
 					<h2 className={ styles.heading }>

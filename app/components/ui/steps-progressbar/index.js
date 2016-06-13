@@ -1,4 +1,5 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -23,12 +24,19 @@ function getStepClassName( currentStepIndex, stepIndex ) {
 	return classes.join( ' ' );
 }
 
+const steps = [
+	i18n.translate( 'search' ),
+	i18n.translate( 'sign in' ),
+	i18n.translate( 'profile' ),
+	i18n.translate( 'checkout' )
+];
+
 function Progressbar( props ) {
-	const currentStepIndex = props.currentStep ? props.steps.indexOf( props.currentStep ) : null;
+	const currentStepIndex = props.currentStep;
 
 	return <ol className={ props.className + ' ' + styles.progressbar }>
 		{
-			props.steps.map( ( step, index ) => <li key={ step } className={ getStepClassName( currentStepIndex, index ) }>
+			steps.map( ( step, index ) => <li key={ step } className={ getStepClassName( currentStepIndex, index ) }>
 				<div className={ styles.progressbarStepCaption }>{ step }</div>
 				<div className={ styles.progressbarStepDot }></div>
 			</li> )
@@ -37,8 +45,7 @@ function Progressbar( props ) {
 }
 
 Progressbar.propTypes = {
-	steps: PropTypes.arrayOf( PropTypes.string ).isRequired,
-	currentStep: PropTypes.string
+	currentStep: PropTypes.number.isRequired
 };
 
 export default withStyles( styles )( Progressbar );

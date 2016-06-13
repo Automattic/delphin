@@ -93,16 +93,9 @@ const Checkout = React.createClass( {
 			return null;
 		}
 
-		const steps = [
-			i18n.translate( 'search' ),
-			i18n.translate( 'sign in' ),
-			i18n.translate( 'profile' ),
-			i18n.translate( 'checkout' )
-		];
-
 		return (
 			<div>
-				<StepsProgressbar className={ styles.progress } steps={ steps } currentStep={ steps[ 3 ] } />
+				<StepsProgressbar className={ styles.progress } currentStep={ 3 } />
 
 				<Form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }
 				fieldArea={

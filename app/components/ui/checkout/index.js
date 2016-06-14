@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Form from 'components/ui/form';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import styles from './styles.scss';
+import capitalize from 'lodash/capitalize';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -92,6 +93,8 @@ const Checkout = React.createClass( {
 			return null;
 		}
 
+		const months = i18n.moment.months();
+
 		return (
 			<div>
 				<CheckoutProgressbar currentStep={ 3 } />
@@ -106,7 +109,7 @@ const Checkout = React.createClass( {
 
 							<fieldset>
 								<label>{ i18n.translate( 'Card Number' ) }</label>
-								<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
+								<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form[ 'credit-card-number' ] } />
 							</fieldset>
 
 							<fieldset>
@@ -114,26 +117,17 @@ const Checkout = React.createClass( {
 								<div className={ styles.expiration }>
 									<select
 										onChange={ this.updateForm }
-										value={ this.state.form['expiration-date-month'] }
+										value={ this.state.form[ 'expiration-date-month' ] }
 										className={ styles.expirationMonth }>
 										<option>{ i18n.translate( 'Month' ) }</option>
-										<option value="01">{ i18n.moment.months( 0 ) }</option>
-										<option value="02">{ i18n.moment.months( 1 ) }</option>
-										<option value="03">{ i18n.moment.months( 2 ) }</option>
-										<option value="04">{ i18n.moment.months( 3 ) }</option>
-										<option value="05">{ i18n.moment.months( 4 ) }</option>
-										<option value="06">{ i18n.moment.months( 5 ) }</option>
-										<option value="07">{ i18n.moment.months( 6 ) }</option>
-										<option value="08">{ i18n.moment.months( 7 ) }</option>
-										<option value="09">{ i18n.moment.months( 8 ) }</option>
-										<option value="10">{ i18n.moment.months( 9 ) }</option>
-										<option value="11">{ i18n.moment.months( 10 ) }</option>
-										<option value="12">{ i18n.moment.months( 11 ) }</option>
+										{ months.map( ( monthName, monthIndex ) =>
+											<option value={ monthIndex }>{ capitalize( monthName ) }</option>
+										) }
 									</select>
 
 									<select
 										onChange={ this.updateForm }
-										value={ this.state.form['expiration-date-year'] }
+										value={ this.state.form[ 'expiration-date-year' ] }
 										className={ styles.expirationYear }>
 										<option>{ i18n.translate( 'Year' ) }</option>
 										<option value="19">2019</option>

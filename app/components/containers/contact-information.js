@@ -1,14 +1,15 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
+import get from 'lodash/get';
 import { reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
 
 // Internal dependencies
 import ContactInformation from 'components/ui/contact-information';
 import { fetchContactInformation } from 'actions/contact-information';
-import { fetchCountries } from 'actions/territories';
+import { fetchCountries, fetchStates } from 'actions/territories';
 import { fetchLocation } from 'actions/location';
-import { getCountries } from 'reducers/territories/selectors';
+import { getCountries, getStates } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
 import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
@@ -39,6 +40,7 @@ export default reduxForm(
 		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),
 		location: getUserLocation( state ),
+		states: getStates( state, get( state, 'form.contact-information.countryCode.value' ) ),
 		user: getUserSettings( state )
 	} ),
 	dispatch => (
@@ -46,6 +48,7 @@ export default reduxForm(
 			fetchContactInformation,
 			fetchCountries,
 			fetchLocation,
+			fetchStates,
 			showAddress2Input,
 			showOrganizationInput,
 			resetInputVisibility,

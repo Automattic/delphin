@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Form from 'components/ui/form';
+import State from 'components/ui/contact-information/state';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
@@ -57,6 +58,13 @@ class ContactInformation extends React.Component {
 
 		if ( ! this.canUpdateCountryFromLocation() && this.canUpdateCountryFromLocation( nextProps ) ) {
 			this.setCountryCode( nextProps );
+		}
+
+		if ( this.props.fields.countryCode.value !== nextProps.fields.countryCode.value ) {
+			this.props.fetchStates( nextProps.fields.countryCode.value );
+
+			// Resets the state field every time the user selects a different country
+			this.props.fields.state.onChange( '' );
 		}
 	}
 
@@ -227,12 +235,10 @@ class ContactInformation extends React.Component {
 									/>
 									<ValidationError field={ fields.city } />
 
-									<input
+									<State
 										disabled={ this.isDataLoading() }
-										{ ...fields.state }
-										className={ styles.state }
-										placeholder={ i18n.translate( 'State' ) }
-									/>
+										field={ fields.state }
+										states={ this.props.states } />
 									<ValidationError field={ fields.state } />
 
 									<input
@@ -248,8 +254,8 @@ class ContactInformation extends React.Component {
 									{ ...fields.countryCode }
 									disabled={ this.isDataLoading() }
 									className={ styles.countryCode }>
-									<option>{ i18n.translate( 'Select Country' ) }</option>
-									<option value=" " key="separator" disabled />
+									<option value="" disabled>{ i18n.translate( 'Select Country' ) }</option>
+									<option disabled />
 									{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
 										country.name
 										? <option value={ country.code } key={ country.code }>{ country.name }</option>
@@ -304,6 +310,7 @@ ContactInformation.propTypes = {
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,
+	states: PropTypes.object.isRequired,
 	submitting: PropTypes.bool.isRequired,
 	user: PropTypes.object.isRequired,
 	validateContactInformation: PropTypes.func.isRequired

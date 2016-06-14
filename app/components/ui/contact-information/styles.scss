@@ -21,13 +21,13 @@
 }
 
 .address-two-is-visible {
-	.address2 {
+	.address2 input {
 		border-top: none;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
 
-	.address1 {
+	.address1 input {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
@@ -49,7 +49,9 @@
 		.lastName,
 		.state,
 		.postal-code {
-			border-top: none;
+			input {
+				border-top: none;
+			}
 		}
 	}
 
@@ -60,13 +62,15 @@
 			width: 170px;
 		}
 
-		.firstName {
-			border-radius: 2px 0 0 2px;
+		.firstName input {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
 		}
 
-		.lastName {
+		.lastName input {
 			border-left: none;
-			border-radius: 0 2px 2px 0;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
 		}
 
 		.city, .state, .postal-code {
@@ -75,25 +79,31 @@
 		}
 
 		.city {
-			border-radius: 2px 0 0 2px;
 			width: 165px;
+			
+			input {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
 		}
 
 		.state {
-			border-left: none;
-			border-radius: 0;
 			width: 80px;
+
+			input {
+				border-left: none;
+				border-right: none;
+				border-radius: 0;
+			}
 		}
 
 		.postal-code {
-			border-left: none;
-			border-radius: 0 2px 2px 0;
 			width: 95px;
-		}
 
-		.has-error {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
+			input {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
 		}
 	}
 }
@@ -114,8 +124,4 @@
 	color: $dark-gray-blue;
 	font-size: 1.3rem;
 	margin-bottom: 20px;
-}
-
-input.has-error {
-	border-color: $yellow !important;
 }

@@ -117,18 +117,18 @@ const Checkout = React.createClass( {
 										value={ this.state.form['expiration-date-month'] }
 										className={ styles.expirationMonth }>
 										<option>{ i18n.translate( 'Month' ) }</option>
-										<option value="01">{ i18n.translate( 'January' ) }</option>
-										<option value="02">{ i18n.translate( 'February' ) }</option>
-										<option value="03">{ i18n.translate( 'March' ) }</option>
-										<option value="04">{ i18n.translate( 'April' ) }</option>
-										<option value="05">{ i18n.translate( 'May' ) }</option>
-										<option value="06">{ i18n.translate( 'June' ) }</option>
-										<option value="07">{ i18n.translate( 'July' ) }</option>
-										<option value="08">{ i18n.translate( 'August' ) }</option>
-										<option value="09">{ i18n.translate( 'September' ) }</option>
-										<option value="10">{ i18n.translate( 'October' ) }</option>
-										<option value="11">{ i18n.translate( 'November' ) }</option>
-										<option value="12">{ i18n.translate( 'December' ) }</option>
+										<option value="01">{ i18n.moment.months( 0 ) }</option>
+										<option value="02">{ i18n.moment.months( 1 ) }</option>
+										<option value="03">{ i18n.moment.months( 2 ) }</option>
+										<option value="04">{ i18n.moment.months( 3 ) }</option>
+										<option value="05">{ i18n.moment.months( 4 ) }</option>
+										<option value="06">{ i18n.moment.months( 5 ) }</option>
+										<option value="07">{ i18n.moment.months( 6 ) }</option>
+										<option value="08">{ i18n.moment.months( 7 ) }</option>
+										<option value="09">{ i18n.moment.months( 8 ) }</option>
+										<option value="10">{ i18n.moment.months( 9 ) }</option>
+										<option value="11">{ i18n.moment.months( 10 ) }</option>
+										<option value="12">{ i18n.moment.months( 11 ) }</option>
 									</select>
 
 									<select

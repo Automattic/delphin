@@ -91,7 +91,7 @@
 		padding: 15px;
 		text-align: center;
 		text-transform: uppercase;
-		transition: all 0.3s;
+		transition: opacity 0.3s, background-color 0.3s;
 		width: 100%;
 
 		&:disabled {

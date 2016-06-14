@@ -29,9 +29,14 @@ function creditCardFieldRules() {
 			rules: [ 'required', 'validCreditCardNumber' ]
 		},
 
-		'expiration-date': {
-			description: i18n.translate( 'Credit Card Expiration Date' ),
-			rules: [ 'required', 'validExpirationDate' ]
+		expirationMonth: {
+			description: i18n.translate( 'Credit card expiration month' ),
+			rules: [ 'required', 'validExpirationMonth' ]
+		},
+
+		expirationYear: {
+			description: i18n.translate( 'Credit card expiration year' ),
+			rules: [ 'required', 'validExpirationYear' ]
 		},
 
 		cvv: {
@@ -70,15 +75,13 @@ validators.validCreditCardNumber = creditCardValidator( 'validCardNumber' );
 
 validators.validCvvNumber = creditCardValidator( 'validCvc' );
 
-validators.validExpirationDate = creditCardValidator(
-	'validExpirationMonth',
-	'validExpirationYear'
-);
+validators.validExpirationMonth = creditCardValidator( 'validExpirationMonth' );
+
+validators.validExpirationYear = creditCardValidator( 'validExpirationYear' );
 
 function validateCreditCard( cardDetails ) {
-	var expirationDate = cardDetails[ 'expiration-date' ] || '/',
-		expirationMonth = parseInt( expirationDate.split( '/' )[ 0 ], 10 ),
-		expirationYear = parseInt( expirationDate.split( '/' )[ 1 ], 10 );
+	var expirationMonth = Number( cardDetails.expirationMonth ),
+		expirationYear = Number( cardDetails.expirationYear );
 
 	return creditcards.validate( {
 		number: cardDetails.number,

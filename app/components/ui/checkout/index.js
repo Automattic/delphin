@@ -131,6 +131,10 @@ const Checkout = React.createClass( {
 									<option value="16">2016</option>
 								</select>
 							</div>
+							<ValidationError fields={ [
+								fields.expirationMonth,
+								fields.expirationYear
+							] } />
 						</fieldset>
 
 						<fieldset className={ styles.securityCode }>

@@ -5,9 +5,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
+import creditCardDetails from 'lib/credit-card-details';
 import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
+import ValidationError from 'components/ui/form/validation-error';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -72,23 +74,30 @@ const Checkout = React.createClass( {
 		this.props.createSite();
 	},
 
+	handleSubmit( values ) {
+		const errors = creditCardDetails.validateCardDetails( values ).errors;
+
+		return Promise.reject( errors );
+	},
+
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields } = this.props;
+			{ fields, handleSubmit } = this.props;
 
 		return (
 			<div>
 				<CheckoutProgressbar currentStep={ 3 } />
 
-				<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
+				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<div className={ styles.fieldArea }>
 						<fieldset>
 							<label>{ i18n.translate( 'Name on Card' ) }</label>
 							<input
-									type="text"
-									autoFocus
-									{ ...fields.name }
-								/>
+								type="text"
+								autoFocus
+								{ ...fields.name }
+							/>
+							<ValidationError field={ fields.name } />
 						</fieldset>
 
 						<fieldset>
@@ -97,6 +106,7 @@ const Checkout = React.createClass( {
 									type="text"
 									{ ...fields.number }
 								/>
+							<ValidationError field={ fields.number } />
 						</fieldset>
 
 						<fieldset>
@@ -129,6 +139,7 @@ const Checkout = React.createClass( {
 								type="text"
 								{ ...fields.cvv }
 							/>
+							<ValidationError field={ fields.cvv } />
 						</fieldset>
 					</div>
 

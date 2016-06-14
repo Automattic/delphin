@@ -116,3 +116,23 @@
 	margin: 1px 5px;
 	display: inline-block;
 }
+
+.input-container {
+	position: relative;
+}
+
+.gridicon {
+	fill: $yellow;
+	position: absolute;
+		top: 12px;
+		right: 10px;
+}
+
+
+.input {
+	&.has-error {
+		border-color: $yellow;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}

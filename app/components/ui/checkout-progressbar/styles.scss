@@ -9,6 +9,8 @@ $inner-dot-color: $gray-blue;
 
 .progressbar {
 	display: flex;
+	margin: 20px auto;
+	max-width: 400px;
 }
 
 @mixin step-line-style( $color, $width ) {

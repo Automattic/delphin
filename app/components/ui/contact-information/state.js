@@ -8,7 +8,17 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 const State = ( { disabled, field, states } ) => {
-	if ( isEmpty( states.data ) ) {
+	if ( ! states.hasLoadedFromServer ) {
+		return (
+			<input
+				className={ styles.state }
+				placeholder={ i18n.translate( 'State' ) }
+				disabled
+			/>
+		);
+	}
+
+	if ( states.hasLoadedFromServer && isEmpty( states.data ) ) {
 		return (
 			<input
 				{ ...field }

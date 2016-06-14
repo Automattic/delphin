@@ -97,62 +97,62 @@ const Checkout = React.createClass( {
 				<CheckoutProgressbar currentStep={ 3 } />
 
 				<Form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }
-				fieldArea={
-					<div>
-						<fieldset>
-							<label>{ i18n.translate( 'Name on Card' ) }</label>
-							<input type="text" name="name" />
-						</fieldset>
+					fieldArea={
+						<div>
+							<fieldset>
+								<label>{ i18n.translate( 'Name on Card' ) }</label>
+								<input type="text" name="name" />
+							</fieldset>
 
-						<fieldset>
-							<label>{ i18n.translate( 'Card Number' ) }</label>
-							<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
-						</fieldset>
+							<fieldset>
+								<label>{ i18n.translate( 'Card Number' ) }</label>
+								<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form['credit-card-number'] } />
+							</fieldset>
 
-						<fieldset>
-							<label>{ i18n.translate( 'Expiration' ) }</label>
-							<div className={ styles.expiration }>
-								<select
-									onChange={ this.updateForm }
-									value={ this.state.form['expiration-date-month'] }
-									className={ styles.expirationMonth }>
-									<option>{ i18n.translate( 'Month' ) }</option>
-									<option value="01">{ i18n.translate( 'January' ) }</option>
-									<option value="02">{ i18n.translate( 'February' ) }</option>
-									<option value="03">{ i18n.translate( 'March' ) }</option>
-									<option value="04">{ i18n.translate( 'April' ) }</option>
-									<option value="05">{ i18n.translate( 'May' ) }</option>
-									<option value="06">{ i18n.translate( 'June' ) }</option>
-									<option value="07">{ i18n.translate( 'July' ) }</option>
-									<option value="08">{ i18n.translate( 'August' ) }</option>
-									<option value="09">{ i18n.translate( 'September' ) }</option>
-									<option value="10">{ i18n.translate( 'October' ) }</option>
-									<option value="11">{ i18n.translate( 'November' ) }</option>
-									<option value="12">{ i18n.translate( 'December' ) }</option>
-								</select>
+							<fieldset>
+								<label>{ i18n.translate( 'Expiration' ) }</label>
+								<div className={ styles.expiration }>
+									<select
+										onChange={ this.updateForm }
+										value={ this.state.form['expiration-date-month'] }
+										className={ styles.expirationMonth }>
+										<option>{ i18n.translate( 'Month' ) }</option>
+										<option value="01">{ i18n.translate( 'January' ) }</option>
+										<option value="02">{ i18n.translate( 'February' ) }</option>
+										<option value="03">{ i18n.translate( 'March' ) }</option>
+										<option value="04">{ i18n.translate( 'April' ) }</option>
+										<option value="05">{ i18n.translate( 'May' ) }</option>
+										<option value="06">{ i18n.translate( 'June' ) }</option>
+										<option value="07">{ i18n.translate( 'July' ) }</option>
+										<option value="08">{ i18n.translate( 'August' ) }</option>
+										<option value="09">{ i18n.translate( 'September' ) }</option>
+										<option value="10">{ i18n.translate( 'October' ) }</option>
+										<option value="11">{ i18n.translate( 'November' ) }</option>
+										<option value="12">{ i18n.translate( 'December' ) }</option>
+									</select>
 
-								<select
-									onChange={ this.updateForm }
-									value={ this.state.form['expiration-date-year'] }
-									className={ styles.expirationYear }>
-									<option>{ i18n.translate( 'Year' ) }</option>
-									<option value="19">2019</option>
-									<option value="18">2018</option>
-									<option value="17">2017</option>
-									<option value="16">2016</option>
-								</select>
-							</div>
-						</fieldset>
+									<select
+										onChange={ this.updateForm }
+										value={ this.state.form['expiration-date-year'] }
+										className={ styles.expirationYear }>
+										<option>{ i18n.translate( 'Year' ) }</option>
+										<option value="19">2019</option>
+										<option value="18">2018</option>
+										<option value="17">2017</option>
+										<option value="16">2016</option>
+									</select>
+								</div>
+							</fieldset>
 
-						<fieldset>
-							<label>{ i18n.translate( 'Security Code' ) }</label>
-							<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
-						</fieldset>
-					</div>
-				}
-				submitArea={
-					<button>{ i18n.translate( 'Checkout' ) }</button>
-				} />
+							<fieldset>
+								<label>{ i18n.translate( 'Security Code' ) }</label>
+								<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
+							</fieldset>
+						</div>
+					}
+					submitArea={
+						<button>{ i18n.translate( 'Checkout' ) }</button>
+					} />
 			</div>
 		);
 	},

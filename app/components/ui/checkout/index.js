@@ -101,7 +101,7 @@ const Checkout = React.createClass( {
 						<div>
 							<fieldset>
 								<label>{ i18n.translate( 'Name on Card' ) }</label>
-								<input type="text" name="name" />
+								<input type="text" name="name" autoFocus />
 							</fieldset>
 
 							<fieldset>

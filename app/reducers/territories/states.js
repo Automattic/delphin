@@ -39,4 +39,3 @@ export const states = ( state = {}, action ) => {
 			return state;
 	}
 };
-

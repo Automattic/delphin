@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Form from 'components/ui/form';
 import styles from './styles.scss';
-import StepsProgressbar from 'components/ui/steps-progressbar';
+import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 
 class ContactInformation extends React.Component {
@@ -131,16 +131,10 @@ class ContactInformation extends React.Component {
 
 	render() {
 		const { fields, handleSubmit, countries } = this.props;
-		const steps = [
-			i18n.translate( 'search' ),
-			i18n.translate( 'sign in' ),
-			i18n.translate( 'profile' ),
-			i18n.translate( 'checkout' )
-		];
 
 		return (
 			<div>
-				<StepsProgressbar className={ styles.progress } steps={ steps } currentStep={ steps[ 2 ] } />
+				<CheckoutProgressbar currentStep={ 2 } />
 
 				<div className={ styles.header }>
 					<h2 className={ styles.heading }>

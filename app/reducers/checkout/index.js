@@ -6,7 +6,7 @@ import {
 } from 'reducers/action-types';
 
 export function checkout( state = {}, action ) {
-	const { domain, type } = action;
+	const { type } = action;
 
 	switch ( type ) {
 		case CREATE_SITE_COMPLETE:
@@ -23,7 +23,10 @@ export function checkout( state = {}, action ) {
 			} );
 
 		case DOMAIN_SELECT:
-			return { domain };
+			return {
+				domain: action.value && action.value.domain_name,
+				cost: action.value && action.value.cost
+			};
 
 		default:
 			return state;

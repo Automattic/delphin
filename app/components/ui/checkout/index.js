@@ -4,10 +4,10 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Form from 'components/ui/form';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
+import FormToggle from 'components/ui/form/form-toggle';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -27,7 +27,8 @@ const Checkout = React.createClass( {
 				'credit-card-number': '',
 				'expiration-date-month': '',
 				'expiration-date-year': '',
-				cvv: ''
+				cvv: '',
+				'privacy-protection': true
 			},
 			submiting: false
 		};
@@ -99,54 +100,69 @@ const Checkout = React.createClass( {
 			<div>
 				<CheckoutProgressbar currentStep={ 3 } />
 
-				<Form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }
-					fieldArea={
-						<div>
-							<fieldset>
-								<label>{ i18n.translate( 'Name on Card' ) }</label>
-								<input type="text" name="name" autoFocus />
-							</fieldset>
+				<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
+					<div className={ styles.fieldArea }>
+						<fieldset>
+							<label>{ i18n.translate( 'Name on Card' ) }</label>
+							<input type="text" name="name" autoFocus />
+						</fieldset>
 
-							<fieldset>
-								<label>{ i18n.translate( 'Card Number' ) }</label>
-								<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form[ 'credit-card-number' ] } />
-							</fieldset>
+						<fieldset>
+							<label>{ i18n.translate( 'Card Number' ) }</label>
+							<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form[ 'credit-card-number' ] } />
+						</fieldset>
 
-							<fieldset>
-								<label>{ i18n.translate( 'Expiration' ) }</label>
-								<div className={ styles.expiration }>
-									<select
-										onChange={ this.updateForm }
-										value={ this.state.form[ 'expiration-date-month' ] }
-										className={ styles.expirationMonth }>
-										<option>{ i18n.translate( 'Month' ) }</option>
-										{ months.map( ( monthName, monthIndex ) =>
-											<option value={ monthIndex }>{ capitalize( monthName ) }</option>
-										) }
-									</select>
+						<fieldset>
+							<label>{ i18n.translate( 'Expiration' ) }</label>
+							<div className={ styles.expiration }>
+								<select
+									onChange={ this.updateForm }
+									value={ this.state.form[ 'expiration-date-month' ] }
+									className={ styles.expirationMonth }>
+									<option>{ i18n.translate( 'Month' ) }</option>
+									{ months.map( ( monthName, monthIndex ) =>
+										<option key={ monthIndex } value={ monthIndex }>{ capitalize( monthName ) }</option>
+									) }
+								</select>
 
-									<select
-										onChange={ this.updateForm }
-										value={ this.state.form[ 'expiration-date-year' ] }
-										className={ styles.expirationYear }>
-										<option>{ i18n.translate( 'Year' ) }</option>
-										<option value="19">2019</option>
-										<option value="18">2018</option>
-										<option value="17">2017</option>
-										<option value="16">2016</option>
-									</select>
-								</div>
-							</fieldset>
+								<select
+									onChange={ this.updateForm }
+									value={ this.state.form[ 'expiration-date-year' ] }
+									className={ styles.expirationYear }>
+									<option>{ i18n.translate( 'Year' ) }</option>
+									<option value="19">2019</option>
+									<option value="18">2018</option>
+									<option value="17">2017</option>
+									<option value="16">2016</option>
+								</select>
+							</div>
+						</fieldset>
 
-							<fieldset className={ styles.securityCode }>
-								<label>{ i18n.translate( 'Security Code' ) }</label>
-								<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
-							</fieldset>
+						<fieldset className={ styles.securityCode }>
+							<label>{ i18n.translate( 'Security Code' ) }</label>
+							<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
+						</fieldset>
+					</div>
+
+					<div className={ styles.orderSummary }>
+						<h2>{ i18n.translate( 'Order Summary' ) }</h2>
+						<div className={ styles.orderItem }>
+							<span>{ this.props.checkout.domain }</span>
+							<span>{ this.props.checkout.cost }</span>
 						</div>
-					}
-					submitArea={
+						<div className={ styles.orderItem }>
+							<label>{ i18n.translate( 'Privacy Protection' ) }</label>
+							<span>
+								<FormToggle name="privacy-protection" checked={ this.state.form[ 'privacy-protection' ] } onChange={ this.updateForm } />
+								<span className={ styles.privacyProtectionPrice }>FREE</span>
+							</span>
+						</div>
+					</div>
+
+					<div className={ styles.submitArea }>
 						<button>{ i18n.translate( 'Checkout' ) }</button>
-					} />
+					</div>
+				</form>
 			</div>
 		);
 	},

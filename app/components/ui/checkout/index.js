@@ -5,7 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Form from 'components/ui/form';
-import StepsProgressbar from 'components/ui/steps-progressbar';
+import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import styles from './styles.scss';
 
 const Checkout = React.createClass( {
@@ -94,7 +94,7 @@ const Checkout = React.createClass( {
 
 		return (
 			<div>
-				<StepsProgressbar currentStep={ 3 } />
+				<CheckoutProgressbar currentStep={ 3 } />
 
 				<Form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }
 				fieldArea={

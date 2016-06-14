@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Form from 'components/ui/form';
 import styles from './styles.scss';
-import StepsProgressbar from 'components/ui/steps-progressbar';
+import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 
 class ContactInformation extends React.Component {
@@ -134,7 +134,7 @@ class ContactInformation extends React.Component {
 
 		return (
 			<div>
-				<StepsProgressbar currentStep={ 2 } />
+				<CheckoutProgressbar currentStep={ 2 } />
 
 				<div className={ styles.header }>
 					<h2 className={ styles.heading }>

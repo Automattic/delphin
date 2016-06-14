@@ -153,7 +153,7 @@ class ContactInformation extends React.Component {
 	}
 
 	render() {
-		const { fields, handleSubmit, countries } = this.props;
+		const { fields, handleSubmit, countries, untouch } = this.props;
 
 		return (
 			<div>
@@ -180,6 +180,7 @@ class ContactInformation extends React.Component {
 									disabled={ this.isDataLoading() }
 									field={ fields.firstName }
 									autoFocus
+									untouch={ untouch }
 									onBlur={ this.handleBlurBound }
 									className={ styles.firstName }
 									placeholder={ i18n.translate( 'First Name' ) }
@@ -188,6 +189,7 @@ class ContactInformation extends React.Component {
 								<Input
 									disabled={ this.isDataLoading() }
 									field={ fields.lastName }
+									untouch={ untouch }
 									onBlur={ this.handleBlurBound }
 									className={ styles.lastName }
 									placeholder={ i18n.translate( 'Last Name' ) }
@@ -206,6 +208,7 @@ class ContactInformation extends React.Component {
 									<label>{ i18n.translate( 'Organization' ) }</label>
 									<Input
 										field={ fields.organization }
+										untouch={ untouch }
 										onBlur={ this.handleBlurBound }
 										className={ styles.organization }
 										disabled={ this.isDataLoading() }
@@ -220,6 +223,7 @@ class ContactInformation extends React.Component {
 
 								<Input
 									field={ fields.address1 }
+									untouch={ untouch }
 									onBlur={ this.handleBlurBound }
 									className={ styles.address1 }
 									disabled={ this.isDataLoading() }
@@ -229,6 +233,7 @@ class ContactInformation extends React.Component {
 								{ this.address2InputIsVisible() && (
 									<Input
 										field={ fields.address2 }
+										untouch={ untouch }
 										onBlur={ this.handleBlurBound }
 										className={ styles.address2 }
 										disabled={ this.isDataLoading() }
@@ -247,6 +252,7 @@ class ContactInformation extends React.Component {
 								<div className={ styles.row }>
 									<Input
 										disabled={ this.isDataLoading() }
+										untouch={ untouch }
 										field={ fields.city }
 										onBlur={ this.handleBlurBound }
 										className={ styles.city }
@@ -256,11 +262,13 @@ class ContactInformation extends React.Component {
 									<State
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
+										untouch={ untouch }
 										onBlur={ this.handleBlurBound }
 										states={ this.props.states } />
 
 									<Input
 										disabled={ this.isDataLoading() }
+										untouch={ untouch }
 										field={ fields.postalCode }
 										onBlur={ this.handleBlurBound }
 										className={ styles.postalCode }
@@ -295,6 +303,7 @@ class ContactInformation extends React.Component {
 								<Input
 									disabled={ this.isDataLoading() }
 									field={ fields.phone }
+									untouch={ untouch }
 									onBlur={ this.handleBlurBound }
 									className={ styles.phone }
 									placeholder={ i18n.translate( 'Phone' ) }

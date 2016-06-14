@@ -17,6 +17,10 @@ const ValidationError = ( { field, fields } ) => {
 	}
 
 	let errors = allFields.reduce( ( result, currentField ) => {
+		if ( ! currentField.touched ) {
+			return result;
+		}
+
 		if ( typeof currentField.error === 'string' ) {
 			return result.concat( currentField.error );
 		}

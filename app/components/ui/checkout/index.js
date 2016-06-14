@@ -144,7 +144,7 @@ const Checkout = React.createClass( {
 								</div>
 							</fieldset>
 
-							<fieldset>
+							<fieldset className={ styles.securityCode }>
 								<label>{ i18n.translate( 'Security Code' ) }</label>
 								<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
 							</fieldset>

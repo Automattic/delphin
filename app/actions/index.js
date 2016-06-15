@@ -58,10 +58,10 @@ function getPaygateParameters( cardDetails ) {
 		name: cardDetails.name,
 		number: cardDetails.number,
 		cvc: cardDetails.cvv,
-		zip: cardDetails[ 'postal-code' ],
+		zip: cardDetails.postalCode,
 		country: cardDetails.country,
-		exp_month: cardDetails[ 'expiration-date' ].substring( 0, 2 ),
-		exp_year: '20' + cardDetails[ 'expiration-date' ].substring( 3, 5 )
+		exp_month: cardDetails.expirationDate.substring( 0, 2 ),
+		exp_year: '20' + cardDetails.expirationDate.substring( 2, 4 )
 	};
 }
 
@@ -125,8 +125,8 @@ export function createTransaction() {
 				name: checkoutForm.name,
 				number: checkoutForm.number,
 				cvv: checkoutForm.cvv,
-				'expiration-date': checkoutForm.expirationMonth + checkoutForm.expirationYear,
-				'postal-code': null // TODO: do we need this value?
+				expirationDate: checkoutForm.expirationMonth + checkoutForm.expirationYear,
+				postalCode: null // TODO: do we need these values?
 			},
 			contactInformationForm = getValues( getState().form[ 'contact-information' ] ),
 			domainDetails = Object.assign( snakeifyKeys( contactInformationForm ), {

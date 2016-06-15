@@ -69,7 +69,7 @@ const Checkout = React.createClass( {
 	checkout( event ) {
 		event.preventDefault();
 
-		this.props.createSite( this.props.user, Object.assign( {}, this.props.values, { domain: this.props.checkout.domain } ) );
+		this.props.createSite();
 	},
 
 	renderForm() {

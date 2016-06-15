@@ -12,14 +12,13 @@ export function checkout( state = {}, action ) {
 		case CREATE_SITE_COMPLETE:
 			return Object.assign( {}, state, {
 				site: {
-					domain: action.domain,
 					blogId: action.blogId
 				}
 			} );
 
 		case CREATE_TRANSACTION_COMPLETE:
 			return Object.assign( {}, state, {
-				transaction: action.form
+				transaction: true
 			} );
 
 		case DOMAIN_SELECT:

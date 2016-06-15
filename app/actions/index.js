@@ -1,4 +1,5 @@
 // External dependencies
+import { getValues } from 'redux-form';
 import debugFactory from 'debug';
 
 // Internal dependencies
@@ -9,39 +10,46 @@ import {
 	VERIFY_USER,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import { getCheckout } from 'reducers/checkout/selectors';
+import { getUserSettings } from 'reducers/user/selectors';
+import { snakeifyKeys } from 'lib/formatters';
 import paygateLoader from 'lib/paygate-loader';
 
 // Module variables
 const debug = debugFactory( 'delphin:actions' );
 
-export function createSite( user, form ) {
-	return {
-		type: WPCOM_REQUEST,
-		method: 'post',
-		params: { path: '/sites/new' },
-		payload: {
-			bearer_token: user.data.bearerToken,
-			blog_name: form.domain,
-			blog_title: form.domain,
-			lang_id: 1,
-			locale: 'en',
-			validate: false,
-			find_available_url: true
-		},
-		loading: VERIFY_USER,
-		success: ( data ) => createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ),
-		fail: ( error ) => addNotice( {
-			message: error.message,
-			status: 'error'
-		} )
+export function createSite() {
+	return ( dispatch, getState ) => {
+		const user = getUserSettings( getState() ),
+			{ domain } = getCheckout( getState() );
+
+		dispatch( {
+			type: WPCOM_REQUEST,
+			method: 'post',
+			params: { path: '/sites/new' },
+			payload: {
+				bearer_token: user.data.bearerToken,
+				blog_name: domain,
+				blog_title: domain,
+				lang_id: 1,
+				locale: 'en',
+				validate: false,
+				find_available_url: true
+			},
+			loading: VERIFY_USER,
+			success: ( data ) => createSiteComplete( data.blog_details.blogid ),
+			fail: ( error ) => addNotice( {
+				message: error.message,
+				status: 'error'
+			} )
+		} );
 	};
 }
 
-export function createSiteComplete( form ) {
+export function createSiteComplete( blogId ) {
 	return {
 		type: CREATE_SITE_COMPLETE,
-		domain: form.domain,
-		blogId: form.blogId
+		blogId
 	};
 }
 
@@ -103,16 +111,23 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	};
 }
 
-export function createTransaction( user, form ) {
-	const cardDetails = {
-		name: form.name,
-		number: form.number,
-		cvv: form.cvv,
-		'expiration-date': form.expirationMonth + form.expirationYear,
-		'postal-code': form[ 'postal-code' ]
-	};
+export function createTransaction() {
+	return ( dispatch, getState ) => {
+		const user = getUserSettings( getState() ),
+			checkout = getCheckout( getState() ),
+			{ domain } = checkout,
+			{ blogId } = checkout.site,
+			checkoutForm = getValues( getState().form.checkout ),
+			cardDetails = {
+				name: checkoutForm.name,
+				number: checkoutForm.number,
+				cvv: checkoutForm.cvv,
+				'expiration-date': checkoutForm.expirationMonth + checkoutForm.expirationYear,
+				'postal-code': null // TODO: do we need this value?
+			},
+			contactInformationForm = getValues( getState().form[ 'contact-information' ] ),
+			domainDetails = Object.assign( snakeifyKeys( contactInformationForm ), { email: user.data.email } );
 
-	return dispatch => {
 		dispatch( createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
 				bearer_token: user.data.bearerToken,
@@ -120,30 +135,20 @@ export function createTransaction( user, form ) {
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',
 				cart: {
-					blog_id: form.blogId,
+					blog_id: blogId,
 					currency: 'GBP',
 					temporary: 1,
 					extra: {},
 					products: [
 						{
 							product_id: 6,
-							meta: form.domain,
+							meta: domain,
 							volume: 1,
 							free_trial: false
 						}
 					]
 				},
-				domain_details: {
-					first_name: 'Wesley',
-					last_name: 'Snipes',
-					address_1: 'The Tomb of Dracula road',
-					city: 'Boston',
-					state: 'MA',
-					postal_code: '02110',
-					country_code: 'US',
-					email: 'wesley@snipes.com',
-					phone: '666-666-666'
-				}
+				domain_details: domainDetails
 			};
 
 			dispatch( {
@@ -154,7 +159,7 @@ export function createTransaction( user, form ) {
 				loading: VERIFY_USER,
 				success: ( data ) => {
 					debug( data );
-					return createTransactionComplete( form );
+					return createTransactionComplete();
 				},
 				fail: ( apiError ) => addNotice( {
 					message: apiError.message,

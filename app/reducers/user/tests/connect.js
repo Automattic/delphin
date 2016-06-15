@@ -5,13 +5,14 @@ import {
 	CONNECT_USER,
 	CONNECT_USER_CLEAR,
 	CONNECT_USER_COMPLETE,
+	CONNECT_USER_WARNING,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE
 } from 'reducers/action-types';
 import { connect } from '../connect';
 
 describe( 'state.user.connect', () => {
-	it( 'should update `email`, `intention` and `isRequesting` when a `CONNECT_USER` action is triggered', () => {
+	it( 'should update `email`, `intention`, `notice` and `isRequesting` when a `CONNECT_USER` action is triggered', () => {
 		expect( connect( undefined, {
 			type: CONNECT_USER,
 			email: 'foo@bar.com',
@@ -23,7 +24,35 @@ describe( 'state.user.connect', () => {
 			data: {
 				bearerToken: null,
 				email: 'foo@bar.com',
+				notice: null,
 				twoFactorAuthenticationEnabled: null
+			}
+		} );
+	} );
+
+	it( 'should update `notice` when a `CONNECT_USER_WARNING` action is triggered', () => {
+		expect( connect( {
+			intention: 'signup',
+			isRequesting: true,
+			wasCreated: false,
+			data: {
+				bearerToken: null,
+				email: 'foo@bar.com',
+				notice: 'Some random error happened',
+				twoFactorAuthenticationEnabled: false
+			}
+		}, {
+			type: CONNECT_USER_WARNING,
+			notice: 'Another weird error happened'
+		} ) ).toEqual( {
+			intention: 'signup',
+			isRequesting: true,
+			wasCreated: false,
+			data: {
+				bearerToken: null,
+				email: 'foo@bar.com',
+				notice: 'Another weird error happened',
+				twoFactorAuthenticationEnabled: false
 			}
 		} );
 	} );
@@ -40,6 +69,7 @@ describe( 'state.user.connect', () => {
 			data: {
 				bearerToken: null,
 				email: 'foo@bar.com',
+				notice: null,
 				twoFactorAuthenticationEnabled: true
 			}
 		} );
@@ -50,12 +80,22 @@ describe( 'state.user.connect', () => {
 			intention: null,
 			isRequesting: false,
 			wasCreated: true,
-			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: false }
+			data: {
+				bearerToken: null,
+				email: 'foo@bar.com',
+				notice: 'Some random error happened',
+				twoFactorAuthenticationEnabled: false
+			}
 		}, { type: CONNECT_USER_CLEAR } ) ).toEqual( {
 			intention: null,
 			isRequesting: false,
 			wasCreated: false,
-			data: { bearerToken: null, email: 'foo@bar.com', twoFactorAuthenticationEnabled: false }
+			data: {
+				bearerToken: null,
+				email: 'foo@bar.com',
+				notice: 'Some random error happened',
+				twoFactorAuthenticationEnabled: false
+			}
 		} );
 	} );
 

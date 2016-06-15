@@ -23,6 +23,7 @@ const initialState = {
 		 * Use `state.user.settings.data.email` to obtain the logged-in user's email.
 		 */
 		email: null,
+		notice: null,
 		twoFactorAuthenticationEnabled: null
 	}
 };
@@ -33,7 +34,10 @@ export const connect = ( state = initialState, action ) => {
 	switch ( type ) {
 		case CONNECT_USER:
 			return merge( {}, state, {
-				data: { email },
+				data: {
+					email,
+					notice: null
+				},
 				isRequesting: true,
 				intention
 			} );

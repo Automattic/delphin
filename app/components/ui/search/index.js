@@ -39,8 +39,8 @@ const Search = React.createClass( {
 		this.props.fetchDomainSuggestions( query );
 	},
 
-	selectDomain( name ) {
-		this.props.selectDomain( name );
+	selectDomain( suggestion ) {
+		this.props.selectDomain( suggestion );
 	},
 
 	isExactMatchUnavailable() {

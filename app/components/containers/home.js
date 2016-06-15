@@ -36,8 +36,8 @@ export default reduxForm(
 			dispatch( fetchDomainSuggestions( query ) );
 		},
 
-		selectDomain( name, isUserLoggedIn ) {
-			dispatch( selectDomain( name ) );
+		selectDomain( domainProduct, isUserLoggedIn ) {
+			dispatch( selectDomain( domainProduct ) );
 
 			if ( isUserLoggedIn ) {
 				dispatch( push( getPath( 'contactInformation' ) ) );
@@ -47,8 +47,8 @@ export default reduxForm(
 		}
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
-		selectDomain( name ) {
-			dispatchProps.selectDomain( name, stateProps.user.isLoggedIn );
+		selectDomain( domainProduct ) {
+			dispatchProps.selectDomain( domainProduct, stateProps.user.isLoggedIn );
 		}
 	} )
 )( Home );

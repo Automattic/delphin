@@ -164,7 +164,7 @@ export function createTransaction() {
 				loading: VERIFY_USER,
 				success: ( data ) => {
 					debug( data );
-					return createTransactionComplete();
+					return createTransactionComplete( blogId, domain );
 				},
 				fail: ( apiError ) => addNotice( {
 					message: apiError.message,
@@ -175,9 +175,10 @@ export function createTransaction() {
 	};
 }
 
-export function createTransactionComplete( form ) {
+export function createTransactionComplete( blogId, domain ) {
 	return {
 		type: CREATE_TRANSACTION_COMPLETE,
-		form
+		blogId,
+		domain
 	};
 }

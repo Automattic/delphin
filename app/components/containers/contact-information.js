@@ -30,7 +30,8 @@ export default reduxForm(
 			'countryCode',
 			'postalCode',
 			'phone'
-		]
+		],
+		destroyOnUnmount: false
 	},
 	state => ( {
 		contactInformation: state.contactInformation,

@@ -7,44 +7,48 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const State = ( { disabled, field, states } ) => {
+const State = ( { disabled, field, states, onBlur } ) => {
+	let content;
 	if ( ! states.hasLoadedFromServer ) {
-		return (
+		content = (
 			<input
-				className={ styles.state }
+				onBlur={ onBlur }
 				placeholder={ i18n.translate( 'State' ) }
 				disabled
 			/>
 		);
-	}
-
-	if ( states.hasLoadedFromServer && isEmpty( states.data ) ) {
-		return (
+	} else if ( states.hasLoadedFromServer && isEmpty( states.data ) ) {
+		content = (
 			<input
 				{ ...field }
-				className={ styles.state }
+				onBlur={ onBlur }
 				disabled={ disabled }
 				placeholder={ i18n.translate( 'State' ) } />
+		);
+	} else {
+		content = (
+			<select
+				{ ...field }
+				onBlur={ onBlur }
+				disabled={ disabled }>
+				<option value="" disabled>{ i18n.translate( 'State' ) }</option>
+				<option disabled />
+				{ states.data.map( ( state ) => (
+					<option value={ state.code } key={ state.code }>{ state.name }</option>
+				) ) }
+			</select>
 		);
 	}
 
 	return (
-		<select
-			{ ...field }
-			className={ styles.state }
-			disabled={ disabled }>
-			<option value="" disabled>{ i18n.translate( 'State' ) }</option>
-			<option disabled />
-			{ states.data.map( ( state ) => (
-				<option value={ state.code } key={ state.code }>{ state.name }</option>
-			) ) }
-		</select>
+		<div className={ styles.state }>{ content }</div>
 	);
 };
 
 State.propTypes = {
 	disabled: PropTypes.bool.isRequired,
 	field: PropTypes.object.isRequired,
+	onBlur: PropTypes.func,
 	states: PropTypes.object.isRequired
 };
 

@@ -21,13 +21,13 @@
 }
 
 .address-two-is-visible {
-	.address-two {
+	.address2 input {
 		border-top: none;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
 
-	.address-one {
+	.address1 input {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
@@ -39,8 +39,19 @@
 	}
 
 	@include breakpoint( '<480px' ) {
-		input {
+		.firstName,
+		.address1,
+		.city,
+		.phone {
 			margin-top: 10px;
+		}
+
+		.lastName,
+		.state,
+		.postal-code {
+			input {
+				border-top: none;
+			}
 		}
 	}
 
@@ -48,11 +59,18 @@
 		.firstName,
 		.lastName {
 			display: inline-block;
-			width: 165px;
+			width: 170px;
 		}
 
-		.lastName {
-			margin-left: 10px;
+		.firstName input {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		.lastName input {
+			border-left: none;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
 		}
 
 		.city, .state, .postal-code {
@@ -61,17 +79,31 @@
 		}
 
 		.city {
-			width: 160px;
+			width: 165px;
+			
+			input {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
 		}
 
 		.state {
-			margin-left: 10px;
-			width: 70px;
+			width: 80px;
+
+			input {
+				border-left: none;
+				border-right: none;
+				border-radius: 0;
+			}
 		}
 
 		.postal-code {
-			margin-left: 10px;
-			width: 90px;
+			width: 95px;
+
+			input {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
 		}
 	}
 }

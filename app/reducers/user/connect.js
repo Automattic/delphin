@@ -56,7 +56,8 @@ export const connect = ( state = initialState, action ) => {
 
 		case CONNECT_USER_WARNING:
 			return merge( {}, state, {
-				data: { notice }
+				data: { notice },
+				intention
 			} );
 
 		case VERIFY_USER:

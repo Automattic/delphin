@@ -30,7 +30,7 @@ describe( 'state.user.connect', () => {
 		} );
 	} );
 
-	it( 'should update `notice` when a `CONNECT_USER_WARNING` action is triggered', () => {
+	it( 'should update `notice` and `intention` when a `CONNECT_USER_WARNING` action is triggered', () => {
 		expect( connect( {
 			intention: 'signup',
 			isRequesting: true,
@@ -43,15 +43,16 @@ describe( 'state.user.connect', () => {
 			}
 		}, {
 			type: CONNECT_USER_WARNING,
-			notice: 'Another weird error happened'
+			notice: 'There is already an account using this email address',
+			intention: 'login'
 		} ) ).toEqual( {
-			intention: 'signup',
+			intention: 'login',
 			isRequesting: true,
 			wasCreated: false,
 			data: {
 				bearerToken: null,
 				email: 'foo@bar.com',
-				notice: 'Another weird error happened',
+				notice: 'There is already an account using this email address',
 				twoFactorAuthenticationEnabled: false
 			}
 		} );

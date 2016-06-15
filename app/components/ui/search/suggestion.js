@@ -13,7 +13,7 @@ const Suggestion = React.createClass( {
 	},
 
 	selectDomain() {
-		this.props.selectDomain( this.props.suggestion.domain_name );
+		this.props.selectDomain( this.props.suggestion );
 	},
 
 	render() {

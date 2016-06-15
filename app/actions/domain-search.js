@@ -70,10 +70,10 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 	};
 }
 
-export function selectDomain( domain ) {
+export function selectDomain( domainProduct ) {
 	return {
 		type: DOMAIN_SELECT,
-		domain
+		value: domainProduct
 	};
 }
 

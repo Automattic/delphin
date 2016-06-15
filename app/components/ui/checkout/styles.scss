@@ -1,3 +1,5 @@
+@import 'app/components/ui/form/styles.scss';
+
 .expiration {
 	display: flex;
 	justify-content: space-between;
@@ -13,4 +15,29 @@
 
 .security-code {
 	width: 40%;
+}
+
+.order-summary {
+	background-color: #f6f9fb;
+	padding: 30px;
+	border-top: 1px solid #c8d7e1;
+	font-size: 1.4rem;
+	font-weight: 300;
+
+	h2 {
+		text-transform: uppercase;
+		font-weight: 600;
+		font-size: 1.3rem;
+		margin: 5px 0 20px 0;
+	}
+}
+
+.order-item {
+	display: flex;
+	justify-content: space-between;
+	margin: 15px 0;
+}
+
+.privacy-protection-price {
+	margin-left: 20px;
 }

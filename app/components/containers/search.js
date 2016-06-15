@@ -46,8 +46,8 @@ export default connect(
 			} ) );
 		},
 
-		selectDomain( name, isUserLoggedIn ) {
-			dispatch( selectDomain( name ) );
+		selectDomain( domainProduct, isUserLoggedIn ) {
+			dispatch( selectDomain( domainProduct ) );
 
 			if ( isUserLoggedIn ) {
 				dispatch( push( getPath( 'contactInformation' ) ) );
@@ -61,8 +61,8 @@ export default connect(
 		}
 	} ),
 	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
-		selectDomain( name ) {
-			dispatchProps.selectDomain( name, stateProps.isLoggedIn );
+		selectDomain( domainProduct ) {
+			dispatchProps.selectDomain( domainProduct, stateProps.isLoggedIn );
 		},
 
 		fetchDomainSuggestions( query ) {

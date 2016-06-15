@@ -10,6 +10,7 @@ import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
 import ValidationError from 'components/ui/form/validation-error';
+import Input from 'components/ui/form/input';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -92,20 +93,20 @@ const Checkout = React.createClass( {
 					<div className={ styles.fieldArea }>
 						<fieldset>
 							<label>{ i18n.translate( 'Name on Card' ) }</label>
-							<input
+							<Input
 								type="text"
+								field={ fields.name }
 								autoFocus
-								{ ...fields.name }
 							/>
 							<ValidationError field={ fields.name } />
 						</fieldset>
 
 						<fieldset>
 							<label>{ i18n.translate( 'Card Number' ) }</label>
-							<input
-									type="text"
-									{ ...fields.number }
-								/>
+							<Input
+								type="text"
+								field={ fields.number }
+							/>
 							<ValidationError field={ fields.number } />
 						</fieldset>
 
@@ -139,9 +140,9 @@ const Checkout = React.createClass( {
 
 						<fieldset className={ styles.securityCode }>
 							<label>{ i18n.translate( 'Security Code' ) }</label>
-							<input
+							<Input
 								type="text"
-								{ ...fields.cvv }
+								field={ fields.cvv }
 							/>
 							<ValidationError field={ fields.cvv } />
 						</fieldset>

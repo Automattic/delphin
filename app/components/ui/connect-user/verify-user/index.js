@@ -65,16 +65,44 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
-	render() {
-		const { fields, handleSubmit, user } = this.props,
-			notice = user.data.notice || i18n.translate(
-				'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}. ' +
-				'Type that code below to verify your email address.',
-				{
-					args: { email: user.data.email },
-					components: { strong: <strong /> }
-				}
+	renderNotice() {
+		const { user: { data: { email, notice }, intention } } = this.props;
+
+		if ( notice ) {
+			return notice;
+		}
+
+		let text = i18n.translate(
+			'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}.',
+			{
+				args: { email: email },
+				components: { strong: <strong /> }
+			}
+		);
+
+		if ( intention === 'login' ) {
+			return (
+				<p>
+					{ text }
+					{ ' ' }
+					{ i18n.translate( 'Type that code below to login.' ) }
+				</p>
 			);
+		} else if ( intention === 'signup' ) {
+			return (
+				<p>
+					{ text }
+					{ ' ' }
+					{ i18n.translate( 'Type that code below to verify your email address.' ) }
+				</p>
+			);
+		}
+
+		return text;
+	},
+
+	render() {
+		const { fields, handleSubmit, user } = this.props;
 
 		return (
 			<div>
@@ -82,7 +110,7 @@ const VerifyUser = React.createClass( {
 
 				<Form
 					onSubmit={ handleSubmit( this.verifyUser ) }
-					noticeArea={ notice }
+					noticeArea={ this.renderNotice() }
 					fieldArea={
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
@@ -108,7 +136,7 @@ const VerifyUser = React.createClass( {
 						</button>
 					} />
 
-					<Footer />
+				<Footer />
 			</div>
 		);
 	}

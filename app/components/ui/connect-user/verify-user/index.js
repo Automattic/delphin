@@ -101,7 +101,10 @@ const VerifyUser = React.createClass( {
 					}
 					submitArea={
 						<button disabled={ user.isRequesting }>
-							{ i18n.translate( 'Verify my email' ) }
+							{ user.intention === 'login'
+								? i18n.translate( 'Login' )
+								: i18n.translate( 'Verify my email' )
+							}
 						</button>
 					} />
 

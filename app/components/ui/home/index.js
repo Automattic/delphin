@@ -7,24 +7,12 @@ import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { isDomain, queryIsInResults } from 'lib/domains';
+import { isDomain } from 'lib/domains';
 import styles from './styles.scss';
 
 const Home = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired
-	},
-
-	componentWillReceiveProps( nextProps ) {
-		if ( ! this.props.domainSearch.hasLoadedFromServer && nextProps.domainSearch.hasLoadedFromServer ) {
-			const { results, query } = nextProps.domainSearch;
-
-			if ( isDomain( query ) && queryIsInResults( results, query ) ) {
-				this.props.selectDomain( query );
-			} else {
-				this.props.redirectToSearch( query );
-			}
-		}
 	},
 
 	handleSubmit( { query } ) {

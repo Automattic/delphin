@@ -73,6 +73,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	}
 
 	return {
+		type: WPCOM_REQUEST,
 		method: 'get',
 		params: { path: '/me/paygate-configuration' },
 		query: { request_type: requestType },
@@ -93,6 +94,8 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 				const parameters = getPaygateParameters( cardDetails );
 				Paygate.createToken( parameters, onSuccess, onFailure );
 			} );
+
+			return { type: 'UNRELATED' };
 		},
 		fail: ( error ) => {
 			callback && callback( error );
@@ -110,7 +113,7 @@ export function createTransaction( user, form ) {
 	};
 
 	return dispatch => {
-		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
+		dispatch( createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
 				bearer_token: user.data.bearerToken,
 				payment_key: response,
@@ -158,7 +161,7 @@ export function createTransaction( user, form ) {
 					status: 'error'
 				} )
 			} );
-		} );
+		} ) );
 	};
 }
 

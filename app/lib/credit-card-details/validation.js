@@ -30,17 +30,17 @@ function creditCardFieldRules() {
 		},
 
 		expirationMonth: {
-			description: i18n.translate( 'Credit card expiration month' ),
+			description: i18n.translate( 'Expiration Month' ),
 			rules: [ 'required', 'validExpirationMonth' ]
 		},
 
 		expirationYear: {
-			description: i18n.translate( 'Credit card expiration year' ),
+			description: i18n.translate( 'Expiration Year' ),
 			rules: [ 'required', 'validExpirationYear' ]
 		},
 
 		cvv: {
-			description: i18n.translate( 'Credit Card CVV Code' ),
+			description: i18n.translate( 'Security Code' ),
 			rules: [ 'required', 'validCvvNumber' ]
 		},
 
@@ -65,7 +65,7 @@ validators.required = {
 	},
 
 	error: function( description ) {
-		return i18n.translate( 'Missing required %(description)s field', {
+		return i18n.translate( 'The "%(description)s" field is required', {
 			args: { description: description }
 		} );
 	}

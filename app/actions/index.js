@@ -106,9 +106,9 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 export function createTransaction( user, form ) {
 	const cardDetails = {
 		name: form.name,
-		number: form[ 'credit-card-number' ],
+		number: form.number,
 		cvv: form.cvv,
-		'expiration-date': form[ 'expiration-date' ],
+		'expiration-date': form.expirationMonth + form.expirationYear,
 		'postal-code': form[ 'postal-code' ]
 	};
 

@@ -11,12 +11,13 @@ import {
 import { connect } from '../connect';
 
 describe( 'state.user.connect', () => {
-	it( 'should update `email` and `isRequesting` when the user is created', () => {
+	it( 'should update `email`, `intention` and `isRequesting` when a `CONNECT_USER` action is triggered', () => {
 		expect( connect( undefined, {
 			type: CONNECT_USER,
-			email: 'foo@bar.com'
+			email: 'foo@bar.com',
+			intention: 'login'
 		} ) ).toEqual( {
-			intention: null,
+			intention: 'login',
 			isRequesting: true,
 			wasCreated: false,
 			data: {
@@ -27,11 +28,11 @@ describe( 'state.user.connect', () => {
 		} );
 	} );
 
-	it( 'should update `wasCreated` when the user creation completes', () => {
+	it( 'should update `wasCreated` and `data` when a `CONNECT_USER_COMPLETE` action is triggered', () => {
 		expect( connect( undefined, {
 			type: CONNECT_USER_COMPLETE,
 			email: 'foo@bar.com',
-			twoFactorAuthenticationEnabled: false
+			twoFactorAuthenticationEnabled: true
 		} ) ).toEqual( {
 			intention: null,
 			isRequesting: false,
@@ -39,7 +40,7 @@ describe( 'state.user.connect', () => {
 			data: {
 				bearerToken: null,
 				email: 'foo@bar.com',
-				twoFactorAuthenticationEnabled: false
+				twoFactorAuthenticationEnabled: true
 			}
 		} );
 	} );

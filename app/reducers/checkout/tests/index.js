@@ -68,8 +68,7 @@ describe( 'checkout reducer for create site complete action', () => {
 			domain: 'example.com',
 			cost: '$25.00',
 			site: {
-				blogId: 1234,
-				domain: 'example.com'
+				blogId: 1234
 			}
 		} );
 	} );
@@ -79,25 +78,17 @@ describe( 'checkout reducer for create transaction complete action', () => {
 	it( 'should return state with new user', () => {
 		const originalState = Object.freeze( { domain: 'example.com', cost: '$30.00' } ),
 			newState = checkout( originalState, {
-				form: {
-					cvv: 'johndoe@example.com',
-					'credit-card-number': 4485839645479525,
-					'expiration-date': '03/18',
-					name: 'John Doe',
-					'postal-code': 12345
-				},
-				type: CREATE_TRANSACTION_COMPLETE
+				type: CREATE_TRANSACTION_COMPLETE,
+				blogId: 123,
+				domain: 'example.com'
 			} );
 
 		expect( newState ).toEqual( {
 			domain: 'example.com',
 			cost: '$30.00',
 			transaction: {
-				cvv: 'johndoe@example.com',
-				'credit-card-number': 4485839645479525,
-				'expiration-date': '03/18',
-				name: 'John Doe',
-				'postal-code': 12345
+				blogId: 123,
+				domain: 'example.com'
 			}
 		} );
 	} );

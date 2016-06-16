@@ -1,6 +1,6 @@
 // External dependencies
-import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
@@ -8,7 +8,18 @@ import { createSite, createTransaction } from 'actions';
 import { getPath } from 'routes';
 import { isLoggedIn, getUserSettings } from 'reducers/user/selectors';
 
-export default connect(
+export default reduxForm(
+	{
+		form: 'checkout',
+		fields: [
+			'name',
+			'number',
+			'cvv',
+			'expirationMonth',
+			'expirationYear',
+			'privacyProtection'
+		]
+	},
 	state => ( {
 		checkout: state.checkout,
 		isLoggedIn: isLoggedIn( state ),

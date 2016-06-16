@@ -1,4 +1,5 @@
 // External dependencies
+import { getValues } from 'redux-form';
 import debugFactory from 'debug';
 
 // Internal dependencies
@@ -9,39 +10,46 @@ import {
 	VERIFY_USER,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import { getCheckout } from 'reducers/checkout/selectors';
+import { getUserSettings } from 'reducers/user/selectors';
+import { snakeifyKeys } from 'lib/formatters';
 import paygateLoader from 'lib/paygate-loader';
 
 // Module variables
 const debug = debugFactory( 'delphin:actions' );
 
-export function createSite( user, form ) {
-	return {
-		type: WPCOM_REQUEST,
-		method: 'post',
-		params: { path: '/sites/new' },
-		payload: {
-			bearer_token: user.data.bearerToken,
-			blog_name: form.domain,
-			blog_title: form.domain,
-			lang_id: 1,
-			locale: 'en',
-			validate: false,
-			find_available_url: true
-		},
-		loading: VERIFY_USER,
-		success: ( data ) => createSiteComplete( Object.assign( {}, form, { blogId: data.blog_details.blogid } ) ),
-		fail: ( error ) => addNotice( {
-			message: error.message,
-			status: 'error'
-		} )
+export function createSite() {
+	return ( dispatch, getState ) => {
+		const user = getUserSettings( getState() ),
+			{ domain } = getCheckout( getState() );
+
+		dispatch( {
+			type: WPCOM_REQUEST,
+			method: 'post',
+			params: { path: '/sites/new' },
+			payload: {
+				bearer_token: user.data.bearerToken,
+				blog_name: domain,
+				blog_title: domain,
+				lang_id: 1,
+				locale: 'en',
+				validate: false,
+				find_available_url: true
+			},
+			loading: VERIFY_USER,
+			success: ( data ) => createSiteComplete( data.blog_details.blogid ),
+			fail: ( error ) => addNotice( {
+				message: error.message,
+				status: 'error'
+			} )
+		} );
 	};
 }
 
-export function createSiteComplete( form ) {
+export function createSiteComplete( blogId ) {
 	return {
 		type: CREATE_SITE_COMPLETE,
-		domain: form.domain,
-		blogId: form.blogId
+		blogId
 	};
 }
 
@@ -50,10 +58,10 @@ function getPaygateParameters( cardDetails ) {
 		name: cardDetails.name,
 		number: cardDetails.number,
 		cvc: cardDetails.cvv,
-		zip: cardDetails[ 'postal-code' ],
+		zip: cardDetails.postalCode,
 		country: cardDetails.country,
-		exp_month: cardDetails[ 'expiration-date' ].substring( 0, 2 ),
-		exp_year: '20' + cardDetails[ 'expiration-date' ].substring( 3, 5 )
+		exp_month: cardDetails.expirationDate.substring( 0, 2 ),
+		exp_year: '20' + cardDetails.expirationDate.substring( 2, 4 )
 	};
 }
 
@@ -73,6 +81,7 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	}
 
 	return {
+		type: WPCOM_REQUEST,
 		method: 'get',
 		params: { path: '/me/paygate-configuration' },
 		query: { request_type: requestType },
@@ -93,6 +102,8 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 				const parameters = getPaygateParameters( cardDetails );
 				Paygate.createToken( parameters, onSuccess, onFailure );
 			} );
+
+			return { type: 'UNRELATED' };
 		},
 		fail: ( error ) => {
 			callback && callback( error );
@@ -100,47 +111,49 @@ function createPaygateToken( requestType, cardDetails, callback ) {
 	};
 }
 
-export function createTransaction( user, form ) {
-	const cardDetails = {
-		name: form.name,
-		number: form[ 'credit-card-number' ],
-		cvv: form.cvv,
-		'expiration-date': form[ 'expiration-date' ],
-		'postal-code': form[ 'postal-code' ]
-	};
+// TODO: Ensure that the user provides an email without a + on `ContactInformation`
+const stripEmailLabel = email => email.replace( /\+[0-9A-z-]+/g, '' );
 
-	return dispatch => {
-		createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
+export function createTransaction() {
+	return ( dispatch, getState ) => {
+		const user = getUserSettings( getState() ),
+			checkout = getCheckout( getState() ),
+			{ domain } = checkout,
+			{ blogId } = checkout.site,
+			checkoutForm = getValues( getState().form.checkout ),
+			cardDetails = {
+				name: checkoutForm.name,
+				number: checkoutForm.number,
+				cvv: checkoutForm.cvv,
+				expirationDate: checkoutForm.expirationMonth + checkoutForm.expirationYear,
+				postalCode: null // TODO: do we need these values?
+			},
+			contactInformationForm = getValues( getState().form[ 'contact-information' ] ),
+			domainDetails = Object.assign( snakeifyKeys( contactInformationForm ), {
+				email: stripEmailLabel( user.data.email )
+			} );
+
+		dispatch( createPaygateToken( 'new_purchase', cardDetails, function( error, response ) {
 			const payload = {
 				bearer_token: user.data.bearerToken,
 				payment_key: response,
 				payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 				locale: 'en',
 				cart: {
-					blog_id: form.blogId,
+					blog_id: blogId,
 					currency: 'GBP',
 					temporary: 1,
 					extra: {},
 					products: [
 						{
 							product_id: 6,
-							meta: form.domain,
+							meta: domain,
 							volume: 1,
 							free_trial: false
 						}
 					]
 				},
-				domain_details: {
-					first_name: 'Wesley',
-					last_name: 'Snipes',
-					address_1: 'The Tomb of Dracula road',
-					city: 'Boston',
-					state: 'MA',
-					postal_code: '02110',
-					country_code: 'US',
-					email: 'wesley@snipes.com',
-					phone: '666-666-666'
-				}
+				domain_details: domainDetails
 			};
 
 			dispatch( {
@@ -151,20 +164,21 @@ export function createTransaction( user, form ) {
 				loading: VERIFY_USER,
 				success: ( data ) => {
 					debug( data );
-					return createTransactionComplete( form );
+					return createTransactionComplete( blogId, domain );
 				},
 				fail: ( apiError ) => addNotice( {
 					message: apiError.message,
 					status: 'error'
 				} )
 			} );
-		} );
+		} ) );
 	};
 }
 
-export function createTransactionComplete( form ) {
+export function createTransactionComplete( blogId, domain ) {
 	return {
 		type: CREATE_TRANSACTION_COMPLETE,
-		form
+		blogId,
+		domain
 	};
 }

@@ -75,10 +75,14 @@ const Checkout = React.createClass( {
 		this.props.createSite();
 	},
 
-	handleSubmit( values ) {
+	validateSubmit( values ) {
 		const errors = creditCardDetails.validateCardDetails( values ).errors;
 
-		return Promise.reject( errors );
+		if ( errors ) {
+			return Promise.reject( errors );
+		}
+
+		return Promise.resolve();
 	},
 
 	renderForm() {
@@ -89,7 +93,7 @@ const Checkout = React.createClass( {
 			<div>
 				<CheckoutProgressbar currentStep={ 3 } />
 
-				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<form className={ styles.form } onSubmit={ handleSubmit( this.validateSubmit ) }>
 					<div className={ styles.fieldArea }>
 						<fieldset>
 							<label>{ i18n.translate( 'Name on Card' ) }</label>

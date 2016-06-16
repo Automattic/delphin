@@ -16,9 +16,8 @@ import Input from 'components/ui/form/input';
 const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
-		createSite: PropTypes.func.isRequired,
-		createTransaction: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		purchaseDomain: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		redirectToSignup: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
@@ -39,29 +38,6 @@ const Checkout = React.createClass( {
 		} );
 	},
 
-	componentWillReceiveProps( nextProps ) {
-		const { checkout } = nextProps,
-			{ values } = this.props;
-
-		if ( ! checkout ) {
-			return;
-		}
-
-		if ( checkout.site && ! checkout.transaction ) {
-			return this.props.createTransaction( this.props.user, Object.assign( {}, values, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
-		}
-
-		if ( checkout.transaction ) {
-			this.props.redirectToSuccess();
-		}
-	},
-
-	checkout( event ) {
-		event.preventDefault();
-
-		this.props.createSite();
-	},
-
 	validateSubmit( values ) {
 		const errors = creditCardDetails.validateCardDetails( values ).errors;
 
@@ -69,7 +45,7 @@ const Checkout = React.createClass( {
 			return Promise.reject( errors );
 		}
 
-		this.props.createSite();
+		this.props.purchaseDomain();
 	},
 
 	renderForm() {

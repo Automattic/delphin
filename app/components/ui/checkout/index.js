@@ -5,9 +5,12 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
+import creditCardDetails from 'lib/credit-card-details';
 import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
+import ValidationError from 'components/ui/form/validation-error';
+import Input from 'components/ui/form/input';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -72,31 +75,43 @@ const Checkout = React.createClass( {
 		this.props.createSite();
 	},
 
+	validateSubmit( values ) {
+		const errors = creditCardDetails.validateCardDetails( values ).errors;
+
+		if ( errors ) {
+			return Promise.reject( errors );
+		}
+
+		return Promise.resolve();
+	},
+
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields } = this.props;
+			{ fields, handleSubmit } = this.props;
 
 		return (
 			<div>
 				<CheckoutProgressbar currentStep={ 3 } />
 
-				<form className={ styles.form } onChange={ this.updateForm } onSubmit={ this.checkout }>
+				<form className={ styles.form } onSubmit={ handleSubmit( this.validateSubmit ) }>
 					<div className={ styles.fieldArea }>
 						<fieldset>
 							<label>{ i18n.translate( 'Name on Card' ) }</label>
-							<input
-									type="text"
-									autoFocus
-									{ ...fields.name }
-								/>
+							<Input
+								type="text"
+								field={ fields.name }
+								autoFocus
+							/>
+							<ValidationError field={ fields.name } />
 						</fieldset>
 
 						<fieldset>
 							<label>{ i18n.translate( 'Card Number' ) }</label>
-							<input
-									type="text"
-									{ ...fields.number }
-								/>
+							<Input
+								type="text"
+								field={ fields.number }
+							/>
+							<ValidationError field={ fields.number } />
 						</fieldset>
 
 						<fieldset>
@@ -107,7 +122,9 @@ const Checkout = React.createClass( {
 									className={ styles.expirationMonth }>
 									<option>{ i18n.translate( 'Month' ) }</option>
 									{ months.map( ( monthName, monthIndex ) =>
-										<option value={ String( monthIndex < 10 ? '0' + monthIndex : monthIndex ) }>{ capitalize( monthName ) }</option>
+										<option value={ String( monthIndex < 10 ? '0' + monthIndex : monthIndex ) } key={ monthIndex }>
+											{ capitalize( monthName ) }
+										</option>
 									) }
 								</select>
 
@@ -121,14 +138,19 @@ const Checkout = React.createClass( {
 									<option value="16">2016</option>
 								</select>
 							</div>
+							<ValidationError fields={ [
+								fields.expirationMonth,
+								fields.expirationYear
+							] } />
 						</fieldset>
 
 						<fieldset className={ styles.securityCode }>
 							<label>{ i18n.translate( 'Security Code' ) }</label>
-							<input
+							<Input
 								type="text"
-								{ ...fields.cvv }
+								field={ fields.cvv }
 							/>
+							<ValidationError field={ fields.cvv } />
 						</fieldset>
 					</div>
 

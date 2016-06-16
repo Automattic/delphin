@@ -26,7 +26,7 @@ const Checkout = React.createClass( {
 	},
 
 	componentDidMount() {
-		if ( ! this.props.checkout.domain ) {
+		if ( ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToSearch();
 		}
 
@@ -147,8 +147,8 @@ const Checkout = React.createClass( {
 					<div className={ styles.orderSummary }>
 						<h2>{ i18n.translate( 'Order Summary' ) }</h2>
 						<div className={ styles.orderItem }>
-							<span>{ this.props.checkout.domain }</span>
-							<span>{ this.props.checkout.cost }</span>
+							<span>{ this.props.checkout.selectedDomain.domain }</span>
+							<span>{ this.props.checkout.selectedDomain.cost }</span>
 						</div>
 						<div className={ styles.orderItem }>
 							<label>{ i18n.translate( 'Privacy Protection' ) }</label>

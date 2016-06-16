@@ -1,5 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
+import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -64,11 +65,11 @@ const Checkout = React.createClass( {
 	validateSubmit( values ) {
 		const errors = creditCardDetails.validateCardDetails( values ).errors;
 
-		if ( errors ) {
+		if ( ! isEmpty( errors ) ) {
 			return Promise.reject( errors );
 		}
 
-		return Promise.resolve();
+		this.props.createSite();
 	},
 
 	renderForm() {

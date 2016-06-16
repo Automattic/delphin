@@ -35,10 +35,6 @@ const Checkout = React.createClass( {
 		if ( ! this.props.isLoggedIn ) {
 			this.props.redirectToSignup();
 		}
-
-		this.props.initializeForm( {
-			privacyProtection: true
-		} );
 	},
 
 	componentWillReceiveProps( nextProps ) {

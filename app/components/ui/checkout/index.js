@@ -21,19 +21,6 @@ const Checkout = React.createClass( {
 		user: PropTypes.object.isRequired
 	},
 
-	getInitialState() {
-		return {
-			form: {
-				'credit-card-number': '',
-				'expiration-date-month': '',
-				'expiration-date-year': '',
-				cvv: '',
-				'privacy-protection': true
-			},
-			submiting: false
-		};
-	},
-
 	componentDidMount() {
 		if ( ! this.props.checkout.domain ) {
 			this.props.redirectToSearch();
@@ -42,18 +29,22 @@ const Checkout = React.createClass( {
 		if ( ! this.props.isLoggedIn ) {
 			this.props.redirectToSignup();
 		}
+
+		this.props.initializeForm( {
+			privacyProtection: true
+		} );
 	},
 
 	componentWillReceiveProps( nextProps ) {
 		const { checkout } = nextProps,
-			{ form } = this.state;
+			{ values } = this.props;
 
 		if ( ! checkout ) {
 			return;
 		}
 
 		if ( checkout.site && ! checkout.transaction ) {
-			return this.props.createTransaction( this.props.user, Object.assign( {}, form, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
+			return this.props.createTransaction( this.props.user, Object.assign( {}, values, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
 		}
 
 		if ( checkout.transaction ) {
@@ -75,26 +66,15 @@ const Checkout = React.createClass( {
 		);
 	},
 
-	updateForm( event ) {
-		const { form } = this.state;
-
-		this.setState( { form: Object.assign( {}, form, { [ event.target.name ]: event.target.value } ) } );
-	},
-
 	checkout( event ) {
 		event.preventDefault();
 
-		this.setState( { submitting: true } );
-
-		this.props.createSite( this.props.user, Object.assign( {}, this.state.form, { domain: this.props.checkout.domain } ) );
+		this.props.createSite();
 	},
 
 	renderForm() {
-		if ( this.state.submitting ) {
-			return null;
-		}
-
-		const months = i18n.moment.months();
+		const months = i18n.moment.months(),
+			{ fields } = this.props;
 
 		return (
 			<div>
@@ -104,30 +84,35 @@ const Checkout = React.createClass( {
 					<div className={ styles.fieldArea }>
 						<fieldset>
 							<label>{ i18n.translate( 'Name on Card' ) }</label>
-							<input type="text" name="name" autoFocus />
+							<input
+									type="text"
+									autoFocus
+									{ ...fields.name }
+								/>
 						</fieldset>
 
 						<fieldset>
 							<label>{ i18n.translate( 'Card Number' ) }</label>
-							<input type="text" name="credit-card-number" onChange={ this.updateForm } value={ this.state.form[ 'credit-card-number' ] } />
+							<input
+									type="text"
+									{ ...fields.number }
+								/>
 						</fieldset>
 
 						<fieldset>
 							<label>{ i18n.translate( 'Expiration' ) }</label>
 							<div className={ styles.expiration }>
 								<select
-									onChange={ this.updateForm }
-									value={ this.state.form[ 'expiration-date-month' ] }
+									{ ...fields.expirationMonth }
 									className={ styles.expirationMonth }>
 									<option>{ i18n.translate( 'Month' ) }</option>
 									{ months.map( ( monthName, monthIndex ) =>
-										<option key={ monthIndex } value={ monthIndex }>{ capitalize( monthName ) }</option>
+										<option value={ String( monthIndex < 10 ? '0' + monthIndex : monthIndex ) }>{ capitalize( monthName ) }</option>
 									) }
 								</select>
 
 								<select
-									onChange={ this.updateForm }
-									value={ this.state.form[ 'expiration-date-year' ] }
+									{ ...fields.expirationYear }
 									className={ styles.expirationYear }>
 									<option>{ i18n.translate( 'Year' ) }</option>
 									<option value="19">2019</option>
@@ -140,7 +125,10 @@ const Checkout = React.createClass( {
 
 						<fieldset className={ styles.securityCode }>
 							<label>{ i18n.translate( 'Security Code' ) }</label>
-							<input type="text" name="cvv" onChange={ this.updateForm } value={ this.state.form.cvv } />
+							<input
+								type="text"
+								{ ...fields.cvv }
+							/>
 						</fieldset>
 					</div>
 
@@ -153,7 +141,10 @@ const Checkout = React.createClass( {
 						<div className={ styles.orderItem }>
 							<label>{ i18n.translate( 'Privacy Protection' ) }</label>
 							<span>
-								<FormToggle name="privacy-protection" checked={ this.state.form[ 'privacy-protection' ] } onChange={ this.updateForm } />
+								<FormToggle
+									name="privacy-protection"
+									{ ...fields.privacyProtection }
+								/>
 								<span className={ styles.privacyProtectionPrice }>FREE</span>
 							</span>
 						</div>
@@ -170,7 +161,6 @@ const Checkout = React.createClass( {
 	render() {
 		return (
 			<div>
-				{ this.state.submitting && 'beep boop...' }
 				{ this.renderForm() }
 				{ this.renderSiteDetails() }
 			</div>

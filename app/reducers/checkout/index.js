@@ -6,20 +6,22 @@ import {
 } from 'reducers/action-types';
 
 export function checkout( state = {}, action ) {
-	const { type } = action;
+	const { type, blogId, domain } = action;
 
 	switch ( type ) {
 		case CREATE_SITE_COMPLETE:
 			return Object.assign( {}, state, {
 				site: {
-					domain: action.domain,
-					blogId: action.blogId
+					blogId
 				}
 			} );
 
 		case CREATE_TRANSACTION_COMPLETE:
 			return Object.assign( {}, state, {
-				transaction: action.form
+				transaction: {
+					domain,
+					blogId
+				}
 			} );
 
 		case DOMAIN_SELECT:

@@ -36,7 +36,7 @@ export default reduxForm(
 	state => ( {
 		contactInformation: state.contactInformation,
 		countries: getCountries( state ),
-		domain: state.checkout.domain,
+		domain: state.checkout.selectedDomain.domain,
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),

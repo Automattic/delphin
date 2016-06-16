@@ -46,9 +46,18 @@ export function connectUser( email, intention, callback ) {
 		success: ( data ) => {
 			return dispatch => {
 				if ( data.warning ) {
+					let innerIntention = intention;
+
+					if ( data.warning === 'sign_up_attempt_with_existing_account' ) {
+						innerIntention = 'login';
+					} else if ( data.warning === 'log_in_attempt_with_new_account' ) {
+						innerIntention = 'signup';
+					}
+
 					dispatch( {
 						notice: data.message,
-						type: CONNECT_USER_WARNING
+						type: CONNECT_USER_WARNING,
+						intention: innerIntention
 					} );
 				}
 

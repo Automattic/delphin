@@ -107,11 +107,14 @@ const Checkout = React.createClass( {
 									{ ...fields.expirationMonth }
 									className={ styles.expirationMonth }>
 									<option>{ i18n.translate( 'Month' ) }</option>
-									{ months.map( ( monthName, monthIndex ) =>
-										<option value={ String( monthIndex < 10 ? '0' + monthIndex : monthIndex ) } key={ monthIndex }>
-											{ capitalize( monthName ) }
-										</option>
-									) }
+									{ months.map( ( monthName, monthIndex ) => {
+										const monthNumber = monthIndex + 1;
+										return (
+											<option value={ String( monthNumber < 10 ? '0' + monthNumber : monthNumber ) } key={ monthNumber }>
+												{ capitalize( monthName ) }
+											</option>
+										);
+									} ) }
 								</select>
 
 								<select

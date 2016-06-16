@@ -29,9 +29,9 @@ const debug = debugFactory( 'delphin:actions' );
 export function createSite() {
 	return ( dispatch, getState ) => {
 		const user = getUserSettings( getState() ),
-			{ domain } = getCheckout( getState() );
+			{ domain } = getCheckout( getState() ).selectedDomain;
 
-		dispatch( {
+		return dispatch( {
 			type: WPCOM_REQUEST,
 			method: 'post',
 			params: { path: '/sites/new' },
@@ -178,7 +178,7 @@ export function createTransaction() {
 			domain_details: domainDetails
 		};
 
-		dispatch( {
+		return dispatch( {
 			type: WPCOM_REQUEST,
 			method: 'post',
 			params: { path: '/me/transactions' },
@@ -210,3 +210,10 @@ export function createTransactionComplete( blogId, domain ) {
 		domain
 	};
 }
+
+export const purchaseDomain = () => dispatch => {
+	dispatch( createSite() )
+		.then( () => dispatch( fetchPaygateConfiguration() ) )
+		.then( () => dispatch( createPaygateToken() ) )
+		.then( () => dispatch( createTransaction() ) );
+};

@@ -55,20 +55,6 @@ const Checkout = React.createClass( {
 		}
 	},
 
-	renderSiteDetails() {
-		const { site } = this.props.checkout;
-
-		if ( ! site ) {
-			return null;
-		}
-
-		return (
-			<div>
-				{ site.domain } { site.blogId }
-			</div>
-		);
-	},
-
 	checkout( event ) {
 		event.preventDefault();
 
@@ -184,7 +170,6 @@ const Checkout = React.createClass( {
 		return (
 			<div>
 				{ this.renderForm() }
-				{ this.renderSiteDetails() }
 			</div>
 		);
 	}

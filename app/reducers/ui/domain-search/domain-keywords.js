@@ -117,6 +117,10 @@ export default function domainKeywords( state = initialState, action ) {
 			return state;
 
 		case DOMAIN_SEARCH_LAST_KEYWORD_REMOVE:
+			if ( isEmpty( state.keywords ) ) {
+				return state;
+			}
+
 			const { value: keywordValue } = last( state.keywords );
 
 			return Object.assign( {}, state, {

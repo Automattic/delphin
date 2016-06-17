@@ -125,4 +125,18 @@ describe( 'ui.domainSearch reducer', () => {
 			keywords: [ { value: 'foobar', isSelected: false } ]
 		} );
 	} );
+
+	it( 'should not change list of keywords when removing the last keyword', () => {
+		const initialState = {
+			inputValue: '',
+			keywords: []
+		};
+
+		expect( domainKeywords( initialState, {
+			type: DOMAIN_SEARCH_LAST_KEYWORD_REMOVE
+		} ) ).toEqual( {
+			inputValue: '',
+			keywords: []
+		} );
+	} );
 } );

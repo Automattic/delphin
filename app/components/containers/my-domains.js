@@ -4,15 +4,18 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import { fetchMyDomains } from 'actions/my-domains';
+import { areDomainDetailsVisible } from 'reducers/ui/my-domains/selectors';
 import { isLoggedIn } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
 import { showDomainDetails, hideDomainDetails } from 'actions/ui/my-domains';
+
 
 export default connect(
 	state => ( {
 		isRequesting: state.domainSearch.isRequesting,
 		isLoggedIn: isLoggedIn( state ),
-		domains: state.user.myDomains
+		domains: state.user.myDomains,
+		areDomainDetailsVisible: areDomainDetailsVisible( state )
 	} ),
 	dispatch => (
 		bindActionCreators( {
@@ -23,13 +26,16 @@ export default connect(
 						type: 'MY_DOMAINS_FETCH_COMPLETE',
 						results: [
 							{
-								domain_name: 'helloworld.live'
+								domain_name: 'helloworld.live',
+								is_setup: true
 							},
 							{
-								domain_name: 'foobar.live'
+								domain_name: 'foobar.live',
+								is_setup: false
 							},
 							{
-								domain_name: 'ilovepoetry.live'
+								domain_name: 'ilovepoetry.live',
+								is_setup: true
 							}
 						]
 					} );
@@ -40,9 +46,13 @@ export default connect(
 			hideDomainDetails
 		}, dispatch )
 	),
-	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
-		fetchMyDomains() {
-			dispatchProps.fetchMyDomains();
+	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
+		toggleDomainDetails( domainName ) {
+			if ( stateProps.areDomainDetailsVisible( domainName ) ) {
+				dispatchProps.hideDomainDetails( domainName );
+			} else {
+				dispatchProps.showDomainDetails( domainName );
+			}
 		}
 	} )
 )( MyDomains );

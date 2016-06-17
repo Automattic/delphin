@@ -24,4 +24,4 @@ export const detailsVisibility = ( state = detailsVisibilityInitialState, action
 	}
 };
 
-export const myDomains = combineReducers( { detailsVisibility } );
+export default combineReducers( { detailsVisibility } );

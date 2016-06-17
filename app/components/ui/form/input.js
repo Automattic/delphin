@@ -15,9 +15,15 @@ class Input extends React.Component {
 		this.onClickGridicon = () => {
 			props.field.onChange( '' );
 
+			this.element.focus();
+
 			if ( props.untouch ) {
 				props.untouch( props.field.name );
 			}
+		};
+
+		this.saveRef = ( element ) => {
+			this.element = element;
 		};
 	}
 
@@ -36,6 +42,7 @@ class Input extends React.Component {
 					className={ inputClassName }
 					{ ...field }
 					{ ...newProps }
+					ref={ this.saveRef }
 				/>
 				{ isInvalid && (
 					<Gridicon

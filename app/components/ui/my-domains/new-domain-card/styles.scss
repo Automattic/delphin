@@ -1,0 +1,21 @@
+.new-domain-card {
+	display: flex;
+	flex-basis: 32%;
+	flex-wrap: wrap;
+	min-height: 200px;
+	align-items: center;
+	border: 2px dashed #c8d7e1;
+	color: #87a6bc;
+	cursor: pointer;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 1.8rem;
+}
+
+.gridicon {
+	display: block;
+	fill: #87a6bc;
+	margin: 0 auto 10px auto;
+}

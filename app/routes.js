@@ -9,6 +9,7 @@ import ContactInformation from 'components/containers/contact-information';
 import HomeContainer from 'components/containers/home';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
+import MyDomains from 'components/containers/my-domains';
 import NotFound from 'components/ui/not-found';
 import Layout from 'components/ui/layout';
 import DefaultHeader from 'components/ui/layout/header/default';
@@ -76,6 +77,12 @@ export const defaultRoutes = [
 				slug: 'success',
 				static: false,
 				component: SuccessContainer
+			},
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				component: MyDomains
 			}
 		]
 	},

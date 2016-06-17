@@ -121,6 +121,12 @@ class ContactInformation extends React.Component {
 		return address2InputIsVisible || address2.initialValue;
 	}
 
+	emailInputIsVisible() {
+		const { fields: { email } } = this.props;
+
+		return email.initialValue && email.initialValue.includes( '+' );
+	}
+
 	organizationInputIsVisible() {
 		const { inputVisibility: { organizationInputIsVisible }, fields: { organization } } = this.props;
 
@@ -220,6 +226,20 @@ class ContactInformation extends React.Component {
 										placeholder={ i18n.translate( 'Organization' ) }
 									/>
 									<ValidationError field={ fields.organization } />
+								</fieldset>
+							) }
+
+							{ this.emailInputIsVisible() && (
+								<fieldset>
+									<label>{ i18n.translate( 'Email' ) }</label>
+									<Input
+										disabled={ this.isDataLoading() }
+										field={ fields.email }
+										onBlur={ this.handleBlurBound }
+										placeholder={ i18n.translate( 'Email' ) }
+										untouch={ untouch }
+									/>
+									<ValidationError field={ fields.email } />
 								</fieldset>
 							) }
 

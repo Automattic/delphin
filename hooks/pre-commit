@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+const npm = require( 'npm' );
+
+npm.load( ( error ) => {
+	if ( error ) {
+		throw error;
+	}
+
+	npm.commands[ 'run-script' ]( [ 'lint' ], ( error ) => {
+		if ( error ) {
+			process.exit( 1 );
+		}
+	} );
+} );

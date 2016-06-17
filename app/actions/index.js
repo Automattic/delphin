@@ -158,7 +158,7 @@ export function createTransaction() {
 	return ( dispatch, getState ) => {
 		const user = getUserSettings( getState() ),
 			checkout = getCheckout( getState() ),
-			{ domain } = checkout,
+			{ domain } = checkout.selectedDomain,
 			{ blogId } = checkout.site.data,
 			contactInformationForm = getValues( getState().form[ 'contact-information' ] ),
 			domainDetails = Object.assign( snakeifyKeys( contactInformationForm ), {
@@ -178,7 +178,7 @@ export function createTransaction() {
 				extra: {},
 				products: [
 					{
-						product_id: 6,
+						product_id: 74,
 						meta: domain,
 						volume: 1,
 						free_trial: false

@@ -33,8 +33,13 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 			<h3>{ domainName }</h3>
 			<div className={ styles.domainDetails }>
 				<div className={ styles.domainConnected }>
-					<span className="icon icon-partner">
-						<svg version="1.1" x="0px" y="0px" viewBox="0 0 24 24" style={ { enableBackground: 'new 0 0 24 24' } }>
+					<span className={ styles.icon }>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							xlinkHref="http://www.w3.org/1999/xlink"
+							version="1.1" x="0px" y="0px"
+							viewBox="0 0 24 24"
+							style={ { enableBackground: 'new 0 0 24 24' } }>
 							<g>
 							<path d="M12,2C6.477,2,2,6.477,2,12c0,5.523,4.477,10,10,10s10-4.477,10-10C22,6.477,17.523,2,12,2z M3.5,12
 							c0-1.232,0.264-2.402,0.736-3.459L8.291,19.65C5.455,18.272,3.5,15.365,3.5,12z M12,20.501c-0.834,0-1.64-0.122-2.401-0.346
@@ -50,8 +55,8 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 						</svg>
 						<span>
 							Connected to a WordPress.com site<br/>
-							<span className="site-name">theroamingforks.com</span><br/>
-							<a href="#" className="disconnect">Disconnect</a>
+							<span className={ styles.siteName }>{ domainName }</span><br/>
+							<a href="#" className={ styles.disconnect }>Disconnect</a>
 						</span>
 					</span>
 				</div>

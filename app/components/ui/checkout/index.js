@@ -38,6 +38,12 @@ const Checkout = React.createClass( {
 		} );
 	},
 
+	componentWillReceiveProps( nextProps ) {
+		if ( ! this.props.checkout.transaction.hasLoadedFromServer && nextProps.checkout.transaction.hasLoadedFromServer ) {
+			this.props.redirectToSuccess();
+		}
+	},
+
 	validateSubmit( values ) {
 		const errors = creditCardDetails.validateCardDetails( values ).errors;
 

@@ -14,14 +14,14 @@ const Success = React.createClass( {
 	},
 
 	render() {
-		if ( ! this.props.transaction ) {
+		if ( ! this.props.transaction.hasLoadedFromServer ) {
 			return null;
 		}
 
 		const {
 			domain,
 			blogId
-		} = this.props.transaction;
+		} = this.props.transaction.data;
 
 		return (
 			<div style={ { textAlign: 'center' } }>

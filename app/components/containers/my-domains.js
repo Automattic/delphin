@@ -26,15 +26,15 @@ export default connect(
 						type: 'MY_DOMAINS_FETCH_COMPLETE',
 						results: [
 							{
-								domain_name: 'helloworld.live',
+								domain_name: 'theroamingforks.com',
 								is_setup: true
 							},
 							{
-								domain_name: 'foobar.live',
+								domain_name: 'foodiewithike.com',
 								is_setup: false
 							},
 							{
-								domain_name: 'ilovepoetry.live',
+								domain_name: 'burgerburgerburgers.com',
 								is_setup: true
 							}
 						]

@@ -4,8 +4,8 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import config from 'config';
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
+import NoMarginLayout from 'components/ui/layout/no-margin';
 import styles from './styles.scss';
 
 const MyDomains = React.createClass( {
@@ -19,19 +19,26 @@ const MyDomains = React.createClass( {
 		this.props.fetchMyDomains();
 	},
 
-	render() {
+	renderDomains() {
 		if ( ! this.props.domains.hasLoadedFromServer ) {
-			return <div>Loading...</div>;
+			return <div>{ i18n.translate( 'Loading...' ) }</div>;
 		}
 
 		return (
-			<div className={ styles.myDomains }>
-				<DomainCardList
-					domains={ this.props.domains.data }
-					toggleDomainDetails={ this.props.toggleDomainDetails }
-					areDetailsVisible={ this.props.areDomainDetailsVisible }
-				/>
-			</div>
+			<DomainCardList
+				domains={ this.props.domains.data }
+				toggleDomainDetails={ this.props.toggleDomainDetails }
+				areDetailsVisible={ this.props.areDomainDetailsVisible } />
+		);
+	},
+
+	render() {
+		return (
+			<NoMarginLayout>
+				<div className={ styles.myDomains }>
+					{ this.renderDomains() }
+				</div>
+			</NoMarginLayout>
 		);
 	}
 } );

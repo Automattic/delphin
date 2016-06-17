@@ -12,6 +12,8 @@
     "clean:all": "rm -rf node_modules && npm run clean",
     "clean:i18n-cache": "rm -f server/i18n-cache/data/*",
     "clean:static": "rm -rf public/static",
+    "hooks:install": "node hooks/install",
+    "hooks:uninstall": "node hooks/uninstall",
     "lint": "eslint --max-warnings 0 app client server",
     "preinstall": "npm run-script clean",
     "postinstall": "npm run-script build",

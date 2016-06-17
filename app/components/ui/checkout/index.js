@@ -54,6 +54,14 @@ const Checkout = React.createClass( {
 		this.props.purchaseDomain();
 	},
 
+	isSubmitting() {
+		const { checkout } = this.props;
+
+		return [ 'site', 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
+			checkout[ request ].isRequesting
+		) );
+	},
+
 	renderForm() {
 		const months = i18n.moment.months(),
 			{ fields, handleSubmit } = this.props;
@@ -145,7 +153,7 @@ const Checkout = React.createClass( {
 					</div>
 
 					<div className={ styles.submitArea }>
-						<button>{ i18n.translate( 'Checkout' ) }</button>
+						<button disabled={ this.isSubmitting() }>{ i18n.translate( 'Checkout' ) }</button>
 					</div>
 				</form>
 			</div>

@@ -135,9 +135,6 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 		} );
 };
 
-// TODO: Ensure that the user provides an email without a + on `ContactInformation`
-const stripEmailLabel = email => email.replace( /\+[0-9A-z-]+/g, '' );
-
 export function createTransaction() {
 	return ( dispatch, getState ) => {
 		const user = getUserSettings( getState() ),
@@ -145,9 +142,6 @@ export function createTransaction() {
 			{ domain } = checkout.selectedDomain,
 			{ blogId } = checkout.site.data,
 			contactInformationForm = getValues( getState().form[ 'contact-information' ] ),
-			domainDetails = Object.assign( snakeifyKeys( contactInformationForm ), {
-				email: stripEmailLabel( user.data.email )
-			} ),
 			paygateToken = checkout.paygateToken.data.token;
 
 		const payload = {
@@ -169,7 +163,7 @@ export function createTransaction() {
 					}
 				]
 			},
-			domain_details: domainDetails
+			domain_details: snakeifyKeys( contactInformationForm )
 		};
 
 		return dispatch( {

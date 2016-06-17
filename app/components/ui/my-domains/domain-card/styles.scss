@@ -28,7 +28,6 @@
 	}
 }
 
-
 .not-connected {
 	align-items: center;
 	background: #f3f6f8;
@@ -67,8 +66,44 @@
 	}
 }
 
+.domain-details {
+	color: white;
+	left: 0;
+	height: 100%;
+	position: absolute;
+	transform: scale(0.7);
+	transition: all 0.35s;
+	top: 0;
+	width: 100%;
+}
+
+.domain-connected {
+	display: none;
+	opacity: 0;
+	padding: 10px 0 20px;
+	transition: opacity 0.35s;
+	transition-delay: 0.25s;
+}
+
 .show-details {
-	
+	z-index: 100;
+
+	.domain-details {
+		background: #2e4453;
+		transform: scale(1);
+		height: calc(100% + 99px);
+
+		.domain-connected {
+			display: block;
+			opacity: 1;
+			margin-top: 212px;
+		}
+	}
+
+	.domain-screenshot {
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+		transform: scale(0.85) translateY(-40px);
+	}
 }
 
 .domain-screenshot {

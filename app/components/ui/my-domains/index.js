@@ -10,7 +10,9 @@ import styles from './styles.scss';
 
 const MyDomains = React.createClass( {
 	propTypes: {
-		fetchMyDomains: PropTypes.func.isRequired
+		fetchMyDomains: PropTypes.func.isRequired,
+		toggleDomainDetails: PropTypes.func.isRequired,
+		areDomainDetailsVisible: PropTypes.func.isRequired
 	},
 
 	componentWillMount() {
@@ -24,7 +26,11 @@ const MyDomains = React.createClass( {
 
 		return (
 			<div className={ styles.myDomains }>
-				<DomainCardList domains={ this.props.domains.data } />
+				<DomainCardList
+					domains={ this.props.domains.data }
+					toggleDomainDetails={ this.props.toggleDomainDetails }
+					areDetailsVisible={ this.props.areDomainDetailsVisible }
+				/>
 			</div>
 		);
 	}

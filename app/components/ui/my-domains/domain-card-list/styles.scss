@@ -1,0 +1,8 @@
+.domain-card-list {
+	display: flex;
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: 1200px;
+}

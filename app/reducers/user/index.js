@@ -8,6 +8,7 @@ import {
 } from 'reducers/action-types';
 import { connect } from './connect';
 import { location } from './location';
+import { myDomains } from './my-domains';
 import { settings } from './settings';
 
 export const isLoggedIn = ( state = false, action ) => {
@@ -29,5 +30,6 @@ export const user = combineReducers( {
 	connect,
 	isLoggedIn,
 	location,
+	myDomains,
 	settings
 } );

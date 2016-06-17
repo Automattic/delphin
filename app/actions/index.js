@@ -29,7 +29,13 @@ const debug = debugFactory( 'delphin:actions' );
 export function createSite() {
 	return ( dispatch, getState ) => {
 		const user = getUserSettings( getState() ),
-			{ domain } = getCheckout( getState() ).selectedDomain;
+			checkout = getCheckout( getState() ),
+			{ domain } = checkout.selectedDomain,
+			{ site } = checkout;
+
+		if ( site.hasLoadedFromServer ) {
+			return Promise.resolve();
+		}
 
 		return dispatch( {
 			type: WPCOM_REQUEST,

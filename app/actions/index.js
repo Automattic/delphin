@@ -95,30 +95,11 @@ export const fetchPaygateConfiguration = () => ( {
 	} )
 } );
 
-export const createPaygateToken = () => ( dispatch, getState ) => {
-	dispatch( { type: PAYGATE_TOKEN_CREATE } );
-
+function requestPaygateToken( configuration, cardDetails ) {
 	return new Promise( ( resolve, reject ) => {
-		const { configuration } = getCheckout( getState() ).paygateConfiguration.data,
-			checkoutForm = getValues( getState().form.checkout ),
-			cardDetails = {
-				name: checkoutForm.name,
-				number: checkoutForm.number,
-				cvv: checkoutForm.cvv,
-				expirationDate: checkoutForm.expirationMonth + checkoutForm.expirationYear,
-				postalCode: null // TODO: do we need these values?
-			};
-
 		paygateLoader.ready( configuration.js_url, function( error, Paygate ) {
 			if ( error ) {
-				dispatch( {
-					type: PAYGATE_TOKEN_CREATE_FAIL,
-					error
-				} );
-
-				reject();
-
-				return;
+				return reject( error );
 			}
 
 			Paygate.setProcessor( configuration.processor );
@@ -126,35 +107,32 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 			Paygate.setPublicKey( configuration.public_key );
 			Paygate.setEnvironment( configuration.environment );
 
-			const parameters = getPaygateParameters( cardDetails );
-			Paygate.createToken( parameters, data => {
-				if ( data.is_error ) {
-					dispatch( {
-						type: PAYGATE_TOKEN_CREATE_FAIL,
-						error: data.error_msg
-					} );
-
-					reject();
-
-					return;
-				}
-
-				dispatch( {
-					type: PAYGATE_TOKEN_CREATE_COMPLETE,
-					token: data.token
-				} );
-
-				resolve();
-			}, () => {
-				dispatch( {
-					PAYGATE_TOKEN_CREATE_FAIL,
-					error: new Error( 'Paygate Request Error' )
-				} );
-
-				reject();
-			} );
+			Paygate.createToken( getPaygateParameters( cardDetails ), data => data.is_error
+					? reject( new Error( 'Paygate Response Error: ' + data.error_msg ) )
+					: resolve( data.token ),
+				() => reject( new Error( 'Paygate Request Error' ) ) );
 		} );
 	} );
+}
+
+export const createPaygateToken = () => ( dispatch, getState ) => {
+	const { configuration } = getCheckout( getState() ).paygateConfiguration.data,
+		checkoutForm = getValues( getState().form.checkout ),
+		cardDetails = {
+			name: checkoutForm.name,
+			number: checkoutForm.number,
+			cvv: checkoutForm.cvv,
+			expirationDate: checkoutForm.expirationMonth + checkoutForm.expirationYear,
+			postalCode: null // TODO: do we need these values?
+		};
+
+	dispatch( { type: PAYGATE_TOKEN_CREATE } );
+	return requestPaygateToken( configuration, cardDetails )
+		.then( token => dispatch( { type: PAYGATE_TOKEN_CREATE_COMPLETE, token } ) )
+		.catch( error => {
+			dispatch( { type: PAYGATE_TOKEN_CREATE_FAIL, error } );
+			return Promise.reject( error );
+		} );
 };
 
 // TODO: Ensure that the user provides an email without a + on `ContactInformation`

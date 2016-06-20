@@ -6,7 +6,7 @@ export default () => (
 		<defs>
 			<polygon id="path-1" points="0.00337790289 47.0613934 35.9018795 47.0613934 35.9018795 0.0409852217 0.00337790289 0.0409852217"></polygon>
 		</defs>
-		<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 			<g id="tumblr_logo_white_transparent" transform="translate(-2.000000, -3.000000)">
 				<g id="Group-4">
 					<g id="Clip-2"></g>

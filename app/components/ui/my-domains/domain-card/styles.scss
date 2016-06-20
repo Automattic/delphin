@@ -1,3 +1,5 @@
+@import 'app/styles/breakpoints';
+
 .domain-card {
 	cursor: pointer;
 	position: relative;
@@ -17,6 +19,17 @@
 		position: absolute;
 		transition: all 0.35s;
 		z-index: 3;
+	}
+
+	@include breakpoint( '<1040px' ) {
+		flex-basis: 49%;
+	}
+
+	@include breakpoint( '<660px' ) {
+		flex-basis: 100%;
+		h3 {
+			font-size: 2.0rem;
+		}
 	}
 }
 
@@ -148,6 +161,14 @@
 			display: block;
 			opacity: 1;
 			margin-top: 212px;
+
+			@include breakpoint( '<1040px' ) {
+				margin-top: 242px;
+			}
+
+			@include breakpoint( '<660px' ) {
+				margin-top: 292px;
+			}
 		}
 	}
 

@@ -1,5 +1,11 @@
+// External dependencies
+import React from 'react';
+
 // Internal dependencies
 import languages from './languages';
+import Medium from 'components/ui/hosts/medium';
+import Tumblr from 'components/ui/hosts/tumblr';
+import WordPress from 'components/ui/hosts/wordpress';
 
 const NODE_ENV = process.env.NODE_ENV,
 	productionOnly = NODE_ENV === 'production';
@@ -28,7 +34,7 @@ const config = {
 		{
 			name: 'WordPress.com',
 			color: '#0087be',
-			logoUrl: '',
+			logoUrl: <WordPress />,
 			coverUrl: '',
 			shortDescription: 'Create a free website or easily build a blog on WordPress.com. Hundreds of free, customizable, mobile-ready designs and themes. Free hosting and support.',
 			longDescription: [
@@ -46,7 +52,7 @@ const config = {
 		{
 			name: 'Tumblr',
 			color: '#36465d',
-			logoUrl: '',
+			logoUrl: <Tumblr />,
 			coverUrl: '',
 			shortDescription: 'Post anything (from anywhere!), customize everything (but limited), and find and follow what you love. Create your own Tumblr blog today.',
 			longDescription: [
@@ -60,7 +66,7 @@ const config = {
 		{
 			name: 'Medium',
 			color: '#000',
-			logoUrl: '',
+			logoUrl: <Medium />,
 			coverUrl: '',
 			shortDescription: 'Medium is a beautiful space for reading and writing — and little else. There are no gratuitous sidebars, plug-ins, or widgets. There is nothing to set up or customize.',
 			longDescription: [

@@ -13,37 +13,37 @@
 	padding: 30px;
 }
 
-	.credential-title {
-		color: #2e4453;
-		font-family: $body-font;
-		font-weight: 600;
-		font-size: 1.4rem;
-		margin: 10px 20px 10px 0;
-		padding: 0;
-		text-transform: uppercase;
-		float: left;
-		clear: both;
-	}
+.credential-title {
+	clear: both;
+	color: #2e4453;
+	float: left;
+	font-family: $body-font;
+	font-weight: 600;
+	font-size: 1.4rem;
+	margin: 10px 20px 10px 0;
+	padding: 0;
+	text-transform: uppercase;
+}
 
-	.credential-cost {
-		float: left;
-		font-size: 1.4rem;
-		margin: 10px 20px 10px 0;
-		padding: 0;
-	}
+.credential-cost {
+	float: left;
+	font-size: 1.4rem;
+	margin: 10px 20px 10px 0;
+	padding: 0;
+}
 
-	.best-for-tag {
-		background: $gray-blue;
-		font-family: $body-font;
-		font-size: 1.4rem;
-		border-radius: 5px;
-		color: #fff;
-		display: inline-block;
-		list-style: none;
-		margin: 5px;
-		padding: 5px 10px;
-		float: left;
-	}
+.best-for-tag {
+	background: $gray-blue;
+	border-radius: 5px;
+	color: #fff;
+	display: inline-block;
+	font-family: $body-font;
+	font-size: 1.4rem;
+	float: left;
+	list-style: none;
+	margin: 5px;
+	padding: 5px 10px;
+}
 
 .feature {
 	font-family: $body-font;

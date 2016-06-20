@@ -24,7 +24,7 @@ class HostThumbnail extends React.Component {
 
 	render() {
 		return <li className={ styles.thumbnail } style={ { backgroundColor: this.props.color } } >
-			<img className={ styles.thumbnailLogo } src={ this.props.logoUrl } />
+			{ this.props.logoUrl }
 			<h3 className={ styles.thumbnailName }>{ this.props.name }</h3>
 			<p className={ styles.thumbnailDescription }>{ this.props.shortDescription }</p>
 			<Link className={ styles.thumbnailLearnMore } to={ this.props.learnMoreUrl }>{ i18n.translate( 'Learn More' ) }</Link>

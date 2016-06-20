@@ -2,6 +2,7 @@
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { Link } from 'react-router';
 
 // Internal dependencies
 import styles from './styles.scss';
@@ -14,11 +15,11 @@ class HostThumbnail extends React.Component {
 	}
 
 	handleLearnMoreClick() {
-		this.props.redirectToHostInfo( this.props.host.name );
+		this.props.redirectToHostInfo( this.props.name );
 	}
 
 	handleConnectNowClick() {
-		this.props.connectHost( this.props.host.name );
+		this.props.connectHost( this.props.name );
 	}
 
 	render() {
@@ -26,8 +27,8 @@ class HostThumbnail extends React.Component {
 			<img className={ styles.thumbnailLogo } src={ this.props.logoUrl } />
 			<h3 className={ styles.thumbnailName }>{ this.props.name }</h3>
 			<p className={ styles.thumbnailDescription }>{ this.props.shortDescription }</p>
-			<a className={ styles.thumbnailLearnMore } onClick={ this.handleLearnMoreClick }>{ i18n.translate( 'Learn More' ) }</a>
-			<a href="" className={ styles.thumbnailConnect } onClick={ this.handleConnectNowClick }>{ i18n.translate( 'Connect Now' ) }</a>
+			<Link className={ styles.thumbnailLearnMore } to={ this.props.learnMoreUrl }>{ i18n.translate( 'Learn More' ) }</Link>
+			<a className={ styles.thumbnailConnect } onClick={ this.handleConnectNowClick }>{ i18n.translate( 'Connect Now' ) }</a>
 		</li>;
 	}
 }

@@ -1,28 +1,59 @@
-.host-thumbnails-list {
-	display: flex;
+@import 'app/styles/fonts.scss';
+@import 'app/styles/colors.scss';
+
+.credentials {
+	background: rgba(0, 0, 0, 0.04);
+	border: 1px solid $gray-blue;
+	float: right;
+	justify-content: space-between;
+	margin-bottom: 40px;
+	margin-left: 40px;
+	margin-top: 20px;
+	min-width: 400px;
+	padding: 30px;
 }
 
-.thumbnail {
-	width: 350px;
-	height: 323px;
+	.credential-title {
+		color: #2e4453;
+		font-family: $body-font;
+		font-weight: 600;
+		font-size: 1.4rem;
+		margin: 10px 20px 10px 0;
+		padding: 0;
+		text-transform: uppercase;
+		float: left;
+		clear: both;
+	}
+
+	.credential-cost {
+		float: left;
+		font-size: 1.4rem;
+		margin: 10px 20px 10px 0;
+		padding: 0;
+	}
+
+	.best-for-tag {
+		background: $gray-blue;
+		font-family: $body-font;
+		font-size: 1.4rem;
+		border-radius: 5px;
+		color: #fff;
+		display: inline-block;
+		list-style: none;
+		margin: 5px;
+		padding: 5px 10px;
+		float: left;
+	}
+
+.feature {
+	font-family: $body-font;
+	font-size: 2.1rem;
+	line-height: 3.1rem;
+	margin-bottom: 2.1rem;
 }
 
-	.thumbnail-logo {
-
-	}
-
-	.thumbnail-name {
-
-	}
-
-	.thumbnail-description {
-
-	}
-
-	.thumbnail-learn-more {
-
-	}
-
-	.thumbnail-connect {
-
-	}
+.description {
+	font-family: $body-font;
+	font-size: 1.8rem;
+	margin: 1em 0;
+}

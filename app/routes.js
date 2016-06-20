@@ -7,6 +7,8 @@ import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformation from 'components/containers/contact-information';
 import HomeContainer from 'components/containers/home';
+import HostsContainer from 'components/containers/hosts';
+import HostInfoContainer from 'components/containers/host-info';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
 import MyDomains from 'components/containers/my-domains';
@@ -77,6 +79,18 @@ export const defaultRoutes = [
 				slug: 'success',
 				static: false,
 				component: SuccessContainer
+			},
+			{
+				path: 'hosts',
+				slug: 'hosts',
+				static: false,
+				component: HostsContainer
+			},
+			{
+				path: 'hosts/:hostName',
+				slug: 'hostInfo',
+				component: HostInfoContainer,
+				static: false
 			}
 		]
 	},

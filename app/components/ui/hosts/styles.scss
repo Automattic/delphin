@@ -1,0 +1,52 @@
+@import 'app/styles/fonts.scss';
+$thumbs-per-line: 3;
+$thumb-width: 350px;
+$thumb-horizontal-margin: 15px;
+
+.host-thumbnails-list {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: ( $thumb-width * $thumbs-per-line ) + ( ( 2 * $thumbs-per-line ) * $thumb-horizontal-margin );
+	margin: 0 auto;
+}
+
+.thumbnail {
+	width: $thumb-width;
+	display: flex;
+	margin: 25px $thumb-horizontal-margin 25px $thumb-horizontal-margin;
+	color: white;
+	flex-direction: column;
+	padding: 40px 30px 30px;
+	font-family: $body-font;
+	text-align: center;
+}
+	.thumbnail-logo {
+		width: 48px;
+		height: 48px;
+		margin: 0 auto;
+	}
+
+	.thumbnail-name {
+		font-size: 2.1rem;
+		line-height: 1.4;
+	}
+
+	.thumbnail-description {
+		font-size: 1.4rem;
+		line-height: 1.4;
+		margin: 14px 0 14px 0;
+	}
+
+	.thumbnail-learn-more {
+		font-size: 1.8rem;
+		border: 1px solid #fff;
+		border-radius: 5px;
+		margin-top: 25px;
+		padding: 8px 30px;
+		background-color: transparent;
+		color: white;
+	}
+
+	.thumbnail-connect {
+		font-size: 1.6rem;
+	}

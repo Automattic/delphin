@@ -1,0 +1,42 @@
+// External dependencies
+import i18n from 'i18n-calypso';
+import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+
+// Internal dependencies
+import styles from './styles.scss';
+import { bindHandlers } from 'lib/class-helpers';
+
+class HostThumbnail extends React.Component {
+	constructor( props ) {
+		super( props );
+		bindHandlers( this );
+	}
+
+	handleLearnMoreClick() {
+		this.props.redirectToHostInfo( this.props.host.name );
+	}
+
+	handleConnectNowClick() {
+		this.props.connectHost( this.props.host.name );
+	}
+
+	render() {
+		return <li className={ styles.thumbnail } style={ { backgroundColor: this.props.color } } >
+			<img className={ styles.thumbnailLogo } src={ this.props.logoUrl } />
+			<h3 className={ styles.thumbnailName }>{ this.props.name }</h3>
+			<p className={ styles.thumbnailDescription }>{ this.props.shortDescription }</p>
+			<a className={ styles.thumbnailLearnMore } onClick={ this.handleLearnMoreClick }>{ i18n.translate( 'Learn More' ) }</a>
+			<a href="" className={ styles.thumbnailConnect } onClick={ this.handleConnectNowClick }>{ i18n.translate( 'Connect Now' ) }</a>
+		</li>;
+	}
+}
+
+HostThumbnail.propTypes = {
+	color: PropTypes.string.isRequired,
+	logoUrl: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	shortDescription: PropTypes.string.isRequired
+};
+
+export default withStyles( styles )( HostThumbnail );

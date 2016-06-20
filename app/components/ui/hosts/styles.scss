@@ -2,6 +2,20 @@
 $thumb-width: 350px;
 $thumb-horizontal-margin: 15px;
 
+.heading2 {
+	color: #2e4453;
+	font-family: "Merriweather", serif;
+	font-size: 2.6rem;
+	font-weight: 600;
+	text-align: center;
+}
+
+.heading3 {
+	color: #668eaa;
+	font-size: 1.9rem;
+	text-align: center;
+}
+
 .host-thumbnails-list {
 	display: flex;
 	flex-wrap: wrap;
@@ -11,6 +25,7 @@ $thumb-horizontal-margin: 15px;
 
 .thumbnail {
 	align-items: center;
+	box-sizing: border-box;
 	color: white;
 	display: flex;
 	flex-direction: column;

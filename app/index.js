@@ -1,12 +1,18 @@
 // External dependencies
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Router } from 'react-router';
 
 // Internal dependencies
 import { routes } from 'routes';
 
-export default function App( { history } ) {
+const App = function( { history } ) {
 	return (
 		<Router history={ history } routes={ routes } />
 	);
-}
+};
+
+App.propTypes = {
+	history: PropTypes.object.isRequired
+};
+
+export default App;

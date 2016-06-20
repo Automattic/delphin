@@ -67,6 +67,7 @@ module.exports = {
 		'react/no-danger': 2,
 		'react/no-did-mount-set-state': 1,
 		'react/no-did-update-set-state': 1,
+		'react/prop-types': 1,
 		'jsx-quotes': [ 1, 'prefer-double' ],
 		'react/jsx-no-bind': 1,
 		'react/jsx-curly-spacing': [ 1, 'always' ],

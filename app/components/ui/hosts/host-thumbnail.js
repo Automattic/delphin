@@ -24,8 +24,8 @@ class HostThumbnail extends React.Component {
 
 	render() {
 		return (
-			<li className={ styles.thumbnail } style={ { backgroundColor: this.props.color } } >
-				{ this.props.logoUrl }
+			<li className={ styles.thumbnail } style={ { backgroundColor: this.props.color } } key={ this.props.name }>
+				<img src={ this.props.logoUrl } />
 				<h3 className={ styles.thumbnailName }>{ this.props.name }</h3>
 				<p className={ styles.thumbnailDescription }>{ this.props.shortDescription }</p>
 				<Link className={ styles.thumbnailLearnMore } to={ this.props.learnMoreUrl }>{ i18n.translate( 'Learn More' ) }</Link>
@@ -37,8 +37,11 @@ class HostThumbnail extends React.Component {
 
 HostThumbnail.propTypes = {
 	color: PropTypes.string.isRequired,
+	connectHost: PropTypes.func.isRequired,
+	learnMoreUrl: PropTypes.string.isRequired,
 	logoUrl: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
+	redirectToHostInfo: PropTypes.func.isRequired,
 	shortDescription: PropTypes.string.isRequired
 };
 

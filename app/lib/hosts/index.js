@@ -2,7 +2,7 @@ export const hosts = [
 	{
 		name: 'WordPress.com',
 		color: '#0087be',
-		logoImage: 'images/wordpress.svg',
+		logoUrl: '/images/wordpress.svg',
 		coverUrl: '',
 		shortDescription: 'Create a free website or easily build a blog on WordPress.com. Hundreds of free, customizable, mobile-ready designs and themes. Free hosting and support.',
 		longDescription: [
@@ -20,7 +20,7 @@ export const hosts = [
 	{
 		name: 'Tumblr',
 		color: '#36465d',
-		logoImage: 'images/tumblr.svg',
+		logoUrl: '/images/tumblr.svg',
 		coverUrl: '',
 		shortDescription: 'Post anything (from anywhere!), customize everything (but limited), and find and follow what you love. Create your own Tumblr blog today.',
 		longDescription: [
@@ -34,7 +34,7 @@ export const hosts = [
 	{
 		name: 'Medium',
 		color: '#000',
-		logoImage: 'images/medium.svg',
+		logoUrl: '/images/medium.svg',
 		coverUrl: '',
 		shortDescription: 'Medium is a beautiful space for reading and writing — and little else. There are no gratuitous sidebars, plug-ins, or widgets. There is nothing to set up or customize.',
 		longDescription: [

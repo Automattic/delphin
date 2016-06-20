@@ -182,15 +182,15 @@ export function createTransaction() {
 				debug( data );
 				return createTransactionComplete( blogId, domain );
 			},
-			fail: ( apiError ) => {
+			fail: ( error ) => {
 				dispatch( addNotice( {
-					message: apiError.message,
+					message: error.message,
 					status: 'error'
 				} ) );
 
 				return {
 					type: TRANSACTION_CREATE_FAIL,
-					error: apiError
+					error: error
 				};
 			}
 		} );

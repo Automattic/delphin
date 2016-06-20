@@ -141,7 +141,7 @@ export function createTransaction() {
 			checkout = getCheckout( getState() ),
 			{ domain } = checkout.selectedDomain,
 			{ blogId } = checkout.site.data,
-			contactInformationForm = getValues( getState().form[ 'contact-information' ] ),
+			contactInformationForm = getValues( getState().form.contactInformation ),
 			paygateToken = checkout.paygateToken.data.token;
 
 		const payload = {

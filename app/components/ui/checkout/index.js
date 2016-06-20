@@ -1,5 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
+import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -15,9 +16,8 @@ import Input from 'components/ui/form/input';
 const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
-		createSite: PropTypes.func.isRequired,
-		createTransaction: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		purchaseDomain: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		redirectToSignup: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
@@ -25,7 +25,7 @@ const Checkout = React.createClass( {
 	},
 
 	componentDidMount() {
-		if ( ! this.props.checkout.domain ) {
+		if ( ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToSearch();
 		}
 
@@ -39,50 +39,27 @@ const Checkout = React.createClass( {
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		const { checkout } = nextProps,
-			{ values } = this.props;
-
-		if ( ! checkout ) {
-			return;
-		}
-
-		if ( checkout.site && ! checkout.transaction ) {
-			return this.props.createTransaction( this.props.user, Object.assign( {}, values, { blogId: checkout.site.blogId, domain: checkout.domain } ) );
-		}
-
-		if ( checkout.transaction ) {
+		if ( ! this.props.checkout.transaction.hasLoadedFromServer && nextProps.checkout.transaction.hasLoadedFromServer ) {
 			this.props.redirectToSuccess();
 		}
-	},
-
-	renderSiteDetails() {
-		const { site } = this.props.checkout;
-
-		if ( ! site ) {
-			return null;
-		}
-
-		return (
-			<div>
-				{ site.domain } { site.blogId }
-			</div>
-		);
-	},
-
-	checkout( event ) {
-		event.preventDefault();
-
-		this.props.createSite();
 	},
 
 	validateSubmit( values ) {
 		const errors = creditCardDetails.validateCardDetails( values ).errors;
 
-		if ( errors ) {
+		if ( ! isEmpty( errors ) ) {
 			return Promise.reject( errors );
 		}
 
-		return Promise.resolve();
+		this.props.purchaseDomain();
+	},
+
+	isSubmitting() {
+		const { checkout } = this.props;
+
+		return [ 'site', 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
+			checkout[ request ].isRequesting
+		) );
 	},
 
 	renderForm() {
@@ -121,11 +98,14 @@ const Checkout = React.createClass( {
 									{ ...fields.expirationMonth }
 									className={ styles.expirationMonth }>
 									<option>{ i18n.translate( 'Month' ) }</option>
-									{ months.map( ( monthName, monthIndex ) =>
-										<option value={ String( monthIndex < 10 ? '0' + monthIndex : monthIndex ) } key={ monthIndex }>
-											{ capitalize( monthName ) }
-										</option>
-									) }
+									{ months.map( ( monthName, monthIndex ) => {
+										const monthNumber = monthIndex + 1;
+										return (
+											<option value={ String( monthNumber < 10 ? '0' + monthNumber : monthNumber ) } key={ monthNumber }>
+												{ capitalize( monthName ) }
+											</option>
+										);
+									} ) }
 								</select>
 
 								<select
@@ -157,8 +137,8 @@ const Checkout = React.createClass( {
 					<div className={ styles.orderSummary }>
 						<h2>{ i18n.translate( 'Order Summary' ) }</h2>
 						<div className={ styles.orderItem }>
-							<span>{ this.props.checkout.domain }</span>
-							<span>{ this.props.checkout.cost }</span>
+							<span>{ this.props.checkout.selectedDomain.domain }</span>
+							<span>{ this.props.checkout.selectedDomain.cost }</span>
 						</div>
 						<div className={ styles.orderItem }>
 							<label>{ i18n.translate( 'Privacy Protection' ) }</label>
@@ -173,7 +153,7 @@ const Checkout = React.createClass( {
 					</div>
 
 					<div className={ styles.submitArea }>
-						<button>{ i18n.translate( 'Checkout' ) }</button>
+						<button disabled={ this.isSubmitting() }>{ i18n.translate( 'Checkout' ) }</button>
 					</div>
 				</form>
 			</div>
@@ -184,7 +164,6 @@ const Checkout = React.createClass( {
 		return (
 			<div>
 				{ this.renderForm() }
-				{ this.renderSiteDetails() }
 			</div>
 		);
 	}

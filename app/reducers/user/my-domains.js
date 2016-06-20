@@ -1,6 +1,3 @@
-// External dependencies
-import merge from 'lodash/merge';
-
 // Internal dependencies
 import {
 	MY_DOMAINS_FETCH,

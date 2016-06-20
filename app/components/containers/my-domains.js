@@ -9,7 +9,6 @@ import { isLoggedIn } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
 import { showDomainDetails, hideDomainDetails } from 'actions/ui/my-domains';
 
-
 export default connect(
 	state => ( {
 		isRequesting: state.domainSearch.isRequesting,

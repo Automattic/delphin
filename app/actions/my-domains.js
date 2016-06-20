@@ -1,5 +1,4 @@
 // Internal dependencies
-import { addNotice } from 'actions/notices';
 import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';

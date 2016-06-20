@@ -8,8 +8,5 @@ import { getPath } from 'routes';
 export default connect(
 	( state, ownProps ) => ( {
 		learnMoreUrl: getPath( 'hostInfo', { hostName: ownProps.name } )
-	} ),
-	dispatch => ( {
-		connectHost: ( hostName ) => {}
 	} )
 )( HostThumbnail );

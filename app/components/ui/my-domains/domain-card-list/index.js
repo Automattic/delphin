@@ -1,5 +1,4 @@
 // External dependencies
-import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -8,11 +7,8 @@ import styles from './styles.scss';
 import DomainCard from 'components/ui/my-domains/domain-card';
 import NewDomainCard from 'components/ui/my-domains/new-domain-card';
 
-const DomainCardList = ( {
-		domains,
-		areDetailsVisible,
-		toggleDomainDetails
-	} ) => {
+const DomainCardList = ( { domains, areDetailsVisible, toggleDomainDetails } ) => {
+	const toggleDetails = ( domainName ) => () => toggleDomainDetails( domainName );
 
 	return (
 		<div className={ styles.domainCardList }>
@@ -22,7 +18,7 @@ const DomainCardList = ( {
 					domainName={ domain_name }
 					isSetup={ is_setup }
 					detailsVisible={ areDetailsVisible( domain_name ) }
-					toggleDetails={ () => toggleDomainDetails( domain_name )  } />
+					toggleDetails={ toggleDetails( domain_name ) } />
 			) }
 			<NewDomainCard/>
 		</div>

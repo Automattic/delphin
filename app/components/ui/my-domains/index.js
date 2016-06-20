@@ -21,7 +21,7 @@ const MyDomains = React.createClass( {
 
 	renderDomains() {
 		if ( ! this.props.domains.hasLoadedFromServer ) {
-			return <div>{ i18n.translate( 'Loading...' ) }</div>;
+			return <div>{ i18n.translate( 'Loading…' ) }</div>;
 		}
 
 		return (

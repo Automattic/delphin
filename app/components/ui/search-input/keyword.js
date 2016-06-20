@@ -55,7 +55,9 @@ Keyword.propTypes = {
 	keyword: PropTypes.shape( {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
-	} ).isRequired
+	} ).isRequired,
+	remove: PropTypes.func.isRequired,
+	toggleSelect: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( Keyword );

@@ -12,7 +12,15 @@ import styles from './styles.scss';
 
 const Home = React.createClass( {
 	propTypes: {
-		fields: PropTypes.object.isRequired
+		changeQuery: PropTypes.func.isRequired,
+		domainSearch: PropTypes.object.isRequired,
+		fetchDomainSuggestions: PropTypes.func.isRequired,
+		fields: PropTypes.object.isRequired,
+		handleSubmit: PropTypes.func.isRequired,
+		redirectToSearch: PropTypes.func.isRequired,
+		selectDomain: PropTypes.func.isRequired,
+		showEmptySearchNotice: PropTypes.bool.isRequired,
+		submitEmptySearch: PropTypes.func.isRequired
 	},
 
 	componentWillReceiveProps( nextProps ) {

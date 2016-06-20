@@ -13,7 +13,9 @@ import SearchHeader from './header';
 
 const Search = React.createClass( {
 	propTypes: {
+		defaultTLD: PropTypes.string.isRequired,
 		fetchDomainSuggestions: PropTypes.func.isRequired,
+		isRequesting: PropTypes.bool.isRequired,
 		query: PropTypes.string.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
 		redirectToSearch: PropTypes.func.isRequired,

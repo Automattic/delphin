@@ -31,9 +31,7 @@ const ConnectUser = React.createClass( {
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedIn ) {
 			this.props.redirectToHome();
-		}
-
-		if ( ! this.props.user.wasCreated && nextProps.user.wasCreated ) {
+		} else if ( ! this.props.user.wasCreated && nextProps.user.wasCreated ) {
 			this.props.redirectToVerifyUser();
 		}
 	},

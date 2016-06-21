@@ -11,6 +11,7 @@ import styles from './styles.scss';
 const MyDomains = React.createClass( {
 	propTypes: {
 		areDomainDetailsVisible: PropTypes.func.isRequired,
+		domains: PropTypes.object.isRequired,
 		fetchMyDomains: PropTypes.func.isRequired,
 		toggleDomainDetails: PropTypes.func.isRequired
 	},

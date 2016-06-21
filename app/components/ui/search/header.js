@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import { getPath } from 'routes';
 import SearchInputContainer from 'components/containers/search-input';
-import headerStyles from 'components/ui/layout/mixins/header/styles.scss';
+import headerStyles from 'components/ui/header/styles.scss';
 import styles from './styles.scss';
 
 const SearchHeader = ( { query, onQueryChange } ) => {

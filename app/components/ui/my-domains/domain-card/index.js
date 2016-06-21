@@ -37,9 +37,13 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 					<span className={ styles.icon }>
 						<WordPressIcon/>
 						<span>
-							Connected to a WordPress.com site<br/>
-							<span className={ styles.siteName }>{ domainName }</span><br/>
-							<a href="#" className={ styles.disconnect }>Disconnect</a>
+							{ i18n.translate( 'Connected to a WordPress.com site' ) }
+							<br/>
+							<span className={ styles.siteName }>{ domainName }</span>
+							<br/>
+							<a href="#" className={ styles.disconnect }>
+								{ i18n.translate( 'Disconnect' ) }
+							</a>
 						</span>
 					</span>
 				</div>

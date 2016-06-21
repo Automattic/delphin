@@ -9,9 +9,10 @@ import ContactInformation from 'components/containers/contact-information';
 import HomeContainer from 'components/containers/home';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
+import MyDomains from 'components/containers/my-domains';
 import NotFound from 'components/ui/not-found';
 import Layout from 'components/ui/layout';
-import DefaultHeader from 'components/ui/layout/header/default';
+import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
@@ -19,7 +20,7 @@ import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 export const defaultRoutes = [
 	{
-		component: DefaultHeader,
+		component: DefaultLayoutWithHeader,
 		indexRoute: {
 			component: HomeContainer
 		},
@@ -84,6 +85,12 @@ export const defaultRoutes = [
 		slug: 'search',
 		static: true,
 		component: SearchContainer
+	},
+	{
+		path: 'my-domains',
+		slug: 'myDomains',
+		static: false,
+		component: MyDomains
 	}
 ];
 

@@ -11,8 +11,8 @@ jest.mock( 'components/containers/my-domains', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
+jest.mock( 'components/ui/header', () => {} );
 jest.mock( 'components/ui/layout', () => {} );
-jest.mock( 'components/ui/layout/mixins/header', () => {} );
 jest.mock( 'components/ui/layout/default-with-header', () => {} );
 
 jest.unmock( 'routes' );

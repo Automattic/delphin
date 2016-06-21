@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Header from 'components/ui/layout/mixins/header';
+import Header from 'components/ui/header';
 import styles from './styles.scss';
 
 const DefaultLayoutWithHeader = ( { children } ) => {

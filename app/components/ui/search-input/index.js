@@ -83,21 +83,21 @@ class SearchInput extends React.Component {
 }
 
 SearchInput.propTypes = {
+	changeInput: PropTypes.func.isRequired,
 	inputValue: PropTypes.string.isRequired,
 	keywords: PropTypes.arrayOf( PropTypes.shape( {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
 	} ) ).isRequired,
 	placeholder: PropTypes.string.isRequired,
+	relatedWords: PropTypes.array.isRequired,
+	removeLastKeyword: PropTypes.func.isRequired,
+	replace: PropTypes.func.isRequired,
 	selectedKeyword: PropTypes.shape( {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
 	} ),
-	relatedWords: PropTypes.array.isRequired,
-	removeLastKeyword: PropTypes.func.isRequired,
-	replace: PropTypes.func.isRequired,
-	submit: PropTypes.func.isRequired,
-	changeInput: PropTypes.func.isRequired
+	submit: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( SearchInput );

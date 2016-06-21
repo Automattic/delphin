@@ -23,8 +23,8 @@ const Menu = ( { logoutUser, isLoggedIn } ) => {
 };
 
 Menu.propTypes = {
-	logoutUser: PropTypes.func.isRequired,
-	isLoggedIn: PropTypes.bool.isRequired
+	isLoggedIn: PropTypes.bool.isRequired,
+	logoutUser: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( Menu );

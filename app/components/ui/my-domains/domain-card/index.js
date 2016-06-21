@@ -53,8 +53,10 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 };
 
 DomainCard.propTypes = {
+	detailsVisible: PropTypes.bool.isRequired,
 	domainName: PropTypes.string.isRequired,
-	isSetup: PropTypes.bool.isRequired
+	isSetup: PropTypes.bool.isRequired,
+	toggleDetails: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( DomainCard );

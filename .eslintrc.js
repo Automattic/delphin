@@ -71,6 +71,7 @@ module.exports = {
 		'jsx-quotes': [ 1, 'prefer-double' ],
 		'react/jsx-no-bind': 1,
 		'react/jsx-curly-spacing': [ 1, 'always' ],
+		'react/sort-prop-types': 1,
 		// Allows function use before declaration
 		'no-use-before-define': [ 2, 'nofunc' ],
 		'object-curly-spacing': [ 1, 'always' ],

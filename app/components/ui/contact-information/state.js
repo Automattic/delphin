@@ -9,20 +9,13 @@ import styles from './styles.scss';
 
 const State = ( { disabled, field, states, onBlur } ) => {
 	let content;
-	if ( ! states.hasLoadedFromServer ) {
-		content = (
-			<input
-				onBlur={ onBlur }
-				placeholder={ i18n.translate( 'State' ) }
-				disabled
-			/>
-		);
-	} else if ( states.hasLoadedFromServer && isEmpty( states.data ) ) {
+
+	if ( ! states.hasLoadedFromServer || isEmpty( states.data ) ) {
 		content = (
 			<input
 				{ ...field }
+				disabled={ ! states.hasLoadedFromServer || disabled }
 				onBlur={ onBlur }
-				disabled={ disabled }
 				placeholder={ i18n.translate( 'State' ) } />
 		);
 	} else {

@@ -8,6 +8,18 @@ import { purchaseDomain } from 'actions';
 import { getPath } from 'routes';
 import { isLoggedIn, getUserSettings } from 'reducers/user/selectors';
 
+/**
+ * Retrieves the full name of the user from the contact information entered.
+ *
+ * @param {object} state - state tree
+ * @returns {string} - the full name
+ */
+export const getFullName = state => {
+	const { firstName: { value: firstName }, lastName: { value: lastName } } = state.form[ 'contact-information' ];
+
+	return `${ firstName } ${ lastName }`;
+};
+
 export default reduxForm(
 	{
 		form: 'checkout',
@@ -22,6 +34,7 @@ export default reduxForm(
 	},
 	state => ( {
 		checkout: state.checkout,
+		initialValues: { name: getFullName( state ), privacyProtection: true },
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserSettings( state )
 	} ),

@@ -75,7 +75,9 @@ class ContactInformation extends React.Component {
 
 	initializeContactInformation( props = this.props ) {
 		const form = Object.keys( props.fields ).reduce( ( result, fieldName ) => {
-			return Object.assign( result, { [ fieldName ]: props.contactInformation.data[ fieldName ] || '' } );
+			const value = props.fields[ fieldName ].value || props.contactInformation.data[ fieldName ] || '';
+
+			return Object.assign( result, { [ fieldName ]: value } );
 		}, {} );
 
 		props.initializeForm( form );

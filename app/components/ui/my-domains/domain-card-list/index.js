@@ -26,8 +26,8 @@ const DomainCardList = ( { domains, areDetailsVisible, toggleDomainDetails } ) =
 };
 
 DomainCardList.propTypes = {
-	domains: PropTypes.array.isRequired,
 	areDetailsVisible: PropTypes.func.isRequired,
+	domains: PropTypes.array.isRequired,
 	toggleDomainDetails: PropTypes.func.isRequired
 };
 

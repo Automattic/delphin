@@ -12,8 +12,8 @@ import ValidationError from 'components/ui/form/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
-		domain: PropTypes.string,
 		connectUser: PropTypes.func.isRequired,
+		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,

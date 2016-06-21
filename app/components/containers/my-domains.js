@@ -7,7 +7,7 @@ import { push } from 'react-router-redux';
 import { fetchMyDomains } from 'actions/my-domains';
 import { areDomainDetailsVisible } from 'reducers/ui/my-domains/selectors';
 import { getPath } from 'routes';
-import { isLoggedIn } from 'reducers/user/selectors';
+import { isLoggedOut } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
 import { showDomainDetails, hideDomainDetails } from 'actions/ui/my-domains';
 
@@ -16,7 +16,7 @@ export default connect(
 		areDomainDetailsVisible: areDomainDetailsVisible( state ),
 		domains: state.user.myDomains,
 		isRequesting: state.domainSearch.isRequesting,
-		isLoggedIn: isLoggedIn( state )
+		isLoggedOut: isLoggedOut( state )
 	} ),
 	dispatch => (
 		bindActionCreators( {

@@ -16,6 +16,9 @@ import Input from 'components/ui/form/input';
 const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
+		fields: PropTypes.object.isRequired,
+		handleSubmit: PropTypes.func.isRequired,
+		initializeForm: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,

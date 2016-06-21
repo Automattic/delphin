@@ -18,7 +18,8 @@ const Suggestions = React.createClass( {
 	propTypes: {
 		count: PropTypes.number,
 		selectDomain: PropTypes.func.isRequired,
-		results: PropTypes.array
+		results: PropTypes.array,
+		sort: PropTypes.string.isRequired
 	},
 
 	getSortedResults() {

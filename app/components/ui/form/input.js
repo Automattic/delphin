@@ -51,6 +51,7 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
+	className: PropTypes.string,
 	field: PropTypes.object.isRequired,
 	untouch: PropTypes.func
 };

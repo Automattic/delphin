@@ -9,6 +9,7 @@ import styles from './styles.scss';
 const ResendSignupEmail = React.createClass( {
 	propTypes: {
 		connectUser: PropTypes.func.isRequired,
+		intention: PropTypes.string.isRequired,
 		email: PropTypes.string.isRequired
 	},
 

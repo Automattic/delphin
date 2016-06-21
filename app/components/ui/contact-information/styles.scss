@@ -1,6 +1,6 @@
 @import 'app/styles/breakpoints';
-@import 'app/styles/colors.scss';
-@import 'app/styles/fonts.scss';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
 
 .header {
 	margin-bottom: 50px;
@@ -22,7 +22,7 @@
 
 .address-two-is-visible {
 	.address2 input {
-		border-top: none;
+		border-top: 0;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 	}
@@ -34,56 +34,58 @@
 }
 
 .row {
-	.firstName {
+	.first-name {
 		margin-top: 0;
 	}
 
 	@include breakpoint( '<480px' ) {
-		.firstName,
+		.first-name,
 		.address1,
 		.city,
 		.phone {
 			margin-top: 10px;
 		}
 
-		.lastName,
+		.last-name,
 		.state,
 		.postal-code {
 			input {
-				border-top: none;
+				border-top: 0;
 			}
 		}
 	}
 
 	@include breakpoint( '>480px' ) {
-		.firstName,
-		.lastName {
+		.first-name,
+		.last-name {
 			display: inline-block;
 			width: 170px;
 		}
 
-		.firstName input {
-			border-top-right-radius: 0;
+		.first-name input {
 			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
 		}
 
-		.lastName input {
-			border-left: none;
-			border-top-left-radius: 0;
+		.last-name input {
 			border-bottom-left-radius: 0;
+			border-left: 0;
+			border-top-left-radius: 0;
 		}
 
-		.city, .state, .postal-code {
+		.city,
+		.state,
+		.postal-code {
 			display: inline-block;
 			margin-top: 10px;
 		}
 
 		.city {
 			width: 165px;
-			
+
 			input {
-				border-top-right-radius: 0;
 				border-bottom-right-radius: 0;
+				border-top-right-radius: 0;
 			}
 		}
 
@@ -91,9 +93,9 @@
 			width: 80px;
 
 			input {
-				border-left: none;
-				border-right: none;
+				border-left: 0;
 				border-radius: 0;
+				border-right: 0;
 			}
 		}
 
@@ -101,8 +103,8 @@
 			width: 95px;
 
 			input {
-				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
+				border-top-left-radius: 0;
 			}
 		}
 	}
@@ -115,9 +117,9 @@
 .show-organization-link,
 .show-address-two-link {
 	color: $gray-blue;
+	display: inline-block;
 	font-size: 1.2rem;
 	margin-top: 5px;
-	display: inline-block;
 }
 
 .disclaimer {

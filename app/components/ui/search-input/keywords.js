@@ -11,12 +11,16 @@ function Keywords( props ) {
 		return null;
 	}
 
-	return <ul className={ styles.keywords }>
-			{ props.keywords.map( ( keyword, index ) => <KeywordContainer
-				key={ keyword.value + index }
-				keyword={ keyword }
-			/> ) }
-	</ul>;
+	return (
+		<span>
+			<ul className={ styles.keywords }>
+				{ props.keywords.map( ( keyword, index ) => <KeywordContainer
+					key={ keyword.value + index }
+					keyword={ keyword }
+				/> ) }
+			</ul>
+		</span>
+	);
 }
 
 Keywords.propTypes = {

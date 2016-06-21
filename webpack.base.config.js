@@ -28,6 +28,10 @@ var config = {
 					'postcss',
 					'sass?sourceMap'
 				]
+			},
+			{
+				test: /\.svg$/,
+				loader: 'babel!svg-react'
 			}
 		]
 	},

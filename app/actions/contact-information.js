@@ -37,7 +37,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 		payload: snakeifyKeys( { domainNames, contactInformation } ),
 		loading: () => {
 			return dispatch => {
-				dispatch( startAsyncValidation( 'contact-information' ) );
+				dispatch( startAsyncValidation( 'contactInformation' ) );
 			};
 		},
 		success: data => {
@@ -55,7 +55,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 					}, {} );
 				}
 
-				dispatch( stopAsyncValidation( 'contact-information', errors ) );
+				dispatch( stopAsyncValidation( 'contactInformation', errors ) );
 			};
 		},
 		fail: ( error ) => {

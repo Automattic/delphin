@@ -18,7 +18,7 @@ import { validateContactInformation } from 'actions/contact-information';
 
 export default reduxForm(
 	{
-		form: 'contact-information',
+		form: 'contactInformation',
 		fields: [
 			'email',
 			'firstName',
@@ -42,7 +42,7 @@ export default reduxForm(
 		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),
 		location: getUserLocation( state ),
-		states: getStates( state, get( state, 'form.contact-information.countryCode.value' ) ),
+		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),
 		user: getUserSettings( state )
 	} ),
 	dispatch => (

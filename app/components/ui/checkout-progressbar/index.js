@@ -45,6 +45,7 @@ function Progressbar( props ) {
 }
 
 Progressbar.propTypes = {
+	className: PropTypes.string,
 	currentStep: PropTypes.number.isRequired
 };
 

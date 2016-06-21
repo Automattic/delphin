@@ -337,8 +337,11 @@ ContactInformation.propTypes = {
 	contactInformation: PropTypes.object.isRequired,
 	countries: PropTypes.object.isRequired,
 	domain: PropTypes.string,
+	errors: PropTypes.object,
+	fetchContactInformation: PropTypes.func.isRequired,
 	fetchCountries: PropTypes.func.isRequired,
 	fetchLocation: PropTypes.func.isRequired,
+	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
@@ -352,6 +355,7 @@ ContactInformation.propTypes = {
 	showOrganizationInput: PropTypes.func.isRequired,
 	states: PropTypes.object.isRequired,
 	submitting: PropTypes.bool.isRequired,
+	untouch: PropTypes.func.isRequired,
 	user: PropTypes.object.isRequired,
 	validateContactInformation: PropTypes.func.isRequired
 };

@@ -8,9 +8,9 @@ import { Link } from 'react-router';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
-const HostThumbnail = ( { slug, logoUrl, name, shortDescription } ) => (
+const HostThumbnail = ( { slug, name, shortDescription } ) => (
 	<li className={ styles.thumbnail + ' ' + styles[ slug ] } key={ name }>
-		<img src={ logoUrl } />
+		<div className={ styles.logo + ' ' + styles[ slug ] } />
 		<h3 className={ styles.thumbnailName }>{ name }</h3>
 		<p className={ styles.thumbnailDescription }>{ shortDescription }</p>
 		<Link className={ styles.thumbnailLearnMore } to={ getPath( 'hostInfo', { slug } ) }>{ i18n.translate( 'Learn More' ) }</Link>

@@ -97,14 +97,14 @@ export const fetchPaygateConfiguration = () => ( {
 
 function requestPaygateToken( configuration, cardDetails ) {
 	return new Promise( ( resolve, reject ) => {
-		paygateLoader.ready( configuration.js_url, function( error, Paygate ) {
+		paygateLoader.ready( configuration.jsUrl, function( error, Paygate ) {
 			if ( error ) {
 				return reject( error );
 			}
 
 			Paygate.setProcessor( configuration.processor );
-			Paygate.setApiUrl( configuration.api_url );
-			Paygate.setPublicKey( configuration.public_key );
+			Paygate.setApiUrl( configuration.apiUrl );
+			Paygate.setPublicKey( configuration.publicKey );
 			Paygate.setEnvironment( configuration.environment );
 
 			Paygate.createToken( getPaygateParameters( cardDetails ), data => data.is_error

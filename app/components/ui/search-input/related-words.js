@@ -1,4 +1,6 @@
 // External dependencies
+import classNames from 'classnames';
+import config from 'config';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -12,10 +14,11 @@ const RelatedWords = ( { target, replace, relatedWords } ) => {
 		return null;
 	}
 	const showRelatedWords = relatedWords.hasLoadedFromServer && relatedWords.data.length > 0,
+		isGoogleTranslateAttributionVisible = i18n.getLocaleSlug() !== config( 'i18n_default_locale_slug' ) && showRelatedWords,
 		{ isRequesting } = relatedWords;
 
 	return (
-		<div className={ styles.relatedWords }>
+		<div className={ classNames( styles.relatedWords, { [ styles.isGoogleTranslateAttributionVisible ]: isGoogleTranslateAttributionVisible } ) }>
 			{ showRelatedWords && (
 				<div>
 					<h3>

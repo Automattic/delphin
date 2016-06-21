@@ -1,7 +1,7 @@
 // External dependencies
 import find from 'lodash/find';
 import i18n from 'i18n-calypso';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -36,5 +36,10 @@ class HostInfo extends React.Component {
 		</section>;
 	}
 }
+
+HostInfo.propTypes = {
+	backUrl: PropTypes.string.isRequired,
+	hostName: PropTypes.string.isRequired
+};
 
 export default withStyles( styles )( HostInfo );

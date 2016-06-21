@@ -2,7 +2,8 @@ export const hosts = [
 	{
 		name: 'WordPress.com',
 		color: '#0087be',
-		logoUrl: '/images/wordpress.svg',
+		logoUrl: '/images/hosts/wordpress-small.svg',
+		horizontalLogoUrl: '/images/hosts/wordpress-horizontal.png',
 		coverUrl: '',
 		shortDescription: 'Create a free website or easily build a blog on WordPress.com. Hundreds of free, customizable, mobile-ready designs and themes. Free hosting and support.',
 		longDescription: [
@@ -10,7 +11,7 @@ export const hosts = [
 			'When you write on Medium, you’ll know that your words and pictures will look great on any device; they’ll automatically adjust to the latest technology and even get better over time.',
 			'Medium’s composing tool is truly what-you-see-is-what-you-get and has just the right amount of formatting to tell your stories without getting in the way. In short, Medium is focused on keeping you focused.',
 		],
-		bestForTags: [ 'blogging', 'e-commerce', 'protfolios', 'websites' ],
+		bestForTags: [ 'blogging', 'e-commerce', 'portfolios', 'websites' ],
 		price: {
 			start: 5,
 			end: 49,
@@ -20,7 +21,8 @@ export const hosts = [
 	{
 		name: 'Tumblr',
 		color: '#36465d',
-		logoUrl: '/images/tumblr.svg',
+		logoUrl: '/images/hosts/tumblr-small.svg',
+		horizontalLogoUrl: '/images/hosts/tumblr-horizontal.svg',
 		coverUrl: '',
 		shortDescription: 'Post anything (from anywhere!), customize everything (but limited), and find and follow what you love. Create your own Tumblr blog today.',
 		longDescription: [
@@ -34,7 +36,8 @@ export const hosts = [
 	{
 		name: 'Medium',
 		color: '#000',
-		logoUrl: '/images/medium.svg',
+		logoUrl: '/images/hosts/medium-small.svg',
+		horizontalLogoUrl: '/images/hosts/medium-horizontal.svg',
 		coverUrl: '',
 		shortDescription: 'Medium is a beautiful space for reading and writing — and little else. There are no gratuitous sidebars, plug-ins, or widgets. There is nothing to set up or customize.',
 		longDescription: [

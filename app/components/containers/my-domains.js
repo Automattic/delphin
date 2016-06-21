@@ -1,10 +1,12 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 // Internal dependencies
 import { fetchMyDomains } from 'actions/my-domains';
 import { areDomainDetailsVisible } from 'reducers/ui/my-domains/selectors';
+import { getPath } from 'routes';
 import { isLoggedIn } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
 import { showDomainDetails, hideDomainDetails } from 'actions/ui/my-domains';
@@ -41,6 +43,7 @@ export default connect(
 				}, 2000 );
 				return fetchMyDomains( domainName );
 			},
+			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			showDomainDetails,
 			hideDomainDetails
 		}, dispatch )

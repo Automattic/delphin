@@ -96,3 +96,23 @@ $thumb-horizontal-margin: 15px;
 	width: 25px;
 	margin-right: 5px;
 }
+
+.logo {
+	height: 50px;
+	width: 150px;
+
+	&.wordpress {
+		background: url( /images/hosts/wordpress-small.svg ) no-repeat center center;
+		background-size: contain;
+	}
+
+	&.medium {
+		background: url( /images/hosts/medium-small.svg ) no-repeat center center;
+		background-size: contain;
+	}
+
+	&.tumblr {
+		background: url( /images/hosts/tumblr-small.svg ) no-repeat center center;
+		background-size: contain;
+	}
+}

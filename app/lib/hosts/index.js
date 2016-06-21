@@ -2,9 +2,6 @@ export const hosts = [
 	{
 		name: 'WordPress.com',
 		slug: 'wordpress',
-		logoUrl: '/images/hosts/wordpress-small.svg',
-		horizontalLogoUrl: '/images/hosts/wordpress-horizontal.png',
-		coverUrl: '',
 		shortDescription: 'Create a free website or easily build a blog on WordPress.com. Hundreds of free, customizable, mobile-ready designs and themes. Free hosting and support.',
 		longDescription: [
 			'WordPress.com allows you to build any kind of site you want: business site, blog, portfolio, the sky is the limit! Hundreds of free, customizable, mobile-ready designs and themes. Free hosting and support.',
@@ -21,9 +18,6 @@ export const hosts = [
 	{
 		name: 'Tumblr',
 		slug: 'tumblr',
-		logoUrl: '/images/hosts/tumblr-small.svg',
-		horizontalLogoUrl: '/images/hosts/tumblr-horizontal.svg',
-		coverUrl: '',
 		shortDescription: 'Post anything (from anywhere!), customize everything (but limited), and find and follow what you love. Create your own Tumblr blog today.',
 		longDescription: [
 			'Post anything (from anywhere!), customize everything (but limited), and find and follow what you love. Create your own Tumblr blog today.',
@@ -36,9 +30,6 @@ export const hosts = [
 	{
 		name: 'Medium',
 		slug: 'medium',
-		logoUrl: '/images/hosts/medium-small.svg',
-		horizontalLogoUrl: '/images/hosts/medium-horizontal.svg',
-		coverUrl: '',
 		shortDescription: 'Medium is a beautiful space for reading and writing — and little else. There are no gratuitous sidebars, plug-ins, or widgets. There is nothing to set up or customize.',
 		longDescription: [
 			'Medium is a beautiful space for reading and writing — and little else. The words are central. They can be accompanied by images to help illustrate your point. But there are no gratuitous sidebars, plug-ins, or widgets. There is nothing to set up or customize.',

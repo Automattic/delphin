@@ -26,7 +26,7 @@ export default reduxForm(
 		validate
 	},
 	state => ( {
-		initialValues: { email: getUserConnect( state ).data.email },
+		initialValues: { email: getUserConnect( state ).data.email || '' },
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
 	} ),

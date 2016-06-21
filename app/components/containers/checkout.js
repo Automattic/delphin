@@ -15,6 +15,10 @@ import { isLoggedIn, getUserSettings } from 'reducers/user/selectors';
  * @returns {string} - the full name
  */
 export const getFullName = state => {
+	if ( ! state.form.contactInformation ) {
+		return '';
+	}
+
 	const { firstName: { value: firstName }, lastName: { value: lastName } } = state.form.contactInformation;
 
 	return `${ firstName } ${ lastName }`;

@@ -20,6 +20,7 @@ export default reduxForm(
 	{
 		form: 'contact-information',
 		fields: [
+			'email',
 			'firstName',
 			'lastName',
 			'organization',

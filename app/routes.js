@@ -106,7 +106,7 @@ export const defaultRoutes = [
 				component: HostsContainer
 			},
 			{
-				path: 'hosts/:hostName',
+				path: 'hosts/:slug',
 				slug: 'hostInfo',
 				component: HostInfoContainer,
 				static: false

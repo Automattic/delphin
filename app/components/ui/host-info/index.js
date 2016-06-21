@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import { hosts } from 'lib/hosts';
 import styles from './styles.scss';
 
@@ -15,12 +16,12 @@ function getCost( cost ) {
 
 class HostInfo extends React.Component {
 	render() {
-		const host = find( hosts, { name: this.props.hostName } );
+		const host = find( hosts, { slug: this.props.slug } );
 
 		return (
 			<section>
 				<div className={ styles.backLinkContainer }>
-					<Link className={ styles.backLink } to={ this.props.backUrl }>← { i18n.translate( 'View All' ) }</Link>
+					<Link className={ styles.backLink } to={ getPath( 'hosts' ) }>← { i18n.translate( 'View All' ) }</Link>
 				</div>
 
 				<div className={ styles.header + ' ' + styles[ host.slug ] }>
@@ -50,8 +51,7 @@ class HostInfo extends React.Component {
 }
 
 HostInfo.propTypes = {
-	backUrl: PropTypes.string.isRequired,
-	hostName: PropTypes.string.isRequired
+	slug: PropTypes.string.isRequired
 };
 
 export default withStyles( styles )( HostInfo );

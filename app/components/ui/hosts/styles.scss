@@ -1,3 +1,4 @@
+@import 'app/styles/colors.scss';
 @import 'app/styles/fonts.scss';
 $thumb-width: 350px;
 $thumb-horizontal-margin: 15px;
@@ -30,7 +31,7 @@ $thumb-horizontal-margin: 15px;
 .thumbnail {
 	align-items: center;
 	box-sizing: border-box;
-	color: white;
+	color: $white;
 	display: flex;
 	flex-direction: column;
 	font-family: $body-font;
@@ -40,6 +41,18 @@ $thumb-horizontal-margin: 15px;
 	position: relative;
 	text-align: center;
 	width: $thumb-width;
+
+	&.wordpress {
+		background: $host-wordpress;
+	}
+
+	&.medium {
+		background: $host-medium;
+	}
+
+	&.tumblr {
+		background: $host-tumblr;
+	}
 }
 
 .thumbnail-logo {

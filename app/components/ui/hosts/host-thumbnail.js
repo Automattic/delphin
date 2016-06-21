@@ -8,8 +8,8 @@ import { Link } from 'react-router';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
-const HostThumbnail = ( { color, slug, logoUrl, name, shortDescription } ) => (
-	<li className={ styles.thumbnail } style={ { backgroundColor: color } } key={ name }>
+const HostThumbnail = ( { slug, logoUrl, name, shortDescription } ) => (
+	<li className={ styles.thumbnail + ' ' + styles[ slug ] } key={ name }>
 		<img src={ logoUrl } />
 		<h3 className={ styles.thumbnailName }>{ name }</h3>
 		<p className={ styles.thumbnailDescription }>{ shortDescription }</p>
@@ -22,7 +22,6 @@ const HostThumbnail = ( { color, slug, logoUrl, name, shortDescription } ) => (
 );
 
 HostThumbnail.propTypes = {
-	color: PropTypes.string.isRequired,
 	logoUrl: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	shortDescription: PropTypes.string.isRequired,

@@ -96,7 +96,12 @@
 		transition: all 0.35s;
 		z-index: 2;
 	}
+}
 
+.domain-screenshot:hover {
+	&:after {
+		opacity: 0.6;
+	}
 }
 
 .domain-details {
@@ -175,6 +180,10 @@
 	.domain-screenshot {
 		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 		transform: scale(0.85) translateY(-40px);
+
+		&:after {
+			opacity: 0;
+		}
 	}
 }
 

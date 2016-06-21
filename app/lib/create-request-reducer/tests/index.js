@@ -51,6 +51,18 @@ describe( 'createRequestReducer', () => {
 			} );
 		} );
 
+		it( 'should camelCase the keys of the provided data  when fetching completes', () => {
+			expect( reducer( {
+				isRequesting: true,
+				hasLoadedFromServer: false,
+				data: null,
+				error: null
+			}, {
+				type: FETCH_COMPLETE,
+				foo_bar: [ { bar_baz: 'snake_case' } ]
+			} ).data ).toEqual( { fooBar: [ { barBaz: 'snake_case' } ] } );
+		} );
+
 		it( 'should update `isRequesting` and `error` when fetching fails', () => {
 			expect( reducer( {
 				hasLoadedFromServer: false,

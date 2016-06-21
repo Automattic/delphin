@@ -21,7 +21,7 @@ const validate = values => {
 
 export default reduxForm(
 	{
-		form: 'connect-user',
+		form: 'connectUser',
 		fields: [ 'email' ],
 		validate
 	},

@@ -32,7 +32,7 @@ const validate = values => {
 
 export default reduxForm(
 	{
-		form: 'verify-user',
+		form: 'verifyUser',
 		fields: [ 'code', 'twoFactorAuthenticationCode' ],
 		validate
 	},

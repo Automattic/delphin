@@ -83,7 +83,7 @@ const Home = React.createClass( {
 					autoComplete="off"
 					autoFocus
 					className={ styles.field }
-					placeholder={ i18n.translate( 'Type a few keywords or a domain' ) }
+					placeholder={ i18n.translate( 'Type a few keywords or an address' ) }
 					ref="query" />
 
 				<ReactCSSTransitionGroup

@@ -30,9 +30,7 @@ const Checkout = React.createClass( {
 	componentDidMount() {
 		if ( ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToSearch();
-		}
-
-		if ( ! this.props.isLoggedIn ) {
+		} else if ( ! this.props.isLoggedIn ) {
 			this.props.redirectToSignup();
 		}
 	},

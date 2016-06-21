@@ -26,7 +26,7 @@ const MyDomains = React.createClass( {
 
 		return (
 			<DomainCardList
-				domains={ this.props.domains.data }
+				domains={ this.props.domains.data.results }
 				toggleDomainDetails={ this.props.toggleDomainDetails }
 				areDetailsVisible={ this.props.areDomainDetailsVisible } />
 		);

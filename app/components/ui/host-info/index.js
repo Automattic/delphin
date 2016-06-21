@@ -20,8 +20,10 @@ class HostInfo extends React.Component {
 		return <section>
 			<Link to={ this.props.backUrl }>← { i18n.translate( 'View All' ) }</Link>
 
+			<img src={ host.horizontalLogoUrl } />
 			<h2>{ host.name }</h2>
 			<a>{ i18n.translate( 'Connect Now' ) }</a>
+
 			<p className={ styles.feature }>{ host.longDescription[ 0 ] }</p>
 			<dl className={ styles.credentials } >
 				<dt className={ styles.credentialTitle }>COST</dt>

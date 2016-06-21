@@ -29,7 +29,7 @@ class HostThumbnail extends React.Component {
 				<h3 className={ styles.thumbnailName }>{ this.props.name }</h3>
 				<p className={ styles.thumbnailDescription }>{ this.props.shortDescription }</p>
 				<Link className={ styles.thumbnailLearnMore } to={ this.props.learnMoreUrl }>{ i18n.translate( 'Learn More' ) }</Link>
-				<a className={ styles.thumbnailConnect } onClick={ this.handleConnectNowClick }>{ i18n.translate( 'Connect Now' ) }</a>
+				<a className={ styles.thumbnailConnect } onClick={ this.handleConnectNowClick }><img className={ styles.thumbnailLinkIcon } src="/images/link.svg" />{ i18n.translate( 'Connect Now' ) }</a>
 			</li>
 		);
 	}

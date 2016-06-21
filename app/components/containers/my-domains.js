@@ -11,10 +11,10 @@ import { showDomainDetails, hideDomainDetails } from 'actions/ui/my-domains';
 
 export default connect(
 	state => ( {
-		isRequesting: state.domainSearch.isRequesting,
-		isLoggedIn: isLoggedIn( state ),
+		areDomainDetailsVisible: areDomainDetailsVisible( state ),
 		domains: state.user.myDomains,
-		areDomainDetailsVisible: areDomainDetailsVisible( state )
+		isRequesting: state.domainSearch.isRequesting,
+		isLoggedIn: isLoggedIn( state )
 	} ),
 	dispatch => (
 		bindActionCreators( {

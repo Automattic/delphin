@@ -12,6 +12,7 @@ import HostInfoContainer from 'components/containers/host-info';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
 import MyDomains from 'components/containers/my-domains';
+import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import Layout from 'components/ui/layout';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
@@ -79,6 +80,24 @@ export const defaultRoutes = [
 				slug: 'success',
 				static: false,
 				component: SuccessContainer
+			}
+		]
+	},
+	{
+		path: 'search',
+		slug: 'search',
+		static: true,
+		component: SearchContainer
+	},
+	{
+		component: NoMarginLayout,
+		path: '',
+		childRoutes: [
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				component: MyDomains
 			},
 			{
 				path: 'hosts',
@@ -93,18 +112,6 @@ export const defaultRoutes = [
 				static: false
 			}
 		]
-	},
-	{
-		path: 'search',
-		slug: 'search',
-		static: true,
-		component: SearchContainer
-	},
-	{
-		path: 'my-domains',
-		slug: 'myDomains',
-		static: false,
-		component: MyDomains
 	}
 ];
 

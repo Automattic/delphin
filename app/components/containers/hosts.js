@@ -9,6 +9,6 @@ import { getPath } from 'routes';
 export default connect(
 	null,
 	dispatch => ( {
-		redirectToHostInfo: ( hostName ) =>	dispatch( push( { pathname: getPath( 'hostInfo' ) + '/' + hostName } ) )
+		redirectToHostInfo: ( hostName ) => dispatch( push( { pathname: getPath( 'hostInfo' ) + '/' + hostName } ) )
 	} )
 )( Hosts );

@@ -1,6 +1,7 @@
 export const hosts = [
 	{
 		name: 'WordPress.com',
+		slug: 'wordpress',
 		color: '#0087be',
 		logoUrl: '/images/hosts/wordpress-small.svg',
 		horizontalLogoUrl: '/images/hosts/wordpress-horizontal.png',
@@ -20,6 +21,7 @@ export const hosts = [
 	},
 	{
 		name: 'Tumblr',
+		slug: 'tumblr',
 		color: '#36465d',
 		logoUrl: '/images/hosts/tumblr-small.svg',
 		horizontalLogoUrl: '/images/hosts/tumblr-horizontal.svg',
@@ -35,6 +37,7 @@ export const hosts = [
 	},
 	{
 		name: 'Medium',
+		slug: 'medium',
 		color: '#000',
 		logoUrl: '/images/hosts/medium-small.svg',
 		horizontalLogoUrl: '/images/hosts/medium-horizontal.svg',

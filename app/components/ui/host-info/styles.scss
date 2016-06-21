@@ -1,47 +1,128 @@
+@import 'app/styles/breakpoints.scss';
 @import 'app/styles/fonts.scss';
 @import 'app/styles/colors.scss';
 
-.credentials {
+.back-link-container {
+	background: darken( $gray, 30% );
+	padding: 15px;
+}
+
+.back-link {
+	color: $white;
+	font-size: 1.6rem;
+	text-decoration: none;
+}
+
+.header {
+	color: $white;
+	margin-bottom: 20px;
+	padding: 40px;
+	text-align: center;
+
+	&.wordpress {
+		background: $host-wordpress;
+	}
+
+	&.medium {
+		background: $host-medium;
+	}
+
+	&.tumblr {
+		background: $host-tumblr;
+	}
+}
+
+.header-image {
+	height: 50px;
+	margin: 0 auto 20px auto;
+	width: 250px;
+
+	&.wordpress {
+		background: url( /images/hosts/wordpress-horizontal.png ) no-repeat center center;
+		background-size: contain;
+	}
+
+	&.medium {
+		background: url( /images/hosts/medium-horizontal.svg ) no-repeat center center;
+		background-size: contain;
+	}
+
+	&.tumblr {
+		background: url( /images/hosts/tumblr-horizontal.svg ) no-repeat center center;
+		background-size: contain;
+	}
+}
+
+.connect-button {
+	background: $white;
+	border-radius: 5px;
+	border: none;
+	color: darken( $gray, 30% );
+	display: inline-block;
+	font-size: 1.6rem;
+	font-weight: 600;
+	margin-top: 20px;
+	padding: 25px 50px;
+}
+
+.content {
+	margin: 0 auto;
+	max-width: 880px;
+	padding: 0 10px;
+}
+
+.credentials-container {
 	background: rgba(0, 0, 0, 0.04);
 	border: 1px solid $gray-blue;
-	float: right;
-	justify-content: space-between;
-	margin-bottom: 40px;
-	margin-left: 40px;
-	margin-top: 20px;
-	min-width: 400px;
-	padding: 30px;
+	padding: 30px 20px 25px 20px;
+
+	@include breakpoint( '>660px' ) {
+		float: right;
+		margin-left: 25px;
+	}
+}
+
+.credentials {
+	margin-bottom: 15px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.credential-title,
+.credential-cost,
+.best-for-tag {
+	display: inline-block;
+	margin-right: 5px;
 }
 
 .credential-title {
-	clear: both;
-	color: #2e4453;
-	float: left;
+	display: inline-block;
 	font-family: $body-font;
 	font-weight: 600;
 	font-size: 1.4rem;
-	margin: 10px 20px 10px 0;
-	padding: 0;
+	margin: 0 10px 10px 0;
 	text-transform: uppercase;
+
+	@include breakpoint( '<660px' ) {
+		display: block;
+	}
 }
 
 .credential-cost {
-	float: left;
 	font-size: 1.4rem;
-	margin: 10px 20px 10px 0;
-	padding: 0;
 }
 
 .best-for-tag {
 	background: $gray-blue;
 	border-radius: 5px;
-	color: #fff;
+	color: $white;
 	display: inline-block;
 	font-family: $body-font;
 	font-size: 1.4rem;
-	float: left;
 	list-style: none;
-	margin: 5px;
+	margin: 0 5px 5px 0;
 	padding: 5px 10px;
 }
 
@@ -49,7 +130,7 @@
 	font-family: $body-font;
 	font-size: 2.1rem;
 	line-height: 3.1rem;
-	margin-bottom: 2.1rem;
+	margin: 40px 0;
 }
 
 .description {

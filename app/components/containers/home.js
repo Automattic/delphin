@@ -6,6 +6,7 @@ import { reduxForm, change } from 'redux-form';
 import { fetchDomainSuggestions, selectDomain, submitEmptySearch } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Home from 'components/ui/home';
+import { isLoggedIn } from 'reducers/user/selectors';
 
 export default reduxForm(
 	{
@@ -14,7 +15,8 @@ export default reduxForm(
 	},
 	state => ( {
 		domainSearch: state.domainSearch,
-		showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice
+		showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice,
+		isLoggedIn: isLoggedIn( state )
 	} ),
 	dispatch => ( {
 		changeQuery( query ) {
@@ -48,7 +50,7 @@ export default reduxForm(
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
 		selectDomain( domainProduct ) {
-			dispatchProps.selectDomain( domainProduct, stateProps.user.isLoggedIn );
+			dispatchProps.selectDomain( domainProduct, stateProps.isLoggedIn );
 		}
 	} )
 )( Home );

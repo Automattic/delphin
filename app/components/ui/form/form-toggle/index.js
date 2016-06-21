@@ -77,13 +77,13 @@ class FormToggle extends React.Component {
 
 FormToggle.propTypes = {
 	'aria-label': React.PropTypes.string,
-	children: React.PropTypes.node,
-	onChange: React.PropTypes.func,
-	onKeyDown: React.PropTypes.func,
 	checked: React.PropTypes.bool,
+	children: React.PropTypes.node,
 	disabled: React.PropTypes.bool,
 	id: React.PropTypes.string,
 	name: React.PropTypes.string.isRequired,
+	onChange: React.PropTypes.func,
+	onKeyDown: React.PropTypes.func,
 	toggling: React.PropTypes.bool
 };
 

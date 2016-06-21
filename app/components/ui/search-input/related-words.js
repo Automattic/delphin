@@ -50,12 +50,12 @@ const RelatedWords = ( { target, replace, relatedWords } ) => {
 };
 
 RelatedWords.propTypes = {
+	relatedWords: PropTypes.object,
+	replace: PropTypes.func.isRequired,
 	target: PropTypes.shape( {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
-	} ).isRequired,
-	relatedWords: PropTypes.object,
-	replace: PropTypes.func.isRequired
+	} ).isRequired
 };
 
 export default withStyles( styles )( RelatedWords );

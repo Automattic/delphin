@@ -28,8 +28,8 @@ const SearchHeader = ( { query, onQueryChange } ) => {
 };
 
 SearchHeader.propTypes = {
-	query: PropTypes.string.isRequired,
-	onQueryChange: PropTypes.func.isRequired
+	onQueryChange: PropTypes.func.isRequired,
+	query: PropTypes.string.isRequired
 };
 
 export default withStyles( headerStyles, styles )( SearchHeader );

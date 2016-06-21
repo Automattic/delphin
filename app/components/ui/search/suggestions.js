@@ -17,8 +17,8 @@ const getNumberFromPrice = price => Number( price.replace( /[^0-9.]/g, '' ) );
 const Suggestions = React.createClass( {
 	propTypes: {
 		count: PropTypes.number,
-		selectDomain: PropTypes.func.isRequired,
 		results: PropTypes.array,
+		selectDomain: PropTypes.func.isRequired,
 		sort: PropTypes.string.isRequired
 	},
 

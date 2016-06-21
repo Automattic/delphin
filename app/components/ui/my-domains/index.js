@@ -5,7 +5,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
-import NoMarginLayout from 'components/ui/layout/no-margin';
 import styles from './styles.scss';
 
 const MyDomains = React.createClass( {
@@ -47,11 +46,9 @@ const MyDomains = React.createClass( {
 
 	render() {
 		return (
-			<NoMarginLayout>
 				<div className={ styles.myDomains }>
 					{ this.renderDomains() }
 				</div>
-			</NoMarginLayout>
 		);
 	}
 } );

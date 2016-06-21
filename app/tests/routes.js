@@ -16,6 +16,7 @@ jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/ui/header', () => {} );
 jest.mock( 'components/ui/layout', () => {} );
 jest.mock( 'components/ui/layout/default-with-header', () => {} );
+jest.mock( 'components/ui/layout/no-margin', () => {} );
 
 jest.unmock( 'routes' );
 

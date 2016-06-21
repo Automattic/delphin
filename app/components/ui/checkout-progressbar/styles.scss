@@ -1,4 +1,4 @@
-@import 'app/styles/colors.scss';
+@import 'app/styles/colors';
 
 $step-inner-dot-size: 14px;
 $step-dot-size: 30px;
@@ -15,38 +15,35 @@ $inner-dot-color: $gray-blue;
 
 @mixin step-line-style( $color, $width ) {
 	background-color: $color;
+	bottom: ( $step-inner-dot-size - ( $step-line-size/2 ) );
 	content: ' ';
-	width: $width;
 	height: $step-line-size;
-
+	left: 0;
 	position: absolute;
-		left: 0;
-		bottom: ( $step-inner-dot-size - ( $step-line-size/2 ) );
-
+	width: $width;
 	z-index: -2;
 }
 
 .progressbar-step {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	justify-content: center;
-	flex: 1;
-
 	position: relative;
 
-	&:after {
+	&::after {
 		@include step-line-style( $inactive-step-color, 100% );
 	}
 
 	&:first-child {
-		&:after {
+		&::after {
 			@include step-line-style( $inactive-step-color, 50% );
 			margin-left: 50%;
 		}
 	}
 
 	&:last-child {
-		&:after {
+		&::after {
 			@include step-line-style( $inactive-step-color, 50% );
 		}
 	}
@@ -55,17 +52,17 @@ $inner-dot-color: $gray-blue;
 .progressbar-step-active {
 	&:first-child,
 	&:last-child {
-		&:after {
+		&::after {
 			background-color: $active-step-color;
 		}
 	}
 
-	&:after {
+	&::after {
 		background-color: $active-step-color;
 	}
 
 	.progressbar-step-dot {
-		&:before {
+		&::before {
 			background-color: $active-step-color;
 		}
 	}
@@ -74,53 +71,50 @@ $inner-dot-color: $gray-blue;
 .progressbar-step-last-active {
 	position: relative;
 
-	&:before {
+	&::before {
 		@include step-line-style( $inactive-step-color, 50% );
-		z-index: -1;
 		margin-left: 50%;
+		z-index: -1;
 	}
 
 	&:last-child {
-		&:before {
-			width: 0;
+		&::before {
 			height: 0;
+			width: 0;
 		}
 	}
 }
 
 @mixin dot-styles( $size, $color ) {
-	position: absolute;
-		left: 50%;
-		margin-left: -$size/2;
-		top: 50%;
-		margin-top: -$size/2;
-
-	width: $size;
-	height: $size;
-
-	border-radius: 50%;
 	background-color: $color;
-
+	border-radius: 50%;
 	content: ' ';
+	height: $size;
+	left: 50%;
+	margin-left: -$size / 2;
+	margin-top: -$size / 2;
+	position: absolute;
+	top: 50%;
+	width: $size;
 }
 
 .progressbar-step-caption {
-	text-transform: uppercase;
-	text-align: center;
 	color: $inner-dot-color;
 	font-size: 1.3rem;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .progressbar-step-dot {
-	position: relative;
-	margin-top: 2.5em;
 	height: $step-dot-size;
+	margin-top: 2.5em;
+	position: relative;
 
-	&:before {
+	&::before {
 		@include dot-styles( $step-dot-size, $inactive-step-color )
 	}
 
-	&:after {
+	&::after {
 		@include dot-styles( $step-inner-dot-size, $inner-dot-color )
 	}
 }

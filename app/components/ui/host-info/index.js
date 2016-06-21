@@ -17,25 +17,35 @@ class HostInfo extends React.Component {
 	render() {
 		const host = find( hosts, { name: this.props.hostName } );
 
-		return <section>
-			<Link to={ this.props.backUrl }>← { i18n.translate( 'View All' ) }</Link>
+		return (
+			<section>
+				<div className={ styles.backLinkContainer }>
+					<Link className={ styles.backLink } to={ this.props.backUrl }>← { i18n.translate( 'View All' ) }</Link>
+				</div>
 
-			<img src={ host.horizontalLogoUrl } />
-			<h2>{ host.name }</h2>
-			<a>{ i18n.translate( 'Connect Now' ) }</a>
+				<div className={ styles.header + ' ' + styles[ host.slug ] }>
+					<div className={ styles.headerImage + ' ' + styles[ host.slug ] } />
+					<button className={ styles.connectButton }>{ i18n.translate( 'Connect Now' ) }</button>
+				</div>
 
-			<p className={ styles.feature }>{ host.longDescription[ 0 ] }</p>
-			<dl className={ styles.credentials } >
-				<dt className={ styles.credentialTitle }>COST</dt>
-				<dd className={ styles.credentialCost }>{ host.price ? getCost( host.price ) : i18n.translate( 'Free' ) }</dd>
-
-				<dt className={ styles.credentialTitle }>BEST FOR</dt>
-				{ host.bestForTags.map( ( bestTag ) => <dd key={ bestTag } className={ styles.bestForTag }>{ bestTag }</dd> ) }
-			</dl>
-			{
-				host.longDescription.slice( 1 ).map( ( paragraph, index ) => <p key={ host.name + 'description' + index } className={ styles.description }>{ paragraph }</p> )
-			}
-		</section>;
+				<div className={ styles.content }>
+					<p className={ styles.feature }>{ host.longDescription[ 0 ] }</p>
+					<div className={ styles.credentialsContainer }>
+						<dl className={ styles.credentials } >
+							<dt className={ styles.credentialTitle }>COST</dt>
+							<dd className={ styles.credentialCost }>{ host.price ? getCost( host.price ) : i18n.translate( 'Free' ) }</dd>
+						</dl>
+						<dl className={ styles.credentials }>
+							<dt className={ styles.credentialTitle }>BEST FOR</dt>
+							{ host.bestForTags.map( ( bestTag ) => <dd key={ bestTag } className={ styles.bestForTag }>{ bestTag }</dd> ) }
+						</dl>
+					</div>
+					{
+						host.longDescription.slice( 1 ).map( ( paragraph, index ) => <p key={ host.name + 'description' + index } className={ styles.description }>{ paragraph }</p> )
+					}
+				</div>
+			</section>
+		);
 	}
 }
 

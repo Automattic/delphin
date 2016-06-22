@@ -1,6 +1,6 @@
-@import 'app/styles/breakpoints.scss';
-@import 'app/styles/fonts.scss';
-@import 'app/styles/colors.scss';
+@import 'app/styles/breakpoints';
+@import 'app/styles/fonts';
+@import 'app/styles/colors';
 
 .back-link-container {
 	background: darken( $gray, 30% );
@@ -34,29 +34,29 @@
 
 .header-image {
 	height: 50px;
-	margin: 0 auto 20px auto;
+	margin: 0 auto 20px;
 	width: 250px;
 
 	&.wordpress {
-		background: url( /images/hosts/wordpress-horizontal.png ) no-repeat center center;
+		background: url( '/images/hosts/wordpress-horizontal.png' ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( /images/hosts/medium-horizontal.svg ) no-repeat center center;
+		background: url( '/images/hosts/medium-horizontal.svg' ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( /images/hosts/tumblr-horizontal.svg ) no-repeat center center;
+		background: url( '/images/hosts/tumblr-horizontal.svg' ) no-repeat center center;
 		background-size: contain;
 	}
 }
 
 .connect-button {
 	background: $white;
+	border: 0;
 	border-radius: 5px;
-	border: none;
 	color: darken( $gray, 30% );
 	display: inline-block;
 	font-size: 1.6rem;
@@ -74,7 +74,7 @@
 .credentials-container {
 	background: rgba(0, 0, 0, 0.04);
 	border: 1px solid $gray-blue;
-	padding: 30px 20px 25px 20px;
+	padding: 30px 20px 25px;
 
 	@include breakpoint( '>660px' ) {
 		float: right;
@@ -100,8 +100,8 @@
 .credential-title {
 	display: inline-block;
 	font-family: $body-font;
-	font-weight: 600;
 	font-size: 1.4rem;
+	font-weight: 600;
 	margin: 0 10px 10px 0;
 	text-transform: uppercase;
 

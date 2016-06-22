@@ -25,9 +25,13 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
-		if ( ! this.props.domain || this.props.isLoggedOut ) {
-			this.props.redirectToHome();
+		if ( this.props.isLoggedOut ) {
+			this.props.redirectToLogin();
+			return;
+		}
 
+		if ( ! this.props.domain ) {
+			this.props.redirectToHome();
 			return;
 		}
 
@@ -56,8 +60,7 @@ class ContactInformation extends React.Component {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedOut ) {
-			this.props.redirectToHome();
-
+			this.props.redirectToLogin();
 			return;
 		}
 
@@ -370,6 +373,7 @@ ContactInformation.propTypes = {
 	location: PropTypes.object.isRequired,
 	redirectToCheckout: PropTypes.func.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
+	redirectToLogin: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,

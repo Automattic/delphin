@@ -155,11 +155,15 @@ export const getPath = ( slug, values = {}, overrides = {} ) => {
 
 export const serverRedirectRoutes = [
 	{
+		from: getPath( 'contactInformation' ),
+		to: getPath( 'loginUser' )
+	},
+	{
 		from: getPath( 'checkout' ),
-		to: getPath( 'home' )
+		to: getPath( 'loginUser' )
 	},
 	{
 		from: getPath( 'success' ),
-		to: getPath( 'home' )
+		to: getPath( 'loginUser' )
 	}
 ];

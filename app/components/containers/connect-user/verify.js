@@ -37,7 +37,7 @@ export default reduxForm(
 		validate
 	},
 	state => ( {
-		domain: getCheckout( state ).domain,
+		domain: getCheckout( state ).selectedDomain.domain,
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
 	} ),

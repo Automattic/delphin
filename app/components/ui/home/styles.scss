@@ -89,3 +89,20 @@
 	float: right;
 	text-decoration: underline;
 }
+
+.warning {
+	background: lighten( $red, 30% );
+	border: 1px solid $red;
+	color: $red;
+	padding: 2rem;
+	text-align: center;
+}
+
+.warning-heading {
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.warning-text {
+	font-size: 2rem;
+}

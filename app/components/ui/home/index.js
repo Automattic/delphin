@@ -74,6 +74,14 @@ const Home = React.createClass( {
 
 		return (
 			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<div className={ styles.warning }>
+					<div className={ styles.warningHeading }>
+						{ i18n.translate( 'Warning: This is an experiment, it may bite.' ) }
+					</div>
+					<div className={ styles.warningText }>
+						{ i18n.translate( 'This site not ready for public consumption, it will probably break and give you a nasty hangover.' ) }
+					</div>
+				</div>
 				<h2 className={ styles.heading }>
 					{ i18n.translate( 'Find your perfect site address.' ) }
 				</h2>

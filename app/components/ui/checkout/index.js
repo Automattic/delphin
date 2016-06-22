@@ -20,22 +20,28 @@ const Checkout = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		initializeForm: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		isLoggedOut: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,
-		redirectToSearch: PropTypes.func.isRequired,
-		redirectToSignup: PropTypes.func.isRequired,
+		redirectToHome: PropTypes.func.isRequired,
+		redirectToLogin: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
-		if ( ! this.props.checkout.selectedDomain.domain ) {
-			this.props.redirectToSearch();
-		} else if ( ! this.props.isLoggedIn ) {
-			this.props.redirectToSignup();
+		if ( this.props.isLoggedOut ) {
+			this.props.redirectToLogin();
+		} else if ( this.props.isLoggedIn && ! this.props.checkout.selectedDomain.domain ) {
+			this.props.redirectToHome();
 		}
 	},
 
 	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.isLoggedOut ) {
+			nextProps.redirectToLogin();
+			return;
+		}
+
 		if ( ! this.props.checkout.transaction.hasLoadedFromServer && nextProps.checkout.transaction.hasLoadedFromServer ) {
 			this.props.redirectToSuccess();
 		}

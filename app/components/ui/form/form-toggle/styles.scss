@@ -1,40 +1,43 @@
-@import 'app/styles/colors.scss';
+@import 'app/styles/colors';
 
-.form-toggle[type="checkbox"] {
+.form-toggle[type='checkbox'] {
 	display: none;
 }
 
 .switch {
-	position: relative;
-	display: inline-block;
 	border-radius: 4px;
 	box-sizing: border-box;
-	padding: 2px;
-	width: 36px;
-	height: 20px;
-	vertical-align: middle;
-	outline: 0;
 	cursor: pointer;
-	transition: all .4s ease, box-shadow 0s;
+	display: inline-block;
+	height: 20px;
+	outline: 0;
+	padding: 2px;
+	position: relative;
+	transition: box-shadow .4s ease, box-shadow 0s, background .4s ease, box-shadow 0s;
+	vertical-align: middle;
+	width: 36px;
 
-	&:before,
-	&:after {
-		position: relative;
+	&::before,
+	&::after {
+		content: '';
 		display: block;
-		content: "";
-		width: 16px;
 		height: 16px;
+		position: relative;
+		width: 16px;
 	}
-	&:after {
-		left: 0;
-		border-radius: 2px;
+
+	&::after {
 		background: $white;
-		transition: all .2s ease;
+		border-radius: 2px;
+		left: 0;
+		transition: left .2s ease;
 	}
-	&:before {
+
+	&::before {
 		display: none;
 	}
-	.accessible-focus &:focus{
+
+	.accessible-focus &:focus {
 		box-shadow: 0 0 0 2px $blue-medium;
 	}
 }
@@ -52,6 +55,7 @@
 		+ .label .switch {
 			box-shadow: 0 0 0 2px $blue-medium;
 		}
+
 		&:checked + .label .switch {
 			box-shadow: 0 0 0 2px $blue-light;
 		}
@@ -61,23 +65,23 @@
 		background: lighten( $gray, 10% );
 	}
 
-	&:not( :disabled ) {
+	&:not([disabled]) {
 		+ .label .switch:hover {
 			background: lighten( $gray, 20% );
 		}
 	}
 
-	&:checked{
+	&:checked {
 		+ .label .switch {
 			background: $blue-medium;
 
-			&:after {
+			&::after {
 				left: 16px;
 			}
 		}
 	}
 
-	&:checked:not( :disabled ) {
+	&:checked:not([disabled]) {
 		+ .label .switch:hover {
 			background: $blue-light;
 		}
@@ -85,8 +89,8 @@
 
 	&:disabled {
 		+ label.label span.switch {
-			opacity: 0.25;
 			cursor: default;
+			opacity: 0.25;
 		}
 	}
 }
@@ -96,6 +100,7 @@
 	+ .label .switch {
 		background: $blue-medium;
 	}
+
 	&:checked {
 		+ .label .switch {
 			background: lighten( $gray, 20% );
@@ -106,18 +111,19 @@
 .form-toggle.is-compact {
 	+ .label .switch {
 		border-radius: 8px;
-		width: 24px;
 		height: 16px;
+		width: 24px;
 
-		&:before,
-		&:after {
-			width: 12px;
+		&::before,
+		&::after {
 			height: 12px;
+			width: 12px;
 		}
 	}
+
 	&:checked {
 		+ .label .switch {
-			&:after{
+			&::after {
 				left: 8px;
 			}
 		}

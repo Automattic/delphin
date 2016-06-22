@@ -1,4 +1,4 @@
-@import 'app/styles/colors.scss';
+@import 'app/styles/colors';
 
 .form {
 	display: block;
@@ -6,7 +6,8 @@
 	margin: 0 auto;
 	max-width: 400px;
 
-	input, button {
+	input,
+	button {
 		font-family: inherit;
 	}
 
@@ -23,7 +24,7 @@
 
 .notice-area {
 	background: #2e4453;
-	color: white;
+	color: #fff;
 	font-size: 1.7rem;
 	padding: 30px;
 	word-wrap: break-word;
@@ -82,9 +83,9 @@
 
 	button {
 		background: #87a6bc;
-		border: none;
+		border: 0;
 		border-radius: 5px;
-		color: white;
+		color: #fff;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 1.6rem;
@@ -113,9 +114,9 @@
 }
 
 .arrow {
+	display: inline-block;
 	font-size: 1.5rem;
 	margin: 1px 5px;
-	display: inline-block;
 }
 
 .input-container {
@@ -126,16 +127,15 @@
 	cursor: pointer;
 	fill: $yellow;
 	position: absolute;
-		top: 12px;
-		right: 10px;
+	right: 10px;
+	top: 12px;
 }
-
 
 .input {
 	&.has-error {
-		border-color: $yellow;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
+		border-color: $yellow;
 		padding-right: 30px;
 	}
 }

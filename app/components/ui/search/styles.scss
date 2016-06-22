@@ -1,6 +1,6 @@
-@import 'app/styles/colors.scss';
-@import 'app/styles/fonts.scss';
-@import 'app/styles/breakpoints.scss';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
 
 .search {
 	margin-bottom: 60px;
@@ -10,7 +10,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	margin: 30px auto 0 auto;
+	margin: 30px auto 0;
 	max-width: 960px;
 	padding: 0 10px;
 }
@@ -25,7 +25,7 @@
 	margin-top: 15px;
 	padding: 0;
 	text-decoration: none;
-	transition: all 150ms ease-in;
+	transition: background 150ms ease-in, border 150ms ease-in;
 	width: 100%;
 
 	&:hover {
@@ -58,7 +58,7 @@
 	font-size: 1.4rem;
 	padding: 10px;
 	text-transform: uppercase;
-	transition: all 150ms ease-in;
+	transition: background 150ms ease-in;
 }
 
 .cost {
@@ -66,7 +66,7 @@
 }
 
 .additional-results-link-container {
-	margin: 30px 0 20px 0;
+	margin: 30px 0 20px;
 	text-align: center;
 }
 
@@ -92,7 +92,7 @@
 
 .sort-select {
 	appearance: none;
-	background: url( http://s.wordpress.com/i/delphin/form-ui-select.png ) no-repeat right center;
+	background: url( 'http://s.wordpress.com/i/delphin/form-ui-select.png' ) no-repeat right center;
 	background-size: 50px 63px;
 	font-size: 1.8rem;
 	height: 61px;
@@ -101,16 +101,16 @@
 
 .search-info {
 	background: $light-blue;
-	color: #016F94;
-	padding: 20px 0 0 0;
-	text-align: center;
+	color: #016f94;
 	font-size: 1.7rem;
 	font-weight: 600;
+	padding: 20px 0 0;
+	text-align: center;
 }
 
 .title {
 	color: #fff;
-	font-size: 2.0rem;
+	font-size: 2rem;
 	padding: 30px;
 	text-decoration: none;
 }

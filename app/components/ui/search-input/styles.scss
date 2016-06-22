@@ -1,8 +1,8 @@
-@import 'app/styles/colors.scss';
-@import 'app/styles/fonts.scss';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
 
 .search-wrapper {
-	background: white;
+	background: #fff;
 	border: 1px solid $search-border-blue;
 	display: flex;
 	justify-content: space-between;
@@ -13,7 +13,7 @@
 
 	input {
 		background: transparent;
-		border: none;
+		border: 0;
 		display: inline-block;
 		font-size: 18px;
 		margin-top: 3px;
@@ -31,7 +31,7 @@
 .keyword {
 	background: $gray-blue;
 	border-radius: 5px;
-	color: white;
+	color: #fff;
 	cursor: pointer;
 	font-size: 15px;
 	line-height: 21px;
@@ -42,22 +42,22 @@
 }
 
 .keyword-action {
-	border: none;
-	border-radius: 0px 5px 5px 0px;
+	border: 0;
+	border-radius: 0 5px 5px 0;
 	font-size: 16px;
 	height: 100%;
 	position: absolute;
-		right: 0;
-		top: 0;
+	right: 0;
+	top: 0;
 	width: 28px;
 }
 
 .keyword-delete {
-	background: url( http://s.wordpress.com/i/delphin/trash.svg ) center no-repeat $dark-gray-blue;
+	background: url( 'http://s.wordpress.com/i/delphin/trash.svg' ) center no-repeat $dark-gray-blue;
 }
 
 .keyword-select {
-	background: url( http://s.wordpress.com/i/delphin/right-arrow.svg ) center no-repeat $dark-gray-blue;
+	background: url( 'http://s.wordpress.com/i/delphin/right-arrow.svg' ) center no-repeat $dark-gray-blue;
 }
 
 .keyword-hidden {
@@ -65,7 +65,7 @@
 }
 
 .keyword-is-selected {
- 	background: #2e4453;
+	background: #2e4453;
 }
 
 .keyword-is-domain {
@@ -77,12 +77,12 @@
 }
 
 .related-words {
-	background: white;
+	background: #fff;
 	border: 1px solid $search-border-blue;
+	left: -1px;
 	padding: 25px 10px;
 	position: absolute;
-		left: -1px;
-		top: 51px;
+	top: 51px;
 	width: calc(100% - 20px);
 
 	h3 {
@@ -111,12 +111,12 @@
 .related-words-list-item {
 	background: $gray-blue;
 	border-radius: 5px;
-	color: white;
+	color: #fff;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 15px;
-	margin-top: 5px;
 	margin-right: 10px;
+	margin-top: 5px;
 	padding: 5px 10px;
 	user-select: none;
 }

@@ -1,10 +1,13 @@
-.header {
-	background: url( http://s.wordpress.com/i/delphin/background.png ) center top #87a6bc;
-	box-shadow: 0px -10px 10px -10px rgba(0, 0, 0, 0.3) inset;
-
+%header {
+	align-items: center;
+	background: url( 'http://s.wordpress.com/i/delphin/background.png' ) center top #87a6bc;
+	box-shadow: 0 -10px 10px -10px rgba(0, 0, 0, 0.3) inset;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+}
+
+.header {
+	@extend %header;
 }
 
 .search-header-wrapper {
@@ -12,18 +15,18 @@
 }
 
 .search-header {
-	@extend .header;
+	@extend %header;
 
+	left: 0;
 	position: fixed;
-		left: 0;
-		right: 0;
-		top: 0;
+	right: 0;
+	top: 0;
 }
 
 .title {
 	color: #fff;
 	flex-basis: 100%;
-	font-size: 2.0rem;
+	font-size: 2rem;
 	padding: 30px;
 	text-align: center;
 	text-decoration: none;

@@ -1,15 +1,15 @@
-@import 'app/styles/colors.scss';
-@import 'app/styles/fonts.scss';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
 $thumb-width: 350px;
 $thumb-horizontal-margin: 15px;
 
 .content {
-	margin: 20px 0 50px 0;
+	margin: 20px 0 50px;
 }
 
 .heading2 {
 	color: #2e4453;
-	font-family: "Merriweather", serif;
+	font-family: 'Merriweather', serif;
 	font-size: 2.6rem;
 	font-weight: 600;
 	text-align: center;
@@ -36,7 +36,7 @@ $thumb-horizontal-margin: 15px;
 	flex-direction: column;
 	font-family: $body-font;
 	justify-content: space-between;
-	margin: 25px $thumb-horizontal-margin 25px $thumb-horizontal-margin;
+	margin: 25px $thumb-horizontal-margin;
 	padding: 40px 30px 30px;
 	position: relative;
 	text-align: center;
@@ -69,14 +69,14 @@ $thumb-horizontal-margin: 15px;
 .thumbnail-description {
 	font-size: 1.4rem;
 	line-height: 1.4;
-	margin: 14px 0 14px 0;
+	margin: 14px 0;
 }
 
 .thumbnail-learn-more {
 	background-color: transparent;
 	border: 1px solid #fff;
 	border-radius: 5px;
-	color: white;
+	color: #fff;
 	font-size: 1.8rem;
 	margin-top: 25px;
 	padding: 8px 30px;
@@ -84,17 +84,17 @@ $thumb-horizontal-margin: 15px;
 }
 
 .thumbnail-connect {
+	bottom: -25px;
 	color: #2e4453;
 	font-size: 1.6rem;
+	left: 0;
 	position: absolute;
-		bottom: -25px;
-		left: 0;
 	width: 100%;
 }
 
 .thumbnail-link-icon {
-	width: 25px;
 	margin-right: 5px;
+	width: 25px;
 }
 
 .logo {
@@ -102,17 +102,17 @@ $thumb-horizontal-margin: 15px;
 	width: 150px;
 
 	&.wordpress {
-		background: url( /images/hosts/wordpress-small.svg ) no-repeat center center;
+		background: url( '/images/hosts/wordpress-small.svg' ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( /images/hosts/medium-small.svg ) no-repeat center center;
+		background: url( '/images/hosts/medium-small.svg' ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( /images/hosts/tumblr-small.svg ) no-repeat center center;
+		background: url( '/images/hosts/tumblr-small.svg' ) no-repeat center center;
 		background-size: contain;
 	}
 }

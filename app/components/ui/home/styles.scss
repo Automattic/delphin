@@ -1,10 +1,10 @@
-@import 'app/styles/colors.scss';
-@import 'app/styles/fonts.scss';
-@import 'app/styles/breakpoints.scss';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
 
 .heading {
 	font-family: $heading-font;
-	font-size: 3.0rem;
+	font-size: 3rem;
 	font-weight: 600;
 	margin-top: 45px;
 	text-align: center;
@@ -24,8 +24,8 @@
 	width: 100%;
 
 	&:hover {
-		border-color: #aaa;
 		background-color: #fff;
+		border-color: #aaa;
 	}
 
 	&:focus {
@@ -50,7 +50,7 @@
 	display: block;
 	font-size: 16px;
 	font-weight: normal;
-	margin: 30px auto 0 auto;
+	margin: 30px auto 0;
 	outline: none;
 	padding: 18px 40px;
 	text-transform: uppercase;
@@ -68,7 +68,7 @@
 	background: #2e4453;
 	border-radius: 0 0 3px 3px;
 	box-sizing: border-box;
-	color: white;
+	color: #fff;
 	display: inline-block;
 	font-size: 1.3rem;
 	margin-top: -2px;

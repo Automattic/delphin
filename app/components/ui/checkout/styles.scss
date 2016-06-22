@@ -1,4 +1,4 @@
-@import 'app/components/ui/form/styles.scss';
+@import 'app/components/ui/form/styles';
 
 .expiration {
 	display: flex;
@@ -19,16 +19,16 @@
 
 .order-summary {
 	background-color: #f6f9fb;
-	padding: 30px;
 	border-top: 1px solid #c8d7e1;
 	font-size: 1.4rem;
 	font-weight: 300;
+	padding: 30px;
 
 	h2 {
-		text-transform: uppercase;
-		font-weight: 600;
 		font-size: 1.3rem;
-		margin: 5px 0 20px 0;
+		font-weight: 600;
+		margin: 5px 0 20px;
+		text-transform: uppercase;
 	}
 }
 

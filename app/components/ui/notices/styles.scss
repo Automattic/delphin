@@ -1,10 +1,10 @@
-@import 'app/styles/colors.scss';
+@import 'app/styles/colors';
 
 .notices {
+	left: 1em;
 	position: fixed;
-		left: 1em;
-		right: 1em;
-		top: 1em;
+	right: 1em;
+	top: 1em;
 }
 
 .notice {
@@ -13,18 +13,18 @@
 	font-size: 1.4em;
 	margin-bottom: 1em;
 	padding: 1em;
+}
 
-	&:global( .error ) {
-		background: $red;
-	}
+.error {
+	background: $red;
+}
 
-	&:global( .success ) {
-		background: $green;
-	}
+.success {
+	background: $green;
 }
 
 .remove {
 	cursor: pointer;
 	position: absolute;
-		right: 1em;
+	right: 1em;
 }

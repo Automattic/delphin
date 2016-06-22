@@ -16,7 +16,7 @@
 .header {
 	color: $white;
 	margin-bottom: 20px;
-	padding: 40px;
+	padding: 30px;
 	text-align: center;
 
 	&.wordpress {
@@ -34,7 +34,7 @@
 
 .header-image {
 	height: 50px;
-	margin: 0 auto 20px;
+	margin: 0 auto;
 	width: 250px;
 
 	&.wordpress {
@@ -61,8 +61,8 @@
 	display: inline-block;
 	font-size: 1.6rem;
 	font-weight: 600;
-	margin-top: 20px;
-	padding: 25px 50px;
+	margin-top: 35px;
+	padding: 18px 40px;
 }
 
 .content {
@@ -78,7 +78,7 @@
 
 	@include breakpoint( '>660px' ) {
 		float: right;
-		margin-left: 25px;
+		margin: 0 0 40px 40px;
 	}
 }
 

@@ -18,6 +18,8 @@ $thumb-horizontal-margin: 15px;
 .heading3 {
 	color: #668eaa;
 	font-size: 1.9rem;
+	margin: 1em auto;
+	max-width: 600px;
 	text-align: center;
 }
 
@@ -36,7 +38,7 @@ $thumb-horizontal-margin: 15px;
 	flex-direction: column;
 	font-family: $body-font;
 	justify-content: space-between;
-	margin: 25px $thumb-horizontal-margin;
+	margin: 25px $thumb-horizontal-margin 70px;
 	padding: 40px 30px 30px;
 	position: relative;
 	text-align: center;

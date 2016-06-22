@@ -22,7 +22,6 @@ const HostThumbnail = ( { slug, name, shortDescription } ) => (
 );
 
 HostThumbnail.propTypes = {
-	logoUrl: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	shortDescription: PropTypes.string.isRequired,
 	slug: PropTypes.string.isRequired

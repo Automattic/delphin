@@ -120,3 +120,7 @@
 	padding: 5px 10px;
 	user-select: none;
 }
+
+.is-google-translate-attribution-visible {
+	background: $white url( '/images/powered-by-google-translate.png' ) no-repeat bottom right;
+}

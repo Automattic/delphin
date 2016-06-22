@@ -8,7 +8,8 @@ import {
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_WARNING,
 	VERIFY_USER,
-	VERIFY_USER_COMPLETE
+	VERIFY_USER_COMPLETE,
+	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 
 const initialState = {
@@ -71,6 +72,11 @@ export const connect = ( state = initialState, action ) => {
 				data: {
 					bearerToken
 				}
+			} );
+
+		case VERIFY_USER_FAIL:
+			return Object.assign( {}, state, {
+				isRequesting: false
 			} );
 
 		default:

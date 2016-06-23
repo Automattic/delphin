@@ -7,9 +7,12 @@ import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformation from 'components/containers/contact-information';
 import HomeContainer from 'components/containers/home';
+import HostsContainer from 'components/containers/hosts';
+import HostInfoContainer from 'components/containers/host-info';
 import i18n from 'i18n-calypso';
 import LoginContainer from 'components/containers/connect-user/login';
 import MyDomains from 'components/containers/my-domains';
+import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import Layout from 'components/ui/layout';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
@@ -87,10 +90,28 @@ export const defaultRoutes = [
 		component: SearchContainer
 	},
 	{
-		path: 'my-domains',
-		slug: 'myDomains',
-		static: false,
-		component: MyDomains
+		component: NoMarginLayout,
+		path: '',
+		childRoutes: [
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				component: MyDomains
+			},
+			{
+				path: 'hosts',
+				slug: 'hosts',
+				static: false,
+				component: HostsContainer
+			},
+			{
+				path: 'hosts/:slug',
+				slug: 'hostInfo',
+				component: HostInfoContainer,
+				static: false
+			}
+		]
 	}
 ];
 

@@ -7,6 +7,8 @@ jest.mock( 'components/containers/connect-user/signup', () => {} );
 jest.mock( 'components/containers/connect-user/verify', () => {} );
 jest.mock( 'components/containers/contact-information', () => {} );
 jest.mock( 'components/containers/home', () => {} );
+jest.mock( 'components/containers/host-info', () => {} );
+jest.mock( 'components/containers/hosts', () => {} );
 jest.mock( 'components/containers/my-domains', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
@@ -14,6 +16,7 @@ jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/ui/header', () => {} );
 jest.mock( 'components/ui/layout', () => {} );
 jest.mock( 'components/ui/layout/default-with-header', () => {} );
+jest.mock( 'components/ui/layout/no-margin', () => {} );
 
 jest.unmock( 'routes' );
 

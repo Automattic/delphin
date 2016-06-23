@@ -3,13 +3,24 @@ import React, { PropTypes } from 'react';
 
 const Success = React.createClass( {
 	propTypes: {
+		isLoggedIn: PropTypes.bool.isRequired,
+		isLoggedOut: PropTypes.bool.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
+		redirectToLogin: PropTypes.func.isRequired,
 		transaction: PropTypes.object
 	},
 
 	componentWillMount() {
-		if ( ! this.props.transaction ) {
+		if ( this.props.isLoggedOut ) {
+			this.props.redirectToLogin();
+		} else if ( this.props.isLoggedIn && ! this.props.transaction.hasLoadedFromServer ) {
 			this.props.redirectToHome();
+		}
+	},
+
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.isLoggedOut ) {
+			nextProps.redirectToLogin();
 		}
 	},
 

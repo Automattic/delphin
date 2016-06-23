@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import Checkout from 'components/ui/checkout';
 import { purchaseDomain } from 'actions';
 import { getPath } from 'routes';
-import { isLoggedIn, getUserSettings } from 'reducers/user/selectors';
+import { isLoggedIn, isLoggedOut, getUserSettings } from 'reducers/user/selectors';
 
 /**
  * Retrieves the full name of the user from the contact information entered.
@@ -15,6 +15,10 @@ import { isLoggedIn, getUserSettings } from 'reducers/user/selectors';
  * @returns {string} - the full name
  */
 export const getFullName = state => {
+	if ( ! state.form.contactInformation ) {
+		return '';
+	}
+
 	const { firstName: { value: firstName }, lastName: { value: lastName } } = state.form.contactInformation;
 
 	return `${ firstName } ${ lastName }`;
@@ -36,17 +40,18 @@ export default reduxForm(
 		checkout: state.checkout,
 		initialValues: { name: getFullName( state ), privacyProtection: true },
 		isLoggedIn: isLoggedIn( state ),
+		isLoggedOut: isLoggedOut( state ),
 		user: getUserSettings( state )
 	} ),
 	dispatch => ( {
 		purchaseDomain() {
 			dispatch( purchaseDomain() );
 		},
-		redirectToSearch() {
-			dispatch( push( getPath( 'search' ) ) );
+		redirectToHome() {
+			dispatch( push( getPath( 'home' ) ) );
 		},
-		redirectToSignup() {
-			dispatch( push( getPath( 'signupUser' ) ) );
+		redirectToLogin() {
+			dispatch( push( getPath( 'loginUser' ) ) );
 		},
 		redirectToSuccess() {
 			dispatch( push( getPath( 'success' ) ) );

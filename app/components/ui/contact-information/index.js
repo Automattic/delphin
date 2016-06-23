@@ -25,11 +25,15 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
-		if ( ! this.props.domain ) {
-			this.props.redirectToHome();
+		if ( this.props.isLoggedOut ) {
+			this.props.redirectToLogin();
+			return;
 		}
 
-		this.redirectIfLoggedOut();
+		if ( ! this.props.domain ) {
+			this.props.redirectToHome();
+			return;
+		}
 
 		if ( ! this.props.location.isRequesting && ! this.props.location.hasLoadedFromServer ) {
 			this.props.fetchLocation();
@@ -55,7 +59,10 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		this.redirectIfLoggedOut( nextProps );
+		if ( nextProps.isLoggedOut ) {
+			this.props.redirectToLogin();
+			return;
+		}
 
 		if ( this.isDataLoading() && ! this.isDataLoading( nextProps ) ) {
 			this.initializeContactInformation( nextProps );
@@ -109,12 +116,6 @@ class ContactInformation extends React.Component {
 	isDataLoading( props = this.props ) {
 		return ! props.contactInformation.hasLoadedFromServer ||
 			! props.countries.hasLoadedFromServer;
-	}
-
-	redirectIfLoggedOut( props = this.props ) {
-		if ( props.isLoggedOut ) {
-			props.redirectToHome();
-		}
 	}
 
 	address2InputIsVisible() {
@@ -372,6 +373,7 @@ ContactInformation.propTypes = {
 	location: PropTypes.object.isRequired,
 	redirectToCheckout: PropTypes.func.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
+	redirectToLogin: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,

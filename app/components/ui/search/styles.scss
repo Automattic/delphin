@@ -97,6 +97,10 @@
 	font-size: 1.8rem;
 	height: 61px;
 	padding: 0 70px 0 20px;
+
+	&::-ms-expand{
+		display: none;
+	}
 }
 
 .search-info {

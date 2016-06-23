@@ -12,6 +12,7 @@ var config = merge.smart( baseConfig, {
 	},
 
 	entry: [
+		'babel-polyfill',
 		path.join( __dirname, 'client' )
 	],
 

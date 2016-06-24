@@ -31,7 +31,7 @@
 }
 
 .field-area {
-	background: $light-blue;
+	background: $blue-light;
 	padding: 30px;
 
 	fieldset {
@@ -108,7 +108,7 @@
 }
 
 .validation-error {
-	background: $yellow;
+	background: $alert-yellow;
 	border-radius: 0 0 3px 3px;
 	color: $black;
 	padding: 10px;
@@ -126,7 +126,7 @@
 
 .gridicon {
 	cursor: pointer;
-	fill: $yellow;
+	fill: $alert-yellow;
 	position: absolute;
 	right: 10px;
 	top: 12px;
@@ -136,7 +136,7 @@
 	&.has-error {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
-		border-color: $yellow;
+		border-color: $alert-yellow;
 		padding-right: 30px;
 	}
 }

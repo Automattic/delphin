@@ -7,7 +7,8 @@ import {
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_WARNING,
 	VERIFY_USER,
-	VERIFY_USER_COMPLETE
+	VERIFY_USER_COMPLETE,
+	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 import { connect } from '../connect';
 
@@ -109,5 +110,16 @@ describe( 'state.user.connect', () => {
 
 		expect( result.isRequesting ).toBe( false );
 		expect( result.data.bearerToken ).toBe( 'foobar' );
+	} );
+
+	it( 'should update `isRequesting` if the user verification fails', () => {
+		expect( connect( {
+			intention: null,
+			isRequesting: true,
+			wasCreated: false,
+			data: null
+		}, {
+			type: VERIFY_USER_FAIL
+		} ).isRequesting ).toEqual( false );
 	} );
 } );

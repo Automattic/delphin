@@ -38,17 +38,17 @@
 	width: 250px;
 
 	&.wordpress {
-		background: url( '/images/hosts/wordpress-horizontal.svg' ) no-repeat center center;
+		background: url( /images/hosts/wordpress-horizontal.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( '/images/hosts/medium-horizontal.svg' ) no-repeat center center;
+		background: url( /images/hosts/medium-horizontal.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( '/images/hosts/tumblr-horizontal.svg' ) no-repeat center center;
+		background: url( /images/hosts/tumblr-horizontal.svg ) no-repeat center center;
 		background-size: contain;
 	}
 }

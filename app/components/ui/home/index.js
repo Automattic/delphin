@@ -17,10 +17,12 @@ const Home = React.createClass( {
 		fetchDomainSuggestions: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		invalid: PropTypes.bool.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		showEmptySearchNotice: PropTypes.bool.isRequired,
-		submitEmptySearch: PropTypes.func.isRequired
+		submitEmptySearch: PropTypes.func.isRequired,
+		submitting: PropTypes.bool.isRequired
 	},
 
 	componentWillReceiveProps( nextProps ) {
@@ -53,6 +55,12 @@ const Home = React.createClass( {
 		}
 	},
 
+	isSubmitButtonDisabled() {
+		const { invalid, submitting, domainSearch: { isRequesting } } = this.props;
+
+		return invalid || submitting || isRequesting;
+	},
+
 	generateRandomQuery() {
 		this.props.changeQuery( randomWords( 3 ).join( ' ' ) );
 	},
@@ -66,11 +74,7 @@ const Home = React.createClass( {
 	},
 
 	render() {
-		const {
-			fields: { query },
-			handleSubmit,
-			domainSearch: { isRequesting }
-		} = this.props;
+		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
 			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -109,7 +113,7 @@ const Home = React.createClass( {
 				</ReactCSSTransitionGroup>
 
 				<button
-					disabled={ isRequesting }
+					disabled={ this.isSubmitButtonDisabled() }
 					className={ styles.button }>
 					{ i18n.translate( "Let's find an address" ) }
 				</button>

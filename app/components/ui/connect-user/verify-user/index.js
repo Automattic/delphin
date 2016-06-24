@@ -16,9 +16,11 @@ const VerifyUser = React.createClass( {
 		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		redirect: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
+		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
@@ -39,6 +41,12 @@ const VerifyUser = React.createClass( {
 				this.props.redirect( 'home' );
 			}
 		}
+	},
+
+	isSubmitButtonDisabled() {
+		const { invalid, submitting, user: { isRequesting } } = this.props;
+
+		return invalid || submitting || isRequesting;
 	},
 
 	verifyUser() {
@@ -129,7 +137,7 @@ const VerifyUser = React.createClass( {
 						</fieldset>
 					}
 					submitArea={
-						<button disabled={ user.isRequesting }>
+						<button disabled={ this.isSubmitButtonDisabled() }>
 							{ user.intention === 'login'
 								? i18n.translate( 'Login' )
 								: i18n.translate( 'Verify my email' )

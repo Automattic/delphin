@@ -116,6 +116,12 @@ class ContactInformation extends React.Component {
 			! props.countries.hasLoadedFromServer;
 	}
 
+	isSubmitButtonDisabled() {
+		const { invalid, submitting } = this.props;
+
+		return invalid || submitting || this.isDataLoading();
+	}
+
 	address2InputIsVisible() {
 		const { inputVisibility: { address2InputIsVisible }, fields: { address2 } } = this.props;
 
@@ -344,7 +350,7 @@ class ContactInformation extends React.Component {
 								{ i18n.translate( 'Some providers charge a fee to keep this information private, but we protect your privacy free of charge.' ) }
 							</p>
 
-							<button disabled={ this.props.submitting }>
+							<button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Continue to Checkout' ) }
 							</button>
 						</div>
@@ -366,6 +372,7 @@ ContactInformation.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
+	invalid: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isLoggedOut: PropTypes.bool.isRequired,
 	location: PropTypes.object.isRequired,

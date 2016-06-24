@@ -9,7 +9,7 @@ $thumb-horizontal-margin: 15px;
 
 .heading2 {
 	color: #2e4453;
-	font-family: 'Merriweather', serif;
+	font-family: Merriweather, serif;
 	font-size: 2.6rem;
 	font-weight: 600;
 	text-align: center;
@@ -104,17 +104,17 @@ $thumb-horizontal-margin: 15px;
 	width: 150px;
 
 	&.wordpress {
-		background: url( '/images/hosts/wordpress-small.svg' ) no-repeat center center;
+		background: url( /images/hosts/wordpress-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( '/images/hosts/medium-small.svg' ) no-repeat center center;
+		background: url( /images/hosts/medium-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( '/images/hosts/tumblr-small.svg' ) no-repeat center center;
+		background: url( /images/hosts/tumblr-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 }

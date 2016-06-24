@@ -57,7 +57,7 @@ if ( NODE_ENV === 'development' ) {
 	config.debug = true;
 
 	// Enables source maps
-	config.devtool = 'eval';
+	config.devtool = 'cheap-module-eval-source-map';
 }
 
 if ( NODE_ENV === 'production' ) {

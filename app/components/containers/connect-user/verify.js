@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { connectUser, verifyUser } from 'actions/user';
+import { getAsyncValidateFunction } from 'lib/form';
 import { getCheckout } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
@@ -34,7 +35,8 @@ export default reduxForm(
 	{
 		form: 'verifyUser',
 		fields: [ 'code', 'twoFactorAuthenticationCode' ],
-		validate
+		asyncValidate: getAsyncValidateFunction( validate ),
+		asyncBlurFields: [ 'code', 'twoFactorAuthenticationCode' ],
 	},
 	state => ( {
 		domain: getCheckout( state ).selectedDomain.domain,

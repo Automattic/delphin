@@ -18,6 +18,7 @@ const VerifyUser = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		redirect: PropTypes.func.isRequired,
+		submitFailed: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
@@ -50,7 +51,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	twoFactorFields() {
-		const { fields, user } = this.props;
+		const { fields, submitFailed, user } = this.props;
 
 		if ( user.data.twoFactorAuthenticationEnabled ) {
 			return (
@@ -59,7 +60,7 @@ const VerifyUser = React.createClass( {
 
 					<input { ...fields.twoFactorAuthenticationCode } autoComplete="off" />
 
-					<ValidationError field={ fields.twoFactorAuthenticationCode } />
+					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
 				</div>
 			);
 		}
@@ -102,7 +103,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, user } = this.props;
+		const { fields, handleSubmit, submitFailed, user } = this.props;
 
 		return (
 			<div>
@@ -117,7 +118,7 @@ const VerifyUser = React.createClass( {
 
 							<input { ...fields.code } autoFocus autoComplete="off" />
 
-							<ValidationError field={ fields.code } />
+							<ValidationError field={ fields.code } submitFailed={ submitFailed } />
 
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }

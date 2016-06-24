@@ -17,6 +17,7 @@ const ConnectUser = React.createClass( {
 		isLoggedIn: PropTypes.bool.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToVerifyUser: PropTypes.func.isRequired,
+		submitFailed: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
@@ -37,7 +38,7 @@ const ConnectUser = React.createClass( {
 	},
 
 	render() {
-		const { handleSubmit, fields, user } = this.props;
+		const { handleSubmit, fields, submitFailed, user } = this.props;
 
 		return (
 			<div>
@@ -49,7 +50,7 @@ const ConnectUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Email address:' ) }</label>
 							<input { ...fields.email } autoFocus />
-							<ValidationError field={ fields.email } />
+							<ValidationError field={ fields.email } submitFailed={ submitFailed } />
 						</fieldset>
 					}
 					submitArea={

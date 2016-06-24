@@ -37,7 +37,7 @@ var config = merge.smart( baseConfig, {
 
 	// Enables source maps
 	// This is fine since the server won't be used in production
-	devtool: 'sourcemap',
+	devtool: 'source-map',
 
 	plugins: [
 		// inject source map support on top of the build file

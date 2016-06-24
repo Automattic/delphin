@@ -13,7 +13,7 @@
     "clean:i18n-cache": "rm -f server/i18n-cache/data/*",
     "clean:static": "rm -rf public/static",
     "hooks": "node hooks/manage",
-    "lint": "eslint --max-warnings 0 app client server && sass-lint --config .sass-lint.yml 'app/**/*.scss' --verbose --no-exit",
+    "lint": "eslint --max-warnings 0 app client server && sass-lint --config .sass-lint.yml  --verbose --no-exit",
     "preinstall": "npm run-script clean",
     "postinstall": "npm run-script build",
     "prod": "NODE_ENV=production REFRESH_I18N_CACHE=true node server/build/bundle",

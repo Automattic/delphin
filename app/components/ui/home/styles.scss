@@ -11,7 +11,7 @@
 }
 
 .field {
-	background-color: $light-blue;
+	background-color: $blue-light;
 	border: 1px solid $border-blue;
 	border-radius: 3px;
 	box-sizing: border-box;
@@ -56,7 +56,7 @@
 	text-transform: uppercase;
 
 	&:hover {
-		color: $light-blue;
+		color: $blue-light;
 	}
 
 	&:disabled {
@@ -91,9 +91,9 @@
 }
 
 .warning {
-	background: lighten( $red, 30% );
-	border: 1px solid $red;
-	color: $red;
+	background: lighten( $alert-red, 30% );
+	border: 1px solid $alert-red;
+	color: $alert-red;
 	padding: 2rem;
 	text-align: center;
 }

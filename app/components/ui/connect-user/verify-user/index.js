@@ -50,11 +50,11 @@ const VerifyUser = React.createClass( {
 	},
 
 	verifyUser() {
-		return this.props.verifyUser(
+		this.props.verifyUser(
 			this.props.user.data.email,
 			this.props.fields.code.value,
 			this.props.fields.twoFactorAuthenticationCode.value,
-			{ showSuccessNotice: this.props.user.intention === 'login' }
+			this.props.user.intention
 		);
 	},
 

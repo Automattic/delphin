@@ -4,6 +4,7 @@ import intersection from 'lodash/intersection';
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import styles from './styles.scss';
@@ -11,14 +12,6 @@ import KeywordsContainer from 'components/containers/keywords';
 import RelatedWords from './related-words';
 
 class SearchInput extends React.Component {
-	constructor( props ) {
-		super( props );
-
-		this.handleInputKeydownBound = this.handleInputKeydown.bind( this );
-		this.handleInputChangeBound = this.handleInputChange.bind( this );
-		this.handleSubmitBound = this.handleSubmit.bind( this );
-	}
-
 	componentWillReceiveProps( nextProps ) {
 		// sync to url the keywords if they change
 		const keywordValues = this.props.keywords.map( keyword => keyword.value ),
@@ -54,7 +47,7 @@ class SearchInput extends React.Component {
 			relatedWordsForSelectedKeyword = selectedKeyword && find( this.props.relatedWords, { word: selectedKeyword.value } );
 
 		return (
-			<form className={ styles.searchWrapper } onSubmit={ this.handleSubmitBound }>
+			<form className={ styles.searchWrapper } onSubmit={ this.handleSubmit }>
 				<KeywordsContainer />
 				<ReactCSSTransitionGroup
 					transitionName={ styles.relatedWords }
@@ -74,8 +67,8 @@ class SearchInput extends React.Component {
 					className="search"
 					value={ this.props.inputValue }
 					placeholder={ this.props.placeholder }
-					onChange={ this.handleInputChangeBound }
-					onKeyDown={ this.handleInputKeydownBound }
+					onChange={ this.handleInputChange }
+					onKeyDown={ this.handleInputKeydown }
 				/>
 			</form>
 		);
@@ -100,4 +93,4 @@ SearchInput.propTypes = {
 	submit: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( SearchInput );
+export default withStyles( styles )( bindHandlers( SearchInput ) );

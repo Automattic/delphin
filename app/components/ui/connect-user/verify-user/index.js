@@ -12,13 +12,16 @@ import ValidationError from 'components/ui/form/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
+		addNotice: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
 		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		redirect: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
+		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
@@ -41,13 +44,28 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
+	isSubmitButtonDisabled() {
+		const { invalid, submitting, user: { isRequesting } } = this.props;
+
+		return invalid || submitting || isRequesting;
+	},
+
 	verifyUser() {
+		const { fields, user: { data: { email }, intention } } = this.props;
+
 		return this.props.verifyUser(
-			this.props.user.data.email,
-			this.props.fields.code.value,
-			this.props.fields.twoFactorAuthenticationCode.value,
-			{ showSuccessNotice: this.props.user.intention === 'login' }
-		);
+			email,
+			fields.code.value,
+			fields.twoFactorAuthenticationCode.value,
+			intention
+		).then( () => {
+			if ( intention === 'login' ) {
+				this.props.addNotice( {
+					message: i18n.translate( 'You were successfully logged in!' ),
+					status: 'success'
+				} );
+			}
+		} );
 	},
 
 	twoFactorFields() {
@@ -129,7 +147,7 @@ const VerifyUser = React.createClass( {
 						</fieldset>
 					}
 					submitArea={
-						<button disabled={ user.isRequesting }>
+						<button disabled={ this.isSubmitButtonDisabled() }>
 							{ user.intention === 'login'
 								? i18n.translate( 'Login' )
 								: i18n.translate( 'Verify my email' )

@@ -14,10 +14,12 @@ const ConnectUser = React.createClass( {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		intention: PropTypes.string.isRequired,
+		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToVerifyUser: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
+		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
@@ -37,12 +39,18 @@ const ConnectUser = React.createClass( {
 		}
 	},
 
+	isSubmitButtonDisabled() {
+		const { invalid, submitting, user: { isRequesting } } = this.props;
+
+		return invalid || submitting || isRequesting;
+	},
+
 	render() {
-		const { handleSubmit, fields, submitFailed, user } = this.props;
+		const { fields, handleSubmit, intention, submitFailed } = this.props;
 
 		return (
 			<div>
-				<Header intention={ this.props.intention } />
+				<Header intention={ intention } />
 
 				<Form
 					onSubmit={ handleSubmit }
@@ -54,7 +62,7 @@ const ConnectUser = React.createClass( {
 						</fieldset>
 					}
 					submitArea={
-						<button disabled={ user.isRequesting }>
+						<button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</button>
 					} />

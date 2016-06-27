@@ -1,6 +1,3 @@
-// External dependencies
-import i18n from 'i18n-calypso';
-
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
@@ -104,7 +101,7 @@ export function logoutUser() {
 	return { type: LOGOUT_USER };
 }
 
-export function verifyUser( email, code, twoFactorAuthenticationCode, { showSuccessNotice } = { showSuccessNotice: true } ) {
+export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'post',
@@ -115,18 +112,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode, { showSucc
 			return dispatch => {
 				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.access_token } );
 
-				// Wait for fetch user action to complete, then display a notice
-				dispatch( fetchUser() )
-					.then( () => {
-						if ( ! showSuccessNotice ) {
-							return;
-						}
-
-						dispatch( addNotice( {
-							message: i18n.translate( 'You were successfully logged in!' ),
-							status: 'success'
-						} ) );
-					} );
+				return dispatch( fetchUser() );
 			};
 		},
 		fail: ( error ) => {

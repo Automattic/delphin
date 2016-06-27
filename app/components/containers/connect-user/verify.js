@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import { connectUser, verifyUser } from 'actions/user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getCheckout } from 'reducers/checkout/selectors';
@@ -44,6 +45,7 @@ export default reduxForm(
 		user: getUserConnect( state )
 	} ),
 	dispatch => bindActionCreators( {
+		addNotice,
 		connectUser,
 		redirect: pathSlug => push( getPath( pathSlug ) ),
 		verifyUser

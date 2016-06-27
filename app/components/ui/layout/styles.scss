@@ -1,4 +1,14 @@
 @import 'app/styles/fonts';
+@import 'app/styles/colors';
+
+body {
+	background: $blue-background;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $white;
+	font-weight: 400;
+}
 
 .layout {
 	color: #2e4453;

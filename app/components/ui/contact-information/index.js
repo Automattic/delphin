@@ -5,6 +5,7 @@ import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Form from 'components/ui/form';
@@ -18,10 +19,7 @@ class ContactInformation extends React.Component {
 	constructor( props ) {
 		super( props );
 
-		this.validateBound = this.validate.bind( this );
-		this.handleBlurBound = this.handleBlur.bind( this );
-		this.debouncedValidateBound = debounce( this.validateBound, 500 );
-		this.validateAndSubmitBound = this.validateAndSubmit.bind( this );
+		this.debouncedValidateBound = debounce( this.validate.bind( this ), 500 );
 	}
 
 	componentWillMount() {
@@ -136,19 +134,19 @@ class ContactInformation extends React.Component {
 		return organizationInputIsVisible || organization.initialValue;
 	}
 
-	validate( onComplete = () => {} ) {
+	validate() {
 		const contactInformation = Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
 			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
 		}, {} );
 
-		this.props.validateContactInformation(
+		return this.props.validateContactInformation(
 			this.props.domain,
 			contactInformation
-		).then( onComplete );
+		);
 	}
 
-	validateAndSubmit() {
-		this.validate( () => {
+	handleSubmission() {
+		this.validate().then( () => {
 			if ( isEmpty( this.props.errors ) ) {
 				this.props.redirectToCheckout();
 			}
@@ -184,7 +182,7 @@ class ContactInformation extends React.Component {
 				</div>
 
 				<Form
-					onSubmit={ handleSubmit( this.validateAndSubmitBound ) }
+					onSubmit={ handleSubmit( this.handleSubmission ) }
 					fieldArea={
 						<div>
 							<fieldset className={ styles.row }>
@@ -195,7 +193,7 @@ class ContactInformation extends React.Component {
 									field={ fields.firstName }
 									autoFocus
 									untouch={ untouch }
-									onBlur={ this.handleBlurBound }
+									onBlur={ this.handleBlur }
 									className={ styles.firstName }
 									placeholder={ i18n.translate( 'First Name' ) }
 								/>
@@ -204,7 +202,7 @@ class ContactInformation extends React.Component {
 									disabled={ this.isDataLoading() }
 									field={ fields.lastName }
 									untouch={ untouch }
-									onBlur={ this.handleBlurBound }
+									onBlur={ this.handleBlur }
 									className={ styles.lastName }
 									placeholder={ i18n.translate( 'Last Name' ) }
 								/>
@@ -223,7 +221,7 @@ class ContactInformation extends React.Component {
 									<Input
 										field={ fields.organization }
 										untouch={ untouch }
-										onBlur={ this.handleBlurBound }
+										onBlur={ this.handleBlur }
 										className={ styles.organization }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Organization' ) }
@@ -238,7 +236,7 @@ class ContactInformation extends React.Component {
 									<Input
 										disabled={ this.isDataLoading() }
 										field={ fields.email }
-										onBlur={ this.handleBlurBound }
+										onBlur={ this.handleBlur }
 										placeholder={ i18n.translate( 'Email' ) }
 										untouch={ untouch }
 									/>
@@ -252,7 +250,7 @@ class ContactInformation extends React.Component {
 								<Input
 									field={ fields.address1 }
 									untouch={ untouch }
-									onBlur={ this.handleBlurBound }
+									onBlur={ this.handleBlur }
 									className={ styles.address1 }
 									disabled={ this.isDataLoading() }
 									placeholder={ i18n.translate( 'Address Line 1' ) }
@@ -262,7 +260,7 @@ class ContactInformation extends React.Component {
 									<Input
 										field={ fields.address2 }
 										untouch={ untouch }
-										onBlur={ this.handleBlurBound }
+										onBlur={ this.handleBlur }
 										className={ styles.address2 }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 2' ) }
@@ -282,7 +280,7 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.city }
-										onBlur={ this.handleBlurBound }
+										onBlur={ this.handleBlur }
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
 									/>
@@ -291,14 +289,14 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
 										untouch={ untouch }
-										onBlur={ this.handleBlurBound }
+										onBlur={ this.handleBlur }
 										states={ this.props.states } />
 
 									<Input
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.postalCode }
-										onBlur={ this.handleBlurBound }
+										onBlur={ this.handleBlur }
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Zip' ) }
 									/>
@@ -332,7 +330,7 @@ class ContactInformation extends React.Component {
 									disabled={ this.isDataLoading() }
 									field={ fields.phone }
 									untouch={ untouch }
-									onBlur={ this.handleBlurBound }
+									onBlur={ this.handleBlur }
 									className={ styles.phone }
 									placeholder={ i18n.translate( 'Phone' ) }
 								/>
@@ -384,4 +382,4 @@ ContactInformation.propTypes = {
 	validateContactInformation: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( ContactInformation );
+export default withStyles( styles )( bindHandlers( ContactInformation ) );

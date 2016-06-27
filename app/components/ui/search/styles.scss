@@ -16,8 +16,8 @@
 }
 
 .suggestion {
-	border: 1px solid $gray-blue;
-	border-radius: 2px;
+	background: $white;
+	border-radius: 3px;
 	color: #2e4453;
 	cursor: pointer;
 	display: block;
@@ -71,7 +71,7 @@
 }
 
 .additional-results-link {
-	color: $blue-dark;
+	color: $white;
 	font-size: 2.1rem;
 
 	&:focus {

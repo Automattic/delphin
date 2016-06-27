@@ -4,6 +4,7 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
+import { bindHandlers } from 'react-bind-handlers';
 
 /**
  * Internal dependencies
@@ -13,14 +14,7 @@ import styles from './styles.scss';
 var idNum = 0;
 
 class FormToggle extends React.Component {
-	constructor( props ) {
-		super( props );
-
-		this._onKeyDownBound = this._onKeyDown.bind( this );
-		this._onChangeBound = this._onChange.bind( this );
-	}
-
-	_onKeyDown( event ) {
+	handleKeyDown( event ) {
 		if ( ! this.props.disabled ) {
 			if ( event.key === 'Enter' || event.key === ' ' ) {
 				event.preventDefault();
@@ -32,7 +26,7 @@ class FormToggle extends React.Component {
 		}
 	}
 
-	_onChange( event ) {
+	handleChange( event ) {
 		if ( this.props.onChange ) {
 			event.target.name = this.props.name;
 			event.target.value = ! this.props.checked;
@@ -61,8 +55,8 @@ class FormToggle extends React.Component {
 						id={ id }
 						role="checkbox"
 						name={ this.props.name }
-						onClick={ this._onChangeBound }
-						onKeyDown={ this._onKeyDownBound }
+						onClick={ this.handleChange }
+						onKeyDown={ this.handleKeyDown }
 						aria-checked={ this.props.checked }
 						aria-label={ this.props[ 'aria-label' ] }
 						disabled={ this.props.disabled }
@@ -92,4 +86,4 @@ FormToggle.defaultProps = {
 	disabled: false
 };
 
-export default withStyles( styles )( FormToggle );
+export default withStyles( styles )( bindHandlers( FormToggle ) );

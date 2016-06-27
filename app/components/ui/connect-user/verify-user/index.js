@@ -12,6 +12,7 @@ import ValidationError from 'components/ui/form/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
+		addNotice: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
 		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
@@ -50,12 +51,21 @@ const VerifyUser = React.createClass( {
 	},
 
 	verifyUser() {
-		this.props.verifyUser(
-			this.props.user.data.email,
-			this.props.fields.code.value,
-			this.props.fields.twoFactorAuthenticationCode.value,
-			this.props.user.intention
-		);
+		const { fields, user: { data: { email }, intention } } = this.props;
+
+		return this.props.verifyUser(
+			email,
+			fields.code.value,
+			fields.twoFactorAuthenticationCode.value,
+			intention
+		).then( () => {
+			if ( intention === 'login' ) {
+				this.props.addNotice( {
+					message: i18n.translate( 'You were successfully logged in!' ),
+					status: 'success'
+				} );
+			}
+		} );
 	},
 
 	twoFactorFields() {

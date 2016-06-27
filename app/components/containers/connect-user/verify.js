@@ -2,7 +2,6 @@
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
-import { startSubmit, stopSubmit } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -46,23 +45,9 @@ export default reduxForm(
 		user: getUserConnect( state )
 	} ),
 	dispatch => bindActionCreators( {
+		addNotice,
 		connectUser,
 		redirect: pathSlug => push( getPath( pathSlug ) ),
-		verifyUser: ( email, code, twoFactorAuthenticationCode, intention ) => {
-			return innerDispatch => {
-				innerDispatch( startSubmit( 'verifyUser' ) );
-
-				innerDispatch( verifyUser( email, code, twoFactorAuthenticationCode ) ).then( () => {
-					innerDispatch( stopSubmit( 'verifyUser' ) );
-
-					if ( intention === 'login' ) {
-						innerDispatch( addNotice( {
-							message: i18n.translate( 'You were successfully logged in!' ),
-							status: 'success'
-						} ) );
-					}
-				} );
-			};
-		}
+		verifyUser
 	}, dispatch )
 )( VerifyUser );

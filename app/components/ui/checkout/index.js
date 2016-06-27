@@ -19,12 +19,14 @@ const Checkout = React.createClass( {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		initializeForm: PropTypes.func.isRequired,
+		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToLogin: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
+		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
@@ -57,10 +59,10 @@ const Checkout = React.createClass( {
 		this.props.purchaseDomain();
 	},
 
-	isSubmitting() {
-		const { checkout } = this.props;
+	isSubmitButtonDisabled() {
+		const { checkout, invalid, submitting } = this.props;
 
-		return [ 'site', 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
+		return invalid || submitting || [ 'site', 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
 			checkout[ request ].isRequesting
 		) );
 	},
@@ -156,7 +158,9 @@ const Checkout = React.createClass( {
 					</div>
 
 					<div className={ styles.submitArea }>
-						<button disabled={ this.isSubmitting() }>{ i18n.translate( 'Checkout' ) }</button>
+						<button disabled={ this.isSubmitButtonDisabled() }>
+							{ i18n.translate( 'Checkout' ) }
+						</button>
 					</div>
 				</form>
 			</div>

@@ -2,26 +2,20 @@
 import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import { isDomain } from 'lib/domains';
 import styles from './styles.scss';
 
 class Keyword extends React.Component {
-	constructor( props ) {
-		super( props );
-
-		this.onRemoveClickBound = this.onRemoveClick.bind( this );
-		this.onKeywordClickBound = this.onKeywordClick.bind( this );
-	}
-
-	onRemoveClick( event ) {
+	handleRemoveClick( event ) {
 		this.props.remove( this.props.keyword );
 
 		event.stopPropagation();
 	}
 
-	onKeywordClick() {
+	handleKeywordClick() {
 		this.props.toggleSelect( this.props.keyword );
 	}
 
@@ -36,12 +30,12 @@ class Keyword extends React.Component {
 		return (
 			<li
 				className={ keywordClassName }
-				onClick={ this.onKeywordClickBound }>
+				onClick={ this.handleKeywordClick }>
 				{ keyword.value }
 				{ keyword.isSelected && (
 					<span
 						className={ styles.keywordAction + ' ' + styles.keywordDelete }
-						onClick={ this.onRemoveClickBound } />
+						onClick={ this.handleRemoveClick } />
 				) }
 				{ ! keyword.isSelected && ! keywordIsDomain && (
 					<span className={ styles.keywordAction + ' ' + styles.keywordSelect } />
@@ -60,4 +54,4 @@ Keyword.propTypes = {
 	toggleSelect: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( Keyword );
+export default withStyles( styles )( bindHandlers( Keyword ) );

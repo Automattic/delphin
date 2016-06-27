@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
-import { purchaseDomain } from 'actions';
+import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
 import { isLoggedIn, isLoggedOut, getUserSettings } from 'reducers/user/selectors';
 

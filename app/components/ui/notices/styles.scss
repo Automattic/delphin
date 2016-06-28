@@ -8,7 +8,7 @@
 }
 
 .notice {
-	background: $blue;
+	background: $alert-blue;
 	color: #fff;
 	font-size: 1.4em;
 	margin-bottom: 1em;
@@ -16,11 +16,11 @@
 }
 
 .error {
-	background: $red;
+	background: $alert-red;
 }
 
 .success {
-	background: $green;
+	background: $alert-green;
 }
 
 .remove {

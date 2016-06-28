@@ -77,7 +77,7 @@
 }
 
 .related-words {
-	background: #fff;
+	background: $white;
 	border: 1px solid $search-border-blue;
 	left: -1px;
 	padding: 25px 10px;
@@ -86,6 +86,7 @@
 	width: calc(100% - 20px);
 
 	h3 {
+		color: $blue-dark;
 		font-size: 16px;
 	}
 }

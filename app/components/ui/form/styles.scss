@@ -31,7 +31,8 @@
 }
 
 .field-area {
-	background: $light-blue;
+	background: $white;
+	border-radius: 3px 3px 0 0;
 	padding: 30px;
 
 	fieldset {
@@ -76,23 +77,24 @@
 }
 
 .submit-area {
-	background: #e9eff3;
-	border-top: 1px solid #c8d7e1;
+	background: $gray-light;
 	padding: 30px;
 	text-align: center;
 
 	button {
-		background: #87a6bc;
+		background: $green;
 		border: 0;
-		border-radius: 5px;
-		color: #fff;
+		border-bottom: 2px solid $green-dark;
+		border-radius: 3px;
+		color: $white;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 1.6rem;
+		font-weight: 600;
 		margin: 0 auto;
 		padding: 15px;
 		text-align: center;
-		text-transform: uppercase;
+		text-transform: none;
 		transition: opacity 0.3s, background-color 0.3s;
 		width: 100%;
 
@@ -102,13 +104,13 @@
 		}
 
 		&:hover {
-			background: #97b2c5;
+			background: $green-dark;
 		}
 	}
 }
 
 .validation-error {
-	background: $yellow;
+	background: $alert-yellow;
 	border-radius: 0 0 3px 3px;
 	color: $black;
 	padding: 10px;
@@ -126,7 +128,7 @@
 
 .gridicon {
 	cursor: pointer;
-	fill: $yellow;
+	fill: $alert-yellow;
 	position: absolute;
 	right: 10px;
 	top: 12px;
@@ -136,7 +138,7 @@
 	&.has-error {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
-		border-color: $yellow;
+		border-color: $alert-yellow;
 		padding-right: 30px;
 	}
 }

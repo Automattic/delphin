@@ -46,7 +46,6 @@
 .keyword-action {
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 20px;
 	border: 0;
 	border-radius: 0 5px 5px 0;
 	font-size: 16px;
@@ -59,11 +58,12 @@
 
 .keyword-delete {
 	background-image: url( http://s.wordpress.com/i/delphin/trash.svg );
-	background-color: $dark-gray-blue;
+	background-size: 12px;
 }
 
 .keyword-select {
 	background-image: url( http://s.wordpress.com/i/delphin/right-arrow.svg );
+	background-size: 20px;
 	transform: rotate( 90deg );
 }
 
@@ -72,7 +72,7 @@
 }
 
 .keyword-is-selected {
-	background: #2e4453;
+	background: $green-dark;
 }
 
 .keyword-is-domain {
@@ -85,16 +85,18 @@
 
 .related-words {
 	background: $white;
-	border: 1px solid $search-border-blue;
-	left: -1px;
-	padding: 25px 10px;
+	border-top: 1px solid $gray-light;
+	border-radius: 0 0 3px 3px;
+	left: 0;
+	padding: 20px 10px;
 	position: absolute;
 	top: 51px;
 	width: calc(100% - 20px);
 
 	h3 {
-		color: $blue-dark;
-		font-size: 16px;
+		color: darken( $gray-medium, 20% );
+		font-size: 14px;
+		margin: 0 0 5px 0;
 	}
 }
 
@@ -117,15 +119,17 @@
 }
 
 .related-words-list-item {
-	background: $gray-blue;
+	background: $white;
+	border: 1px solid $gray-medium;
+	border-bottom-width: 2px;
 	border-radius: 5px;
-	color: #fff;
+	color: $blue-dark;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 15px;
 	margin-right: 10px;
-	margin-top: 5px;
-	padding: 5px 10px;
+	margin-top: 10px;
+	padding: 5px 10px 7px 10px;
 	user-select: none;
 }
 

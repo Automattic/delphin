@@ -3,7 +3,8 @@
 
 .search-wrapper {
 	background: #fff;
-	border: 1px solid $search-border-blue;
+	border: none;
+	border-radius: 3px;
 	display: flex;
 	justify-content: space-between;
 	margin-left: 15px;
@@ -29,19 +30,23 @@
 }
 
 .keyword {
-	background: $gray-blue;
+	background: $green;
+	border-bottom: 2px solid $green-dark;
 	border-radius: 5px;
 	color: #fff;
 	cursor: pointer;
 	font-size: 15px;
 	line-height: 21px;
 	margin-right: 5px;
-	padding: 5px 34px 5px 10px;
+	padding: 5px 40px 5px 10px;
 	position: relative;
 	user-select: none;
 }
 
 .keyword-action {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 20px;
 	border: 0;
 	border-radius: 0 5px 5px 0;
 	font-size: 16px;
@@ -49,15 +54,17 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 28px;
+	width: 30px;
 }
 
 .keyword-delete {
-	background: url( http://s.wordpress.com/i/delphin/trash.svg ) center no-repeat $dark-gray-blue;
+	background-image: url( http://s.wordpress.com/i/delphin/trash.svg );
+	background-color: $dark-gray-blue;
 }
 
 .keyword-select {
-	background: url( http://s.wordpress.com/i/delphin/right-arrow.svg ) center no-repeat $dark-gray-blue;
+	background-image: url( http://s.wordpress.com/i/delphin/right-arrow.svg );
+	transform: rotate( 90deg );
 }
 
 .keyword-hidden {

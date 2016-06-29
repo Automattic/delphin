@@ -32,7 +32,7 @@
 		border-color: $dark-gray-blue;
 
 		.buy-button {
-			background: $blue;
+			background: $gray-light;
 		}
 	}
 
@@ -45,24 +45,39 @@
 	}
 }
 
+.suggestion-info {
+	padding: 20px;
+
+	hr {
+		border: 0;
+		border-top: 2px solid $blue-bright;
+		margin: 10px 0;
+		width: 50px;
+	}
+}
+
 .suggestion-title {
-	font-size: 1.4rem;
+	font-size: 1.8rem;
 	overflow: hidden;
-	padding: 25px 30px 50px 15px;
+	padding: 0;
 	text-overflow: ellipsis;
 }
 
 .buy-button {
-	background: $gray-blue;
-	color: $white;
+	background: $gray-light;
+	border-radius: 0 0 3px 3px;
+	border-top: 1px solid darken( $gray-light, 5% );
+	color: darken( $blue-bright, 10% );
 	font-size: 1.4rem;
-	padding: 10px;
+	padding: 15px;
+	text-align: center;
 	text-transform: uppercase;
 	transition: background 150ms ease-in;
 }
 
 .cost {
-	float: right;
+	color: $gray;
+	font-size: 1.6rem;
 }
 
 .additional-results-link-container {
@@ -80,7 +95,7 @@
 }
 
 .sort {
-	background: $blue-light;
+	color: $white;
 	font-size: 1.4rem;
 	padding: 30px 0;
 	text-align: center;
@@ -92,11 +107,15 @@
 
 .sort-select {
 	appearance: none;
-	background: url( http://s.wordpress.com/i/delphin/form-ui-select.png ) no-repeat right center;
-	background-size: 50px 63px;
+	background: transparent;
+	border: 0;
+	border-bottom: 1px solid $white;
+	border-radius: 0;
+	color: $white;
 	font-size: 1.8rem;
-	height: 61px;
-	padding: 0 70px 0 20px;
+	height: 40px;
+	outline: none;
+	padding: 0 40px 0 10px;
 
 	&::-ms-expand {
 		display: none;

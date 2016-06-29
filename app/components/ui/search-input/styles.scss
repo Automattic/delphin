@@ -57,14 +57,14 @@
 }
 
 .keyword-delete {
-	background-image: url( http://s.wordpress.com/i/delphin/trash.svg );
+	background-image: url( /images/trash.svg );
 	background-size: 12px;
 }
 
 .keyword-select {
-	background-image: url( http://s.wordpress.com/i/delphin/right-arrow.svg );
-	background-size: 20px;
-	transform: rotate( 90deg );
+	background-image: url( /images/down-arrow.svg );
+	background-size: 15px;
+	margin: 1px 0 0 0;
 }
 
 .keyword-hidden {

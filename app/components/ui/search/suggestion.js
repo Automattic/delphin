@@ -19,7 +19,7 @@ const Suggestion = React.createClass( {
 	render() {
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
-				<div className={ styles.suggestionInfo}>
+				<div className={ styles.suggestionInfo }>
 					<div className={ styles.suggestionTitle }>
 						{ this.props.suggestion.domain_name }
 					</div>

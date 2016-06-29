@@ -3,7 +3,7 @@
 
 .search-wrapper {
 	background: #fff;
-	border: none;
+	border: 0;
 	border-radius: 3px;
 	display: flex;
 	justify-content: space-between;
@@ -64,7 +64,7 @@
 .keyword-select {
 	background-image: url( /images/down-arrow.svg );
 	background-size: 15px;
-	margin: 1px 0 0 0;
+	margin: 1px 0 0;
 }
 
 .keyword-hidden {
@@ -85,8 +85,8 @@
 
 .related-words {
 	background: $white;
-	border-top: 1px solid $gray-light;
 	border-radius: 0 0 3px 3px;
+	border-top: 1px solid $gray-light;
 	left: 0;
 	padding: 20px 10px;
 	position: absolute;
@@ -96,7 +96,7 @@
 	h3 {
 		color: darken( $gray-medium, 20% );
 		font-size: 14px;
-		margin: 0 0 5px 0;
+		margin: 0 0 5px;
 	}
 }
 
@@ -129,7 +129,7 @@
 	font-size: 15px;
 	margin-right: 10px;
 	margin-top: 10px;
-	padding: 5px 10px 7px 10px;
+	padding: 5px 10px 7px;
 	user-select: none;
 }
 

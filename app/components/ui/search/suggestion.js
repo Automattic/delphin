@@ -19,14 +19,17 @@ const Suggestion = React.createClass( {
 	render() {
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
-				<div className={ styles.suggestionTitle }>
-					{ this.props.suggestion.domain_name }
-				</div>
-				<div className={ styles.buyButton }>
-					{ i18n.translate( 'Get it' ) }
+				<div className={ styles.suggestionInfo }>
+					<div className={ styles.suggestionTitle }>
+						{ this.props.suggestion.domain_name }
+					</div>
+					<hr />
 					<div className={ styles.cost }>
 						{ this.props.suggestion.cost }
 					</div>
+				</div>
+				<div className={ styles.buyButton }>
+					{ i18n.translate( 'Get it' ) }
 				</div>
 			</li>
 		);

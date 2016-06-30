@@ -3,7 +3,8 @@
 
 .search-wrapper {
 	background: #fff;
-	border: 1px solid $search-border-blue;
+	border: 0;
+	border-radius: 3px;
 	display: flex;
 	justify-content: space-between;
 	margin-left: 15px;
@@ -29,19 +30,22 @@
 }
 
 .keyword {
-	background: $gray-blue;
+	background: $green;
+	border-bottom: 2px solid $green-dark;
 	border-radius: 5px;
 	color: #fff;
 	cursor: pointer;
 	font-size: 15px;
 	line-height: 21px;
 	margin-right: 5px;
-	padding: 5px 34px 5px 10px;
+	padding: 5px 40px 5px 10px;
 	position: relative;
 	user-select: none;
 }
 
 .keyword-action {
+	background-position: center;
+	background-repeat: no-repeat;
 	border: 0;
 	border-radius: 0 5px 5px 0;
 	font-size: 16px;
@@ -49,15 +53,18 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 28px;
+	width: 30px;
 }
 
 .keyword-delete {
-	background: url( http://s.wordpress.com/i/delphin/trash.svg ) center no-repeat $dark-gray-blue;
+	background-image: url( /images/trash.svg );
+	background-size: 12px;
 }
 
 .keyword-select {
-	background: url( http://s.wordpress.com/i/delphin/right-arrow.svg ) center no-repeat $dark-gray-blue;
+	background-image: url( /images/down-arrow.svg );
+	background-size: 15px;
+	margin: 1px 0 0;
 }
 
 .keyword-hidden {
@@ -65,7 +72,7 @@
 }
 
 .keyword-is-selected {
-	background: #2e4453;
+	background: $green-dark;
 }
 
 .keyword-is-domain {
@@ -78,16 +85,18 @@
 
 .related-words {
 	background: $white;
-	border: 1px solid $search-border-blue;
-	left: -1px;
-	padding: 25px 10px;
+	border-radius: 0 0 3px 3px;
+	border-top: 1px solid $gray-light;
+	left: 0;
+	padding: 20px 10px;
 	position: absolute;
 	top: 51px;
 	width: calc(100% - 20px);
 
 	h3 {
-		color: $blue-dark;
-		font-size: 16px;
+		color: darken( $gray-medium, 20% );
+		font-size: 14px;
+		margin: 0 0 5px;
 	}
 }
 
@@ -110,15 +119,17 @@
 }
 
 .related-words-list-item {
-	background: $gray-blue;
+	background: $white;
+	border: 1px solid $gray-medium;
+	border-bottom-width: 2px;
 	border-radius: 5px;
-	color: #fff;
+	color: $blue-dark;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 15px;
 	margin-right: 10px;
-	margin-top: 5px;
-	padding: 5px 10px;
+	margin-top: 10px;
+	padding: 5px 10px 7px;
 	user-select: none;
 }
 

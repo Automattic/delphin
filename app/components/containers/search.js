@@ -8,6 +8,7 @@ import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'ac
 import { getPath } from 'routes';
 import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
+import { updatePageTitle } from 'actions/page';
 
 export default connect(
 	( state, ownProps ) => ( {
@@ -58,6 +59,10 @@ export default connect(
 
 		fetchDomainSuggestions( query ) {
 			dispatch( fetchDomainSuggestions( query ) );
+		},
+
+		updatePageTitle( title ) {
+			dispatch( updatePageTitle( title ) );
 		}
 	} ),
 	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {

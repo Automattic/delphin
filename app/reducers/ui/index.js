@@ -5,5 +5,6 @@ import { combineReducers } from 'redux';
 import { contactInformation } from './contact-information';
 import domainSearch from './domain-search';
 import myDomains from './my-domains';
+import page from './page';
 
-export default combineReducers( { contactInformation, domainSearch, myDomains } );
+export default combineReducers( { contactInformation, domainSearch, myDomains, page } );

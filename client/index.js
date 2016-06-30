@@ -20,6 +20,7 @@ import reducers from 'reducers';
 import i18n from 'i18n-calypso';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
+import { syncPageWithStore } from 'lib/page';
 import { userMiddleware } from './user-middleware';
 import { relatedWordsMiddleware } from './related-words-middleware';
 
@@ -55,6 +56,8 @@ const store = createStore(
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
 	applyMiddleware( ...middlewares )
 );
+
+syncPageWithStore( store );
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );

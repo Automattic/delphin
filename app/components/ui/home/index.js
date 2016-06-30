@@ -22,7 +22,12 @@ const Home = React.createClass( {
 		selectDomain: PropTypes.func.isRequired,
 		showEmptySearchNotice: PropTypes.bool.isRequired,
 		submitEmptySearch: PropTypes.func.isRequired,
-		submitting: PropTypes.bool.isRequired
+		submitting: PropTypes.bool.isRequired,
+		updatePageTitle: PropTypes.func.isRequired
+	},
+
+	componentWillMount() {
+		this.props.updatePageTitle( '' );
 	},
 
 	componentWillReceiveProps( nextProps ) {

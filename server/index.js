@@ -23,6 +23,7 @@ import api from './wpcom-rest-api-proxy';
 import config from 'config';
 import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
+import { getPageTitle } from 'reducers/ui/page/selectors';
 import { getPath, defaultRoutes, routes, serverRedirectRoutes } from 'app/routes';
 import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
@@ -60,7 +61,14 @@ function renderPage( props, localeData ) {
 		</Provider>
 	);
 
-	return templateCompiler( { content, localeData, css: css.join( '' ) } );
+	const title = getPageTitle( store.getState() );
+
+	return templateCompiler( {
+		content,
+		localeData,
+		css: css.join( '' ),
+		title
+	} );
 }
 
 const generateStaticFile = filePath => {

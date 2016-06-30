@@ -1,9 +1,17 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default function About() {
+const About = ( { updatePageTitle } ) => {
+	updatePageTitle( i18n.translate( 'About' ) );
+
 	return (
 		<div>{ i18n.translate( 'About' ) }</div>
 	);
-}
+};
+
+About.propTypes = {
+	updatePageTitle: PropTypes.func.isRequired
+};
+
+export default About;

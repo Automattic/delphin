@@ -27,6 +27,7 @@ const Checkout = React.createClass( {
 		redirectToLogin: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
+		updatePageTitle: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
@@ -36,6 +37,10 @@ const Checkout = React.createClass( {
 		} else if ( this.props.isLoggedIn && ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToHome();
 		}
+	},
+
+	componentWillMount() {
+		this.props.updatePageTitle( i18n.translate( 'Checkout' ) );
 	},
 
 	componentWillReceiveProps( nextProps ) {

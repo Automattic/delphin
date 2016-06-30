@@ -10,6 +10,7 @@ import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
 import i18n from 'i18n-calypso';
+import { updatePageTitle } from 'actions/page';
 
 const validate = values => {
 	if ( ! values.email ) {
@@ -44,6 +45,10 @@ export default reduxForm(
 		},
 		redirectToVerifyUser() {
 			dispatch( push( getPath( 'verifyUser' ) ) );
+		},
+
+		updatePageTitle( title ) {
+			dispatch( updatePageTitle( title ) );
 		}
 	} )
 )( ConnectUser );

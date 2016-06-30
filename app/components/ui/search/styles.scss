@@ -120,6 +120,11 @@
 	&::-ms-expand {
 		display: none;
 	}
+
+	option {
+		background: $white;
+		color: $blue-dark;
+	}
 }
 
 .search-info {

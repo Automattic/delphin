@@ -21,7 +21,8 @@ const Search = React.createClass( {
 		redirectToSearch: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
-		sort: PropTypes.string
+		sort: PropTypes.string,
+		updatePageTitle: PropTypes.func.isRequired
 	},
 
 	getDefaultProps() {
@@ -34,6 +35,8 @@ const Search = React.createClass( {
 	componentWillMount() {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 		this.fetchResults( this.props.query );
+
+		this.props.updatePageTitle( i18n.translate( 'Search' ) );
 	},
 
 	fetchResults( query ) {

@@ -20,6 +20,7 @@ const ConnectUser = React.createClass( {
 		redirectToVerifyUser: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
+		updatePageTitle: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
@@ -29,6 +30,16 @@ const ConnectUser = React.createClass( {
 		} else {
 			this.props.clearConnectUser();
 		}
+	},
+
+	componentWillMount() {
+		let title = i18n.translate( 'Signup' );
+
+		if ( this.props.intention === 'login' ) {
+			title = i18n.translate( 'Login' );
+		}
+
+		this.props.updatePageTitle( title );
 	},
 
 	componentWillReceiveProps( nextProps ) {

@@ -2,7 +2,7 @@
 import { formatPattern } from 'react-router';
 
 // Internal dependencies
-import About from 'components/ui/about';
+import AboutContainer from 'components/containers/about';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformation from 'components/containers/contact-information';
@@ -35,12 +35,12 @@ export const defaultRoutes = [
 				path: 'about',
 				slug: 'about',
 				static: true,
-				component: About,
+				component: AboutContainer,
 				childRoutes: [
 					{
 						path: 'testnest',
 						slug: 'testnest',
-						component: About,
+						component: AboutContainer,
 						static: true
 					}
 				]

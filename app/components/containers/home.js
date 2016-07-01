@@ -7,6 +7,7 @@ import { fetchDomainSuggestions, selectDomain, submitEmptySearch } from 'actions
 import { getPath } from 'routes';
 import Home from 'components/ui/home';
 import { isLoggedIn } from 'reducers/user/selectors';
+import { updatePageTitle } from 'actions/page';
 
 export default reduxForm(
 	{
@@ -46,6 +47,10 @@ export default reduxForm(
 			} else {
 				dispatch( push( getPath( 'signupUser' ) ) );
 			}
+		},
+
+		updatePageTitle( title ) {
+			dispatch( updatePageTitle( title ) );
 		}
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {

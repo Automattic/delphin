@@ -54,6 +54,8 @@ class ContactInformation extends React.Component {
 		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
 			this.props.fetchCountries();
 		}
+
+		this.props.updatePageTitle( i18n.translate( 'Contact Information' ) );
 	}
 
 	componentWillReceiveProps( nextProps ) {
@@ -385,6 +387,7 @@ ContactInformation.propTypes = {
 	states: PropTypes.object.isRequired,
 	submitting: PropTypes.bool.isRequired,
 	untouch: PropTypes.func.isRequired,
+	updatePageTitle: PropTypes.func.isRequired,
 	user: PropTypes.object.isRequired,
 	validateContactInformation: PropTypes.func.isRequired
 };

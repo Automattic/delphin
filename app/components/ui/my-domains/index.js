@@ -14,7 +14,8 @@ const MyDomains = React.createClass( {
 		fetchMyDomains: PropTypes.func.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
 		redirectToLogin: PropTypes.func.isRequired,
-		toggleDomainDetails: PropTypes.func.isRequired
+		toggleDomainDetails: PropTypes.func.isRequired,
+		updatePageTitle: PropTypes.func.isRequired
 	},
 
 	componentWillMount() {
@@ -22,6 +23,8 @@ const MyDomains = React.createClass( {
 			this.props.redirectToLogin();
 		} else {
 			this.props.fetchMyDomains();
+
+			this.props.updatePageTitle( i18n.translate( 'My Domains' ) );
 		}
 	},
 

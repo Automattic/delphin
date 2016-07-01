@@ -10,6 +10,7 @@ import { getPath } from 'routes';
 import { isLoggedOut } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
 import { showDomainDetails, hideDomainDetails } from 'actions/ui/my-domains';
+import { updatePageTitle } from 'actions/page';
 
 export default connect(
 	state => ( {
@@ -45,7 +46,8 @@ export default connect(
 			},
 			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			showDomainDetails,
-			hideDomainDetails
+			hideDomainDetails,
+			updatePageTitle
 		}, dispatch )
 	),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {

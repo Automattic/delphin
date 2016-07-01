@@ -7,6 +7,7 @@ import Checkout from 'components/ui/checkout';
 import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
 import { isLoggedIn, isLoggedOut, getUserSettings } from 'reducers/user/selectors';
+import { updatePageTitle } from 'actions/page';
 
 /**
  * Retrieves the full name of the user from the contact information entered.
@@ -55,6 +56,10 @@ export default reduxForm(
 		},
 		redirectToSuccess() {
 			dispatch( push( getPath( 'success' ) ) );
+		},
+
+		updatePageTitle( title ) {
+			dispatch( updatePageTitle( title ) );
 		}
 	} )
 )( Checkout );

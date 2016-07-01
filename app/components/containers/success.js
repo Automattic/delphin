@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import { getPath } from 'routes';
 import { isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import Success from 'components/ui/success';
+import { updatePageTitle } from 'actions/page';
 
 export default connect(
 	state => ( {
@@ -19,6 +20,10 @@ export default connect(
 		},
 		redirectToHome() {
 			dispatch( push( getPath( 'home' ) ) );
+		},
+
+		updatePageTitle( title ) {
+			dispatch( updatePageTitle( title ) );
 		}
 	} )
 )( Success );

@@ -14,6 +14,7 @@ import { getPath } from 'routes';
 import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
+import { updatePageTitle } from 'actions/page';
 import { validateContactInformation } from 'actions/contact-information';
 
 export default reduxForm(
@@ -57,6 +58,7 @@ export default reduxForm(
 			redirectToCheckout: () => push( getPath( 'checkout' ) ),
 			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			redirectToHome: () => push( getPath( 'home' ) ),
+			updatePageTitle,
 			validateContactInformation: ( domainName, contactInformation ) => (
 				validateContactInformation( [ domainName ], contactInformation )
 			)

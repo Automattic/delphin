@@ -31,9 +31,9 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 			<div className={ styles.domainScreenshot }>
 				<img src="http://domainsearchproto.herokuapp.com/img/domain-screenshots/theroamingforks_com.jpg"/>
 			</div>
-			<h3>{ domainName }</h3>
-			<div className={ styles.domainDetails }>
-				<div className={ styles.domainConnected }>
+			<div className={ styles.domainInfo }>
+				<h3>{ domainName }</h3>
+				<div className={ styles.domainDetails }>
 					<span className={ styles.icon }>
 						<WordPressIcon/>
 						<span>

@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
+import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import State from 'components/ui/contact-information/state';
 import Input from 'components/ui/form/input';
@@ -169,193 +170,195 @@ class ContactInformation extends React.Component {
 		const { fields, handleSubmit, countries, untouch } = this.props;
 
 		return (
-			<div>
-				<CheckoutProgressbar currentStep={ 2 } />
+			<DocumentTitle title={ i18n.translate( 'Contact Information' ) }>
+				<div>
+					<CheckoutProgressbar currentStep={ 2 } />
 
-				<div className={ styles.header }>
-					<h2 className={ styles.heading }>
-						{ i18n.translate( 'Registration Profile' ) }
-					</h2>
+					<div className={ styles.header }>
+						<h2 className={ styles.heading }>
+							{ i18n.translate( 'Registration Profile' ) }
+						</h2>
 
-					<h3 className={ styles.text }>
-						{ i18n.translate( 'We need your contact information to claim {{strong}}%(domain)s{{/strong}}.',
-							{
-								args: { domain: this.props.domain },
-								components: { strong: <strong /> }
-							}
-						) }
-					</h3>
-				</div>
-
-				<Form
-					onSubmit={ handleSubmit( this.handleSubmission ) }
-					fieldArea={
-						<div>
-							<fieldset className={ styles.row }>
-								<label>{ i18n.translate( 'Name' ) }</label>
-
-								<Input
-									disabled={ this.isDataLoading() }
-									field={ fields.firstName }
-									autoFocus
-									untouch={ untouch }
-									onBlur={ this.handleBlur }
-									className={ styles.firstName }
-									placeholder={ i18n.translate( 'First Name' ) }
-								/>
-
-								<Input
-									disabled={ this.isDataLoading() }
-									field={ fields.lastName }
-									untouch={ untouch }
-									onBlur={ this.handleBlur }
-									className={ styles.lastName }
-									placeholder={ i18n.translate( 'Last Name' ) }
-								/>
-								<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
-							</fieldset>
-
-							{ ! this.organizationInputIsVisible() && (
-								<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
-									{ i18n.translate( 'Registering for a company? Add Organization name' ) }
-								</a>
+						<h3 className={ styles.text }>
+							{ i18n.translate( 'We need your contact information to claim {{strong}}%(domain)s{{/strong}}.',
+								{
+									args: { domain: this.props.domain },
+									components: { strong: <strong /> }
+								}
 							) }
+						</h3>
+					</div>
 
-							{ this.organizationInputIsVisible() && (
-								<fieldset>
-									<label>{ i18n.translate( 'Organization' ) }</label>
+					<Form
+						onSubmit={ handleSubmit( this.handleSubmission ) }
+						fieldArea={
+							<div>
+								<fieldset className={ styles.row }>
+									<label>{ i18n.translate( 'Name' ) }</label>
+
 									<Input
-										field={ fields.organization }
+										disabled={ this.isDataLoading() }
+										field={ fields.firstName }
+										autoFocus
 										untouch={ untouch }
 										onBlur={ this.handleBlur }
-										className={ styles.organization }
-										disabled={ this.isDataLoading() }
-										placeholder={ i18n.translate( 'Organization' ) }
+										className={ styles.firstName }
+										placeholder={ i18n.translate( 'First Name' ) }
 									/>
-									<ValidationError field={ fields.organization } />
+
+									<Input
+										disabled={ this.isDataLoading() }
+										field={ fields.lastName }
+										untouch={ untouch }
+										onBlur={ this.handleBlur }
+										className={ styles.lastName }
+										placeholder={ i18n.translate( 'Last Name' ) }
+									/>
+									<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
 								</fieldset>
-							) }
 
-							{ this.emailInputIsVisible() && (
-								<fieldset>
-									<label>{ i18n.translate( 'Email' ) }</label>
-									<Input
-										disabled={ this.isDataLoading() }
-										field={ fields.email }
-										onBlur={ this.handleBlur }
-										placeholder={ i18n.translate( 'Email' ) }
-										untouch={ untouch }
-									/>
-									<ValidationError field={ fields.email } />
-								</fieldset>
-							) }
-
-							<fieldset className={ classNames( { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
-								<label>{ i18n.translate( 'Address' ) }</label>
-
-								<Input
-									field={ fields.address1 }
-									untouch={ untouch }
-									onBlur={ this.handleBlur }
-									className={ styles.address1 }
-									disabled={ this.isDataLoading() }
-									placeholder={ i18n.translate( 'Address Line 1' ) }
-								/>
-
-								{ this.address2InputIsVisible() && (
-									<Input
-										field={ fields.address2 }
-										untouch={ untouch }
-										onBlur={ this.handleBlur }
-										className={ styles.address2 }
-										disabled={ this.isDataLoading() }
-										placeholder={ i18n.translate( 'Address Line 2' ) }
-									/>
-								) }
-
-								<ValidationError fields={ [ fields.address1, fields.address2 ] } />
-
-								{ ! this.address2InputIsVisible() && (
-									<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
-										{ i18n.translate( '+ Add Address Line 2' ) }
+								{ ! this.organizationInputIsVisible() && (
+									<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
+										{ i18n.translate( 'Registering for a company? Add Organization name' ) }
 									</a>
 								) }
 
-								<div className={ styles.row }>
+								{ this.organizationInputIsVisible() && (
+									<fieldset>
+										<label>{ i18n.translate( 'Organization' ) }</label>
+										<Input
+											field={ fields.organization }
+											untouch={ untouch }
+											onBlur={ this.handleBlur }
+											className={ styles.organization }
+											disabled={ this.isDataLoading() }
+											placeholder={ i18n.translate( 'Organization' ) }
+										/>
+										<ValidationError field={ fields.organization } />
+									</fieldset>
+								) }
+
+								{ this.emailInputIsVisible() && (
+									<fieldset>
+										<label>{ i18n.translate( 'Email' ) }</label>
+										<Input
+											disabled={ this.isDataLoading() }
+											field={ fields.email }
+											onBlur={ this.handleBlur }
+											placeholder={ i18n.translate( 'Email' ) }
+											untouch={ untouch }
+										/>
+										<ValidationError field={ fields.email } />
+									</fieldset>
+								) }
+
+								<fieldset className={ classNames( { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
+									<label>{ i18n.translate( 'Address' ) }</label>
+
+									<Input
+										field={ fields.address1 }
+										untouch={ untouch }
+										onBlur={ this.handleBlur }
+										className={ styles.address1 }
+										disabled={ this.isDataLoading() }
+										placeholder={ i18n.translate( 'Address Line 1' ) }
+									/>
+
+									{ this.address2InputIsVisible() && (
+										<Input
+											field={ fields.address2 }
+											untouch={ untouch }
+											onBlur={ this.handleBlur }
+											className={ styles.address2 }
+											disabled={ this.isDataLoading() }
+											placeholder={ i18n.translate( 'Address Line 2' ) }
+										/>
+									) }
+
+									<ValidationError fields={ [ fields.address1, fields.address2 ] } />
+
+									{ ! this.address2InputIsVisible() && (
+										<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
+											{ i18n.translate( '+ Add Address Line 2' ) }
+										</a>
+									) }
+
+									<div className={ styles.row }>
+										<Input
+											disabled={ this.isDataLoading() }
+											untouch={ untouch }
+											field={ fields.city }
+											onBlur={ this.handleBlur }
+											className={ styles.city }
+											placeholder={ i18n.translate( 'City' ) }
+										/>
+
+										<State
+											disabled={ this.isDataLoading() }
+											field={ fields.state }
+											untouch={ untouch }
+											onBlur={ this.handleBlur }
+											states={ this.props.states } />
+
+										<Input
+											disabled={ this.isDataLoading() }
+											untouch={ untouch }
+											field={ fields.postalCode }
+											onBlur={ this.handleBlur }
+											className={ styles.postalCode }
+											placeholder={ i18n.translate( 'Zip' ) }
+										/>
+										<ValidationError
+											fields={ [
+												fields.city,
+												fields.state,
+												fields.postalCode
+											] }
+										/>
+									</div>
+
+									<select
+										{ ...fields.countryCode }
+										disabled={ this.isDataLoading() }
+										className={ styles.countryCode }>
+										<option value="" disabled>{ i18n.translate( 'Select Country' ) }</option>
+										<option disabled />
+										{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
+											country.name
+											? <option value={ country.code } key={ country.code }>{ country.name }</option>
+											: <option value=" " key={ index } disabled />
+										) ) }
+									</select>
+									<ValidationError field={ fields.countryCode } />
+								</fieldset>
+
+								<fieldset>
+									<label>{ i18n.translate( 'Phone' ) }</label>
 									<Input
 										disabled={ this.isDataLoading() }
-										untouch={ untouch }
-										field={ fields.city }
-										onBlur={ this.handleBlur }
-										className={ styles.city }
-										placeholder={ i18n.translate( 'City' ) }
-									/>
-
-									<State
-										disabled={ this.isDataLoading() }
-										field={ fields.state }
+										field={ fields.phone }
 										untouch={ untouch }
 										onBlur={ this.handleBlur }
-										states={ this.props.states } />
-
-									<Input
-										disabled={ this.isDataLoading() }
-										untouch={ untouch }
-										field={ fields.postalCode }
-										onBlur={ this.handleBlur }
-										className={ styles.postalCode }
-										placeholder={ i18n.translate( 'Zip' ) }
+										className={ styles.phone }
+										placeholder={ i18n.translate( 'Phone' ) }
 									/>
-									<ValidationError
-										fields={ [
-											fields.city,
-											fields.state,
-											fields.postalCode
-										] }
-									/>
-								</div>
+									<ValidationError field={ fields.phone } />
+								</fieldset>
+							</div>
+						}
+						submitArea={
+							<div>
+								<p className={ styles.disclaimer }>
+									{ i18n.translate( 'Some providers charge a fee to keep this information private, but we protect your privacy free of charge.' ) }
+								</p>
 
-								<select
-									{ ...fields.countryCode }
-									disabled={ this.isDataLoading() }
-									className={ styles.countryCode }>
-									<option value="" disabled>{ i18n.translate( 'Select Country' ) }</option>
-									<option disabled />
-									{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
-										country.name
-										? <option value={ country.code } key={ country.code }>{ country.name }</option>
-										: <option value=" " key={ index } disabled />
-									) ) }
-								</select>
-								<ValidationError field={ fields.countryCode } />
-							</fieldset>
-
-							<fieldset>
-								<label>{ i18n.translate( 'Phone' ) }</label>
-								<Input
-									disabled={ this.isDataLoading() }
-									field={ fields.phone }
-									untouch={ untouch }
-									onBlur={ this.handleBlur }
-									className={ styles.phone }
-									placeholder={ i18n.translate( 'Phone' ) }
-								/>
-								<ValidationError field={ fields.phone } />
-							</fieldset>
-						</div>
-					}
-					submitArea={
-						<div>
-							<p className={ styles.disclaimer }>
-								{ i18n.translate( 'Some providers charge a fee to keep this information private, but we protect your privacy free of charge.' ) }
-							</p>
-
-							<button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Continue to Checkout' ) }
-							</button>
-						</div>
-					} />
-			</div>
+								<button disabled={ this.isSubmitButtonDisabled() }>
+									{ i18n.translate( 'Continue to Checkout' ) }
+								</button>
+							</div>
+						} />
+				</div>
+			</DocumentTitle>
 		);
 	}
 }

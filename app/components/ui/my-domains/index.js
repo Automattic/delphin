@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import DocumentTitle from 'components/ui/document-title';
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
 import styles from './styles.scss';
 
@@ -46,9 +47,11 @@ const MyDomains = React.createClass( {
 
 	render() {
 		return (
+			<DocumentTitle title={ i18n.translate( 'My Domains' ) }>
 				<div className={ styles.myDomains }>
 					{ this.renderDomains() }
 				</div>
+			</DocumentTitle>
 		);
 	}
 } );

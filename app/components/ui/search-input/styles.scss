@@ -2,9 +2,7 @@
 @import 'app/styles/fonts';
 
 .search-wrapper {
-	background: #fff;
 	border: 0;
-	border-radius: 3px;
 	display: flex;
 	justify-content: space-between;
 	margin-left: 15px;
@@ -15,6 +13,7 @@
 	input {
 		background: transparent;
 		border: 0;
+		color: $white;
 		display: inline-block;
 		font-size: 18px;
 		margin-top: 3px;

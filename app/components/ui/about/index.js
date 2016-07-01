@@ -2,16 +2,20 @@
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 
-const About = ( { updatePageTitle } ) => {
-	updatePageTitle( i18n.translate( 'About' ) );
+const About = React.createClass( {
+	propTypes: {
+		updatePageTitle: PropTypes.func.isRequired
+	},
 
-	return (
-		<div>{ i18n.translate( 'About' ) }</div>
-	);
-};
+	componentWillMount() {
+		this.props.updatePageTitle( i18n.translate( 'About' ) );
+	},
 
-About.propTypes = {
-	updatePageTitle: PropTypes.func.isRequired
-};
+	render() {
+		return (
+			<div>{ i18n.translate( 'About' ) }</div>
+		);
+	}
+} );
 
 export default About;

@@ -3,12 +3,12 @@ import i18n from 'i18n-calypso';
 import React from 'react';
 
 // Internal dependencies
-import DocumentTitle from 'components/ui/document-title';
+import withTitle from 'lib/title-decorator';
 
-export default function About() {
+function About() {
 	return (
-		<DocumentTitle title={ 'About' }>
-			<div>{ i18n.translate( 'About' ) }</div>
-		</DocumentTitle>
+		<div>{ i18n.translate( 'About' ) }</div>
 	);
 }
+
+export default withTitle( About, i18n.translate( 'About' ) );

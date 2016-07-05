@@ -12,6 +12,7 @@ import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
 import ValidationError from 'components/ui/form/validation-error';
 import Input from 'components/ui/form/input';
+import SiftScience from 'lib/siftscience';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -23,7 +24,6 @@ const Checkout = React.createClass( {
 		isLoggedIn: PropTypes.bool.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,
-		recordSiftScience: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToLogin: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
@@ -36,9 +36,9 @@ const Checkout = React.createClass( {
 			this.props.redirectToLogin();
 		} else if ( this.props.isLoggedIn && ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToHome();
+		} else {
+			SiftScience.recordUser( this.props.user.data.id );
 		}
-
-		this.props.recordSiftScience( this.props.user.data.id );
 	},
 
 	componentWillReceiveProps( nextProps ) {

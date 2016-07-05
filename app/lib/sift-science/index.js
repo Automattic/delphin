@@ -2,7 +2,7 @@
  * External dependencies
  */
 import debugFactory from 'debug';
-const debug = debugFactory( 'delphin:siftscience' );
+const debug = debugFactory( 'delphin:sift-science' );
 
 /**
  * Internal dependencies
@@ -10,7 +10,7 @@ const debug = debugFactory( 'delphin:siftscience' );
 import config from 'config';
 import loadScript from 'lib/load-script';
 
-const SIFTSCIENCE_URL = 'https://cdn.siftscience.com/s.js';
+const SIFT_SCIENCE_URL = 'https://cdn.siftscience.com/s.js';
 
 let hasLoaded = false;
 
@@ -23,16 +23,16 @@ if ( ! window._sift ) {
 module.exports = {
 	recordUser: function( userId ) {
 		if ( ! hasLoaded ) {
-			window._sift.push( [ '_setAccount', config( 'siftscience_key' ) ] );
+			window._sift.push( [ '_setAccount', config( 'sift_science_key' ) ] );
 			window._sift.push( [ '_setUserId', userId ] );
 			window._sift.push( [ '_trackPageview' ] );
 
 			hasLoaded = true;
-			loadScript.loadScript( SIFTSCIENCE_URL, function( error ) {
+			loadScript.loadScript( SIFT_SCIENCE_URL, function( error ) {
 				if ( error ) {
-					debug( 'Error loading siftscience' );
+					debug( 'Error loading SiftScience' );
 				} else {
-					debug( 'siftscience loaded successfully' );
+					debug( 'SiftScience loaded successfully' );
 				}
 			} );
 		}

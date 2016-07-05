@@ -12,7 +12,7 @@ import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
 import ValidationError from 'components/ui/form/validation-error';
 import Input from 'components/ui/form/input';
-import SiftScience from 'lib/siftscience';
+import SiftScience from 'lib/sift-science';
 
 const Checkout = React.createClass( {
 	propTypes: {

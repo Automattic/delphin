@@ -5,8 +5,6 @@ import debugFactory from 'debug';
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
-	SITE_CREATE,
-	SITE_CREATE_COMPLETE,
 	PAYGATE_CONFIGURATION_FETCH,
 	PAYGATE_CONFIGURATION_FETCH_COMPLETE,
 	PAYGATE_CONFIGURATION_FETCH_FAIL,
@@ -25,47 +23,6 @@ import paygateLoader from 'lib/paygate-loader';
 
 // Module variables
 const debug = debugFactory( 'delphin:actions' );
-
-export function createSite() {
-	return ( dispatch, getState ) => {
-		const user = getUserSettings( getState() ),
-			checkout = getCheckout( getState() ),
-			{ domain } = checkout.selectedDomain,
-			{ site } = checkout;
-
-		if ( site.hasLoadedFromServer ) {
-			return Promise.resolve();
-		}
-
-		return dispatch( {
-			type: WPCOM_REQUEST,
-			method: 'post',
-			params: { path: '/sites/new' },
-			payload: {
-				bearer_token: user.data.bearerToken,
-				blog_name: domain,
-				blog_title: domain,
-				lang_id: 1,
-				locale: 'en',
-				validate: false,
-				find_available_url: true
-			},
-			loading: SITE_CREATE,
-			success: ( data ) => createSiteComplete( data.blog_details.blogid ),
-			fail: ( error ) => addNotice( {
-				message: error.message,
-				status: 'error'
-			} )
-		} );
-	};
-}
-
-export function createSiteComplete( blogId ) {
-	return {
-		type: SITE_CREATE_COMPLETE,
-		blogId
-	};
-}
 
 function getPaygateParameters( cardDetails ) {
 	return {
@@ -200,8 +157,7 @@ export function createTransactionComplete( blogId, domain ) {
 }
 
 export const purchaseDomain = () => dispatch => {
-	dispatch( createSite() )
-		.then( () => dispatch( fetchPaygateConfiguration() ) )
+	dispatch( () => dispatch( fetchPaygateConfiguration() ) )
 		.then( () => dispatch( createPaygateToken() ) )
 		.then( () => dispatch( createTransaction() ) );
 };

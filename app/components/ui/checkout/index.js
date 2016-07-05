@@ -66,7 +66,7 @@ const Checkout = React.createClass( {
 	isSubmitButtonDisabled() {
 		const { checkout, invalid, submitting } = this.props;
 
-		return invalid || submitting || [ 'site', 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
+		return invalid || submitting || [ 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
 			checkout[ request ].isRequesting
 		) );
 	},

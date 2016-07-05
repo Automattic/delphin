@@ -14,7 +14,7 @@ const SIFT_SCIENCE_URL = 'https://cdn.siftscience.com/s.js';
 
 let hasLoaded = false;
 
-if ( ! window._sift ) {
+if ( process.env.BROWSER && ! window._sift ) {
 	window._sift = [];
 }
 /**
@@ -22,6 +22,10 @@ if ( ! window._sift ) {
  */
 module.exports = {
 	recordUser: function( userId ) {
+		if ( ! process.env.BROWSER ) {
+			return;
+		}
+
 		if ( ! hasLoaded ) {
 			window._sift.push( [ '_setAccount', config( 'sift_science_key' ) ] );
 			window._sift.push( [ '_setUserId', userId ] );

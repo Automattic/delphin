@@ -7,7 +7,7 @@ import Checkout from 'components/ui/checkout';
 import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
 import { isLoggedIn, isLoggedOut, getUserSettings } from 'reducers/user/selectors';
-import SiftScience from 'lib/siftscience';
+
 /**
  * Retrieves the full name of the user from the contact information entered.
  *
@@ -55,9 +55,6 @@ export default reduxForm(
 		},
 		redirectToSuccess() {
 			dispatch( push( getPath( 'success' ) ) );
-		},
-		recordSiftScience( userId ) {
-			SiftScience.recordUser( userId );
 		}
 	} )
 )( Checkout );

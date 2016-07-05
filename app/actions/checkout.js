@@ -1,6 +1,5 @@
 // External dependencies
 import { getValues } from 'redux-form';
-import debugFactory from 'debug';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -17,12 +16,8 @@ import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 import { getCheckout } from 'reducers/checkout/selectors';
-import { getUserSettings } from 'reducers/user/selectors';
 import { snakeifyKeys } from 'lib/formatters';
 import paygateLoader from 'lib/paygate-loader';
-
-// Module variables
-const debug = debugFactory( 'delphin:actions' );
 
 function getPaygateParameters( cardDetails ) {
 	return {
@@ -94,45 +89,32 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 
 export function createTransaction() {
 	return ( dispatch, getState ) => {
-		const user = getUserSettings( getState() ),
-			checkout = getCheckout( getState() ),
+		const checkout = getCheckout( getState() ),
 			{ domain } = checkout.selectedDomain,
-			{ blogId } = checkout.site.data,
 			contactInformationForm = getValues( getState().form.contactInformation ),
 			paygateToken = checkout.paygateToken.data.token;
 
 		const payload = {
-			bearer_token: user.data.bearerToken,
+			domain,
 			payment_key: paygateToken,
 			payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 			locale: 'en',
-			cart: {
-				blog_id: blogId,
-				currency: 'GBP',
-				temporary: 1,
-				extra: {},
-				products: [
-					{
-						product_id: 74,
-						meta: domain,
-						volume: 1,
-						free_trial: false
-					}
-				]
-			},
-			domain_details: snakeifyKeys( contactInformationForm )
+			contact_information: snakeifyKeys( contactInformationForm )
 		};
 
 		return dispatch( {
 			type: WPCOM_REQUEST,
 			method: 'post',
-			params: { path: '/me/transactions' },
+			params: {
+				apiNamespace: 'wpcom/v2',
+				path: '/delphin/transactions'
+			},
 			payload,
 			loading: TRANSACTION_CREATE,
-			success: ( data ) => {
-				debug( data );
-				return createTransactionComplete( blogId, domain );
-			},
+			success: () => ( {
+				type: TRANSACTION_CREATE_COMPLETE,
+				domain
+			} ),
 			fail: ( error ) => {
 				dispatch( addNotice( {
 					message: error.message,
@@ -145,14 +127,6 @@ export function createTransaction() {
 				};
 			}
 		} );
-	};
-}
-
-export function createTransactionComplete( blogId, domain ) {
-	return {
-		type: TRANSACTION_CREATE_COMPLETE,
-		blogId,
-		domain
 	};
 }
 

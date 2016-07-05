@@ -17,7 +17,7 @@ const config = {
 		mc_analytics_enabled: productionOnly
 	},
 	languages,
-	siftscience_key: productionOnly ? 'a4f69f6759' : 'e00e878351',
+	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',
 	tracks_event_prefix: 'delphin_',
 	wordpress: {
 		rest_api_oauth_client_id: 46199,

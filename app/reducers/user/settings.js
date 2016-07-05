@@ -18,6 +18,7 @@ export const initialState = {
 export const settings = ( state = initialState, action ) => {
 	const {
 		email,
+		id,
 		locale,
 		type
 	} = action;
@@ -34,6 +35,7 @@ export const settings = ( state = initialState, action ) => {
 				isRequesting: false,
 				data: {
 					email,
+					id,
 					locale
 				}
 			} );

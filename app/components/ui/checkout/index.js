@@ -23,6 +23,7 @@ const Checkout = React.createClass( {
 		isLoggedIn: PropTypes.bool.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,
+		recordSiftScience: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		redirectToLogin: PropTypes.func.isRequired,
 		redirectToSuccess: PropTypes.func.isRequired,
@@ -36,6 +37,8 @@ const Checkout = React.createClass( {
 		} else if ( this.props.isLoggedIn && ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToHome();
 		}
+
+		this.props.recordSiftScience( this.props.user.data.id );
 	},
 
 	componentWillReceiveProps( nextProps ) {

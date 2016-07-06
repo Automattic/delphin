@@ -21,7 +21,7 @@ const MyDomains = React.createClass( {
 	componentWillMount() {
 		if ( this.props.isLoggedOut ) {
 			this.props.redirectToLogin();
-		} else {
+		} else if ( ! this.props.domains.hasLoadedFromServer && ! this.props.domains.isRequesting ) {
 			this.props.fetchMyDomains();
 		}
 	},

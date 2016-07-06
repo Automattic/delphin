@@ -3,9 +3,9 @@
 $step-inner-dot-size: 14px;
 $step-dot-size: 30px;
 $step-line-size: 8px;
-$inactive-step-color: $blue-light;
-$active-step-color: #c8d7e1;
-$inner-dot-color: $gray-blue;
+$inactive-step-color: desaturate( $dark-gray-blue, 15% );
+$active-step-color: $green;
+$inner-dot-color: $blue-background;
 
 .progressbar {
 	display: flex;
@@ -83,6 +83,10 @@ $inner-dot-color: $gray-blue;
 			width: 0;
 		}
 	}
+
+	.progressbar-step-caption {
+		color: $active-step-color;
+	}
 }
 
 @mixin dot-styles( $size, $color ) {
@@ -99,7 +103,7 @@ $inner-dot-color: $gray-blue;
 }
 
 .progressbar-step-caption {
-	color: $inner-dot-color;
+	color: lighten( $inactive-step-color, 10% );
 	font-size: 1.3rem;
 	text-align: center;
 	text-transform: uppercase;

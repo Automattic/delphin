@@ -12,13 +12,13 @@ const DomainCardList = ( { domains, areDetailsVisible, toggleDomainDetails } ) =
 
 	return (
 		<div className={ styles.domainCardList }>
-			{ domains.map( ( { domainName, isSetup } ) =>
+			{ domains.map( ( { name, isSetup } ) =>
 				<DomainCard
-					key={ domainName }
-					domainName={ domainName }
+					key={ name }
+					name={ name }
 					isSetup={ isSetup }
-					detailsVisible={ areDetailsVisible( domainName ) }
-					toggleDetails={ toggleDetails( domainName ) } />
+					detailsVisible={ areDetailsVisible( name ) }
+					toggleDetails={ toggleDetails( name ) } />
 			) }
 			<NewDomainCard/>
 		</div>

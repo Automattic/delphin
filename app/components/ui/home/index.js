@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import DocumentTitle from 'components/ui/document-title';
 import { isDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 
@@ -77,47 +78,49 @@ const Home = React.createClass( {
 		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
-				<div className={ styles.warning }>
-					<div className={ styles.warningHeading }>
-						{ i18n.translate( 'Warning: This is an experiment, it may bite.' ) }
-					</div>
-					<div className={ styles.warningText }>
-						{ i18n.translate( 'This site not ready for public consumption, it will probably break and give you a nasty hangover.' ) }
-					</div>
-				</div>
-				<h2 className={ styles.heading }>
-					{ i18n.translate( 'Find your perfect site address.' ) }
-				</h2>
-
-				<input
-					{ ...query }
-					autoComplete="off"
-					autoFocus
-					className={ styles.field }
-					placeholder={ i18n.translate( 'Type a few keywords or an address' ) }
-					ref="query" />
-
-				<ReactCSSTransitionGroup
-					transitionName={ styles.emptySearchNotice }
-					transitionEnterTimeout={ 500 }
-					transitionLeaveTimeout={ 1 }>
-					{ this.props.showEmptySearchNotice && (
-						<div className={ styles.emptySearchNotice }>
-							{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
-								args: { randomQuery: 'travel mom foodie' }
-							} ) }
-							{ this.needSomeInspiration() }
+			<DocumentTitle>
+				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
+					<div className={ styles.warning }>
+						<div className={ styles.warningHeading }>
+							{ i18n.translate( 'Warning: This is an experiment, it may bite.' ) }
 						</div>
-					) }
-				</ReactCSSTransitionGroup>
+						<div className={ styles.warningText }>
+							{ i18n.translate( 'This site not ready for public consumption, it will probably break and give you a nasty hangover.' ) }
+						</div>
+					</div>
+					<h2 className={ styles.heading }>
+						{ i18n.translate( 'Find your perfect site address.' ) }
+					</h2>
 
-				<button
-					disabled={ this.isSubmitButtonDisabled() }
-					className={ styles.button }>
-					{ i18n.translate( "Let's find an address" ) }
-				</button>
-			</form>
+					<input
+						{ ...query }
+						autoComplete="off"
+						autoFocus
+						className={ styles.field }
+						placeholder={ i18n.translate( 'Type a few keywords or an address' ) }
+						ref="query" />
+
+					<ReactCSSTransitionGroup
+						transitionName={ styles.emptySearchNotice }
+						transitionEnterTimeout={ 500 }
+						transitionLeaveTimeout={ 1 }>
+						{ this.props.showEmptySearchNotice && (
+							<div className={ styles.emptySearchNotice }>
+								{ i18n.translate( "Hi there! Try something like '%(randomQuery)s'.", {
+									args: { randomQuery: 'travel mom foodie' }
+								} ) }
+								{ this.needSomeInspiration() }
+							</div>
+						) }
+					</ReactCSSTransitionGroup>
+
+					<button
+						disabled={ this.isSubmitButtonDisabled() }
+						className={ styles.button }>
+						{ i18n.translate( "Let's find an address" ) }
+					</button>
+				</form>
+			</DocumentTitle>
 		);
 	}
 } );

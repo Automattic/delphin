@@ -2,6 +2,7 @@
 import auth from 'http-auth';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import curry from 'lodash/curry';
+import DocumentTitle from 'react-document-title';
 import find from 'lodash/find';
 import express from 'express';
 import fs from 'fs';
@@ -60,7 +61,9 @@ function renderPage( props, localeData ) {
 		</Provider>
 	);
 
-	return templateCompiler( { content, localeData, css: css.join( '' ) } );
+	const title = DocumentTitle.rewind();
+
+	return templateCompiler( { content, localeData, title, css: css.join( '' ) } );
 }
 
 const generateStaticFile = filePath => {

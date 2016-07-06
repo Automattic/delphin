@@ -1,5 +1,9 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
+
+// Internal dependencies
+import DocumentTitle from 'components/ui/document-title';
 
 const Success = React.createClass( {
 	propTypes: {
@@ -35,11 +39,13 @@ const Success = React.createClass( {
 		} = this.props.transaction.data;
 
 		return (
-			<div style={ { textAlign: 'center' } }>
-				<h2>You registered { domain }!!!</h2>
-				<h3>we're so happy</h3>
-				<h6>your blog's ID is { blogId }</h6>
-			</div>
+			<DocumentTitle title={ i18n.translate( 'Success' ) }>
+				<div style={ { textAlign: 'center' } }>
+					<h2>You registered { domain }!!!</h2>
+					<h3>we're so happy</h3>
+					<h6>your blog's ID is { blogId }</h6>
+				</div>
+			</DocumentTitle>
 		);
 	}
 } );

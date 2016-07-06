@@ -95,27 +95,27 @@
 }
 
 .sort {
-	color: $white;
-	font-size: 1.4rem;
-	padding: 30px 0;
-	text-align: center;
+	color: rgba( $white, 0.7 );
+	font-size: 1.6rem;
+	padding: 10px 20px;
 
 	@include breakpoint( '>660px' ) {
-		font-size: 1.8rem;
+		font-size: 1.6rem;
 	}
 }
 
 .sort-select {
 	appearance: none;
 	background: url( /images/down-arrow.svg ) no-repeat 95% center;
+	background-size: 10px;
 	border: 0;
 	border-bottom: 1px solid $white;
 	border-radius: 0;
 	color: $white;
-	font-size: 1.8rem;
-	height: 40px;
+	font-size: 1.6rem;
+	height: 30px;
 	outline: none;
-	padding: 0 40px 0 10px;
+	padding: 0 30px 0 10px;
 
 	&::-ms-expand {
 		display: none;

@@ -1,5 +1,8 @@
 // Internal dependencies
 import {
+	MY_DOMAINS_FETCH,
+	MY_DOMAINS_FETCH_COMPLETE,
+	MY_DOMAINS_FETCH_FAIL,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 
@@ -8,10 +11,20 @@ import {
  *
  * @returns {object} the corresponding action object
  */
-export function fetchMyDomains() {
-	return {
-		type: WPCOM_REQUEST,
-		method: 'get',
-		params: { path: '/me' }
-	};
-}
+export const fetchMyDomains = () => ( {
+	type: WPCOM_REQUEST,
+	method: 'get',
+	params: {
+		apiNamespace: 'wpcom/v2',
+		path: '/delphin/purchases'
+	},
+	loading: MY_DOMAINS_FETCH,
+	success: results => dispatch => dispatch( {
+		type: MY_DOMAINS_FETCH_COMPLETE,
+		results
+	} ),
+	fail: error => dispatch => dispatch( {
+		type: MY_DOMAINS_FETCH_FAIL,
+		error
+	} )
+} );

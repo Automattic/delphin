@@ -16,7 +16,7 @@ const DomainCardList = ( { domains, areDetailsVisible, toggleDomainDetails } ) =
 				<DomainCard
 					key={ name }
 					name={ name }
-					isSetup={ isSetup }
+					isSetup={ !! isSetup /* TODO: remove !! once isSetup is returned by the API */ }
 					detailsVisible={ areDetailsVisible( name ) }
 					toggleDetails={ toggleDetails( name ) } />
 			) }

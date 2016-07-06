@@ -3,14 +3,12 @@ import React, { PropTypes } from 'react';
 import { Router } from 'react-router';
 
 // Internal dependencies
-import DocumentTitle from 'components/ui/document-title';
 import { routes } from 'routes';
+import withTitle from 'lib/title-decorator';
 
 const App = function( { history } ) {
 	return (
-		<DocumentTitle>
-			<Router history={ history } routes={ routes } />
-		</DocumentTitle>
+		<Router history={ history } routes={ routes } />
 	);
 };
 
@@ -18,4 +16,4 @@ App.propTypes = {
 	history: PropTypes.object.isRequired
 };
 
-export default App;
+export default withTitle( App );

@@ -6,11 +6,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import DocumentTitle from 'components/ui/document-title';
 import { isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
+import withTitle from 'lib/title-decorator';
 
 const Search = React.createClass( {
 	propTypes: {
@@ -124,51 +124,49 @@ const Search = React.createClass( {
 				this.props.results.length > this.props.numberOfResultsToDisplay;
 
 		return (
-			<DocumentTitle title={ i18n.translate( 'Search' ) }>
-				<div className={ styles.search }>
-					<SearchHeader
-						{ ... { query } }
-						onQueryChange={ this.debouncedFetchResults } />
+			<div className={ styles.search }>
+				<SearchHeader
+					{ ... { query } }
+					onQueryChange={ this.debouncedFetchResults } />
 
-					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
+				{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
-					<div className={ styles.sort }>
-						{ exactMatchUnavailable && (
-							i18n.translate( "Don't fret, check out these {{sortOption/}} addresses:", {
-								components: {
-									context: 'sortOption will be one of "recommended", "unique" or "short"',
-									sortOption: this.renderSortOptions()
-								}
-							} )
-						) }
-						{ ! exactMatchUnavailable && (
-							i18n.translate( 'Show me {{sortOption/}} addresses for my blog:', {
-								components: {
-									context: 'sortOption will be one of "recommended", "unique" or "short"',
-									sortOption: this.renderSortOptions()
-								}
-							} )
-						) }
-
-					</div>
-
-					<Suggestions
-						count={ this.props.numberOfResultsToDisplay }
-						results={ this.props.results }
-						selectDomain={ this.selectDomain }
-						sort={ this.props.sort } />
-
-					{ showAdditionalResultsLink && (
-						<div className={ styles.additionalResultsLinkContainer }>
-							<a onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
-								{ i18n.translate( 'Show me more' ) }
-							</a>
-						</div>
+				<div className={ styles.sort }>
+					{ exactMatchUnavailable && (
+						i18n.translate( "Don't fret, check out these {{sortOption/}} addresses:", {
+							components: {
+								context: 'sortOption will be one of "recommended", "unique" or "short"',
+								sortOption: this.renderSortOptions()
+							}
+						} )
 					) }
+					{ ! exactMatchUnavailable && (
+						i18n.translate( 'Show me {{sortOption/}} addresses for my blog:', {
+							components: {
+								context: 'sortOption will be one of "recommended", "unique" or "short"',
+								sortOption: this.renderSortOptions()
+							}
+						} )
+					) }
+
 				</div>
-			</DocumentTitle>
+
+				<Suggestions
+					count={ this.props.numberOfResultsToDisplay }
+					results={ this.props.results }
+					selectDomain={ this.selectDomain }
+					sort={ this.props.sort } />
+
+				{ showAdditionalResultsLink && (
+					<div className={ styles.additionalResultsLinkContainer }>
+						<a onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
+							{ i18n.translate( 'Show me more' ) }
+						</a>
+					</div>
+				) }
+			</div>
 		);
 	}
 } );
 
-export default withStyles( styles )( Search );
+export default withStyles( styles )( withTitle( Search, i18n.translate( 'Search' ) ) );

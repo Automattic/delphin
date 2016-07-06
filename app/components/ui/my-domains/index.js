@@ -4,9 +4,9 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import DocumentTitle from 'components/ui/document-title';
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
 import styles from './styles.scss';
+import withTitle from 'lib/title-decorator';
 
 const MyDomains = React.createClass( {
 	propTypes: {
@@ -47,13 +47,11 @@ const MyDomains = React.createClass( {
 
 	render() {
 		return (
-			<DocumentTitle title={ i18n.translate( 'My Domains' ) }>
-				<div className={ styles.myDomains }>
-					{ this.renderDomains() }
-				</div>
-			</DocumentTitle>
+			<div className={ styles.myDomains }>
+				{ this.renderDomains() }
+			</div>
 		);
 	}
 } );
 
-export default withStyles( styles )( MyDomains );
+export default withStyles( styles )( withTitle( MyDomains, i18n.translate( 'My Domains' ) ) );

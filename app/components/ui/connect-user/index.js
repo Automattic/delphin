@@ -3,11 +3,11 @@ import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
-import DocumentTitle from 'components/ui/document-title';
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import ValidationError from 'components/ui/form/validation-error';
+import withTitle from 'lib/title-decorator';
 
 const ConnectUser = React.createClass( {
 	propTypes: {
@@ -50,30 +50,28 @@ const ConnectUser = React.createClass( {
 		const { fields, handleSubmit, intention, submitFailed } = this.props;
 
 		return (
-			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Login' ) : i18n.translate( 'Signup' ) }>
-				<div>
-					<Header intention={ intention } />
+			<div>
+				<Header intention={ intention } />
 
-					<Form
-						onSubmit={ handleSubmit }
-						fieldArea={
-							<fieldset>
-								<label>{ i18n.translate( 'Email address:' ) }</label>
-								<input { ...fields.email } autoFocus />
-								<ValidationError field={ fields.email } submitFailed={ submitFailed } />
-							</fieldset>
-						}
-						submitArea={
-							<button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Next' ) }
-							</button>
-						} />
+				<Form
+					onSubmit={ handleSubmit }
+					fieldArea={
+						<fieldset>
+							<label>{ i18n.translate( 'Email address:' ) }</label>
+							<input { ...fields.email } autoFocus />
+							<ValidationError field={ fields.email } submitFailed={ submitFailed } />
+						</fieldset>
+					}
+					submitArea={
+						<button disabled={ this.isSubmitButtonDisabled() }>
+							{ i18n.translate( 'Next' ) }
+						</button>
+					} />
 
-					<Footer />
-				</div>
-			</DocumentTitle>
+				<Footer />
+			</div>
 		);
 	}
 } );
 
-export default ConnectUser;
+export default withTitle( ConnectUser, ( props ) => props.intention === 'login' ? i18n.translate( 'Login' ) : i18n.translate( 'Signup' ) );

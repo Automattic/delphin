@@ -86,6 +86,7 @@ export function fetchUser() {
 			type: FETCH_USER_COMPLETE,
 			bearerToken: requestToken,
 			email: data.email,
+			id: data.ID,
 			language: data.language
 		} ),
 		fail: FETCH_USER_FAIL

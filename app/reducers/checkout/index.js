@@ -4,8 +4,6 @@ import { combineReducers } from 'redux';
 // Internal dependencies
 import { createRequestReducer } from 'lib/create-request-reducer';
 import {
-	SITE_CREATE,
-	SITE_CREATE_COMPLETE,
 	DOMAIN_SELECT,
 	PAYGATE_CONFIGURATION_FETCH,
 	PAYGATE_CONFIGURATION_FETCH_COMPLETE,
@@ -33,11 +31,6 @@ export const selectedDomain = ( state = {}, action ) => {
 	}
 };
 
-const site = createRequestReducer( {
-	loading: SITE_CREATE,
-	success: SITE_CREATE_COMPLETE
-} );
-
 const paygateConfiguration = createRequestReducer( {
 	loading: PAYGATE_CONFIGURATION_FETCH,
 	success: PAYGATE_CONFIGURATION_FETCH_COMPLETE,
@@ -60,6 +53,5 @@ export const checkout = combineReducers( {
 	paygateConfiguration,
 	paygateToken,
 	transaction,
-	selectedDomain,
-	site
+	selectedDomain
 } );

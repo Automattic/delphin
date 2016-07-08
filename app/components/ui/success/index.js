@@ -34,8 +34,7 @@ const Success = React.createClass( {
 		}
 
 		const {
-			domain,
-			blogId
+			domain
 		} = this.props.transaction.data;
 
 		return (
@@ -43,7 +42,6 @@ const Success = React.createClass( {
 				<div style={ { textAlign: 'center' } }>
 					<h2>You registered { domain }!!!</h2>
 					<h3>we're so happy</h3>
-					<h6>your blog's ID is { blogId }</h6>
 				</div>
 			</DocumentTitle>
 		);

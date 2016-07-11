@@ -6,10 +6,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 const Tooltip = props => {
-	const { children, text } = props;
+	const { children, text, ...rest } = props;
 
 	return (
-		<a className={ styles.tooltip } { ...props }>
+		<a className={ styles.tooltip } { ...rest }>
 			{ children }
 
 			<div className={ styles.text }>

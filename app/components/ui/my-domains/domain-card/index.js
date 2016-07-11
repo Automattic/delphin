@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import WordPressIcon from 'assets/svg/wordpress.svg';
 
-const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) => {
+const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
 	const domainCardClassNames = classNames( {
 		[ styles.domainCard ]: true,
 		[ styles.notConnected ]: ! isSetup,
@@ -19,7 +19,7 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 		return (
 			<div className={ domainCardClassNames }>
 				<div className={ styles.domainSetup }>
-					<h3>{ domainName }</h3>
+					<h3>{ name }</h3>
 					<button>{ i18n.translate( 'Setup Now' ) }</button>
 				</div>
 			</div>
@@ -32,14 +32,14 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 				<img src="http://domainsearchproto.herokuapp.com/img/domain-screenshots/theroamingforks_com.jpg"/>
 			</div>
 			<div className={ styles.domainInfo }>
-				<h3>{ domainName }</h3>
+				<h3>{ name }</h3>
 				<div className={ styles.domainDetails }>
 					<span className={ styles.icon }>
 						<WordPressIcon/>
 						<span>
 							{ i18n.translate( 'Connected to a WordPress.com site' ) }
 							<br/>
-							<span className={ styles.siteName }>{ domainName }</span>
+							<span className={ styles.siteName }>{ name }</span>
 							<br/>
 							<a href="#" className={ styles.disconnect }>
 								{ i18n.translate( 'Disconnect' ) }
@@ -54,8 +54,8 @@ const DomainCard = ( { domainName, isSetup, detailsVisible, toggleDetails } ) =>
 
 DomainCard.propTypes = {
 	detailsVisible: PropTypes.bool.isRequired,
-	domainName: PropTypes.string.isRequired,
 	isSetup: PropTypes.bool.isRequired,
+	name: PropTypes.string.isRequired,
 	toggleDetails: PropTypes.func.isRequired
 };
 

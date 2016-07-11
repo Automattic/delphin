@@ -20,29 +20,7 @@ export default connect(
 	} ),
 	dispatch => (
 		bindActionCreators( {
-			// TODO: should be replaced with just `fetchMyDomains` once we get real data from the server
-			fetchMyDomains: ( domainName ) => {
-				setTimeout( function() {
-					dispatch( {
-						type: 'MY_DOMAINS_FETCH_COMPLETE',
-						results: [
-							{
-								domain_name: 'theroamingforks.com',
-								is_setup: true
-							},
-							{
-								domain_name: 'foodiewithike.com',
-								is_setup: false
-							},
-							{
-								domain_name: 'burgerburgerburgers.com',
-								is_setup: true
-							}
-						]
-					} );
-				}, 2000 );
-				return fetchMyDomains( domainName );
-			},
+			fetchMyDomains,
 			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			showDomainDetails,
 			hideDomainDetails

@@ -1,0 +1,93 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.heading {
+	font-family: $heading-font;
+	font-size: 3rem;
+	margin: 45px 0 10px;
+	text-align: center;
+
+	em {
+		color: $blue-bright;
+	}
+}
+
+.secondary-heading {
+	font-size: 2rem;
+	font-weight: 200;
+}
+
+.secondary-heading-container {
+	margin: 0 auto 35px;
+	max-width: 600px;
+	text-align: center;
+}
+
+.field {
+	margin: 0 auto;
+	max-width: 550px;
+}
+
+.field input {
+	background-color: $white;
+	border: 0;
+	border-radius: 3px;
+	box-sizing: border-box;
+	color: $blue-dark;
+	font-family: $body-font;
+	font-size: 1.6rem;
+	padding: 10px 16px;
+	transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
+	width: 100%;
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	@include breakpoint( '>660px' ) {
+		font-size: 1.8rem;
+	}
+}
+
+// TODO: Create a <Button /> component to share these styles
+.button {
+	background: $green;
+	border: 0;
+	border-bottom: 2px solid $green-dark;
+	border-radius: 3px;
+	color: $white;
+	cursor: pointer;
+	display: block;
+	font-size: 16px;
+	font-weight: normal;
+	margin: 30px auto 0;
+	outline: none;
+	padding: 15px 40px;
+
+	&:hover {
+		color: $blue-light;
+	}
+
+	&:disabled {
+		background: lighten( $gray-blue, 20% );
+	}
+}
+
+.warning {
+	background: lighten( $alert-red, 30% );
+	border: 1px solid $alert-red;
+	color: $alert-red;
+	padding: 2rem;
+	text-align: center;
+}
+
+.warning-heading {
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.warning-text {
+	font-size: 2rem;
+}

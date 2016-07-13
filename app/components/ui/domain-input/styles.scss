@@ -1,0 +1,29 @@
+@import 'app/styles/colors';
+
+.domain-input {
+	background: $white;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: row;
+}
+
+.tld-container {
+	align-items: center;
+	background: $gray-light;
+	border-radius: 0 5px 5px 0;
+	display: flex;
+	font-size: 1.6rem;
+	justify-content: center;
+	text-align: center;
+}
+
+.tld {
+	padding: 0 20px;
+}
+
+.input {
+	border: 0;
+	flex: 1 1 auto;
+	margin: 5px;
+	padding: 5px;
+}

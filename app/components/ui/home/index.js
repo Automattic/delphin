@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
+import ExperimentWarning from 'components/ui/experiment-warning';
 import { isDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 
@@ -80,14 +81,7 @@ const Home = React.createClass( {
 		return (
 			<DocumentTitle>
 				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
-					<div className={ styles.warning }>
-						<div className={ styles.warningHeading }>
-							{ i18n.translate( 'Warning: This is an experiment, it may bite.' ) }
-						</div>
-						<div className={ styles.warningText }>
-							{ i18n.translate( 'This site not ready for public consumption, it will probably break and give you a nasty hangover.' ) }
-						</div>
-					</div>
+					<ExperimentWarning />
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Find your perfect site address.' ) }
 					</h2>

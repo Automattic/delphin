@@ -74,20 +74,3 @@
 		background: lighten( $gray-blue, 20% );
 	}
 }
-
-.warning {
-	background: lighten( $alert-red, 30% );
-	border: 1px solid $alert-red;
-	color: $alert-red;
-	padding: 2rem;
-	text-align: center;
-}
-
-.warning-heading {
-	font-size: 3rem;
-	font-weight: 600;
-}
-
-.warning-text {
-	font-size: 2rem;
-}

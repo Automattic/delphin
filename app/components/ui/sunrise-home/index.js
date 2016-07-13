@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
+import ExperimentWarning from 'components/ui/experiment-warning';
 import styles from './styles.scss';
 
 const SunriseHome = React.createClass( {
@@ -25,14 +26,7 @@ const SunriseHome = React.createClass( {
 		return (
 			<DocumentTitle>
 				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
-					<div className={ styles.warning }>
-						<div className={ styles.warningHeading }>
-							{ i18n.translate( 'Warning: This is an experiment, it may bite.' ) }
-						</div>
-						<div className={ styles.warningText }>
-							{ i18n.translate( 'This site not ready for public consumption, it will probably break and give you a nasty hangover.' ) }
-						</div>
-					</div>
+					<ExperimentWarning />
 
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {

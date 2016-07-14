@@ -9,9 +9,6 @@ import styles from './styles.scss';
 const DomainInput = props => {
 	const { className, ...inputProps } = props;
 
-	console.log( inputProps );
-	console.log( className );
-
 	return (
 		<div className={ classNames( className, styles.domainInput ) }>
 			<input

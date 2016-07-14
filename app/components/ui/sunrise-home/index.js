@@ -30,7 +30,7 @@ const SunriseHome = React.createClass( {
 
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {
-							components: { em: <em /> }
+							components: { em: <em className="emphasis" /> }
 						} ) }
 					</h2>
 

@@ -100,7 +100,7 @@ export function createTransaction() {
 			domain,
 			privacy: privacyProtection,
 			payment_key: paygateToken,
-			payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
+			payment_method: 'paygate',
 			locale: 'en',
 			contact_information: snakeifyKeys( contactInformationForm )
 		};

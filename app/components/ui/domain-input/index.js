@@ -1,6 +1,5 @@
 // External dependencies
 import classNames from 'classnames';
-import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -8,8 +7,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 const DomainInput = props => {
-	const inputProps = omit( props, 'className' ),
-		{ className } = props;
+	const { className, ...inputProps } = props;
+
+	console.log( inputProps );
+	console.log( className );
 
 	return (
 		<div className={ classNames( className, styles.domainInput ) }>

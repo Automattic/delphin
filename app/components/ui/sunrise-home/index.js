@@ -24,39 +24,76 @@ const SunriseHome = React.createClass( {
 		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
-				<DocumentTitle />
+			<div>
+				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
+					<DocumentTitle />
 
-				<ExperimentWarning />
+					<ExperimentWarning />
 
-				<h2 className={ styles.heading }>
-					{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {
-						components: { em: <em className="emphasis" /> }
-					} ) }
-				</h2>
+					<h2 className={ styles.heading }>
+						{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {
+							components: { em: <em className="emphasis" /> }
+						} ) }
+					</h2>
 
-				<div className={ styles.secondaryHeadingContainer }>
-					<h3 className={ styles.secondaryHeading }>
-						{ i18n.translate(
-							'The .blog launch is currently in the Sunrise phase for trademark holders. ' +
-							"Don't have a trademark? No problem! Your domain will be added to a pre-registration list."
-						) }
-					</h3>
+					<div className={ styles.secondaryHeadingContainer }>
+						<h3 className={ styles.secondaryHeading }>
+							{ i18n.translate(
+								'The .blog launch is currently in the Sunrise phase for trademark holders. ' +
+								"Don't have a trademark? No problem! Your domain will be added to a pre-registration list."
+							) }
+						</h3>
+					</div>
+
+					<DomainInput
+						{ ...query }
+						autoComplete="off"
+						autoFocus
+						className={ styles.field }
+						placeholder={ i18n.translate( 'Enter your domain name' ) }
+						ref="query" />
+
+					<button
+						className={ styles.button }>
+						{ i18n.translate( 'Next' ) }
+					</button>
+				</form>
+
+				<div className={ styles.explanationsWrapper }>
+					<div className={ styles.explanations }>
+						<h2 className={ styles.explanationsHeading }>{ i18n.translate( 'How does the application process work?' ) }</h2>
+						<div className={ styles.explanationBlock }>
+							<div className={ styles.explanationTitle }>
+								{ i18n.translate( 'Trademark Check' ) }
+							</div>
+							<div className={ styles.explanationText }>
+								{ i18n.translate( "If you're applying for a domain containing a trademark you own, you will be able to claim it by identifying as the mark's owner. We use a service called TMCH to handle trademark claims." ) }
+								<a href="#">{ i18n.translate( 'Learn more about registering trademarked domains' ) }</a>
+							</div>
+						</div>
+
+						<div className={ styles.explanationBlock }>
+							<div className={ styles.explanationTitle }>
+								{ i18n.translate( 'Identification and Payment' ) }
+							</div>
+							<div className={ styles.explanationText }>
+								{ i18n.translate( "Contact information and a valid payment method are required when applying for a domain. Your application fee will be refunded if you don't get your domain." ) }
+								<a href="#">{ i18n.translate( 'Learn more about our pricing and billing' ) }</a>
+							</div>
+						</div>
+
+						<div className={ styles.explanationBlock }>
+							<div className={ styles.explanationTitle }>
+								{ i18n.translate( 'Granting Applications' ) }
+							</div>
+							<div className={ styles.explanationText }>
+								{ i18n.translate( "To offer everyone a fair chance, we'll accept applications in two stages, and multiple requests for the same domain will be handled by auction. We'll keep you posted on the status of your application." ) }
+								<a href="#">{ i18n.translate( 'Learn more about the launch schedule' ) }</a>
+							</div>
+						</div>
+					</div>
 				</div>
-
-				<DomainInput
-					{ ...query }
-					autoComplete="off"
-					autoFocus
-					className={ styles.field }
-					placeholder={ i18n.translate( 'Enter your domain name' ) }
-					ref="query" />
-
-				<button
-					className={ styles.button }>
-					{ i18n.translate( 'Next' ) }
-				</button>
-			</form>
+			</div>
 		);
 	}
 } );

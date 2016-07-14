@@ -24,39 +24,39 @@ const SunriseHome = React.createClass( {
 		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<DocumentTitle>
-				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
-					<ExperimentWarning />
+			<form onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<DocumentTitle />
 
-					<h2 className={ styles.heading }>
-						{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {
-							components: { em: <em className="emphasis" /> }
-						} ) }
-					</h2>
+				<ExperimentWarning />
 
-					<div className={ styles.secondaryHeadingContainer }>
-						<h3 className={ styles.secondaryHeading }>
-							{ i18n.translate(
-								'The .blog launch is currently in the Sunrise phase for trademark holders. ' +
-								"Don't have a trademark? No problem! Your domain will be added to a pre-registration list."
-							) }
-						</h3>
-					</div>
+				<h2 className={ styles.heading }>
+					{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {
+						components: { em: <em className="emphasis" /> }
+					} ) }
+				</h2>
 
-					<DomainInput
-						{ ...query }
-						autoComplete="off"
-						autoFocus
-						className={ styles.field }
-						placeholder={ i18n.translate( 'Enter your domain name' ) }
-						ref="query" />
+				<div className={ styles.secondaryHeadingContainer }>
+					<h3 className={ styles.secondaryHeading }>
+						{ i18n.translate(
+							'The .blog launch is currently in the Sunrise phase for trademark holders. ' +
+							"Don't have a trademark? No problem! Your domain will be added to a pre-registration list."
+						) }
+					</h3>
+				</div>
 
-					<button
-						className={ styles.button }>
-						{ i18n.translate( 'Next' ) }
-					</button>
-				</form>
-			</DocumentTitle>
+				<DomainInput
+					{ ...query }
+					autoComplete="off"
+					autoFocus
+					className={ styles.field }
+					placeholder={ i18n.translate( 'Enter your domain name' ) }
+					ref="query" />
+
+				<button
+					className={ styles.button }>
+					{ i18n.translate( 'Next' ) }
+				</button>
+			</form>
 		);
 	}
 } );

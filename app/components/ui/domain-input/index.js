@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 
 const DomainInput = props => {
@@ -13,7 +14,7 @@ const DomainInput = props => {
 		<div className={ classNames( className, styles.domainInput ) }>
 			<input
 				className={ styles.input }
-				{ ...inputProps }
+				{ ...removeInvalidInputProps( inputProps ) }
 			/>
 			<div className={ styles.tldContainer }>
 				<div className={ styles.tld }>.blog</div>

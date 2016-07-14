@@ -92,10 +92,13 @@ export function createTransaction() {
 		const checkout = getCheckout( getState() ),
 			{ domain } = checkout.selectedDomain,
 			contactInformationForm = getValues( getState().form.contactInformation ),
+			checkoutForm = getValues( getState().form.checkout ),
+			{ privacyProtection } = checkoutForm,
 			paygateToken = checkout.paygateToken.data.token;
 
 		const payload = {
 			domain,
+			privacy: privacyProtection,
 			payment_key: paygateToken,
 			payment_method: 'WPCOM_Billing_MoneyPress_Paygate',
 			locale: 'en',

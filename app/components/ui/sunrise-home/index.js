@@ -31,7 +31,7 @@ const SunriseHome = React.createClass( {
 					<ExperimentWarning />
 
 					<h2 className={ styles.heading }>
-						{ i18n.translate( 'Apply for your {{em}}.blog{{/em}} domain!', {
+						{ i18n.translate( 'Give your blog the name it deserves', {
 							components: { em: <em className="emphasis" /> }
 						} ) }
 					</h2>
@@ -39,8 +39,8 @@ const SunriseHome = React.createClass( {
 					<div className={ styles.secondaryHeadingContainer }>
 						<h3 className={ styles.secondaryHeading }>
 							{ i18n.translate(
-								'The .blog launch is currently in the Sunrise phase for trademark holders. ' +
-								"Don't have a trademark? No problem! Your domain will be added to a pre-registration list."
+								'Millions of short, easy to remember names will be available when the new .blog domain goes live November 21. ' +
+								'Pre-register now to secure the perfect domain for your blog!'
 							) }
 						</h3>
 					</div>

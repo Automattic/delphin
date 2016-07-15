@@ -1,0 +1,28 @@
+@import 'app/styles/colors';
+
+.button {
+	background: $green;
+	border: 0;
+	border-bottom: 2px solid $green-dark;
+	border-radius: 3px;
+	color: $white;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.6rem;
+	font-weight: 600;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 15px;
+	text-align: center;
+	text-transform: none;
+	transition: opacity 0.3s, background-color 0.3s;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.3;
+	}
+
+	&:hover {
+		background: $green-dark;
+	}
+}

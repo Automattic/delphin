@@ -23,6 +23,24 @@ const SunriseHome = React.createClass( {
 	render() {
 		const { fields: { query }, handleSubmit } = this.props;
 
+		const explanations = [
+			{
+				title: i18n.translate( 'Trademark Check' ),
+				text: i18n.translate( "If you're applying for a domain containing a trademark you own, you will be able to claim it by identifying as the mark's owner. We use a service called TMCH to handle trademark claims." ),
+				linkText: i18n.translate( 'Learn more about registering trademarked domains' )
+			},
+			{
+				title: i18n.translate( 'Identification and Payment' ),
+				text: i18n.translate( "Contact information and a valid payment method are required when applying for a domain. Your application fee will be refunded if you don't get your domain." ),
+				linkText: i18n.translate( 'Learn more about our pricing and billing' )
+			},
+			{
+				title: i18n.translate( 'Granting Applications' ),
+				text: i18n.translate( "To offer everyone a fair chance, we'll accept applications in two stages, and multiple requests for the same domain will be handled by auction. We'll keep you posted on the status of your application." ),
+				linkText: i18n.translate( 'Learn more about the launch schedule' )
+			}
+		];
+
 		return (
 			<div>
 				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -72,35 +90,17 @@ const SunriseHome = React.createClass( {
 					<div className={ styles.explanationsHeadingLine } />
 
 					<div className={ styles.explanations }>
-						<div className={ styles.explanationBlock }>
-							<div className={ styles.explanationTitle }>
-								{ i18n.translate( 'Trademark Check' ) }
+						{ explanations.map( explanation => (
+							<div className={ styles.explanationBlock }>
+								<div className={ styles.explanationTitle }>
+									{ explanation.title }
+								</div>
+								<div>
+									<p className={ styles.explanationText }>{ explanation.title }</p>
+									<p><a href="#" className={ styles.explanationLink }>{ explanation.linkText }</a></p>
+								</div>
 							</div>
-							<div>
-								<p className={ styles.explanationText }>{ i18n.translate( "If you're applying for a domain containing a trademark you own, you will be able to claim it by identifying as the mark's owner. We use a service called TMCH to handle trademark claims." ) }</p>
-								<p><a href="#" className={ styles.explanationLink }>{ i18n.translate( 'Learn more about registering trademarked domains' ) }</a></p>
-							</div>
-						</div>
-
-						<div className={ styles.explanationBlock }>
-							<div className={ styles.explanationTitle }>
-								{ i18n.translate( 'Identification and Payment' ) }
-							</div>
-							<div>
-								<p className={ styles.explanationText }>{ i18n.translate( "Contact information and a valid payment method are required when applying for a domain. Your application fee will be refunded if you don't get your domain." ) }</p>
-								<p><a href="#" className={ styles.explanationLink }>{ i18n.translate( 'Learn more about our pricing and billing' ) }</a></p>
-							</div>
-						</div>
-
-						<div className={ styles.explanationBlock }>
-							<div className={ styles.explanationTitle }>
-								{ i18n.translate( 'Granting Applications' ) }
-							</div>
-							<div>
-								<p className={ styles.explanationText }>{ i18n.translate( "To offer everyone a fair chance, we'll accept applications in two stages, and multiple requests for the same domain will be handled by auction. We'll keep you posted on the status of your application." ) }</p>
-								<p><a href="#" className={ styles.explanationLink }>{ i18n.translate( 'Learn more about the launch schedule' ) }</a></p>
-							</div>
-						</div>
+						) ) }
 					</div>
 				</div>
 			</div>

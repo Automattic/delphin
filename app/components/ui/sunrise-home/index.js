@@ -96,7 +96,7 @@ const SunriseHome = React.createClass( {
 									{ explanation.title }
 								</div>
 								<div>
-									<p className={ styles.explanationText }>{ explanation.title }</p>
+									<p className={ styles.explanationText }>{ explanation.text }</p>
 									<p><a href="#" className={ styles.explanationLink }>{ explanation.linkText }</a></p>
 								</div>
 							</div>

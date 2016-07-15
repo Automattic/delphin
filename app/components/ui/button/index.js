@@ -19,7 +19,7 @@ Button.propTypes = {
 	children: React.PropTypes.oneOfType( [
 		React.PropTypes.arrayOf( React.PropTypes.node ),
 		React.PropTypes.node
-	] ),
+	] ).isRequired,
 	className: PropTypes.string
 };
 

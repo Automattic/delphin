@@ -59,16 +59,26 @@ const SunriseHome = React.createClass( {
 					</button>
 				</form>
 
+				<div className={ styles.trademark }>
+					{ i18n.translate( 'Registering a trademark domain? {{a}}Start here{{/a}}', {
+						components: {
+							a: <a href="#" className={ styles.explanationLink }></a>
+						}
+					} ) }
+				</div>
+
 				<div className={ styles.explanationsWrapper }>
+					<h2 className={ styles.explanationsHeading }>{ i18n.translate( 'How does the application process work?' ) }</h2>
+					<div className={ styles.explanationsHeadingLine } />
+
 					<div className={ styles.explanations }>
-						<h2 className={ styles.explanationsHeading }>{ i18n.translate( 'How does the application process work?' ) }</h2>
 						<div className={ styles.explanationBlock }>
 							<div className={ styles.explanationTitle }>
 								{ i18n.translate( 'Trademark Check' ) }
 							</div>
-							<div className={ styles.explanationText }>
-								{ i18n.translate( "If you're applying for a domain containing a trademark you own, you will be able to claim it by identifying as the mark's owner. We use a service called TMCH to handle trademark claims." ) }
-								<a href="#">{ i18n.translate( 'Learn more about registering trademarked domains' ) }</a>
+							<div>
+								<p className={ styles.explanationText }>{ i18n.translate( "If you're applying for a domain containing a trademark you own, you will be able to claim it by identifying as the mark's owner. We use a service called TMCH to handle trademark claims." ) }</p>
+								<p><a href="#" className={ styles.explanationLink }>{ i18n.translate( 'Learn more about registering trademarked domains' ) }</a></p>
 							</div>
 						</div>
 
@@ -76,9 +86,9 @@ const SunriseHome = React.createClass( {
 							<div className={ styles.explanationTitle }>
 								{ i18n.translate( 'Identification and Payment' ) }
 							</div>
-							<div className={ styles.explanationText }>
-								{ i18n.translate( "Contact information and a valid payment method are required when applying for a domain. Your application fee will be refunded if you don't get your domain." ) }
-								<a href="#">{ i18n.translate( 'Learn more about our pricing and billing' ) }</a>
+							<div>
+								<p className={ styles.explanationText }>{ i18n.translate( "Contact information and a valid payment method are required when applying for a domain. Your application fee will be refunded if you don't get your domain." ) }</p>
+								<p><a href="#" className={ styles.explanationLink }>{ i18n.translate( 'Learn more about our pricing and billing' ) }</a></p>
 							</div>
 						</div>
 
@@ -86,9 +96,9 @@ const SunriseHome = React.createClass( {
 							<div className={ styles.explanationTitle }>
 								{ i18n.translate( 'Granting Applications' ) }
 							</div>
-							<div className={ styles.explanationText }>
-								{ i18n.translate( "To offer everyone a fair chance, we'll accept applications in two stages, and multiple requests for the same domain will be handled by auction. We'll keep you posted on the status of your application." ) }
-								<a href="#">{ i18n.translate( 'Learn more about the launch schedule' ) }</a>
+							<div>
+								<p className={ styles.explanationText }>{ i18n.translate( "To offer everyone a fair chance, we'll accept applications in two stages, and multiple requests for the same domain will be handled by auction. We'll keep you posted on the status of your application." ) }</p>
+								<p><a href="#" className={ styles.explanationLink }>{ i18n.translate( 'Learn more about the launch schedule' ) }</a></p>
 							</div>
 						</div>
 					</div>

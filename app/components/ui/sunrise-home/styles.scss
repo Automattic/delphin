@@ -4,7 +4,8 @@
 
 .heading {
 	font-family: $heading-font;
-	font-size: 3rem;
+	font-size: 3.4rem;
+	font-weight: 700;
 	margin: 45px 0 10px;
 	text-align: center;
 
@@ -14,7 +15,7 @@
 }
 
 .secondary-heading {
-	font-size: 2rem;
+	font-size: 2.2rem;
 	font-weight: 200;
 }
 
@@ -142,6 +143,7 @@ $icon-radius: 40px;
 
 .explanationTitle {
 	display: block;
+	font-size: 1.6rem;
 	font-weight: bold;
 	margin-bottom: 10px;
 

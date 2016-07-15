@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
+import Button from 'components/ui/button';
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
@@ -147,12 +148,12 @@ const VerifyUser = React.createClass( {
 						</fieldset>
 					}
 					submitArea={
-						<button disabled={ this.isSubmitButtonDisabled() }>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ user.intention === 'login'
 								? i18n.translate( 'Login' )
 								: i18n.translate( 'Verify my email' )
 							}
-						</button>
+						</Button>
 					} />
 
 				<Footer />

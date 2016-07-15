@@ -1,0 +1,14 @@
+@import 'app/styles/colors';
+
+.textarea {
+	border: solid 1px $gray-medium;
+	border-radius: 3px;
+	height: 150px;
+	margin: 0 0 20px;
+	resize: none;
+	width: 100%;
+}
+
+.button {
+	margin-bottom: 15px;
+}

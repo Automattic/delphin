@@ -84,7 +84,7 @@
 	text-align: center;
 }
 
-.explanationsWrapper {
+.explanations-wrapper {
 	background: $white;
 	font-size: 1.5em;
 	padding: 3em 0;
@@ -101,7 +101,7 @@
 	}
 }
 
-.explanationsHeading {
+.explanations-heading {
 	color: $blue-dark;
 	font-family: $explanation-font;
 	font-size: 3rem;
@@ -109,20 +109,21 @@
 	text-align: center;
 }
 
-.explanationsHeadingLine {
+.explanations-heading-line {
 	border: 1px solid $blue-bright;
 	margin: 1em auto;
 	width: 100px;
 }
 
 $icon-radius: 40px;
-.explanationBlock {
+
+.explanation-block {
 	border: 1px solid $gray-light;
 	border-radius: 2px;
 	display: block;
+	margin: $icon-radius + 20px 0;
 	padding: $icon-radius + 20px 1em 1em;
 	position: relative;
-	margin: $icon-radius + 20px 0;
 
 	@include breakpoint( '>660px' ) {
 		flex-basis: 28%;
@@ -141,7 +142,7 @@ $icon-radius: 40px;
 	}
 }
 
-.explanationTitle {
+.explanation-title {
 	display: block;
 	font-size: 1.6rem;
 	font-weight: bold;
@@ -152,11 +153,11 @@ $icon-radius: 40px;
 	}
 }
 
-.explanationText {
+.explanation-text {
 	margin-bottom: 1em;
 }
 
-.explanationLink {
+.explanation-link {
 	color: $blue-bright;
 	text-decoration: none;
 }

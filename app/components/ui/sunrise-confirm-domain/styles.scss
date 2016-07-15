@@ -1,0 +1,83 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.header {
+	background-color: $blue-background;
+	font-family: $heading-font;
+	padding: 50px 200px;
+	text-align: center;
+
+	h1 {
+		color: #fff;
+		font-size: 3rem;
+		margin-bottom: 10px;
+		margin-top: 40px;
+	}
+
+	h2 {
+		color: #fff;
+		font-size: 2rem;
+		font-weight: 200;
+		margin-bottom: 30px;
+	}
+}
+
+.form {
+	background-color: #fff;
+	border: 1px solid $gray-light;
+	border-radius: 5px;
+	box-sizing: border-box;
+	color: $gray;
+	font-weight: 200;
+	margin: -40px auto 25px;
+	padding: 30px;
+	width: 400px;
+}
+
+.price-tag {
+	font-size: 1.8rem;
+}
+
+.renewal-info {
+	color: $gray;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+}
+
+.rule {
+	background-color: $blue-bright;
+	border: 0;
+	height: 2px;
+	margin: 10px 0;
+	width: 25%;
+}
+
+.text {
+	color: $blue-dark;
+	font-size: 2rem;
+}
+
+.back-notice {
+	font-size: 1.3rem;
+	text-align: center;
+	width: 100%;
+}
+
+.button {
+	font-size: 1.5rem;
+	font-weight: 200;
+	margin-bottom: 20px;
+	margin-top: 30px;
+	padding: 18px 0;
+	width: 100%;
+}
+
+.extra-info-bottom {
+	color: $gray;
+	font-size: 1.4rem;
+	font-weight: 200;
+	margin: 0 auto 70px;
+	text-align: center;
+	width: 400px;
+}

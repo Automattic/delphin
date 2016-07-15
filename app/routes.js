@@ -24,12 +24,6 @@ import VerifyUserContainer from 'components/containers/connect-user/verify';
 export const defaultRoutes = [
 	{
 		component: DefaultLayoutWithHeader,
-		indexRoute: {
-			component: SunriseHomeContainer
-		},
-		path: '/',
-		slug: 'home',
-		static: true,
 		childRoutes: [
 			{
 				path: 'about',
@@ -91,7 +85,12 @@ export const defaultRoutes = [
 	},
 	{
 		component: NoMarginLayout,
-		path: '',
+		indexRoute: {
+			component: SunriseHomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
 		childRoutes: [
 			{
 				path: 'my-domains',

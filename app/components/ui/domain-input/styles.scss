@@ -11,6 +11,7 @@
 	background: $gray-light;
 	border-radius: 0 5px 5px 0;
 	display: flex;
+	flex-shrink: 0;
 	font-size: 1.6rem;
 	justify-content: center;
 	text-align: center;

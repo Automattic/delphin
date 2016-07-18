@@ -13,6 +13,7 @@ import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import State from 'components/ui/contact-information/state';
 import Input from 'components/ui/form/input';
+import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
@@ -319,7 +320,7 @@ class ContactInformation extends React.Component {
 									</div>
 
 									<select
-										{ ...fields.countryCode }
+										{ ...removeInvalidInputProps( fields.countryCode ) }
 										disabled={ this.isDataLoading() }
 										className={ styles.countryCode }>
 										<option value="" disabled>{ i18n.translate( 'Select Country' ) }</option>

@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 
 const State = ( { disabled, field, states, onBlur } ) => {
@@ -21,7 +22,7 @@ const State = ( { disabled, field, states, onBlur } ) => {
 	} else {
 		content = (
 			<select
-				{ ...field }
+				{ ...removeInvalidInputProps( field ) }
 				onBlur={ onBlur }
 				disabled={ disabled }>
 				<option value="" disabled>{ i18n.translate( 'State' ) }</option>

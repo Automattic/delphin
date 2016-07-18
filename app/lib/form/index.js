@@ -21,15 +21,32 @@ export const getAsyncValidateFunction = validate => values => new Promise( ( res
 } );
 
 /**
- * Extract valid props to be given to an <input> element from an object (a set of props) containing other fields.
- * This function basically removes all custom props added by react-form.
- * See this issue in react-form: https://github.com/erikras/redux-form/issues/1249#
+ * Extracts valid props to be given to a form element from an object (a set of props) containing other fields. This
+ * function basically removes all custom props added by redux-form:
  *
- * @param {object} props   - a set of props for an input element
- * @returns {object} props filtered
+ *   https://github.com/erikras/redux-form/issues/1249
+ *
+ * This function should be removed once redux-form is upgraded to version 6.
+ *
+ * @param {object} props - a set of props for a form element
+ * @returns {object} - the props filtered
  */
 export const removeInvalidInputProps = ( props ) => {
-	const { active, autofill, autofilled, dirty, error, initialValue, invalid, onUpdate, pristine, touched,
-			valid, visited, asyncValidating, autofocus, ...validProps } = props;
+	const {
+		active,
+		autofill,
+		autofilled,
+		dirty,
+		error,
+		initialValue,
+		invalid,
+		onUpdate,
+		pristine,
+		touched,
+		valid,
+		visited,
+		...validProps
+	} = props;
+
 	return validProps;
 };

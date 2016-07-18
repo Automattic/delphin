@@ -40,20 +40,5 @@ module.exports = function wpcomRestApiProxy() {
 
 	createEndpointProxy( app, '/users/email/verification' );
 
-	app.post( '/sites/new', function( request, response ) {
-		const payload = Object.assign( {}, request.body, {
-			client_id: rest_api_oauth_client_id,
-			client_secret: rest_api_oauth_client_secret
-		} );
-
-		if ( ! payload.bearer_token ) {
-			response.status( 401 ).send( { message: 'Requests to this endpoint must be authenticated' } );
-		}
-
-		WPCOM( payload.bearer_token ).req.post( '/sites/new', payload, function( error, results ) {
-			response.status( ( error && error.statusCode ) || 200 ).send( error || results );
-		} );
-	} );
-
 	return app;
 };

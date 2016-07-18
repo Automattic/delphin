@@ -8,11 +8,11 @@ import Form from './form';
 import Footer from './footer';
 import styles from './styles.scss';
 
-const SunriseStep = ( { children } ) => (
+const SunriseStep = withStyles( styles )( ( { children } ) => (
 	<div className={ styles.sunriseStep }>
 		{ children }
 	</div>
-);
+) );
 
 SunriseStep.propTypes = {
 	children: PropTypes.oneOfType( [
@@ -25,4 +25,4 @@ SunriseStep.Header = Header;
 SunriseStep.Form = Form;
 SunriseStep.Footer = Footer;
 
-export default withStyles( styles )( SunriseStep );
+export default SunriseStep;

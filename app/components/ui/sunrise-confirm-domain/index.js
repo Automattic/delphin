@@ -9,23 +9,23 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import styles from './styles.scss';
+import SunriseStep from 'components/ui/sunrise-step';
 
 const SunriseConfirmDomain = ( { domain } ) => (
-	<div>
-		<DocumentTitle />
-
-		<div className={ styles.header }>
+	<SunriseStep>
+		<DocumentTitle title={ i18n.translate( 'We found it!' ) } />
+		<SunriseStep.Header>
 			<h1>
 				{ i18n.translate( 'We found it!' ) }
 			</h1>
 			<h2>
 				{ i18n.translate( 'That looks like a nice domain. Apply for ' +
-						'this domain to secure it for your blog.' ) }
+					'this domain to secure it for your blog.' ) }
 			</h2>
-		</div>
+		</SunriseStep.Header>
 
-		<form className={ styles.form }>
-			<h3 className={ styles.text }>
+		<SunriseStep.Form className={ styles.confirmDomainForm }>
+			<h3>
 				{ domain }
 			</h3>
 			<hr className={ styles.rule } />
@@ -46,14 +46,14 @@ const SunriseConfirmDomain = ( { domain } ) => (
 					{ i18n.translate( 'Try a different domain' ) }
 				</Link>
 			</div>
-		</form>
+		</SunriseStep.Form>
 
-		<div className={ styles.extraInfoBottom }>
+		<SunriseStep.Footer>
 			{ i18n.translate( 'We may receive other applications for the domain you want. ' +
 					'If so, we\'ll notify all applicants and put the domain up for auction. ' +
 					'Applications are open until November 9.' ) }
-		</div>
-	</div>
+		</SunriseStep.Footer>
+	</SunriseStep>
 );
 
 SunriseConfirmDomain.propTypes = {

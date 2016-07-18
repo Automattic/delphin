@@ -7,6 +7,7 @@ import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import i18n from 'i18n-calypso';
+import Input from 'components/ui/form/input';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
@@ -77,7 +78,7 @@ const VerifyUser = React.createClass( {
 				<div className={ styles.twoFactorFields }>
 					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
 
-					<input { ...fields.twoFactorAuthenticationCode } autoComplete="off" />
+					<Input field={ fields.twoFactorAuthenticationCode } autoComplete="off" />
 
 					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
 				</div>
@@ -135,7 +136,7 @@ const VerifyUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<input { ...fields.code } autoFocus autoComplete="off" />
+							<Input field={ fields.code } autoFocus autoComplete="off" />
 
 							<ValidationError field={ fields.code } submitFailed={ submitFailed } />
 

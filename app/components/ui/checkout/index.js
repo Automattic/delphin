@@ -14,6 +14,7 @@ import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
 import ValidationError from 'components/ui/form/validation-error';
 import Input from 'components/ui/form/input';
+import { removeInvalidInputProps } from 'lib/form';
 import SiftScience from 'lib/sift-science';
 
 const Checkout = React.createClass( {
@@ -106,7 +107,7 @@ const Checkout = React.createClass( {
 								<label>{ i18n.translate( 'Expiration' ) }</label>
 								<div className={ styles.expiration }>
 									<select
-										{ ...fields.expirationMonth }
+										{ ...removeInvalidInputProps( fields.expirationMonth ) }
 										className={ styles.expirationMonth }>
 										<option>{ i18n.translate( 'Month' ) }</option>
 										{ months.map( ( monthName, monthIndex ) => {
@@ -120,7 +121,7 @@ const Checkout = React.createClass( {
 									</select>
 
 									<select
-										{ ...fields.expirationYear }
+										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }>
 										<option>{ i18n.translate( 'Year' ) }</option>
 										<option value="19">2019</option>

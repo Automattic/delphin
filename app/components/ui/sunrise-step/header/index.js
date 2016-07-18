@@ -7,8 +7,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 const SunriseStepHeader = ( { children, className } ) => (
-	<div className={ classNames( className, styles.header ) }>
-		{ children }
+	<div className={ styles.container }>
+		<div className={ classNames( className, styles.header ) }>
+			{ children }
+		</div>
 	</div>
 );
 

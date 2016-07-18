@@ -90,8 +90,8 @@ const SunriseHome = React.createClass( {
 					<div className={ styles.explanationsHeadingLine } />
 
 					<div className={ styles.explanations }>
-						{ explanations.map( explanation => (
-							<div className={ styles.explanationBlock }>
+						{ explanations.map( ( explanation, index ) => (
+							<div className={ styles.explanationBlock } key={ index }>
 								<div className={ styles.explanationTitle }>
 									{ explanation.title }
 								</div>

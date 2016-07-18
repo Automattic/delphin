@@ -87,7 +87,12 @@ export const defaultRoutes = [
 	},
 	{
 		component: NoMarginLayout,
-		path: '',
+		indexRoute: {
+			component: SunriseHomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
 		childRoutes: [
 			{
 				path: 'my-domains',
@@ -111,12 +116,6 @@ export const defaultRoutes = [
 	},
 	{
 		component: SunriseLayout,
-		indexRoute: {
-			component: SunriseHomeContainer
-		},
-		path: '/',
-		slug: 'home',
-		static: true,
 		childRoutes: [
 			{
 				path: 'confirm-domain',

@@ -8,6 +8,7 @@ import DocumentTitle from 'components/ui/document-title';
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
+import Input from 'components/ui/form/input';
 import ValidationError from 'components/ui/form/validation-error';
 
 const ConnectUser = React.createClass( {
@@ -60,7 +61,7 @@ const ConnectUser = React.createClass( {
 						fieldArea={
 							<fieldset>
 								<label>{ i18n.translate( 'Email address:' ) }</label>
-								<input { ...fields.email } autoFocus />
+								<Input field={ fields.email } autoFocus />
 								<ValidationError field={ fields.email } submitFailed={ submitFailed } />
 							</fieldset>
 						}

@@ -3,15 +3,14 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Header from './header';
+import Form from './form';
+import Footer from './footer';
 import styles from './styles.scss';
 
-const SunriseStep = ( { children, heading, secondaryHeading } ) => (
-	<div className={ styles.container }>
-		<h1 className={ styles.heading }>{ heading }</h1>
-		<h2 className={ styles.secondaryHeading }>{ secondaryHeading }</h2>
-		<div className={ styles.content }>
-			{ children }
-		</div>
+const SunriseStep = ( { children } ) => (
+	<div className={ styles.sunriseStep }>
+		{ children }
 	</div>
 );
 
@@ -19,9 +18,11 @@ SunriseStep.propTypes = {
 	children: PropTypes.oneOfType( [
 		PropTypes.arrayOf( React.PropTypes.node ),
 		PropTypes.node
-	] ),
-	heading: PropTypes.string.isRequired,
-	secondaryHeading: PropTypes.string.isRequired
+	] ).isRequired
 };
+
+SunriseStep.Header = Header;
+SunriseStep.Form = Form;
+SunriseStep.Footer = Footer;
 
 export default withStyles( styles )( SunriseStep );

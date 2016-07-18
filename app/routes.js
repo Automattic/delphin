@@ -19,6 +19,7 @@ import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
+import SunriseLayout from 'components/ui/layout/sunrise';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 export const defaultRoutes = [
@@ -85,12 +86,7 @@ export const defaultRoutes = [
 	},
 	{
 		component: NoMarginLayout,
-		indexRoute: {
-			component: SunriseHomeContainer
-		},
-		path: '/',
-		slug: 'home',
-		static: true,
+		path: '',
 		childRoutes: [
 			{
 				path: 'my-domains',
@@ -111,6 +107,15 @@ export const defaultRoutes = [
 				static: false
 			}
 		]
+	},
+	{
+		component: SunriseLayout,
+		indexRoute: {
+			component: SunriseHomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true
 	}
 ];
 

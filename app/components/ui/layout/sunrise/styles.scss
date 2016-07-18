@@ -1,0 +1,41 @@
+@import 'app/styles/colors';
+
+body {
+	background-color: #fff;
+	margin: 0 auto;
+	max-width: 960px;
+
+	strong {
+		font-weight: bold;
+	}
+}
+
+.header {
+	align-items: center;
+	background: $blue-dark-sunrise;
+	display: flex;
+	justify-content: space-between;
+}
+
+.title {
+	flex-basis: 100%;
+	font-size: 2rem;
+	padding: 22px;
+	text-align: center;
+	text-decoration: none;
+
+}
+
+.header-text {
+	color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $blue-dark-sunrise;
+	font-weight: 400;
+}

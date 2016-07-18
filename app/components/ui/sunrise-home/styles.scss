@@ -2,12 +2,19 @@
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
 
+.form {
+	text-align: center;
+}
+
+.button {
+	margin-top: 15px;
+}
+
 .heading {
 	font-family: $heading-font;
 	font-size: 3.4rem;
 	font-weight: 400;
 	margin: 45px 0 10px;
-	text-align: center;
 
 	.emphasis {
 		color: $blue-bright;
@@ -22,7 +29,6 @@
 .secondary-heading-container {
 	margin: 0 auto 35px;
 	max-width: 600px;
-	text-align: center;
 }
 
 .field {
@@ -49,30 +55,6 @@
 
 	@include breakpoint( '>660px' ) {
 		font-size: 1.8rem;
-	}
-}
-
-// TODO: Create a <Button /> component to share these styles
-.button {
-	background: $green;
-	border: 0;
-	border-bottom: 2px solid $green-dark;
-	border-radius: 3px;
-	color: $white;
-	cursor: pointer;
-	display: block;
-	font-size: 16px;
-	font-weight: normal;
-	margin: 30px auto 0;
-	outline: none;
-	padding: 15px 40px;
-
-	&:hover {
-		color: $blue-light;
-	}
-
-	&:disabled {
-		background: lighten( $gray-blue, 20% );
 	}
 }
 

@@ -11,6 +11,10 @@
 		font-family: inherit;
 	}
 
+	button {
+		width: 100%;
+	}
+
 	>:first-child {
 		border-top-left-radius: 2px;
 		border-top-right-radius: 2px;
@@ -80,33 +84,6 @@
 	background: $gray-light;
 	padding: 30px;
 	text-align: center;
-
-	button {
-		background: $green;
-		border: 0;
-		border-bottom: 2px solid $green-dark;
-		border-radius: 3px;
-		color: $white;
-		cursor: pointer;
-		display: inline-block;
-		font-size: 1.6rem;
-		font-weight: 600;
-		margin: 0 auto;
-		padding: 15px;
-		text-align: center;
-		text-transform: none;
-		transition: opacity 0.3s, background-color 0.3s;
-		width: 100%;
-
-		&:disabled {
-			cursor: not-allowed;
-			opacity: 0.3;
-		}
-
-		&:hover {
-			background: $green-dark;
-		}
-	}
 }
 
 .validation-error {

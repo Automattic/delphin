@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import ExperimentWarning from 'components/ui/experiment-warning';
 import { isDomain, queryIsInResults } from 'lib/domains';
@@ -108,11 +109,11 @@ const Home = React.createClass( {
 						) }
 					</ReactCSSTransitionGroup>
 
-					<button
+					<Button
 						disabled={ this.isSubmitButtonDisabled() }
 						className={ styles.button }>
 						{ i18n.translate( "Let's find an address" ) }
-					</button>
+					</Button>
 				</form>
 			</DocumentTitle>
 		);

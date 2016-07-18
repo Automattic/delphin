@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
+import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import State from 'components/ui/contact-information/state';
@@ -352,9 +353,9 @@ class ContactInformation extends React.Component {
 									{ i18n.translate( 'Some providers charge a fee to keep this information private, but we protect your privacy free of charge.' ) }
 								</p>
 
-								<button disabled={ this.isSubmitButtonDisabled() }>
+								<Button disabled={ this.isSubmitButtonDisabled() }>
 									{ i18n.translate( 'Continue to Checkout' ) }
-								</button>
+								</Button>
 							</div>
 						} />
 				</div>

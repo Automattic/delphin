@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import creditCardDetails from 'lib/credit-card-details';
 import DocumentTitle from 'components/ui/document-title';
@@ -163,9 +164,9 @@ const Checkout = React.createClass( {
 						</div>
 
 						<div className={ styles.submitArea }>
-							<button disabled={ this.isSubmitButtonDisabled() }>
+							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Checkout' ) }
-							</button>
+							</Button>
 						</div>
 					</form>
 				</div>

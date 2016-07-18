@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
 import ExperimentWarning from 'components/ui/experiment-warning';
@@ -43,7 +44,7 @@ const SunriseHome = React.createClass( {
 
 		return (
 			<div>
-				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<DocumentTitle />
 
 					<ExperimentWarning />
@@ -71,10 +72,9 @@ const SunriseHome = React.createClass( {
 						placeholder={ i18n.translate( 'Enter your domain name' ) }
 						ref="query" />
 
-					<button
-						className={ styles.button }>
+					<Button className={ styles.button }>
 						{ i18n.translate( 'Next' ) }
-					</button>
+					</Button>
 				</form>
 
 				<div className={ styles.trademark }>

@@ -3,6 +3,7 @@ import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
+import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
@@ -64,9 +65,9 @@ const ConnectUser = React.createClass( {
 							</fieldset>
 						}
 						submitArea={
-							<button disabled={ this.isSubmitButtonDisabled() }>
+							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Next' ) }
-							</button>
+							</Button>
 						} />
 
 					<Footer />

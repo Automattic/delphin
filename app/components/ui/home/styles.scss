@@ -38,29 +38,6 @@
 	}
 }
 
-.button {
-	background: $green;
-	border: 0;
-	border-bottom: 2px solid $green-dark;
-	border-radius: 3px;
-	color: $white;
-	cursor: pointer;
-	display: block;
-	font-size: 16px;
-	font-weight: normal;
-	margin: 30px auto 0;
-	outline: none;
-	padding: 15px 40px;
-
-	&:hover {
-		color: $blue-light;
-	}
-
-	&:disabled {
-		background: lighten( $gray-blue, 20% );
-	}
-}
-
 .empty-search-notice {
 	background: $blue-dark;
 	border-radius: 0 0 3px 3px;

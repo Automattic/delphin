@@ -58,17 +58,30 @@ export function connectUser( email, intention, callback ) {
 					} );
 				}
 
-				dispatch( {
+				dispatch( connectUserComplete( {
 					email,
-					twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled,
-					type: CONNECT_USER_COMPLETE
-				} );
+					twoFactorAuthenticationEnabled: !! data.two_factor_authentication_code
+				} ) );
 
 				callback && callback();
 			};
 		},
 		fail: CONNECT_USER_FAIL
 	};
+}
+
+export function connectUserComplete( { email, twoFactorAuthenticationEnabled, intention } ) {
+	const action = {
+		email,
+		twoFactorAuthenticationEnabled,
+		type: CONNECT_USER_COMPLETE
+	};
+
+	if ( intention ) {
+		Object.assign( action, { intention } );
+	}
+
+	return action;
 }
 
 /**

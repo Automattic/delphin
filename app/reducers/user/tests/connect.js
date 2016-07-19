@@ -60,12 +60,51 @@ describe( 'state.user.connect', () => {
 	} );
 
 	it( 'should update `wasCreated` and `data` when a `CONNECT_USER_COMPLETE` action is triggered', () => {
-		expect( connect( undefined, {
+		expect( connect( {
+			intention: 'login',
+			isRequesting: true,
+			wasCreated: false,
+			data: {
+				bearerToken: null,
+				email: null,
+				notice: null,
+				twoFactorAuthenticationEnabled: null
+			}
+		}, {
 			type: CONNECT_USER_COMPLETE,
 			email: 'foo@bar.com',
 			twoFactorAuthenticationEnabled: true
 		} ) ).toEqual( {
+			intention: 'login',
+			isRequesting: false,
+			wasCreated: true,
+			data: {
+				bearerToken: null,
+				email: 'foo@bar.com',
+				notice: null,
+				twoFactorAuthenticationEnabled: true
+			}
+		} );
+	} );
+
+	it( 'should update `intention` if present in `CONNECT_USER_COMPLETE` action', () => {
+		expect( connect( {
 			intention: null,
+			isRequesting: true,
+			wasCreated: false,
+			data: {
+				bearerToken: null,
+				email: null,
+				notice: null,
+				twoFactorAuthenticationEnabled: null
+			}
+		}, {
+			type: CONNECT_USER_COMPLETE,
+			email: 'foo@bar.com',
+			twoFactorAuthenticationEnabled: true,
+			intention: 'login'
+		} ) ).toEqual( {
+			intention: 'login',
 			isRequesting: false,
 			wasCreated: true,
 			data: {

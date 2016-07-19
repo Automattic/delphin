@@ -6,6 +6,7 @@ import i18n from 'i18n-calypso';
 import About from 'components/ui/about';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformationContainer from 'components/containers/contact-information';
+import CheckoutReviewContainer from 'components/containers/checkout-review';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import HostInfoContainer from 'components/containers/host-info';
 import HostsContainer from 'components/containers/hosts';
@@ -54,6 +55,12 @@ export const defaultRoutes = [
 				slug: 'checkout',
 				static: false,
 				component: CheckoutContainer
+			},
+			{
+				path: 'checkout-review',
+				slug: 'checkoutReview',
+				static: false,
+				component: CheckoutReviewContainer
 			},
 			{
 				path: 'log-in',

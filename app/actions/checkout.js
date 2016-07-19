@@ -119,23 +119,26 @@ export function createTransaction() {
 				type: TRANSACTION_CREATE_COMPLETE,
 				domain
 			} ),
-			fail: ( error ) => {
-				dispatch( addNotice( {
+			fail: ( error ) => failThunkDispatch => {
+				failThunkDispatch( addNotice( {
 					message: error.message,
 					status: 'error'
 				} ) );
 
-				return {
+				failThunkDispatch( {
 					type: TRANSACTION_CREATE_FAIL,
 					error: error
-				};
+				} );
+
+				// we don't want swallow the error
+				return Promise.reject( error );
 			}
 		} );
 	};
 }
 
-export const purchaseDomain = () => dispatch => {
+export const purchaseDomain = () => dispatch =>
 	dispatch( () => dispatch( fetchPaygateConfiguration() ) )
 		.then( () => dispatch( createPaygateToken() ) )
 		.then( () => dispatch( createTransaction() ) );
-};
+

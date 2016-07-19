@@ -3,6 +3,7 @@ import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import range from 'lodash/range';
 import padStart from 'lodash/padStart';
 
 // Internal dependencies
@@ -26,34 +27,18 @@ const Checkout = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
-		isLoggedIn: PropTypes.bool.isRequired,
-		isLoggedOut: PropTypes.bool.isRequired,
-		purchaseDomain: PropTypes.func.isRequired,
+		isPurchasing: PropTypes.bool.isRequired,
+		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
-		redirectToLogin: PropTypes.func.isRequired,
-		redirectToSuccess: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
-		if ( this.props.isLoggedOut ) {
-			this.props.redirectToLogin();
-		} else if ( this.props.isLoggedIn && ! this.props.checkout.selectedDomain.domain ) {
+		if ( ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToHome();
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
-		}
-	},
-
-	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.isLoggedOut ) {
-			nextProps.redirectToLogin();
-			return;
-		}
-
-		if ( ! this.props.checkout.transaction.hasLoadedFromServer && nextProps.checkout.transaction.hasLoadedFromServer ) {
-			this.props.redirectToSuccess();
 		}
 	},
 
@@ -64,15 +49,13 @@ const Checkout = React.createClass( {
 			return Promise.reject( errors );
 		}
 
-		this.props.purchaseDomain();
+		this.props.redirectToCheckoutReview();
 	},
 
 	isSubmitButtonDisabled() {
-		const { checkout, invalid, submitting } = this.props;
+		const { isPurchasing, invalid, submitting } = this.props;
 
-		return invalid || submitting || [ 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
-			checkout[ request ].isRequesting
-		) );
+		return invalid || submitting || isPurchasing;
 	},
 
 	renderForm() {
@@ -187,7 +170,7 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Checkout' ) }
+								{ i18n.translate( 'Review Application' ) }
 							</Button>
 						</div>
 					</form>

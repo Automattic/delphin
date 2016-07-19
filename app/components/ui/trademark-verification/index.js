@@ -3,7 +3,6 @@ import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -14,38 +13,18 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class TrademarkVerification extends React.Component {
-	componentDidMount() {
-		if ( ! process.env.BROWSER ) {
-			return;
-		}
-
-		const node = ReactDOM.findDOMNode( this.refs.dropZone );
-
-		node.addEventListener( 'drop', this.handleDrop, false );
-	}
-
-	componentWillUnmount() {
-		if ( ! process.env.BROWSER ) {
-			return;
-		}
-
-		const node = ReactDOM.findDOMNode( this.refs.dropZone );
-
-		node.removeEventListener( 'drop', this.handleDrop, false );
-	}
-
-	handleDrop( event ) {
-		event.stopPropagation();
-		event.preventDefault();
-
-		const files = event.dataTransfer.files;
+	handleChange( event ) {
 		const reader = new FileReader();
 		reader.onload = ( { target } ) => this.props.changeSmd( target.result );
-		reader.readAsText( files[ 0 ], 'UTF-8' );
+		reader.readAsText( event.target.files[ 0 ], 'UTF-8' );
 	}
 
 	render() {
-		const { fields } = this.props;
+		const { fields, values } = this.props;
+
+		// This is an arbitrary length to determine whether the user has added
+		// their SMD file or just entered some text
+		const showUploadButton = ! values.smd || values.smd.length < 100;
 
 		return (
 			<SunriseStep>
@@ -62,7 +41,13 @@ class TrademarkVerification extends React.Component {
 					onSubmit={ null }
 				>
 					<div>
-						<div ref="dropZone">
+						<div>
+							{ showUploadButton && (
+								<label className={ styles.fileInputLabel }>
+									<input type="file" ref="fileInput" className={ styles.fileInput } onChange={ this.handleChange } />
+									<span>{ i18n.translate( 'Upload SMD File' ) }</span>
+								</label>
+							) }
 							<textarea className={ styles.textarea } { ...removeInvalidInputProps( fields.smd ) } />
 						</div>
 
@@ -93,7 +78,8 @@ class TrademarkVerification extends React.Component {
 
 TrademarkVerification.propTypes = {
 	changeSmd: PropTypes.func.isRequired,
-	fields: PropTypes.object.isRequired
+	fields: PropTypes.object.isRequired,
+	values: PropTypes.object.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( TrademarkVerification ) );

@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 // Internal dependencies
 import { getPath } from 'routes';
 import SunriseHome from 'components/ui/sunrise-home';
+import flowStep from 'components/containers/flow-step';
 
 export default reduxForm(
 	{
@@ -17,4 +18,4 @@ export default reduxForm(
 			dispatch( push( getPath( 'confirmDomain' ) ) );
 		}
 	} )
-)( SunriseHome );
+)( flowStep( SunriseHome ) );

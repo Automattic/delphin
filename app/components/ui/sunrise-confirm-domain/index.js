@@ -11,7 +11,7 @@ import { getPath } from 'routes';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
-const SunriseConfirmDomain = ( { domain } ) => (
+const SunriseConfirmDomain = ( { domain, goToNextStep } ) => (
 	<SunriseStep>
 		<DocumentTitle title={ i18n.translate( 'We found it!' ) } />
 		<SunriseStep.Header>
@@ -24,7 +24,7 @@ const SunriseConfirmDomain = ( { domain } ) => (
 			</h2>
 		</SunriseStep.Header>
 
-		<SunriseStep.Form className={ styles.confirmDomainForm }>
+		<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ goToNextStep }>
 			<h3>
 				{ domain }
 			</h3>
@@ -57,7 +57,8 @@ const SunriseConfirmDomain = ( { domain } ) => (
 );
 
 SunriseConfirmDomain.propTypes = {
-	domain: PropTypes.string.isRequired
+	domain: PropTypes.string.isRequired,
+	goToNextStep: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( SunriseConfirmDomain );

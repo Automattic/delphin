@@ -12,13 +12,19 @@ import styles from './styles.scss';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
+		enterFlow: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
+		goToNextStep: PropTypes.func.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired
 	},
 
+	componentDidMount() {
+		this.props.enterFlow( 'pre-registration' );
+	},
+
 	handleSubmit() {
-		this.props.redirectToConfirmDomain();
+		this.props.goToNextStep();
 	},
 
 	render() {

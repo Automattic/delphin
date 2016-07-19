@@ -1,5 +1,6 @@
 // Internal dependencies
 import languages from './languages';
+import flows from './flows';
 
 const NODE_ENV = process.env.NODE_ENV,
 	productionOnly = NODE_ENV === 'production';
@@ -9,6 +10,7 @@ const config = {
 	default_tld: 'live',
 	default_search_sort: 'recommended',
 	env: NODE_ENV || 'development',
+	flows,
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
 	features: {

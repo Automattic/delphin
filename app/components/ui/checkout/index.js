@@ -3,6 +3,7 @@ import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import padStart from 'lodash/padStart';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -114,7 +115,7 @@ const Checkout = React.createClass( {
 										{ months.map( ( monthName, monthIndex ) => {
 											const monthNumber = monthIndex + 1;
 											return (
-												<option value={ String( monthNumber < 10 ? '0' + monthNumber : monthNumber ) } key={ monthNumber }>
+												<option value={ padStart( monthNumber, 2, '0' ) } key={ monthNumber }>
 													{ capitalize( monthName ) }
 												</option>
 											);
@@ -125,10 +126,12 @@ const Checkout = React.createClass( {
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }>
 										<option>{ i18n.translate( 'Year' ) }</option>
-										<option value="19">2019</option>
-										<option value="18">2018</option>
-										<option value="17">2017</option>
-										<option value="16">2016</option>
+										{
+											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 5 ).map(
+												( year ) => <option value={ padStart( year - 2000, 2, '0' ) } key={ year } >{ year }</option>
+											)
+										}
+
 									</select>
 								</div>
 								<ValidationError fields={ [

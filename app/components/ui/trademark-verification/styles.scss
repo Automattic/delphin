@@ -5,12 +5,15 @@
 	border-radius: 3px;
 	height: 150px;
 	margin: 0 0 20px;
+	padding: 0;
 	resize: none;
 	width: 100%;
 }
 
-.button {
+.form .button { // two classes necessary to override the font-weight
+	font-weight: 200;
 	margin-bottom: 15px;
+	width: 100%;
 }
 
 .file-input {

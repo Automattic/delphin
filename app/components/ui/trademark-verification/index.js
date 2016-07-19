@@ -41,15 +41,13 @@ class TrademarkVerification extends React.Component {
 					onSubmit={ null }
 				>
 					<div>
-						<div>
-							{ showUploadButton && (
-								<label className={ styles.fileInputLabel }>
-									<input type="file" ref="fileInput" className={ styles.fileInput } onChange={ this.handleChange } />
-									<span>{ i18n.translate( 'Upload SMD File' ) }</span>
-								</label>
-							) }
-							<textarea className={ styles.textarea } { ...removeInvalidInputProps( fields.smd ) } />
-						</div>
+						{ showUploadButton && (
+							<label className={ styles.fileInputLabel }>
+								<input type="file" ref="fileInput" className={ styles.fileInput } onChange={ this.handleChange } />
+								<span>{ i18n.translate( 'Upload SMD File' ) }</span>
+							</label>
+						) }
+						<textarea className={ styles.textarea } { ...removeInvalidInputProps( fields.smd ) } />
 
 						<Button className={ styles.button }>{ i18n.translate( 'Continue with application' ) }</Button>
 						<p>

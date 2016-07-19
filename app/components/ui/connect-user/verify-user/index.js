@@ -1,5 +1,6 @@
 // External dependencies
 import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -165,7 +166,15 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, submitFailed, user } = this.props;
+		const { fields, handleSubmit, submitFailed, user, userDataFromQuery } = this.props;
+
+		if ( this.isLoggingInWithQuery() && userDataFromQuery.twoFactorAuthenticationEnabled ) {
+			return (
+				<div className={ styles.loggingIn }>
+					{ i18n.translate( 'Logging you in…' ) }
+				</div>
+			);
+		}
 
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
@@ -211,4 +220,4 @@ const VerifyUser = React.createClass( {
 	}
 } );
 
-export default VerifyUser;
+export default withStyles( styles )( VerifyUser );

@@ -4,9 +4,10 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
-import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
-import { isLoggedIn, isLoggedOut, getUserSettings } from 'reducers/user/selectors';
+import { isPurchasing } from 'reducers/checkout/selectors';
+import { getUserSettings } from 'reducers/user/selectors';
+import RequireLogin from './require-login';
 
 /**
  * Retrieves the full name of the user from the contact information entered.
@@ -36,32 +37,26 @@ export default reduxForm(
 			'countryCode',
 			'postalCode',
 			'privacyProtection'
-		]
+		],
+		destroyOnUnmount: false
 	},
 	state => ( {
 		checkout: state.checkout,
+		isPurchasing: isPurchasing( state ),
 		initialValues: {
 			name: getFullName( state ),
 			countryCode: state.contactInformation.data.countryCode,
 			postalCode: state.contactInformation.data.postalCode,
 			privacyProtection: true
 		},
-		isLoggedIn: isLoggedIn( state ),
-		isLoggedOut: isLoggedOut( state ),
 		user: getUserSettings( state )
 	} ),
 	dispatch => ( {
-		purchaseDomain() {
-			dispatch( purchaseDomain() );
+		redirectToCheckoutReview() {
+			dispatch( push( getPath( 'checkoutReview' ) ) );
 		},
 		redirectToHome() {
 			dispatch( push( getPath( 'home' ) ) );
-		},
-		redirectToLogin() {
-			dispatch( push( getPath( 'loginUser' ) ) );
-		},
-		redirectToSuccess() {
-			dispatch( push( getPath( 'success' ) ) );
 		}
 	} )
-)( Checkout );
+)( RequireLogin( Checkout ) );

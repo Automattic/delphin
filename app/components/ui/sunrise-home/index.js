@@ -23,7 +23,7 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		this.props.selectDomain( { domain_name: withTld( this.props.values.query ) } );
+		this.props.selectDomain( { domain_name: withTld( this.props.values.query ), cost: '€666' } );
 
 		this.props.redirectToConfirmDomain();
 	},

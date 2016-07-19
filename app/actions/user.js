@@ -38,7 +38,7 @@ export function connectUser( email, intention, callback ) {
 		type: WPCOM_REQUEST,
 		method: 'post',
 		params: { path: intention === 'signup' ? '/users/email/new' : '/users/email' },
-		payload: { email },
+		payload: { email, service_slug: 'delphin' },
 		loading: { type: CONNECT_USER, email, intention },
 		success: ( data ) => {
 			return dispatch => {

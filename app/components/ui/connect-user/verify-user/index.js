@@ -16,6 +16,7 @@ const VerifyUser = React.createClass( {
 	propTypes: {
 		addNotice: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
+		connectUserComplete: PropTypes.func.isRequired,
 		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
@@ -24,11 +25,31 @@ const VerifyUser = React.createClass( {
 		redirect: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
+		updateCode: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired,
+		userDataFromQuery: PropTypes.object,
 		verifyUser: PropTypes.func.isRequired
 	},
 
 	componentDidMount() {
+		const { userDataFromQuery } = this.props;
+
+		if ( this.isLoggingInWithQuery() && userDataFromQuery.twoFactorAuthenticationEnabled ) {
+			this.props.connectUserComplete( userDataFromQuery );
+			this.props.updateCode( userDataFromQuery.code );
+			return;
+		}
+
+		if ( this.isLoggingInWithQuery() && ! userDataFromQuery.twoFactorAuthenticationEnabled ) {
+			this.verifyUser(
+				userDataFromQuery.email,
+				userDataFromQuery.code,
+				null,
+				userDataFromQuery.intention
+			);
+			return;
+		}
+
 		if ( this.props.isLoggedIn ) {
 			this.props.redirect( 'home' );
 		} else if ( ! this.props.user.wasCreated ) {
@@ -46,19 +67,40 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
+	isLoggingInWithQuery() {
+		const { userDataFromQuery } = this.props;
+
+		if ( ! userDataFromQuery ) {
+			return false;
+		}
+
+		const { code, email, intention } = userDataFromQuery;
+
+		return code && email && intention;
+	},
+
 	isSubmitButtonDisabled() {
 		const { invalid, submitting, user: { isRequesting } } = this.props;
 
 		return invalid || submitting || isRequesting;
 	},
 
-	verifyUser() {
+	handleSubmit() {
 		const { fields, user: { data: { email }, intention } } = this.props;
 
-		return this.props.verifyUser(
+		return this.verifyUser(
 			email,
 			fields.code.value,
 			fields.twoFactorAuthenticationCode.value,
+			intention
+		);
+	},
+
+	verifyUser( email, code, twoFactorAuthenticationCode, intention ) {
+		return this.props.verifyUser(
+			email,
+			code,
+			twoFactorAuthenticationCode,
 			intention
 		).then( () => {
 			if ( intention === 'login' ) {
@@ -125,12 +167,18 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, submitFailed, user } = this.props;
 
+		if ( ! user.intention ) {
+			// Don't render until the state is populated with user data or in
+			// the case that we redirect
+			return null;
+		}
+
 		return (
 			<div>
 				<Header intention={ 'verifyUser' } />
 
 				<Form
-					onSubmit={ handleSubmit( this.verifyUser ) }
+					onSubmit={ handleSubmit( this.handleSubmit ) }
 					noticeArea={ this.renderNotice() }
 					fieldArea={
 						<fieldset>

@@ -1,0 +1,10 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.footer {
+	color: $gray;
+	margin: 0 auto 70px;
+	text-align: center;
+	width: 400px;
+}

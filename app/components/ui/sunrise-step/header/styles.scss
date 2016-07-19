@@ -1,0 +1,27 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.container {
+	background-color: $blue-background;
+}
+
+.header {
+	margin: 0 auto;
+	max-width: 560px;
+	padding: 50px 0;
+
+	h1 {
+		color: #fff;
+		font-size: 3rem;
+		margin-bottom: 10px;
+		margin-top: 40px;
+	}
+
+	h2 {
+		color: #fff;
+		font-size: 2rem;
+		font-weight: 200;
+		margin-bottom: 30px;
+	}
+}

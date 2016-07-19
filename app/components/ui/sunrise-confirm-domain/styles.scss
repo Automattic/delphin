@@ -1,0 +1,28 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.price-tag {
+	font-size: 1.8rem;
+}
+
+.renewal-info {
+	color: $gray;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+}
+
+.button {
+	font-size: 1.5rem;
+	font-weight: 200;
+	margin-bottom: 20px;
+	margin-top: 30px;
+	padding: 18px 0;
+	width: 100%;
+}
+
+.back-notice {
+	font-size: 1.3rem;
+	text-align: center;
+	width: 100%;
+}

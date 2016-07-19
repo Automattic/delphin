@@ -1,0 +1,15 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.sunrise-step {
+	font-family: $heading-font;
+	font-size: 1.4rem;
+	font-weight: 200;
+	text-align: center;
+
+	a {
+		color: $blue-bright;
+		text-decoration: none;
+	}
+}

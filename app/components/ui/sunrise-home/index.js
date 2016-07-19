@@ -13,12 +13,12 @@ import styles from './styles.scss';
 const SunriseHome = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired,
-		handleSubmit: PropTypes.func.isRequired
+		handleSubmit: PropTypes.func.isRequired,
+		redirectToConfirmDomain: PropTypes.func.isRequired
 	},
 
 	handleSubmit() {
-		// TODO: Go to the "confirm application" step
-		return;
+		this.props.redirectToConfirmDomain();
 	},
 
 	render() {

@@ -18,7 +18,9 @@ import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
+import SunriseConfirmDomain from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
+import SunriseLayout from 'components/ui/layout/sunrise';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 export const defaultRoutes = [
@@ -109,6 +111,17 @@ export const defaultRoutes = [
 				slug: 'hostInfo',
 				component: HostInfoContainer,
 				static: false
+			}
+		]
+	},
+	{
+		component: SunriseLayout,
+		childRoutes: [
+			{
+				path: 'confirm-domain',
+				slug: 'confirmDomain',
+				static: false,
+				component: SunriseConfirmDomain
 			}
 		]
 	}

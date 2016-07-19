@@ -12,3 +12,22 @@
 .button {
 	margin-bottom: 15px;
 }
+
+.file-input {
+	position: fixed;
+	top: -10000px; // hide the native file input
+}
+
+.file-input-label {
+	border: solid 1px $gray-medium;
+	border-bottom: solid 2px $gray-medium;
+	border-radius: 3px;
+	cursor: pointer;
+	display: inline-block;
+	left: 50%;
+	margin-left: -75px;
+	margin-top: 50px;
+	padding: 10px 0;
+	position: absolute;
+	width: 150px;
+}

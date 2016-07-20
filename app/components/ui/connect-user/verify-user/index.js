@@ -133,7 +133,11 @@ const VerifyUser = React.createClass( {
 				<div className={ styles.twoFactorFields }>
 					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
 
-					<Input field={ fields.twoFactorAuthenticationCode } autoComplete="off" />
+					<Input
+						field={ fields.twoFactorAuthenticationCode }
+						autoFocus={ this.isLoggingInWithQuery() }
+						autoComplete="off"
+					/>
 
 					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
 				</div>
@@ -206,7 +210,11 @@ const VerifyUser = React.createClass( {
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<Input field={ fields.code } autoFocus autoComplete="off" />
+							<Input
+								field={ fields.code }
+								autoFocus={ ! this.isLoggingInWithQuery() }
+								autoComplete="off"
+							/>
 
 							<ValidationError field={ fields.code } submitFailed={ submitFailed } />
 

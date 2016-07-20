@@ -60,7 +60,7 @@ export function connectUser( email, intention, callback ) {
 
 				dispatch( connectUserComplete( {
 					email,
-					twoFactorAuthenticationEnabled: !! data.two_factor_authentication_code
+					twoFactorAuthenticationEnabled: !! data.two_factor_authentication_enabled
 				} ) );
 
 				callback && callback();

@@ -41,6 +41,11 @@ class TrademarkVerification extends React.Component {
 					onSubmit={ null }
 				>
 					<div>
+						<div className={ styles.explanationContainer }>
+							<h3 className={ styles.explanation }>
+								{ i18n.translate( 'SMD (Signed Mark Data) file contents:' ) }
+							</h3>
+						</div>
 						{ showUploadButton && (
 							<label className={ styles.fileInputLabel }>
 								<input type="file" ref="fileInput" className={ styles.fileInput } onChange={ this.handleChange } />

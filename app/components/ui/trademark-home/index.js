@@ -5,6 +5,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import ApplicationProcess from 'components/ui/application-process';
 import Button from 'components/ui/button';
 import DomainInput from 'components/ui/domain-input';
 import styles from './styles.scss';
@@ -38,6 +39,8 @@ class TrademarkHome extends React.Component {
 						components: { a: <Link className={ styles.preRegisterLink } to="/" /> },
 					} ) }
 				</div>
+
+				<ApplicationProcess />
 			</div>
 		);
 	}

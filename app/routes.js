@@ -4,7 +4,6 @@ import i18n from 'i18n-calypso';
 
 // Internal dependencies
 import About from 'components/ui/about';
-import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformation from 'components/containers/contact-information';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
@@ -22,6 +21,8 @@ import SunriseConfirmDomain from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import SunriseLayout from 'components/ui/layout/sunrise';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
+import { buildPaths, getLocalizedRoutes } from 'lib/routes';
+import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
 
 export const defaultRoutes = [
 	{
@@ -70,6 +71,18 @@ export const defaultRoutes = [
 				slug: 'verifyUser',
 				static: false,
 				component: VerifyUserContainer
+			},
+			{
+				path: 'sign-in-with-email',
+				slug: 'signInWithEmail',
+				static: true,
+				component: verifyUserWithQueryContainerFactory( 'login' )
+			},
+			{
+				path: 'sign-up-with-email',
+				slug: 'signUpWithEmail',
+				static: true,
+				component: verifyUserWithQueryContainerFactory( 'signup' )
 			},
 			{
 				path: 'success',

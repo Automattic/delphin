@@ -32,19 +32,6 @@ const validate = values => {
 	return errors;
 };
 
-const getUserDataFromQuery = query => {
-	if ( ! query.intention || ! query.email ) {
-		return;
-	}
-
-	return {
-		code: query.code,
-		intention: query.intention,
-		email: query.email,
-		twoFactorAuthenticationEnabled: !! query[ '2fa' ]
-	};
-};
-
 export default reduxForm(
 	{
 		form: 'verifyUser',
@@ -56,7 +43,7 @@ export default reduxForm(
 		domain: getCheckout( state ).selectedDomain.domain,
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state ),
-		userDataFromQuery: getUserDataFromQuery( ownProps.location.query )
+		query: ownProps.location.query
 	} ),
 	dispatch => bindActionCreators( {
 		addNotice,

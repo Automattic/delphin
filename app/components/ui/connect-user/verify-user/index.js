@@ -23,32 +23,21 @@ const VerifyUser = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		query: PropTypes.object,
 		redirect: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		updateCode: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired,
-		userDataFromQuery: PropTypes.object,
 		verifyUser: PropTypes.func.isRequired
 	},
 
 	componentDidMount() {
-		const { userDataFromQuery } = this.props;
+		const { query } = this.props;
 
-		this.props.connectUserComplete( userDataFromQuery );
-
-		if ( this.isLoggingInWithQuery() && userDataFromQuery.twoFactorAuthenticationEnabled ) {
-			this.props.updateCode( userDataFromQuery.code );
-			return;
-		}
-
-		if ( this.isLoggingInWithQuery() && ! userDataFromQuery.twoFactorAuthenticationEnabled ) {
-			this.verifyUser(
-				userDataFromQuery.email,
-				userDataFromQuery.code,
-				null,
-				userDataFromQuery.intention
-			);
+		if ( this.isUsingCodeFromQuery() ) {
+			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
+			this.props.updateCode( query.code );
 			return;
 		}
 
@@ -69,16 +58,14 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
-	isLoggingInWithQuery() {
-		const { userDataFromQuery } = this.props;
+	isUsingCodeFromQuery() {
+		const { query } = this.props;
 
-		if ( ! userDataFromQuery ) {
+		if ( ! query ) {
 			return false;
 		}
 
-		const { code, email, intention } = userDataFromQuery;
-
-		return code && email && intention;
+		return query.code && query.email && query.intention;
 	},
 
 	isSubmitButtonDisabled() {
@@ -135,7 +122,7 @@ const VerifyUser = React.createClass( {
 
 					<Input
 						field={ fields.twoFactorAuthenticationCode }
-						autoFocus={ this.isLoggingInWithQuery() }
+						autoFocus={ this.isUsingCodeFromQuery() }
 						autoComplete="off"
 					/>
 
@@ -182,21 +169,12 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, submitFailed, user, userDataFromQuery } = this.props;
+		const { fields, handleSubmit, submitFailed, user } = this.props;
 
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
 			// the case that we redirect
 			return null;
-		}
-
-		if ( this.isLoggingInWithQuery() && ! userDataFromQuery.twoFactorAuthenticationEnabled ) {
-			return (
-				<div className={ styles.loggingIn }>
-					{ userDataFromQuery.intention === 'login' && i18n.translate( 'Signing you in…' ) }
-					{ userDataFromQuery.intention === 'signup' && i18n.translate( 'Signing you in to your new account now…' ) }
-				</div>
-			);
 		}
 
 		return (
@@ -212,7 +190,7 @@ const VerifyUser = React.createClass( {
 
 							<Input
 								field={ fields.code }
-								autoFocus={ ! this.isLoggingInWithQuery() }
+								autoFocus={ ! this.isUsingCodeFromQuery() }
 								autoComplete="off"
 							/>
 

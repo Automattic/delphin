@@ -24,7 +24,7 @@ class TrademarkVerification extends React.Component {
 
 		// This is an arbitrary length to determine whether the user has added
 		// their SMD file or just entered some text
-		const showUploadButton = ! values.smd || values.smd.length < 100;
+		const showUploadInput = ! values.smd || values.smd.length < 100;
 
 		return (
 			<SunriseStep>
@@ -46,10 +46,16 @@ class TrademarkVerification extends React.Component {
 								{ i18n.translate( 'SMD (Signed Mark Data) file contents:' ) }
 							</h3>
 						</div>
-						{ showUploadButton && (
+						{ showUploadInput && (
 							<label className={ styles.fileInputLabel }>
 								<input type="file" ref="fileInput" className={ styles.fileInput } onChange={ this.handleChange } />
-								<span>{ i18n.translate( 'Upload SMD File' ) }</span>
+								<span>
+									{ i18n.translate( '{{em}}Upload{{/em}} or paste your SMD file', {
+										components: {
+											em: <em className={ styles.uploadLink } />
+										}
+									} ) }
+								</span>
 							</label>
 						) }
 						<textarea className={ styles.textarea } { ...removeInvalidInputProps( fields.smd ) } />

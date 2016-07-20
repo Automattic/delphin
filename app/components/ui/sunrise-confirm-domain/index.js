@@ -24,7 +24,7 @@ class SunriseConfirmDomain extends React.Component {
 
 		return (
 			<SunriseStep>
-				<DocumentTitle title={ i18n.translate( 'We found it!' ) } />
+				<DocumentTitle title={ i18n.translate( 'Confirm Your Domain' ) } />
 				<SunriseStep.Header>
 					<h1>
 						{ i18n.translate( 'We found it!' ) }

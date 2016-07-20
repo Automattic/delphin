@@ -109,6 +109,19 @@ const VerifyUser = React.createClass( {
 				message: i18n.translate( 'You have signed in to your account successfully!' ),
 				status: 'success'
 			} );
+		} ).catch( error => {
+			if ( intention === 'login' ) {
+				this.props.redirect( 'loginUser' );
+			}
+
+			if ( intention === 'signup' ) {
+				this.props.redirect( 'signupUser' );
+			}
+
+			this.props.addNotice( {
+				message: error.code || i18n.translate( 'There was a problem signing in to your account.' ),
+				status: 'error'
+			} );
 		} );
 	},
 

@@ -168,7 +168,7 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, submitFailed, user, userDataFromQuery } = this.props;
 
-		if ( this.isLoggingInWithQuery() && userDataFromQuery.twoFactorAuthenticationEnabled ) {
+		if ( this.isLoggingInWithQuery() && ! userDataFromQuery.twoFactorAuthenticationEnabled ) {
 			return (
 				<div className={ styles.loggingIn }>
 					{ i18n.translate( 'Logging you in…' ) }

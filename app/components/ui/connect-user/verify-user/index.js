@@ -35,8 +35,9 @@ const VerifyUser = React.createClass( {
 	componentDidMount() {
 		const { userDataFromQuery } = this.props;
 
+		this.props.connectUserComplete( userDataFromQuery );
+
 		if ( this.isLoggingInWithQuery() && userDataFromQuery.twoFactorAuthenticationEnabled ) {
-			this.props.connectUserComplete( userDataFromQuery );
 			this.props.updateCode( userDataFromQuery.code );
 			return;
 		}
@@ -104,12 +105,10 @@ const VerifyUser = React.createClass( {
 			twoFactorAuthenticationCode,
 			intention
 		).then( () => {
-			if ( intention === 'login' ) {
-				this.props.addNotice( {
-					message: i18n.translate( 'You were successfully logged in!' ),
-					status: 'success'
-				} );
-			}
+			this.props.addNotice( {
+				message: i18n.translate( 'You have signed in to your account successfully!' ),
+				status: 'success'
+			} );
 		} );
 	},
 
@@ -168,18 +167,19 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, submitFailed, user, userDataFromQuery } = this.props;
 
-		if ( this.isLoggingInWithQuery() && ! userDataFromQuery.twoFactorAuthenticationEnabled ) {
-			return (
-				<div className={ styles.loggingIn }>
-					{ i18n.translate( 'Logging you in…' ) }
-				</div>
-			);
-		}
-
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
 			// the case that we redirect
 			return null;
+		}
+
+		if ( this.isLoggingInWithQuery() && ! userDataFromQuery.twoFactorAuthenticationEnabled ) {
+			return (
+				<div className={ styles.loggingIn }>
+					{ userDataFromQuery.intention === 'login' && i18n.translate( 'Signing you in…' ) }
+					{ userDataFromQuery.intention === 'signup' && i18n.translate( 'Signing you in to your new account now…' ) }
+				</div>
+			);
 		}
 
 		return (

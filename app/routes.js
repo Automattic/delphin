@@ -137,7 +137,7 @@ export const defaultRoutes = [
 		indexRoute: {
 			component: TrademarkHomeContainer
 		},
-		path: '/trademark',
+		path: 'trademark',
 		slug: 'trademarkHome',
 		static: true
 	}

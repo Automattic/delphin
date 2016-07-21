@@ -25,6 +25,7 @@ const VerifyUser = React.createClass( {
 		isLoggedIn: PropTypes.bool.isRequired,
 		query: PropTypes.object,
 		redirect: PropTypes.func.isRequired,
+		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		updateCode: PropTypes.func.isRequired,
@@ -36,6 +37,10 @@ const VerifyUser = React.createClass( {
 		const { query } = this.props;
 
 		if ( this.isUsingCodeFromQuery() ) {
+			if ( query.domain ) {
+				this.props.selectDomain( { domain_name: query.domain } );
+			}
+
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
 			this.props.updateCode( query.code );
 			return;

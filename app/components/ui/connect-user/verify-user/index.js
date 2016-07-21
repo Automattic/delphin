@@ -169,7 +169,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, submitFailed, user } = this.props;
+		const { domain, fields, handleSubmit, submitFailed, user } = this.props;
 
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
@@ -199,7 +199,9 @@ const VerifyUser = React.createClass( {
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }
 								email={ user.data.email }
-								intention={ user.intention } />
+								intention={ user.intention }
+								domain={ domain }
+							/>
 
 							{ this.twoFactorFields() }
 						</fieldset>

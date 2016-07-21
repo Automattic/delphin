@@ -30,15 +30,16 @@ export function clearConnectUser() {
  *
  * @param {string} email address of the user
  * @param {string} intention of the user (e.g. 'login' or 'signup')
+ * @param {string} domain the user selected, if any
  * @param {function} [callback] optional callback to call upon success
  * @returns {object} the corresponding action object
  */
-export function connectUser( email, intention, callback ) {
+export function connectUser( email, intention, domain, callback ) {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'post',
 		params: { path: intention === 'signup' ? '/users/email/new' : '/users/email' },
-		payload: { email, service_slug: 'delphin' },
+		payload: { email, service_slug: 'delphin', domain },
 		loading: { type: CONNECT_USER, email, intention },
 		success: ( data ) => {
 			return dispatch => {

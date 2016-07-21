@@ -14,10 +14,14 @@ const SunriseHome = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		redirectToConfirmDomain: PropTypes.func.isRequired
+		redirectToConfirmDomain: PropTypes.func.isRequired,
+		selectDomain: PropTypes.func.isRequired,
+		values: PropTypes.object.isRequired
 	},
 
 	handleSubmit() {
+		this.props.selectDomain( { domain_name: this.props.values.query + '.live' } ); // TODO: Use `.blog` here
+
 		this.props.redirectToConfirmDomain();
 	},
 

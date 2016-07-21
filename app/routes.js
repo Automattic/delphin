@@ -21,7 +21,6 @@ import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomain from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import SunriseLayout from 'components/ui/layout/sunrise';
-import TrademarkVerification from 'components/containers/trademark-verification';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
 export const defaultRoutes = [
@@ -123,12 +122,6 @@ export const defaultRoutes = [
 				slug: 'confirmDomain',
 				static: false,
 				component: SunriseConfirmDomain
-			},
-			{
-				path: 'verify-trademark',
-				slug: 'verifyTrademark',
-				component: TrademarkVerification,
-				static: false
 			}
 		]
 	}

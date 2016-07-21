@@ -12,6 +12,12 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class SunriseConfirmDomain extends React.Component {
+	componentWillMount() {
+		if ( ! this.props.domain ) {
+			this.props.redirect( 'home' );
+		}
+	}
+
 	render() {
 		const { domain } = this.props;
 
@@ -63,7 +69,8 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
-	domain: PropTypes.string.isRequired
+	domain: PropTypes.string,
+	redirect: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( SunriseConfirmDomain );

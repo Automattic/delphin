@@ -1,3 +1,6 @@
+// External dependencies
+import pick from '';
+
 // Internal dependencies
 import config from 'config';
 
@@ -11,6 +14,10 @@ export const getPageSlugFromFlow = ( flowName, step ) => (
 	flows[ flowName ][ step ]
 );
 
-export const isPartOfFlow = ( pageSlug, flowName ) => (
+export const getStepFromSlug = ( flowName, pageSlug ) => (
+	flows[ flowName ].indexOf( pageSlug )
+);
+
+export const isPartOfFlow = ( flowName, pageSlug ) => (
 	-1 !== flows[ flowName ].indexOf( pageSlug )
 );

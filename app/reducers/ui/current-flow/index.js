@@ -8,7 +8,7 @@ import {
 	FLOW_NEXT_STEP,
 	FLOW_PREVIOUS_STEP
 } from 'reducers/action-types';
-import { getFlowLength, isPartOfFlow } from 'lib/flows';
+import { getFlowLength, getStepFromSlug, isPartOfFlow } from 'lib/flows';
 import { getSlugFromPath } from 'routes';
 
 const initialState = {
@@ -55,9 +55,15 @@ export default ( state = initialState, action ) => {
 				} );
 			}
 			// the new page is not part of the flow, exit current flow
-			if ( action.payload.action === 'PUSH' && name &&
-					! isPartOfFlow( getSlugFromPath( action.payload.pathname ), name ) ) {
-				return initialState;
+			if ( action.payload.action === 'PUSH' && name ) {
+				const pageSlug = getSlugFromPath( action.payload.pathname );
+				const requestedStep = getStepFromSlug( name, pageSlug );
+				if ( ! isPartOfFlow( name, pageSlug ) || requestedStep > step + 1 ) {
+					return initialState;
+				}
+				return Object.assign( {}, state, {
+					step: requestedStep
+				} );
 			}
 			return state;
 

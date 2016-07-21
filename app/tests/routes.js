@@ -14,7 +14,6 @@ jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );
 jest.mock( 'components/containers/sunrise-home', () => {} );
-jest.mock( 'components/containers/trademark-home', () => {} );
 jest.mock( 'components/containers/trademark-verification', () => {} );
 jest.mock( 'components/ui/document-title', () => {} );
 jest.mock( 'components/ui/header', () => {} );

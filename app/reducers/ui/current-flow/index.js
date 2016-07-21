@@ -8,7 +8,7 @@ import {
 	FLOW_NEXT_STEP,
 	FLOW_PREVIOUS_STEP
 } from 'reducers/action-types';
-import { isPartOfFlow } from 'lib/flows';
+import { getFlowLength, isPartOfFlow } from 'lib/flows';
 import { getSlugFromPath } from 'routes';
 
 const initialState = {
@@ -31,10 +31,16 @@ export default ( state = initialState, action ) => {
 			return initialState;
 
 		case FLOW_PREVIOUS_STEP:
+			if ( step === 0 ) {
+				return initialState;
+			}
 			return Object.assign( {}, state, {
 				step: step - 1
 			} );
 		case FLOW_NEXT_STEP:
+			if ( step >= getFlowLength( name ) ) {
+				return initialState;
+			}
 			return Object.assign( {}, state, {
 				step: step + 1
 			} );

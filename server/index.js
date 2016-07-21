@@ -173,7 +173,7 @@ const init = () => {
 		} );
 
 		devServer.listen( port, error => {
-			console.log( error || 'Server listening on http://localhost:' + port );
+			console.log( error || 'Server listening on http://delphin.localhost:' + port );
 		} );
 
 		app.listen( backendPort, 'localhost', error => {

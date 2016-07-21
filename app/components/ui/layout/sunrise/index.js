@@ -12,9 +12,10 @@ const Sunrise = ( { children } ) => {
 		<div>
 			<header className={ styles.header }>
 				<Link className={ styles.title } to={ getPath( 'home' ) }>
-					<h1 className={ styles.headerText }>get.blog</h1>
+					<h1>get.blog</h1>
 				</Link>
 			</header>
+
 			<div className={ styles.content }>
 				{ children }
 			</div>

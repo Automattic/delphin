@@ -1,4 +1,5 @@
 // External dependencies
+import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
@@ -18,6 +19,16 @@ class SunriseConfirmDomain extends React.Component {
 		}
 	}
 
+	handleSubmit( event ) {
+		event.preventDefault();
+
+		if ( this.props.isLoggedIn ) {
+			this.props.redirect( 'contactInformation' );
+		} else {
+			this.props.redirect( 'signupUser' );
+		}
+	}
+
 	render() {
 		const { domain } = this.props;
 
@@ -34,7 +45,7 @@ class SunriseConfirmDomain extends React.Component {
 					</h2>
 				</SunriseStep.Header>
 
-				<SunriseStep.Form className={ styles.confirmDomainForm }>
+				<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
 					<h3>
 						{ domain }
 					</h3>
@@ -70,7 +81,8 @@ class SunriseConfirmDomain extends React.Component {
 
 SunriseConfirmDomain.propTypes = {
 	domain: PropTypes.string,
+	isLoggedIn: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( SunriseConfirmDomain );
+export default withStyles( styles )( bindHandlers( SunriseConfirmDomain ) );

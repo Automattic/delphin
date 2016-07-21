@@ -1,7 +1,6 @@
 @import 'app/styles/colors';
 
 body {
-	background-color: #fff;
 	margin: 0 auto;
 
 	strong {
@@ -11,7 +10,7 @@ body {
 
 .header {
 	align-items: center;
-	background: $blue-dark-sunrise;
+	background-color: $blue-dark-sunrise;
 	display: flex;
 	justify-content: space-between;
 }

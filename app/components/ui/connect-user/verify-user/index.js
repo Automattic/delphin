@@ -1,5 +1,6 @@
 // External dependencies
 import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -16,19 +17,30 @@ const VerifyUser = React.createClass( {
 	propTypes: {
 		addNotice: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
+		connectUserComplete: PropTypes.func.isRequired,
 		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		query: PropTypes.object,
 		redirect: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
+		updateCode: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired,
 		verifyUser: PropTypes.func.isRequired
 	},
 
 	componentDidMount() {
+		const { query } = this.props;
+
+		if ( this.isUsingCodeFromQuery() ) {
+			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
+			this.props.updateCode( query.code );
+			return;
+		}
+
 		if ( this.props.isLoggedIn ) {
 			this.props.redirect( 'home' );
 		} else if ( ! this.props.user.wasCreated ) {
@@ -46,27 +58,57 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
+	isUsingCodeFromQuery() {
+		const { query } = this.props;
+
+		if ( ! query ) {
+			return false;
+		}
+
+		return query.code && query.email && query.intention;
+	},
+
 	isSubmitButtonDisabled() {
 		const { invalid, submitting, user: { isRequesting } } = this.props;
 
 		return invalid || submitting || isRequesting;
 	},
 
-	verifyUser() {
+	handleSubmit() {
 		const { fields, user: { data: { email }, intention } } = this.props;
 
-		return this.props.verifyUser(
+		return this.verifyUser(
 			email,
 			fields.code.value,
 			fields.twoFactorAuthenticationCode.value,
 			intention
+		);
+	},
+
+	verifyUser( email, code, twoFactorAuthenticationCode, intention ) {
+		return this.props.verifyUser(
+			email,
+			code,
+			twoFactorAuthenticationCode,
+			intention
 		).then( () => {
+			this.props.addNotice( {
+				message: i18n.translate( 'You have signed in to your account successfully!' ),
+				status: 'success'
+			} );
+		} ).catch( error => {
 			if ( intention === 'login' ) {
-				this.props.addNotice( {
-					message: i18n.translate( 'You were successfully logged in!' ),
-					status: 'success'
-				} );
+				this.props.redirect( 'loginUser' );
 			}
+
+			if ( intention === 'signup' ) {
+				this.props.redirect( 'signupUser' );
+			}
+
+			this.props.addNotice( {
+				message: error.code || i18n.translate( 'There was a problem signing in to your account.' ),
+				status: 'error'
+			} );
 		} );
 	},
 
@@ -78,7 +120,11 @@ const VerifyUser = React.createClass( {
 				<div className={ styles.twoFactorFields }>
 					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
 
-					<Input field={ fields.twoFactorAuthenticationCode } autoComplete="off" />
+					<Input
+						field={ fields.twoFactorAuthenticationCode }
+						autoFocus={ this.isUsingCodeFromQuery() }
+						autoComplete="off"
+					/>
 
 					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
 				</div>
@@ -125,18 +171,28 @@ const VerifyUser = React.createClass( {
 	render() {
 		const { fields, handleSubmit, submitFailed, user } = this.props;
 
+		if ( ! user.intention ) {
+			// Don't render until the state is populated with user data or in
+			// the case that we redirect
+			return null;
+		}
+
 		return (
 			<div>
 				<Header intention={ 'verifyUser' } />
 
 				<Form
-					onSubmit={ handleSubmit( this.verifyUser ) }
+					onSubmit={ handleSubmit( this.handleSubmit ) }
 					noticeArea={ this.renderNotice() }
 					fieldArea={
 						<fieldset>
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<Input field={ fields.code } autoFocus autoComplete="off" />
+							<Input
+								field={ fields.code }
+								autoFocus={ ! this.isUsingCodeFromQuery() }
+								autoComplete="off"
+							/>
 
 							<ValidationError field={ fields.code } submitFailed={ submitFailed } />
 
@@ -163,4 +219,4 @@ const VerifyUser = React.createClass( {
 	}
 } );
 
-export default VerifyUser;
+export default withStyles( styles )( VerifyUser );

@@ -1,11 +1,11 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
+import { change, reduxForm } from 'redux-form';
 import { push } from 'react-router-redux';
-import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
-import { connectUser, verifyUser } from 'actions/user';
+import { connectUser, connectUserComplete, verifyUser } from 'actions/user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getCheckout } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
@@ -39,15 +39,18 @@ export default reduxForm(
 		asyncValidate: getAsyncValidateFunction( validate ),
 		asyncBlurFields: [ 'code', 'twoFactorAuthenticationCode' ],
 	},
-	state => ( {
+	( state, ownProps ) => ( {
 		domain: getCheckout( state ).selectedDomain.domain,
 		isLoggedIn: isLoggedIn( state ),
-		user: getUserConnect( state )
+		user: getUserConnect( state ),
+		query: ownProps.location.query
 	} ),
 	dispatch => bindActionCreators( {
 		addNotice,
 		connectUser,
+		connectUserComplete,
 		redirect: pathSlug => push( getPath( pathSlug ) ),
+		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser
 	}, dispatch )
 )( VerifyUser );

@@ -1,0 +1,80 @@
+@import 'app/components/ui/button/styles';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.header {
+	background-image: url( /images/smiley-blog.svg );
+	background-position: center 70px;
+	background-repeat: no-repeat;
+
+	body & { // Needed for overriding
+		padding-top: 140px;
+	}
+}
+
+.content {
+	display: flex;
+	font-family: $body-font;
+	font-size: 1.6rem;
+	margin: -40px auto 25px;
+	max-width: 700px;
+
+	@include breakpoint( '<660px' ) {
+		flex-direction: column;
+	}
+}
+
+.highlight,
+.text {
+	padding: 30px;
+
+	p {
+		line-height: 1.4em;
+
+		&:not(:first-child) {
+			margin-top: 30px;
+		}
+	}
+}
+
+.highlight {
+	background-color: $gray-light;
+	border-top-left-radius: 5px;
+	flex-basis: 40%;
+	text-align: left;
+
+	@include breakpoint( '<660px' ) {
+		border-top-right-radius: 5px;
+	}
+
+	@include breakpoint( '>660px' ) {
+		border-bottom-left-radius: 5px;
+	}
+
+	h3 {
+		color: $black;
+		font-size: 2.2rem;
+	}
+}
+
+.text {
+	background-color: $white;
+	border-bottom-right-radius: 5px;
+	flex-basis: 60%;
+	text-align: justify;
+
+	@include breakpoint( '<660px' ) {
+		border-bottom-left-radius: 5px;
+	}
+
+	@include breakpoint( '>660px' ) {
+		border-top-right-radius: 5px;
+	}
+
+	.button {
+		color: $white;
+		display: block;
+		margin-top: 20px;
+	}
+}

@@ -38,7 +38,7 @@ export function connectUser( email, intention, callback ) {
 		type: WPCOM_REQUEST,
 		method: 'post',
 		params: { path: intention === 'signup' ? '/users/email/new' : '/users/email' },
-		payload: { email },
+		payload: { email, service_slug: 'delphin' },
 		loading: { type: CONNECT_USER, email, intention },
 		success: ( data ) => {
 			return dispatch => {
@@ -58,17 +58,30 @@ export function connectUser( email, intention, callback ) {
 					} );
 				}
 
-				dispatch( {
+				dispatch( connectUserComplete( {
 					email,
-					twoFactorAuthenticationEnabled: data.two_factor_authentication_enabled,
-					type: CONNECT_USER_COMPLETE
-				} );
+					twoFactorAuthenticationEnabled: !! data.two_factor_authentication_enabled
+				} ) );
 
 				callback && callback();
 			};
 		},
 		fail: CONNECT_USER_FAIL
 	};
+}
+
+export function connectUserComplete( { email, twoFactorAuthenticationEnabled, intention } ) {
+	const action = {
+		email,
+		twoFactorAuthenticationEnabled,
+		type: CONNECT_USER_COMPLETE
+	};
+
+	if ( intention ) {
+		Object.assign( action, { intention } );
+	}
+
+	return action;
 }
 
 /**

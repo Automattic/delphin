@@ -51,6 +51,7 @@ export const connect = ( state = initialState, action ) => {
 		case CONNECT_USER_COMPLETE:
 			return merge( {}, state, {
 				data: { email, twoFactorAuthenticationEnabled },
+				intention,
 				isRequesting: false,
 				wasCreated: true
 			} );

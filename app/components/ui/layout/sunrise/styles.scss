@@ -1,24 +1,8 @@
-@import 'app/styles/colors';
-
-body {
+.content {
 	margin: 0 auto;
+	padding-bottom: 50px;
 
 	strong {
 		font-weight: bold;
 	}
-}
-
-.header {
-	align-items: center;
-	background-color: $blue-dark-sunrise;
-	display: flex;
-	justify-content: space-between;
-}
-
-.title {
-	flex-basis: 100%;
-	font-size: 2rem;
-	padding: 22px;
-	text-align: center;
-	text-decoration: none;
 }

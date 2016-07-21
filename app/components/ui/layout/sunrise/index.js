@@ -1,20 +1,15 @@
 // External dependencies
-import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getPath } from 'routes';
+import Header from 'components/ui/header';
 import styles from './styles.scss';
 
 const Sunrise = ( { children } ) => {
 	return (
 		<div>
-			<header className={ styles.header }>
-				<Link className={ styles.title } to={ getPath( 'home' ) }>
-					<h1>get.blog</h1>
-				</Link>
-			</header>
+			<Header />
 
 			<div className={ styles.content }>
 				{ children }

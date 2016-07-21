@@ -7,14 +7,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
-const DefaultHeader = () => {
+const Header = () => {
 	return (
 		<header className={ styles.header }>
-			<Link className={ styles.title } to={ getPath( 'home' ) }>
+			<Link className={ styles.logo } to={ getPath( 'home' ) }>
 				<img alt="get.blog" src="/images/get-dot-blog-logo.svg" />
 			</Link>
 		</header>
 	);
 };
 
-export default withStyles( styles )( DefaultHeader );
+export default withStyles( styles )( Header );

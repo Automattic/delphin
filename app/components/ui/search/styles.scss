@@ -97,6 +97,7 @@
 .sort {
 	color: rgba( $white, 0.7 );
 	font-size: 1.6rem;
+	margin-top: 83px;
 	padding: 10px 20px;
 
 	@include breakpoint( '>660px' ) {
@@ -136,9 +137,6 @@
 	text-align: center;
 }
 
-.title {
-	color: #fff;
-	font-size: 2rem;
+.logo {
 	padding: 30px;
-	text-decoration: none;
 }

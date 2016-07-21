@@ -19,6 +19,11 @@ class TrademarkVerification extends React.Component {
 		reader.readAsText( event.target.files[ 0 ], 'UTF-8' );
 	}
 
+	handleSubmission( event ) {
+		event.preventDefault();
+		this.props.redirect( 'contactInformation' );
+	}
+
 	render() {
 		const { fields, values } = this.props;
 
@@ -38,7 +43,7 @@ class TrademarkVerification extends React.Component {
 
 				<SunriseStep.Form
 					className={ styles.form }
-					onSubmit={ null }
+					onSubmit={ this.handleSubmission }
 				>
 					<div>
 						<div className={ styles.explanationContainer }>
@@ -88,6 +93,7 @@ class TrademarkVerification extends React.Component {
 TrademarkVerification.propTypes = {
 	changeSmd: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	redirect: PropTypes.func.isRequired,
 	values: PropTypes.object.isRequired
 };
 

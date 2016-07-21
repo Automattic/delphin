@@ -93,6 +93,8 @@ export function createTransaction() {
 			{ domain } = checkout.selectedDomain,
 			contactInformationForm = getValues( getState().form.contactInformation ),
 			checkoutForm = getValues( getState().form.checkout ),
+			trademarkVerificationForm = getValues( getState().form.trademarkVerification ),
+			{ smd } = trademarkVerificationForm,
 			{ privacyProtection } = checkoutForm,
 			paygateToken = checkout.paygateToken.data.token;
 
@@ -104,6 +106,10 @@ export function createTransaction() {
 			locale: 'en',
 			contact_information: snakeifyKeys( contactInformationForm )
 		};
+
+		if ( smd ) {
+			payload.smd = smd;
+		}
 
 		return dispatch( {
 			type: WPCOM_REQUEST,

@@ -14,6 +14,8 @@ import ValidationError from 'components/ui/form/validation-error';
 const ConnectUser = React.createClass( {
 	propTypes: {
 		clearConnectUser: PropTypes.func.isRequired,
+		connectUser: PropTypes.func.isRequired,
+		domain: PropTypes.string,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		intention: PropTypes.string.isRequired,
@@ -23,7 +25,8 @@ const ConnectUser = React.createClass( {
 		redirectToVerifyUser: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
-		user: PropTypes.object.isRequired
+		user: PropTypes.object.isRequired,
+		values: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
@@ -48,6 +51,10 @@ const ConnectUser = React.createClass( {
 		return invalid || submitting || isRequesting;
 	},
 
+	handleSubmit() {
+		this.props.connectUser( this.props.values, this.props.domain );
+	},
+
 	render() {
 		const { fields, handleSubmit, intention, submitFailed } = this.props;
 
@@ -57,7 +64,7 @@ const ConnectUser = React.createClass( {
 					<Header intention={ intention } />
 
 					<Form
-						onSubmit={ handleSubmit }
+						onSubmit={ handleSubmit( this.handleSubmit ) }
 						fieldArea={
 							<fieldset>
 								<label>{ i18n.translate( 'Email address:' ) }</label>

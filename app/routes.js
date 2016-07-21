@@ -21,7 +21,6 @@ import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomain from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import SunriseLayout from 'components/ui/layout/sunrise';
-import TrademarkHomeContainer from 'components/containers/trademark-home';
 import TrademarkVerification from 'components/containers/trademark-verification';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 
@@ -132,14 +131,6 @@ export const defaultRoutes = [
 				static: false
 			}
 		]
-	},
-	{
-		indexRoute: {
-			component: TrademarkHomeContainer
-		},
-		path: 'trademark',
-		slug: 'trademarkHome',
-		static: true
 	}
 ];
 

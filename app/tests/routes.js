@@ -14,6 +14,7 @@ jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );
 jest.mock( 'components/containers/sunrise-home', () => {} );
+jest.mock( 'components/containers/sunrise-success', () => {} );
 jest.mock( 'components/containers/verify-user-with-query-container-factory', () => ( {
 	verifyUserWithQueryContainerFactory: () => {}
 } ) );
@@ -23,6 +24,7 @@ jest.mock( 'components/ui/layout', () => {} );
 jest.mock( 'components/ui/layout/default-with-header', () => {} );
 jest.mock( 'components/ui/layout/no-margin', () => {} );
 jest.mock( 'components/ui/layout/sunrise/flow', () => {} );
+jest.mock( 'components/ui/layout/sunrise/success', () => {} );
 
 jest.unmock( 'routes' );
 

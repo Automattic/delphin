@@ -26,6 +26,10 @@ export const refreshStep = () => ( dispatch, getState ) => {
 		flowName = getCurrentFlowName( state ),
 		step = getCurrentFlowStep( state );
 
+	if ( ! flowName ) {
+		return;
+	}
+
 	dispatch( push( getPath( getCurrentPageSlug( flowName, step ) ) ) );
 };
 

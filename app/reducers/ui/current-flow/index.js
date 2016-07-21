@@ -1,6 +1,5 @@
 // External dependencies
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { combineReducers } from 'redux';
 
 // Internal dependencies
 import {
@@ -9,40 +8,51 @@ import {
 	FLOW_NEXT_STEP,
 	FLOW_PREVIOUS_STEP
 } from 'reducers/action-types';
+import { isPartOfFlow } from 'lib/flows';
+import { getSlugFromPath } from 'routes';
 
-export const name = ( state = null, action ) => {
-	const { type, value } = action;
-
-	switch ( type ) {
-		case FLOW_ENTER:
-			return value;
-
-		case FLOW_EXIT:
-			return null;
-
-	}
+const initialState = {
+	name: null,
+	step: 0
 };
 
-export const step = ( state = 0, action ) => {
-	const { type } = action;
+export default ( state = initialState, action ) => {
+	const { type, value } = action,
+		{ name, step } = state;
 
 	switch ( type ) {
+		case FLOW_ENTER:
+			return {
+				name: value,
+				step: 0
+			};
+
+		case FLOW_EXIT:
+			return initialState;
+
 		case FLOW_PREVIOUS_STEP:
-			return state - 1;
+			return Object.assign( {}, state, {
+				step: step - 1
+			} );
+		case FLOW_NEXT_STEP:
+			return Object.assign( {}, state, {
+				step: step + 1
+			} );
 		case LOCATION_CHANGE:
+			// POP = going back into the history
 			if ( action.payload.action === 'POP' && state > 0 ) {
-				return state - 1;
+				return Object.assign( {}, state, {
+					step: step - 1
+				} );
+			}
+			// the new page is not part of the flow, exit current flow
+			if ( action.payload.action === 'PUSH' && name &&
+					! isPartOfFlow( getSlugFromPath( action.payload.pathname ), name ) ) {
+				return initialState;
 			}
 			return state;
-		case FLOW_ENTER:
-		case FLOW_EXIT:
-			return 0;
-		case FLOW_NEXT_STEP:
-			return state + 1;
 
 		default:
 			return state;
 	}
 };
-
-export default combineReducers( { name, step } );

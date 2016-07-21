@@ -1,5 +1,6 @@
 // External dependencies
 import { formatPattern } from 'react-router';
+import matchRoutes from 'react-router/lib/matchRoutes';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
@@ -200,3 +201,35 @@ export const serverRedirectRoutes = [
 		to: getPath( 'loginUser' )
 	}
 ];
+
+/**
+ * Gets the page slug matching a given pathname.
+ * It calls react-router's internal `matchRoutes` logic so it can be subject to breakage if the lib is updated.
+ *
+ * @param {string} pathname The pathname of a page.
+ * @return {string|null} The page slug.
+ */
+export const getSlugFromPath = pathname => {
+	let err, match;
+
+	// Assumes `getComponent` is not used in our route defintions so `matchRoutes` is synchronous.
+	// See: https://github.com/reactjs/react-router/blob/v2.5.2/modules/matchRoutes.js#L215
+	matchRoutes( [ routes ], { pathname }, ( _err, _match ) => {
+		err = _err;
+		match = _match;
+	} );
+
+	if ( err || ! match.routes ) {
+		return null;
+	}
+
+	let routeIndex = match.routes.length;
+
+	while ( routeIndex-- > 0 ) {
+		if ( match.routes[ routeIndex ].slug ) {
+			return match.routes[ routeIndex ].slug;
+		}
+	}
+
+	return null;
+};

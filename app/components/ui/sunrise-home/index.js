@@ -19,10 +19,6 @@ const SunriseHome = React.createClass( {
 		redirectToConfirmDomain: PropTypes.func.isRequired
 	},
 
-	componentDidMount() {
-		this.props.enterFlow( 'pre-registration' );
-	},
-
 	handleSubmit() {
 		this.props.goToNextStep();
 	},

@@ -39,8 +39,11 @@ export default ( state = initialState, action ) => {
 				step: step + 1
 			} );
 		case LOCATION_CHANGE:
-			// POP = going back into the history
-			if ( action.payload.action === 'POP' && state > 0 ) {
+			// POP = going back in the history or landing on a new page (page loaded for the first time)
+			if ( action.payload.action === 'POP' ) {
+				if ( step === 0 ) {
+					return initialState;
+				}
 				return Object.assign( {}, state, {
 					step: step - 1
 				} );

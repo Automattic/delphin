@@ -18,4 +18,4 @@ export default reduxForm(
 			dispatch( push( getPath( 'confirmDomain' ) ) );
 		}
 	} )
-)( flowStep( SunriseHome ) );
+)( flowStep( SunriseHome, 'pre-registration' ) );

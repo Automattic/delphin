@@ -12,18 +12,16 @@ import styles from './styles.scss';
 
 const SearchHeader = ( { query, onQueryChange } ) => {
 	return (
-		<div className={ headerStyles.searchHeaderWrapper }>
-			<header className={ headerStyles.searchHeader }>
-				<SearchInputContainer
-					{ ...{ query } }
-					onQueryChange={ onQueryChange }
-					placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+		<header className={ headerStyles.searchHeader }>
+			<SearchInputContainer
+				{ ...{ query } }
+				onQueryChange={ onQueryChange }
+				placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
 
-				<Link className={ styles.title } to={ getPath( 'home' ) }>
-					<h1>MagicDomains</h1>
-				</Link>
-			</header>
-		</div>
+			<Link className={ styles.logo } to={ getPath( 'home' ) }>
+				<img alt="get.blog" src="/images/get-dot-blog-logo.svg" />
+			</Link>
+		</header>
 	);
 };
 

@@ -2,8 +2,9 @@
 import { connect } from 'react-redux';
 
 // Internal dependencies
+import { getCheckout } from 'reducers/checkout/selectors';
 import SunriseConfirmDomain from 'components/ui/sunrise-confirm-domain';
 
 export default connect(
-	() => ( { domain: 'danhauk.blog' } )
+	state => ( { domain: getCheckout( state ).selectedDomain.domain } )
 )( SunriseConfirmDomain );

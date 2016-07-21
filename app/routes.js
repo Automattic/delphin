@@ -19,7 +19,7 @@ import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
-import SunriseLayout from 'components/ui/layout/sunrise';
+import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
@@ -128,13 +128,12 @@ export const defaultRoutes = [
 		]
 	},
 	{
-		component: SunriseLayout,
+		component: SunriseFlowLayout,
 		childRoutes: [
 			{
 				path: 'confirm-domain',
 				slug: 'confirmDomain',
 				static: false,
-				component: SunriseConfirmDomain
 				component: SunriseConfirmDomainContainer
 			}
 		]

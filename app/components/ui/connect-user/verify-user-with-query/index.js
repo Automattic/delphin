@@ -12,14 +12,22 @@ class VerifyUserWithQuery extends React.Component {
 			return;
 		}
 
-		const { code, email } = this.props.query,
+		const { code, email, domain } = this.props.query,
 			{ intention } = this.props;
+
+		if ( domain ) {
+			this.props.selectDomain( { domain_name: domain } );
+		}
 
 		this.props.verifyUser(
 			email,
 			code
 		).then( () => {
-			this.props.redirect( 'home' );
+			if ( domain ) {
+				this.props.redirect( 'contactInformation' );
+			} else {
+				this.props.redirect( 'home' );
+			}
 
 			this.props.addNotice( {
 				message: i18n.translate( 'You have signed in to your account successfully!' ),
@@ -60,6 +68,7 @@ VerifyUserWithQuery.propTypes = {
 	intention: PropTypes.string.isRequired,
 	query: PropTypes.object.isRequired,
 	redirect: PropTypes.func.isRequired,
+	selectDomain: PropTypes.func.isRequired,
 	verifyUser: PropTypes.func.isRequired
 };
 

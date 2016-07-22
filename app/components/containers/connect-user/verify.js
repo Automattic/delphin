@@ -9,6 +9,7 @@ import { getAsyncValidateFunction } from 'lib/form';
 import { getCheckout } from 'reducers/checkout/selectors';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { redirect } from 'actions/routes';
+import { selectDomain } from 'actions/domain-search';
 import i18n from 'i18n-calypso';
 import VerifyUser from 'components/ui/connect-user/verify-user';
 
@@ -49,6 +50,7 @@ export default reduxForm(
 		connectUser,
 		connectUserComplete,
 		redirect,
+		selectDomain,
 		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser
 	}, dispatch )

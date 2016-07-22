@@ -9,6 +9,7 @@ import styles from './styles.scss';
 const ResendSignupEmail = React.createClass( {
 	propTypes: {
 		connectUser: PropTypes.func.isRequired,
+		domain: PropTypes.string,
 		email: PropTypes.string.isRequired,
 		intention: PropTypes.string.isRequired
 	},
@@ -18,7 +19,7 @@ const ResendSignupEmail = React.createClass( {
 	},
 
 	connectUser() {
-		this.props.connectUser( this.props.email, this.props.intention, () => {
+		this.props.connectUser( this.props.email, this.props.intention, this.props.domain, () => {
 			this.setState( { sent: true } );
 		} );
 	},

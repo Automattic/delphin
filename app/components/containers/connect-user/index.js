@@ -6,6 +6,7 @@ import validator from 'validator';
 // Internal dependencies
 import ConnectUser from 'components/ui/connect-user';
 import { getAsyncValidateFunction } from 'lib/form';
+import { getCheckout } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
@@ -28,6 +29,7 @@ export default reduxForm(
 		asyncBlurFields: [ 'email' ]
 	},
 	state => ( {
+		domain: getCheckout( state ).selectedDomain.domain,
 		initialValues: { email: getUserConnect( state ).data.email || '' },
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
@@ -36,8 +38,8 @@ export default reduxForm(
 		clearConnectUser() {
 			dispatch( clearConnectUser() );
 		},
-		onSubmit( fields ) {
-			return dispatch( connectUser( fields.email, ownProps.intention ) );
+		connectUser( fields, domain ) {
+			dispatch( connectUser( fields.email, ownProps.intention, domain ) );
 		},
 		redirectToHome() {
 			dispatch( push( getPath( 'search' ) ) );

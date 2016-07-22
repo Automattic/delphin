@@ -7,26 +7,26 @@ import Country from 'components/ui/form/country';
 import { fetchCountries } from 'actions/territories';
 import { getCountries } from 'reducers/territories/selectors';
 
-const CountryWrapper = React.createClass( {
-	propTypes: {
-		countries: PropTypes.object.isRequired,
-		fetchCountries: PropTypes.func.isRequired
-	},
-
+class CountryContainer extends React.Component {
 	isDataLoading() {
 		return ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer;
-	},
+	}
 
 	componentWillMount() {
 		if ( this.isDataLoading() ) {
 			this.props.fetchCountries();
 		}
-	},
+	}
 
 	render() {
 		return <Country disabled={ this.isDataLoading() } { ...this.props }/>;
 	}
-} );
+}
+
+CountryContainer.propTypes = {
+	countries: PropTypes.object.isRequired,
+	fetchCountries: PropTypes.func.isRequired
+};
 
 export default connect(
 	state => ( {
@@ -35,4 +35,4 @@ export default connect(
 	{
 		fetchCountries
 	}
-)( CountryWrapper );
+)( CountryContainer );

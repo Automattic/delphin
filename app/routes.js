@@ -21,7 +21,6 @@ import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
 import SunriseSuccessLayout from 'components/ui/layout/sunrise/success';
-import SunriseSuccessContainer from 'components/containers/sunrise-success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
@@ -85,12 +84,6 @@ export const defaultRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
-			},
-			{
-				path: 'success',
-				slug: 'success',
-				static: false,
-				component: SuccessContainer
 			}
 		]
 	},
@@ -144,10 +137,10 @@ export const defaultRoutes = [
 		component: SunriseSuccessLayout,
 		childRoutes: [
 			{
-				path: 'sunrise-success',
-				slug: 'sunriseSuccess',
+				path: 'success',
+				slug: 'success',
 				static: false,
-				component: SunriseSuccessContainer
+				component: SuccessContainer
 			}
 		]
 	}
@@ -223,10 +216,6 @@ export const serverRedirectRoutes = [
 	},
 	{
 		from: getPath( 'success' ),
-		to: getPath( 'loginUser' )
-	},
-	{
-		from: getPath( 'sunriseSuccess' ),
 		to: getPath( 'loginUser' )
 	}
 ];

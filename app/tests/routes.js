@@ -14,7 +14,6 @@ jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );
 jest.mock( 'components/containers/sunrise-home', () => {} );
-jest.mock( 'components/containers/sunrise-success', () => {} );
 jest.mock( 'components/containers/verify-user-with-query-container-factory', () => ( {
 	verifyUserWithQueryContainerFactory: () => {}
 } ) );

@@ -9,7 +9,7 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
-import Country from 'components/ui/connected-components/country';
+import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import State from 'components/ui/form/state';

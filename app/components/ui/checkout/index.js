@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
-import Country from 'components/ui/connected-components/country';
+import Country from 'components/containers/country';
 import creditCardDetails from 'lib/credit-card-details';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';

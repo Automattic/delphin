@@ -9,6 +9,7 @@ import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
 import ExperimentWarning from 'components/ui/experiment-warning';
 import styles from './styles.scss';
+import ValidationError from 'components/ui/form/validation-error';
 import { withTld } from 'lib/domains';
 
 const SunriseHome = React.createClass( {
@@ -17,6 +18,7 @@ const SunriseHome = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
+		submitFailed: PropTypes.bool.isRequired,
 		values: PropTypes.object.isRequired
 	},
 
@@ -76,6 +78,7 @@ const SunriseHome = React.createClass( {
 						className={ styles.field }
 						placeholder={ i18n.translate( 'Enter your domain name' ) }
 						ref="query" />
+					<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Next' ) }

@@ -42,6 +42,16 @@ function creditCardFieldRules() {
 		cvv: {
 			description: i18n.translate( 'Security Code' ),
 			rules: [ 'required', 'validCvvNumber' ]
+		},
+
+		countryCode: {
+			description: i18n.translate( 'Country' ),
+			rules: [ 'required' ]
+		},
+
+		postalCode: {
+			description: i18n.translate( 'Postal Code' ),
+			rules: [ 'required' ]
 		}
 	};
 }

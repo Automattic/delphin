@@ -151,7 +151,6 @@ const Checkout = React.createClass( {
 									<div className={ styles.countryCode }>
 										<label>{ i18n.translate( 'Country' ) }</label>
 										<Country field={ fields.countryCode } />
-										<ValidationError field={ fields.countryCode } />
 									</div>
 									<div className={ styles.postalCode }>
 										<label>{ i18n.translate( 'Postal Code' ) }</label>
@@ -159,9 +158,9 @@ const Checkout = React.createClass( {
 											type="text"
 											field={ fields.postalCode }
 										/>
-										<ValidationError field={ fields.postalCode } />
 									</div>
 								</div>
+								<ValidationError fields={ [ fields.countryCode, fields.postalCode ] } />
 							</fieldset>
 						</div>
 

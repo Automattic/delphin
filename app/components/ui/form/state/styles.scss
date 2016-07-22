@@ -1,0 +1,21 @@
+@import 'app/styles/breakpoints';
+
+@include breakpoint( '<480px' ) {
+	.state {
+		input {
+			border-top: 0;
+		}
+	}
+}
+
+@include breakpoint( '>480px' ) {
+	.state {
+		width: 80px;
+
+		input {
+			border-left: 0;
+			border-radius: 0;
+			border-right: 0;
+		}
+	}
+}

@@ -11,7 +11,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
-import State from 'components/ui/contact-information/state';
+import State from 'components/ui/form/state';
 import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
@@ -300,6 +300,7 @@ class ContactInformation extends React.Component {
 											field={ fields.state }
 											untouch={ untouch }
 											onBlur={ this.handleBlur }
+											className={ styles.state }
 											states={ this.props.states } />
 
 										<Input

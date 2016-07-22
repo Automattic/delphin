@@ -27,6 +27,35 @@ import { verifyUserWithQueryContainerFactory } from 'components/containers/verif
 
 export const defaultRoutes = [
 	{
+		component: NoMarginLayout,
+		indexRoute: {
+			component: SunriseHomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
+		childRoutes: [
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				component: MyDomainsContainer
+			},
+			{
+				path: 'hosts',
+				slug: 'hosts',
+				static: false,
+				component: HostsContainer
+			},
+			{
+				path: 'hosts/:slug',
+				slug: 'hostInfo',
+				component: HostInfoContainer,
+				static: false
+			}
+		]
+	},
+	{
 		component: DefaultLayoutWithHeader,
 		childRoutes: [
 			{
@@ -92,35 +121,6 @@ export const defaultRoutes = [
 		slug: 'search',
 		static: true,
 		component: SearchContainer
-	},
-	{
-		component: NoMarginLayout,
-		indexRoute: {
-			component: SunriseHomeContainer
-		},
-		path: '/',
-		slug: 'home',
-		static: true,
-		childRoutes: [
-			{
-				path: 'my-domains',
-				slug: 'myDomains',
-				static: false,
-				component: MyDomainsContainer
-			},
-			{
-				path: 'hosts',
-				slug: 'hosts',
-				static: false,
-				component: HostsContainer
-			},
-			{
-				path: 'hosts/:slug',
-				slug: 'hostInfo',
-				component: HostInfoContainer,
-				static: false
-			}
-		]
 	},
 	{
 		component: SunriseFlowLayout,

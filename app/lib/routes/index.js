@@ -103,7 +103,7 @@ const omitSlugFromRoutes = routes => {
  */
 function getRouteWithLanguageSlug( language, route ) {
 	return Object.assign( {}, route, {
-		path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path }`
+		path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path || '' }`
 	} );
 }
 

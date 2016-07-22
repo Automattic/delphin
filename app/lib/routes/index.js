@@ -107,17 +107,26 @@ function getRouteWithLanguageSlug( language, route ) {
 	} );
 }
 
+function getChildRoutes( route ) {
+	if ( route.childRoutes ) {
+		return flatten( route.childRoutes.map( route => getChildRoutes( route ) ) );
+	}
+
+	return route;
+}
+
 /**
- * Returns a new array of routes with the top level routes prefixed by a locale slug.
+ * Returns a new array of routes with the all routes prefixed by a locale slug.
  *
  * @param {array} routes - An array of routes.
  * @return {array} An array of routes.
  */
 export const getLocalizedRoutes = routes => {
-	const routesWithoutSlug = omitSlugFromRoutes( routes );
+	const routesWithoutSlug = omitSlugFromRoutes( routes ),
+		flattenedRoutes = flatten( routesWithoutSlug.map( route => getChildRoutes( route ) ) );
 
 	const localizedRoutesArray = config( 'languages' )
-		.map( language => routesWithoutSlug.map( route => getRouteWithLanguageSlug( language, route ) ) );
+		.map( language => flattenedRoutes.map( route => getRouteWithLanguageSlug( language, route ) ) );
 
 	return flatten( localizedRoutesArray );
 };

@@ -78,3 +78,12 @@ export const queryIsInResults = ( results, query ) => (
  * @return {string} - the updated string
  */
 export const omitTld = ( string = '' ) => string.replace( /\.(.*)/g, '' );
+
+/**
+ * Adds the tld to a domain if it's not already there (or replaces it if it's not the given tld)
+ *
+ * @param {string} domain - the domain string to fix
+ * @param {string} tld - the tld that will be used
+ * @return {string} - the updated domain with the tld
+ */
+export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^(\w*)(\.\w+)?$/g, '$1.' + tld );

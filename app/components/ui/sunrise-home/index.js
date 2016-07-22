@@ -9,15 +9,20 @@ import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
 import ExperimentWarning from 'components/ui/experiment-warning';
 import styles from './styles.scss';
+import { withTld } from 'lib/domains';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		redirectToConfirmDomain: PropTypes.func.isRequired
+		redirectToConfirmDomain: PropTypes.func.isRequired,
+		selectDomain: PropTypes.func.isRequired,
+		values: PropTypes.object.isRequired
 	},
 
 	handleSubmit() {
+		this.props.selectDomain( { domain_name: withTld( this.props.values.query ) } );
+
 		this.props.redirectToConfirmDomain();
 	},
 

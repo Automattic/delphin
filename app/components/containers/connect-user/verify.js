@@ -1,15 +1,14 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
 import { change, reduxForm } from 'redux-form';
-import { push } from 'react-router-redux';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import { connectUser, connectUserComplete, verifyUser } from 'actions/user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getCheckout } from 'reducers/checkout/selectors';
-import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
+import { redirect } from 'actions/routes';
 import i18n from 'i18n-calypso';
 import VerifyUser from 'components/ui/connect-user/verify-user';
 
@@ -49,7 +48,7 @@ export default reduxForm(
 		addNotice,
 		connectUser,
 		connectUserComplete,
-		redirect: pathSlug => push( getPath( pathSlug ) ),
+		redirect,
 		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser
 	}, dispatch )

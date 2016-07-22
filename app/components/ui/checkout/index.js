@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
+import Country from 'components/ui/connected-components/country';
 import creditCardDetails from 'lib/credit-card-details';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
@@ -143,6 +144,24 @@ const Checkout = React.createClass( {
 									field={ fields.cvv }
 								/>
 								<ValidationError field={ fields.cvv } />
+							</fieldset>
+
+							<fieldset>
+								<div className={ styles.billingAddress }>
+									<div className={ styles.countryCode }>
+										<label>{ i18n.translate( 'Country' ) }</label>
+										<Country field={ fields.countryCode } />
+										<ValidationError field={ fields.countryCode } />
+									</div>
+									<div className={ styles.postalCode }>
+										<label>{ i18n.translate( 'Postal Code' ) }</label>
+										<Input
+											type="text"
+											field={ fields.postalCode }
+										/>
+										<ValidationError field={ fields.postalCode } />
+									</div>
+								</div>
 							</fieldset>
 						</div>
 

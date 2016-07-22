@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -9,7 +10,7 @@ import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 
-const State = ( { disabled, field, states, onBlur } ) => {
+const State = ( { className, disabled, field, states, onBlur } ) => {
 	let content;
 
 	if ( ! states.hasLoadedFromServer || isEmpty( states.data ) ) {
@@ -36,11 +37,12 @@ const State = ( { disabled, field, states, onBlur } ) => {
 	}
 
 	return (
-		<div className={ styles.state }>{ content }</div>
+		<div className={ classNames( className, styles.state ) }>{ content }</div>
 	);
 };
 
 State.propTypes = {
+	className: PropTypes.string,
 	disabled: PropTypes.bool.isRequired,
 	field: PropTypes.object.isRequired,
 	onBlur: PropTypes.func,

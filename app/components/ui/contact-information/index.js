@@ -9,6 +9,7 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import Country from 'components/ui/form/country';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import State from 'components/ui/form/state';
@@ -320,18 +321,11 @@ class ContactInformation extends React.Component {
 										/>
 									</div>
 
-									<select
-										{ ...removeInvalidInputProps( fields.countryCode ) }
+									<Country
+										countries={ countries }
+									 	field={ fields.countryCode }
 										disabled={ this.isDataLoading() }
-										className={ styles.countryCode }>
-										<option value="" disabled>{ i18n.translate( 'Select Country' ) }</option>
-										<option disabled />
-										{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
-											country.name
-											? <option value={ country.code } key={ country.code }>{ country.name }</option>
-											: <option value=" " key={ index } disabled />
-										) ) }
-									</select>
+										className={ styles.countryCode } />
 									<ValidationError field={ fields.countryCode } />
 								</fieldset>
 

@@ -71,14 +71,16 @@ const SunriseHome = React.createClass( {
 						</h3>
 					</div>
 
-					<DomainInput
-						{ ...query }
-						autoComplete="off"
-						autoFocus
-						className={ styles.field }
-						placeholder={ i18n.translate( 'Enter your domain name' ) }
-						ref="query" />
-					<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
+					<div className={ styles.field }>
+						<DomainInput
+							{ ...query }
+							autoComplete="off"
+							autoFocus
+							placeholder={ i18n.translate( 'Enter your domain name' ) }
+							ref="query" />
+
+						<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
+					</div>
 
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Next' ) }

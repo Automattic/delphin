@@ -9,12 +9,11 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
-import Country from 'components/ui/form/country';
+import Country from 'components/ui/connected-components/country';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import State from 'components/ui/form/state';
 import Input from 'components/ui/form/input';
-import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
@@ -54,10 +53,6 @@ class ContactInformation extends React.Component {
 		}
 
 		this.props.resetInputVisibility();
-
-		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
-			this.props.fetchCountries();
-		}
 	}
 
 	componentWillReceiveProps( nextProps ) {
@@ -116,8 +111,7 @@ class ContactInformation extends React.Component {
 	}
 
 	isDataLoading( props = this.props ) {
-		return ! props.contactInformation.hasLoadedFromServer ||
-			! props.countries.hasLoadedFromServer;
+		return ! props.contactInformation.hasLoadedFromServer;
 	}
 
 	isSubmitButtonDisabled() {
@@ -170,7 +164,7 @@ class ContactInformation extends React.Component {
 	}
 
 	render() {
-		const { fields, handleSubmit, countries, untouch } = this.props;
+		const { fields, handleSubmit, untouch } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Contact Information' ) }>
@@ -322,9 +316,7 @@ class ContactInformation extends React.Component {
 									</div>
 
 									<Country
-										countries={ countries }
 									 	field={ fields.countryCode }
-										disabled={ this.isDataLoading() }
 										className={ styles.countryCode } />
 									<ValidationError field={ fields.countryCode } />
 								</fieldset>
@@ -362,11 +354,9 @@ class ContactInformation extends React.Component {
 
 ContactInformation.propTypes = {
 	contactInformation: PropTypes.object.isRequired,
-	countries: PropTypes.object.isRequired,
 	domain: PropTypes.string,
 	errors: PropTypes.object,
 	fetchContactInformation: PropTypes.func.isRequired,
-	fetchCountries: PropTypes.func.isRequired,
 	fetchLocation: PropTypes.func.isRequired,
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,

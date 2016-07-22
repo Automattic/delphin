@@ -7,9 +7,9 @@ import { push } from 'react-router-redux';
 // Internal dependencies
 import ContactInformation from 'components/ui/contact-information';
 import { fetchContactInformation } from 'actions/contact-information';
-import { fetchCountries, fetchStates } from 'actions/territories';
+import { fetchStates } from 'actions/territories';
 import { fetchLocation } from 'actions/location';
-import { getCountries, getStates } from 'reducers/territories/selectors';
+import { getStates } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
 import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
@@ -36,7 +36,6 @@ export default reduxForm(
 	},
 	state => ( {
 		contactInformation: state.contactInformation,
-		countries: getCountries( state ),
 		domain: state.checkout.selectedDomain.domain,
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),
@@ -48,7 +47,6 @@ export default reduxForm(
 	dispatch => (
 		bindActionCreators( {
 			fetchContactInformation,
-			fetchCountries,
 			fetchLocation,
 			fetchStates,
 			showAddress2Input,

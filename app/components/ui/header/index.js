@@ -11,7 +11,7 @@ const DefaultHeader = () => {
 	return (
 		<header className={ styles.header }>
 			<Link className={ styles.title } to={ getPath( 'home' ) }>
-				<h1>MagicDomains</h1>
+				<img alt="get.blog" src="/images/get-dot-blog-logo.svg" />
 			</Link>
 		</header>
 	);

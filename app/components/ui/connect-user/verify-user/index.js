@@ -25,6 +25,7 @@ const VerifyUser = React.createClass( {
 		isLoggedIn: PropTypes.bool.isRequired,
 		query: PropTypes.object,
 		redirect: PropTypes.func.isRequired,
+		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		updateCode: PropTypes.func.isRequired,
@@ -36,6 +37,10 @@ const VerifyUser = React.createClass( {
 		const { query } = this.props;
 
 		if ( this.isUsingCodeFromQuery() ) {
+			if ( query.domain ) {
+				this.props.selectDomain( { domain_name: query.domain } );
+			}
+
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
 			this.props.updateCode( query.code );
 			return;
@@ -169,7 +174,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, submitFailed, user } = this.props;
+		const { domain, fields, handleSubmit, submitFailed, user } = this.props;
 
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
@@ -199,7 +204,9 @@ const VerifyUser = React.createClass( {
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }
 								email={ user.data.email }
-								intention={ user.intention } />
+								intention={ user.intention }
+								domain={ domain }
+							/>
 
 							{ this.twoFactorFields() }
 						</fieldset>

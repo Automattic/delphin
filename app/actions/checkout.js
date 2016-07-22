@@ -25,7 +25,7 @@ function getPaygateParameters( cardDetails ) {
 		number: cardDetails.number,
 		cvc: cardDetails.cvv,
 		zip: cardDetails.postalCode,
-		country: cardDetails.country,
+		country: cardDetails.countryCode,
 		exp_month: cardDetails.expirationDate.substring( 0, 2 ),
 		exp_year: '20' + cardDetails.expirationDate.substring( 2, 4 )
 	};
@@ -75,7 +75,8 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 			number: checkoutForm.number,
 			cvv: checkoutForm.cvv,
 			expirationDate: checkoutForm.expirationMonth + checkoutForm.expirationYear,
-			postalCode: null // TODO: do we need these values?
+			countryCode: checkoutForm.countryCode,
+			postalCode: checkoutForm.postalCode
 		};
 
 	dispatch( { type: PAYGATE_TOKEN_CREATE } );

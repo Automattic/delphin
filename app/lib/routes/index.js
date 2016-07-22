@@ -101,11 +101,11 @@ const omitSlugFromRoutes = routes => {
  * @param {Object} route route configuration that includes a `path`
  * @returns {Object} new route with a path including a language slug
  */
-function getRouteWithLanguageSlug( language, route ) {
+export const getRouteWithLanguageSlug = ( language, route ) => {
 	return Object.assign( {}, route, {
 		path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path || '' }`
 	} );
-}
+};
 
 /**
  * Returns a new array of routes with the top level routes prefixed by a locale slug.

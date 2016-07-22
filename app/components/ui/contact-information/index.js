@@ -316,7 +316,7 @@ class ContactInformation extends React.Component {
 									</div>
 
 									<Country
-									 	field={ fields.countryCode }
+										field={ fields.countryCode }
 										className={ styles.countryCode } />
 									<ValidationError field={ fields.countryCode } />
 								</fieldset>

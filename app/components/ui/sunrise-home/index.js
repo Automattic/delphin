@@ -9,6 +9,7 @@ import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
 import ExperimentWarning from 'components/ui/experiment-warning';
 import styles from './styles.scss';
+import { withTld } from 'lib/domains';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
@@ -20,7 +21,7 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		this.props.selectDomain( { domain_name: this.props.values.query + '.live' } ); // TODO: Use `.blog` here
+		this.props.selectDomain( { domain_name: withTld( this.props.values.query ) } );
 
 		this.props.redirectToConfirmDomain();
 	},

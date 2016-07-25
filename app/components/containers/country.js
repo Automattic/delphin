@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import Country from 'components/ui/form/country';
-import { fetchCountriesSupportedByCheckout, fetchCountriesSupportedByDomains } from 'actions/territories';
+import { fetchCountries } from 'actions/territories';
 import { getCountriesSupportedByCheckout, getCountriesSupportedByDomains } from 'reducers/territories/selectors';
 
 class QueryCountries extends React.Component {
@@ -35,9 +35,7 @@ const CountryContainer = connect(
 			? getCountriesSupportedByCheckout( state )
 			: getCountriesSupportedByDomains( state ) } ),
 	( dispatch, ownProps ) => bindActionCreators( {
-		fetchCountries: ownProps.supportedBy === 'checkout'
-			? fetchCountriesSupportedByCheckout
-			: fetchCountriesSupportedByDomains
+		fetchCountries: fetchCountries.bind( null, ownProps.supportedBy )
 	}, dispatch )
 )( QueryCountries );
 

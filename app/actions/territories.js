@@ -1,6 +1,9 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
+	COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH,
+	COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_COMPLETE,
+	COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_ERROR,
 	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH,
 	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_COMPLETE,
 	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_ERROR,
@@ -11,7 +14,24 @@ import {
 } from 'reducers/action-types';
 import { getStates } from 'reducers/territories/selectors';
 
-export const fetchCountries = () => ( {
+export const fetchCountriesSupportedByCheckout = () => ( {
+	type: WPCOM_REQUEST,
+	params: { path: '/me/transactions/supported-countries' },
+	loading: COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH,
+	success: data => ( { type: COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_COMPLETE, data } ),
+	fail: error => (
+		dispatch => {
+			dispatch( addNotice( {
+				message: error.message,
+				status: 'error'
+			} ) );
+
+			dispatch( { type: COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_ERROR } );
+		}
+	)
+} );
+
+export const fetchCountriesSupportedByDomains = () => ( {
 	type: WPCOM_REQUEST,
 	params: { path: '/domains/supported-countries' },
 	loading: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH,

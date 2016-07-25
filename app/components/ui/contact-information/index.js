@@ -9,11 +9,11 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
-import State from 'components/ui/contact-information/state';
+import State from 'components/ui/form/state';
 import Input from 'components/ui/form/input';
-import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
@@ -53,10 +53,6 @@ class ContactInformation extends React.Component {
 		}
 
 		this.props.resetInputVisibility();
-
-		if ( ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer ) {
-			this.props.fetchCountries();
-		}
 	}
 
 	componentWillReceiveProps( nextProps ) {
@@ -115,8 +111,7 @@ class ContactInformation extends React.Component {
 	}
 
 	isDataLoading( props = this.props ) {
-		return ! props.contactInformation.hasLoadedFromServer ||
-			! props.countries.hasLoadedFromServer;
+		return ! props.contactInformation.hasLoadedFromServer;
 	}
 
 	isSubmitButtonDisabled() {
@@ -169,7 +164,7 @@ class ContactInformation extends React.Component {
 	}
 
 	render() {
-		const { fields, handleSubmit, countries, untouch } = this.props;
+		const { fields, handleSubmit, untouch } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Contact Information' ) }>
@@ -300,6 +295,7 @@ class ContactInformation extends React.Component {
 											field={ fields.state }
 											untouch={ untouch }
 											onBlur={ this.handleBlur }
+											className={ styles.state }
 											states={ this.props.states } />
 
 										<Input
@@ -319,18 +315,9 @@ class ContactInformation extends React.Component {
 										/>
 									</div>
 
-									<select
-										{ ...removeInvalidInputProps( fields.countryCode ) }
-										disabled={ this.isDataLoading() }
-										className={ styles.countryCode }>
-										<option value="" disabled>{ i18n.translate( 'Select Country' ) }</option>
-										<option disabled />
-										{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
-											country.name
-											? <option value={ country.code } key={ country.code }>{ country.name }</option>
-											: <option value=" " key={ index } disabled />
-										) ) }
-									</select>
+									<Country
+										field={ fields.countryCode }
+										className={ styles.countryCode } />
 									<ValidationError field={ fields.countryCode } />
 								</fieldset>
 
@@ -367,11 +354,9 @@ class ContactInformation extends React.Component {
 
 ContactInformation.propTypes = {
 	contactInformation: PropTypes.object.isRequired,
-	countries: PropTypes.object.isRequired,
 	domain: PropTypes.string,
 	errors: PropTypes.object,
 	fetchContactInformation: PropTypes.func.isRequired,
-	fetchCountries: PropTypes.func.isRequired,
 	fetchLocation: PropTypes.func.isRequired,
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,

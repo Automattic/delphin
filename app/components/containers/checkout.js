@@ -33,12 +33,19 @@ export default reduxForm(
 			'cvv',
 			'expirationMonth',
 			'expirationYear',
+			'countryCode',
+			'postalCode',
 			'privacyProtection'
 		]
 	},
 	state => ( {
 		checkout: state.checkout,
-		initialValues: { name: getFullName( state ), privacyProtection: true },
+		initialValues: {
+			name: getFullName( state ),
+			countryCode: state.contactInformation.data.countryCode,
+			postalCode: state.contactInformation.data.postalCode,
+			privacyProtection: true
+		},
 		isLoggedIn: isLoggedIn( state ),
 		isLoggedOut: isLoggedOut( state ),
 		user: getUserSettings( state )

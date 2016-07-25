@@ -11,7 +11,7 @@ import { selectDomain } from 'actions/domain-search';
 import SunriseHome from 'components/ui/sunrise-home';
 
 const validate = values => {
-	if ( ! values.query ) {
+	if ( ! values.query.trim() ) {
 		return { query: i18n.translate( 'Please enter a domain name' ) };
 	}
 	return {};

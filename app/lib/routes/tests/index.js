@@ -21,7 +21,7 @@ describe( 'lib/routes', () => {
 
 		it( 'should ignore path if it is undefined', () => {
 			expect( getRouteWithLanguageSlug( { langSlug: 'ja' }, {} ) ).toEqual( {
-				path: 'ja/'
+				path: 'ja'
 			} );
 		} );
 	} );

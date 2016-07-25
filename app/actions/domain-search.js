@@ -42,7 +42,10 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
-		params: { path: '/domains/suggestions' },
+		params: {
+			apiNamespace: 'wpcom/v2',
+			path: '/delphin/domains/suggestions'
+		},
 		query: {
 			query: queryWithoutTlds,
 			quantity: 36,

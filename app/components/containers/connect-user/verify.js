@@ -6,7 +6,7 @@ import { change, reduxForm } from 'redux-form';
 import { addNotice } from 'actions/notices';
 import { connectUser, connectUserComplete, verifyUser } from 'actions/user';
 import { getAsyncValidateFunction } from 'lib/form';
-import { getCheckout } from 'reducers/checkout/selectors';
+import { getSelectedDomain } from 'reducers/checkout/selectors';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { redirect } from 'actions/routes';
 import { selectDomain } from 'actions/domain-search';
@@ -40,7 +40,7 @@ export default reduxForm(
 		asyncBlurFields: [ 'code', 'twoFactorAuthenticationCode' ],
 	},
 	( state, ownProps ) => ( {
-		domain: getCheckout( state ).selectedDomain.domain,
+		domain: getSelectedDomain( state ).domain,
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state ),
 		query: ownProps.location.query

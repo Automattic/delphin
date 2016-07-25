@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Menu from 'components/containers/menu';
-import Notices from 'components/containers/notices';
+import MenuContainer from 'components/containers/menu';
+import NoticesContainer from 'components/containers/notices';
 import styles from './styles.scss';
 
 const Layout = ( { children } ) => {
@@ -12,9 +12,9 @@ const Layout = ( { children } ) => {
 		<div className={ styles.layout }>
 			{ children }
 
-			<Notices />
+			<NoticesContainer />
 
-			<Menu />
+			<MenuContainer />
 		</div>
 	);
 };

@@ -11,24 +11,18 @@
 	@extend %header;
 }
 
-.search-header-wrapper {
-	height: 83px;
-}
-
 .search-header {
 	@extend %header;
 
+	height: 83px;
 	left: 0;
 	position: fixed;
 	right: 0;
 	top: 0;
 }
 
-.title {
-	color: #fff;
+.logo {
 	flex-basis: 100%;
-	font-size: 2rem;
 	padding: 30px;
 	text-align: center;
-	text-decoration: none;
 }

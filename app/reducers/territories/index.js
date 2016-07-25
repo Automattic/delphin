@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 
 // Internal dependencies
-import { countries } from './countries';
+import { countriesSupportedByDomains } from './countries-supported-by-domains';
 import { states } from './states';
 
-export default combineReducers( { countries, states } );
+export default combineReducers( { countriesSupportedByDomains, states } );

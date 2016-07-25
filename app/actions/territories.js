@@ -1,9 +1,9 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
-	COUNTRIES_FETCH,
-	COUNTRIES_FETCH_COMPLETE,
-	COUNTRIES_FETCH_ERROR,
+	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH,
+	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_COMPLETE,
+	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_ERROR,
 	STATES_FETCH,
 	STATES_FETCH_COMPLETE,
 	STATES_FETCH_ERROR,
@@ -14,8 +14,8 @@ import { getStates } from 'reducers/territories/selectors';
 export const fetchCountries = () => ( {
 	type: WPCOM_REQUEST,
 	params: { path: '/domains/supported-countries' },
-	loading: COUNTRIES_FETCH,
-	success: data => ( { type: COUNTRIES_FETCH_COMPLETE, data } ),
+	loading: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH,
+	success: data => ( { type: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_COMPLETE, data } ),
 	fail: error => (
 		dispatch => {
 			dispatch( addNotice( {
@@ -23,7 +23,7 @@ export const fetchCountries = () => ( {
 				status: 'error'
 			} ) );
 
-			dispatch( { type: COUNTRIES_FETCH_ERROR } );
+			dispatch( { type: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_ERROR } );
 		}
 	)
 } );

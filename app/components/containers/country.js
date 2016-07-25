@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Country from 'components/ui/form/country';
 import { fetchCountries } from 'actions/territories';
-import { getCountries } from 'reducers/territories/selectors';
+import { getCountriesSupportedByDomains } from 'reducers/territories/selectors';
 
 class CountryContainer extends React.Component {
 	isDataLoading() {
@@ -30,7 +30,7 @@ CountryContainer.propTypes = {
 
 export default connect(
 	state => ( {
-		countries: getCountries( state )
+		countries: getCountriesSupportedByDomains( state )
 	} ),
 	{
 		fetchCountries

@@ -1,0 +1,24 @@
+@import 'app/styles/colors';
+
+.partial-underline {
+	display: inline;
+	position: relative;
+
+	&::before {
+		$underline-height: 2px;
+		$line-margin: 3px;
+
+		background-color: $blue-bright;
+		bottom: -( $underline-height + $line-margin );
+		content: ' ';
+		height: $underline-height;
+		position: absolute;
+		width: 85%;
+	}
+
+	&::after {
+		content: ' ';
+		display: block;
+		margin-bottom: 1rem;
+	}
+}

@@ -17,10 +17,12 @@ export const createRequestReducer = ( { loading, success, fail } = {}, additiona
 	}
 
 	if ( success && type === success ) {
+		const data = action.data ? action.data : camelizeKeys( omit( action, 'type' ) );
+
 		return Object.assign( {}, state, {
 			hasLoadedFromServer: true,
 			isRequesting: false,
-			data: camelizeKeys( omit( action, 'type' ) )
+			data
 		} );
 	}
 

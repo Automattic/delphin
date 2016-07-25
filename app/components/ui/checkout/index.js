@@ -136,7 +136,7 @@ const Checkout = React.createClass( {
 								<div className={ styles.billingAddress }>
 									<div className={ styles.countryCode }>
 										<label>{ i18n.translate( 'Country' ) }</label>
-										<Country field={ fields.countryCode } />
+										<Country field={ fields.countryCode } supportedBy="checkout" />
 									</div>
 									<div className={ styles.postalCode }>
 										<label>{ i18n.translate( 'Postal Code' ) }</label>

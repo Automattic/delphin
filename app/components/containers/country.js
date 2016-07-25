@@ -1,13 +1,14 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import Country from 'components/ui/form/country';
-import { fetchCountries } from 'actions/territories';
-import { getCountriesSupportedByDomains } from 'reducers/territories/selectors';
+import { fetchCountriesSupportedByCheckout, fetchCountriesSupportedByDomains } from 'actions/territories';
+import { getCountriesSupportedByCheckout, getCountriesSupportedByDomains } from 'reducers/territories/selectors';
 
-class CountryContainer extends React.Component {
+class QueryCountries extends React.Component {
 	isDataLoading() {
 		return ! this.props.countries.isRequesting && ! this.props.countries.hasLoadedFromServer;
 	}
@@ -23,16 +24,25 @@ class CountryContainer extends React.Component {
 	}
 }
 
-CountryContainer.propTypes = {
+QueryCountries.propTypes = {
 	countries: PropTypes.object.isRequired,
 	fetchCountries: PropTypes.func.isRequired
 };
 
-export default connect(
-	state => ( {
-		countries: getCountriesSupportedByDomains( state )
-	} ),
-	{
-		fetchCountries
-	}
-)( CountryContainer );
+const CountryContainer = connect(
+	( state, ownProps ) => ( {
+		countries: ownProps.supportedBy === 'checkout'
+			? getCountriesSupportedByCheckout( state )
+			: getCountriesSupportedByDomains( state ) } ),
+	( dispatch, ownProps ) => bindActionCreators( {
+		fetchCountries: ownProps.supportedBy === 'checkout'
+			? fetchCountriesSupportedByCheckout
+			: fetchCountriesSupportedByDomains
+	}, dispatch )
+)( QueryCountries );
+
+CountryContainer.propTypes = {
+	supportedBy: PropTypes.string.isRequired
+};
+
+export default CountryContainer;

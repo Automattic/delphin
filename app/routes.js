@@ -5,21 +5,22 @@ import i18n from 'i18n-calypso';
 // Internal dependencies
 import About from 'components/ui/about';
 import CheckoutContainer from 'components/containers/checkout';
-import ContactInformation from 'components/containers/contact-information';
+import ContactInformationContainer from 'components/containers/contact-information';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import HostInfoContainer from 'components/containers/host-info';
 import HostsContainer from 'components/containers/hosts';
 import Layout from 'components/ui/layout';
 import LoginContainer from 'components/containers/connect-user/login';
-import MyDomains from 'components/containers/my-domains';
+import MyDomainsContainer from 'components/containers/my-domains';
 import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
-import SunriseConfirmDomain from 'components/containers/sunrise-confirm-domain';
+import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
-import SunriseLayout from 'components/ui/layout/sunrise';
+import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
+import SunriseSuccessLayout from 'components/ui/layout/sunrise/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
@@ -45,7 +46,7 @@ export const defaultRoutes = [
 			{
 				path: 'contact-information',
 				slug: 'contactInformation',
-				component: ContactInformation,
+				component: ContactInformationContainer,
 				static: false
 			},
 			{
@@ -83,12 +84,6 @@ export const defaultRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
-			},
-			{
-				path: 'success',
-				slug: 'success',
-				static: false,
-				component: SuccessContainer
 			}
 		]
 	},
@@ -111,7 +106,7 @@ export const defaultRoutes = [
 				path: 'my-domains',
 				slug: 'myDomains',
 				static: false,
-				component: MyDomains
+				component: MyDomainsContainer
 			},
 			{
 				path: 'hosts',
@@ -128,13 +123,24 @@ export const defaultRoutes = [
 		]
 	},
 	{
-		component: SunriseLayout,
+		component: SunriseFlowLayout,
 		childRoutes: [
 			{
 				path: 'confirm-domain',
 				slug: 'confirmDomain',
 				static: false,
-				component: SunriseConfirmDomain
+				component: SunriseConfirmDomainContainer
+			}
+		]
+	},
+	{
+		component: SunriseSuccessLayout,
+		childRoutes: [
+			{
+				path: 'success',
+				slug: 'success',
+				static: false,
+				component: SuccessContainer
 			}
 		]
 	}

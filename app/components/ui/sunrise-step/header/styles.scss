@@ -1,6 +1,4 @@
 @import 'app/styles/colors';
-@import 'app/styles/fonts';
-@import 'app/styles/breakpoints';
 
 .container {
 	background-color: $blue-background;
@@ -9,12 +7,14 @@
 .header {
 	margin: 0 auto;
 	max-width: 560px;
-	padding: 50px 0;
+	padding-bottom: 80px;
+	padding-top: 50px;
+	text-align: center;
 
 	h1 {
 		color: #fff;
 		font-size: 3rem;
-		margin-bottom: 10px;
+		font-weight: 400;
 		margin-top: 40px;
 	}
 
@@ -22,6 +22,6 @@
 		color: #fff;
 		font-size: 2rem;
 		font-weight: 200;
-		margin-bottom: 30px;
+		margin-top: 10px;
 	}
 }

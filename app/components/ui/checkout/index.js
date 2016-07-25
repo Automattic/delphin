@@ -3,6 +3,8 @@ import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import range from 'lodash/range';
+import padStart from 'lodash/padStart';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -25,34 +27,18 @@ const Checkout = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
-		isLoggedIn: PropTypes.bool.isRequired,
-		isLoggedOut: PropTypes.bool.isRequired,
-		purchaseDomain: PropTypes.func.isRequired,
+		isPurchasing: PropTypes.bool.isRequired,
+		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
-		redirectToLogin: PropTypes.func.isRequired,
-		redirectToSuccess: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
-		if ( this.props.isLoggedOut ) {
-			this.props.redirectToLogin();
-		} else if ( this.props.isLoggedIn && ! this.props.checkout.selectedDomain.domain ) {
+		if ( ! this.props.checkout.selectedDomain.domain ) {
 			this.props.redirectToHome();
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
-		}
-	},
-
-	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.isLoggedOut ) {
-			nextProps.redirectToLogin();
-			return;
-		}
-
-		if ( ! this.props.checkout.transaction.hasLoadedFromServer && nextProps.checkout.transaction.hasLoadedFromServer ) {
-			this.props.redirectToSuccess();
 		}
 	},
 
@@ -63,15 +49,13 @@ const Checkout = React.createClass( {
 			return Promise.reject( errors );
 		}
 
-		this.props.purchaseDomain();
+		this.props.redirectToCheckoutReview();
 	},
 
 	isSubmitButtonDisabled() {
-		const { checkout, invalid, submitting } = this.props;
+		const { isPurchasing, invalid, submitting } = this.props;
 
-		return invalid || submitting || [ 'paygateConfiguration', 'paygateToken', 'transaction' ].some( request => (
-			checkout[ request ].isRequesting
-		) );
+		return invalid || submitting || isPurchasing;
 	},
 
 	renderForm() {
@@ -114,7 +98,7 @@ const Checkout = React.createClass( {
 										{ months.map( ( monthName, monthIndex ) => {
 											const monthNumber = monthIndex + 1;
 											return (
-												<option value={ String( monthNumber < 10 ? '0' + monthNumber : monthNumber ) } key={ monthNumber }>
+												<option value={ padStart( monthNumber, 2, '0' ) } key={ monthNumber }>
 													{ capitalize( monthName ) }
 												</option>
 											);
@@ -125,10 +109,12 @@ const Checkout = React.createClass( {
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }>
 										<option>{ i18n.translate( 'Year' ) }</option>
-										<option value="19">2019</option>
-										<option value="18">2018</option>
-										<option value="17">2017</option>
-										<option value="16">2016</option>
+										{
+											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 5 ).map(
+												( year ) => <option value={ padStart( year - 2000, 2, '0' ) } key={ year } >{ year }</option>
+											)
+										}
+
 									</select>
 								</div>
 								<ValidationError fields={ [
@@ -184,7 +170,7 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Checkout' ) }
+								{ i18n.translate( 'Review Application' ) }
 							</Button>
 						</div>
 					</form>

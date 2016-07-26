@@ -1,7 +1,8 @@
 // External dependencies
 import get from 'lodash/get';
 
-export const getCountries = state => state.territories.countries;
+export const getCountriesSupportedByCheckout = state => state.territories.countriesSupportedByCheckout;
+export const getCountriesSupportedByDomains = state => state.territories.countriesSupportedByDomains;
 
 /**
  * Returns the list of states for the specified country.

@@ -28,6 +28,35 @@ import { verifyUserWithQueryContainerFactory } from 'components/containers/verif
 
 export const defaultRoutes = [
 	{
+		component: NoMarginLayout,
+		indexRoute: {
+			component: SunriseHomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
+		childRoutes: [
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				component: MyDomainsContainer
+			},
+			{
+				path: 'hosts',
+				slug: 'hosts',
+				static: false,
+				component: HostsContainer
+			},
+			{
+				path: 'hosts/:slug',
+				slug: 'hostInfo',
+				component: HostInfoContainer,
+				static: false
+			}
+		]
+	},
+	{
 		component: DefaultLayoutWithHeader,
 		childRoutes: [
 			{
@@ -101,35 +130,6 @@ export const defaultRoutes = [
 		component: SearchContainer
 	},
 	{
-		component: NoMarginLayout,
-		indexRoute: {
-			component: SunriseHomeContainer
-		},
-		path: '/',
-		slug: 'home',
-		static: true,
-		childRoutes: [
-			{
-				path: 'my-domains',
-				slug: 'myDomains',
-				static: false,
-				component: MyDomainsContainer
-			},
-			{
-				path: 'hosts',
-				slug: 'hosts',
-				static: false,
-				component: HostsContainer
-			},
-			{
-				path: 'hosts/:slug',
-				slug: 'hostInfo',
-				component: HostInfoContainer,
-				static: false
-			}
-		]
-	},
-	{
 		component: SunriseFlowLayout,
 		childRoutes: [
 			{
@@ -173,7 +173,10 @@ export const routes = {
 	]
 };
 
-const paths = buildPaths( routes );
+// Ignore localized routes here
+const paths = buildPaths( {
+	childRoutes: defaultRoutes
+} );
 
 /**
  * Gets the path with the given slug, replacing parameter placeholders with the given values.

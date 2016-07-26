@@ -18,6 +18,10 @@ const getPath = ( route, prefix = '' ) => {
 		return route.path;
 	}
 
+	if ( prefix === '/' ) {
+		return `/${ route.path }`;
+	}
+
 	return `${ prefix }/${ route.path }`;
 };
 
@@ -101,11 +105,13 @@ const omitSlugFromRoutes = routes => {
  * @param {Object} route route configuration that includes a `path`
  * @returns {Object} new route with a path including a language slug
  */
-function getRouteWithLanguageSlug( language, route ) {
+export const getRouteWithLanguageSlug = ( language, route ) => {
+	const separator = route.path ? '/' : '';
+
 	return Object.assign( {}, route, {
-		path: route.path === '/' ? language.langSlug : `${ language.langSlug }/${ route.path }`
+		path: route.path === '/' ? language.langSlug : `${ language.langSlug }${ separator }${ route.path || '' }`
 	} );
-}
+};
 
 /**
  * Returns a new array of routes with the top level routes prefixed by a locale slug.

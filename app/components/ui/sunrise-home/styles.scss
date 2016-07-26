@@ -16,11 +16,19 @@
 	.emphasis {
 		color: $blue-bright;
 	}
+
+	@include breakpoint( '<480px' ) {
+		font-size: 2.8rem;
+	}
 }
 
 .secondary-heading {
 	font-size: 2.2rem;
 	font-weight: 200;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.8rem;
+	}
 }
 
 .secondary-heading-container {
@@ -97,6 +105,10 @@
 	font-size: 3rem;
 	font-weight: 100;
 	text-align: center;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 2.4rem;
+	}
 }
 
 .explanations-heading-line {

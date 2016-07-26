@@ -12,6 +12,7 @@ import Button from 'components/ui/button';
 import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
+import Phone from 'components/ui/form/phone';
 import State from 'components/ui/form/state';
 import Input from 'components/ui/form/input';
 import styles from './styles.scss';
@@ -325,13 +326,13 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'Phone' ) }</label>
-									<Input
+									<Phone
+										countryCode={ fields.countryCode.value }
 										disabled={ this.isDataLoading() }
 										field={ fields.phone }
 										untouch={ untouch }
 										onBlur={ this.handleBlur }
 										className={ styles.phone }
-										placeholder={ i18n.translate( 'Phone' ) }
 									/>
 									<ValidationError field={ fields.phone } />
 								</fieldset>

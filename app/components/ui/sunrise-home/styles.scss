@@ -45,41 +45,41 @@
 	@include breakpoint( '<480px' ) {
 		flex-direction: column;
 	}
+}
 
-	.field {
+.field {
+	width: 100%;
+
+	input {
+		background-color: $white;
+		border: 0;
+		border-radius: 3px;
+		box-sizing: border-box;
+		color: $blue-dark;
+		font-family: $body-font;
+		font-size: 1.6rem;
+		padding: 10px 16px;
+		transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 		width: 100%;
 
-		input {
-			background-color: $white;
-			border: 0;
-			border-radius: 3px;
-			box-sizing: border-box;
-			color: $blue-dark;
-			font-family: $body-font;
-			font-size: 1.6rem;
-			padding: 10px 16px;
-			transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
-			width: 100%;
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
 
-			&:focus {
-				box-shadow: none;
-				outline: none;
-			}
-
-			@include breakpoint( '>660px' ) {
-				font-size: 1.8rem;
-			}
+		@include breakpoint( '>660px' ) {
+			font-size: 1.8rem;
 		}
 	}
+}
 
-	.button {
-		flex-shrink: 0;
-		margin-left: 15px;
+.button {
+	flex-shrink: 0;
+	margin-left: 15px;
 
-		@include breakpoint( '<480px' ) {
-			margin: 15px 0 0;
-			width: 100%;
-		}
+	@include breakpoint( '<480px' ) {
+		margin: 15px 0 0;
+		width: 100%;
 	}
 }
 

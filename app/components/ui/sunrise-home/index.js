@@ -71,29 +71,23 @@ const SunriseHome = React.createClass( {
 						</h3>
 					</div>
 
-					<div className={ styles.field }>
-						<DomainInput
-							{ ...query }
-							autoComplete="off"
-							autoFocus
-							placeholder={ i18n.translate( 'Enter your domain name' ) }
-							ref="query" />
+					<div className={ styles.domainSearch }>
+						<div className={ styles.field }>
+							<DomainInput
+								{ ...query }
+								autoComplete="off"
+								autoFocus
+								placeholder={ i18n.translate( 'Enter your domain name' ) }
+								ref="query" />
 
-						<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
+							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
+						</div>
+
+						<Button className={ styles.button }>
+							{ i18n.translate( 'Next' ) }
+						</Button>
 					</div>
-
-					<Button className={ styles.button }>
-						{ i18n.translate( 'Next' ) }
-					</Button>
 				</form>
-
-				<div className={ styles.trademark }>
-					{ i18n.translate( 'Registering a trademark domain? {{a}}Start here{{/a}}', {
-						components: {
-							a: <a href="#" className={ styles.explanationLink }></a>
-						}
-					} ) }
-				</div>
 
 				<div className={ styles.explanationsWrapper }>
 					<h2 className={ styles.explanationsHeading }>{ i18n.translate( 'How does the application process work?' ) }</h2>

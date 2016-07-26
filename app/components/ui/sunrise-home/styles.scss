@@ -3,11 +3,8 @@
 @import 'app/styles/breakpoints';
 
 .form {
+	padding: 0 20px;
 	text-align: center;
-}
-
-.button {
-	margin-top: 15px;
 }
 
 .heading {
@@ -31,45 +28,56 @@
 	max-width: 600px;
 }
 
-.field {
-	margin: 0 auto;
+.domain-search {
+	display: flex;
+	margin: 0 auto 6em;
 	max-width: 550px;
-}
 
-.field input {
-	background-color: $white;
-	border: 0;
-	border-radius: 3px;
-	box-sizing: border-box;
-	color: $blue-dark;
-	font-family: $body-font;
-	font-size: 1.6rem;
-	padding: 10px 16px;
-	transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
-	width: 100%;
-
-	&:focus {
-		box-shadow: none;
-		outline: none;
+	@include breakpoint( '<480px' ) {
+		flex-direction: column;
 	}
 
-	@include breakpoint( '>660px' ) {
-		font-size: 1.8rem;
-	}
-}
+	.field {
+		width: 100%;
 
-.trademark {
-	background: $blue-light;
-	font-size: 1.5em;
-	margin-top: 3em;
-	padding: 1em 0;
-	text-align: center;
+		input {
+			background-color: $white;
+			border: 0;
+			border-radius: 3px;
+			box-sizing: border-box;
+			color: $blue-dark;
+			font-family: $body-font;
+			font-size: 1.6rem;
+			padding: 10px 16px;
+			transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
+			width: 100%;
+
+			&:focus {
+				box-shadow: none;
+				outline: none;
+			}
+
+			@include breakpoint( '>660px' ) {
+				font-size: 1.8rem;
+			}
+		}
+	}
+
+	.button {
+		flex-shrink: 0;
+		margin-left: 15px;
+
+		@include breakpoint( '<480px' ) {
+			margin: 15px 0 0;
+			width: 100%;
+		}
+	}
 }
 
 .explanations-wrapper {
 	background: $white;
 	font-size: 1.5em;
-	padding: 3em 0;
+	padding: 3em 20px;
 }
 
 .explanations {

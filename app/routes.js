@@ -166,7 +166,10 @@ export const routes = {
 	]
 };
 
-const paths = buildPaths( routes );
+// Ignore localized routes here
+const paths = buildPaths( {
+	childRoutes: defaultRoutes
+} );
 
 /**
  * Gets the path with the given slug, replacing parameter placeholders with the given values.

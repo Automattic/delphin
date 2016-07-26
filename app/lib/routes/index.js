@@ -18,6 +18,10 @@ const getPath = ( route, prefix = '' ) => {
 		return route.path;
 	}
 
+	if ( prefix === '/' ) {
+		return `/${ route.path }`;
+	}
+
 	return `${ prefix }/${ route.path }`;
 };
 

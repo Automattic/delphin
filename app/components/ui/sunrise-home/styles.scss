@@ -28,6 +28,7 @@
 
 	@include breakpoint( '<480px' ) {
 		font-size: 1.8rem;
+		line-height: 1.35;
 	}
 }
 
@@ -156,6 +157,7 @@ $icon-radius: 40px;
 }
 
 .explanation-text {
+	line-height: 1.4;
 	margin-bottom: 1em;
 }
 

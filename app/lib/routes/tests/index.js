@@ -3,9 +3,29 @@ jest.disableAutomock();
 import find from 'lodash/find';
 
 // Internal dependencies
-import { getLocaleSlug, getLocalizedRoutes, stripLocaleSlug } from '..';
+import { getRouteWithLanguageSlug, getLocaleSlug, getLocalizedRoutes, stripLocaleSlug } from '..';
 
 describe( 'lib/routes', () => {
+	describe( 'getRouteWithLanguageSlug', () => {
+		it( 'should prefix the path of the given route with a locale slug', () => {
+			expect( getRouteWithLanguageSlug( { langSlug: 'ja' }, { path: 'about' } ) ).toEqual( {
+				path: 'ja/about'
+			} );
+		} );
+
+		it( 'should return the locale slug if the given path is a slash', () => {
+			expect( getRouteWithLanguageSlug( { langSlug: 'ja' }, { path: '/' } ) ).toEqual( {
+				path: 'ja'
+			} );
+		} );
+
+		it( 'should ignore path if it is undefined', () => {
+			expect( getRouteWithLanguageSlug( { langSlug: 'ja' }, {} ) ).toEqual( {
+				path: 'ja'
+			} );
+		} );
+	} );
+
 	describe( 'getLocaleSlug', () => {
 		it( 'should get the locale slug, if present', () => {
 			expect( getLocaleSlug( '/fr/foobar' ) ).toBe( 'fr' );

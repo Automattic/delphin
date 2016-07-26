@@ -33,17 +33,17 @@ const SunriseHome = React.createClass( {
 		const explanations = [
 			{
 				title: i18n.translate( 'Trademark Check' ),
-				text: i18n.translate( "If you're applying for a domain containing a trademark you own, you will be able to claim it by identifying as the mark's owner. We use a service called TMCH to handle trademark claims." ),
+				text: i18n.translate( "Claim domains that contain a trademark by identifying as the mark's owner." ),
 				linkText: i18n.translate( 'Learn more about registering trademarked domains' )
 			},
 			{
 				title: i18n.translate( 'Identification and Payment' ),
-				text: i18n.translate( "Contact information and a valid payment method are required when applying for a domain. Your application fee will be refunded if you don't get your domain." ),
+				text: i18n.translate( "Your application fee will be refunded if you don't get your domain." ),
 				linkText: i18n.translate( 'Learn more about our pricing and billing' )
 			},
 			{
 				title: i18n.translate( 'Granting Applications' ),
-				text: i18n.translate( "To offer everyone a fair chance, we'll accept applications in two stages, and multiple requests for the same domain will be handled by auction. We'll keep you posted on the status of your application." ),
+				text: i18n.translate( "Some applications may need to be settled in an auction at a later date. We'll keep you posted." ),
 				linkText: i18n.translate( 'Learn more about the launch schedule' )
 			}
 		];
@@ -54,7 +54,7 @@ const SunriseHome = React.createClass( {
 					<DocumentTitle />
 
 					<h2 className={ styles.heading }>
-						{ i18n.translate( 'Give your blog the name it deserves', {
+						{ i18n.translate( 'Every .blog is a story. Tell yours.', {
 							components: { em: <em className="emphasis" /> }
 						} ) }
 					</h2>
@@ -62,8 +62,11 @@ const SunriseHome = React.createClass( {
 					<div className={ styles.secondaryHeadingContainer }>
 						<h3 className={ styles.secondaryHeading }>
 							{ i18n.translate(
-								'Millions of short, easy to remember names will be available when the new .blog domain goes live November 21. ' +
-								'Pre-register now to secure the perfect domain for your blog!'
+								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
+							) }
+							<br /><br />
+							{ i18n.translate(
+								'Apply now to secure the perfect domain for your blog.'
 							) }
 						</h3>
 					</div>

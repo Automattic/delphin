@@ -1,9 +1,12 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
-	COUNTRIES_FETCH,
-	COUNTRIES_FETCH_COMPLETE,
-	COUNTRIES_FETCH_ERROR,
+	COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH,
+	COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_COMPLETE,
+	COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_ERROR,
+	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH,
+	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_COMPLETE,
+	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_ERROR,
 	STATES_FETCH,
 	STATES_FETCH_COMPLETE,
 	STATES_FETCH_ERROR,
@@ -11,22 +14,40 @@ import {
 } from 'reducers/action-types';
 import { getStates } from 'reducers/territories/selectors';
 
-export const fetchCountries = () => ( {
-	type: WPCOM_REQUEST,
-	params: { path: '/domains/supported-countries' },
-	loading: COUNTRIES_FETCH,
-	success: data => ( { type: COUNTRIES_FETCH_COMPLETE, data } ),
-	fail: error => (
-		dispatch => {
-			dispatch( addNotice( {
-				message: error.message,
-				status: 'error'
-			} ) );
+export const fetchCountries = supportedBy => {
+	const path = supportedBy === 'checkout'
+		? '/me/transactions/supported-countries'
+		: '/domains/supported-countries';
 
-			dispatch( { type: COUNTRIES_FETCH_ERROR } );
-		}
-	)
-} );
+	const LOADING_ACTION = supportedBy === 'checkout'
+		? COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH
+		: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH;
+
+	const SUCCESS_ACTION = supportedBy === 'checkout'
+		? COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_COMPLETE
+		: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_COMPLETE;
+
+	const FAIL_ACTION = supportedBy === 'checkout'
+		? COUNTRIES_SUPPORTED_BY_CHECKOUT_FETCH_ERROR
+		: COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH_ERROR;
+
+	return {
+		type: WPCOM_REQUEST,
+		params: { path },
+		loading: LOADING_ACTION,
+		success: data => ( { type: SUCCESS_ACTION, data } ),
+		fail: error => (
+			dispatch => {
+				dispatch( addNotice( {
+					message: error.message,
+					status: 'error'
+				} ) );
+
+				dispatch( { type: FAIL_ACTION } );
+			}
+		)
+	};
+};
 
 export const fetchStates = ( countryCode ) => {
 	return ( dispatch, getState ) => {

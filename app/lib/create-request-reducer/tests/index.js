@@ -51,6 +51,18 @@ describe( 'createRequestReducer', () => {
 			} );
 		} );
 
+		it( 'should replace `data` if `data` property provided in action', () => {
+			expect( reducer( {
+				isRequesting: true,
+				hasLoadedFromServer: false,
+				data: null,
+				error: null
+			}, {
+				type: FETCH_COMPLETE,
+				data: 'data is a string'
+			} ).data ).toBe( 'data is a string' );
+		} );
+
 		it( 'should camelCase the keys of the provided data  when fetching completes', () => {
 			expect( reducer( {
 				isRequesting: true,

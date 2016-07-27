@@ -20,8 +20,8 @@
 		margin-top: 40px;
 
 		@include breakpoint( '<480px' ) {
-			margin-top: 0;
 			font-size: 2.6rem;
+			margin-top: 0;
 		}
 	}
 

@@ -30,24 +30,6 @@ const SunriseHome = React.createClass( {
 	render() {
 		const { fields: { query }, handleSubmit } = this.props;
 
-		const explanations = [
-			{
-				title: i18n.translate( 'Trademark Check' ),
-				text: i18n.translate( "Claim domains that contain a trademark by identifying as the mark's owner." ),
-				linkText: i18n.translate( 'Learn more about registering trademarked domains' )
-			},
-			{
-				title: i18n.translate( 'Identification and Payment' ),
-				text: i18n.translate( "Your application fee will be refunded if you don't get your domain." ),
-				linkText: i18n.translate( 'Learn more about our pricing and billing' )
-			},
-			{
-				title: i18n.translate( 'Granting Applications' ),
-				text: i18n.translate( "Some applications may need to be settled in an auction at a later date. We'll keep you posted." ),
-				linkText: i18n.translate( 'Learn more about the launch schedule' )
-			}
-		];
-
 		return (
 			<div>
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -88,25 +70,6 @@ const SunriseHome = React.createClass( {
 						</Button>
 					</div>
 				</form>
-
-				<div className={ styles.explanationsWrapper }>
-					<h2 className={ styles.explanationsHeading }>{ i18n.translate( 'How does the application process work?' ) }</h2>
-					<div className={ styles.explanationsHeadingLine } />
-
-					<div className={ styles.explanations }>
-						{ explanations.map( ( explanation, index ) => (
-							<div className={ styles.explanationBlock } key={ index }>
-								<div className={ styles.explanationTitle }>
-									{ explanation.title }
-								</div>
-								<div>
-									<p className={ styles.explanationText }>{ explanation.text }</p>
-									<p><a href="#" className={ styles.explanationLink }>{ explanation.linkText }</a></p>
-								</div>
-							</div>
-						) ) }
-					</div>
-				</div>
 			</div>
 		);
 	}

@@ -9,7 +9,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
-import ExperimentWarning from 'components/ui/experiment-warning';
 import { isDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 
@@ -82,7 +81,6 @@ const Home = React.createClass( {
 		return (
 			<DocumentTitle>
 				<form onSubmit={ handleSubmit( this.handleSubmit ) }>
-					<ExperimentWarning />
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Find your perfect site address.' ) }
 					</h2>

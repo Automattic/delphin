@@ -2,6 +2,10 @@
 
 // External dependencies
 import isEmpty from 'lodash/isEmpty';
+import isString from 'lodash/isString';
+
+// Internal dependencies
+import phone from './phone.json';
 
 /**
  * Creates a new validate function that returns a promise.
@@ -19,6 +23,36 @@ export const getAsyncValidateFunction = validate => values => new Promise( ( res
 		reject( errors );
 	}
 } );
+
+/**
+ * Retrieves the calling code for the specified country.
+ *
+ * @param {string} countryCode - country code (ISO 3166-1 alpha-2 identifier)
+ * @returns {string} - the corresponding calling code or an empty string if not found
+ */
+export const getCallingCode = countryCode => phone[ countryCode ] || '';
+
+/**
+ * Masks the specified number to only allow numbers and the plus sign.
+ *
+ * @param {string} nextPhoneNumber - new phone number
+ * @param {string} currentPhoneNumber - previous phone number
+ * @returns {string} - the new phone number with only allowed characters
+ */
+export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
+	let digits = '';
+
+	if ( isString( nextPhoneNumber ) ) {
+		// Allows the removal of a single plus sign
+		if ( nextPhoneNumber === '' && currentPhoneNumber === '+' ) {
+			return nextPhoneNumber;
+		}
+
+		digits = nextPhoneNumber.replace( /[^0-9]/g, '' );
+	}
+
+	return `+${ digits }`;
+};
 
 /**
  * Extracts valid props to be given to a form element from an object (a set of props) containing other fields. This

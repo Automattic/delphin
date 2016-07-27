@@ -10,7 +10,7 @@ const Country = ( { className, disabled, field, countries } ) => (
 		{ ...removeInvalidInputProps( field ) }
 		disabled={ disabled }
 		className={ className }>
-		<option value={ null }>{ i18n.translate( 'Select Country' ) }</option>
+		<option value="" disabled>{ i18n.translate( 'Country' ) }</option>
 		<option disabled />
 		{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
 			country.name

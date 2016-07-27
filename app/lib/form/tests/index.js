@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { getAsyncValidateFunction } from '..';
+import { getAsyncValidateFunction, getCallingCode, maskPhone } from '..';
 
 describe( 'getAsyncValidateFunction', () => {
 	pit( 'should resolve with no arguments if the validation returns no errors', () => {
@@ -30,5 +30,78 @@ describe( 'getAsyncValidateFunction', () => {
 				age: 'foo'
 			} );
 		} );
+	} );
+} );
+
+describe( 'getCallingCode', () => {
+	it( 'should return an empty string when no country code provided', () => {
+		expect( getCallingCode() ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when country code is null', () => {
+		expect( getCallingCode( null ) ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when country code is empty', () => {
+		expect( getCallingCode( '' ) ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when country code is unknown', () => {
+		expect( getCallingCode( 'BURGER' ) ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when country code is unknown', () => {
+		expect( getCallingCode( 'FR' ) ).toBe( '33' );
+	} );
+
+	it( 'should return an empty string when country code is unknown', () => {
+		expect( getCallingCode( 'UK' ) ).toBe( '44' );
+	} );
+} );
+
+describe( 'maskPhone', () => {
+	it( 'should return a plus sign when no number provided', () => {
+		expect( maskPhone() ).toBe( '+' );
+	} );
+
+	it( 'should return a plus sign when number is null', () => {
+		expect( maskPhone( null ) ).toBe( '+' );
+	} );
+
+	it( 'should return a plus sign when number is empty', () => {
+		expect( maskPhone( '' ) ).toBe( '+' );
+	} );
+
+	it( 'should return an empty string when deleting a single plus sign', () => {
+		expect( maskPhone( '', '+' ) ).toBe( '' );
+	} );
+
+	it( 'should return a plus sign when deleting a single digit', () => {
+		expect( maskPhone( '', '1' ) ).toBe( '+' );
+	} );
+
+	it( 'should return a plus sign when number only contains invisible characters', () => {
+		expect( maskPhone( ' 	' ) ).toBe( '+' );
+	} );
+
+	it( 'should add a plus sign to a single digit', () => {
+		expect( maskPhone( '1' ) ).toBe( '+1' );
+	} );
+
+	it( 'should add a plus sign to a full number', () => {
+		expect( maskPhone( '1234567890' ) ).toBe( '+1234567890' );
+	} );
+
+	it( 'should trim any invisible characters', () => {
+		expect( maskPhone( ' +1 234 567 890   ' ) ).toBe( '+1234567890' );
+	} );
+
+	it( 'should remove any invalid character', () => {
+		expect( maskPhone( '+1 (234) 567-890' ) ).toBe( '+1234567890' );
+		expect( maskPhone( '12.34.56.78.90' ) ).toBe( '+1234567890' );
+	} );
+
+	it( 'should remove any duplicate plus sign', () => {
+		expect( maskPhone( '++1234567890' ) ).toBe( '+1234567890' );
 	} );
 } );

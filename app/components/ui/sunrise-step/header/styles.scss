@@ -1,4 +1,6 @@
 @import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
 
 .container {
 	background-color: $blue-background;
@@ -7,21 +9,32 @@
 .header {
 	margin: 0 auto;
 	max-width: 560px;
-	padding-bottom: 80px;
-	padding-top: 50px;
+	padding: 50px 20px 80px;
 	text-align: center;
 
 	h1 {
-		color: #fff;
+		color: $white;
+		font-family: $heading-font;
 		font-size: 3rem;
 		font-weight: 400;
 		margin-top: 40px;
+
+		@include breakpoint( '<480px' ) {
+			margin-top: 0;
+			font-size: 2.6rem;
+		}
 	}
 
 	h2 {
-		color: #fff;
+		font-family: $body-font;
 		font-size: 2rem;
 		font-weight: 200;
+		line-height: 1.4;
 		margin-top: 10px;
+
+		@include breakpoint( '<480px' ) {
+			font-size: 1.8rem;
+			line-height: 1.35;
+		}
 	}
 }

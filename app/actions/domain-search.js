@@ -19,8 +19,6 @@ import {
 } from 'reducers/action-types';
 import { omitTld } from 'lib/domains';
 
-const availableTLDs = config( 'available_tlds' );
-
 /**
  * Returns an action object to be used in signalling that domain suggestions have been cleared.
  *
@@ -42,13 +40,13 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
-		params: { path: '/domains/suggestions' },
+		params: {
+			apiNamespace: 'wpcom/v2',
+			path: '/delphin/domains/suggestions'
+		},
 		query: {
 			query: queryWithoutTlds,
-			quantity: 36,
-			include_wordpressdotcom: false,
-			vendor: 'domainsbot',
-			tlds: availableTLDs
+			quantity: 36
 		},
 		loading: () => ( { type: DOMAIN_SUGGESTIONS_FETCH, query: domainQuery } ),
 		success: ( results ) => ( {

@@ -7,7 +7,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
-import ExperimentWarning from 'components/ui/experiment-warning';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import { withTld } from 'lib/domains';
@@ -53,8 +52,6 @@ const SunriseHome = React.createClass( {
 			<div>
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<DocumentTitle />
-
-					<ExperimentWarning />
 
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Give your blog the name it deserves', {

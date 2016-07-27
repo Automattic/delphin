@@ -1,4 +1,5 @@
 // External dependencies
+import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -155,8 +156,12 @@ const Checkout = React.createClass( {
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
 							<div className={ styles.orderItem }>
+								<span>{ i18n.translate( 'Pre-registration application fee' ) }</span>
+								<span>{ '$220' }</span>
+							</div>
+							<div className={ styles.orderItem }>
 								<span>{ this.props.checkout.selectedDomain.domain }</span>
-								<span>{ this.props.checkout.selectedDomain.cost }</span>
+								<span>{ '$30' }</span>
 							</div>
 							<div className={ styles.orderItem }>
 								<label>{ i18n.translate( 'Privacy Protection' ) }</label>
@@ -167,6 +172,10 @@ const Checkout = React.createClass( {
 									/>
 									<span className={ styles.privacyProtectionPrice }>FREE</span>
 								</span>
+							</div>
+							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
+								<span>{ i18n.translate( 'Total cost' ) }</span>
+								<span>{ '$250' }</span>
 							</div>
 						</div>
 

@@ -21,11 +21,11 @@ h6 {
 }
 
 a {
-  color: $blue-medium;
+	color: $blue-medium;
 	cursor: pointer;
-  text-decoration: none;
+	text-decoration: none;
 
-  &:hover {
-    color: $blue-bright;
-  }
+	&:hover {
+		color: $blue-bright;
+	}
 }

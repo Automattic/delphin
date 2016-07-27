@@ -21,5 +21,11 @@ h6 {
 }
 
 a {
+	color: $blue-medium;
 	cursor: pointer;
+	text-decoration: none;
+
+	&:hover {
+		color: $blue-bright;
+	}
 }

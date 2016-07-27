@@ -1,8 +1,10 @@
 @import 'app/styles/colors';
 
 .footer {
-	color: $gray;
+	color: $gray-blue;
+	line-height: 1.4;
 	margin: 0 auto 70px;
+	max-width: 400px;
+	padding: 0 20px;
 	text-align: center;
-	width: 400px;
 }

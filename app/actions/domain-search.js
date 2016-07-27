@@ -1,6 +1,5 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
-import config from 'config';
 import {
 	WPCOM_REQUEST,
 	DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT,

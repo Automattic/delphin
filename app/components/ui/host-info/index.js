@@ -15,6 +15,10 @@ function getCost( cost ) {
 }
 
 class HostInfo extends React.Component {
+	componentDidMount() {
+		this.props.recordPageView();
+	}
+
 	render() {
 		const host = find( hosts, { slug: this.props.slug } );
 
@@ -51,6 +55,7 @@ class HostInfo extends React.Component {
 }
 
 HostInfo.propTypes = {
+	recordPageView: PropTypes.func.isRequired,
 	slug: PropTypes.string.isRequired
 };
 

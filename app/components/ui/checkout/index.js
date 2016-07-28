@@ -20,6 +20,7 @@ import ValidationError from 'components/ui/form/validation-error';
 import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import SiftScience from 'lib/sift-science';
+import withPageView from 'lib/analytics/with-page-view';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -203,4 +204,4 @@ const Checkout = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( Checkout );
+export default withStyles( styles )( withPageView( Checkout, 'checkout', 'Checkout' ) );

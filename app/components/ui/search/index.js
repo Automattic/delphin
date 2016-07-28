@@ -11,6 +11,7 @@ import { isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
+import withPageView from 'lib/analytics/with-page-view';
 
 const Search = React.createClass( {
 	propTypes: {
@@ -19,6 +20,7 @@ const Search = React.createClass( {
 		isRequesting: PropTypes.bool.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
 		query: PropTypes.string.isRequired,
+		recordPageView: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
@@ -171,4 +173,4 @@ const Search = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( Search );
+export default withStyles( styles )( withPageView( Search, 'search', 'Search' ) );

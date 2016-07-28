@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import withPageView from 'lib/analytics/with-page-view';
 
 const Success = ( { domain, email } ) => (
 	<SunriseStep className={ styles.step }>
@@ -72,4 +73,4 @@ Success.propTypes = {
 	email: PropTypes.string.isRequired
 };
 
-export default withStyles( styles )( Success );
+export default withStyles( styles )( withPageView( Success, 'success', 'Success' ) );

@@ -41,6 +41,9 @@ export default reduxForm(
 		connectUser( fields, domain ) {
 			dispatch( connectUser( fields.email, ownProps.intention, domain ) );
 		},
+		recordPageView() {
+			ownProps.recordPageView();
+		},
 		redirectToHome() {
 			dispatch( push( getPath( 'search' ) ) );
 		},

@@ -1,5 +1,6 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
+import capitalize from 'lodash/capitalize';
 import { change, reduxForm } from 'redux-form';
 
 // Internal dependencies
@@ -7,7 +8,9 @@ import { addNotice } from 'actions/notices';
 import { connectUser, connectUserComplete, verifyUser } from 'actions/user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
+import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
+import { recordPageView } from 'actions/analytics';
 import { redirect } from 'actions/routes';
 import { selectDomain } from 'actions/domain-search';
 import i18n from 'i18n-calypso';
@@ -50,9 +53,18 @@ export default reduxForm(
 		addNotice,
 		connectUser,
 		connectUserComplete,
+		recordPageView,
 		redirect,
 		selectDomain,
 		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser
-	}, dispatch )
+	}, dispatch ),
+	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
+		recordPageView() {
+			dispatchProps.recordPageView(
+				getPath( 'verifyUser' ),
+				`Verify User (${ capitalize( stateProps.user.intention ) })`
+			);
+		}
+	} )
 )( VerifyUser );

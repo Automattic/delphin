@@ -18,18 +18,20 @@ const Header = ( { intention } ) => {
 	}
 
 	return (
-		<div className={ styles.header }>
-			{ heading && (
-				<h2 className={ styles.heading }>
-					{ heading }
-				</h2>
-			) }
+		<div className={ styles.container }>
+			<div className={ styles.header }>
+				{ heading && (
+					<h2 className={ styles.heading }>
+						{ heading }
+					</h2>
+				) }
 
-			{ text && (
-				<p className={ styles.text }>
-					{ text }
-				</p>
-			) }
+				{ text && (
+					<p className={ styles.text }>
+						{ text }
+					</p>
+				) }
+			</div>
 		</div>
 	);
 };

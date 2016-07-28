@@ -46,12 +46,12 @@
 
 .highlight {
 	background-color: $gray-light;
-	flex-basis: 40%;
 	text-align: left;
 
 	@include breakpoint( '>660px' ) {
 		border-bottom-left-radius: 5px;
 		border-top-left-radius: 5px;
+		flex-basis: 40%;
 	}
 
 	h3 {
@@ -70,12 +70,12 @@
 
 .text {
 	background-color: $white;
-	flex-basis: 60%;
 	text-align: left;
 
 	@include breakpoint( '>660px' ) {
-		border-top-right-radius: 5px;
 		border-bottom-right-radius: 5px;
+		border-top-right-radius: 5px;
+		flex-basis: 60%;
 	}
 
 	.button {

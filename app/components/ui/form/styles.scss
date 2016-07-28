@@ -37,11 +37,17 @@
 }
 
 .notice-area {
-	background: #2e4453;
-	color: #fff;
-	font-size: 1.7rem;
+	background: $gray-light;
+	color: $blue-background;
+	font-size: 1.6rem;
+	line-height: 1.4;
 	padding: 30px;
 	word-wrap: break-word;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.4rem;
+		padding: 15px;
+	}
 }
 
 .field-area {

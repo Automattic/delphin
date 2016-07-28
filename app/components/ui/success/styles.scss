@@ -8,6 +8,10 @@
 	background-position: center 70px;
 	background-repeat: no-repeat;
 
+	@include breakpoint( '<660px' ) {
+		background-position: center 30px;
+	}
+
 	body & { // Needed for overriding
 		padding-top: 140px;
 	}
@@ -30,6 +34,8 @@
 	padding: 30px;
 
 	p {
+		font-size: 1.7rem;
+		font-weight: 300;
 		line-height: 1.4em;
 
 		&:not(:first-child) {
@@ -40,36 +46,36 @@
 
 .highlight {
 	background-color: $gray-light;
-	border-top-left-radius: 5px;
-	flex-basis: 40%;
 	text-align: left;
-
-	@include breakpoint( '<660px' ) {
-		border-top-right-radius: 5px;
-	}
 
 	@include breakpoint( '>660px' ) {
 		border-bottom-left-radius: 5px;
+		border-top-left-radius: 5px;
+		flex-basis: 40%;
 	}
 
 	h3 {
 		color: $black;
 		font-size: 2.2rem;
 	}
+
+	p:not(:first-child) {
+		color: darken( $gray-blue, 15% );
+
+		@include breakpoint( '<660px' ) {
+			margin-top: 5px;
+		}
+	}
 }
 
 .text {
 	background-color: $white;
-	border-bottom-right-radius: 5px;
-	flex-basis: 60%;
-	text-align: justify;
-
-	@include breakpoint( '<660px' ) {
-		border-bottom-left-radius: 5px;
-	}
+	text-align: left;
 
 	@include breakpoint( '>660px' ) {
+		border-bottom-right-radius: 5px;
 		border-top-right-radius: 5px;
+		flex-basis: 60%;
 	}
 
 	.button {

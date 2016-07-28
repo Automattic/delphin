@@ -32,6 +32,8 @@ class SunriseConfirmDomain extends React.Component {
 	render() {
 		const { domain } = this.props;
 
+		const { applicationCost, cost, domainName, totalCost } = domain;
+
 		return (
 			<SunriseStep>
 				<DocumentTitle title={ i18n.translate( 'Apply now' ) } />
@@ -48,14 +50,21 @@ class SunriseConfirmDomain extends React.Component {
 
 				<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
 					<h3>
-						{ domain.domainName }
+						{ domainName }
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
-						{ i18n.translate( '$250 Early Application' ) }
+						{ i18n.translate( '%(totalCost)s Early Application', {
+							args: { totalCost }
+						} ) }
 					</div>
 					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '$30 registration + $220 application fee' ) }
+						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+							args: {
+								applicationCost,
+								domainCost: cost
+							}
+						} ) }
 					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }

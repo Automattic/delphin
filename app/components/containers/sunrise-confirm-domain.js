@@ -10,8 +10,8 @@ import SunriseConfirmDomain from 'components/ui/sunrise-confirm-domain';
 
 export default connect(
 	state => ( {
-		hasSelectedDomain: hasSelectedDomain( state ),
 		domain: getSelectedDomain( state ),
+		hasSelectedDomain: hasSelectedDomain( state ),
 		isLoggedIn: isLoggedIn( state )
 	} ),
 	dispatch => bindActionCreators( {

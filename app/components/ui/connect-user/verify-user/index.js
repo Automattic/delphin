@@ -131,31 +131,7 @@ const VerifyUser = React.createClass( {
 			return notice;
 		}
 
-		let text = i18n.translate(
-			'We just sent a confirmation code to {{strong}}%(email)s{{/strong}}.',
-			{
-				args: { email: email },
-				components: { strong: <strong /> }
-			}
-		);
-
-		if ( intention === 'login' ) {
-			return (
-				<p>
-					{ text }
-					{ ' ' }
-					{ i18n.translate( 'Type that code below to login.' ) }
-				</p>
-			);
-		} else if ( intention === 'signup' ) {
-			return (
-				<p>
-					{ text }
-					{ ' ' }
-					{ i18n.translate( 'Type that code below to verify your email address.' ) }
-				</p>
-			);
-		}
+		let text = i18n.translate( 'Open the link we sent you to proceed. If you’re on another device or the link doesn’t work, enter the code from the email below.' );
 
 		return text;
 	},

@@ -1,10 +1,20 @@
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 .form {
+	background-color: #fff;
+	border: 1px solid $gray-light;
+	border-radius: 3px;
+	color: $blue-dark;
 	display: block;
 	font-size: 1.4rem;
-	margin: 0 auto;
-	max-width: 400px;
+	margin: -40px auto 25px;
+	max-width: 440px;
+
+	@include breakpoint( '<480px' ) {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
 
 	input,
 	button {
@@ -27,17 +37,27 @@
 }
 
 .notice-area {
-	background: #2e4453;
-	color: #fff;
-	font-size: 1.7rem;
+	background: $gray-light;
+	color: $blue-background;
+	font-size: 1.6rem;
+	line-height: 1.4;
 	padding: 30px;
 	word-wrap: break-word;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.4rem;
+		padding: 15px;
+	}
 }
 
 .field-area {
 	background: $white;
 	border-radius: 3px 3px 0 0;
 	padding: 30px;
+
+	@include breakpoint( '<480px' ) {
+		padding: 15px;
+	}
 
 	fieldset {
 		margin-top: 20px;
@@ -81,9 +101,12 @@
 }
 
 .submit-area {
-	background: $gray-light;
-	padding: 30px;
+	padding: 0 30px 30px;
 	text-align: center;
+
+	@include breakpoint( '<480px' ) {
+		padding: 0 15px 15px;
+	}
 }
 
 .validation-error {

@@ -50,8 +50,8 @@
 	text-align: left;
 
 	@include breakpoint( '>660px' ) {
-		border-top-left-radius: 5px;
 		border-bottom-left-radius: 5px;
+		border-top-left-radius: 5px;
 	}
 
 	h3 {
@@ -74,8 +74,8 @@
 	text-align: left;
 
 	@include breakpoint( '>660px' ) {
-		border-bottom-right-radius: 5px;
 		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
 	}
 
 	.button {

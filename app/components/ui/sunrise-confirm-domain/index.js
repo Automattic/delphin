@@ -40,8 +40,7 @@ class SunriseConfirmDomain extends React.Component {
 						{ i18n.translate( 'Found it!' ) }
 					</h1>
 					<h2>
-						{ i18n.translate( 'Apply now to secure this domain ' +
-							'for your blog.' ) }
+						{ i18n.translate( 'Apply now to secure this domain for your blog.' ) }
 					</h2>
 				</SunriseStep.Header>
 

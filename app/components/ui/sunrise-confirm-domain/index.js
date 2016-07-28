@@ -34,10 +34,10 @@ class SunriseConfirmDomain extends React.Component {
 
 		return (
 			<SunriseStep>
-				<DocumentTitle title={ i18n.translate( 'Found it!' ) } />
+				<DocumentTitle title={ i18n.translate( 'Apply now' ) } />
 				<SunriseStep.Header>
 					<h1>
-						{ i18n.translate( 'Apply for this domain!' ) }
+						{ i18n.translate( 'Apply now' ) }
 					</h1>
 					<h2>
 						{ i18n.translate( 'Applications are open until November 9. ' +
@@ -52,10 +52,10 @@ class SunriseConfirmDomain extends React.Component {
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
-						{ i18n.translate( '$250 Early Registration' ) }
+						{ i18n.translate( '$250 Early application' ) }
 					</div>
 					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '$30 registration fee + $220 application fee' ) }
+						{ i18n.translate( '$30 registration + $220 application fee' ) }
 					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }

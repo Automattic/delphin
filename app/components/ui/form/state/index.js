@@ -3,12 +3,10 @@ import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
-import styles from './styles.scss';
 
 const State = ( { className, disabled, field, states, onBlur } ) => {
 	let content;
@@ -37,7 +35,7 @@ const State = ( { className, disabled, field, states, onBlur } ) => {
 	}
 
 	return (
-		<div className={ classNames( className, styles.state ) }>{ content }</div>
+		<div className='state'>{ content }</div>
 	);
 };
 
@@ -49,4 +47,4 @@ State.propTypes = {
 	states: PropTypes.object.isRequired
 };
 
-export default withStyles( styles )( State );
+export default State;

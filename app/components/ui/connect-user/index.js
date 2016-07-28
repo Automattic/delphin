@@ -1,7 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -11,7 +10,6 @@ import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import Input from 'components/ui/form/input';
 import ValidationError from 'components/ui/form/validation-error';
-import styles from './styles.scss';
 
 const ConnectUser = React.createClass( {
 	propTypes: {
@@ -62,7 +60,7 @@ const ConnectUser = React.createClass( {
 
 		return (
 			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Login' ) : i18n.translate( 'Signup' ) }>
-				<div className={ styles.container }>
+				<div>
 					<Header intention={ intention } />
 
 					<Form
@@ -87,4 +85,4 @@ const ConnectUser = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( ConnectUser );
+export default ConnectUser;

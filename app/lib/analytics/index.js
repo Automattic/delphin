@@ -14,11 +14,13 @@ const debug = debugFactory( 'delphin:analytics' );
 import config, { isEnabled } from 'config';
 import { loadScript } from 'lib/load-script';
 
+// Load tracking scripts
 if ( process.env.BROWSER ) {
-	// Load tracking scripts
-	window._tkq = window._tkq || [];
+	if ( isEnabled( 'tracks_enabled' ) ) {
+		window._tkq = window._tkq || [];
 
-	loadScript( '//stats.wp.com/w.js?53' );
+		loadScript( '//stats.wp.com/w.js?53' );
+	}
 
 	if ( isEnabled( 'google_analytics_enabled' ) ) {
 		window.ga = window.ga || function() {
@@ -127,6 +129,10 @@ const analytics = {
 
 	tracks: {
 		recordEvent( eventName, eventProperties = {} ) {
+			if ( ! isEnabled( 'tracks_enabled' ) ) {
+				return;
+			}
+
 			debug( 'Record event "%s" called with props %o', eventName, eventProperties );
 
 			if ( eventName.indexOf( config( 'tracks_event_prefix' ) ) !== 0 ) {
@@ -150,6 +156,10 @@ const analytics = {
 		},
 
 		recordPageView: function( urlPath ) {
+			if ( ! isEnabled( 'tracks_enabled' ) ) {
+				return;
+			}
+
 			analytics.tracks.recordEvent( `${ config( 'tracks_event_prefix' ) }page_view`, {
 				path: urlPath
 			} );

@@ -90,18 +90,35 @@ export const defaultRoutes = [
 				slug: 'checkoutReview',
 				static: false,
 				component: CheckoutReviewContainer
-			},
+			}
+		]
+	},
+	{
+		path: 'search',
+		slug: 'search',
+		static: true,
+		component: SearchContainer
+	},
+	{
+		component: SunriseFlowLayout,
+		childRoutes: [
 			{
-				path: 'log-in',
-				slug: 'loginUser',
-				static: true,
-				component: LoginContainer
+				path: 'confirm-domain',
+				slug: 'confirmDomain',
+				static: false,
+				component: SunriseConfirmDomainContainer
 			},
 			{
 				path: 'signup',
 				slug: 'signupUser',
 				static: true,
 				component: SignupContainer
+			},
+			{
+				path: 'log-in',
+				slug: 'loginUser',
+				static: true,
+				component: LoginContainer
 			},
 			{
 				path: 'verify',
@@ -120,23 +137,6 @@ export const defaultRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
-			}
-		]
-	},
-	{
-		path: 'search',
-		slug: 'search',
-		static: true,
-		component: SearchContainer
-	},
-	{
-		component: SunriseFlowLayout,
-		childRoutes: [
-			{
-				path: 'confirm-domain',
-				slug: 'confirmDomain',
-				static: false,
-				component: SunriseConfirmDomainContainer
 			}
 		]
 	},

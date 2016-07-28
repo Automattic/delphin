@@ -74,12 +74,6 @@ export const defaultRoutes = [
 				]
 			},
 			{
-				path: 'checkout',
-				slug: 'checkout',
-				static: false,
-				component: CheckoutContainer
-			},
-			{
 				path: 'checkout-review',
 				slug: 'checkoutReview',
 				static: false,
@@ -137,6 +131,12 @@ export const defaultRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
+			},
+			{
+				path: 'checkout',
+				slug: 'checkout',
+				static: false,
+				component: CheckoutContainer
 			}
 		]
 	},

@@ -98,12 +98,6 @@ export const defaultRoutes = [
 				component: LoginContainer
 			},
 			{
-				path: 'signup',
-				slug: 'signupUser',
-				static: true,
-				component: SignupContainer
-			},
-			{
 				path: 'verify',
 				slug: 'verifyUser',
 				static: false,
@@ -137,6 +131,12 @@ export const defaultRoutes = [
 				slug: 'confirmDomain',
 				static: false,
 				component: SunriseConfirmDomainContainer
+			},
+			{
+				path: 'signup',
+				slug: 'signupUser',
+				static: true,
+				component: SignupContainer
 			}
 		]
 	},

@@ -11,8 +11,8 @@ const Header = ( { intention } ) => {
 	let text = '';
 
 	if ( intention === 'signup' ) {
-		heading = i18n.translate( 'Create an account' );
-		text = i18n.translate( "Enter your email address to create an account. We'll send you a confirmation to get started." );
+		heading = i18n.translate( 'Your domain awaits' );
+		text = i18n.translate( 'Enter your email address to claim your domain.' );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Time to check your email!' );
 	}

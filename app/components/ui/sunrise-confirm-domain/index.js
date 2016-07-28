@@ -34,14 +34,14 @@ class SunriseConfirmDomain extends React.Component {
 
 		return (
 			<SunriseStep>
-				<DocumentTitle title={ i18n.translate( 'We found it!' ) } />
+				<DocumentTitle title={ i18n.translate( 'Found it!' ) } />
 				<SunriseStep.Header>
 					<h1>
-						{ i18n.translate( 'We found it!' ) }
+						{ i18n.translate( 'Found it!' ) }
 					</h1>
 					<h2>
-						{ i18n.translate( 'That looks like a nice domain. Apply for ' +
-							'this domain to secure it for your blog.' ) }
+						{ i18n.translate( 'Apply now to secure this domain ' +
+							'for your blog.' ) }
 					</h2>
 				</SunriseStep.Header>
 
@@ -51,7 +51,7 @@ class SunriseConfirmDomain extends React.Component {
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
-						{ i18n.translate( '$220 application fee' ) }
+						{ i18n.translate( '$220 one time fee' ) }
 					</div>
 					<div className={ styles.renewalInfo }>
 						{ i18n.translate( 'Renews at $30 per year' ) }
@@ -61,7 +61,7 @@ class SunriseConfirmDomain extends React.Component {
 					</Button>
 					<div className={ styles.backNotice }>
 						<div>
-							{ i18n.translate( 'Not the domain you want?' ) }
+							{ i18n.translate( 'Not what you wanted?' ) }
 						</div>
 						<Link to={ getPath( 'home' ) }>
 							{ i18n.translate( 'Try a different domain' ) }
@@ -70,9 +70,9 @@ class SunriseConfirmDomain extends React.Component {
 				</SunriseStep.Form>
 
 				<SunriseStep.Footer>
-					{ i18n.translate( 'We may receive other applications for the domain you want. ' +
-							'If so, we\'ll notify all applicants and put the domain up for auction. ' +
-							'Applications are open until November 9.' ) }
+					{ i18n.translate( 'Applications are open until November 9. ' +
+							'If others apply for the same domain, ' +
+							'you will be able to bid for it in an auction.' ) }
 				</SunriseStep.Footer>
 			</SunriseStep>
 		);

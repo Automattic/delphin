@@ -74,12 +74,6 @@ export const defaultRoutes = [
 				]
 			},
 			{
-				path: 'contact-information',
-				slug: 'contactInformation',
-				component: ContactInformationContainer,
-				static: false
-			},
-			{
 				path: 'checkout',
 				slug: 'checkout',
 				static: false,
@@ -102,6 +96,12 @@ export const defaultRoutes = [
 	{
 		component: SunriseFlowLayout,
 		childRoutes: [
+			{
+				path: 'contact-information',
+				slug: 'contactInformation',
+				component: ContactInformationContainer,
+				static: false
+			},
 			{
 				path: 'confirm-domain',
 				slug: 'confirmDomain',

@@ -170,9 +170,9 @@ class ContactInformation extends React.Component {
 		return (
 			<DocumentTitle title={ i18n.translate( 'Contact Information' ) }>
 				<div>
-					<CheckoutProgressbar currentStep={ 2 } />
-
 					<div className={ styles.header }>
+						<CheckoutProgressbar currentStep={ 2 } />
+						
 						<h2 className={ styles.heading }>
 							{ i18n.translate( 'Registration Profile' ) }
 						</h2>

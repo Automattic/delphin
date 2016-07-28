@@ -14,7 +14,8 @@ const config = {
 	features: {
 		boom_analytics_enabled: productionOnly,
 		google_analytics_enabled: productionOnly,
-		mc_analytics_enabled: productionOnly
+		mc_analytics_enabled: productionOnly,
+		tracks_enabled: productionOnly
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',

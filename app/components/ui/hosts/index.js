@@ -8,6 +8,7 @@ import HostThumbnail from 'components/ui/hosts/host-thumbnail';
 import DocumentTitle from 'components/ui/document-title';
 import { hosts } from 'lib/hosts';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 const Hosts = () => {
 	return (
@@ -27,4 +28,4 @@ const Hosts = () => {
 	);
 };
 
-export default withStyles( styles )( Hosts );
+export default withStyles( styles )( withPageView( Hosts, 'hosts', 'Hosts' ) );

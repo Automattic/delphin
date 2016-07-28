@@ -10,6 +10,7 @@ import DomainInput from 'components/ui/domain-input';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import { withTld } from 'lib/domains';
+import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
@@ -78,4 +79,4 @@ const SunriseHome = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( SunriseHome );
+export default withStyles( styles )( withPageView( SunriseHome, 'home', 'Home' ) );

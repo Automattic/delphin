@@ -66,7 +66,6 @@ const ConnectUser = React.createClass( {
 					<Header intention={ intention } />
 
 					<Form
-						className={ styles.signupFlowForm }
 						onSubmit={ handleSubmit( this.handleSubmit ) }
 						fieldArea={
 							<fieldset>

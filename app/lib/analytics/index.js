@@ -18,7 +18,7 @@ if ( process.env.BROWSER ) {
 	// Load tracking scripts
 	window._tkq = window._tkq || [];
 
-	loadScript( '//stats.wp.com/w.js?51' );
+	loadScript( '//stats.wp.com/w.js?53' );
 
 	if ( isEnabled( 'google_analytics_enabled' ) ) {
 		window.ga = window.ga || function() {

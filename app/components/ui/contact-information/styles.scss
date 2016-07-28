@@ -45,16 +45,21 @@
 	align-items: flex-start;
 	display: flex;
 
-	.first-name {
-		margin-top: 0;
+	.state {
+		width: 100%;
 	}
 
 	@include breakpoint( '<480px' ) {
+		flex-wrap: wrap;
+
 		.first-name,
-		.address1,
-		.city,
-		.phone {
-			margin-top: 10px;
+		.last-name {
+			flex-basis: 100%;
+			flex-shrink: 0;
+		}
+
+		.state {
+			margin-bottom: 10px;
 		}
 	}
 
@@ -72,7 +77,6 @@
 
 		.state {
 			margin-right: 15px;
-			width: 100%;
 		}
 	}
 }

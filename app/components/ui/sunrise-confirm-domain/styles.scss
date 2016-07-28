@@ -27,3 +27,14 @@
 	text-align: center;
 	width: 100%;
 }
+
+.premium-flag {
+	background: $blue-bright;
+	border-radius: 3px;
+	color: $white;
+	float: right;
+	font-size: 1rem;
+	font-weight: 400;
+	padding: 6px 12px;
+	text-transform: uppercase;
+}

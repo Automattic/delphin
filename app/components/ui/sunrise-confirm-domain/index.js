@@ -32,7 +32,7 @@ class SunriseConfirmDomain extends React.Component {
 	render() {
 		const { domain } = this.props;
 
-		const { applicationCost, cost, domainName, totalCost } = domain;
+		const { applicationCost, cost, domainName, isPremium, totalCost } = domain;
 
 		return (
 			<SunriseStep>
@@ -49,6 +49,12 @@ class SunriseConfirmDomain extends React.Component {
 				</SunriseStep.Header>
 
 				<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
+					{ isPremium && (
+						<div className={ styles.premiumFlag }>
+							{ i18n.translate( 'premium' ) }
+						</div>
+					) }
+
 					<h3>
 						{ domainName }
 					</h3>

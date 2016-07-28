@@ -16,6 +16,7 @@ const SunriseHome = React.createClass( {
 		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		isRequestingDomainPrice: PropTypes.bool.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
@@ -68,7 +69,7 @@ const SunriseHome = React.createClass( {
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 						</div>
 
-						<Button className={ styles.button }>
+						<Button className={ styles.button } disabled={ this.props.isRequestingDomainPrice }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</div>

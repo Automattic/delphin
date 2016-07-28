@@ -37,10 +37,12 @@ class SunriseConfirmDomain extends React.Component {
 				<DocumentTitle title={ i18n.translate( 'Found it!' ) } />
 				<SunriseStep.Header>
 					<h1>
-						{ i18n.translate( 'Found it!' ) }
+						{ i18n.translate( 'Apply for this domain!' ) }
 					</h1>
 					<h2>
-						{ i18n.translate( 'Apply now to secure this domain for your blog.' ) }
+						{ i18n.translate( 'Applications are open until November 9. ' +
+							'If others apply for the same domain, ' +
+							'you will be able to bid for it in an auction.' ) }
 					</h2>
 				</SunriseStep.Header>
 
@@ -50,10 +52,10 @@ class SunriseConfirmDomain extends React.Component {
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
-						{ i18n.translate( '$220 one time fee' ) }
+						{ i18n.translate( '$250 Early Registration' ) }
 					</div>
 					<div className={ styles.renewalInfo }>
-						{ i18n.translate( 'Renews at $30 per year' ) }
+						{ i18n.translate( '$30 registration fee + $220 application fee' ) }
 					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }
@@ -67,12 +69,6 @@ class SunriseConfirmDomain extends React.Component {
 						</Link>
 					</div>
 				</SunriseStep.Form>
-
-				<SunriseStep.Footer>
-					{ i18n.translate( 'Applications are open until November 9. ' +
-							'If others apply for the same domain, ' +
-							'you will be able to bid for it in an auction.' ) }
-				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

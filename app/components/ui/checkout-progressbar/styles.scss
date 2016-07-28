@@ -1,16 +1,16 @@
 @import 'app/styles/colors';
 
-$step-inner-dot-size: 14px;
-$step-dot-size: 30px;
-$step-line-size: 8px;
+$step-inner-dot-size: 12px;
+$step-dot-size: 24px;
+$step-line-size: 6px;
 $inactive-step-color: desaturate( $dark-gray-blue, 15% );
 $active-step-color: $green;
 $inner-dot-color: $blue-background;
 
 .progressbar {
 	display: flex;
-	margin: 20px auto;
-	max-width: 400px;
+	margin: 0 auto 40px;
+	max-width: 320px;
 }
 
 @mixin step-line-style( $color, $width ) {
@@ -21,7 +21,7 @@ $inner-dot-color: $blue-background;
 	left: 0;
 	position: absolute;
 	width: $width;
-	z-index: -2;
+	z-index: 1;
 }
 
 .progressbar-step {
@@ -74,7 +74,7 @@ $inner-dot-color: $blue-background;
 	&::before {
 		@include step-line-style( $inactive-step-color, 50% );
 		margin-left: 50%;
-		z-index: -1;
+		z-index: 2;
 	}
 
 	&:last-child {
@@ -100,18 +100,19 @@ $inner-dot-color: $blue-background;
 	position: absolute;
 	top: 50%;
 	width: $size;
+	z-index: 2;
 }
 
 .progressbar-step-caption {
 	color: lighten( $inactive-step-color, 10% );
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	text-align: center;
 	text-transform: uppercase;
 }
 
 .progressbar-step-dot {
 	height: $step-dot-size;
-	margin-top: 2.5em;
+	margin-top: 12px;
 	position: relative;
 
 	&::before {

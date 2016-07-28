@@ -1,3 +1,9 @@
+@import 'app/styles/colors';
+
+body {
+	background-color: $white;
+}
+
 .content {
 	margin: 0 auto;
 	padding-bottom: 50px;

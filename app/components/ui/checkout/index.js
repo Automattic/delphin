@@ -65,9 +65,7 @@ const Checkout = React.createClass( {
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
 				<div>
-					<div className={ styles.header }>
-						<CheckoutProgressbar currentStep={ 3 } />
-					</div>
+					<CheckoutProgressbar currentStep={ 3 } />
 
 					<form className={ styles.form } onSubmit={ handleSubmit( this.validateSubmit ) }>
 						<div className={ styles.fieldArea }>

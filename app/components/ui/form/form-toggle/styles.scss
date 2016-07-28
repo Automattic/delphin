@@ -83,7 +83,7 @@
 
 	&:checked:not([disabled]) {
 		+ .label .switch:hover {
-			background: $blue-bright;
+			background: $blue-light;
 		}
 	}
 

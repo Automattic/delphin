@@ -17,13 +17,17 @@ import { loadScript } from 'lib/load-script';
 if ( process.env.BROWSER ) {
 	// Load tracking scripts
 	window._tkq = window._tkq || [];
-	window.ga = window.ga || function() {
-		( window.ga.q = window.ga.q || [] ).push( arguments );
-	};
-	window.ga.l = +new Date();
 
 	loadScript( '//stats.wp.com/w.js?51' );
-	loadScript( '//www.google-analytics.com/analytics.js' );
+
+	if ( isEnabled( 'google_analytics_enabled' ) ) {
+		window.ga = window.ga || function() {
+			( window.ga.q = window.ga.q || [] ).push( arguments );
+		};
+		window.ga.l = + new Date();
+
+		loadScript( '//www.google-analytics.com/analytics.js' );
+	}
 }
 
 function buildQuerystring( group, name ) {
@@ -209,23 +213,29 @@ const analytics = {
 		},
 
 		recordPageView( urlPath, pageTitle ) {
+			if ( ! isEnabled( 'google_analytics_enabled' ) ) {
+				return;
+			}
+
 			analytics.ga.initialize();
 
 			debug( 'Recording Page View ~ [URL: ' + urlPath + '] [Title: ' + pageTitle + ']' );
 
-			if ( isEnabled( 'google_analytics_enabled' ) ) {
-				// Set the current page so all GA events are attached to it.
-				window.ga( 'set', 'page', urlPath );
+			// Set the current page so all GA events are attached to it.
+			window.ga( 'set', 'page', urlPath );
 
-				window.ga( 'send', {
-					hitType: 'pageview',
-					page: urlPath,
-					title: pageTitle
-				} );
-			}
+			window.ga( 'send', {
+				hitType: 'pageview',
+				page: urlPath,
+				title: pageTitle
+			} );
 		},
 
 		recordEvent( category, action, label, value ) {
+			if ( ! isEnabled( 'google_analytics_enabled' ) ) {
+				return;
+			}
+
 			analytics.ga.initialize();
 
 			let debugText = 'Recording Event ~ [Category: ' + category + '] [Action: ' + action + ']';
@@ -240,19 +250,19 @@ const analytics = {
 
 			debug( debugText );
 
-			if ( isEnabled( 'google_analytics_enabled' ) ) {
-				window.ga( 'send', 'event', category, action, label, value );
-			}
+			window.ga( 'send', 'event', category, action, label, value );
 		},
 
 		recordTiming( urlPath, eventType, duration, triggerName ) {
+			if ( ! isEnabled( 'google_analytics_enabled' ) ) {
+				return;
+			}
+
 			analytics.ga.initialize();
 
 			debug( 'Recording Timing ~ [URL: ' + urlPath + '] [Duration: ' + duration + ']' );
 
-			if ( isEnabled( 'google_analytics_enabled' ) ) {
-				window.ga( 'send', 'timing', urlPath, eventType, duration, triggerName );
-			}
+			window.ga( 'send', 'timing', urlPath, eventType, duration, triggerName );
 		}
 	},
 

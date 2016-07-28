@@ -42,6 +42,9 @@
 }
 
 .row {
+	align-items: flex-start;
+	display: flex;
+
 	.first-name {
 		margin-top: 0;
 	}
@@ -53,23 +56,9 @@
 		.phone {
 			margin-top: 10px;
 		}
-
-		.last-name,
-		.state,
-		.postal-code {
-			input {
-				border-top: 0;
-			}
-		}
 	}
 
 	@include breakpoint( '>480px' ) {
-		.first-name,
-		.last-name {
-			display: inline-block;
-			width: 170px;
-		}
-
 		.first-name input {
 			border-bottom-right-radius: 0;
 			border-top-right-radius: 0;
@@ -81,29 +70,9 @@
 			border-top-left-radius: 0;
 		}
 
-		.city,
-		.state,
-		.postal-code {
-			display: inline-block;
-			margin-top: 10px;
-		}
-
-		.city {
-			width: 165px;
-
-			input {
-				border-bottom-right-radius: 0;
-				border-top-right-radius: 0;
-			}
-		}
-
-		.postal-code {
-			width: 95px;
-
-			input {
-				border-bottom-left-radius: 0;
-				border-top-left-radius: 0;
-			}
+		.state {
+			margin-right: 15px;
+			width: 100%;
 		}
 	}
 }

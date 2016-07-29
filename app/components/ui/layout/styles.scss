@@ -20,6 +20,10 @@ h6 {
 	font-family: $body-font;
 }
 
+.content {
+    min-height: 90vh;
+}
+
 a {
 	color: $blue-medium;
 	cursor: pointer;

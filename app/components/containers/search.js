@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import config from 'config';
 import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
+import { fetchDomainPrice } from 'actions/domain-price';
 import { getPath } from 'routes';
 import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
@@ -48,6 +49,8 @@ export default connect(
 
 		selectDomain( domainProduct, isUserLoggedIn ) {
 			dispatch( selectDomain( domainProduct ) );
+			// pre-fetch domain price information
+			dispatch( fetchDomainPrice( domainProduct.domain_name ) );
 
 			if ( isUserLoggedIn ) {
 				dispatch( push( getPath( 'contactInformation' ) ) );

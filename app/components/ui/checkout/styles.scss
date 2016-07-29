@@ -22,6 +22,10 @@
 
 .security-code {
 	width: 40%;
+
+	@include breakpoint( '<480px' ) {
+		width: 100%;
+	}
 }
 
 .order-summary {
@@ -41,6 +45,7 @@
 	}
 
 	@include breakpoint( '<480px' ) {
+		margin-bottom: 15px;
 		padding: 15px;
 	}
 }
@@ -65,5 +70,13 @@
 
 	.postal-code {
 		flex: 0 1 35%;
+	}
+
+	@include breakpoint( '<480px' ) {
+		flex-direction: column;
+
+		.country-code {
+			margin-bottom: 20px;
+		}
 	}
 }

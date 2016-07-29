@@ -44,17 +44,9 @@ const Checkout = React.createClass( {
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
-
-		if ( ! this.props.selectedDomainPrice.hasLoadedFromServer ) {
-			this.props.fetchDomainPrice();
-		}
 	},
 
 	getApplicationFee() {
-		if ( ! this.props.selectedDomainPrice.hasLoadedFromServer ) {
-			return null;
-		}
-
 		const applicationItem = find( this.props.selectedDomainPrice.data.details, {
 			product_slug: 'delphin-domain-application-fee'
 		} );
@@ -67,10 +59,6 @@ const Checkout = React.createClass( {
 	},
 
 	getRegistrationFee() {
-		if ( ! this.props.selectedDomainPrice.hasLoadedFromServer ) {
-			return null;
-		}
-
 		const registrationItem = find( this.props.selectedDomainPrice.data.details, {
 			product_slug: 'delphin-domain'
 		} );

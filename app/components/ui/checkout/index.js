@@ -47,7 +47,7 @@ const Checkout = React.createClass( {
 	},
 
 	getApplicationFee() {
-		const applicationItem = find( this.props.selectedDomainPrice.data.details, {
+		const applicationItem = find( this.props.selectedDomainPrice.details, {
 			product_slug: 'delphin-domain-application-fee'
 		} );
 
@@ -59,7 +59,7 @@ const Checkout = React.createClass( {
 	},
 
 	getRegistrationFee() {
-		const registrationItem = find( this.props.selectedDomainPrice.data.details, {
+		const registrationItem = find( this.props.selectedDomainPrice.details, {
 			product_slug: 'delphin-domain'
 		} );
 
@@ -204,7 +204,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ this.props.selectedDomainPrice.data.cost }</span>
+								<span>{ this.props.selectedDomainPrice.cost }</span>
 							</div>
 						</div>
 

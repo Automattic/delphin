@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import Checkout from 'components/ui/checkout';
 import { fetchDomainPrice } from 'actions/domain-price';
 import { getPath } from 'routes';
-import { isPurchasing, getSelectedDomain } from 'reducers/checkout/selectors';
+import { getSelectedDomainPrice, isPurchasing, getSelectedDomain } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
 import RequireLogin from './require-login';
 
@@ -43,6 +43,7 @@ export default reduxForm(
 	},
 	state => ( {
 		checkout: state.checkout,
+		selectedDomainPrice: getSelectedDomainPrice( state ),
 		domain: getSelectedDomain( state ).domain,
 		isPurchasing: isPurchasing( state ),
 		initialValues: {

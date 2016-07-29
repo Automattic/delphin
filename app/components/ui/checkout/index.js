@@ -25,6 +25,7 @@ import SiftScience from 'lib/sift-science';
 const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
+		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		initializeForm: PropTypes.func.isRequired,
@@ -32,6 +33,7 @@ const Checkout = React.createClass( {
 		isPurchasing: PropTypes.bool.isRequired,
 		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
+		selectedDomainPrice: PropTypes.object.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
@@ -43,17 +45,17 @@ const Checkout = React.createClass( {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
 
-		if ( ! this.props.checkout.selectedDomainPrice.hasLoadedFromServer ) {
+		if ( ! this.props.selectedDomainPrice.hasLoadedFromServer ) {
 			this.props.fetchDomainPrice();
 		}
 	},
 
 	getApplicationFee() {
-		if ( ! this.props.checkout.selectedDomainPrice.hasLoadedFromServer ) {
+		if ( ! this.props.selectedDomainPrice.hasLoadedFromServer ) {
 			return null;
 		}
 
-		const applicationItem = find( this.props.checkout.selectedDomainPrice.data.details, {
+		const applicationItem = find( this.props.selectedDomainPrice.data.details, {
 			product_slug: 'delphin-domain-application-fee'
 		} );
 
@@ -65,11 +67,11 @@ const Checkout = React.createClass( {
 	},
 
 	getRegistrationFee() {
-		if ( ! this.props.checkout.selectedDomainPrice.hasLoadedFromServer ) {
+		if ( ! this.props.selectedDomainPrice.hasLoadedFromServer ) {
 			return null;
 		}
 
-		const registrationItem = find( this.props.checkout.selectedDomainPrice.data.details, {
+		const registrationItem = find( this.props.selectedDomainPrice.data.details, {
 			product_slug: 'delphin-domain'
 		} );
 
@@ -214,7 +216,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ this.props.checkout.selectedDomain.cost }</span>
+								<span>{ this.props.selectedDomainPrice.data.cost }</span>
 							</div>
 						</div>
 

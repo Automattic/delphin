@@ -16,6 +16,8 @@ class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
 		if ( ! this.props.domain ) {
 			this.props.redirect( 'home' );
+		} else {
+			this.props.fetchDomainPrice();
 		}
 	}
 

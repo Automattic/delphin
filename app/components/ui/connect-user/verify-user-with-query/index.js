@@ -28,11 +28,6 @@ class VerifyUserWithQuery extends React.Component {
 			} else {
 				this.props.redirect( 'home' );
 			}
-
-			this.props.addNotice( {
-				message: i18n.translate( 'You have signed in to your account successfully!' ),
-				status: 'success'
-			} );
 		} ).catch( error => {
 			if ( intention === 'login' ) {
 				this.props.redirect( 'loginUser' );

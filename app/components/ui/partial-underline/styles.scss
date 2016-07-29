@@ -1,7 +1,8 @@
 @import 'app/styles/colors';
 
 .partial-underline {
-	display: inline;
+	font-weight: 400;
+	margin-bottom: 20px;
 	position: relative;
 
 	&::before {
@@ -9,11 +10,11 @@
 		$line-margin: 3px;
 
 		background-color: $blue-bright;
-		bottom: -( $underline-height + $line-margin );
+		bottom: -( $underline-height + 10px );
 		content: ' ';
 		height: $underline-height;
 		position: absolute;
-		width: 85%;
+		width: 25%;
 	}
 
 	&::after {

@@ -61,6 +61,10 @@
 		.state {
 			margin-bottom: 10px;
 		}
+
+		.zip {
+			width: 100%;
+		}
 	}
 
 	@include breakpoint( '>480px' ) {

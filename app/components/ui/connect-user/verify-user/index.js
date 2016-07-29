@@ -125,7 +125,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	renderNotice() {
-		const { user: { data: { email, notice }, intention } } = this.props;
+		const { user: { data: { notice } } } = this.props;
 
 		if ( notice ) {
 			return notice;

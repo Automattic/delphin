@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
+import { fetchDomainPrice } from 'actions/domain-price';
 import { getPath } from 'routes';
 import { isPurchasing } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
@@ -51,7 +52,10 @@ export default reduxForm(
 		},
 		user: getUserSettings( state )
 	} ),
-	dispatch => ( {
+	( dispatch, ownProps ) => ( {
+		fetchDomainPrice() {
+			dispatch( fetchDomainPrice( ownProps.checkout.selectedDomain.domain_name ) );
+		},
 		redirectToCheckoutReview() {
 			dispatch( push( getPath( 'checkoutReview' ) ) );
 		},

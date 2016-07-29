@@ -15,6 +15,7 @@ import {
 	TRANSACTION_CREATE_COMPLETE,
 	TRANSACTION_CREATE_FAIL
 } from 'reducers/action-types';
+import { domainPrice as selectedDomainPrice } from 'reducers/checkout/domain-price';
 
 export const selectedDomain = ( state = {}, action ) => {
 	const { type } = action;
@@ -53,5 +54,6 @@ export const checkout = combineReducers( {
 	paygateConfiguration,
 	paygateToken,
 	transaction,
-	selectedDomain
+	selectedDomain,
+	selectedDomainPrice
 } );

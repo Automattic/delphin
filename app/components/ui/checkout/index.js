@@ -1,5 +1,6 @@
 // External dependencies
 import classnames from 'classnames';
+import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -41,6 +42,42 @@ const Checkout = React.createClass( {
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
+
+		if ( ! this.props.checkout.selectedDomainPrice.hasLoadedFromServer ) {
+			this.props.fetchDomainPrice();
+		}
+	},
+
+	getApplicationFee() {
+		if ( ! this.props.checkout.selectedDomainPrice.hasLoadedFromServer ) {
+			return null;
+		}
+
+		const applicationItem = find( this.props.checkout.selectedDomainPrice.data.details, {
+			product_slug: 'delphin-domain-application-fee'
+		} );
+
+		if ( ! applicationItem ) {
+			return null;
+		}
+
+		return applicationItem.cost;
+	},
+
+	getRegistrationFee() {
+		if ( ! this.props.checkout.selectedDomainPrice.hasLoadedFromServer ) {
+			return null;
+		}
+
+		const registrationItem = find( this.props.checkout.selectedDomainPrice.data.details, {
+			product_slug: 'delphin-domain'
+		} );
+
+		if ( ! registrationItem ) {
+			return null;
+		}
+
+		return registrationItem.cost;
 	},
 
 	validateSubmit( values ) {
@@ -61,7 +98,9 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields, handleSubmit } = this.props;
+			{ fields, handleSubmit } = this.props,
+			applicationFee = this.getApplicationFee(),
+			registrationFee = this.getRegistrationFee();
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -155,13 +194,13 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
+							{ applicationFee && <div className={ styles.orderItem }>
+								<span>{ i18n.translate( 'Application' ) }</span>
+								<span>{ applicationFee }</span>
+							</div> }
 							<div className={ styles.orderItem }>
-								<span>{ i18n.translate( 'Pre-registration application fee' ) }</span>
-								<span>{ '$220' }</span>
-							</div>
-							<div className={ styles.orderItem }>
-								<span>{ this.props.checkout.selectedDomain.domain }</span>
-								<span>{ '$30' }</span>
+								<span>{ i18n.translate( 'Domain registration' ) }</span>
+								<span>{ registrationFee }</span>
 							</div>
 							<div className={ styles.orderItem }>
 								<label>{ i18n.translate( 'Privacy Protection' ) }</label>
@@ -175,7 +214,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ '$250' }</span>
+								<span>{ this.props.checkout.selectedDomain.cost }</span>
 							</div>
 						</div>
 

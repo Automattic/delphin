@@ -18,9 +18,10 @@ const VerifyUser = React.createClass( {
 		addNotice: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
 		connectUserComplete: PropTypes.func.isRequired,
-		domain: PropTypes.string,
+		domain: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		hasSelectedDomain: PropTypes.bool.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		query: PropTypes.object,
@@ -55,7 +56,7 @@ const VerifyUser = React.createClass( {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedIn ) {
-			if ( nextProps.domain ) {
+			if ( nextProps.hasSelectedDomain ) {
 				this.props.redirect( 'contactInformation' );
 			} else {
 				this.props.redirect( 'home' );
@@ -191,7 +192,7 @@ const VerifyUser = React.createClass( {
 								connectUser={ this.props.connectUser }
 								email={ user.data.email }
 								intention={ user.intention }
-								domain={ domain }
+								domain={ this.props.hasSelectedDomain ? domain.domainName : null }
 							/>
 
 							{ this.twoFactorFields() }

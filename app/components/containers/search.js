@@ -48,15 +48,16 @@ export default connect(
 		},
 
 		selectDomain( domainProduct, isUserLoggedIn ) {
-			dispatch( selectDomain( domainProduct ) );
 			// pre-fetch domain price information
-			dispatch( fetchDomainPrice( domainProduct.domain_name ) );
+			dispatch( fetchDomainPrice( domainProduct.domain_name ) ).then( action => {
+				dispatch( selectDomain( action.result ) );
 
-			if ( isUserLoggedIn ) {
-				dispatch( push( getPath( 'contactInformation' ) ) );
-			} else {
-				dispatch( push( getPath( 'signupUser' ) ) );
-			}
+				if ( isUserLoggedIn ) {
+					dispatch( push( getPath( 'contactInformation' ) ) );
+				} else {
+					dispatch( push( getPath( 'signupUser' ) ) );
+				}
+			} );
 		},
 
 		fetchDomainSuggestions( query ) {

@@ -52,7 +52,7 @@ class SunriseConfirmDomain extends React.Component {
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
-						{ i18n.translate( '$250 Early application' ) }
+						{ i18n.translate( '$250 Early Application' ) }
 					</div>
 					<div className={ styles.renewalInfo }>
 						{ i18n.translate( '$30 registration + $220 application fee' ) }

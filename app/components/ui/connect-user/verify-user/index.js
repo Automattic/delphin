@@ -96,18 +96,9 @@ const VerifyUser = React.createClass( {
 			code,
 			twoFactorAuthenticationCode,
 			intention
-		).catch( error => {
-			if ( intention === 'login' ) {
-				this.props.redirect( 'loginUser' );
-			}
-
-			if ( intention === 'signup' ) {
-				this.props.redirect( 'signupUser' );
-			}
-
-			this.props.addNotice( {
-				message: error.code || i18n.translate( 'There was a problem signing in to your account.' ),
-				status: 'error'
+		).catch( () => {
+			return Promise.reject( {
+				code: i18n.translate( 'Enter your code just as it is in the email.' )
 			} );
 		} );
 	},

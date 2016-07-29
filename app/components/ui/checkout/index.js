@@ -25,21 +25,21 @@ import SiftScience from 'lib/sift-science';
 const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
-		fetchDomainPrice: PropTypes.func.isRequired,
+		domain: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		hasSelectedDomain: PropTypes.bool.isRequired,
 		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isPurchasing: PropTypes.bool.isRequired,
 		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
-		selectedDomainPrice: PropTypes.object.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
 	componentDidMount() {
-		if ( ! this.props.checkout.selectedDomain.domain ) {
+		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
@@ -47,8 +47,8 @@ const Checkout = React.createClass( {
 	},
 
 	getApplicationFee() {
-		const applicationItem = find( this.props.selectedDomainPrice.details, {
-			product_slug: 'delphin-domain-application-fee'
+		const applicationItem = find( this.props.domain.details, {
+			productSlug: 'delphin-domain-application-fee'
 		} );
 
 		if ( ! applicationItem ) {
@@ -59,8 +59,8 @@ const Checkout = React.createClass( {
 	},
 
 	getRegistrationFee() {
-		const registrationItem = find( this.props.selectedDomainPrice.details, {
-			product_slug: 'delphin-domain'
+		const registrationItem = find( this.props.domain.details, {
+			productSlug: 'delphin-domain'
 		} );
 
 		if ( ! registrationItem ) {
@@ -204,7 +204,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ this.props.selectedDomainPrice.cost }</span>
+								<span>{ this.props.domain.cost }</span>
 							</div>
 						</div>
 

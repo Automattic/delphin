@@ -72,12 +72,6 @@ export const defaultRoutes = [
 						static: true
 					}
 				]
-			},
-			{
-				path: 'checkout-review',
-				slug: 'checkoutReview',
-				static: false,
-				component: CheckoutReviewContainer
 			}
 		]
 	},
@@ -137,6 +131,12 @@ export const defaultRoutes = [
 				slug: 'checkout',
 				static: false,
 				component: CheckoutContainer
+			},
+			{
+				path: 'checkout-review',
+				slug: 'checkoutReview',
+				static: false,
+				component: CheckoutReviewContainer
 			}
 		]
 	},

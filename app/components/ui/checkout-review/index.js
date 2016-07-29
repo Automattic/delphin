@@ -48,9 +48,11 @@ class CheckoutReview extends React.Component {
 				<div>{ this.props.contactInformation.organization }</div>
 				<div>{ this.props.contactInformation.address1 }</div>
 				<div>{ this.props.contactInformation.address2 }</div>
-				<div>{ this.props.contactInformation.city }</div>
-				<div>{ this.props.contactInformation.state }</div>
-				<div>{ this.props.contactInformation.postalCode }</div>
+				<div>
+					{ this.props.contactInformation.city },&nbsp;
+					{ this.props.contactInformation.state }&nbsp;
+					{ this.props.contactInformation.postalCode }
+				</div>
 				<div>{ this.props.contactInformation.countryCode }</div>
 			</div>
 
@@ -79,7 +81,7 @@ class CheckoutReview extends React.Component {
 			<SunriseStep.Form className={ styles.checkoutReview } onSubmit={ this.handleSubmission }>
 				<section className={ styles.summary }>
 					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domain }</PartialUnderline>
-					<p className={ styles.applicationFee }>{ i18n.translate( '%(applicationFeeCost)s application fee', { args: { applicationFeeCost: this.props.applicationCost } } ) }</p>
+					<p className={ styles.applicationFee }>{ i18n.translate( '%(applicationFeeCost)s Early Application', { args: { applicationFeeCost: this.props.applicationCost } } ) }</p>
 					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
 				</section>
 				{ this.renderPaymentReview() }

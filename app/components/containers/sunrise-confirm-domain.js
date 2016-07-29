@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Internal dependencies
+import { fetchDomainPrice } from 'actions/domain-price';
 import { getSelectedDomain } from 'reducers/checkout/selectors';
 import { isLoggedIn } from 'reducers/user/selectors';
 import { redirect } from 'actions/routes';
@@ -14,6 +15,12 @@ export default connect(
 		isLoggedIn: isLoggedIn( state )
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
-	}, dispatch )
+		redirect,
+		fetchDomainPrice
+	}, dispatch ),
+	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
+		fetchDomainPrice() {
+			return dispatchProps.fetchDomainPrice( stateProps.domain );
+		}
+	} )
 )( SunriseConfirmDomain );

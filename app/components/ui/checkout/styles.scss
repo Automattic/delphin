@@ -1,4 +1,11 @@
 @import 'app/components/ui/form/styles';
+@import 'app/styles/colors';
+@import 'app/styles/breakpoints';
+
+.header {
+	background: $blue-background;
+	padding: 30px 20px 80px;
+}
 
 .expiration {
 	display: flex;
@@ -15,13 +22,18 @@
 
 .security-code {
 	width: 40%;
+
+	@include breakpoint( '<480px' ) {
+		width: 100%;
+	}
 }
 
 .order-summary {
-	background-color: lighten( $gray-light, 5% );
-	border-top: 1px solid #c8d7e1;
+	background-color: $gray-light;
+	border-top: 1px solid $blue-bright;
 	font-size: 1.4rem;
 	font-weight: 300;
+	margin-bottom: 30px;
 	padding: 30px;
 
 	h2 {
@@ -30,6 +42,11 @@
 		font-weight: 600;
 		margin: 5px 0 20px;
 		text-transform: uppercase;
+	}
+
+	@include breakpoint( '<480px' ) {
+		margin-bottom: 15px;
+		padding: 15px;
 	}
 }
 
@@ -53,5 +70,18 @@
 
 	.postal-code {
 		flex: 0 1 35%;
+	}
+
+	@include breakpoint( '<480px' ) {
+		flex-wrap: wrap;
+
+		.country-code {
+			flex: 1 0 100%;
+			margin-bottom: 20px;
+		}
+
+		.postal-code {
+			flex: 1 0 100%;
+		}
 	}
 }

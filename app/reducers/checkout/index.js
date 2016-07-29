@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 
 // Internal dependencies
+import { camelizeKeys } from 'lib/formatters';
 import { createRequestReducer } from 'lib/create-request-reducer';
 import {
 	DOMAIN_SELECT,
@@ -22,10 +23,7 @@ export const selectedDomain = ( state = {}, action ) => {
 
 	switch ( type ) {
 		case DOMAIN_SELECT:
-			return {
-				domain: action.value && action.value.domain_name,
-				cost: action.value && action.value.cost
-			};
+			return camelizeKeys( action.value );
 
 		default:
 			return state;

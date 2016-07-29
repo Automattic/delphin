@@ -14,7 +14,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
-		if ( ! this.props.domain ) {
+		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );
 		}
 	}
@@ -48,7 +48,7 @@ class SunriseConfirmDomain extends React.Component {
 
 				<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
 					<h3>
-						{ domain }
+						{ domain.domainName }
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
@@ -75,7 +75,8 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
-	domain: PropTypes.string,
+	domain: PropTypes.object,
+	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired
 };

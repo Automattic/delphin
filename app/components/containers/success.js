@@ -8,7 +8,7 @@ import Success from 'components/ui/success';
 
 export default connect(
 	state => ( {
-		domain: getSelectedDomain( state ).domain,
+		domain: getSelectedDomain( state ).domainName,
 		email: getUserSettings( state ).data.email
 	} )
 )( Success );

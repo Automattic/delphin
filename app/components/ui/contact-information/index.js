@@ -170,9 +170,9 @@ class ContactInformation extends React.Component {
 		return (
 			<DocumentTitle title={ i18n.translate( 'Contact Information' ) }>
 				<div>
-					<CheckoutProgressbar currentStep={ 2 } />
-
 					<div className={ styles.header }>
+						<CheckoutProgressbar currentStep={ 2 } />
+
 						<h2 className={ styles.heading }>
 							{ i18n.translate( 'Registration Profile' ) }
 						</h2>
@@ -191,19 +191,22 @@ class ContactInformation extends React.Component {
 						onSubmit={ handleSubmit( this.handleSubmission ) }
 						fieldArea={
 							<div>
-								<fieldset className={ styles.row }>
-									<label>{ i18n.translate( 'Name' ) }</label>
-
+								<fieldset>
+									<label>{ i18n.translate( 'First Name' ) }</label>
 									<Input
-										disabled={ this.isDataLoading() }
-										field={ fields.firstName }
-										autoFocus
-										untouch={ untouch }
-										onBlur={ this.handleBlur }
-										className={ styles.firstName }
-										placeholder={ i18n.translate( 'First Name' ) }
-									/>
+											disabled={ this.isDataLoading() }
+											field={ fields.firstName }
+											autoFocus
+											untouch={ untouch }
+											onBlur={ this.handleBlur }
+											className={ styles.firstName }
+											placeholder={ i18n.translate( 'First Name' ) }
+										/>
+									<ValidationError field={ fields.firstName } />
+								</fieldset>
 
+								<fieldset>
+									<label>{ i18n.translate( 'Last Name' ) }</label>
 									<Input
 										disabled={ this.isDataLoading() }
 										field={ fields.lastName }
@@ -212,7 +215,7 @@ class ContactInformation extends React.Component {
 										className={ styles.lastName }
 										placeholder={ i18n.translate( 'Last Name' ) }
 									/>
-									<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
+									<ValidationError field={ fields.lastName } />
 								</fieldset>
 
 								{ ! this.organizationInputIsVisible() && (
@@ -280,48 +283,62 @@ class ContactInformation extends React.Component {
 											{ i18n.translate( '+ Add Address Line 2' ) }
 										</a>
 									) }
+								</fieldset>
 
-									<div className={ styles.row }>
-										<Input
-											disabled={ this.isDataLoading() }
-											untouch={ untouch }
-											field={ fields.city }
-											onBlur={ this.handleBlur }
-											className={ styles.city }
-											placeholder={ i18n.translate( 'City' ) }
-										/>
-
-										<State
-											disabled={ this.isDataLoading() }
-											field={ fields.state }
-											untouch={ untouch }
-											onBlur={ this.handleBlur }
-											className={ styles.state }
-											states={ this.props.states } />
-
-										<Input
-											disabled={ this.isDataLoading() }
-											untouch={ untouch }
-											field={ fields.postalCode }
-											onBlur={ this.handleBlur }
-											className={ styles.postalCode }
-											placeholder={ i18n.translate( 'Zip' ) }
-										/>
-										<ValidationError
-											fields={ [
-												fields.city,
-												fields.state,
-												fields.postalCode
-											] }
-										/>
-									</div>
-
+								<fieldset>
+									<label>{ i18n.translate( 'Country' ) }</label>
 									<Country
 										field={ fields.countryCode }
 										className={ styles.countryCode }
 										supportedBy="domains"
 									/>
 									<ValidationError field={ fields.countryCode } />
+								</fieldset>
+
+								<fieldset>
+									<label>{ i18n.translate( 'City' ) }</label>
+									<Input
+										disabled={ this.isDataLoading() }
+										untouch={ untouch }
+										field={ fields.city }
+										onBlur={ this.handleBlur }
+										className={ styles.city }
+										placeholder={ i18n.translate( 'City' ) }
+									/>
+									<ValidationError field={ fields.city } />
+								</fieldset>
+
+								<fieldset>
+									<div className={ styles.row }>
+										<div className={ styles.state }>
+											<label>{ i18n.translate( 'State' ) }</label>
+											<State
+												disabled={ this.isDataLoading() }
+												field={ fields.state }
+												untouch={ untouch }
+												onBlur={ this.handleBlur }
+												className={ styles.state }
+												states={ this.props.states } />
+										</div>
+
+										<div className={ styles.zip }>
+											<label>{ i18n.translate( 'Postal Code' ) }</label>
+											<Input
+												disabled={ this.isDataLoading() }
+												untouch={ untouch }
+												field={ fields.postalCode }
+												onBlur={ this.handleBlur }
+												className={ styles.postalCode }
+												placeholder={ i18n.translate( 'Zip' ) }
+											/>
+										</div>
+										<ValidationError
+											fields={ [
+												fields.state,
+												fields.postalCode
+											] }
+										/>
+									</div>
 								</fieldset>
 
 								<fieldset>
@@ -340,10 +357,6 @@ class ContactInformation extends React.Component {
 						}
 						submitArea={
 							<div>
-								<p className={ styles.disclaimer }>
-									{ i18n.translate( 'Some providers charge a fee to keep this information private, but we protect your privacy free of charge.' ) }
-								</p>
-
 								<Button disabled={ this.isSubmitButtonDisabled() }>
 									{ i18n.translate( 'Continue to Checkout' ) }
 								</Button>

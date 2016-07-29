@@ -192,10 +192,8 @@ class ContactInformation extends React.Component {
 						fieldArea={
 							<div>
 								<fieldset>
-									<label>{ i18n.translate( 'Name' ) }</label>
-
-									<div className={ styles.row }>
-										<Input
+									<label>{ i18n.translate( 'First Name' ) }</label>
+									<Input
 											disabled={ this.isDataLoading() }
 											field={ fields.firstName }
 											autoFocus
@@ -204,17 +202,20 @@ class ContactInformation extends React.Component {
 											className={ styles.firstName }
 											placeholder={ i18n.translate( 'First Name' ) }
 										/>
+									<ValidationError field={ fields.firstName } />
+								</fieldset>
 
-										<Input
-											disabled={ this.isDataLoading() }
-											field={ fields.lastName }
-											untouch={ untouch }
-											onBlur={ this.handleBlur }
-											className={ styles.lastName }
-											placeholder={ i18n.translate( 'Last Name' ) }
-										/>
-									</div>
-									<ValidationError fields={ [ fields.firstName, fields.lastName ] } />
+								<fieldset>
+									<label>{ i18n.translate( 'Last Name' ) }</label>
+									<Input
+										disabled={ this.isDataLoading() }
+										field={ fields.lastName }
+										untouch={ untouch }
+										onBlur={ this.handleBlur }
+										className={ styles.lastName }
+										placeholder={ i18n.translate( 'Last Name' ) }
+									/>
+									<ValidationError field={ fields.lastName } />
 								</fieldset>
 
 								{ ! this.organizationInputIsVisible() && (

@@ -15,7 +15,7 @@ const ConnectUser = React.createClass( {
 	propTypes: {
 		clearConnectUser: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
-		domain: PropTypes.string,
+		domain: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		intention: PropTypes.string.isRequired,
@@ -52,7 +52,7 @@ const ConnectUser = React.createClass( {
 	},
 
 	handleSubmit() {
-		this.props.connectUser( this.props.values, this.props.domain );
+		this.props.connectUser( this.props.values, this.props.domain.domainName );
 	},
 
 	render() {

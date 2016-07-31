@@ -73,8 +73,11 @@ class CheckoutReview extends React.Component {
 					{ i18n.translate( 'Review your application' ) }
 				</h1>
 				<h2>
-					{ i18n.translate( 'This does not guarantee the domain is yours. ' +
-						'If we receive multiple requests for this domain you will need to bid at auction.' ) }
+					{ i18n.translate( 'Applying does not guarantee the domain is  yours. ' ) }
+				</h2>
+				<h2>
+					{ i18n.translate( 'If others apply for it, you will be able to bid for it in an auction. ' +
+						'Applications are open until November 9.' ) }
 				</h2>
 			</SunriseStep.Header>
 

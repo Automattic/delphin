@@ -18,7 +18,7 @@ const Success = ( { domain, email } ) => (
 			</h1>
 
 			<h2>
-				{ i18n.translate( 'Your application for {{strong}}%(domain)s{{/strong}} has been submitted.',
+				{ i18n.translate( 'Your application for {{strong}}%(domain)s{{/strong}} is being processed.',
 					{
 						args: { domain },
 						components: { strong: <strong /> }
@@ -30,31 +30,30 @@ const Success = ( { domain, email } ) => (
 		<div className={ styles.content }>
 			<div className={ styles.highlight }>
 				<h3>
-					{ i18n.translate( "Make sure you're ready for the next step!" ) }
+					{ i18n.translate( "What happens now?" ) }
 				</h3>
 
 				<p>
-					{ i18n.translate( "We'll let you know if you need to prepare for a bidding war." ) }
+					{ i18n.translate( "Your application will be reviewed by November 9. We'll email you at {{strong}}%(email)s{{/strong}} with more details.",
+						{
+							args: { email },
+							components: { strong: <strong /> }
+						}
+					) }
 				</p>
 			</div>
 
 			<div className={ styles.text }>
 				<p>
-					{ i18n.translate( "If no other requests are received for this domain, it's yours! But if we receive multiple requests you will be able to bid for it at auction." ) }
+					{ i18n.translate( "If no other requests are received for this domain, you will be granted the domain shortly after November 9." ) }
 				</p>
 
 				<p>
-					{ i18n.translate( "We suggest setting up an account at {{a}}NameJet{{/a}}, our domain auction partner, just in case your domain goes to auction. We'll email you at {{strong}}%(email)s{{/strong}} with more details.",
-						{
-							args: {
-								email
-							},
-							components: {
-								a: <a href="http://www.namejet.com/" target="_blank" />,
-								strong: <strong />
-							}
-						}
-					) }
+					{ i18n.translate( "If multiple requests are received for this domain, you will be able to bid for it in an auction, between November 14 and November 17." ) }
+				</p>
+
+				<p>
+					{ i18n.translate( "Please set up an account with our auction partner, NameJet, so you will be ready in case your domain goes to auction." ) }
 				</p>
 
 				<a

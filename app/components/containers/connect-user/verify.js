@@ -18,7 +18,7 @@ const validate = values => {
 	if ( ! values.code ) {
 		errors.code = i18n.translate( 'Please enter your verification code' );
 	} else if ( ! /^[0-9]{6}$/i.test( values.code ) ) {
-		errors.code = i18n.translate( 'This is an invalid verification code' );
+		errors.code = i18n.translate( 'Your code should be six digits' );
 	}
 
 	if ( values.twoFactorAuthenticationCode !== undefined ) {

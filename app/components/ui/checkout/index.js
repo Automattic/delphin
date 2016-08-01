@@ -1,6 +1,5 @@
 // External dependencies
 import classnames from 'classnames';
-import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -26,6 +25,8 @@ const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
 		domain: PropTypes.object,
+		domainApplicationCost: PropTypes.string.isRequired,
+		domainCost: PropTypes.string.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
@@ -46,30 +47,6 @@ const Checkout = React.createClass( {
 		}
 	},
 
-	getApplicationFee() {
-		const applicationItem = find( this.props.domain.details, {
-			productSlug: 'delphin-domain-application-fee'
-		} );
-
-		if ( ! applicationItem ) {
-			return null;
-		}
-
-		return applicationItem.cost;
-	},
-
-	getRegistrationFee() {
-		const registrationItem = find( this.props.domain.details, {
-			productSlug: 'delphin-domain'
-		} );
-
-		if ( ! registrationItem ) {
-			return null;
-		}
-
-		return registrationItem.cost;
-	},
-
 	validateSubmit( values ) {
 		const errors = creditCardDetails.validateCardDetails( values ).errors;
 
@@ -88,9 +65,7 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields, handleSubmit } = this.props,
-			applicationFee = this.getApplicationFee(),
-			registrationFee = this.getRegistrationFee();
+			{ fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -184,13 +159,13 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
-							{ applicationFee && <div className={ styles.orderItem }>
+							{ domainApplicationCost && <div className={ styles.orderItem }>
 								<span>{ i18n.translate( 'Application' ) }</span>
-								<span>{ applicationFee }</span>
+								<span>{ domainApplicationCost }</span>
 							</div> }
 							<div className={ styles.orderItem }>
-								<span>{ i18n.translate( 'Domain registration' ) }</span>
-								<span>{ registrationFee }</span>
+								<span>{ i18n.translate( 'Domain Registration' ) }</span>
+								<span>{ domainCost }</span>
 							</div>
 							<div className={ styles.orderItem }>
 								<label>{ i18n.translate( 'Privacy Protection' ) }</label>
@@ -204,7 +179,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ this.props.domain.cost }</span>
+								<span>{ this.props.domain.totalCost }</span>
 							</div>
 						</div>
 

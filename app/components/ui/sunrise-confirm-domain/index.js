@@ -30,9 +30,9 @@ class SunriseConfirmDomain extends React.Component {
 	}
 
 	render() {
-		const { domain } = this.props;
+		const { domain, domainCost, applicationCost } = this.props;
 
-		const { applicationCost, cost, domainName, isPremium, totalCost } = domain;
+		const { domainName, isPremium, totalCost } = domain;
 
 		return (
 			<SunriseStep>
@@ -68,7 +68,7 @@ class SunriseConfirmDomain extends React.Component {
 						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
 							args: {
 								applicationCost,
-								domainCost: cost
+								domainCost
 							}
 						} ) }
 					</div>
@@ -90,7 +90,9 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
+	applicationCost: PropTypes.string.isRequired,
 	domain: PropTypes.object,
+	domainCost: PropTypes.string.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired

@@ -65,6 +65,16 @@ class CheckoutReview extends React.Component {
 		</section>;
 	}
 
+	renderTermsOfService() {
+		return <section className={ styles.terms }>
+			{ i18n.translate( 'By submitting your application you agree to our {{link}}terms of service{{/link}}.',
+				{
+					components: { link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" /> }
+				}
+			) }
+		</section>;
+	}
+
 	render() {
 		return ( <SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Review your application' ) } />
@@ -89,6 +99,7 @@ class CheckoutReview extends React.Component {
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }
+				{ this.renderTermsOfService() }
 				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit Application & Pay now' ) }</Button>
 
 				<Link className={ styles.cancelApplication } to={ getPath( 'home' ) }>{ i18n.translate( 'Cancel Application' ) }</Link>

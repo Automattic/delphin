@@ -14,4 +14,4 @@ const About = () => {
 	);
 };
 
-export default withPageView( About, 'about', 'About' );
+export default withPageView( About, 'About' );

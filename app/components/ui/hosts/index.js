@@ -28,4 +28,4 @@ const Hosts = () => {
 	);
 };
 
-export default withStyles( styles )( withPageView( Hosts, 'hosts', 'Hosts' ) );
+export default withStyles( styles )( withPageView( Hosts, 'Hosts' ) );

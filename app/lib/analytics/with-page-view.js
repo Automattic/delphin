@@ -5,35 +5,30 @@ import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
-import { getPath } from 'app/routes';
 import { recordPageView } from 'actions/analytics';
 
-export default ( WrappedComponent, slug, title ) => {
+export default ( WrappedComponent, title ) => {
 	class WithPageView extends React.Component {
 		componentDidMount() {
-			this.props.recordPageView( this.props.url, this.props.title );
+			this.props.recordPageView( this.props.location.pathname, title );
 		}
 
 		render() {
-			const props = omit( this.props, [ 'recordPageView', 'title', 'url' ] );
+			const props = omit( this.props, [ 'recordPageView' ] );
 
 			return (
-				<WrappedComponent {...props} />
+				<WrappedComponent { ...props } />
 			);
 		}
 	}
 
 	WithPageView.propTypes = {
-		recordPageView: PropTypes.func.isRequired,
-		title: PropTypes.string.isRequired,
-		url: PropTypes.string.isRequired
+		location: PropTypes.object.isRequired,
+		recordPageView: PropTypes.func.isRequired
 	};
 
 	return connect(
-		() => ( {
-			title,
-			url: getPath( slug )
-		} ),
+		undefined,
 		dispatch => bindActionCreators( {
 			recordPageView
 		}, dispatch )

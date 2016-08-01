@@ -178,7 +178,7 @@ class ContactInformation extends React.Component {
 						</h2>
 
 						<h3 className={ styles.text }>
-							{ i18n.translate( 'We need your contact information to claim {{strong}}%(domain)s{{/strong}}.',
+							{ i18n.translate( 'Enter your contact information to claim {{strong}}%(domain)s{{/strong}}.',
 								{
 									args: { domain: this.props.domain },
 									components: { strong: <strong /> }

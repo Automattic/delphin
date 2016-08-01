@@ -14,7 +14,7 @@ const Header = ( { intention } ) => {
 		heading = i18n.translate( 'Your domain awaits' );
 		text = i18n.translate( 'Enter your email address to claim your domain.' );
 	} else if ( intention === 'verifyUser' ) {
-		heading = i18n.translate( 'Time to check your email!' );
+		heading = i18n.translate( 'Check your email' );
 	}
 
 	return (

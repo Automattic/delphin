@@ -173,4 +173,4 @@ const Search = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( Search, 'search', 'Search' ) );
+export default withStyles( styles )( withPageView( Search, 'Search' ) );

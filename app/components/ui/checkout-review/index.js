@@ -125,4 +125,4 @@ CheckoutReview.propTypes = {
 	selectedDomain: PropTypes.object.isRequired
 };
 
-export default withStyles( styles )( withPageView( bindHandlers( CheckoutReview ), 'checkoutReview', 'Checkout Review' ) );
+export default withStyles( styles )( withPageView( bindHandlers( CheckoutReview ), 'Checkout Review' ) );

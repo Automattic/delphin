@@ -82,4 +82,4 @@ SunriseConfirmDomain.propTypes = {
 	redirect: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'confirmDomain', 'Confirm Domain' ) );
+export default withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) );

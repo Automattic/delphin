@@ -73,4 +73,4 @@ Success.propTypes = {
 	email: PropTypes.string.isRequired
 };
 
-export default withStyles( styles )( withPageView( Success, 'success', 'Success' ) );
+export default withStyles( styles )( withPageView( Success, 'Success' ) );

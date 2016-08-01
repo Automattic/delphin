@@ -204,4 +204,4 @@ const Checkout = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( Checkout, 'checkout', 'Checkout' ) );
+export default withStyles( styles )( withPageView( Checkout, 'Checkout' ) );

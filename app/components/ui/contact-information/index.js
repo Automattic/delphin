@@ -397,4 +397,4 @@ ContactInformation.propTypes = {
 	validateContactInformation: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'contactInformation', 'Contact Information' ) );
+export default withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'Contact Information' ) );

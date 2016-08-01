@@ -57,4 +57,4 @@ const MyDomains = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( MyDomains, 'myDomains', 'My Domains' ) );
+export default withStyles( styles )( withPageView( MyDomains, 'My Domains' ) );

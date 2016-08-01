@@ -79,4 +79,4 @@ const SunriseHome = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( SunriseHome, 'home', 'Home' ) );
+export default withStyles( styles )( withPageView( SunriseHome, 'Home' ) );

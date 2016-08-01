@@ -34,7 +34,7 @@ class CheckoutReview extends React.Component {
 					<span className={ styles.cardNumber }>**** { ccSuffix }</span>
 				</div>
 				<div className={ styles.cost }>
-					{ this.props.selectedDomain.cost }
+					{ this.props.selectedDomain.totalCost }
 				</div>
 			</div>
 			<Link className={ styles.editLink } to={ getPath( 'checkout' ) }>{ i18n.translate( 'edit payment method' ) }</Link>
@@ -93,7 +93,7 @@ class CheckoutReview extends React.Component {
 
 			<SunriseStep.Form className={ styles.checkoutReview } onSubmit={ this.handleSubmission }>
 				<section className={ styles.summary }>
-					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domain }</PartialUnderline>
+					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
 					<p className={ styles.applicationFee }>{ i18n.translate( '%(applicationFeeCost)s Early Application', { args: { applicationFeeCost: this.props.applicationCost } } ) }</p>
 					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
 				</section>
@@ -121,10 +121,7 @@ CheckoutReview.propTypes = {
 	purchaseDomain: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	renewCost: PropTypes.string.isRequired,
-	selectedDomain: PropTypes.shape( {
-		domain: PropTypes.string.isRequired,
-		cost: PropTypes.string.isRequired
-	} ).isRequired
+	selectedDomain: PropTypes.object.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( CheckoutReview ) );

@@ -16,7 +16,9 @@ class VerifyUserWithQuery extends React.Component {
 			{ intention } = this.props;
 
 		if ( domain ) {
-			this.props.selectDomain( { domain_name: domain } );
+			this.props.fetchDomainPrice( domain ).then( action => {
+				this.props.selectDomain( action.result );
+			} );
 		}
 
 		this.props.verifyUser(
@@ -60,6 +62,7 @@ class VerifyUserWithQuery extends React.Component {
 
 VerifyUserWithQuery.propTypes = {
 	addNotice: PropTypes.func.isRequired,
+	fetchDomainPrice: PropTypes.func.isRequired,
 	intention: PropTypes.string.isRequired,
 	query: PropTypes.object.isRequired,
 	redirect: PropTypes.func.isRequired,

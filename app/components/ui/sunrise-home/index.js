@@ -13,6 +13,7 @@ import { withTld } from 'lib/domains';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
+		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
@@ -22,9 +23,11 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		this.props.selectDomain( { domain_name: withTld( this.props.values.query ), cost: '€666' } );
-
-		this.props.redirectToConfirmDomain();
+		const query = withTld( this.props.values.query );
+		this.props.fetchDomainPrice( query ).then( action => {
+			this.props.selectDomain( action.result );
+			this.props.redirectToConfirmDomain();
+		} );
 	},
 
 	render() {

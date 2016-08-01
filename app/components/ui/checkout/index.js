@@ -1,4 +1,5 @@
 // External dependencies
+import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -23,8 +24,12 @@ import SiftScience from 'lib/sift-science';
 const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
+		domain: PropTypes.object,
+		domainApplicationCost: PropTypes.string.isRequired,
+		domainCost: PropTypes.string.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
+		hasSelectedDomain: PropTypes.bool.isRequired,
 		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isPurchasing: PropTypes.bool.isRequired,
@@ -35,7 +40,7 @@ const Checkout = React.createClass( {
 	},
 
 	componentDidMount() {
-		if ( ! this.props.checkout.selectedDomain.domain ) {
+		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
@@ -60,7 +65,7 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields, handleSubmit } = this.props;
+			{ fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -154,9 +159,13 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
+							{ domainApplicationCost && <div className={ styles.orderItem }>
+								<span>{ i18n.translate( 'Application' ) }</span>
+								<span>{ domainApplicationCost }</span>
+							</div> }
 							<div className={ styles.orderItem }>
-								<span>{ this.props.checkout.selectedDomain.domain }</span>
-								<span>{ this.props.checkout.selectedDomain.cost }</span>
+								<span>{ i18n.translate( 'Domain Registration' ) }</span>
+								<span>{ domainCost }</span>
 							</div>
 							<div className={ styles.orderItem }>
 								<label>{ i18n.translate( 'Privacy Protection' ) }</label>
@@ -167,6 +176,10 @@ const Checkout = React.createClass( {
 									/>
 									<span className={ styles.privacyProtectionPrice }>FREE</span>
 								</span>
+							</div>
+							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
+								<span>{ i18n.translate( 'Total cost' ) }</span>
+								<span>{ this.props.domain.totalCost }</span>
 							</div>
 						</div>
 

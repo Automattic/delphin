@@ -8,6 +8,10 @@ import i18n from 'i18n-calypso';
 import { getPath } from 'routes';
 import { isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 
+function getDisplayName( WrappedComponent ) {
+	return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
 export default WrappedComponent => {
 	function LoginEnforcer( props ) {
 		if ( ! props.isLoggedIn && ! props.isLoggedOut ) {
@@ -27,6 +31,8 @@ export default WrappedComponent => {
 		isLoggedOut: PropTypes.bool.isRequired,
 		redirectToLogin: PropTypes.func.isRequired
 	};
+
+	LoginEnforcer.displayName = `LoginEnforcer(${ getDisplayName( WrappedComponent ) })`;
 
 	return connect(
 		state => ( {

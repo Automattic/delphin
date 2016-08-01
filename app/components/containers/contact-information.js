@@ -11,7 +11,7 @@ import { fetchStates } from 'actions/territories';
 import { fetchLocation } from 'actions/location';
 import { getStates } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
-import { getSelectedDomain } from 'reducers/checkout/selectors';
+import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
@@ -37,7 +37,8 @@ export default reduxForm(
 	},
 	state => ( {
 		contactInformation: state.contactInformation,
-		domain: getSelectedDomain( state ).domain,
+		domain: getSelectedDomain( state ),
+		hasSelectedDomain: hasSelectedDomain( state ),
 		isLoggedOut: isLoggedOut( state ),
 		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),

@@ -25,7 +25,7 @@ const Suggestion = React.createClass( {
 					</div>
 					<hr />
 					<div className={ styles.cost }>
-						{ this.props.suggestion.cost }
+						{ this.props.suggestion.total_cost }
 					</div>
 				</div>
 				<div className={ styles.buyButton }>

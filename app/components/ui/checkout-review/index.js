@@ -65,6 +65,16 @@ class CheckoutReview extends React.Component {
 		</section>;
 	}
 
+	renderTermsOfService() {
+		return <section className={ styles.terms }>
+			{ i18n.translate( 'By submitting your application you agree to our {{link}}terms of service{{/link}}.',
+				{
+					components: { link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" /> }
+				}
+			) }
+		</section>;
+	}
+
 	render() {
 		return ( <SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Review your application' ) } />
@@ -73,8 +83,11 @@ class CheckoutReview extends React.Component {
 					{ i18n.translate( 'Review your application' ) }
 				</h1>
 				<h2>
-					{ i18n.translate( 'This does not guarantee the domain is yours. ' +
-						'If we receive multiple requests for this domain you will need to bid at auction.' ) }
+					{ i18n.translate( 'Applying does not guarantee the domain is  yours. ' ) }
+				</h2>
+				<h2>
+					{ i18n.translate( 'If others apply for it, you will be able to bid for it in an auction. ' +
+						'Applications are open until November 9.' ) }
 				</h2>
 			</SunriseStep.Header>
 
@@ -86,6 +99,7 @@ class CheckoutReview extends React.Component {
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }
+				{ this.renderTermsOfService() }
 				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit Application & Pay now' ) }</Button>
 
 				<Link className={ styles.cancelApplication } to={ getPath( 'home' ) }>{ i18n.translate( 'Cancel Application' ) }</Link>

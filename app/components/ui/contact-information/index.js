@@ -174,11 +174,11 @@ class ContactInformation extends React.Component {
 						<CheckoutProgressbar currentStep={ 2 } />
 
 						<h2 className={ styles.heading }>
-							{ i18n.translate( 'Registration Profile' ) }
+							{ i18n.translate( 'Enter your contact information' ) }
 						</h2>
 
 						<h3 className={ styles.text }>
-							{ i18n.translate( 'Enter your contact information to claim {{strong}}%(domain)s{{/strong}}.',
+							{ i18n.translate( 'Your details are needed to claim {{strong}}%(domain)s{{/strong}}.',
 								{
 									args: { domain: this.props.domain.domainName },
 									components: { strong: <strong /> }

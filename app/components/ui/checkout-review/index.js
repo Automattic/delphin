@@ -99,9 +99,9 @@ class CheckoutReview extends React.Component {
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }
 				{ this.renderTermsOfService() }
-				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit Application & Pay now' ) }</Button>
+				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit application & pay now' ) }</Button>
 
-				<Link className={ styles.cancelApplication } to={ getPath( 'home' ) }>{ i18n.translate( 'Cancel Application' ) }</Link>
+				<Link className={ styles.cancelApplication } to={ getPath( 'home' ) }>{ i18n.translate( 'Cancel application' ) }</Link>
 			</SunriseStep.Form>
 
 			{/* This is here so Cancel Application will have some space */}

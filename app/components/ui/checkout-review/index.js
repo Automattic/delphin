@@ -34,7 +34,7 @@ class CheckoutReview extends React.Component {
 					<span className={ styles.cardNumber }>**** { ccSuffix }</span>
 				</div>
 				<div className={ styles.cost }>
-					{ this.props.selectedDomain.cost }
+					{ this.props.selectedDomain.totalCost }
 				</div>
 			</div>
 			<Link className={ styles.editLink } to={ getPath( 'checkout' ) }>{ i18n.translate( 'edit payment method' ) }</Link>

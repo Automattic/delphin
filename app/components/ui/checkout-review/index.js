@@ -83,11 +83,8 @@ class CheckoutReview extends React.Component {
 					{ i18n.translate( 'Review your application' ) }
 				</h1>
 				<h2>
-					{ i18n.translate( 'Applying does not guarantee the domain is  yours. ' ) }
-				</h2>
-				<h2>
-					{ i18n.translate( 'If others apply for it, you will be able to bid for it in an auction. ' +
-						'Applications are open until November 9.' ) }
+					{ i18n.translate( 'Applying does not guarantee you get the domain. ' +
+					'If others apply for it, you will be able to bid for it in an auction.' ) }
 				</h2>
 			</SunriseStep.Header>
 
@@ -96,6 +93,8 @@ class CheckoutReview extends React.Component {
 					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
 					<p className={ styles.applicationFee }>{ i18n.translate( '%(applicationFeeCost)s Early Application', { args: { applicationFeeCost: this.props.applicationCost } } ) }</p>
 					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
+					<p>{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+					</p>
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }

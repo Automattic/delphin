@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
+import { fetchDomainPrice } from 'actions/domain-price';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getPath } from 'routes';
 import { selectDomain } from 'actions/domain-search';
@@ -26,6 +27,7 @@ export default reduxForm(
 	},
 	undefined,
 	dispatch => bindActionCreators( {
+		fetchDomainPrice,
 		selectDomain,
 		redirectToConfirmDomain: () => push( getPath( 'confirmDomain' ) )
 	}, dispatch )

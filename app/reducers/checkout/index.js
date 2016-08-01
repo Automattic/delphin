@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 
 // Internal dependencies
+import { camelizeKeys } from 'lib/formatters';
 import { createRequestReducer } from 'lib/create-request-reducer';
 import {
 	DOMAIN_SELECT,
@@ -15,16 +16,14 @@ import {
 	TRANSACTION_CREATE_COMPLETE,
 	TRANSACTION_CREATE_FAIL
 } from 'reducers/action-types';
+import { domainPrice as selectedDomainPrice } from 'reducers/checkout/domain-price';
 
 export const selectedDomain = ( state = {}, action ) => {
 	const { type } = action;
 
 	switch ( type ) {
 		case DOMAIN_SELECT:
-			return {
-				domain: action.value && action.value.domain_name,
-				cost: action.value && action.value.cost
-			};
+			return camelizeKeys( action.value );
 
 		default:
 			return state;
@@ -53,5 +52,6 @@ export const checkout = combineReducers( {
 	paygateConfiguration,
 	paygateToken,
 	transaction,
-	selectedDomain
+	selectedDomain,
+	selectedDomainPrice
 } );

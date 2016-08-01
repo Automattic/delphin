@@ -91,14 +91,14 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 export function createTransaction() {
 	return ( dispatch, getState ) => {
 		const checkout = getCheckout( getState() ),
-			{ domain } = checkout.selectedDomain,
+			{ domainName } = checkout.selectedDomain,
 			contactInformationForm = getValues( getState().form.contactInformation ),
 			checkoutForm = getValues( getState().form.checkout ),
 			{ privacyProtection } = checkoutForm,
 			paygateToken = checkout.paygateToken.data.token;
 
 		const payload = {
-			domain,
+			domain: domainName,
 			privacy: privacyProtection,
 			payment_key: paygateToken,
 			payment_method: 'paygate',
@@ -117,7 +117,7 @@ export function createTransaction() {
 			loading: TRANSACTION_CREATE,
 			success: () => ( {
 				type: TRANSACTION_CREATE_COMPLETE,
-				domain
+				domain: domainName
 			} ),
 			fail: ( error ) => failThunkDispatch => {
 				failThunkDispatch( addNotice( {

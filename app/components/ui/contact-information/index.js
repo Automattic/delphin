@@ -32,7 +32,7 @@ class ContactInformation extends React.Component {
 			return;
 		}
 
-		if ( ! this.props.domain ) {
+		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 			return;
 		}
@@ -145,7 +145,7 @@ class ContactInformation extends React.Component {
 		}, {} );
 
 		return this.props.validateContactInformation(
-			this.props.domain,
+			this.props.domain.domainName,
 			contactInformation
 		);
 	}
@@ -180,7 +180,7 @@ class ContactInformation extends React.Component {
 						<h3 className={ styles.text }>
 							{ i18n.translate( 'Enter your contact information to claim {{strong}}%(domain)s{{/strong}}.',
 								{
-									args: { domain: this.props.domain },
+									args: { domain: this.props.domain.domainName },
 									components: { strong: <strong /> }
 								}
 							) }
@@ -370,13 +370,14 @@ class ContactInformation extends React.Component {
 
 ContactInformation.propTypes = {
 	contactInformation: PropTypes.object.isRequired,
-	domain: PropTypes.string,
+	domain: PropTypes.object,
 	errors: PropTypes.object,
 	fetchContactInformation: PropTypes.func.isRequired,
 	fetchLocation: PropTypes.func.isRequired,
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hasSelectedDomain: PropTypes.bool.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,

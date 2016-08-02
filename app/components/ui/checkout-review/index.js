@@ -13,6 +13,7 @@ import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { getPath } from 'routes';
+import withPageView from 'lib/analytics/with-page-view';
 
 class CheckoutReview extends React.Component {
 
@@ -123,4 +124,4 @@ CheckoutReview.propTypes = {
 	selectedDomain: PropTypes.object.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( CheckoutReview ) );
+export default withStyles( styles )( withPageView( bindHandlers( CheckoutReview ), 'Checkout Review' ) );

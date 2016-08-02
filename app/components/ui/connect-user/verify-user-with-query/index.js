@@ -12,6 +12,8 @@ class VerifyUserWithQuery extends React.Component {
 			return;
 		}
 
+		this.props.recordPageView();
+
 		const { code, email, domain } = this.props.query,
 			{ intention } = this.props;
 
@@ -65,6 +67,7 @@ VerifyUserWithQuery.propTypes = {
 	fetchDomainPrice: PropTypes.func.isRequired,
 	intention: PropTypes.string.isRequired,
 	query: PropTypes.object.isRequired,
+	recordPageView: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	selectDomain: PropTypes.func.isRequired,
 	verifyUser: PropTypes.func.isRequired

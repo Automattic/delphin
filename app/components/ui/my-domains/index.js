@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 const MyDomains = React.createClass( {
 	propTypes: {
@@ -56,4 +57,4 @@ const MyDomains = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( MyDomains );
+export default withStyles( styles )( withPageView( MyDomains, 'My Domains' ) );

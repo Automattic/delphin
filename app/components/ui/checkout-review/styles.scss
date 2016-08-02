@@ -11,7 +11,7 @@
 
 	// This is here to override .app-components-ui-sunrise-step-sunrise-step a
 	a.edit-link {
-		color: $gray-blue;
+		color: $gray;
 		font-size: 1.2rem;
 		text-decoration: underline;
 
@@ -22,7 +22,7 @@
 
 	a.cancel-application {
 		bottom: -4rem;
-		color: $gray-blue;
+		color: $gray;
 		display: inline-block;
 		font-size: 1.4rem;
 		margin-left: -30px;
@@ -55,7 +55,7 @@
 }
 
 .renew-fee {
-	color: $gray-blue;
+	color: $gray;
 	font-size: 1.2rem;
 	margin-top: 5px;
 	text-transform: uppercase;

@@ -25,14 +25,21 @@ const UNAUTHENTICATED_NAMESPACES = [ 'geo/' ];
  *
  * @param  {String} locale the requested locale
  * @param  {Object} query Original query parameters
+ * @param  {String} apiNamespace The namespace of the request
  * @return {Object}        Revised parameters, if non-default locale
  */
-function addLocaleQueryParam( locale, query ) {
-	if ( ! locale || 'en' === locale ) {
-		return query;
+function addLocaleQueryParam( locale, query, apiNamespace ) {
+	let localeParam;
+
+	if ( apiNamespace === 'wpcom/v2' ) {
+		// Meta properties like locale are prefixed with an underscore in the
+		// v2 API
+		localeParam = { _locale: locale };
+	} else {
+		localeParam = { locale };
 	}
 
-	return Object.assign( {}, query, { locale } );
+	return Object.assign( {}, query, localeParam );
 }
 
 /**
@@ -85,7 +92,7 @@ function makeWpcomRequest( state, action ) {
 		} );
 	}
 
-	query = query ? addLocaleQueryParam( locale, query ) : { locale };
+	query = addLocaleQueryParam( locale, query || {}, params.apiNamespace );
 
 	const reqArgs = [ params, query ];
 

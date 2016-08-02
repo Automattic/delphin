@@ -8,6 +8,7 @@ import i18n from 'i18n-calypso';
 import { fetchDomainPrice } from 'actions/domain-price';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getPath } from 'routes';
+import { isRequestingDomainPrice } from 'reducers/checkout/selectors';
 import { selectDomain } from 'actions/domain-search';
 import SunriseHome from 'components/ui/sunrise-home';
 
@@ -25,7 +26,7 @@ export default reduxForm(
 		asyncValidate: getAsyncValidateFunction( validate ),
 
 	},
-	undefined,
+	state => ( { isRequestingDomainPrice: isRequestingDomainPrice( state ) } ),
 	dispatch => bindActionCreators( {
 		fetchDomainPrice,
 		selectDomain,

@@ -51,7 +51,8 @@ describe( 'middleware', () => {
 		} );
 
 		it( 'should call analytics events with wrapped actions', () => {
-			dispatch( withAnalytics( bumpStat( 'name', 'value' ), { type: 'TEST_ACTION' } ) );
+			const wrappedActionCreator = withAnalytics( bumpStat( 'name', 'value' ), { type: 'TEST_ACTION' } );
+			dispatch( wrappedActionCreator() );
 
 			expect( analytics.mc.bumpStat ).toBeCalled();
 		} );

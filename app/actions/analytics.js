@@ -18,13 +18,29 @@ const mergedMetaData = ( a, b ) => [
 	...get( b, 'meta.analytics', [] )
 ];
 
-const joinAnalytics = ( analytics, action ) =>
-	isFunction( action )
-		? dispatch => {
-			dispatch( analytics );
-			return action( dispatch );
+/***
+ * Wraps an action creator with analytics action
+ * @param {Function|Object} analyticsAction some analytics action
+ * @param {Function|Object} actionCreator action creator, a function, or a static action - an object
+ * @returns {Function} a wrapped action creator, that will return the original action + analytics action
+ */
+const joinAnalytics = ( analyticsAction, actionCreator ) => {
+	// we return a new action creator, that wraps the real action creator
+	return ( ...args ) => {
+		const action = isFunction( actionCreator ) ? actionCreator( ...args ) : actionCreator;
+		const dispatchedAnalyticsAction = isFunction( analyticsAction ) ? analyticsAction( ...args ) : analyticsAction;
+
+		// if the action is a thunk, we wrap it with our own
+		if ( isFunction( action ) ) {
+			return dispatch => {
+				dispatch( dispatchedAnalyticsAction );
+				return action( dispatch );
+			};
 		}
-		: merge( {}, action, { meta: { analytics: mergedMetaData( analytics, action ) } } );
+
+		return merge( {}, action, { meta: { analytics: mergedMetaData( dispatchedAnalyticsAction, action ) } } );
+	};
+};
 
 export const composeAnalytics = ( ...analytics ) => ( {
 	type: ANALYTICS_MULTI_TRACK,

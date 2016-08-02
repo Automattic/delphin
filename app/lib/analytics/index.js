@@ -77,20 +77,8 @@ window.addEventListener( 'popstate', function() {
 const analytics = {
 	user: null,
 
-	superProps: null,
-
-	initialize( user, superProps ) {
-		analytics.setUser( user );
-		analytics.setSuperProps( superProps );
-		analytics.identifyUser();
-	},
-
-	setUser( { id, username } ) {
-		this.user = { id, username };
-	},
-
-	setSuperProps( superProps ) {
-		this.superProps = superProps;
+	superProps: {
+		launch_period: 'landrush pre-reg' // Future options will be landrush and ga
 	},
 
 	mc: {
@@ -274,21 +262,6 @@ const analytics = {
 
 			window.ga( 'send', 'timing', urlPath, eventType, duration, triggerName );
 		}
-	},
-
-	identifyUser() {
-		// Don't identify the user if we don't have one
-		if ( this.user ) {
-			window._tkq.push( [ 'identifyUser', this.user.id, this.user.username ] );
-		}
-	},
-
-	setProperties( properties ) {
-		window._tkq.push( [ 'setProperties', properties ] );
-	},
-
-	clearedIdentity() {
-		window._tkq.push( [ 'clearIdentity' ] );
 	}
 };
 

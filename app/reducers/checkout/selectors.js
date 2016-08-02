@@ -29,3 +29,5 @@ export const hasSelectedDomain = state => ! isEmpty( getSelectedDomain( state ) 
 export const isPurchasing = state => [ 'paygateConfiguration', 'paygateToken', 'transaction' ]
 	.map( requestName => getCheckout( state )[ requestName ] )
 	.some( request => request.isRequesting );
+
+export const isRequestingDomainPrice = state => getCheckout( state ).selectedDomainPrice.isRequesting;

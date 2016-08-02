@@ -30,7 +30,9 @@ class SunriseConfirmDomain extends React.Component {
 	}
 
 	render() {
-		const { domain } = this.props;
+		const { domain, domainCost, applicationCost } = this.props;
+
+		const { domainName, isPremium, totalCost } = domain;
 
 		return (
 			<SunriseStep>
@@ -47,15 +49,28 @@ class SunriseConfirmDomain extends React.Component {
 				</SunriseStep.Header>
 
 				<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
+					{ isPremium && (
+						<div className={ styles.premiumFlag }>
+							{ i18n.translate( 'premium' ) }
+						</div>
+					) }
+
 					<h3>
-						{ domain.domainName }
+						{ domainName }
 					</h3>
 					<hr className={ styles.rule } />
 					<div className={ styles.priceTag }>
-						{ i18n.translate( '$250 Early Application' ) }
+						{ i18n.translate( '%(totalCost)s Early Application', {
+							args: { totalCost }
+						} ) }
 					</div>
 					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '$30 registration + $220 application fee' ) }
+						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+							args: {
+								applicationCost,
+								domainCost
+							}
+						} ) }
 					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }
@@ -75,7 +90,9 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
+	applicationCost: PropTypes.string.isRequired,
 	domain: PropTypes.object,
+	domainCost: PropTypes.string.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired

@@ -71,5 +71,22 @@ describe( 'middleware', () => {
 
 			expect( composite.meta.analytics.length ).toBe( 2 );
 		} );
+
+		it( 'should not swallow returned value from dispatched action', () => {
+			const myResult = 'hello, yes, this is dog';
+			const payloadAction = { type: 'SOME_UNRELATED_ACTION' };
+			const myActionThunk = dispatch => {
+				dispatch( payloadAction );
+				return myResult;
+			};
+
+			const composite = withAnalytics( bumpStat( 'splines', 'reticulated_count' ), myActionThunk );
+
+			const dispatch = jest.fn();
+
+			const result = composite( dispatch );
+			expect( dispatch ).lastCalledWith( payloadAction );
+			expect( result ).toBe( myResult );
+		} );
 	} );
 } );

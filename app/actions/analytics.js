@@ -22,7 +22,7 @@ const joinAnalytics = ( analytics, action ) =>
 	isFunction( action )
 		? dispatch => {
 			dispatch( analytics );
-			action( dispatch );
+			return action( dispatch );
 		}
 		: merge( {}, action, { meta: { analytics: mergedMetaData( analytics, action ) } } );
 

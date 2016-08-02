@@ -11,6 +11,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import withPageView from 'lib/analytics/with-page-view';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
@@ -98,4 +99,4 @@ SunriseConfirmDomain.propTypes = {
 	redirect: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( SunriseConfirmDomain ) );
+export default withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) );

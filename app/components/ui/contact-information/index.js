@@ -18,6 +18,7 @@ import Input from 'components/ui/form/input';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
@@ -396,4 +397,4 @@ ContactInformation.propTypes = {
 	validateContactInformation: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( ContactInformation ) );
+export default withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'Contact Information' ) );

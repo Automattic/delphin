@@ -1,7 +1,7 @@
 @import 'app/styles/colors';
 
 .legend {
-	color: #87a6bc;
+	color: $gray;
 	font-size: 1.2rem;
 	font-style: italic;
 	margin-top: 5px;
@@ -12,7 +12,7 @@
 		text-decoration: underline;
 
 		&:hover {
-			color: #2e4453;
+			color: $gray-dark;
 		}
 	}
 }

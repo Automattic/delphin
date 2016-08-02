@@ -1,5 +1,7 @@
+@import 'app/styles/colors';
+
 .tooltip {
-	color: #87a6bc;
+	color: $gray;
 	position: relative;
 
 	&:hover .text {
@@ -9,10 +11,10 @@
 }
 
 .text {
-	background: #2e4453;
+	background: $blue-dark;
 	border-radius: 3px;
 	bottom: calc( 100% + 40px );
-	color: #fff;
+	color: $white;
 	font-size: 0.8em;
 	left: calc( 50% - 110px );
 	opacity: 0;
@@ -24,7 +26,7 @@
 
 	&::after {
 		border: 6px solid;
-		border-color: #2e4453 transparent transparent;
+		border-color: $blue-dark transparent transparent;
 		content: '';
 		left: calc( 50% - 10px );
 		position: absolute;

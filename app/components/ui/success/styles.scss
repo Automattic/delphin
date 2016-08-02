@@ -60,7 +60,7 @@
 	}
 
 	p:not(:first-child) {
-		color: darken( $gray-blue, 15% );
+		color: $gray-dark;
 
 		@include breakpoint( '<660px' ) {
 			margin-top: 5px;

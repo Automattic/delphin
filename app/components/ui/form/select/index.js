@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const FormSelect = ( props ) => {
+const Select = props => {
 	const classes = classNames( props.className, styles.formSelect );
 
 	return (
@@ -17,9 +17,9 @@ const FormSelect = ( props ) => {
 	);
 };
 
-FormSelect.propTypes = {
+Select.propTypes = {
 	children: PropTypes.array.isRequired,
 	className: PropTypes.string,
 };
 
-export default withStyles( styles )( FormSelect );
+export default withStyles( styles )( Select );

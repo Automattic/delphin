@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import FormSelect from 'components/ui/form/select';
+import Select from 'components/ui/form/select';
 import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
@@ -24,7 +24,7 @@ const State = ( { className, disabled, field, states, onBlur } ) => {
 		);
 	} else {
 		content = (
-			<FormSelect
+			<Select
 				{ ...removeInvalidInputProps( field ) }
 				onBlur={ onBlur }
 				disabled={ disabled }>
@@ -33,7 +33,7 @@ const State = ( { className, disabled, field, states, onBlur } ) => {
 				{ states.data.map( ( state ) => (
 					<option value={ state.code } key={ state.code }>{ state.name }</option>
 				) ) }
-			</FormSelect>
+			</Select>
 		);
 	}
 

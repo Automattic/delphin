@@ -40,6 +40,10 @@
 	}
 }
 
+.summary {
+	padding-bottom: 30px;
+}
+
 .domain {
 	color: $blue-background;
 	font-size: 2rem;
@@ -58,11 +62,9 @@
 }
 
 .refund-notice {
-	background: $blue;
-	color: $white;
+	color: $gray-dark;
 	font-size: 1.4rem;
-	margin: 30px -30px 0;
-	padding: 10px 30px;
+	padding-top: 15px;
 }
 
 .contact-review {

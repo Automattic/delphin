@@ -16,12 +16,11 @@ import SunriseHome from 'components/ui/sunrise-home';
 const validate = values => {
 	let { query } = values;
 
-	if ( ! query.trim() ) {
-		return { query: i18n.translate( 'Please enter a domain name' ) };
-	}
+	query = query.trim();
+	query = query.replace( /\.blog$/gi, '' );
 
-	if ( query.indexOf( '.blog' ) > -1 ) {
-		query = query.replace( /\.blog/gi, '' );
+	if ( query === '' ) {
+		return { query: i18n.translate( 'Please enter a domain name' ) };
 	}
 
 	if ( query.length < 4 ) {

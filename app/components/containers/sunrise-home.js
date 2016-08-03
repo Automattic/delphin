@@ -32,11 +32,11 @@ const validate = values => {
 		return { query: i18n.translate( 'Choose a shorter domain, up to 63 characters (not including the ".blog" part)' ) };
 	}
 
-	if ( query.indexOf( '-' ) === 0 ) {
+	if ( query.charAt( 0 ) === '-' ) {
 		return { query: i18n.translate( 'Don’t use a "-" (dash) as the first character in your domain.' ) };
 	}
 
-	if ( query.indexOf( '-' ) === query.length - 1 ) {
+	if ( query.charAt( query.length - 1 ) === '-' ) {
 		return { query: i18n.translate( 'Don’t use a "-" (dash) as the last character in your domain.' ) };
 	}
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="30px" viewBox="0 0 32 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="16" cy="15" r="15"></circle>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="2" operator="erode" in="SourceAlpha" result="shadowSpreadInner1"></feMorphology>
+            <feOffset dx="0" dy="0" in="shadowSpreadInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="30" height="30" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Review-application" transform="translate(-649.000000, -423.000000)">
+            <g id="Search-result" transform="translate(312.000000, 296.000000)">
+                <g id="Group-Copy" transform="translate(337.000000, 127.000000)">
+                    <g id="Oval">
+                        <use fill="#E9EFF3" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use stroke="#374555" mask="url(#mask-3)" stroke-width="2" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M9.39130435,10.8347826 C8.57217391,10.8347826 8.4,11.9412174 8.4,12.8695652 C8.4,13.797913 8.57217391,14.9043478 9.39130435,14.9043478 C10.2104348,14.9043478 10.3826087,13.797913 10.3826087,12.8695652 C10.3826087,11.9412174 10.2104348,10.8347826 9.39130435,10.8347826 L9.39130435,10.8347826 Z" id="Shape" fill="#374555"></path>
+                    <path d="M10.1391304,18.101913 C10.2497391,22.6730435 12.28,24.9906087 16.173913,24.9906087 C20.1822609,24.9906087 22.4490435,22.5443478 22.5561739,18.101913 L22.5721739,17.4427826 L10.1234783,17.4427826 L10.1391304,18.101913 L10.1391304,18.101913 Z M16.173913,22.208 C17.0135652,22.208 17.7593043,22.6994783 18.1064348,23.4309565 C17.5332174,23.6121739 16.8855652,23.704 16.173913,23.704 C15.4486957,23.704 14.8027826,23.6086957 14.2462609,23.4194783 C14.5965217,22.6949565 15.3412174,22.208 16.173913,22.208 L16.173913,22.208 Z" id="Shape" fill="#374555"></path>
+                    <path d="M22.6086957,10.8347826 C21.7895652,10.8347826 21.6173913,11.9412174 21.6173913,12.8695652 C21.6173913,13.797913 21.7892174,14.9043478 22.6086957,14.9043478 C23.4281739,14.9043478 23.6,13.797913 23.6,12.8695652 C23.6,11.9412174 23.4278261,10.8347826 22.6086957,10.8347826 L22.6086957,10.8347826 Z" id="Shape" fill="#374555"></path>
+                    <path d="M28,22 C28,22 30.1636913,23.5888083 31.3778584,26.7634687" id="Path-2" stroke="#00BF8C" stroke-linecap="round" stroke-dasharray="3,2" transform="translate(29.688929, 24.381734) scale(1, -1) translate(-29.688929, -24.381734) "></path>
+                    <path d="M1,22 C1,22 3.16369128,23.5888083 4.3778584,26.7634687" id="Path-2" stroke="#00BF8C" stroke-linecap="round" stroke-dasharray="3,2" transform="translate(2.688929, 24.381734) scale(-1, -1) rotate(-1.000000) translate(-2.688929, -24.381734) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

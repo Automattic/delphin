@@ -1,0 +1,30 @@
+@import 'app/styles/colors';
+
+.container {
+	color: $white;
+	cursor: pointer;
+	fill: $white;
+
+	svg {
+		margin-left: 5px;
+		vertical-align: bottom;
+	}
+}
+
+.current-language {
+	color: $white;
+	font-size: 1.4rem;
+}
+
+.select {
+	border: solid 1px $gray;
+	border-bottom: solid 3px $gray;
+	border-radius: 4px;
+	color: $gray-dark;
+	font-size: 1.3rem;
+	padding: 10px 50px 10px 12px;
+}
+
+.container .select:focus {
+	box-shadow: none;
+}

@@ -1,7 +1,19 @@
 jest.disableAutomock();
 
+// External dependencies
+import isEmpty from 'lodash/isEmpty';
+
 // Internal dependencies
-import { isDomain, isDomainSearch, isValidSecondLevelDomain, secondLevelDomainOf, omitTld, queryIsInResults } from '..';
+import {
+	isDomain,
+	isDomainSearch,
+	isValidSecondLevelDomain,
+	secondLevelDomainOf,
+	omitTld,
+	queryIsInResults,
+	withTld,
+	validateDomain
+} from '..';
 
 describe( 'lib/domains', () => {
 	describe( 'isDomain', () => {
@@ -117,6 +129,52 @@ describe( 'lib/domains', () => {
 
 		it( 'should return false for strings without a TLD suffix', () => {
 			expect( isDomainSearch( 'foo' ) ).toBe( false );
+		} );
+	} );
+
+	describe( 'validateDomain', () => {
+		it( 'should return an error if the query is empty', () => {
+			expect( ! isEmpty( validateDomain( '' ) ) ).toBeTruthy();
+			expect( ! isEmpty( validateDomain( '   ' ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an error if the query is less than four characters', () => {
+			expect( ! isEmpty( validateDomain( 'foo' ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an error if the query is longer than 63 characterso ', () => {
+			expect( ! isEmpty( validateDomain( new Array( 65 ).join( 'a' ) ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an error if the query begins with a hyphen', () => {
+			expect( ! isEmpty( validateDomain( '-foobar' ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an error if the query ends with a hyphen', () => {
+			expect( ! isEmpty( validateDomain( 'foobar-' ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an error if the query contains a period', () => {
+			expect( ! isEmpty( validateDomain( 'foo.bar' ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an error if the query is not a valid domain', () => {
+			// `isDomain` is tested and covers this
+			expect( ! isEmpty( validateDomain( 'foo$bar' ) ) ).toBeTruthy();
+		} );
+
+		it( 'should return an empty object if a valid query is submitted', () => {
+			expect( isEmpty( validateDomain( 'thisisavalidquery' ) ) ).toBeTruthy();
+		} );
+	} );
+
+	describe( 'withTld', () => {
+		it( 'should add the given TLD to the end of the given string', () => {
+			expect( withTld( 'foo', 'blog' ) ).toBe( 'foo.blog' );
+		} );
+
+		it( 'should replace an existing TLD with the given one', () => {
+			expect( withTld( 'foo.com', 'blog' ) ).toBe( 'foo.blog' );
 		} );
 	} );
 } );

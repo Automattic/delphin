@@ -16,8 +16,9 @@ h6 {
 }
 
 .layout {
-	color: #2e4453;
+	color: $blue-dark;
 	font-family: $body-font;
+	font-weight: 400;
 }
 
 .content {
@@ -25,11 +26,11 @@ h6 {
 }
 
 a {
-	color: $blue-medium;
+	color: $blue;
 	cursor: pointer;
 	text-decoration: none;
 
 	&:hover {
-		color: $blue-bright;
+		color: lighten( $blue, 10% );
 	}
 }

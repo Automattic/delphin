@@ -62,18 +62,18 @@
 	}
 
 	& + .label .switch {
-		background: lighten( $gray, 10% );
+		background: $gray;
 	}
 
 	&:not([disabled]) {
 		+ .label .switch:hover {
-			background: lighten( $gray, 20% );
+			background: lighten( $gray, 10% );
 		}
 	}
 
 	&:checked {
 		+ .label .switch {
-			background: $blue-medium;
+			background: $blue;
 
 			&::after {
 				left: 16px;
@@ -83,7 +83,7 @@
 
 	&:checked:not([disabled]) {
 		+ .label .switch:hover {
-			background: $blue-bright;
+			background: lighten( $blue, 10% );
 		}
 	}
 

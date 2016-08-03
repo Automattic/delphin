@@ -1,5 +1,6 @@
 @import 'app/styles/fonts';
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 body {
 	background: $blue-background;
@@ -32,5 +33,21 @@ a {
 
 	&:hover {
 		color: lighten( $blue, 10% );
+	}
+}
+
+.footer {
+	display: flex;
+	flex-direction: column-reverse;
+
+	@include breakpoint( '<480px' ) {
+		margin: 0 15px;
+		padding-top: 10px;
+	}
+
+	@include breakpoint( '>480px' ) {
+		flex-direction: row;
+		justify-content: space-between;
+		margin: 0 30px 0 20px;
 	}
 }

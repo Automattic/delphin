@@ -183,7 +183,7 @@ const VerifyUser = React.createClass( {
 					submitArea={
 						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ user.intention === 'login'
-								? i18n.translate( 'Login' )
+								? i18n.translate( 'Next' )
 								: i18n.translate( 'Verify my email' )
 							}
 						</Button>

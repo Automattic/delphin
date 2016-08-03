@@ -71,7 +71,7 @@ const SunriseHome = React.createClass( {
 						</div>
 
 						<Button className={ styles.button } disabled={ this.props.isRequestingDomainPrice }>
-							{ i18n.translate( 'Next' ) }
+							{ i18n.translate( 'Get started' ) }
 						</Button>
 					</div>
 				</form>

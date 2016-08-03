@@ -86,4 +86,4 @@ export const omitTld = ( string = '' ) => string.replace( /\.(.*)/g, '' );
  * @param {string} tld - the tld that will be used
  * @return {string} - the updated domain with the tld
  */
-export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^(\w*)(\.\w+)?$/g, '$1.' + tld );
+export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^([a-z0-9\-]+)?$/g, '$1.' + tld );

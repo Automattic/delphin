@@ -333,13 +333,13 @@ class ContactInformation extends React.Component {
 												placeholder={ i18n.translate( 'Zip' ) }
 											/>
 										</div>
-										<ValidationError
-											fields={ [
-												fields.state,
-												fields.postalCode
-											] }
-										/>
 									</div>
+									<ValidationError
+										fields={ [
+											fields.state,
+											fields.postalCode
+										] }
+									/>
 								</fieldset>
 
 								<fieldset>

@@ -92,6 +92,31 @@ describe( 'wpcom-middleware', () => {
 			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'fr' }, payload );
 		} );
 
+		it( 'should make a request with the `_locale` property if using the v2 API namespace', () => {
+			i18n.setLocale( {
+				'': { localeSlug: 'ja' }
+			} );
+
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction()
+			};
+
+			const paramsWithNamespace = Object.assign( {}, params, { apiNamespace: 'wpcom/v2' } );
+
+			middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params: paramsWithNamespace,
+				payload,
+				loading: LOADING_ACTION,
+				success: SUCCESS_ACTION,
+				fail: FAIL_ACTION
+			} );
+
+			expect( WPCOM().req[ method ] ).lastCalledWith( paramsWithNamespace, { _locale: 'ja' }, payload );
+		} );
+
 		it( 'should make a request with the locale of the user if present', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {

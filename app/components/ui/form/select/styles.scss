@@ -53,7 +53,7 @@
 	// Firefox: Remove the focus outline, see http://stackoverflow.com/questions/3773430/remove-outline-from-select-box-in-ff/18853002#18853002
 	&:-moz-focusring {
 		color: transparent;
-		text-shadow: 0 0 0 $dark-gray-blue;
+		text-shadow: 0 0 0 $gray-dark;
 	}
 
 	// Rules for the error state

@@ -312,7 +312,7 @@ class ContactInformation extends React.Component {
 								<fieldset>
 									<div className={ styles.row }>
 										<div className={ styles.state }>
-											<label>{ i18n.translate( 'State' ) }</label>
+											<label>{ i18n.translate( 'State/Province' ) }</label>
 											<State
 												disabled={ this.isDataLoading() }
 												field={ fields.state }
@@ -330,7 +330,7 @@ class ContactInformation extends React.Component {
 												field={ fields.postalCode }
 												onBlur={ this.handleBlur }
 												className={ styles.postalCode }
-												placeholder={ i18n.translate( 'Zip' ) }
+												placeholder={ i18n.translate( 'Postal Code' ) }
 											/>
 										</div>
 									</div>

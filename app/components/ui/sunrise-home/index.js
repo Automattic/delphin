@@ -65,6 +65,7 @@ const SunriseHome = React.createClass( {
 								autoComplete="off"
 								autoFocus
 								placeholder={ i18n.translate( 'Enter your domain name' ) }
+								field={ this.props.fields.query }
 								ref="query" />
 
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />

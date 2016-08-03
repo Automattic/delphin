@@ -1,8 +1,8 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
-import { push } from 'react-router-redux';
 import i18n from 'i18n-calypso';
+import { push } from 'react-router-redux';
+import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { fetchDomainPrice } from 'actions/domain-price';

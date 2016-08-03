@@ -39,6 +39,7 @@
 
 	@include breakpoint( '<480px' ) {
 		margin-bottom: 15px;
+		margin-top: 15px;
 		padding: 15px;
 	}
 }
@@ -70,40 +71,5 @@
 
 	&:hover {
 		fill: $gray-dark;
-	}
-}
-
-.billing-address {
-	display: flex;
-	justify-content: space-between;
-
-	.country-code {
-		flex: 0 1 65%;
-
-		select {
-			border-right-width: 0;
-		}
-	}
-
-	.postal-code {
-		border-right-width: 1px;
-		flex: 0 1 35%;
-	}
-
-	@include breakpoint( '<480px' ) {
-		flex-wrap: wrap;
-
-		.country-code {
-			flex: 1 0 100%;
-			margin-bottom: 20px;
-
-			select {
-				border-right-width: 1px;
-			}
-		}
-
-		.postal-code {
-			flex: 1 0 100%;
-		}
 	}
 }

@@ -310,36 +310,28 @@ class ContactInformation extends React.Component {
 								</fieldset>
 
 								<fieldset>
-									<div className={ styles.row }>
-										<div className={ styles.state }>
-											<label>{ i18n.translate( 'State/Province' ) }</label>
-											<State
-												disabled={ this.isDataLoading() }
-												field={ fields.state }
-												untouch={ untouch }
-												onBlur={ this.handleBlur }
-												className={ styles.state }
-												states={ this.props.states } />
-										</div>
+									<label>{ i18n.translate( 'State/Province' ) }</label>
+									<State
+										disabled={ this.isDataLoading() }
+										field={ fields.state }
+										untouch={ untouch }
+										onBlur={ this.handleBlur }
+										className={ styles.state }
+										states={ this.props.states } />
+									<ValidationError field={ fields.state } />
+								</fieldset>
 
-										<div className={ styles.zip }>
-											<label>{ i18n.translate( 'Postal Code' ) }</label>
-											<Input
-												disabled={ this.isDataLoading() }
-												untouch={ untouch }
-												field={ fields.postalCode }
-												onBlur={ this.handleBlur }
-												className={ styles.postalCode }
-												placeholder={ i18n.translate( 'Postal Code' ) }
-											/>
-										</div>
-									</div>
-									<ValidationError
-										fields={ [
-											fields.state,
-											fields.postalCode
-										] }
+								<fieldset>
+									<label>{ i18n.translate( 'Postal Code' ) }</label>
+									<Input
+										disabled={ this.isDataLoading() }
+										untouch={ untouch }
+										field={ fields.postalCode }
+										onBlur={ this.handleBlur }
+										className={ styles.postalCode }
+										placeholder={ i18n.translate( 'Postal Code' ) }
 									/>
+									<ValidationError field={ fields.postalCode } />
 								</fieldset>
 
 								<fieldset>

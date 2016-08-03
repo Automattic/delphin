@@ -14,7 +14,7 @@ describe( 'state.languagePicker', () => {
 		} );
 
 		it( 'should return true after `LANGUAGE_PICKER_SELECT_SHOW`', () => {
-			expect( isSelectVisible( true, { type: LANGUAGE_PICKER_SELECT_SHOW } ) ).toBeFalsy();
+			expect( isSelectVisible( false, { type: LANGUAGE_PICKER_SELECT_SHOW } ) ).toBeTruthy();
 		} );
 
 		it( 'should return false after `LANGUAGE_PICKER_SELECT_HIDE`', () => {

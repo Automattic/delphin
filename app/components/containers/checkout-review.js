@@ -10,6 +10,7 @@ import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
 import { isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
 import RequireLogin from './require-login';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default connect(
 	state => ( {
@@ -21,7 +22,10 @@ export default connect(
 		selectedDomain: getSelectedDomain( state )
 	} ),
 	dispatch => bindActionCreators( {
-		purchaseDomain,
+		purchaseDomain: withAnalytics(
+			recordTracksEvent( 'delphin_application_review_submit' ),
+			purchaseDomain
+		),
 		redirect: pathSlug => push( getPath( pathSlug ) )
 	}, dispatch )
 )( RequireLogin( CheckoutReview ) );

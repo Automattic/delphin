@@ -15,6 +15,7 @@ import { redirect } from 'actions/routes';
 import { selectDomain } from 'actions/domain-search';
 import i18n from 'i18n-calypso';
 import VerifyUser from 'components/ui/connect-user/verify-user';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 const validate = values => {
 	const errors = {};
@@ -57,7 +58,10 @@ export default reduxForm(
 		redirect,
 		selectDomain,
 		updateCode: code => change( 'verifyUser', 'code', code ),
-		verifyUser
+		verifyUser: withAnalytics(
+			( ...args ) => recordTracksEvent( 'delphin_confirmation_code_submit', { is_existing_account: args.intention === 'login' } ),
+			verifyUser
+		)
 	}, dispatch ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
 		recordPageView() {

@@ -1,4 +1,5 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 import validator from 'validator';
@@ -11,6 +12,7 @@ import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
 import i18n from 'i18n-calypso';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 const validate = values => {
 	if ( ! values.email ) {
@@ -34,21 +36,13 @@ export default reduxForm(
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
 	} ),
-	( dispatch, ownProps ) => ( {
-		clearConnectUser() {
-			dispatch( clearConnectUser() );
-		},
-		connectUser( fields, domain ) {
-			dispatch( connectUser( fields.email, ownProps.intention, domain ) );
-		},
-		recordPageView() {
-			ownProps.recordPageView();
-		},
-		redirectToHome() {
-			dispatch( push( getPath( 'search' ) ) );
-		},
-		redirectToVerifyUser() {
-			dispatch( push( getPath( 'verifyUser' ) ) );
-		}
-	} )
+	( dispatch, ownProps ) => bindActionCreators( {
+		clearConnectUser,
+		connectUser: withAnalytics(
+			recordTracksEvent( 'delphin_signup_submit' ),
+			( fields, domain ) => connectUser( fields.email, ownProps.intention, domain )
+		),
+		redirectToHome: () => push( getPath( 'search' ) ),
+		redirectToVerifyUser: () => push( getPath( 'verifyUser' ) )
+	}, dispatch )
 )( ConnectUser );

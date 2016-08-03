@@ -16,6 +16,7 @@ import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reduc
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
 import { validateContactInformation } from 'actions/contact-information';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default reduxForm(
 	{
@@ -57,8 +58,9 @@ export default reduxForm(
 			redirectToCheckout: () => push( getPath( 'checkout' ) ),
 			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			redirectToHome: () => push( getPath( 'home' ) ),
-			validateContactInformation: ( domainName, contactInformation ) => (
-				validateContactInformation( [ domainName ], contactInformation )
+			validateContactInformation: withAnalytics(
+				recordTracksEvent( 'delphin_contact_form_submit' ),
+				( domainName, contactInformation ) => validateContactInformation( [ domainName ], contactInformation )
 			)
 		}, dispatch )
 	)

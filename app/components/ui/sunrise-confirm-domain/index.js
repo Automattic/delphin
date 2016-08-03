@@ -1,7 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -11,6 +10,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 class SunriseConfirmDomain extends React.Component {
@@ -22,6 +22,8 @@ class SunriseConfirmDomain extends React.Component {
 
 	handleSubmit( event ) {
 		event.preventDefault();
+
+		this.props.trackSubmit( this.props.domain.isPremium );
 
 		if ( this.props.isLoggedIn ) {
 			this.props.redirect( 'contactInformation' );
@@ -80,9 +82,9 @@ class SunriseConfirmDomain extends React.Component {
 						<div>
 							{ i18n.translate( 'Not what you wanted?' ) }
 						</div>
-						<Link to={ getPath( 'home' ) }>
+						<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
 							{ i18n.translate( 'Try a different domain' ) }
-						</Link>
+						</TrackingLink>
 					</div>
 				</SunriseStep.Form>
 			</SunriseStep>
@@ -96,7 +98,8 @@ SunriseConfirmDomain.propTypes = {
 	domainCost: PropTypes.string.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
-	redirect: PropTypes.func.isRequired
+	redirect: PropTypes.func.isRequired,
+	trackSubmit: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) );

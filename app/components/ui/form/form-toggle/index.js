@@ -31,6 +31,10 @@ class FormToggle extends React.Component {
 			event.target.name = this.props.name;
 			event.target.value = ! this.props.checked;
 			this.props.onChange( event );
+
+			if ( typeof this.props.trackChange === 'function' ) {
+				this.props.trackChange( event.target.value );
+			}
 		}
 	}
 
@@ -78,7 +82,8 @@ FormToggle.propTypes = {
 	name: React.PropTypes.string.isRequired,
 	onChange: React.PropTypes.func,
 	onKeyDown: React.PropTypes.func,
-	toggling: React.PropTypes.bool
+	toggling: React.PropTypes.bool,
+	trackChange: React.PropTypes.func
 };
 
 FormToggle.defaultProps = {

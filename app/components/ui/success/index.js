@@ -60,6 +60,7 @@ const Success = ( { domain, email } ) => (
 				<a
 					className={ styles.button }
 					href="https://www.namejet.com/Pages/Login.aspx"
+					onClick={ this.props.trackAuctionSignup }
 					target="_blank">
 					{ i18n.translate( 'Sign up at NameJet' ) }
 				</a>
@@ -70,7 +71,8 @@ const Success = ( { domain, email } ) => (
 
 Success.propTypes = {
 	domain: PropTypes.string.isRequired,
-	email: PropTypes.string.isRequired
+	email: PropTypes.string.isRequired,
+	trackAuctionSignup: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( withPageView( Success, 'Success' ) );

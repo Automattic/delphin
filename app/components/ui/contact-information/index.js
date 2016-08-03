@@ -359,7 +359,7 @@ class ContactInformation extends React.Component {
 						submitArea={
 							<div>
 								<Button disabled={ this.isSubmitButtonDisabled() }>
-									{ i18n.translate( 'Continue to Checkout' ) }
+									{ i18n.translate( 'Continue to checkout' ) }
 								</Button>
 							</div>
 						} />

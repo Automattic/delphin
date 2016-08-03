@@ -32,16 +32,13 @@
 	}
 }
 
+.address1 input:focus {
+	z-index: 1;
+}
+
 .address-two-is-visible {
 	.address2 input {
-		border-top: 0;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-	}
-
-	.address1 input {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
+		border-top-width: 0;
 	}
 }
 
@@ -51,6 +48,10 @@
 
 	.state {
 		width: 100%;
+
+		select {
+			border-right-width: 0;
+		}
 	}
 
 	@include breakpoint( '<480px' ) {
@@ -64,6 +65,10 @@
 
 		.state {
 			margin-bottom: 10px;
+
+			select {
+				border-right-width: 1px;
+			}
 		}
 
 		.zip {
@@ -81,10 +86,6 @@
 			border-bottom-left-radius: 0;
 			border-left: 0;
 			border-top-left-radius: 0;
-		}
-
-		.state {
-			margin-right: 15px;
 		}
 	}
 }

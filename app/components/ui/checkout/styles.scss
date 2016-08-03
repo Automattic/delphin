@@ -12,19 +12,12 @@
 	justify-content: space-between;
 
 	.expiration-month {
-		flex: 0 1 60%;
+		border-right-width: 0;
+		flex: 0 1 65%;
 	}
 
 	.expiration-year {
 		flex: 0 1 35%;
-	}
-}
-
-.security-code {
-	width: 40%;
-
-	@include breakpoint( '<480px' ) {
-		width: 100%;
 	}
 }
 
@@ -85,10 +78,15 @@
 	justify-content: space-between;
 
 	.country-code {
-		flex: 0 1 60%;
+		flex: 0 1 65%;
+
+		select {
+			border-right-width: 0;
+		}
 	}
 
 	.postal-code {
+		border-right-width: 1px;
 		flex: 0 1 35%;
 	}
 
@@ -98,6 +96,10 @@
 		.country-code {
 			flex: 1 0 100%;
 			margin-bottom: 20px;
+
+			select {
+				border-right-width: 1px;
+			}
 		}
 
 		.postal-code {

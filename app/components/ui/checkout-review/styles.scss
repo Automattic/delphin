@@ -65,6 +65,16 @@
 	color: $gray-dark;
 	font-size: 1.4rem;
 	padding-top: 15px;
+
+	img {
+		float: right;
+	}
+
+	strong {
+		color: $blue;
+		display: block;
+		font-weight: 400;
+	}
 }
 
 .contact-review {

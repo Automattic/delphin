@@ -94,7 +94,11 @@ class CheckoutReview extends React.Component {
 					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
 					<p className={ styles.applicationFee }>{ i18n.translate( '%(applicationFeeCost)s Early Application', { args: { applicationFeeCost: this.props.applicationCost } } ) }</p>
 					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
-					<p className={ styles.refundNotice }>{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }</p>
+					<p className={ styles.refundNotice }>
+						<img src='images/happy-surprise.svg' />
+						<strong>{ i18n.translate( 'Our risk-free promise') }</strong>
+						{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+					</p>
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }

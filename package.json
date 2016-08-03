@@ -73,7 +73,6 @@
     "http-auth": "^2.3.1",
     "i18n-calypso": "1.5.0",
     "inherits": "^2.0.1",
-    "is-valid-domain": "0.0.2",
     "isomorphic-style-loader": "^1.0.0",
     "jed": "1.0.2",
     "jest-cli": "^11.0.0",

@@ -21,6 +21,7 @@ import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
+import Select from 'components/ui/form/select';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -99,7 +100,7 @@ const Checkout = React.createClass( {
 							<fieldset>
 								<label>{ i18n.translate( 'Expiration' ) }</label>
 								<div className={ styles.expiration }>
-									<select
+									<Select
 										{ ...removeInvalidInputProps( fields.expirationMonth ) }
 										className={ styles.expirationMonth }>
 										<option>{ i18n.translate( 'Month' ) }</option>
@@ -111,9 +112,9 @@ const Checkout = React.createClass( {
 												</option>
 											);
 										} ) }
-									</select>
+									</Select>
 
-									<select
+									<Select
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }>
 										<option>{ i18n.translate( 'Year' ) }</option>
@@ -123,7 +124,7 @@ const Checkout = React.createClass( {
 											)
 										}
 
-									</select>
+									</Select>
 								</div>
 								<ValidationError fields={ [
 									fields.expirationMonth,

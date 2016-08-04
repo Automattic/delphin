@@ -1,9 +1,7 @@
 /** @ssr-ready **/
 
 import curry from 'lodash/curry';
-import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
-import merge from 'lodash/merge';
 import property from 'lodash/property';
 
 import {
@@ -12,11 +10,6 @@ import {
 	ANALYTICS_PAGE_VIEW_RECORD,
 	ANALYTICS_STAT_BUMP
 } from 'reducers/action-types';
-
-const mergedMetaData = ( a, b ) => [
-	...get( a, 'meta.analytics', [] ),
-	...get( b, 'meta.analytics', [] )
-];
 
 /***
  * Wraps an action creator with analytics action
@@ -30,15 +23,12 @@ const joinAnalytics = ( analyticsAction, actionCreator ) => {
 		const action = isFunction( actionCreator ) ? actionCreator( ...args ) : actionCreator;
 		const dispatchedAnalyticsAction = isFunction( analyticsAction ) ? analyticsAction( ...args ) : analyticsAction;
 
-		// if the action is a thunk, we wrap it with our own
-		if ( isFunction( action ) ) {
-			return dispatch => {
-				dispatch( dispatchedAnalyticsAction );
-				return action( dispatch );
-			};
-		}
-
-		return merge( {}, action, { meta: { analytics: mergedMetaData( dispatchedAnalyticsAction, action ) } } );
+		// we never modify original action, since it might be discarded / modified with another middleware,
+		// consider the example of @@router/CALL_HISTORY_METHOD
+		return dispatch => {
+			dispatch( dispatchedAnalyticsAction );
+			return dispatch( action );
+		};
 	};
 };
 

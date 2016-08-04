@@ -7,7 +7,7 @@ import Footer from 'components/ui/footer';
 import Header from 'components/ui/header';
 import styles from './styles.scss';
 
-const Sunrise = ( { children } ) => {
+const Sunrise = ( { children, languagePickerClassName } ) => {
 	return (
 		<div>
 			<div className={ styles.content }>
@@ -15,13 +15,14 @@ const Sunrise = ( { children } ) => {
 				{ children }
 			</div>
 
-			<Footer languagePickerClassName={ styles.languagePicker } />
+			<Footer languagePickerClassName={ languagePickerClassName } />
 		</div>
 	);
 };
 
 Sunrise.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
+	languagePickerClassName: PropTypes.string
 };
 
 export default withStyles( styles )( Sunrise );

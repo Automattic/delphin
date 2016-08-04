@@ -9,7 +9,7 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import withPageView from 'lib/analytics/with-page-view';
 
-const Success = ( { domain, email } ) => (
+const Success = ( { domain, email, trackAuctionSignup } ) => (
 	<SunriseStep className={ styles.step }>
 		<DocumentTitle title={ i18n.translate( 'Success' ) } />
 
@@ -60,7 +60,7 @@ const Success = ( { domain, email } ) => (
 				<a
 					className={ styles.button }
 					href="https://www.namejet.com/Pages/Login.aspx"
-					onClick={ this.props.trackAuctionSignup }
+					onClick={ trackAuctionSignup }
 					target="_blank">
 					{ i18n.translate( 'Sign up at NameJet' ) }
 				</a>

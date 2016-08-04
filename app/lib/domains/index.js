@@ -1,4 +1,5 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import parseDomain from 'parse-domain';
 
 // Internal dependencies
@@ -86,4 +87,45 @@ export const omitTld = ( string = '' ) => string.replace( /\.(.*)/g, '' );
  * @param {string} tld - the tld that will be used
  * @return {string} - the updated domain with the tld
  */
-export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^(\w*)(\.\w+)?$/g, '$1.' + tld );
+export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^([a-z0-9\-]+)(\.\w+)?$/g, '$1.' + tld );
+
+/**
+ * Returns validation messages for the given domain.
+ *
+ * @param {string} query - Query to validate.
+ * @return {object} - Object that may contain validation messages.
+ */
+export const validateDomain = query => {
+	query = query.trim();
+	query = query.replace( /\.blog$/gi, '' );
+
+	if ( query === '' ) {
+		return { query: i18n.translate( 'Please enter a domain name' ) };
+	}
+
+	if ( query.length < 4 ) {
+		return { query: i18n.translate( 'Choose a longer domain, at least four characters.' ) };
+	}
+
+	if ( query.length > 63 ) {
+		return { query: i18n.translate( 'Choose a shorter domain, up to 63 characters (not including the ".blog" part)' ) };
+	}
+
+	if ( query.charAt( 0 ) === '-' ) {
+		return { query: i18n.translate( 'Don’t use a "-" (dash) as the first character in your domain.' ) };
+	}
+
+	if ( query.charAt( query.length - 1 ) === '-' ) {
+		return { query: i18n.translate( 'Don’t use a "-" (dash) as the last character in your domain.' ) };
+	}
+
+	if ( query.indexOf( '.' ) > -1 ) {
+		return { query: i18n.translate( 'Don’t use a "." (period) in your domain.' ) };
+	}
+
+	if ( ! isDomain( query + '.blog' ) ) {
+		return { query: i18n.translate( 'Use only lowercase letters, numbers, and dashes (a to z, 0 to 9, and -). Spaces or other characters are not supported.' ) };
+	}
+
+	return {};
+};

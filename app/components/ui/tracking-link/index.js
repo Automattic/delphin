@@ -29,11 +29,14 @@ const TrackingLink = props => {
 	};
 
 	return (
-		<Link { ...newProps } />
+		<Link { ...newProps }>
+			{ props.children }
+		</Link>
 	);
 };
 
 TrackingLink.propTypes = {
+	children: PropTypes.node,
 	onClick: PropTypes.func,
 	trackEvent: PropTypes.func.isRequired
 };

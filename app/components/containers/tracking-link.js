@@ -7,7 +7,7 @@ import { recordTracksEvent } from 'actions/analytics';
 import TrackingLink from 'components/ui/tracking-link';
 
 export default connect(
-	state => state,
+	() => ( { } ),
 	( dispatch, ownProps )=> bindActionCreators( {
 		trackEvent: () => {
 			if ( typeof ownProps.eventParams !== 'undefined' ) {

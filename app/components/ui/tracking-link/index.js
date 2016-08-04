@@ -1,24 +1,11 @@
 // External dependencies
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import pick from 'lodash/pick';
-
-const LINK_PROPS = [
-	'to',
-	'query',
-	'hash',
-	'state',
-	'activeStyle',
-	'activeClassName',
-	'onlyActiveOnIndex',
-	'onClick',
-	'target',
-	'className'
-];
+import omit from 'lodash/omit';
 
 const TrackingLink = props => {
 	const { onClick } = props;
-	const newProps = pick( props, LINK_PROPS );
+	const newProps = omit( props, [ 'eventName', 'eventParams', 'trackEvent' ] );
 
 	newProps.onClick = ( ...args ) => {
 		// track event, it's already bound with eventName on the container

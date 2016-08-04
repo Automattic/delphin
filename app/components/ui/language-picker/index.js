@@ -1,5 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
+import classNames from 'classnames';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 import find from 'lodash/find';
 import i18n from 'i18n-calypso';
@@ -22,7 +23,8 @@ class LanguagePicker extends React.Component {
 		const { isSelectVisible, showSelect } = this.props;
 		const currentLanguage = find( languages, { locale: i18n.getLocaleSlug() } );
 
-		let content;
+		let content,
+			className;
 		if ( isSelectVisible ) {
 			content = (
 				<Select className={ styles.select } onChange={ this.handleChange } defaultValue="">
@@ -41,8 +43,9 @@ class LanguagePicker extends React.Component {
 			);
 		}
 
+		className = classNames( styles.container, this.props.context === 'no-margin' ? styles.isLight : styles.isDark );
 		return (
-			<div className={ styles.container }>
+			<div className={ className }>
 				{ content }
 			</div>
 		);
@@ -50,6 +53,7 @@ class LanguagePicker extends React.Component {
 }
 
 LanguagePicker.propTypes = {
+	context: PropTypes.string,
 	hideSelect: PropTypes.func.isRequired,
 	isSelectVisible: PropTypes.bool.isRequired,
 	showSelect: PropTypes.func.isRequired,

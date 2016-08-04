@@ -42,7 +42,7 @@ class VerifyUserWithQuery extends React.Component {
 			}
 
 			this.props.addNotice( {
-				message: error.code || i18n.translate( 'There was a problem signing in to your account.' ),
+				message: error.code || i18n.translate( 'There was a problem with your email.' ),
 				status: 'error'
 			} );
 		} );
@@ -54,8 +54,8 @@ class VerifyUserWithQuery extends React.Component {
 		return (
 			<div className={ styles.container }>
 				<h1 className={ styles.heading }>
-					{ intention === 'login' && i18n.translate( 'Signing you in…' ) }
-					{ intention === 'signup' && i18n.translate( 'Signing you in to your new account now…' ) }
+					{ intention === 'login' && i18n.translate( "Let's get started…" ) }
+					{ intention === 'signup' && i18n.translate( "Let's get started…" ) }
 				</h1>
 			</div>
 		);

@@ -1,9 +1,46 @@
 @import 'app/styles/colors';
 
 .domain-input {
-	background: $white;
 	border-radius: 3px;
 	display: flex;
+
+	.input {
+		border: 1px solid $white;
+		border-right: 0;
+	}
+
+	.tld-container {
+		border: 1px solid $gray-light;
+	}
+
+
+	&.has-error {
+		.input,
+		.tld-container {
+			border-bottom: 0;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+			border-top: 1px solid $alert-yellow;
+		}
+
+		.input {
+			border-left: 1px solid $alert-yellow;
+		}
+
+		.tld-container {
+			border-right: 1px solid $alert-yellow;
+		}
+	}
+}
+
+.input-container {
+	flex-grow: 1;
+
+	.input {
+		border-bottom-right-radius: 0;
+		border-top-right-radius: 0;
+		line-height: 34px;
+	}
 }
 
 .tld-container {
@@ -21,9 +58,3 @@
 	padding: 0 20px;
 }
 
-.input {
-	border: 0;
-	flex: 1 1 auto;
-	margin: 5px;
-	padding: 5px;
-}

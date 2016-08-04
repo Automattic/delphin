@@ -25,7 +25,7 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		const query = withTld( this.props.values.query );
+		const query = withTld( this.props.values.query.trim() );
 		this.props.fetchDomainPrice( query ).then( action => {
 			this.props.selectDomain( action.result );
 			this.props.redirectToConfirmDomain();
@@ -65,6 +65,7 @@ const SunriseHome = React.createClass( {
 								autoComplete="off"
 								autoFocus
 								placeholder={ i18n.translate( 'Enter your domain name' ) }
+								field={ this.props.fields.query }
 								ref="query" />
 
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />

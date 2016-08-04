@@ -3,17 +3,19 @@ jest.disableAutomock();
 // Internal dependencies
 import { initialState, createRequestReducer } from '..';
 
+const EXTRA_ACTION = 'EXTRA_ACTION';
 const FETCH = 'FETCH';
 const FETCH_COMPLETE = 'FETCH_COMPLETE';
 const FETCH_FAIL = 'FETCH_FAIL';
-const EXTRA_ACTION = 'EXTRA_ACTION';
+const RESET = 'RESET';
 
 describe( 'createRequestReducer', () => {
 	describe( 'with all parameters', () => {
 		const reducer = createRequestReducer( {
 			loading: FETCH,
 			success: FETCH_COMPLETE,
-			fail: FETCH_FAIL
+			fail: FETCH_FAIL,
+			reset: RESET,
 		}, ( state, action ) => {
 			const { type } = action;
 
@@ -63,7 +65,7 @@ describe( 'createRequestReducer', () => {
 			} ).data ).toBe( 'data is a string' );
 		} );
 
-		it( 'should camelCase the keys of the provided data  when fetching completes', () => {
+		it( 'should camelCase the keys of the provided data when fetching completes', () => {
 			expect( reducer( {
 				isRequesting: true,
 				hasLoadedFromServer: false,
@@ -89,6 +91,20 @@ describe( 'createRequestReducer', () => {
 				isRequesting: false,
 				data: null,
 				error: { message: 'foobar' }
+			} );
+		} );
+
+		it( 'should return the initial state when the reset action is dispatched', () => {
+			expect( reducer( {
+				hasLoadedFromServer: true,
+				isRequesting: false,
+				data: 'foo',
+				error: 'bar'
+			}, { type: RESET } ) ).toEqual( {
+				hasLoadedFromServer: false,
+				isRequesting: false,
+				data: null,
+				error: null
 			} );
 		} );
 

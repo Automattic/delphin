@@ -7,6 +7,10 @@
 	padding: 30px 20px 80px;
 }
 
+.form {
+	position: relative;
+}
+
 .expiration {
 	display: flex;
 	justify-content: space-between;
@@ -71,5 +75,155 @@
 
 	&:hover {
 		fill: $gray-dark;
+	}
+}
+
+.checkout-error {
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-name: fadeIn;
+	align-content: center;
+	animation-duration: 0.5s;
+	animation-name: fadeIn;
+	background: rgba( $white, 0.95 );
+	display: flex;
+	// display: none;
+	flex-direction: column;
+	font-weight: 300;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+
+	.icon {
+		-webkit-animation-duration: 0.5s;
+		-webkit-animation-name: bounceIn;
+		animation-duration: 0.5s;
+		animation-name: bounceIn;
+		background: url( /images/checkout-error.svg );
+		height: 46px;
+		margin: 0 auto;
+		width: 72px;
+	}
+
+	p {
+		-webkit-animation-duration: 0.75s;
+		-webkit-animation-name: fadeUp;
+		animation-duration: 0.75s;
+		animation-name: fadeUp;
+		font-size: 2rem;
+		margin: 20px auto;
+		max-width: 260px;
+
+		span {
+			display: block;
+			font-size: 1.6rem;
+			margin-top: 30px;
+		}
+	}
+
+	a {
+		color: $alert-red;
+		text-decoration: underline;
+	}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes bounceIn {
+	0%, 60%, 100% {
+		animation-timing-function: cubic-bezier( 0.215,.61,.355,1 );
+	}
+
+	0% {
+		opacity: 0;
+		transform: scale3d( .3,.3,.3 );
+	}
+
+	60% {
+		transform: scale3d( 1.1,1.1,1.1 );
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale3d( 1,1,1 );
+	}
+}
+
+@keyframes bounceIn {
+	0%, 60%, 100% {
+		animation-timing-function: cubic-bezier( 0.215,.61,.355,1 );
+	}
+
+	0% {
+		opacity: 0;
+		transform: scale3d( .3,.3,.3 );
+	}
+
+	60% {
+		transform: scale3d( 1.1,1.1,1.1 );
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale3d( 1,1,1 );
+	}
+}
+
+@-webkit-keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY( -40px );
+	}
+
+	50% {
+		opacity: 0;
+		transform: translateY( -40px );
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY( 0 );
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY( -40px );
+	}
+
+	50% {
+		opacity: 0;
+		transform: translateY( -40px );
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY( 0 );
 	}
 }

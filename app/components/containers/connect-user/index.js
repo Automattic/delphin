@@ -16,9 +16,9 @@ import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 const validate = values => {
 	if ( ! values.email ) {
-		return { email: i18n.translate( 'Please enter an email address' ) };
+		return { email: i18n.translate( 'Enter a working email address, so you can receive our messages.' ) };
 	} else if ( ! validator.isEmail( values.email ) ) {
-		return { email: i18n.translate( 'This is an invalid email address' ) };
+		return { email: i18n.translate( 'Use a working email address, so you can receive our messages.' ) };
 	}
 	return {};
 };

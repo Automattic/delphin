@@ -12,7 +12,8 @@ const LINK_PROPS = [
 	'activeClassName',
 	'onlyActiveOnIndex',
 	'onClick',
-	'target'
+	'target',
+	'className'
 ];
 
 const TrackingLink = props => {

@@ -18,6 +18,7 @@ import { fetchUser } from 'actions/user';
 import { getTokenFromBearerCookie } from './bearer-cookie';
 import reducers from 'reducers';
 import i18n from 'i18n-calypso';
+import { setLocaleCookie } from './locale-cookie';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
 import { userMiddleware } from './user-middleware';
@@ -95,6 +96,8 @@ function boot() {
 	i18n.stateObserver.on( 'change', render );
 
 	window.switchLocale = switchLocale;
+
+	setLocaleCookie( i18n.getLocaleSlug() );
 }
 
 boot();

@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { fetchDomainPrice } from 'actions/domain-price';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getPath } from 'routes';
 import { isRequestingDomainPrice } from 'reducers/checkout/selectors';
@@ -23,7 +24,10 @@ export default reduxForm(
 	},
 	state => ( { isRequestingDomainPrice: isRequestingDomainPrice( state ) } ),
 	dispatch => bindActionCreators( {
-		fetchDomainPrice,
+		fetchDomainPrice: withAnalytics(
+			domain => recordTracksEvent( 'delphin_domain_search', { search_string: domain } ),
+			fetchDomainPrice
+		),
 		selectDomain,
 		redirectToConfirmDomain: () => push( getPath( 'confirmDomain' ) )
 	}, dispatch )

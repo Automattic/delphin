@@ -7,6 +7,7 @@ import { getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationC
 import { isLoggedIn } from 'reducers/user/selectors';
 import { redirect } from 'actions/routes';
 import SunriseConfirmDomain from 'components/ui/sunrise-confirm-domain';
+import { recordTracksEvent } from 'actions/analytics';
 
 export default connect(
 	state => ( {
@@ -17,6 +18,7 @@ export default connect(
 		isLoggedIn: isLoggedIn( state )
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
+		redirect,
+		trackSubmit: ( isPremium ) => recordTracksEvent( 'delphin_select_domain', { is_premium: isPremium } )
 	}, dispatch )
 )( SunriseConfirmDomain );

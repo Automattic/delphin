@@ -38,6 +38,7 @@ const Checkout = React.createClass( {
 		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
+		trackPrivacyToggle: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
 	},
 
@@ -175,6 +176,7 @@ const Checkout = React.createClass( {
 									<FormToggle
 										name="privacy-protection"
 										{ ...fields.privacyProtection }
+										trackChange={ this.props.trackPrivacyToggle }
 									/>
 									<span className={ styles.privacyProtectionPrice }>FREE</span>
 								</span>

@@ -59,7 +59,7 @@ export default reduxForm(
 		selectDomain,
 		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser: withAnalytics(
-			( ...args ) => recordTracksEvent( 'delphin_confirmation_code_submit', { is_existing_account: args.intention === 'login' } ),
+			( email, code, twoFactorAuthenticationCode, intention ) => recordTracksEvent( 'delphin_confirmation_code_submit', { is_existing_account: intention === 'login' } ),
 			verifyUser
 		)
 	}, dispatch ),

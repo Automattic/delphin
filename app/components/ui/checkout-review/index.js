@@ -16,11 +16,12 @@ import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 class CheckoutReview extends React.Component {
-
 	handleSubmission( submitEvent ) {
 		submitEvent.preventDefault();
 
-		this.props.purchaseDomain().then( () => this.props.redirect( 'success' ) );
+		this.props.purchaseDomain()
+			.then( () => this.props.redirect( 'success' ) )
+			.catch( () => this.props.redirect( 'checkout' ) );
 	}
 
 	renderPaymentReview() {

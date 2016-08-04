@@ -69,19 +69,21 @@ const Checkout = React.createClass( {
 	},
 
 	renderCheckoutError() {
-		return <div className={ styles.checkoutError }>
-			<div className={ styles.icon }></div>
-			<p>
-				{ i18n.translate( 'We weren\'t able to process your payment.' ) }
-				<span>
-					{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
-						{
-							components: { link: <a href="#" /> }
-						}
-					) }
-				</span>
-			</p>
-		</div>;
+		return (
+			<div className={ styles.checkoutError }>
+				<div className={ styles.icon }></div>
+				<p>
+					{ i18n.translate( 'We weren\'t able to process your payment.' ) }
+					<span>
+						{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
+							{
+								components: { link: <a href="#" /> }
+							}
+						) }
+					</span>
+				</p>
+			</div>
+		);
 	},
 
 	renderForm() {
@@ -226,7 +228,7 @@ const Checkout = React.createClass( {
 							</Button>
 						</div>
 
-						{ this.renderCheckoutError() }
+						{ this.props.checkout.transaction.error && this.renderCheckoutError() }
 					</form>
 				</div>
 			</DocumentTitle>

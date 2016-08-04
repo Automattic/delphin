@@ -86,6 +86,13 @@ const Checkout = React.createClass( {
 		);
 	},
 
+	hasError() {
+		const { checkout } = this.props;
+		const { paygateConfiguration, paygateToken, transaction } = checkout;
+
+		return paygateConfiguration.error || paygateToken.error || transaction.error;
+	},
+
 	renderForm() {
 		const months = i18n.moment.months(),
 			{ fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
@@ -228,7 +235,7 @@ const Checkout = React.createClass( {
 							</Button>
 						</div>
 
-						{ this.props.checkout.transaction.error && this.renderCheckoutError() }
+						{ this.hasError() && this.renderCheckoutError() }
 					</form>
 				</div>
 			</DocumentTitle>

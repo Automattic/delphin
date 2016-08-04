@@ -1,8 +1,15 @@
+@import 'app/styles/colors';
+
 .content {
 	margin: 0 auto;
-	padding-bottom: 50px;
+	min-height: 92vh;
 
 	strong {
 		font-weight: bold;
 	}
+}
+
+.language-picker div {
+	color: $black;
+	fill: $black;
 }

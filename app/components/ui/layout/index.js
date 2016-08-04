@@ -8,9 +8,7 @@ import styles from './styles.scss';
 const Layout = ( { children } ) => {
 	return (
 		<div className={ styles.layout }>
-			<div className={ styles.content }>
-				{ children }
-			</div>
+			{ children }
 		</div>
 	);
 };

@@ -10,13 +10,12 @@ import styles from './styles.scss';
 const Sunrise = ( { children } ) => {
 	return (
 		<div>
-			<Header />
-
 			<div className={ styles.content }>
+				<Header />
 				{ children }
 			</div>
 
-			<Footer context="default" />
+			<Footer languagePickerClassName={ styles.languagePicker } />
 		</div>
 	);
 };

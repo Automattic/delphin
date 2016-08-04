@@ -1,24 +1,24 @@
 // External dependencies
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import LanguagePicker from 'components/containers/language-picker';
 import MenuContainer from 'components/containers/menu';
-import NoticesContainer from 'components/containers/notices';
 import styles from './styles.scss';
 
-const Footer = ( { context } ) => {
+const Footer = ( { languagePickerClassName } ) => {
 	return (
-		<div>
-			<NoticesContainer />
-
-			<div className={ styles.footer }>
-				<MenuContainer />
-				<LanguagePicker context={ context } />
-			</div>
+		<div className={ classNames( styles.footer ) }>
+			<MenuContainer />
+			<LanguagePicker className={ languagePickerClassName } />
 		</div>
 	);
+};
+
+Footer.propTypes = {
+	languagePickerClassName: PropTypes.string
 };
 
 export default withStyles( styles )( Footer );

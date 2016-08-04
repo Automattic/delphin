@@ -2,7 +2,9 @@
 @import 'app/styles/breakpoints';
 
 .container {
+	color: $white;
 	cursor: pointer;
+	fill: $white;
 
 	svg {
 		margin-left: 5px;
@@ -15,6 +17,7 @@
 }
 
 .current-language {
+	color: $white;
 	font-size: 1.4rem;
 	margin-top: 15px;
 }
@@ -25,15 +28,6 @@
 
 	.current-language {
 		color: $blue-dark;
-	}
-}
-
-.is-light {
-	color: $white;
-	fill: $white;
-
-	.current-language {
-		color: $white;
 	}
 }
 

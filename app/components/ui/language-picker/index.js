@@ -20,11 +20,10 @@ class LanguagePicker extends React.Component {
 	}
 
 	render() {
-		const { isSelectVisible, showSelect } = this.props;
+		const { className, isSelectVisible, showSelect } = this.props;
 		const currentLanguage = find( languages, { locale: i18n.getLocaleSlug() } );
 
-		let content,
-			className;
+		let content;
 		if ( isSelectVisible ) {
 			content = (
 				<Select className={ styles.select } onChange={ this.handleChange } defaultValue="">
@@ -43,9 +42,9 @@ class LanguagePicker extends React.Component {
 			);
 		}
 
-		className = classNames( styles.container, this.props.context === 'no-margin' ? styles.isLight : styles.isDark );
+		const classes = classNames( styles.container, className );
 		return (
-			<div className={ className }>
+			<div className={ classes }>
 				{ content }
 			</div>
 		);
@@ -53,7 +52,7 @@ class LanguagePicker extends React.Component {
 }
 
 LanguagePicker.propTypes = {
-	context: PropTypes.string,
+	className: PropTypes.string,
 	hideSelect: PropTypes.func.isRequired,
 	isSelectVisible: PropTypes.bool.isRequired,
 	showSelect: PropTypes.func.isRequired,

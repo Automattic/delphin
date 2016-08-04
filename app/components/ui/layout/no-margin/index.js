@@ -10,12 +10,12 @@ import styles from './styles.scss';
 const LayoutNoMargin = ( { children } ) => {
 	return (
 		<div>
-			<Header/>
 			<div className={ styles.content }>
+				<Header/>
 				{ children }
 			</div>
 
-			<Footer context="no-margin" />
+			<Footer />
 		</div>
 	);
 };

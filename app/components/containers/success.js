@@ -14,6 +14,6 @@ export default connect(
 		email: getUserSettings( state ).data.email
 	} ),
 	dispatch => bindActionCreators( {
-		trackAuctionSignup: recordTracksEvent( 'delphin_thank_you_click' )
+		trackAuctionSignup: () => recordTracksEvent( 'delphin_thank_you_click' )
 	}, dispatch )
 )( Success );

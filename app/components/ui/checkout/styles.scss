@@ -155,42 +155,46 @@
 }
 
 @-webkit-keyframes bounceIn {
-	0%, 60%, 100% {
-		animation-timing-function: cubic-bezier( 0.215,.61,.355,1 );
+	0%,
+	60%,
+	100% {
+		animation-timing-function: cubic-bezier( 0.215, .61, .355, 1 );
 	}
 
 	0% {
 		opacity: 0;
-		transform: scale3d( .3,.3,.3 );
+		transform: scale3d( .3, .3, .3 );
 	}
 
 	60% {
-		transform: scale3d( 1.1,1.1,1.1 );
+		transform: scale3d( 1.1, 1.1, 1.1 );
 	}
 
 	100% {
 		opacity: 1;
-		transform: scale3d( 1,1,1 );
+		transform: scale3d( 1, 1, 1 );
 	}
 }
 
 @keyframes bounceIn {
-	0%, 60%, 100% {
-		animation-timing-function: cubic-bezier( 0.215,.61,.355,1 );
+	0%,
+	60%,
+	100% {
+		animation-timing-function: cubic-bezier( 0.215, .61, .355, 1 );
 	}
 
 	0% {
 		opacity: 0;
-		transform: scale3d( .3,.3,.3 );
+		transform: scale3d( .3, .3, .3 );
 	}
 
 	60% {
-		transform: scale3d( 1.1,1.1,1.1 );
+		transform: scale3d( 1.1, 1.1, 1.1 );
 	}
 
 	100% {
 		opacity: 1;
-		transform: scale3d( 1,1,1 );
+		transform: scale3d( 1, 1, 1 );
 	}
 }
 

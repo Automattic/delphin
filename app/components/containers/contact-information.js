@@ -55,13 +55,13 @@ export default reduxForm(
 			showAddress2Input,
 			showOrganizationInput,
 			resetInputVisibility,
-			redirectToCheckout: () => push( getPath( 'checkout' ) ),
+			redirectToCheckout: withAnalytics(
+				recordTracksEvent( 'delphin_contact_form_submit' ),
+				() => push( getPath( 'checkout' ) )
+			),
 			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			redirectToHome: () => push( getPath( 'home' ) ),
-			validateContactInformation: withAnalytics(
-				recordTracksEvent( 'delphin_contact_form_submit' ),
-				( domainName, contactInformation ) => validateContactInformation( [ domainName ], contactInformation )
-			)
+			validateContactInformation: ( domainName, contactInformation ) => validateContactInformation( [ domainName ], contactInformation )
 		}, dispatch )
 	)
 )( ContactInformation );

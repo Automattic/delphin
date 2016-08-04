@@ -39,6 +39,7 @@ const Checkout = React.createClass( {
 		isPurchasing: PropTypes.bool.isRequired,
 		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
+		resetCheckout: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		trackPrivacyToggle: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
@@ -68,6 +69,12 @@ const Checkout = React.createClass( {
 		return invalid || submitting || isPurchasing;
 	},
 
+	handleClickResetCheckout( event ) {
+		event.preventDefault();
+
+		this.props.resetCheckout();
+	},
+
 	renderCheckoutError() {
 		return (
 			<div className={ styles.checkoutError }>
@@ -77,7 +84,7 @@ const Checkout = React.createClass( {
 					<span>
 						{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
 							{
-								components: { link: <a href="#" /> }
+								components: { link: <a onClick={ this.handleClickResetCheckout } href="#" /> }
 							}
 						) }
 					</span>

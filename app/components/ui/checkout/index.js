@@ -174,7 +174,9 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ styles.orderItem }>
 								<label>
-									{ i18n.translate( 'Privacy Protection' ) }
+									<span className={ styles.privacyLabel }>
+										{ i18n.translate( 'Privacy Protection' ) }
+									</span>
 									<Tooltip
 										text={
 											<div>

@@ -61,12 +61,16 @@
 }
 
 .privacy-protection-price {
+	display: inline-block;
 	margin-left: 20px;
+}
+
+.privacy-label {
+	margin-right: 5px;
 }
 
 .gridicon {
 	fill: $gray;
-	left: 5px;
 	position: relative;
 	right: 0;
 	top: 3px;

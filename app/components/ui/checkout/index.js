@@ -143,20 +143,18 @@ const Checkout = React.createClass( {
 							</fieldset>
 
 							<fieldset>
-								<div className={ styles.billingAddress }>
-									<div className={ styles.countryCode }>
-										<label>{ i18n.translate( 'Country' ) }</label>
-										<Country field={ fields.countryCode } supportedBy="checkout" />
-									</div>
-									<div className={ styles.postalCode }>
-										<label>{ i18n.translate( 'Postal Code' ) }</label>
-										<Input
-											type="text"
-											field={ fields.postalCode }
-										/>
-									</div>
-								</div>
-								<ValidationError fields={ [ fields.countryCode, fields.postalCode ] } />
+								<label>{ i18n.translate( 'Country' ) }</label>
+								<Country field={ fields.countryCode } supportedBy="checkout" />
+								<ValidationError field={ fields.countryCode } />
+							</fieldset>
+
+							<fieldset>
+								<label>{ i18n.translate( 'Postal Code' ) }</label>
+								<Input
+									type="text"
+									field={ fields.postalCode }
+								/>
+								<ValidationError field={ fields.postalCode } />
 							</fieldset>
 						</div>
 

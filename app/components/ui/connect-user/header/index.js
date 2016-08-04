@@ -15,6 +15,7 @@ const Header = ( { intention } ) => {
 		text = i18n.translate( 'Enter your email address to claim your domain.' );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
+		text = i18n.translate( 'We sent you a special link to confirm your email address. Look for an email from get.blog and click the link to continue.' );
 	}
 
 	return (

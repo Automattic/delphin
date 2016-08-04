@@ -137,7 +137,7 @@ const VerifyUser = React.createClass( {
 			return notice;
 		}
 
-		let text = i18n.translate( 'Open the link we sent you to proceed. If you’re on another device or the link doesn’t work, enter the code from the email below.' );
+		let text = i18n.translate( 'Using another device or the link doesn\'t work? Enter the confirmation code from the email.' );
 
 		return text;
 	},

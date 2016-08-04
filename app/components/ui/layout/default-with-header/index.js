@@ -15,7 +15,7 @@ const DefaultLayoutWithHeader = ( { children } ) => {
 				{ children }
 			</div>
 
-			<Footer context="default" />
+			<Footer />
 		</div>
 	);
 };

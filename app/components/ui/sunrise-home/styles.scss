@@ -40,7 +40,7 @@
 .domain-search {
 	align-items: flex-start;
 	display: flex;
-	font-size: 1.6rem;
+	font-size: 1.4rem;
 	margin: 0 auto 6em;
 	max-width: 550px;
 
@@ -69,6 +69,7 @@
 		box-sizing: border-box;
 		color: $blue-dark;
 		font-family: $body-font;
+		font-size: 1.6rem;
 		padding: 10px 16px;
 		transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 		width: 100%;
@@ -76,10 +77,6 @@
 		&:focus {
 			box-shadow: none;
 			outline: none;
-		}
-
-		@include breakpoint( '>660px' ) {
-			font-size: 1.8rem;
 		}
 	}
 }

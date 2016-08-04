@@ -9,7 +9,7 @@ export const initialState = {
 	error: null
 };
 
-export const createRequestReducer = ( { loading, success, fail } = {}, additionalReducer = x => x ) => ( state = initialState, action ) => {
+export const createRequestReducer = ( { loading, success, fail, reset } = {}, additionalReducer = x => x ) => ( state = initialState, action ) => {
 	const { type, error } = action;
 
 	if ( loading && type === loading ) {
@@ -31,6 +31,10 @@ export const createRequestReducer = ( { loading, success, fail } = {}, additiona
 			isRequesting: false,
 			error
 		} );
+	}
+
+	if ( reset && type === reset ) {
+		return initialState;
 	}
 
 	return additionalReducer( state, action );

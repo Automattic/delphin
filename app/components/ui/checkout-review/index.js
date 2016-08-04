@@ -1,6 +1,5 @@
 // External dependencies
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import i18n from 'i18n-calypso';
 import { card } from 'creditcards';
@@ -13,6 +12,7 @@ import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { getPath } from 'routes';
+import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 class CheckoutReview extends React.Component {
@@ -38,7 +38,7 @@ class CheckoutReview extends React.Component {
 					{ this.props.selectedDomain.totalCost }
 				</div>
 			</div>
-			<Link className={ styles.editLink } to={ getPath( 'checkout' ) }>{ i18n.translate( 'edit payment method' ) }</Link>
+			<TrackingLink className={ styles.editLink } to={ getPath( 'checkout' ) } eventName="delphin_edit_payment_click">{ i18n.translate( 'edit payment method' ) }</TrackingLink>
 		</section>;
 	}
 
@@ -62,7 +62,7 @@ class CheckoutReview extends React.Component {
 				<div>{ this.props.contactInformation.email }</div>
 			</div>
 
-			<Link className={ styles.editLink } to={ getPath( 'contactInformation' ) }>{ i18n.translate( 'edit contact info' ) }</Link>
+			<TrackingLink className={ styles.editLink } to={ getPath( 'contactInformation' ) } eventName="delphin_edit_contact_click">{ i18n.translate( 'edit contact info' ) }</TrackingLink>
 		</section>;
 	}
 
@@ -102,7 +102,7 @@ class CheckoutReview extends React.Component {
 				{ this.renderTermsOfService() }
 				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit application & pay now' ) }</Button>
 
-				<Link className={ styles.cancelApplication } to={ getPath( 'home' ) }>{ i18n.translate( 'Cancel application' ) }</Link>
+				<TrackingLink className={ styles.cancelApplication } to={ getPath( 'home' ) } eventName="delphin_cancel_application_click">{ i18n.translate( 'Cancel application' ) }</TrackingLink>
 			</SunriseStep.Form>
 
 			{/* This is here so Cancel Application will have some space */}

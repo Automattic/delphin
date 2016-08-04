@@ -10,6 +10,7 @@ import {
 	recordPageView
 } from 'actions/analytics';
 import { dispatcher as dispatch } from '../index';
+import analyticsMiddleware from 'index';
 import analytics from 'lib/analytics';
 
 describe( 'middleware', () => {
@@ -51,7 +52,10 @@ describe( 'middleware', () => {
 		} );
 
 		it( 'should call analytics events with wrapped actions', () => {
-			dispatch( withAnalytics( bumpStat( 'name', 'value' ), { type: 'TEST_ACTION' } ) );
+			const wrappedActionCreator = withAnalytics( bumpStat( 'name', 'value' ), { type: 'TEST_ACTION' } );
+			const thunk = wrappedActionCreator();
+
+			thunk( analyticsMiddleware );
 
 			expect( analytics.mc.bumpStat ).toBeCalled();
 		} );

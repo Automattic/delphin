@@ -1,4 +1,5 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
@@ -8,6 +9,7 @@ import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
 import RequireLogin from './require-login';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 /**
  * Retrieves the full name of the user from the contact information entered.
@@ -55,12 +57,12 @@ export default reduxForm(
 		},
 		user: getUserSettings( state )
 	} ),
-	dispatch => ( {
-		redirectToCheckoutReview() {
-			dispatch( push( getPath( 'checkoutReview' ) ) );
-		},
-		redirectToHome() {
-			dispatch( push( getPath( 'home' ) ) );
-		}
-	} )
+	dispatch => bindActionCreators( {
+		redirectToCheckoutReview: withAnalytics(
+			recordTracksEvent( 'delphin_checkout_form_submit' ),
+			push( getPath( 'checkoutReview' ) )
+		),
+		redirectToHome: () => push( getPath( 'home' ) ),
+		trackPrivacyToggle: ( newValue ) => recordTracksEvent( 'delphin_privacy_toggle', { toggled_to: newValue } )
+	}, dispatch )
 )( RequireLogin( Checkout ) );

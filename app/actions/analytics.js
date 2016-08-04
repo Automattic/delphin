@@ -1,9 +1,7 @@
 /** @ssr-ready **/
 
 import curry from 'lodash/curry';
-import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
-import merge from 'lodash/merge';
 import property from 'lodash/property';
 
 import {
@@ -13,18 +11,26 @@ import {
 	ANALYTICS_STAT_BUMP
 } from 'reducers/action-types';
 
-const mergedMetaData = ( a, b ) => [
-	...get( a, 'meta.analytics', [] ),
-	...get( b, 'meta.analytics', [] )
-];
+/***
+ * Wraps an action creator with analytics action
+ * @param {Function|Object} analyticsAction some analytics action
+ * @param {Function|Object} actionCreator action creator, a function, or a static action - an object
+ * @returns {Function} a wrapped action creator, that will return the original action + analytics action
+ */
+const joinAnalytics = ( analyticsAction, actionCreator ) => {
+	// we return a new action creator, that wraps the real action creator
+	return ( ...args ) => {
+		const action = isFunction( actionCreator ) ? actionCreator( ...args ) : actionCreator;
+		const dispatchedAnalyticsAction = isFunction( analyticsAction ) ? analyticsAction( ...args ) : analyticsAction;
 
-const joinAnalytics = ( analytics, action ) =>
-	isFunction( action )
-		? dispatch => {
-			dispatch( analytics );
-			action( dispatch );
-		}
-		: merge( {}, action, { meta: { analytics: mergedMetaData( analytics, action ) } } );
+		// we never modify original action, since it might be discarded / modified with another middleware,
+		// consider the example of @@router/CALL_HISTORY_METHOD
+		return dispatch => {
+			dispatch( dispatchedAnalyticsAction );
+			return dispatch( action );
+		};
+	};
+};
 
 export const composeAnalytics = ( ...analytics ) => ( {
 	type: ANALYTICS_MULTI_TRACK,

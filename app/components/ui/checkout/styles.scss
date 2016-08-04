@@ -64,6 +64,18 @@
 	margin-left: 20px;
 }
 
+.gridicon {
+	fill: $gray;
+	left: 5px;
+	position: relative;
+	right: 0;
+	top: 3px;
+
+	&:hover {
+		fill: $gray-dark;
+	}
+}
+
 .billing-address {
 	display: flex;
 	justify-content: space-between;

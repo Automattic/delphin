@@ -9,6 +9,8 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import withPageView from 'lib/analytics/with-page-view';
 
+const auctionPartnerName = 'NameJet';
+
 const Success = ( { domain, email, trackAuctionSignup } ) => (
 	<SunriseStep className={ styles.step }>
 		<DocumentTitle title={ i18n.translate( 'Success' ) } />
@@ -54,7 +56,11 @@ const Success = ( { domain, email, trackAuctionSignup } ) => (
 				</p>
 
 				<p>
-					{ i18n.translate( 'Please set up an account with our auction partner, NameJet, so you will be ready in case your domain goes to auction.' ) }
+					{ i18n.translate( 'Please set up an account with our auction partner, %(auctionPartnerName)s, so you will be ready in case your domain goes to auction.', {
+						args: {
+							auctionPartnerName
+						}
+					} ) }
 				</p>
 
 				<a
@@ -62,7 +68,11 @@ const Success = ( { domain, email, trackAuctionSignup } ) => (
 					href="https://www.namejet.com/Pages/Login.aspx"
 					onClick={ trackAuctionSignup }
 					target="_blank">
-					{ i18n.translate( 'Sign up at NameJet' ) }
+					{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {
+						args: {
+							auctionPartnerName
+						}
+					} ) }
 				</a>
 			</div>
 		</div>

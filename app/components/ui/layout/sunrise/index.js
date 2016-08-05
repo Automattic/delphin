@@ -7,7 +7,7 @@ import Footer from 'components/ui/footer';
 import Header from 'components/ui/header';
 import styles from '../no-margin/styles.scss';
 
-const Sunrise = ( { children } ) => {
+const Sunrise = ( { children, isFooterDark } ) => {
 	return (
 		<div>
 			<div className={ styles.content }>
@@ -15,13 +15,14 @@ const Sunrise = ( { children } ) => {
 				{ children }
 			</div>
 
-			<Footer isDark />
+			<Footer isDark={ isFooterDark } />
 		</div>
 	);
 };
 
 Sunrise.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
+	isFooterDark: PropTypes.bool,
 };
 
 export default withStyles( styles )( Sunrise );

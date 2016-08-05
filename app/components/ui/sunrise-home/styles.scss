@@ -41,7 +41,7 @@
 	align-items: flex-start;
 	display: flex;
 	font-size: 1.4rem;
-	margin: 0 auto 6em;
+	margin: 0 auto;
 	max-width: 550px;
 
 	@include breakpoint( '<480px' ) {

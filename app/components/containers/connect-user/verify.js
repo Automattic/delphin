@@ -27,7 +27,7 @@ const validate = values => {
 
 	if ( values.twoFactorAuthenticationCode !== undefined ) {
 		if ( ! values.twoFactorAuthenticationCode ) {
-			errors.twoFactorAuthenticationCode = i18n.translate( 'Your code should be six digits.' );
+			errors.twoFactorAuthenticationCode = i18n.translate( 'Your code should be six or seven digits.' );
 		} else if ( ! /^[0-9]{6,7}$/i.test( values.twoFactorAuthenticationCode ) ) {
 			errors.twoFactorAuthenticationCode = i18n.translate( 'Your code should be six or seven digits.' );
 		}

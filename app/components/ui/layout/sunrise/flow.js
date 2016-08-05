@@ -7,7 +7,7 @@ import SunriseLayout from '.';
 import styles from './flow.scss';
 
 const SunriseFlowLayout = ( { children } ) => (
-	<SunriseLayout languagePickerClassName={ styles.languagePicker }>
+	<SunriseLayout>
 		{ children }
 	</SunriseLayout>
 );

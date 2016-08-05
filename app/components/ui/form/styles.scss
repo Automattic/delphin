@@ -24,16 +24,6 @@
 	button {
 		width: 100%;
 	}
-
-	>:first-child {
-		border-top-left-radius: 2px;
-		border-top-right-radius: 2px;
-	}
-
-	>:last-child {
-		border-bottom-left-radius: 2px;
-		border-bottom-right-radius: 2px;
-	}
 }
 
 .notice-area {
@@ -67,36 +57,47 @@
 	}
 
 	label {
+		color: $gray-dark;
 		display: block;
-		font-size: 1.3rem;
+		font-size: 1.4rem;
 		margin-bottom: 5px;
 	}
 
 	input,
 	select {
-		border: 1px solid $border-blue;
-		border-radius: 2px;
+		border: 1px solid $gray-medium;
+		border-radius: 0;
 		box-sizing: border-box;
 		display: block;
-		font-size: 1.5rem;
+		font-size: 1.6rem;
 		margin: 0;
 		padding: 10px 12px;
+		transition: border-color 0.2s, box-shadow 0.2s;
 		width: 100%;
 
+		&::placeholder {
+			color: darken( $gray-medium, 10% );
+		}
+
 		&:disabled {
-			background: darken( $white, 3% );
-			color: darken( $white, 12% );
+			background: $blue-light;
+			color: darken( $gray-medium, 10% );
 			cursor: not-allowed;
 
 			&::placeholder {
-				color: darken( $white, 12% );
+				color: darken( $gray-medium, 10% );
 			}
 		}
 
 		&:focus {
-			border-color: $border-light-blue;
+			border-color: $green;
+			box-shadow: inset 0 0 0 2px $green-light;
 			outline: none;
 		}
+	}
+
+	select {
+		padding-bottom: 11px;
 	}
 }
 
@@ -111,7 +112,6 @@
 
 .validation-error {
 	background: $alert-yellow;
-	border-radius: 0 0 3px 3px;
 	color: $black;
 	padding: 10px;
 }

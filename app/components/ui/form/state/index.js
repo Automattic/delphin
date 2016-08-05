@@ -20,7 +20,7 @@ const State = ( { className, disabled, field, states, onBlur } ) => {
 				field={ field }
 				disabled={ ! states.hasLoadedFromServer || disabled }
 				onBlur={ onBlur }
-				placeholder={ i18n.translate( 'State' ) } />
+				placeholder={ i18n.translate( 'State/Province' ) } />
 		);
 	} else {
 		content = (
@@ -28,7 +28,7 @@ const State = ( { className, disabled, field, states, onBlur } ) => {
 				{ ...removeInvalidInputProps( field ) }
 				onBlur={ onBlur }
 				disabled={ disabled }>
-				<option value="" disabled>{ i18n.translate( 'State' ) }</option>
+				<option value="" disabled>{ i18n.translate( 'State/Province' ) }</option>
 				<option disabled />
 				{ states.data.map( ( state ) => (
 					<option value={ state.code } key={ state.code }>{ state.name }</option>

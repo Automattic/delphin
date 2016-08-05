@@ -62,13 +62,10 @@
 }
 
 .refund-notice {
+	background: url( /images/happy-surprise.svg ) no-repeat right 15px;
 	color: $gray-dark;
 	font-size: 1.4rem;
-	padding-top: 15px;
-
-	img {
-		float: right;
-	}
+	padding: 15px 40px 0 0;
 
 	strong {
 		color: $blue;

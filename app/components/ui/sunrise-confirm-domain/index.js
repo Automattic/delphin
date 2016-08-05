@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import PartialUnderline from 'components/ui/partial-underline';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import styles from './styles.scss';
@@ -58,10 +59,10 @@ class SunriseConfirmDomain extends React.Component {
 						</div>
 					) }
 
-					<h3>
-						{ domainName }
-					</h3>
-					<hr className={ styles.rule } />
+					<PartialUnderline className={ styles.domain }>
+						<h3>{ domainName }</h3>
+					</PartialUnderline>
+
 					<div className={ styles.priceTag }>
 						{ i18n.translate( '%(totalCost)s Early Application', {
 							args: { totalCost }

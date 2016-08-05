@@ -4,6 +4,7 @@ import { getValues } from 'redux-form';
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
+	CHECKOUT_REQUESTS_RESET,
 	PAYGATE_CONFIGURATION_FETCH,
 	PAYGATE_CONFIGURATION_FETCH_COMPLETE,
 	PAYGATE_CONFIGURATION_FETCH_FAIL,
@@ -18,6 +19,8 @@ import {
 import { getCheckout } from 'reducers/checkout/selectors';
 import { snakeifyKeys } from 'lib/formatters';
 import paygateLoader from 'lib/paygate-loader';
+
+export const resetCheckout = () => ( { type: CHECKOUT_REQUESTS_RESET } );
 
 function getPaygateParameters( cardDetails ) {
 	return {

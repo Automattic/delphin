@@ -39,6 +39,7 @@ const Checkout = React.createClass( {
 		isPurchasing: PropTypes.bool.isRequired,
 		redirectToCheckoutReview: PropTypes.func.isRequired,
 		redirectToHome: PropTypes.func.isRequired,
+		resetCheckout: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		trackPrivacyToggle: PropTypes.func.isRequired,
 		user: PropTypes.object.isRequired
@@ -66,6 +67,37 @@ const Checkout = React.createClass( {
 		const { isPurchasing, invalid, submitting } = this.props;
 
 		return invalid || submitting || isPurchasing;
+	},
+
+	handleClickResetCheckout( event ) {
+		event.preventDefault();
+
+		this.props.resetCheckout();
+	},
+
+	renderCheckoutError() {
+		return (
+			<div className={ styles.checkoutError }>
+				<div className={ styles.icon }></div>
+				<p>
+					{ i18n.translate( 'We weren\'t able to process your payment.' ) }
+					<span>
+						{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
+							{
+								components: { link: <a onClick={ this.handleClickResetCheckout } href="#" /> }
+							}
+						) }
+					</span>
+				</p>
+			</div>
+		);
+	},
+
+	hasError() {
+		const { checkout } = this.props;
+		const { paygateConfiguration, paygateToken, transaction } = checkout;
+
+		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},
 
 	renderForm() {
@@ -209,6 +241,8 @@ const Checkout = React.createClass( {
 								{ i18n.translate( 'Review application' ) }
 							</Button>
 						</div>
+
+						{ this.hasError() && this.renderCheckoutError() }
 					</form>
 				</div>
 			</DocumentTitle>

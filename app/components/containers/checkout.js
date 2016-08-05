@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
+import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
@@ -58,6 +59,7 @@ export default reduxForm(
 		user: getUserSettings( state )
 	} ),
 	dispatch => bindActionCreators( {
+		resetCheckout,
 		redirectToCheckoutReview: withAnalytics(
 			recordTracksEvent( 'delphin_checkout_form_submit' ),
 			push( getPath( 'checkoutReview' ) )

@@ -38,7 +38,7 @@ const VerifyUser = React.createClass( {
 	componentDidMount() {
 		const { query } = this.props;
 
-		if ( this.props.isLoggedIn ) {
+		if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );
 
 			return;

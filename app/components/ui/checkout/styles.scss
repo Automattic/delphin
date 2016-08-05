@@ -79,14 +79,11 @@
 }
 
 .checkout-error {
-	-webkit-animation-duration: 0.5s;
-	-webkit-animation-name: fadeIn;
 	align-content: center;
 	animation-duration: 0.5s;
 	animation-name: fadeIn;
 	background: rgba( $white, 0.95 );
 	display: flex;
-	// display: none;
 	flex-direction: column;
 	font-weight: 300;
 	height: 100%;
@@ -98,8 +95,6 @@
 	width: 100%;
 
 	.icon {
-		-webkit-animation-duration: 0.5s;
-		-webkit-animation-name: bounceIn;
 		animation-duration: 0.5s;
 		animation-name: bounceIn;
 		background: url( /images/checkout-error.svg );
@@ -109,8 +104,6 @@
 	}
 
 	p {
-		-webkit-animation-duration: 0.75s;
-		-webkit-animation-name: fadeUp;
 		animation-duration: 0.75s;
 		animation-name: fadeUp;
 		font-size: 2rem;

@@ -214,18 +214,3 @@ export const getPath = ( slug, values = {}, overrides = {} ) => {
 
 	return `/${ locale }${ formattedPath }`;
 };
-
-export const serverRedirectRoutes = [
-	{
-		from: getPath( 'contactInformation' ),
-		to: getPath( 'loginUser' )
-	},
-	{
-		from: getPath( 'checkout' ),
-		to: getPath( 'loginUser' )
-	},
-	{
-		from: getPath( 'success' ),
-		to: getPath( 'loginUser' )
-	}
-];

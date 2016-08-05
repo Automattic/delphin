@@ -3,7 +3,6 @@ import auth from 'http-auth';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import curry from 'lodash/curry';
 import DocumentTitle from 'react-document-title';
-import find from 'lodash/find';
 import express from 'express';
 import fs from 'fs';
 import i18n from 'i18n-calypso';
@@ -24,8 +23,8 @@ import api from './wpcom-rest-api-proxy';
 import config from 'config';
 import { fileExists } from './utils';
 import i18nCache from './i18n-cache';
-import { getPath, defaultRoutes, routes, serverRedirectRoutes } from 'app/routes';
-import { getLocaleSlug, stripLocaleSlug } from 'lib/routes';
+import { getPath, defaultRoutes, routes } from 'app/routes';
+import { getLocaleSlug } from 'lib/routes';
 import Stylizer, { addCss } from 'lib/stylizer';
 import webpackConfig from '../webpack.client.config';
 
@@ -135,16 +134,6 @@ const init = () => {
 				localeData = i18nCache.get( locale );
 
 			i18n.setLocale( localeData );
-
-			const redirect = find( serverRedirectRoutes, route => {
-				return stripLocaleSlug( request.url ).startsWith( route.from );
-			} );
-
-			if ( redirect ) {
-				response.redirect( locale ? `/${ locale }${ redirect.to }` : redirect.to );
-
-				return;
-			}
 
 			if ( props.routes.some( route => route.slug === 'notFound' ) ) {
 				response.status( 404 );

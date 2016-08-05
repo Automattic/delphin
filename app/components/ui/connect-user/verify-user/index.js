@@ -116,7 +116,7 @@ const VerifyUser = React.createClass( {
 		if ( user.data.twoFactorAuthenticationEnabled ) {
 			return (
 				<div className={ styles.twoFactorFields }>
-					<label>{ i18n.translate( 'Two factor authentication code:' ) }</label>
+					<label>{ i18n.translate( 'Two-step authentication code:' ) }</label>
 
 					<Input
 						field={ fields.twoFactorAuthenticationCode }

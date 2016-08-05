@@ -112,11 +112,11 @@ export const validateDomain = query => {
 	}
 
 	if ( query.charAt( 0 ) === '-' ) {
-		return { query: i18n.translate( 'Don’t use a "-" (dash) as the first character in your domain.' ) };
+		return { query: i18n.translate( 'Don’t use a "-" (hyphen) as the first character in your domain.' ) };
 	}
 
 	if ( query.charAt( query.length - 1 ) === '-' ) {
-		return { query: i18n.translate( 'Don’t use a "-" (dash) as the last character in your domain.' ) };
+		return { query: i18n.translate( 'Don’t use a "-" (hyphen) as the last character in your domain.' ) };
 	}
 
 	if ( query.indexOf( '.' ) > -1 ) {
@@ -124,7 +124,7 @@ export const validateDomain = query => {
 	}
 
 	if ( ! isDomain( query + '.blog' ) ) {
-		return { query: i18n.translate( 'Use only lowercase letters, numbers, and dashes (a to z, 0 to 9, and -). Spaces or other characters are not supported.' ) };
+		return { query: i18n.translate( 'Use only lowercase letters, numbers, and hyphens (a to z, 0 to 9, and -). Spaces or other characters are not supported.' ) };
 	}
 
 	return {};

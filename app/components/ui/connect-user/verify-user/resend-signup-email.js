@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import config from 'config';
 import i18n from 'i18n-calypso';
 import styles from './styles.scss';
 
@@ -26,7 +27,10 @@ const ResendSignupEmail = React.createClass( {
 
 	render() {
 		let text = i18n.translate(
-			"On its way! If you don't receive it in within a few minutes, send us a message."
+			"On its way! If you don't receive it in within a few minutes, {{a}}send us a message{{/a}}.",
+			{
+				components: { a: <a href={ config( 'support_link' ) } /> }
+			}
 		);
 
 		if ( ! this.state.sent ) {

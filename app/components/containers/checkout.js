@@ -52,8 +52,8 @@ export default reduxForm(
 		isPurchasing: isPurchasing( state ),
 		initialValues: {
 			name: getFullName( state ),
-			countryCode: state.contactInformation.data.countryCode,
-			postalCode: state.contactInformation.data.postalCode,
+			countryCode: state.contactInformation.data && state.contactInformation.data.countryCode,
+			postalCode: state.contactInformation.data && state.contactInformation.data.postalCode,
 			privacyProtection: true
 		},
 		user: getUserSettings( state )

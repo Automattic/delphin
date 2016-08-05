@@ -3,7 +3,6 @@
 
 .container {
 	color: $white;
-	cursor: pointer;
 	fill: $white;
 
 	svg {
@@ -18,6 +17,7 @@
 
 .current-language {
 	color: $white;
+	cursor: pointer;
 	font-size: 1.4rem;
 	margin-top: 15px;
 }

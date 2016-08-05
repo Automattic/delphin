@@ -6,7 +6,7 @@
 
 	@include breakpoint( '<480px' ) {
 		margin: 0 15px;
-		padding-top: 10px;
+		padding-top: 8px;
 	}
 
 	@include breakpoint( '>480px' ) {

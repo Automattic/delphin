@@ -72,7 +72,7 @@
 		font-size: 1.6rem;
 		margin: 0;
 		padding: 10px 12px;
-		transition: all 0.2s;
+		transition: border-color 0.2s, box-shadow 0.2s;
 		width: 100%;
 
 		&::placeholder {

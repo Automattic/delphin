@@ -2,7 +2,7 @@
 import DocumentTitle from 'react-document-title';
 import React, { PropTypes } from 'react';
 
-const DEFAULT_TITLE = 'MagicDomains';
+const DEFAULT_TITLE = 'get.blog';
 
 const DocumentTitleWrapper = ( { children, title } ) => {
 	const formattedTitle = title ? `${ title } | ${ DEFAULT_TITLE }` : DEFAULT_TITLE;

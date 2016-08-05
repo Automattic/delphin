@@ -22,7 +22,7 @@
 	font-family: $body-font;
 	font-size: 1.6rem;
 	margin: -40px auto 25px;
-	max-width: 700px;
+	max-width: 800px;
 
 	@include breakpoint( '<660px' ) {
 		flex-direction: column;
@@ -52,6 +52,7 @@
 		border-bottom-left-radius: 5px;
 		border-top-left-radius: 5px;
 		flex-basis: 40%;
+		margin-left: 15px;
 	}
 
 	h3 {
@@ -59,11 +60,17 @@
 		font-size: 2.2rem;
 	}
 
-	p:not(:first-child) {
-		color: $gray-dark;
 
-		@include breakpoint( '<660px' ) {
-			margin-top: 5px;
+
+	p {
+		word-break: break-word;
+
+		&:not(:first-child) {
+			color: $gray-dark;
+
+			@include breakpoint( '<660px' ) {
+				margin-top: 5px;
+			}
 		}
 	}
 }
@@ -76,6 +83,7 @@
 		border-bottom-right-radius: 5px;
 		border-top-right-radius: 5px;
 		flex-basis: 60%;
+		margin-right: 15px;
 	}
 
 	.button {

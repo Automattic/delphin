@@ -28,12 +28,7 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillMount() {
-		if ( this.props.isLoggedOut ) {
-			this.props.redirectToLogin();
-			return;
-		}
-
-		if ( ! this.props.hasSelectedDomain ) {
+		if ( this.props.isLoggedOut || ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 			return;
 		}

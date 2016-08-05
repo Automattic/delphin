@@ -14,6 +14,7 @@ import { analyticsMiddleware } from './analytics-middleware';
 import config from 'config';
 import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
+import { logErrorNoticesMiddleware } from './log-error-notices-middleware';
 import reducers from 'reducers';
 import i18n from 'i18n-calypso';
 import { setLocaleCookie } from './locale-cookie';
@@ -25,6 +26,7 @@ const middlewares = [
 	routerMiddleware( browserHistory ),
 	thunk,
 	analyticsMiddleware,
+	logErrorNoticesMiddleware,
 	wpcomMiddleware,
 	relatedWordsMiddleware
 ];

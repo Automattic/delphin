@@ -1,10 +1,12 @@
 @import 'app/styles/breakpoints';
+@import 'app/styles/colors';
 
 .footer {
 	display: flex;
 	flex-direction: column-reverse;
 
 	@include breakpoint( '<480px' ) {
+		border-top: 1px solid $gray-light;
 		margin: 0 15px;
 		padding-top: 8px;
 	}

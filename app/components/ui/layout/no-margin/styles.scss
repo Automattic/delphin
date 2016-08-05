@@ -1,6 +1,12 @@
+@import 'app/styles/breakpoints';
+
 .content {
 	margin: 0 auto;
-	padding-bottom: 50px;
+	min-height: 83vh;
+
+	@include breakpoint( '>480px' ) {
+		min-height: 92vh;
+	}
 
 	strong {
 		font-weight: bold;

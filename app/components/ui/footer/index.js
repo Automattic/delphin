@@ -8,17 +8,17 @@ import LanguagePicker from 'components/containers/language-picker';
 import MenuContainer from 'components/containers/menu';
 import styles from './styles.scss';
 
-const Footer = ( { languagePickerClassName } ) => {
+const Footer = ( { isDark } ) => {
 	return (
 		<div className={ classNames( styles.footer ) }>
 			<MenuContainer />
-			<LanguagePicker className={ languagePickerClassName } />
+			<LanguagePicker isDark={ isDark } />
 		</div>
 	);
 };
 
 Footer.propTypes = {
-	languagePickerClassName: PropTypes.string
+	isDark: PropTypes.bool
 };
 
 export default withStyles( styles )( Footer );

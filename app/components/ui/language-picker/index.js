@@ -20,7 +20,7 @@ class LanguagePicker extends React.Component {
 	}
 
 	render() {
-		const { className, isSelectVisible, showSelect } = this.props;
+		const { isDark, isSelectVisible, showSelect } = this.props;
 		const currentLanguage = find( languages, { locale: i18n.getLocaleSlug() } );
 
 		let content;
@@ -42,7 +42,7 @@ class LanguagePicker extends React.Component {
 			);
 		}
 
-		const classes = classNames( styles.container, className );
+		const classes = classNames( styles.container, isDark ? styles.isDark : null );
 		return (
 			<div className={ classes }>
 				{ content }
@@ -52,8 +52,8 @@ class LanguagePicker extends React.Component {
 }
 
 LanguagePicker.propTypes = {
-	className: PropTypes.string,
 	hideSelect: PropTypes.func.isRequired,
+	isDark: PropTypes.bool,
 	isSelectVisible: PropTypes.bool.isRequired,
 	showSelect: PropTypes.func.isRequired,
 };

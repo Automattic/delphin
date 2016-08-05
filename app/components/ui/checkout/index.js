@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import range from 'lodash/range';
 import padStart from 'lodash/padStart';
+const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -22,6 +23,7 @@ import { removeInvalidInputProps } from 'lib/form';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
 import Select from 'components/ui/form/select';
+import Tooltip from 'components/ui/tooltip';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -171,7 +173,24 @@ const Checkout = React.createClass( {
 								<span>{ domainCost }</span>
 							</div>
 							<div className={ styles.orderItem }>
-								<label>{ i18n.translate( 'Privacy Protection' ) }</label>
+								<label>
+									<span className={ styles.privacyLabel }>
+										{ i18n.translate( 'Privacy Protection' ) }
+									</span>
+									<Tooltip
+										text={
+											<div>
+												<p>{ i18n.translate( 'Some providers charge a fee to keep personal information out of the domain\'s public records.' ) }</p>
+												<p>{ i18n.translate( 'We keep your details hidden for free, to protect your identity and prevent spam.' ) }</p>
+											</div>
+										}>
+										<Gridicon
+											className={ styles.gridicon }
+											icon="help-outline"
+											size={ 16 }
+										/>
+									</Tooltip>
+								</label>
 								<span>
 									<FormToggle
 										name="privacy-protection"

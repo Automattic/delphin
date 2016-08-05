@@ -11,7 +11,7 @@ const Header = () => {
 	return (
 		<header className={ styles.header }>
 			<Link className={ styles.logo } to={ getPath( 'home' ) }>
-				<img alt="get.blog" src="/images/get-dot-blog-logo.svg" />
+				<img alt="get.blog" src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/get-dot-blog-logo.svg" />
 			</Link>
 		</header>
 	);

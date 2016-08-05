@@ -19,16 +19,12 @@ import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 const validate = values => {
 	const errors = {};
-	if ( ! values.code ) {
-		errors.code = i18n.translate( 'Your code should be six digits.' );
-	} else if ( ! /^[0-9]{6}$/i.test( values.code ) ) {
+	if ( ! values.code || ! /^[0-9]{6}$/i.test( values.code ) ) {
 		errors.code = i18n.translate( 'Your code should be six digits.' );
 	}
 
 	if ( values.twoFactorAuthenticationCode !== undefined ) {
-		if ( ! values.twoFactorAuthenticationCode ) {
-			errors.twoFactorAuthenticationCode = i18n.translate( 'Your code should be six or seven digits.' );
-		} else if ( ! /^[0-9]{6,7}$/i.test( values.twoFactorAuthenticationCode ) ) {
+		if ( ! values.twoFactorAuthenticationCode || ! /^[0-9]{6,7}$/i.test( values.twoFactorAuthenticationCode ) ) {
 			errors.twoFactorAuthenticationCode = i18n.translate( 'Your code should be six or seven digits.' );
 		}
 	}

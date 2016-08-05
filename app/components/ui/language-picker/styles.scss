@@ -1,0 +1,44 @@
+@import 'app/styles/colors';
+@import 'app/styles/breakpoints';
+
+.container {
+	color: $white;
+	fill: $white;
+
+	svg {
+		margin-left: 5px;
+		vertical-align: bottom;
+	}
+
+	@include breakpoint( '<480px' ) {
+		margin-bottom: 10px;
+	}
+}
+
+.current-language {
+	color: $white;
+	cursor: pointer;
+	font-size: 1.4rem;
+	margin-top: 15px;
+}
+
+.is-dark {
+	color: $blue-dark;
+	fill: $blue-dark;
+
+	.current-language {
+		color: $blue-dark;
+	}
+}
+
+.select {
+	border: solid 1px $gray;
+	border-radius: 4px;
+	color: $gray-dark;
+	font-size: 1.3rem;
+	padding: 10px 50px 10px 12px;
+}
+
+.container .select:focus {
+	box-shadow: none;
+}

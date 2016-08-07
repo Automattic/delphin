@@ -12,10 +12,6 @@ import withPageView from 'lib/analytics/with-page-view';
 const auctionPartnerName = 'NameJet';
 
 class Success extends React.Component {
-	constructor( props ) {
-		super( props );
-	}
-
 	componentWillMount() {
 		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );

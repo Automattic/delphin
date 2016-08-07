@@ -108,7 +108,7 @@ export const validateDomain = query => {
 	}
 
 	if ( query.length > 63 ) {
-		return { query: i18n.translate( 'Choose a shorter domain, up to 63 characters (not including the ".blog" part)' ) };
+		return { query: i18n.translate( 'Choose a shorter domain, up to 63 characters (not including the ".blog" part).' ) };
 	}
 
 	if ( query.charAt( 0 ) === '-' ) {

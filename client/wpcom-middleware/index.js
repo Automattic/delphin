@@ -52,9 +52,15 @@ function makeWpcomRequest( state, action ) {
 	let token;
 	let locale;
 
-	// get token and locale from state if user logged in
-	if ( getPath( state, 'user.isLoggedIn' ) ) {
+	// get token from state if user is verified
+	// user is logged in only when fetch user is complete
+	// but we get bearer token before that, on verify user
+	if ( getPath( getUserConnect( state ), 'data.bearerToken' ) ) {
 		token = getUserConnect( state ).data.bearerToken;
+	}
+
+	// get from state if user logged in
+	if ( getPath( state, 'user.isLoggedIn' ) ) {
 		locale = getUserLocale( state );
 	}
 

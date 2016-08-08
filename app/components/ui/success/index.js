@@ -11,78 +11,92 @@ import withPageView from 'lib/analytics/with-page-view';
 
 const auctionPartnerName = 'NameJet';
 
-const Success = ( { domain, email, trackAuctionSignup } ) => (
-	<SunriseStep className={ styles.step }>
-		<DocumentTitle title={ i18n.translate( 'Success' ) } />
+class Success extends React.Component {
+	componentWillMount() {
+		if ( ! this.props.hasSelectedDomain ) {
+			this.props.redirect( 'home' );
+		}
+	}
 
-		<SunriseStep.Header className={ styles.header }>
-			<h1>
-				{ i18n.translate( "That's a happy blog!" ) }
-			</h1>
+	render() {
+		const { domain, email, trackAuctionSignup } = this.props;
 
-			<h2>
-				{ i18n.translate( 'Your application for {{strong}}%(domain)s{{/strong}} is being processed.',
-					{
-						args: { domain },
-						components: { strong: <strong /> }
-					}
-				) }
-			</h2>
-		</SunriseStep.Header>
+		return (
+			<SunriseStep className={ styles.step }>
+				<DocumentTitle title={ i18n.translate( 'Success' ) } />
 
-		<div className={ styles.content }>
-			<div className={ styles.highlight }>
-				<h3>
-					{ i18n.translate( 'What happens now?' ) }
-				</h3>
+				<SunriseStep.Header className={ styles.header }>
+					<h1>
+						{ i18n.translate( "That's a happy blog!" ) }
+					</h1>
 
-				<p>
-					{ i18n.translate( "Your application will be reviewed by November 9. We'll email you at {{strong}}%(email)s{{/strong}} with more details.",
-						{
-							args: { email },
-							components: { strong: <strong /> }
-						}
-					) }
-				</p>
-			</div>
+					<h2>
+						{ i18n.translate( 'Your application for {{strong}}%(domain)s{{/strong}} is being processed.',
+							{
+								args: { domain },
+								components: { strong: <strong /> }
+							}
+						) }
+					</h2>
+				</SunriseStep.Header>
 
-			<div className={ styles.text }>
-				<p>
-					{ i18n.translate( 'If no other requests are received for this domain, you will be granted the domain shortly after November 9.' ) }
-				</p>
+				<div className={ styles.content }>
+					<div className={ styles.highlight }>
+						<h3>
+							{ i18n.translate( 'What happens now?' ) }
+						</h3>
 
-				<p>
-					{ i18n.translate( 'If multiple requests are received for this domain, you will be able to bid for it in an auction, between November 14 and November 17.' ) }
-				</p>
+						<p>
+							{ i18n.translate( "Your application will be reviewed by November 9. We'll email you at {{strong}}%(email)s{{/strong}} with more details.",
+								{
+									args: { email },
+									components: { strong: <strong /> }
+								}
+							) }
+						</p>
+					</div>
 
-				<p>
-					{ i18n.translate( 'Please set up an account with our auction partner, %(auctionPartnerName)s, so you will be ready in case your domain goes to auction.', {
-						args: {
-							auctionPartnerName
-						}
-					} ) }
-				</p>
+					<div className={ styles.text }>
+						<p>
+							{ i18n.translate( 'If no other requests are received for this domain, you will be granted the domain shortly after November 9.' ) }
+						</p>
 
-				<a
-					className={ styles.button }
-					href="https://www.namejet.com/Pages/Login.aspx"
-					onClick={ trackAuctionSignup }
-					target="_blank">
-					{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {
-						args: {
-							auctionPartnerName
-						}
-					} ) }
-				</a>
-			</div>
-		</div>
-	</SunriseStep>
-);
+						<p>
+							{ i18n.translate( 'If multiple requests are received for this domain, you will be able to bid for it in an auction, between November 14 and November 17.' ) }
+						</p>
+
+						<p>
+							{ i18n.translate( 'Please set up an account with our auction partner, %(auctionPartnerName)s, so you will be ready in case your domain goes to auction.', {
+								args: {
+									auctionPartnerName
+								}
+							} ) }
+						</p>
+
+						<a
+							className={ styles.button }
+							href="https://www.namejet.com/Pages/Login.aspx"
+							onClick={ trackAuctionSignup }
+							target="_blank">
+							{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {
+								args: {
+									auctionPartnerName
+								}
+							} ) }
+						</a>
+					</div>
+				</div>
+			</SunriseStep>
+		);
+	}
+}
 
 Success.propTypes = {
-	domain: PropTypes.string.isRequired,
-	email: PropTypes.string.isRequired,
-	trackAuctionSignup: PropTypes.func.isRequired
+	domain: PropTypes.string,
+	email: PropTypes.string,
+	hasSelectedDomain: PropTypes.bool.isRequired,
+	redirect: PropTypes.func.isRequired,
+	trackAuctionSignup: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( withPageView( Success, 'Success' ) );

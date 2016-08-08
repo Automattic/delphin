@@ -8,8 +8,10 @@ import {
 } from 'reducers/action-types';
 import { withTld } from 'lib/domains';
 
+const normalizeQuery = query => query.trim().toLowerCase();
+
 export function fetchDomainPrice( domainQuery = '' ) {
-	const queryWithTld = withTld( domainQuery );
+	const queryWithTld = withTld( normalizeQuery( domainQuery ) );
 
 	return {
 		type: WPCOM_REQUEST,

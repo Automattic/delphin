@@ -46,18 +46,6 @@ const SunriseHome = React.createClass( {
 						} ) }
 					</h2>
 
-					<div className={ styles.secondaryHeadingContainer }>
-						<h3 className={ styles.secondaryHeading }>
-							{ i18n.translate(
-								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
-							) }
-							<br /><br />
-							{ i18n.translate(
-								'Apply now to secure the perfect domain for your blog.'
-							) }
-						</h3>
-					</div>
-
 					<div className={ styles.domainSearch }>
 						<div className={ styles.field }>
 							<DomainInput
@@ -74,6 +62,17 @@ const SunriseHome = React.createClass( {
 						<Button className={ styles.button } disabled={ this.props.isRequestingDomainPrice }>
 							{ i18n.translate( 'Get started' ) }
 						</Button>
+					</div>
+
+					<div className={ styles.secondaryHeadingContainer }>
+						<h3 className={ styles.secondaryHeading }>
+							{ i18n.translate(
+								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
+							) }
+							{ i18n.translate(
+								'Apply now to secure the perfect domain for your blog.'
+							) }
+						</h3>
 					</div>
 				</form>
 			</div>

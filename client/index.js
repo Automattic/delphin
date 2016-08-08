@@ -21,6 +21,7 @@ import { setLocaleCookie } from './locale-cookie';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
 import { relatedWordsMiddleware } from './related-words-middleware';
+import { switchLocaleMiddleware } from './switch-locale-middleware';
 
 const middlewares = [
 	routerMiddleware( browserHistory ),
@@ -28,7 +29,8 @@ const middlewares = [
 	analyticsMiddleware,
 	logErrorNoticesMiddleware,
 	wpcomMiddleware,
-	relatedWordsMiddleware
+	relatedWordsMiddleware,
+	switchLocaleMiddleware,
 ];
 
 const isDevelopment = 'production' !== config( 'env' );

@@ -25,7 +25,7 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		const query = withTld( this.props.values.query.trim() );
+		const query = withTld( this.props.values.query );
 		this.props.fetchDomainPrice( query ).then( action => {
 			this.props.selectDomain( action.result );
 			this.props.redirectToConfirmDomain();

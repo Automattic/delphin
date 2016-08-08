@@ -7,7 +7,7 @@ import validator from 'validator';
 // Internal dependencies
 import ConnectUser from 'components/ui/connect-user';
 import { getAsyncValidateFunction } from 'lib/form';
-import { getSelectedDomain } from 'reducers/checkout/selectors';
+import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
@@ -32,6 +32,7 @@ export default reduxForm(
 	},
 	state => ( {
 		domain: getSelectedDomain( state ),
+		hasSelectedDomain: hasSelectedDomain( state ),
 		initialValues: { email: getUserConnect( state ).data.email || '' },
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )
@@ -42,7 +43,7 @@ export default reduxForm(
 			recordTracksEvent( 'delphin_signup_submit' ),
 			( fields, domain ) => connectUser( fields.email, ownProps.intention, domain )
 		),
-		redirectToHome: () => push( getPath( 'search' ) ),
+		redirectToHome: () => push( getPath( 'home' ) ),
 		redirectToVerifyUser: () => push( getPath( 'verifyUser' ) )
 	}, dispatch )
 )( ConnectUser );

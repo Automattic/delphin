@@ -54,6 +54,7 @@ describe( 'lib/routes', () => {
 		} );
 
 		it( 'should return root for a URL with only the locale', () => {
+			expect( stripLocaleSlug( '/fr/' ) ).toBe( '/' );
 			expect( stripLocaleSlug( '/fr' ) ).toBe( '/' );
 		} );
 	} );

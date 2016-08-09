@@ -14,9 +14,10 @@ import styles from './styles.scss';
 
 class LanguagePicker extends React.Component {
 	handleChange( event ) {
-		const locale = event.target.value === 'en' ? '' : event.target.value;
+		const locale = event.target.value;
 
-		window.location.href = '/' + locale;
+		this.props.switchLocale( locale );
+		this.props.hideSelect();
 	}
 
 	render() {
@@ -56,6 +57,7 @@ LanguagePicker.propTypes = {
 	isDark: PropTypes.bool,
 	isSelectVisible: PropTypes.bool.isRequired,
 	showSelect: PropTypes.func.isRequired,
+	switchLocale: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( LanguagePicker ) );

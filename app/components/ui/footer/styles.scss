@@ -6,9 +6,12 @@
 	flex-direction: column-reverse;
 
 	@include breakpoint( '<480px' ) {
-		border-top: 1px solid $gray-dark;
-		margin: 0 15px 30px;
+		margin: 15px 15px 30px;
 		padding-top: 8px;
+
+		&.has-border {
+			border-top: 1px solid $gray-dark;
+		}
 	}
 
 	@include breakpoint( '>480px' ) {

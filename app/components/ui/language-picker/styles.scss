@@ -10,7 +10,7 @@
 		vertical-align: bottom;
 	}
 
-	@include breakpoint( '<480px' ) {
+	@include breakpoint( '<660px' ) {
 		margin-bottom: 10px;
 	}
 }

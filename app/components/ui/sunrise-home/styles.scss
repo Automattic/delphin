@@ -2,16 +2,31 @@
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
 
+.home-container {
+	display: flex;
+	flex-direction: column;
+}
+
 .form {
 	padding: 0 20px;
 	text-align: center;
+}
+
+.whats-your-story {
+	margin: 8vmin auto 0;
+	max-width: 777px;
+	width: 100%;
+
+	@include breakpoint( '<480px' ) {
+		margin-top: 10px;
+	}
 }
 
 .heading {
 	font-family: $heading-font;
 	font-size: 3.4rem;
 	font-weight: 400;
-	margin: 15vmin 0 10px;
+	margin-bottom: 10px;
 
 	.emphasis {
 		color: $blue-bright;
@@ -19,24 +34,24 @@
 
 	@include breakpoint( '<480px' ) {
 		font-size: 2.6rem;
-		margin: 45px 0 10px;
 	}
 }
 
 .secondary-heading {
-	font-size: 2rem;
+	color: $gray-medium;
+	font-size: 1.8rem;
 	font-weight: 300;
+	line-height: 1.4;
 
 	@include breakpoint( '<480px' ) {
-		font-size: 1.8rem;
-		line-height: 1.35;
+		font-size: 1.6rem;
 	}
 }
 
 .secondary-heading-container {
 	margin: 0 auto;
-	max-width: 550px;
-	padding: 35px 0;
+	max-width: 500px;
+	padding: 0 0;
 }
 
 .domain-search {

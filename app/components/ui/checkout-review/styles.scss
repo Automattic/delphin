@@ -3,7 +3,6 @@
 
 .checkout-review {
 	background-color: #fff;
-	border-top: 1px solid $blue-bright;
 	font-size: 1.6rem;
 	font-weight: 300;
 	position: relative;
@@ -172,4 +171,69 @@ $card-type-width: 32px;
 	font-size: 1.3rem;
 	margin: 0 0 20px;
 	text-align: left;
+}
+
+.processing-payment {
+	align-content: center;
+	animation-duration: 0.5s;
+	animation-name: fadeIn;
+	background: rgba( $white, 0.95 );
+	display: flex;
+	flex-direction: column;
+	font-size: 2rem;
+	font-weight: 300;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+
+	.icon {
+		background: url( /images/card-blue.svg ) no-repeat;
+		height: 39px;
+		margin: 0 auto;
+		position: relative;
+		width: 58px;
+
+		&::after {
+			animation: moveLeft 0.5s infinite linear;
+			background-image: linear-gradient( -45deg, transparent 33%, rgba(255, 255, 255, 0.25) 33%, rgba(255, 255, 255, 0.25) 66%, transparent 66%);
+			background-size: 16px 9px, 100% 100%, 100% 100%;
+			content: '';
+			display: block;
+			height: 9px;
+			left: 2px;
+			position: absolute;
+			top: 5px;
+			width: 54px;
+		}
+	}
+
+	p {
+		font-size: 2rem;
+		margin: 20px auto;
+		max-width: 260px;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes moveLeft {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 16px 0;
+	}
 }

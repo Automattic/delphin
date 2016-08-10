@@ -1,4 +1,5 @@
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 %header {
 	align-items: center;
@@ -23,6 +24,18 @@
 
 .logo {
 	flex-basis: 100%;
-	padding: 30px;
+	padding: 15px;
 	text-align: center;
+
+	img {
+		width: 70px;
+	}
+
+	@include breakpoint( '>480px' ) {
+		padding: 20px;
+
+		img {
+			width: auto;
+		}
+	}
 }

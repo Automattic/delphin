@@ -36,27 +36,17 @@ const SunriseHome = React.createClass( {
 		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<div>
+			<div className={ styles.homeContainer }>
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<DocumentTitle />
+
+					<div className={ styles.whatsYourStory } />
 
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Every .blog is a story. Tell yours.', {
 							components: { em: <em className="emphasis" /> }
 						} ) }
 					</h2>
-
-					<div className={ styles.secondaryHeadingContainer }>
-						<h3 className={ styles.secondaryHeading }>
-							{ i18n.translate(
-								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
-							) }
-							<br /><br />
-							{ i18n.translate(
-								'Apply now to secure the perfect domain for your blog.'
-							) }
-						</h3>
-					</div>
 
 					<div className={ styles.domainSearch }>
 						<div className={ styles.field }>
@@ -74,6 +64,17 @@ const SunriseHome = React.createClass( {
 						<Button className={ styles.button } disabled={ this.props.isRequestingDomainPrice }>
 							{ i18n.translate( 'Get started' ) }
 						</Button>
+					</div>
+
+					<div className={ styles.secondaryHeadingContainer }>
+						<h3 className={ styles.secondaryHeading }>
+							{ i18n.translate(
+								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
+							) }
+							{ i18n.translate(
+								'Apply now to secure the perfect domain for your blog.'
+							) }
+						</h3>
 					</div>
 				</form>
 			</div>

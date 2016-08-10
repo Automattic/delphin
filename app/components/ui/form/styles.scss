@@ -26,6 +26,13 @@
 	}
 }
 
+input::-ms-clear,
+input::-ms-reveal {
+	display: none;
+	height: 0;
+	width: 0;
+}
+
 .notice-area {
 	background: $gray-light;
 	font-size: 1.6rem;

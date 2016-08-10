@@ -5,7 +5,7 @@
 	margin: 0;
 	padding-left: 0;
 
-	@include breakpoint( '>480px' ) {
+	@include breakpoint( '>660px' ) {
 		text-align: center;
 	}
 }
@@ -18,7 +18,7 @@
 	margin-top: 8px;
 	text-decoration: none;
 
-	@include breakpoint( '>480px' ) {
+	@include breakpoint( '>660px' ) {
 		display: inline-block;
 		padding: 10px;
 	}

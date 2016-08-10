@@ -36,9 +36,11 @@ const SunriseHome = React.createClass( {
 		const { fields: { query }, handleSubmit } = this.props;
 
 		return (
-			<div>
+			<div className={ styles.homeContainer }>
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<DocumentTitle />
+
+					<img src='/images/whats-your-story.svg' className={ styles.whatsYourStory } />
 
 					<h2 className={ styles.heading }>
 						{ i18n.translate( 'Every .blog is a story. Tell yours.', {

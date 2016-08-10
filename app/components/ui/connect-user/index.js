@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -105,4 +106,4 @@ const ConnectUser = React.createClass( {
 	}
 } );
 
-export default ConnectUser;
+export default withStyles( styles )( ConnectUser );

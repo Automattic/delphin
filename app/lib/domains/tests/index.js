@@ -112,18 +112,18 @@ describe( 'lib/domains', () => {
 	} );
 
 	describe( 'isDomainSearch', () => {
-		it( 'should return true for valid .live domains', () => {
-			expect( isDomainSearch( 'foo.live' ) ).toBe( true );
-			expect( isDomainSearch( 'foo-bar.live' ) ).toBe( true );
-			expect( isDomainSearch( 'foo0.live' ) ).toBe( true );
+		it( 'should return true for valid .blog domains', () => {
+			expect( isDomainSearch( 'foo.blog' ) ).toBe( true );
+			expect( isDomainSearch( 'foo-bar.blog' ) ).toBe( true );
+			expect( isDomainSearch( 'foo0.blog' ) ).toBe( true );
 		} );
 
-		it( 'should return false for invalid .live domains', () => {
-			expect( isDomainSearch( 'foo-.live' ) ).toBe( false );
-			expect( isDomainSearch( 'foo bar.live' ) ).toBe( false );
+		it( 'should return false for invalid .blog domains', () => {
+			expect( isDomainSearch( 'foo-.blog' ) ).toBe( false );
+			expect( isDomainSearch( 'foo bar.blog' ) ).toBe( false );
 		} );
 
-		it( 'should return false for non-.live domains', () => {
+		it( 'should return false for non-.blog domains', () => {
 			expect( isDomainSearch( 'foo.com' ) ).toBe( false );
 		} );
 

@@ -10,7 +10,9 @@ import { recordPageView } from 'actions/analytics';
 export default ( WrappedComponent, title ) => {
 	class WithPageView extends React.Component {
 		componentDidMount() {
-			this.props.recordPageView( this.props.location.pathname, title );
+			if ( process.env.BROWSER ) {
+				this.props.recordPageView( window.location.pathname, title );
+			}
 		}
 
 		render() {
@@ -23,7 +25,6 @@ export default ( WrappedComponent, title ) => {
 	}
 
 	WithPageView.propTypes = {
-		location: PropTypes.object.isRequired,
 		recordPageView: PropTypes.func.isRequired
 	};
 

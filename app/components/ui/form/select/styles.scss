@@ -48,6 +48,7 @@
 	// IE: Remove default background and color styles on focus
 	&::-ms-value {
 		background: none;
+		color: $black;
 	}
 
 	// Firefox: Remove the focus outline, see http://stackoverflow.com/questions/3773430/remove-outline-from-select-box-in-ff/18853002#18853002

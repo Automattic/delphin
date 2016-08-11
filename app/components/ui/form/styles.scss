@@ -12,8 +12,13 @@
 	max-width: 440px;
 
 	@include breakpoint( '<480px' ) {
-		margin-left: 20px;
-		margin-right: 20px;
+		border: 0;
+		border-radius: 0;
+		margin-bottom: 0;
+		margin-left: 0;
+		margin-right: 0;
+		max-width: 100%;
+		padding: 30px 20px 0;
 	}
 
 	input,
@@ -41,8 +46,11 @@ input::-ms-reveal {
 	word-wrap: break-word;
 
 	@include breakpoint( '<480px' ) {
+		background: transparent;
+		border-bottom: 1px solid $gray-medium;
 		font-size: 1.4rem;
-		padding: 15px;
+		margin: -30px -20px 25px;
+		padding: 20px;
 	}
 }
 
@@ -52,7 +60,7 @@ input::-ms-reveal {
 	padding: 30px;
 
 	@include breakpoint( '<480px' ) {
-		padding: 15px;
+		padding: 0 0 15px;
 	}
 
 	fieldset {
@@ -115,7 +123,7 @@ input::-ms-reveal {
 	text-align: center;
 
 	@include breakpoint( '<480px' ) {
-		padding: 0 15px 15px;
+		padding: 0 0 15px;
 	}
 }
 

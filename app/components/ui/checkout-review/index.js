@@ -86,6 +86,12 @@ class CheckoutReview extends React.Component {
 		);
 	}
 
+	renderCancelLink() {
+		return (
+			<TrackingLink className={ styles.cancelApplication } to={ getPath( 'home' ) } eventName="delphin_cancel_application_click">{ i18n.translate( 'Cancel application' ) }</TrackingLink>
+		);
+	}
+
 	render() {
 		return ( <SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Review your application' ) } />
@@ -114,7 +120,7 @@ class CheckoutReview extends React.Component {
 				{ this.renderTermsOfService() }
 				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit application & pay now' ) }</Button>
 
-				<TrackingLink className={ styles.cancelApplication } to={ getPath( 'home' ) } eventName="delphin_cancel_application_click">{ i18n.translate( 'Cancel application' ) }</TrackingLink>
+				{ !this.props.isPurchasing && this.renderCancelLink() }
 
 				{ this.props.isPurchasing && this.renderProcessing() }
 			</SunriseStep.Form>

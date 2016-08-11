@@ -35,6 +35,7 @@
 		}
 
 		@include breakpoint( '<480px' ) {
+			bottom: -1rem;
 			margin-left: -15px;
 		}
 	}
@@ -78,6 +79,10 @@
 .contact-review {
 	line-height: 1.5;
 	padding: 30px 0;
+
+	@include breakpoint( '<480px' ) {
+		padding-top: 0;
+	}
 }
 
 .payment-review {
@@ -94,9 +99,13 @@
 	}
 
 	@include breakpoint( '<480px' ) {
+		background: transparent;
+		border-bottom: 1px solid $gray-medium;
+		border-color: $gray-medium;
+		margin-bottom: 30px;
 		margin-left: -15px;
 		margin-right: -15px;
-		padding: 15px;
+		padding: 15px 15px 20px;
 	}
 }
 

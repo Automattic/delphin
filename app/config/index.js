@@ -5,8 +5,8 @@ const NODE_ENV = process.env.NODE_ENV,
 	productionOnly = NODE_ENV === 'production';
 
 const config = {
-	available_tlds: [ 'live' ],
-	default_tld: 'live',
+	available_tlds: [ 'blog' ],
+	default_tld: 'blog',
 	default_search_sort: 'recommended',
 	env: NODE_ENV || 'development',
 	i18n_default_locale_slug: 'en',

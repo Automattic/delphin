@@ -8,14 +8,10 @@ import CheckoutContainer from 'components/containers/checkout';
 import ContactInformationContainer from 'components/containers/contact-information';
 import CheckoutReviewContainer from 'components/containers/checkout-review';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
-import HostInfoContainer from 'components/containers/host-info';
-import HostsContainer from 'components/containers/hosts';
 import Layout from 'components/ui/layout';
 import LoginContainer from 'components/containers/connect-user/login';
-import MyDomainsContainer from 'components/containers/my-domains';
 import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
-import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
@@ -34,27 +30,7 @@ export const defaultRoutes = [
 		},
 		path: '/',
 		slug: 'home',
-		static: true,
-		childRoutes: [
-			{
-				path: 'my-domains',
-				slug: 'myDomains',
-				static: false,
-				component: MyDomainsContainer
-			},
-			{
-				path: 'hosts',
-				slug: 'hosts',
-				static: false,
-				component: HostsContainer
-			},
-			{
-				path: 'hosts/:slug',
-				slug: 'hostInfo',
-				component: HostInfoContainer,
-				static: false
-			}
-		]
+		static: true
 	},
 	{
 		component: DefaultLayoutWithHeader,
@@ -74,12 +50,6 @@ export const defaultRoutes = [
 				]
 			}
 		]
-	},
-	{
-		path: 'search',
-		slug: 'search',
-		static: true,
-		component: SearchContainer
 	},
 	{
 		component: SunriseFlowLayout,

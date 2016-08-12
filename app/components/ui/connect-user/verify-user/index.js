@@ -4,7 +4,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
-import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import i18n from 'i18n-calypso';

@@ -4,7 +4,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
-import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import i18n from 'i18n-calypso';
@@ -129,12 +128,6 @@ const VerifyUser = React.createClass( {
 	},
 
 	renderNotice() {
-		const { user: { data: { notice } } } = this.props;
-
-		if ( notice ) {
-			return notice;
-		}
-
 		let text = i18n.translate( 'Using another device or the link doesn\'t work? Enter the confirmation code from the email.' );
 
 		return text;
@@ -155,9 +148,10 @@ const VerifyUser = React.createClass( {
 
 				<Form
 					onSubmit={ handleSubmit( this.handleSubmit ) }
-					noticeArea={ this.renderNotice() }
 					fieldArea={
 						<fieldset>
+							<strong className={ styles.instructions }>{ this.renderNotice() }</strong>
+
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
 							<Input
@@ -168,26 +162,26 @@ const VerifyUser = React.createClass( {
 
 							<ValidationError field={ fields.code } submitFailed={ submitFailed } />
 
+							{ this.twoFactorFields() }
+						</fieldset>
+					}
+					submitArea={
+						<div>
+							<Button disabled={ this.isSubmitButtonDisabled() }>
+								{ user.intention === 'login'
+									? i18n.translate( 'Next' )
+									: i18n.translate( 'Verify my email' )
+								}
+							</Button>
+
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }
 								email={ user.data.email }
 								intention={ user.intention }
 								domain={ this.props.hasSelectedDomain ? domain.domainName : null }
 							/>
-
-							{ this.twoFactorFields() }
-						</fieldset>
-					}
-					submitArea={
-						<Button disabled={ this.isSubmitButtonDisabled() }>
-							{ user.intention === 'login'
-								? i18n.translate( 'Next' )
-								: i18n.translate( 'Verify my email' )
-							}
-						</Button>
+						</div>
 					} />
-
-				<Footer />
 			</div>
 		);
 	}

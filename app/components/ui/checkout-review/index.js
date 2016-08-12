@@ -120,7 +120,7 @@ class CheckoutReview extends React.Component {
 				{ this.renderTermsOfService() }
 				<Button className={ styles.purchaseButton } disabled={ this.props.isPurchasing }>{ i18n.translate( 'Submit application & pay now' ) }</Button>
 
-				{ !this.props.isPurchasing && this.renderCancelLink() }
+				{ ! this.props.isPurchasing && this.renderCancelLink() }
 
 				{ this.props.isPurchasing && this.renderProcessing() }
 			</SunriseStep.Form>

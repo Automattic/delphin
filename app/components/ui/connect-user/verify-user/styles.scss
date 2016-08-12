@@ -1,10 +1,21 @@
 @import 'app/styles/colors';
 
+.instructions {
+	background: url( https://s0.wordpress.com/i/delphin/click-email.svg ) no-repeat right top;
+	background-size: auto 100px;
+	border-bottom: 1px solid $gray-light;
+	display: block;
+	font-size: 1.6rem;
+	line-height: 1.4;
+	margin: 0 0 30px;
+	padding: 10px 100px 40px 0;
+}
+
 .legend {
 	color: $gray;
-	font-size: 1.2rem;
-	font-style: italic;
-	margin-top: 5px;
+	font-size: 1.4rem;
+	font-style: normal;
+	margin-top: 30px;
 
 	a {
 		color: inherit;

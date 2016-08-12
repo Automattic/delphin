@@ -1,7 +1,6 @@
 // External dependencies
 import classnames from 'classnames';
 import i18n from 'i18n-calypso';
-import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import range from 'lodash/range';
@@ -12,7 +11,6 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
-import creditCardDetails from 'lib/credit-card-details';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
@@ -51,16 +49,6 @@ const Checkout = React.createClass( {
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
-	},
-
-	validateSubmit( values ) {
-		const errors = creditCardDetails.validateCardDetails( values ).errors;
-
-		if ( ! isEmpty( errors ) ) {
-			return Promise.reject( errors );
-		}
-
-		this.props.redirectToCheckoutReview();
 	},
 
 	isSubmitButtonDisabled() {
@@ -111,7 +99,7 @@ const Checkout = React.createClass( {
 						<CheckoutProgressbar currentStep={ 3 } />
 					</div>
 
-					<form className={ styles.form } onSubmit={ handleSubmit( this.validateSubmit ) }>
+					<form className={ styles.form } onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }>
 						<div className={ styles.fieldArea }>
 							<fieldset>
 								<label>{ i18n.translate( 'Name on Card' ) }</label>
@@ -138,7 +126,7 @@ const Checkout = React.createClass( {
 									<Select
 										{ ...removeInvalidInputProps( fields.expirationMonth ) }
 										className={ styles.expirationMonth }>
-										<option>{ i18n.translate( 'Month' ) }</option>
+										<option value="">{ i18n.translate( 'Month' ) }</option>
 										{ months.map( ( monthName, monthIndex ) => {
 											const monthNumber = padStart( monthIndex + 1, 2, '0' );
 											return (
@@ -152,7 +140,7 @@ const Checkout = React.createClass( {
 									<Select
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }>
-										<option>{ i18n.translate( 'Year' ) }</option>
+										<option value="">{ i18n.translate( 'Year' ) }</option>
 										{
 											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 5 ).map(
 												( year ) => <option value={ padStart( year - 2000, 2, '0' ) } key={ year } >{ year }</option>

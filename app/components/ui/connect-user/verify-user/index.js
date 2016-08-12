@@ -110,11 +110,7 @@ const VerifyUser = React.createClass( {
 			code,
 			twoFactorAuthenticationCode,
 			intention
-		).catch( () => {
-			return Promise.reject( {
-				code: i18n.translate( 'Enter your code just as it is in the email.' )
-			} );
-		} );
+		);
 	},
 
 	twoFactorFields() {

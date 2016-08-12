@@ -37,7 +37,6 @@ export default reduxForm(
 		form: 'verifyUser',
 		fields: [ 'code', 'twoFactorAuthenticationCode' ],
 		asyncValidate: getAsyncValidateFunction( validate ),
-		asyncBlurFields: [ 'code', 'twoFactorAuthenticationCode' ],
 	},
 	( state, ownProps ) => ( {
 		hasSelectedDomain: hasSelectedDomain( state ),

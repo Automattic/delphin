@@ -38,16 +38,6 @@ const VerifyUser = React.createClass( {
 	componentDidMount() {
 		const { query } = this.props;
 
-		if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
-			this.props.redirect( 'home' );
-
-			return;
-		} else if ( ! this.props.user.wasCreated ) {
-			this.props.redirect( 'signupUser' );
-
-			return;
-		}
-
 		if ( this.isUsingCodeFromQuery() ) {
 			if ( query.domain ) {
 				this.props.selectDomain( { domain_name: query.domain } );
@@ -55,6 +45,14 @@ const VerifyUser = React.createClass( {
 
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
 			this.props.updateCode( query.code );
+		} else if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
+			this.props.redirect( 'home' );
+
+			return;
+		} else if ( ! this.props.user.wasCreated ) {
+			this.props.redirect( 'signupUser' );
+
+			return;
 		}
 
 		this.props.recordPageView();

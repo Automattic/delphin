@@ -69,8 +69,12 @@ class ContactInformation extends React.Component {
 		if ( this.props.fields.countryCode.value !== nextProps.fields.countryCode.value ) {
 			this.props.fetchStates( nextProps.fields.countryCode.value );
 
-			// Resets the state field every time the user selects a different country
-			this.props.fields.state.onChange( '' );
+			if ( this.props.fields.countryCode.value ) {
+				// Reset the state field every time the user selects a
+				// different country, but only if a country was previously
+				// selected
+				this.props.fields.state.onChange( '' );
+			}
 		}
 	}
 

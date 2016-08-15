@@ -11,6 +11,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import Button from 'components/ui/button';
 import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
+import { isCallingCode } from 'lib/form';
 import Form from 'components/ui/form';
 import Phone from 'components/ui/form/phone';
 import State from 'components/ui/form/state';
@@ -76,7 +77,18 @@ class ContactInformation extends React.Component {
 
 	initializeContactInformation( props = this.props ) {
 		const form = Object.keys( props.fields ).reduce( ( result, fieldName ) => {
-			const value = props.fields[ fieldName ].value || props.contactInformation.data[ fieldName ] || '';
+			let value = props.fields[ fieldName ].value || props.contactInformation.data[ fieldName ] || '';
+
+			if ( fieldName === 'phone' && props.contactInformation.data.phone ) {
+				const existingPhoneValue = props.fields.phone.value;
+				const newPhoneValue = props.contactInformation.data.phone;
+
+				if ( ! existingPhoneValue || isCallingCode( parseInt( existingPhoneValue ) ) ) {
+					// we should overwrite this field if it contains only a
+					// calling code or is empty
+					value = newPhoneValue;
+				}
+			}
 
 			return Object.assign( result, { [ fieldName ]: value } );
 		}, {} );

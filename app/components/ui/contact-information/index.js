@@ -137,7 +137,11 @@ class ContactInformation extends React.Component {
 
 	validate() {
 		const contactInformation = Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
-			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
+			return Object.assign( result, {
+				[ fieldName ]: this.props.fields[ fieldName ].dirty // if the field change
+					? this.props.fields[ fieldName ].value // take the it's new value
+					: this.props.fields[ fieldName ].initialValue // if not changed, take it's initial value
+			} );
 		}, {} );
 
 		return this.props.validateContactInformation(

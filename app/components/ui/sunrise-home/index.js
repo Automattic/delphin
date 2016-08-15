@@ -9,7 +9,6 @@ import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
-import { withTld } from 'lib/domains';
 import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {
@@ -25,7 +24,8 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		const query = withTld( this.props.values.query );
+		const { query } = this.props.values;
+
 		this.props.fetchDomainPrice( query ).then( action => {
 			this.props.selectDomain( action.result );
 			this.props.redirectToConfirmDomain();

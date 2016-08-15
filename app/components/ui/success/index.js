@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 const auctionPartnerName = 'NameJet';
@@ -19,7 +20,7 @@ class Success extends React.Component {
 	}
 
 	render() {
-		const { domain, email, trackAuctionSignup } = this.props;
+		const { domain, email } = this.props;
 
 		return (
 			<SunriseStep className={ styles.step }>
@@ -73,17 +74,17 @@ class Success extends React.Component {
 							} ) }
 						</p>
 
-						<a
+						<TrackingLink
 							className={ styles.button }
-							href="https://www.namejet.com/Pages/Login.aspx"
-							onClick={ trackAuctionSignup }
+							to="https://www.namejet.com/Pages/Login.aspx"
+							eventName="delphin_thank_you_click"
 							target="_blank">
 							{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {
 								args: {
 									auctionPartnerName
 								}
 							} ) }
-						</a>
+						</TrackingLink>
 					</div>
 				</div>
 			</SunriseStep>
@@ -96,7 +97,6 @@ Success.propTypes = {
 	email: PropTypes.string,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
-	trackAuctionSignup: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( withPageView( Success, 'Success' ) );

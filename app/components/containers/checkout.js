@@ -5,6 +5,8 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
+import { validateCheckoutForm } from 'lib/checkout';
+import { getAsyncValidateFunction } from 'lib/form';
 import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
@@ -41,6 +43,7 @@ export default reduxForm(
 			'postalCode',
 			'privacyProtection'
 		],
+		asyncValidate: getAsyncValidateFunction( validateCheckoutForm ),
 		destroyOnUnmount: false
 	},
 	state => ( {

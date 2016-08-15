@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { getAsyncValidateFunction, getCallingCode, maskPhone } from '..';
+import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone } from '..';
 
 describe( 'getAsyncValidateFunction', () => {
 	pit( 'should resolve with no arguments if the validation returns no errors', () => {
@@ -56,6 +56,18 @@ describe( 'getCallingCode', () => {
 
 	it( 'should return an empty string when country code is unknown', () => {
 		expect( getCallingCode( 'UK' ) ).toBe( '44' );
+	} );
+} );
+
+describe( 'isCallingCode', () => {
+	it( 'should return true for a number that is a calling code', () => {
+		expect( isCallingCode( 1 ) ).toBeTruthy();
+		expect( isCallingCode( 44 ) ).toBeTruthy();
+	} );
+
+	it( 'should return false for a number that is not a calling code', () => {
+		expect( isCallingCode( 1337 ) ).toBeFalsy();
+		expect( isCallingCode( 3141591337 ) ).toBeFalsy();
 	} );
 } );
 

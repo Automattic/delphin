@@ -1,0 +1,36 @@
+@import 'app/styles/colors';
+@import 'app/styles/breakpoints';
+@import 'app/styles/fonts';
+
+.content {
+	margin: 0 auto;
+	min-height: 83vh;
+
+	@include breakpoint( '>480px' ) {
+		min-height: 92vh;
+	}
+}
+
+.four-oh-four {
+	margin: 12vmin 10px 0;
+	text-align: center;
+
+	h1 {
+		background: url( https://s0.wordpress.com/i/delphin/404-browser.svg ) no-repeat center top;
+		font: 300 3.4rem $heading-font;
+		margin-bottom: 10px;
+		padding-top: 120px;
+
+		@include breakpoint( '<480px' ) {
+			font-size: 2.6rem;
+		}
+	}
+
+	h2 {
+		font: 300 2rem $body-font;
+
+		@include breakpoint( '<480px' ) {
+			font-size: 1.8rem;
+		}
+	}
+}

@@ -10,11 +10,7 @@ export default connect(
 	() => ( { } ),
 	( dispatch, ownProps )=> bindActionCreators( {
 		trackEvent: () => {
-			if ( typeof ownProps.eventParams !== 'undefined' ) {
-				return recordTracksEvent( ownProps.eventName, ownProps.eventParams );
-			}
-
-			return recordTracksEvent( ownProps.eventName );
+			return recordTracksEvent( ownProps.eventName, Object.assign( { link_clicked: ownProps.to }, ownProps.eventParams ) );
 		}
 	}, dispatch )
 )( TrackingLink );

@@ -72,6 +72,7 @@ export const removeInvalidInputProps = ( props ) => {
 		autofilled,
 		dirty,
 		error,
+		value,
 		initialValue,
 		invalid,
 		onUpdate,
@@ -81,6 +82,9 @@ export const removeInvalidInputProps = ( props ) => {
 		visited,
 		...validProps
 	} = props;
+
+	// if the field is not changed (dirty), value should be initial value
+	validProps.value = dirty ? value : initialValue;
 
 	return validProps;
 };

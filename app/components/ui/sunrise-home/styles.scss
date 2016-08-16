@@ -13,16 +13,20 @@
 }
 
 .whats-your-story {
-	background: url(https://s0.wordpress.com/i/delphin/whats-your-story.svg) no-repeat bottom center;
+	background: url(/images/tell-your-story.svg) no-repeat bottom center;
 	background-size: contain;
-	height: 34vmin;
+	height: 26vmin;
 	margin: 6vmin auto 0;
-	max-width: 777px;
+	max-width: 480px;
 	width: 100%;
 
 	@include breakpoint( '<660px' ) {
-		height: 30vmin;
+		height: 32vmin;
 		margin-top: 10px;
+	}
+
+	@include breakpoint( '<480px' ) {
+		height: 34vmin;
 	}
 }
 

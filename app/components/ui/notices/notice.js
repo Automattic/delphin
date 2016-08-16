@@ -10,7 +10,13 @@ import styles from './styles.scss';
 const Notice = function( { notice, removeNotice } ) {
 	return (
 		<div className={ classNames( styles.notice, notice.status ) }>
-			<p>{ notice.message }</p>
+			<Gridicon
+				className={ styles.noticeIcon }
+				icon="notice-outline"
+				size="32"
+			/>
+
+			{ notice.message }
 
 			<span className={ styles.remove } onClick={ removeNotice }>
 				<Gridicon

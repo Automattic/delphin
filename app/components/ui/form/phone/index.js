@@ -11,11 +11,13 @@ class Phone extends React.Component {
 		const {
 			countryCode: currentCountryCode,
 			field: {
-				onChange: updatePhone,
-				value: currentPhoneNumber
+				onChange: updatePhone
 			}
 		} = this.props;
-
+		const { field } = this.props;
+		// The value will be held in either `value` or `initialValue` depending
+		// on whether the form was just initialized
+		const currentPhoneNumber = field.value || field.initialValue;
 		const {
 			countryCode: nextCountryCode
 		} = nextProps;

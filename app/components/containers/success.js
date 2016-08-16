@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
 import Success from 'components/ui/success';
-import { recordTracksEvent } from 'actions/analytics';
 import { redirect } from 'actions/routes';
 
 export default connect(
@@ -16,7 +15,6 @@ export default connect(
 		hasSelectedDomain: hasSelectedDomain( state ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect,
-		trackAuctionSignup: () => recordTracksEvent( 'delphin_thank_you_click' )
+		redirect
 	}, dispatch )
 )( Success );

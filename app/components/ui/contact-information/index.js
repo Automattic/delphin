@@ -72,7 +72,7 @@ class ContactInformation extends React.Component {
 
 			// Resets the state field every time the user selects a different country
 			// but only after the first change of country field, so we won't erase the initial value
-			if ( nextProps.fields.countryCode.dirty ) {
+			if ( ! nextProps.fields.countryCode.pristine ) {
 				nextProps.fields.state.onChange( '' );
 			}
 		}

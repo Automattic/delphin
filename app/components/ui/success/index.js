@@ -10,7 +10,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
-const auctionPartnerName = 'NameJet';
+const auctionPartnerName = 'Sedo';
 
 class Success extends React.Component {
 	componentWillMount() {
@@ -76,7 +76,7 @@ class Success extends React.Component {
 
 						<TrackingLink
 							className={ styles.button }
-							to="https://www.namejet.com/Pages/Login.aspx"
+							to="https://sedo.com/"
 							eventName="delphin_thank_you_click"
 							target="_blank">
 							{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {

@@ -1,3 +1,6 @@
+// External dependencies
+import i18n from 'i18n-calypso';
+
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
@@ -137,11 +140,13 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 				} );
 
 				if ( error.error === 'invalid_verification_code' ) {
-					return Promise.reject( { code: error.message } );
+					return Promise.reject( { code: i18n.translate( 'Enter your code just as it is in the email.' ) } );
 				}
 
 				if ( error.error === 'invalid_2FA_code' ) {
-					return Promise.reject( { twoFactorAuthenticationCode: error.message } );
+					return Promise.reject( {
+						twoFactorAuthenticationCode: i18n.translate( 'You entered an invalid code. Please try again.'
+					) } );
 				}
 
 				// If the error isn't invalid_verification_code or invalid_2FA_code

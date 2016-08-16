@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { removeInvalidInputProps } from 'lib/form';
+import { getFieldValue, removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 
 class Input extends React.Component {
@@ -44,6 +44,7 @@ class Input extends React.Component {
 					className={ inputClassName }
 					{ ...removeInvalidInputProps( field ) }
 					{ ...newProps }
+					value={ getFieldValue( field ) }
 					ref={ this.saveRef }
 				/>
 				{ isInvalid && (

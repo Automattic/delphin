@@ -55,6 +55,14 @@ export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
 };
 
 /**
+ * Gets a value of a redux field based on it's dirty status
+ *
+ * @param {Object} field - redux field
+ * @returns {String|Object|Number} - initial value or current value if the field is dirty
+ */
+export const getFieldValue = ( field ) => field.dirty ? field.value : field.initialValue;
+
+/**
  * Extracts valid props to be given to a form element from an object (a set of props) containing other fields. This
  * function basically removes all custom props added by redux-form:
  *
@@ -72,7 +80,6 @@ export const removeInvalidInputProps = ( props ) => {
 		autofilled,
 		dirty,
 		error,
-		value,
 		initialValue,
 		invalid,
 		onUpdate,
@@ -82,9 +89,6 @@ export const removeInvalidInputProps = ( props ) => {
 		visited,
 		...validProps
 	} = props;
-
-	// if the field is not changed (dirty), value should be initial value
-	validProps.value = dirty ? value : initialValue;
 
 	return validProps;
 };

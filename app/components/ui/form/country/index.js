@@ -4,11 +4,12 @@ import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import Select from 'components/ui/form/select';
-import { removeInvalidInputProps } from 'lib/form';
+import { getFieldValue, removeInvalidInputProps } from 'lib/form';
 
 const Country = ( { className, disabled, field, countries } ) => (
 	<Select
 		{ ...removeInvalidInputProps( field ) }
+		value={ getFieldValue( field ) }
 		disabled={ disabled }
 		className={ className }>
 		<option value="" disabled>{ i18n.translate( 'Country' ) }</option>

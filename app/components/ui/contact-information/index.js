@@ -19,6 +19,7 @@ import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
+import { getFieldValue } from 'lib/form';
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
@@ -140,11 +141,7 @@ class ContactInformation extends React.Component {
 
 	validate() {
 		const contactInformation = Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
-			return Object.assign( result, {
-				[ fieldName ]: this.props.fields[ fieldName ].dirty // if the field change
-					? this.props.fields[ fieldName ].value // take the it's new value
-					: this.props.fields[ fieldName ].initialValue // if not changed, take it's initial value
-			} );
+			return Object.assign( result, { [ fieldName ]: getFieldValue( this.props.fields[ fieldName ] ) } );
 		}, {} );
 
 		return this.props.validateContactInformation(

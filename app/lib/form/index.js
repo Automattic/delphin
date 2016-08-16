@@ -55,6 +55,14 @@ export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
 };
 
 /**
+ * Gets a value of a redux field based on it's pristine status
+ *
+ * @param {Object} field - redux field
+ * @returns {String|Object|Number} - initial value or current value if the field is dirty
+ */
+export const getFieldValue = ( field ) => field.pristine ? field.initialValue : field.value;
+
+/**
  * Extracts valid props to be given to a form element from an object (a set of props) containing other fields. This
  * function basically removes all custom props added by redux-form:
  *

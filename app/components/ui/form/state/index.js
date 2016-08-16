@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Select from 'components/ui/form/select';
 import Input from 'components/ui/form/input';
-import { removeInvalidInputProps } from 'lib/form';
+import { getFieldValue, removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 
 const State = ( { className, disabled, field, states, onBlur } ) => {
@@ -26,6 +26,7 @@ const State = ( { className, disabled, field, states, onBlur } ) => {
 		content = (
 			<Select
 				{ ...removeInvalidInputProps( field ) }
+				value={ getFieldValue( field ) }
 				onBlur={ onBlur }
 				disabled={ disabled }>
 				<option value="" disabled>{ i18n.translate( 'State/Province' ) }</option>

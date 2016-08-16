@@ -12,7 +12,9 @@ class Phone extends React.Component {
 			countryCode: currentCountryCode,
 			field: {
 				onChange: updatePhone,
-				value: currentPhoneNumber
+				value: currentPhoneNumber,
+				initialValue: currentIntialPhoneNumber,
+				dirty: currentPhoneNumberDirty
 			}
 		} = this.props;
 
@@ -20,16 +22,15 @@ class Phone extends React.Component {
 			countryCode: nextCountryCode
 		} = nextProps;
 
+		const canUpdatePhoneField = ( currentPhoneNumberDirty && ! currentPhoneNumber ) || // field is changed and empty
+			( ! currentPhoneNumberDirty && ! currentIntialPhoneNumber ) || // field not changed and initial value is empty
+			// field was changed, but it's current value is some country code, so we can change it
+			( currentPhoneNumberDirty && ( currentPhoneNumber === maskPhone( getCallingCode( currentCountryCode ) ) ) );
+
 		// Adds a calling code to the phone field - upon country change - only if it is empty or if it contains the one
 		// from the previous selected country
-		if ( currentCountryCode !== nextCountryCode ) {
-			const currentCallingCode = getCallingCode( currentCountryCode );
-
-			if ( ! currentPhoneNumber || currentPhoneNumber === maskPhone( currentCallingCode ) ) {
-				const nextCallingCode = getCallingCode( nextCountryCode );
-
-				updatePhone( maskPhone( nextCallingCode ) );
-			}
+		if ( canUpdatePhoneField && currentCountryCode !== nextCountryCode ) {
+			updatePhone( maskPhone( getCallingCode( nextCountryCode ) ) );
 		}
 	}
 

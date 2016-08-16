@@ -19,6 +19,7 @@ import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
+import { getFieldValue } from 'lib/form';
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
@@ -70,7 +71,10 @@ class ContactInformation extends React.Component {
 			this.props.fetchStates( nextProps.fields.countryCode.value );
 
 			// Resets the state field every time the user selects a different country
-			this.props.fields.state.onChange( '' );
+			// but only after the first change of country field, so we won't erase the initial value
+			if ( ! nextProps.fields.countryCode.pristine ) {
+				nextProps.fields.state.onChange( '' );
+			}
 		}
 	}
 
@@ -137,7 +141,7 @@ class ContactInformation extends React.Component {
 
 	validate() {
 		const contactInformation = Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
-			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
+			return Object.assign( result, { [ fieldName ]: getFieldValue( this.props.fields[ fieldName ] ) } );
 		}, {} );
 
 		return this.props.validateContactInformation(

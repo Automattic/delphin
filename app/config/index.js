@@ -26,6 +26,7 @@ const config = {
 		rest_api_oauth_client_secret: '7FVcj4q9nDvX3ic812oAGDR2oZFjSk0woryR0rRmNIO5Gn7k6HibTIlhvC7Wmof9'
 	},
 	wordnik_api_key: '***REMOVED***',
+	google_analytics_key: 'UA-10673494-28',
 	google_translate_api_key: '***REMOVED***'
 };
 

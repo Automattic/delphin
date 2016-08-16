@@ -15,18 +15,14 @@
 .whats-your-story {
 	background: url(/images/tell-your-story.svg) no-repeat bottom center;
 	background-size: contain;
-	height: 26vmin;
+	height: 30vmin;
 	margin: 6vmin auto 0;
 	max-width: 480px;
 	width: 100%;
 
 	@include breakpoint( '<660px' ) {
-		height: 32vmin;
-		margin-top: 10px;
-	}
-
-	@include breakpoint( '<480px' ) {
 		height: 34vmin;
+		margin-top: 10px;
 	}
 }
 

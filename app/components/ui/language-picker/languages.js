@@ -24,6 +24,10 @@ export default [
 		name: 'עברית'
 	},
 	{
+		locale: 'ru',
+		name: 'Русский'
+	},
+	{
 		locale: 'ja',
 		name: '日本語'
 	},
@@ -50,6 +54,10 @@ export default [
 	{
 		locale: 'zh-cn',
 		name: '中文(简体)'
+	},
+	{
+		locale: 'zh-tw',
+		name: '中文(繁體)'
 	},
 	{
 		locale: 'ar',

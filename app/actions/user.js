@@ -145,7 +145,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 
 				if ( error.error === 'invalid_2FA_code' ) {
 					return Promise.reject( {
-						twoFactorAuthenticationCode: i18n.translate( 'Wait for a new code and enter it just as it is in the authenticator app.'
+						twoFactorAuthenticationCode: i18n.translate( 'You entered an invalid code. Please try again.'
 					) } );
 				}
 

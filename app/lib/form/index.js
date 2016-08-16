@@ -33,6 +33,22 @@ export const getAsyncValidateFunction = validate => values => new Promise( ( res
 export const getCallingCode = countryCode => phone[ countryCode ] || '';
 
 /**
+ * Determines whether the given number is a calling code.
+ *
+ * @param {number} number - Any number
+ * @returns {boolean} - Whether the given number is a calling code.
+ */
+export const isCallingCode = number => {
+	for ( const countryCode in phone ) {
+		if ( phone.hasOwnProperty( countryCode ) && parseInt( phone[ countryCode ] ) === number ) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+/**
  * Masks the specified number to only allow numbers and the plus sign.
  *
  * @param {string} nextPhoneNumber - new phone number

@@ -48,6 +48,18 @@ export const defaultRoutes = [
 						static: true
 					}
 				]
+			},
+			{
+				path: 'sign-in-with-email',
+				slug: 'signInWithEmail',
+				static: true,
+				component: verifyUserWithQueryContainerFactory( 'login' )
+			},
+			{
+				path: 'sign-up-with-email',
+				slug: 'signUpWithEmail',
+				static: true,
+				component: verifyUserWithQueryContainerFactory( 'signup' )
 			}
 		]
 	},
@@ -83,18 +95,6 @@ export const defaultRoutes = [
 				slug: 'verifyUser',
 				static: false,
 				component: VerifyUserContainer
-			},
-			{
-				path: 'sign-in-with-email',
-				slug: 'signInWithEmail',
-				static: true,
-				component: verifyUserWithQueryContainerFactory( 'login' )
-			},
-			{
-				path: 'sign-up-with-email',
-				slug: 'signUpWithEmail',
-				static: true,
-				component: verifyUserWithQueryContainerFactory( 'signup' )
 			},
 			{
 				path: 'checkout',

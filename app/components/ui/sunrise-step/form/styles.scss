@@ -23,5 +23,9 @@
 		color: $blue-dark;
 		font-size: 2rem;
 		word-wrap: break-word;
+
+		@include breakpoint( '<480px' ) {
+			font-size: 1.8rem;
+		}
 	}
 }

@@ -1,9 +1,23 @@
+@import 'app/styles/breakpoints';
+@import 'app/styles/fonts';
+
 .container {
-	margin: 100px auto;
-	max-width: 500px;
+	margin: 0 auto;
+	min-height: 83vh;
 	text-align: center;
+
+	@include breakpoint( '>480px' ) {
+		min-height: 92vh;
+	}
 }
 
 .heading {
-	font-size: 4em;
+	background: url( /images/rocket-launch.svg ) no-repeat center top;
+	font: 300 3.4rem $heading-font;
+	margin-top: 12vmin;
+	padding: 170px 10px 0;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 2.6rem;
+	}
 }

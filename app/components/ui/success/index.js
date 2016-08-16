@@ -76,7 +76,7 @@ class Success extends React.Component {
 
 						<TrackingLink
 							className={ styles.button }
-							to="https://sedo.com/"
+							to="https://sedo.com/member/register.php#1"
 							eventName="delphin_thank_you_click"
 							target="_blank">
 							{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {

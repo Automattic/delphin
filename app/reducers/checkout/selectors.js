@@ -20,7 +20,7 @@ export const getSelectedDomainCost = state => {
 };
 
 export const getSelectedDomainApplicationCost = state => {
-	const applicationCostDetail = getSelectedDomainPriceDetails( state ).find( detail => detail.productSlug === 'delphin-domain-application-fee' );
+	const applicationCostDetail = getSelectedDomainPriceDetails( state ).find( detail => detail.productSlug === 'delphin-domain-app' );
 
 	return applicationCostDetail ? applicationCostDetail.cost : null;
 };

@@ -4,6 +4,10 @@ export default [
 		name: 'English'
 	},
 	{
+		locale: 'fr',
+		name: 'Français'
+	},
+	{
 		locale: 'es',
 		name: 'Español'
 	},

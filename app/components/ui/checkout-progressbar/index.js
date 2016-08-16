@@ -24,15 +24,15 @@ function getStepClassName( currentStepIndex, stepIndex ) {
 	return classes.join( ' ' );
 }
 
-const steps = [
-	i18n.translate( 'search' ),
-	i18n.translate( 'sign in' ),
-	i18n.translate( 'profile' ),
-	i18n.translate( 'checkout' )
-];
-
 function Progressbar( props ) {
 	const currentStepIndex = props.currentStep;
+
+	const steps = [
+		i18n.translate( 'search' ),
+		i18n.translate( 'sign in' ),
+		i18n.translate( 'profile' ),
+		i18n.translate( 'checkout' )
+	];
 
 	return <ol className={ props.className + ' ' + styles.progressbar }>
 		{

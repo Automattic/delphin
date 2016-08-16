@@ -37,11 +37,17 @@ const VerifyUser = React.createClass( {
 	componentDidMount() {
 		const { query } = this.props;
 
+		if ( this.props.user.data.twoFactorAuthenticationEnabled || this.isUsingCodeFromQuery() ) {
+			// initializing this field causes the validate method to validate it
+			this.initializeTwoFactorAuthenticationField();
+		}
+
 		if ( this.isUsingCodeFromQuery() ) {
 			if ( query.domain ) {
 				this.props.selectDomain( { domain_name: query.domain } );
 			}
 
+			// the sign-in email directs the user to this component only if two factor authentication is enabled
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
 			this.props.updateCode( query.code );
 		} else if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
@@ -65,6 +71,10 @@ const VerifyUser = React.createClass( {
 				this.props.redirect( 'home' );
 			}
 		}
+	},
+
+	initializeTwoFactorAuthenticationField() {
+		this.props.fields.twoFactorAuthenticationCode.onChange( '' );
 	},
 
 	isUsingCodeFromQuery() {
@@ -100,11 +110,7 @@ const VerifyUser = React.createClass( {
 			code,
 			twoFactorAuthenticationCode,
 			intention
-		).catch( () => {
-			return Promise.reject( {
-				code: i18n.translate( 'Enter your code just as it is in the email.' )
-			} );
-		} );
+		);
 	},
 
 	twoFactorFields() {

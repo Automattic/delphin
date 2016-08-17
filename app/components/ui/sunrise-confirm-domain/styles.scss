@@ -4,6 +4,10 @@
 
 .price-tag {
 	font-size: 1.8rem;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.6rem;
+	}
 }
 
 .renewal-info {
@@ -11,6 +15,10 @@
 	font-size: 1.2rem;
 	margin-top: 5px;
 	text-transform: uppercase;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.1rem;
+	}
 }
 
 .button {

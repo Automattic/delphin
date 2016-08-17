@@ -48,11 +48,19 @@
 	color: $blue-background;
 	font-size: 2rem;
 	word-wrap: break-word;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.8rem;
+	}
 }
 
 .application-fee {
 	color: $blue-dark;
 	font-size: 1.8rem;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.6rem;
+	}
 }
 
 .renew-fee {
@@ -60,6 +68,10 @@
 	font-size: 1.2rem;
 	margin-top: 5px;
 	text-transform: uppercase;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.1rem;
+	}
 }
 
 .refund-notice {
@@ -80,6 +92,7 @@
 	padding: 30px 0;
 
 	@include breakpoint( '<480px' ) {
+		font-size: 1.4rem;
 		padding-top: 0;
 	}
 }

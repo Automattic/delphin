@@ -1,4 +1,5 @@
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 .instructions {
 	background: url( https://s0.wordpress.com/i/delphin/click-email.svg ) no-repeat right top;
@@ -9,6 +10,11 @@
 	line-height: 1.4;
 	margin: 0 0 30px;
 	padding: 10px 100px 40px 0;
+
+	@include breakpoint( '<480px' ) {
+		background-size: auto 80px;
+		font-size: 1.4rem;
+	}
 }
 
 .legend {

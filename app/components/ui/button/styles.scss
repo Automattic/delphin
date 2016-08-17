@@ -1,4 +1,5 @@
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 .button {
 	background: $green;
@@ -24,5 +25,9 @@
 
 	&:hover {
 		background: $green-dark;
+	}
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.4rem;
 	}
 }

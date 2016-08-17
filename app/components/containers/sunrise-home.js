@@ -19,10 +19,12 @@ export default reduxForm(
 	{
 		form: 'sunrise-home',
 		fields: [ 'query' ],
-		asyncValidate: getAsyncValidateFunction( validate ),
-
+		asyncValidate: getAsyncValidateFunction( validate )
 	},
-	state => ( { isRequestingDomainPrice: isRequestingDomainPrice( state ) } ),
+	state => ( {
+		isRequestingDomainPrice: isRequestingDomainPrice( state ),
+		confirmDomainPath: getPath( 'confirmDomain' )
+	} ),
 	dispatch => bindActionCreators( {
 		fetchDomainPrice: withAnalytics(
 			domain => recordTracksEvent( 'delphin_domain_search', { search_string: domain } ),

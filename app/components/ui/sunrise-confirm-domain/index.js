@@ -9,6 +9,7 @@ import Button from 'components/ui/button';
 import PartialUnderline from 'components/ui/partial-underline';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
+import LoadingScreen from 'components/ui/loading-screen';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
@@ -46,68 +47,15 @@ class SunriseConfirmDomain extends React.Component {
 		}
 	}
 
-	placeholder() {
-		return (
-			<SunriseStep.Form className={ styles.confirmDomainForm }>
-				<PartialUnderline className={ styles.domain }>
-					<h3></h3>
-				</PartialUnderline>
-				<div className={ styles.priceTag }></div>
-				<div className={ styles.renewalInfo }></div>
-			</SunriseStep.Form>
-		);
-	}
-
-	renderForm() {
+	render() {
 		const { domain, domainCost, applicationCost, hasSelectedDomain } = this.props;
 
 		if ( ! hasSelectedDomain ) {
-			return this.placeholder();
+			return <LoadingScreen />;
 		}
 
 		const { domainName, isPremium, totalCost } = domain;
 
-		return (
-			<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
-				{ isPremium && (
-					<div className={ styles.premiumFlag }>
-						{ i18n.translate( 'premium' ) }
-					</div>
-				) }
-
-				<PartialUnderline className={ styles.domain }>
-					<h3>{ domainName }</h3>
-				</PartialUnderline>
-
-				<div className={ styles.priceTag }>
-					{ i18n.translate( '%(totalCost)s Early Application', {
-						args: { totalCost }
-					} ) }
-				</div>
-				<div className={ styles.renewalInfo }>
-					{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
-						args: {
-							applicationCost,
-							domainCost
-						}
-					} ) }
-				</div>
-				<Button className={ styles.button }>
-					{ i18n.translate( 'Apply for this domain' ) }
-				</Button>
-				<div className={ styles.backNotice }>
-					<div>
-						{ i18n.translate( 'Not what you wanted?' ) }
-					</div>
-					<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
-						{ i18n.translate( 'Try a different domain' ) }
-					</TrackingLink>
-				</div>
-			</SunriseStep.Form>
-		);
-	}
-
-	render() {
 		return (
 			<SunriseStep>
 				<DocumentTitle title={ i18n.translate( 'Apply now' ) } />
@@ -122,7 +70,42 @@ class SunriseConfirmDomain extends React.Component {
 					</h2>
 				</SunriseStep.Header>
 
-				{ this.renderForm() }
+				<SunriseStep.Form className={ styles.confirmDomainForm } onSubmit={ this.handleSubmit }>
+					{ isPremium && (
+						<div className={ styles.premiumFlag }>
+							{ i18n.translate( 'premium' ) }
+						</div>
+					) }
+
+					<PartialUnderline className={ styles.domain }>
+						<h3>{ domainName }</h3>
+					</PartialUnderline>
+
+					<div className={ styles.priceTag }>
+						{ i18n.translate( '%(totalCost)s Early Application', {
+							args: { totalCost }
+						} ) }
+					</div>
+					<div className={ styles.renewalInfo }>
+						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+							args: {
+								applicationCost,
+								domainCost
+							}
+						} ) }
+					</div>
+					<Button className={ styles.button }>
+						{ i18n.translate( 'Apply for this domain' ) }
+					</Button>
+					<div className={ styles.backNotice }>
+						<div>
+							{ i18n.translate( 'Not what you wanted?' ) }
+						</div>
+						<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
+							{ i18n.translate( 'Try a different domain' ) }
+						</TrackingLink>
+					</div>
+				</SunriseStep.Form>
 			</SunriseStep>
 		);
 	}

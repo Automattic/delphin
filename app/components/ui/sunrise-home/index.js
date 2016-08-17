@@ -61,7 +61,7 @@ const SunriseHome = React.createClass( {
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 						</div>
 
-						<Button className={ styles.button } disabled={ this.props.isRequestingDomainPrice }>
+						<Button className={ styles.button } disabled={ ! process.env.BROWSER || this.props.isRequestingDomainPrice }>
 							{ i18n.translate( 'Get started' ) }
 						</Button>
 					</div>

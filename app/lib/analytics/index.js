@@ -13,6 +13,7 @@ const debug = debugFactory( 'delphin:analytics' );
  */
 import config, { isEnabled } from 'config';
 import { loadScript } from 'lib/load-script';
+import { stripLocaleSlug } from 'lib/routes';
 
 // Load tracking scripts
 if ( process.env.BROWSER ) {
@@ -149,7 +150,8 @@ const analytics = {
 			}
 
 			analytics.tracks.recordEvent( `${ config( 'tracks_event_prefix' ) }page_view`, {
-				path: urlPath
+				path: urlPath,
+				canonical_path: stripLocaleSlug( urlPath ),
 			} );
 		}
 	},

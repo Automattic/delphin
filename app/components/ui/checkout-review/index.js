@@ -14,6 +14,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 import { getPath } from 'routes';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 class CheckoutReview extends React.Component {
 	handleSubmission( submitEvent ) {
@@ -145,4 +146,4 @@ CheckoutReview.propTypes = {
 	selectedDomain: PropTypes.object.isRequired
 };
 
-export default withStyles( styles )( withPageView( bindHandlers( CheckoutReview ), 'Checkout Review' ) );
+export default withStyles( styles )( scrollToTop( withPageView( bindHandlers( CheckoutReview ), 'Checkout Review' ) ) );

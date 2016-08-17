@@ -18,7 +18,7 @@ import State from 'components/ui/form/state';
 import Input from 'components/ui/form/input';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
-import ValidationError from 'components/ui/form/validation-error';
+import ValidationError from 'components/containers/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 
 class ContactInformation extends React.Component {

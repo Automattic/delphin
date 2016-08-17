@@ -8,7 +8,7 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
 import styles from './styles.scss';
-import ValidationError from 'components/ui/form/validation-error';
+import ValidationError from 'components/containers/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {

@@ -15,7 +15,7 @@ import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
 import FormToggle from 'components/ui/form/form-toggle';
-import ValidationError from 'components/ui/form/validation-error';
+import ValidationError from 'components/containers/validation-error';
 import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import SiftScience from 'lib/sift-science';

@@ -35,7 +35,7 @@ const isVisible = ( fields, errors, submitFailed ) => {
 	return true;
 };
 
-const ValidationError = ( { field, fields, submitFailed } ) => {
+const ValidationError = ( { field, fields, submitFailed, trackFieldError } ) => {
 	let allFields;
 
 	if ( Array.isArray( fields ) ) {
@@ -51,12 +51,19 @@ const ValidationError = ( { field, fields, submitFailed } ) => {
 			return result;
 		}
 
+		let errorMessage = null;
+
 		if ( typeof currentField.error === 'string' ) {
-			return result.concat( currentField.error );
+			errorMessage = currentField.error;
 		}
 
 		if ( typeof currentField.error === 'object' ) {
-			return result.concat( currentField.error.data );
+			errorMessage = currentField.error.data;
+		}
+
+		if ( errorMessage && typeof trackFieldError === 'function' ) {
+			trackFieldError( currentField.name, errorMessage );
+			return result.concat( errorMessage );
 		}
 
 		return result;
@@ -91,7 +98,8 @@ const ValidationError = ( { field, fields, submitFailed } ) => {
 ValidationError.propTypes = {
 	field: PropTypes.object,
 	fields: PropTypes.array,
-	submitFailed: PropTypes.bool
+	submitFailed: PropTypes.bool,
+	trackFieldError: PropTypes.func
 };
 
 export default withStyles( formStyles )( ValidationError );

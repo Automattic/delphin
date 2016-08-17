@@ -22,6 +22,7 @@ import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
 import Select from 'components/ui/form/select';
 import Tooltip from 'components/ui/tooltip';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -246,4 +247,4 @@ const Checkout = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( Checkout, 'Checkout' ) );
+export default scrollToTop( withStyles( styles )( withPageView( Checkout, 'Checkout' ) ) );

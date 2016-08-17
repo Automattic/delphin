@@ -12,6 +12,7 @@ import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import Input from 'components/ui/form/input';
 import ValidationError from 'components/ui/form/validation-error';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 const ConnectUser = React.createClass( {
 	propTypes: {
@@ -106,4 +107,4 @@ const ConnectUser = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( ConnectUser );
+export default scrollToTop( withStyles( styles )( ConnectUser ) );

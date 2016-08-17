@@ -9,6 +9,7 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 const auctionPartnerName = 'Sedo';
 
@@ -99,4 +100,4 @@ Success.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( withPageView( Success, 'Success' ) );
+export default scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) );

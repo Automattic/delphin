@@ -10,7 +10,7 @@ import i18n from 'i18n-calypso';
 import Input from 'components/ui/form/input';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
-import ValidationError from 'components/ui/form/validation-error';
+import ValidationError from 'components/containers/validation-error';
 
 const VerifyUser = React.createClass( {
 	propTypes: {

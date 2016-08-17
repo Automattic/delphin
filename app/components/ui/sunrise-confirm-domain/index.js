@@ -13,6 +13,7 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
@@ -103,4 +104,4 @@ SunriseConfirmDomain.propTypes = {
 	trackSubmit: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) );
+export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) ) );

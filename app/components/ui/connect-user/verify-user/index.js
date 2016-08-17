@@ -11,6 +11,7 @@ import Input from 'components/ui/form/input';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 const VerifyUser = React.createClass( {
 	propTypes: {
@@ -193,4 +194,4 @@ const VerifyUser = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( VerifyUser );
+export default scrollToTop( withStyles( styles )( VerifyUser ) );

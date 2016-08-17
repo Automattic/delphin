@@ -20,6 +20,7 @@ import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
@@ -400,4 +401,4 @@ ContactInformation.propTypes = {
 	validateContactInformation: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'Contact Information' ) );
+export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'Contact Information' ) ) );

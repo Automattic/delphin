@@ -1,10 +1,9 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import styles from './styles.scss';
+import LoadingScreen from 'components/ui/loading-screen';
 
 class VerifyUserWithQuery extends React.Component {
 	componentWillMount() {
@@ -49,16 +48,7 @@ class VerifyUserWithQuery extends React.Component {
 	}
 
 	render() {
-		const { intention } = this.props;
-
-		return (
-			<div className={ styles.container }>
-				<h1 className={ styles.heading }>
-					{ intention === 'login' && i18n.translate( "Let's get started…" ) }
-					{ intention === 'signup' && i18n.translate( "Let's get started…" ) }
-				</h1>
-			</div>
-		);
+		return <LoadingScreen />;
 	}
 }
 
@@ -73,4 +63,4 @@ VerifyUserWithQuery.propTypes = {
 	verifyUser: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( VerifyUserWithQuery );
+export default VerifyUserWithQuery;

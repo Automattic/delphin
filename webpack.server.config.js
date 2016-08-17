@@ -3,8 +3,7 @@ var baseConfig = require( './webpack.base.config' ),
 	fs = require( 'fs' ),
 	merge = require( 'webpack-merge' ),
 	path = require( 'path' ),
-	webpack = require( 'webpack' ),
-	NODE_ENV = process.env.NODE_ENV || 'development';
+	webpack = require( 'webpack' );
 
 function getExternals() {
 	var externals = {};
@@ -42,13 +41,7 @@ var config = merge.smart( baseConfig, {
 
 	plugins: [
 		// inject source map support on top of the build file
-		new webpack.BannerPlugin( 'require("source-map-support").install();', { raw: true, entryOnly: false } ),
-		new webpack.DefinePlugin( {
-			'process.env': {
-				NODE_ENV: JSON.stringify( NODE_ENV ),
-				BROWSER: JSON.stringify( false )
-			}
-		} )
+		new webpack.BannerPlugin( 'require("source-map-support").install();', { raw: true, entryOnly: false } )
 	]
 } );
 

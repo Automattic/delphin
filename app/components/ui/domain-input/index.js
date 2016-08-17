@@ -28,6 +28,8 @@ const DomainInput = props => {
 				className={ styles.inputContainer }
 				inputClassName={ styles.input }
 				gridIconSize={ 32 }
+				// in case the app has not loaded yet, add a simple validation for the domain field
+				pattern={ ! process.env.BROWSER ? '[a-zA-Z0-9\-]+(\.[a-zA-Z]+)?' : null }
 				{ ...removeInvalidInputProps( inputProps ) }
 			/>
 			<div className={ styles.tldContainer }>

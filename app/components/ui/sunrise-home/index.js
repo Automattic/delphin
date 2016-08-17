@@ -13,6 +13,7 @@ import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
+		confirmDomainPath: PropTypes.string.isRequired,
 		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
@@ -43,11 +44,12 @@ const SunriseHome = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit } = this.props;
+		const { fields: { query }, handleSubmit, confirmDomainPath } = this.props;
 
 		return (
 			<div className={ styles.homeContainer }>
-				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }
+						method="get" action={ confirmDomainPath } >
 					<DocumentTitle />
 
 					<div className={ styles.whatsYourStory } />

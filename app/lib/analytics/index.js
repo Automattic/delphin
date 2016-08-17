@@ -82,6 +82,12 @@ const analytics = {
 		launch_period: 'landrush pre-reg' // Future options will be landrush and ga
 	},
 
+	identifyUser( { id, username } ) {
+		debug( 'Identifying user with id: %s and username: %s', id, username );
+
+		window._tkq.push( [ 'identifyUser', id, username ] );
+	},
+
 	mc: {
 		bumpStat( group, name ) {
 			const uriComponent = buildQuerystring( group, name ); // prints debug info

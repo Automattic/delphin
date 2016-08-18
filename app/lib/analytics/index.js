@@ -83,6 +83,10 @@ const analytics = {
 	},
 
 	identifyUser( { id, username } ) {
+		if ( ! isEnabled( 'tracks_enabled' ) ) {
+			return;
+		}
+
 		debug( 'Identifying user with id: %s and username: %s', id, username );
 
 		window._tkq.push( [ 'identifyUser', id, username ] );

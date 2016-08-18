@@ -44,3 +44,17 @@
 	padding: 6px 12px;
 	text-transform: uppercase;
 }
+
+.refund-notice {
+	background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat right 35px;
+	color: $gray-dark;
+	font-size: 1.4rem;
+	line-height: 1.8rem;
+	padding: 25px 40px 0 0;
+
+	strong {
+		color: $blue;
+		display: block;
+		font-weight: 400;
+	}
+}

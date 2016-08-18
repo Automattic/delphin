@@ -100,3 +100,16 @@ export const removeInvalidInputProps = ( props ) => {
 
 	return validProps;
 };
+
+/**
+ * Focuses the child select or input of the given node.
+ *
+ * @param {elementNodeReference} node - Node for a given field component like `Input`
+ */
+export const focusField = node => {
+	const field = node.querySelector( 'input, select' );
+
+	if ( field ) {
+		field.focus();
+	}
+};

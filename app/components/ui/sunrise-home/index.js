@@ -18,6 +18,7 @@ const SunriseHome = React.createClass( {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		isRequestingDomainPrice: PropTypes.bool.isRequired,
+		query: PropTypes.string,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
@@ -68,7 +69,8 @@ const SunriseHome = React.createClass( {
 								autoFocus
 								placeholder={ i18n.translate( 'Enter your domain name' ) }
 								field={ this.props.fields.query }
-								ref="query" />
+								ref="query"
+								value={ this.props.query } />
 
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 						</div>

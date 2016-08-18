@@ -1,5 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
+import isEmpty from 'lodash/isEmpty';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -10,15 +11,20 @@ import PartialUnderline from 'components/ui/partial-underline';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import LoadingScreen from 'components/ui/loading-screen';
+import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
-import scrollToTop from 'components/containers/scroll-to-top';
+import { validateDomain } from 'lib/domains';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
 		const { hasSelectedDomain, query, redirect } = this.props;
+
+		if ( query && ! isEmpty( validateDomain( query ) ) ) {
+			redirect( 'home', '?query=' + query );
+		}
 
 		if ( ! hasSelectedDomain && ! query ) {
 			redirect( 'home' );

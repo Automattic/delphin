@@ -18,6 +18,7 @@ import {
 	VERIFY_USER_FAIL,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import { identifyUser, withAnalytics } from 'actions/analytics';
 
 /**
  * Resets the flag indicating that a user was connected successfully.
@@ -99,13 +100,16 @@ export function fetchUser() {
 		method: 'get',
 		params: { path: '/me' },
 		loading: FETCH_USER,
-		success: ( data, requestArguments, requestToken ) => ( {
-			type: FETCH_USER_COMPLETE,
-			bearerToken: requestToken,
-			email: data.email,
-			id: data.ID,
-			language: data.language
-		} ),
+		success: withAnalytics(
+					data => identifyUser( data.ID, data.username ),
+					( data, requestArguments, requestToken ) => ( {
+						type: FETCH_USER_COMPLETE,
+						bearerToken: requestToken,
+						email: data.email,
+						id: data.ID,
+						language: data.language
+					} )
+				),
 		fail: FETCH_USER_FAIL
 	};
 }

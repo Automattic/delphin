@@ -1,7 +1,10 @@
 // External dependencies
 import classnames from 'classnames';
+import find from 'lodash/find';
 import i18n from 'i18n-calypso';
+import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import range from 'lodash/range';
 import padStart from 'lodash/padStart';
@@ -23,6 +26,17 @@ import withPageView from 'lib/analytics/with-page-view';
 import Select from 'components/ui/form/select';
 import Tooltip from 'components/ui/tooltip';
 import scrollToTop from 'components/containers/scroll-to-top';
+import { focusField } from 'lib/form';
+
+const fieldsInOrder = [
+	'name',
+	'number',
+	'expirationMonth',
+	'expirationYear',
+	'cvv',
+	'countryCode',
+	'postalCode',
+];
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -30,6 +44,7 @@ const Checkout = React.createClass( {
 		domain: PropTypes.object,
 		domainApplicationCost: PropTypes.string.isRequired,
 		domainCost: PropTypes.string.isRequired,
+		errors: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
@@ -44,12 +59,32 @@ const Checkout = React.createClass( {
 		user: PropTypes.object.isRequired
 	},
 
+	elements: {},
+
+	saveRef( element ) {
+		if ( element ) {
+			this.elements[ element.props.name || element.props.field.name ] = element;
+		}
+	},
+
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
+	},
+
+	componentWillReceiveProps( nextProps ) {
+		if ( isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
+			this.focusFirstFieldWithErrors();
+		}
+	},
+
+	focusFirstFieldWithErrors() {
+		const fieldName = find( fieldsInOrder, name => this.props.errors[ name ] );
+		const node = ReactDOM.findDOMNode( this.elements[ fieldName ] );
+		focusField( node );
 	},
 
 	isSubmitButtonDisabled() {
@@ -107,6 +142,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.name }
+									ref={ this.saveRef }
 									autoFocus
 								/>
 								<ValidationError field={ fields.name } />
@@ -117,6 +153,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.number }
+									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.number } />
 							</fieldset>
@@ -126,7 +163,9 @@ const Checkout = React.createClass( {
 								<div className={ styles.expiration }>
 									<Select
 										{ ...removeInvalidInputProps( fields.expirationMonth ) }
-										className={ styles.expirationMonth }>
+										className={ styles.expirationMonth }
+										ref={ this.saveRef }
+									>
 										<option value="">{ i18n.translate( 'Month' ) }</option>
 										{ months.map( ( monthName, monthIndex ) => {
 											const monthNumber = padStart( monthIndex + 1, 2, '0' );
@@ -140,7 +179,9 @@ const Checkout = React.createClass( {
 
 									<Select
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
-										className={ styles.expirationYear }>
+										className={ styles.expirationYear }
+										ref={ this.saveRef }
+									>
 										<option value="">{ i18n.translate( 'Year' ) }</option>
 										{
 											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 6 ).map(
@@ -161,13 +202,18 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.cvv }
+									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.cvv } />
 							</fieldset>
 
 							<fieldset>
 								<label>{ i18n.translate( 'Country' ) }</label>
-								<Country field={ fields.countryCode } supportedBy="checkout" />
+								<Country
+									field={ fields.countryCode }
+									supportedBy="checkout"
+									ref={ this.saveRef }
+								/>
 								<ValidationError field={ fields.countryCode } />
 							</fieldset>
 
@@ -176,6 +222,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.postalCode }
+									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.postalCode } />
 							</fieldset>

@@ -24,8 +24,23 @@ class Input extends React.Component {
 		};
 
 		this.saveRef = ( element ) => {
-			this.element = element;
+			if ( element !== null ) {
+				this.element = element;
+			}
 		};
+
+		// Before React completes the client side render and makes the switch, we'll capture
+		// the server side rendered element and get it's value
+		if ( process.env.BROWSER ) {
+			const serverSideElement = document.getElementById( this.props.field.name );
+			this.serverSideValue = serverSideElement ? serverSideElement.value : null;
+		}
+	}
+
+	componentDidMount() {
+		if ( this.serverSideValue && ! this.props.field.value ) {
+			this.props.field.onChange( this.serverSideValue );
+		}
 	}
 
 	render() {
@@ -41,6 +56,7 @@ class Input extends React.Component {
 		return (
 			<div className={ className }>
 				<input
+					id={ field.name }
 					className={ inputClassName }
 					{ ...removeInvalidInputProps( field ) }
 					{ ...newProps }

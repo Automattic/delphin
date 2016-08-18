@@ -77,6 +77,12 @@ class SunriseConfirmDomain extends React.Component {
 							}
 						} ) }
 					</div>
+					<div>
+						<p className={ styles.refundNotice }>
+							<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
+							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+						</p>
+					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }
 					</Button>

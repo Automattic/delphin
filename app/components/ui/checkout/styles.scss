@@ -25,6 +25,31 @@
 	}
 }
 
+.refund-notice {
+	margin: 0 30px;
+	padding: 0 0 25px;
+
+	p {
+		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat right 10px;
+		color: $gray-dark;
+		font-size: 1.4rem;
+		line-height: 1.8rem;
+		padding: 0 50px 0 0;
+	}
+
+	@include breakpoint( '<480px' ) {
+		border-top: 1px solid $gray-medium;
+		margin: 15px -20px 0;
+		padding: 30px 20px 25px;
+	}
+
+	strong {
+		color: $blue;
+		display: block;
+		font-weight: 400;
+	}
+}
+
 .order-summary {
 	background-color: $gray-light;
 	border-top: 1px solid $blue-bright;

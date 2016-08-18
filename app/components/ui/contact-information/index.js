@@ -1,9 +1,11 @@
 // External dependencies
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
+import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
@@ -21,12 +23,35 @@ import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 import scrollToTop from 'components/containers/scroll-to-top';
+import { focusField } from 'lib/form';
+
+const fieldsInOrder = [
+	'firstName',
+	'lastName',
+	'organization',
+	'email',
+	'address1',
+	'address2',
+	'countryCode',
+	'city',
+	'state',
+	'postalCode',
+	'phone',
+];
 
 class ContactInformation extends React.Component {
 	constructor( props ) {
 		super( props );
 
 		this.debouncedValidateBound = debounce( this.validate.bind( this ), 500 );
+
+		this.elements = {};
+
+		this.saveRef = element => {
+			if ( element ) {
+				this.elements[ element.props.field.name ] = element;
+			}
+		};
 	}
 
 	componentWillMount() {
@@ -165,8 +190,14 @@ class ContactInformation extends React.Component {
 
 	handleSubmission() {
 		this.validate().then( () => {
-			if ( isEmpty( this.props.errors ) ) {
+			const { errors } = this.props;
+
+			if ( isEmpty( errors ) ) {
 				this.props.redirectToCheckout();
+			} else {
+				const fieldName = find( fieldsInOrder, name => errors[ name ] );
+				const node = ReactDOM.findDOMNode( this.elements[ fieldName ] );
+				focusField( node );
 			}
 		} );
 	}
@@ -214,6 +245,7 @@ class ContactInformation extends React.Component {
 											onBlur={ this.handleBlur }
 											className={ styles.firstName }
 											placeholder={ i18n.translate( 'First Name' ) }
+											ref={ this.saveRef }
 										/>
 									<ValidationError field={ fields.firstName } />
 								</fieldset>
@@ -227,6 +259,7 @@ class ContactInformation extends React.Component {
 										onBlur={ this.handleBlur }
 										className={ styles.lastName }
 										placeholder={ i18n.translate( 'Last Name' ) }
+										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.lastName } />
 								</fieldset>
@@ -247,6 +280,7 @@ class ContactInformation extends React.Component {
 											className={ styles.organization }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Organization' ) }
+											ref={ this.saveRef }
 										/>
 										<ValidationError field={ fields.organization } />
 									</fieldset>
@@ -261,6 +295,7 @@ class ContactInformation extends React.Component {
 											onBlur={ this.handleBlur }
 											placeholder={ i18n.translate( 'Email' ) }
 											untouch={ untouch }
+											ref={ this.saveRef }
 										/>
 										<ValidationError field={ fields.email } />
 									</fieldset>
@@ -276,6 +311,7 @@ class ContactInformation extends React.Component {
 										className={ styles.address1 }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 1' ) }
+										ref={ this.saveRef }
 									/>
 
 									{ this.address2InputIsVisible() && (
@@ -286,6 +322,7 @@ class ContactInformation extends React.Component {
 											className={ styles.address2 }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Address Line 2' ) }
+											ref={ this.saveRef }
 										/>
 									) }
 
@@ -317,6 +354,7 @@ class ContactInformation extends React.Component {
 										onBlur={ this.handleBlur }
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
+										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.city } />
 								</fieldset>
@@ -329,7 +367,9 @@ class ContactInformation extends React.Component {
 										untouch={ untouch }
 										onBlur={ this.handleBlur }
 										className={ styles.state }
-										states={ this.props.states } />
+										states={ this.props.states }
+										ref={ this.saveRef }
+									/>
 									<ValidationError field={ fields.state } />
 								</fieldset>
 
@@ -342,6 +382,7 @@ class ContactInformation extends React.Component {
 										onBlur={ this.handleBlur }
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Postal Code' ) }
+										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.postalCode } />
 								</fieldset>
@@ -355,6 +396,7 @@ class ContactInformation extends React.Component {
 										untouch={ untouch }
 										onBlur={ this.handleBlur }
 										className={ styles.phone }
+										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.phone } />
 								</fieldset>

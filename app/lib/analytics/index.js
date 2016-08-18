@@ -82,16 +82,6 @@ const analytics = {
 		launch_period: 'landrush pre-reg' // Future options will be landrush and ga
 	},
 
-	identifyUser( { id, username } ) {
-		if ( ! isEnabled( 'tracks_enabled' ) ) {
-			return;
-		}
-
-		debug( 'Identifying user with id: %s and username: %s', id, username );
-
-		window._tkq.push( [ 'identifyUser', id, username ] );
-	},
-
 	mc: {
 		bumpStat( group, name ) {
 			const uriComponent = buildQuerystring( group, name ); // prints debug info
@@ -127,6 +117,16 @@ const analytics = {
 	},
 
 	tracks: {
+		identifyUser( { id, username } ) {
+			if ( ! isEnabled( 'tracks_enabled' ) ) {
+				return;
+			}
+
+			debug( 'Identifying user with id: %s and username: %s', id, username );
+
+			window._tkq.push( [ 'identifyUser', id, username ] );
+		},
+
 		recordEvent( eventName, eventProperties = {} ) {
 			if ( ! isEnabled( 'tracks_enabled' ) ) {
 				return;

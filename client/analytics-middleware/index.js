@@ -36,7 +36,7 @@ export const dispatcher = ( { meta: { analytics } } ) => {
 				return statBump( payload );
 
 			case ANALYTICS_USER_IDENTIFY:
-				return analyticsModule.identifyUser( payload );
+				return analyticsModule.tracks.identifyUser( payload );
 		}
 	} );
 };

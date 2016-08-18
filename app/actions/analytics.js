@@ -8,7 +8,8 @@ import {
 	ANALYTICS_EVENT_RECORD,
 	ANALYTICS_MULTI_TRACK,
 	ANALYTICS_PAGE_VIEW_RECORD,
-	ANALYTICS_STAT_BUMP
+	ANALYTICS_STAT_BUMP,
+	ANALYTICS_USER_IDENTIFY
 } from 'reducers/action-types';
 
 /***
@@ -83,3 +84,13 @@ export const recordPageView = ( url, title, service ) => ( {
 
 export const recordGooglePageView = ( url, title ) =>
 	recordPageView( url, title, 'ga' );
+
+export const identifyUser = ( id, username ) => ( {
+	type: ANALYTICS_USER_IDENTIFY,
+	meta: {
+		analytics: [ {
+			type: ANALYTICS_USER_IDENTIFY,
+			payload: { id, username }
+		} ]
+	}
+} );

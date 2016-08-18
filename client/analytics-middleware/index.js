@@ -5,7 +5,8 @@ import invoke from 'lodash/invoke';
 import {
 	ANALYTICS_EVENT_RECORD,
 	ANALYTICS_PAGE_VIEW_RECORD,
-	ANALYTICS_STAT_BUMP
+	ANALYTICS_STAT_BUMP,
+	ANALYTICS_USER_IDENTIFY,
 } from 'reducers/action-types';
 
 const eventServices = {
@@ -33,6 +34,9 @@ export const dispatcher = ( { meta: { analytics } } ) => {
 
 			case ANALYTICS_STAT_BUMP:
 				return statBump( payload );
+
+			case ANALYTICS_USER_IDENTIFY:
+				return analyticsModule.identifyUser( payload );
 		}
 	} );
 };

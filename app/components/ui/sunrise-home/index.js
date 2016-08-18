@@ -62,7 +62,7 @@ const SunriseHome = React.createClass( {
 						</div>
 
 						<Button className={ styles.button } disabled={ ! process.env.BROWSER || this.props.isRequestingDomainPrice }>
-							{ i18n.translate( 'Get started' ) }
+							{ process.env.BROWSER ? i18n.translate( 'Get started' ) : i18n.translate( 'Loading…' ) }
 						</Button>
 					</div>
 

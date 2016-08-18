@@ -19,7 +19,9 @@ const filterConfig = {
 		/\/sign-in-with-email/,
 		/\/sign-up-with-email/,
 		/\/success/,
-		/\/about/
+		/\/about/,
+		/\/log-in/,
+		/\/signup/
 	]
 };
 

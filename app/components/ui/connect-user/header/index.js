@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const Header = ( { intention } ) => {
+const Header = ( { intention, twoFactorAuthenticationEnabled } ) => {
 	let heading = '';
 	let text = '';
 
@@ -15,7 +15,14 @@ const Header = ( { intention } ) => {
 		text = i18n.translate( 'Enter your email address to claim your domain.' );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
-		text = i18n.translate( 'We sent you a special link to confirm your email address. Look for an email from get.blog and click the link to continue.' );
+
+		if ( twoFactorAuthenticationEnabled ) {
+			text = i18n.translate( 'Open the link we sent you to start your application using your WordPress.com account.' +
+				"If you're on another device or the link doesn't work, enter the code from the email below." );
+		} else {
+			text = i18n.translate( 'We sent you a special link to confirm your email address. ' +
+				'Look for an email from get.blog and click the link to continue.' );
+		}
 	}
 
 	return (
@@ -38,7 +45,8 @@ const Header = ( { intention } ) => {
 };
 
 Header.propTypes = {
-	intention: PropTypes.string.isRequired
+	intention: PropTypes.string.isRequired,
+	twoFactorAuthenticationEnabled: PropTypes.bool
 };
 
 export default withStyles( styles )( Header );

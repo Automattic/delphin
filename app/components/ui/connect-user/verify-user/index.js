@@ -151,7 +151,8 @@ const VerifyUser = React.createClass( {
 
 		return (
 			<div>
-				<Header intention={ 'verifyUser' } />
+				<Header intention={ 'verifyUser' }
+						twoFactorAuthenticationEnabled={ user.data.twoFactorAuthenticationEnabled } />
 
 				<Form
 					onSubmit={ handleSubmit( this.handleSubmit ) }

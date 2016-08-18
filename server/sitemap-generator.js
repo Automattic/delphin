@@ -21,7 +21,8 @@ const filterConfig = {
 		/\/success/,
 		/\/about/,
 		/\/log-in/,
-		/\/signup/
+		/\/signup/,
+		/\/\*/
 	]
 };
 

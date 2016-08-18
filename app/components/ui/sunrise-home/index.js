@@ -23,6 +23,16 @@ const SunriseHome = React.createClass( {
 		values: PropTypes.object.isRequired
 	},
 
+	getInitialState() {
+		return { disabledWhileServerSide: true };
+	},
+
+	componentDidMount() {
+		// Enables the submit button only when we switch from server-side to client-side rendering using the fact that
+		// componentDidMount is only invoked on the client
+		this.setState( { disabledWhileServerSide: false } ); /* eslint react/no-did-mount-set-state: 0 */
+	},
+
 	handleSubmit() {
 		const { query } = this.props.values;
 
@@ -61,8 +71,8 @@ const SunriseHome = React.createClass( {
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 						</div>
 
-						<Button className={ styles.button } disabled={ ! process.env.BROWSER || this.props.isRequestingDomainPrice }>
-							{ process.env.BROWSER ? i18n.translate( 'Get started' ) : i18n.translate( 'Loading…' ) }
+						<Button className={ styles.button } disabled={ this.state.disabledWhileServerSide || this.props.isRequestingDomainPrice }>
+							{ ! this.state.disabledWhileServerSide ? i18n.translate( 'Get started' ) : i18n.translate( 'Loading…' ) }
 						</Button>
 					</div>
 

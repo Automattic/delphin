@@ -15,4 +15,3 @@ export default [
 	{ value: 68, langSlug: 'sv', name: 'Svenska' },
 	{ value: 78, langSlug: 'tr', name: 'Türkçe', popular: 11 },
 ];
-

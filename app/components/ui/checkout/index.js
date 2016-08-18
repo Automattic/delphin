@@ -224,6 +224,13 @@ const Checkout = React.createClass( {
 							</div>
 						</div>
 
+						<div className={ styles.refundNotice }>
+							<p>
+								<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
+								{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+							</p>
+						</div>
+
 						<div className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Review application' ) }

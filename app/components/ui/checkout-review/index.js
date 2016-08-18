@@ -70,7 +70,7 @@ class CheckoutReview extends React.Component {
 
 	renderTermsOfService() {
 		return <section className={ styles.terms }>
-			{ i18n.translate( 'By submitting your application, you agree to our {{link}}domain name registration agreement{{/link}}.' +
+			{ i18n.translate( 'By submitting your application, you agree to our {{link}}domain name registration agreement{{/link}}. ' +
 			'If you win this domain, you authorize your payment method to be charged on a recurring basis until you cancel, which you can do at any time.',
 				{
 					components: { link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" /> }

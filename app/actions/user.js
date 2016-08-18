@@ -100,21 +100,16 @@ export function fetchUser() {
 		method: 'get',
 		params: { path: '/me' },
 		loading: FETCH_USER,
-		success: ( data, requestArguments, requestToken ) => {
-			return dispatch => dispatch(
-				withAnalytics(
-					identifyUser( data.ID, data.username )
-				)(
-					{
+		success: withAnalytics(
+					data => identifyUser( data.ID, data.username ),
+					( data, requestArguments, requestToken ) => ( {
 						type: FETCH_USER_COMPLETE,
 						bearerToken: requestToken,
 						email: data.email,
 						id: data.ID,
 						language: data.language
-					}
-				)( dispatch )
-			);
-		},
+					} )
+				),
 		fail: FETCH_USER_FAIL
 	};
 }

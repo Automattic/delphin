@@ -21,9 +21,10 @@ export default reduxForm(
 		fields: [ 'query' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
-	state => ( {
+	( state, ownProps ) => ( {
 		isRequestingDomainPrice: isRequestingDomainPrice( state ),
-		confirmDomainPath: getPath( 'confirmDomain' )
+		confirmDomainPath: getPath( 'confirmDomain' ),
+		query: ownProps.location.query.query
 	} ),
 	dispatch => bindActionCreators( {
 		fetchDomainPrice: withAnalytics(

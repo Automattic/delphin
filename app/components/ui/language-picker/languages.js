@@ -20,10 +20,6 @@ export default [
 		name: 'Italiano'
 	},
 	{
-		locale: 'he',
-		name: 'עברית'
-	},
-	{
 		locale: 'ru',
 		name: 'Русский'
 	},
@@ -58,10 +54,6 @@ export default [
 	{
 		locale: 'zh-tw',
 		name: '中文(繁體)'
-	},
-	{
-		locale: 'ar',
-		name: 'العربية'
 	},
 	{
 		locale: 'sv',

@@ -22,7 +22,7 @@ export default reduxForm(
 	},
 	( state, ownProps ) => ( {
 		confirmDomainPath: getPath( 'confirmDomain' ),
-		query: ownProps.location.query.query
+		initialValues: ownProps.location.query
 	} ),
 	dispatch => bindActionCreators( {
 		fetchDomainPrice: withAnalytics(

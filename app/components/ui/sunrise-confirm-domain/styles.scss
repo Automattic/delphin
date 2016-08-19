@@ -30,6 +30,7 @@
 
 .back-notice {
 	font-size: 1.3rem;
+	margin: 25px 0 20px;
 	text-align: center;
 	width: 100%;
 }
@@ -45,16 +46,26 @@
 	text-transform: uppercase;
 }
 
-.refund-notice {
-	background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat right 35px;
-	color: $gray-dark;
-	font-size: 1.4rem;
-	line-height: 1.8rem;
-	padding: 25px 40px 0 0;
+.fee-notice {
+	background: $gray-light;
+	margin: 0 -30px -30px;
+	padding: 30px;
 
-	strong {
-		color: $blue;
-		display: block;
+	p {
 		font-weight: 400;
+		margin: 0 0 15px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
+	.headline {
+		font-size: 1.6rem;
+		font-weight: 600;
+	}
+}
+
+.happy-circle {
+	background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat right 20px;
+	padding: 15px 40px 0 0;
 }

@@ -143,7 +143,7 @@ const Checkout = React.createClass( {
 										className={ styles.expirationYear }>
 										<option value="">{ i18n.translate( 'Year' ) }</option>
 										{
-											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 5 ).map(
+											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 6 ).map(
 												( year ) => <option value={ padStart( year - 2000, 2, '0' ) } key={ year } >{ year }</option>
 											)
 										}

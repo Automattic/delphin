@@ -89,7 +89,18 @@ class SunriseConfirmDomain extends React.Component {
 							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
 						</p>
 						<p>
-							{ i18n.translate( 'You can register any mike.blog without an application fee starting on November 21. Just beware you could miss out if your domain if you\'re not the first to grab it. If you don\'t want to apply now, sign-up for updates and we\'ll email you when it\'s time to register.' ) }
+							<a href="#" className={ styles.more }>
+								{ i18n.translate( 'More about the application process' ) }
+							</a>
+						</p>
+						<p>
+							{ i18n.translate( 'You can register any mike.blog without an application fee starting on November 21.' +
+								'Just beware you could miss out if your domain if you\'re not the first to grab it. If you don\'t want to apply now, ' +
+								'{{link}}sign-up for updates{{/link}} and we\'ll email you when it\'s time to register.',
+									{
+										components: { link: <a href="https://dotblog.wordpress.com/" target="_blank" /> }
+									}
+							) }
 						</p>
 					</div>
 				</SunriseStep.Form>

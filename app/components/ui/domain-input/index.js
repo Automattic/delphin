@@ -17,8 +17,10 @@ const DomainInput = props => {
 
 	return (
 		<div className={ inputClassName }>
+			<label for="domain-input" className={ styles.label }>Enter your domain name</label>
 			<Input
 				className={ styles.inputContainer }
+				id="domain-input"
 				inputClassName={ styles.input }
 				gridIconSize={ 32 }
 				{ ...removeInvalidInputProps( inputProps ) }

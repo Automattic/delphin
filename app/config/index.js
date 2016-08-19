@@ -9,6 +9,7 @@ const config = {
 	default_tld: 'blog',
 	default_search_sort: 'recommended',
 	env: NODE_ENV || 'development',
+	hostname: 'get.blog',
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
 	features: {

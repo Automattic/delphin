@@ -1,5 +1,6 @@
 // External dependencies
 import classNames from 'classnames';
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -17,7 +18,7 @@ const DomainInput = props => {
 
 	return (
 		<div className={ inputClassName }>
-			<label for="domain-input" className={ styles.label }>Enter your domain name</label>
+			<label htmlFor="domain-input" className={ styles.label }>{ i18n.translate( 'Enter your domain name' ) }</label>
 			<Input
 				className={ styles.inputContainer }
 				id="domain-input"

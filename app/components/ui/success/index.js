@@ -64,7 +64,7 @@ class Success extends React.Component {
 						</p>
 
 						<p>
-							{ i18n.translate( 'If multiple requests are received for this domain, you will be able to bid for it in an auction, between November 14 and November 17.' ) }
+							{ i18n.translate( 'If multiple requests are received for this domain, you will be able to bid for it in an auction, between November 14 and November 17. If your domain goes to auction and you don\'t win, your payment will be refunded.' ) }
 						</p>
 
 						<p>

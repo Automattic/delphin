@@ -8,7 +8,6 @@ import { fetchDomainPrice } from 'actions/domain-price';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getPath } from 'routes';
-import { isRequestingDomainPrice } from 'reducers/checkout/selectors';
 import { selectDomain } from 'actions/domain-search';
 import { validateDomain } from 'lib/domains';
 import SunriseHome from 'components/ui/sunrise-home';
@@ -22,7 +21,6 @@ export default reduxForm(
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
 	( state, ownProps ) => ( {
-		isRequestingDomainPrice: isRequestingDomainPrice( state ),
 		confirmDomainPath: getPath( 'confirmDomain' ),
 		query: ownProps.location.query.query
 	} ),

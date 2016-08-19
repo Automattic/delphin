@@ -17,22 +17,11 @@ const SunriseHome = React.createClass( {
 		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		isRequestingDomainPrice: PropTypes.bool.isRequired,
 		query: PropTypes.string,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		values: PropTypes.object.isRequired
-	},
-
-	getInitialState() {
-		return { disabledWhileServerSide: true };
-	},
-
-	componentDidMount() {
-		// Enables the submit button only when we switch from server-side to client-side rendering using the fact that
-		// componentDidMount is only invoked on the client
-		this.setState( { disabledWhileServerSide: false } ); /* eslint react/no-did-mount-set-state: 0 */
 	},
 
 	handleSubmit() {
@@ -49,7 +38,8 @@ const SunriseHome = React.createClass( {
 
 		return (
 			<div className={ styles.homeContainer }>
-				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }
+				<form className={ styles.form }
+						onSubmit={ handleSubmit( this.handleSubmit ) }
 						method="get" action={ confirmDomainPath } >
 					<DocumentTitle />
 
@@ -75,8 +65,8 @@ const SunriseHome = React.createClass( {
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 						</div>
 
-						<Button className={ styles.button } disabled={ this.state.disabledWhileServerSide || this.props.isRequestingDomainPrice }>
-							{ ! this.state.disabledWhileServerSide ? i18n.translate( 'Get started' ) : i18n.translate( 'Loading…' ) }
+						<Button className={ styles.button }>
+							{ i18n.translate( 'Get started' ) }
 						</Button>
 					</div>
 

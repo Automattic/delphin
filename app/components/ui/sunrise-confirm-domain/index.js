@@ -77,24 +77,30 @@ class SunriseConfirmDomain extends React.Component {
 							}
 						} ) }
 					</div>
-					<div>
-						<p className={ styles.refundNotice }>
-							<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
-							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
-						</p>
-					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }
 					</Button>
-					<div className={ styles.backNotice }>
-						<div>
-							{ i18n.translate( 'Not what you wanted?' ) }
-						</div>
-						<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
-							{ i18n.translate( 'Try a different domain' ) }
-						</TrackingLink>
+					<div className={ styles.feeNotice }>
+						<h3 className={ styles.headline }>{ i18n.translate( 'Apply risk free' ) }</h3>
+						<p className={ styles.happyCircle }>
+							{ i18n.translate( 'Even though .blog domains are not yet available for everyone, submitting an application puts you in the running to claim mike.blog, risk free.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'You can register any mike.blog without an application fee starting on November 21. Just beware you could miss out if your domain if you\'re not the first to grab it. If you don\'t want to apply now, sign-up for updates and we\'ll email you when it\'s time to register.' ) }
+						</p>
 					</div>
 				</SunriseStep.Form>
+				<div className={ styles.backNotice }>
+					<div>
+						{ i18n.translate( 'Not what you wanted?' ) }
+					</div>
+					<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
+						{ i18n.translate( 'Try a different domain' ) }
+					</TrackingLink>
+				</div>
 			</SunriseStep>
 		);
 	}

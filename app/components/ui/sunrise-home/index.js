@@ -13,6 +13,7 @@ import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
+		asyncValidate: PropTypes.func.isRequired,
 		confirmDomainPath: PropTypes.string.isRequired,
 		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
@@ -20,7 +21,21 @@ const SunriseHome = React.createClass( {
 		redirectToConfirmDomain: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
+		touch: PropTypes.func.isRequired,
 		values: PropTypes.object.isRequired
+	},
+
+	componentDidMount() {
+		const { fields: { query } } = this.props;
+
+		// Trigger validation if we have an initialValue for query
+		if ( query.initialValue ) {
+			// wait for query.value to be populated by query.initialValue
+			setTimeout( () => {
+				this.props.touch( query.name );
+				this.props.asyncValidate();
+			}, 1000 );
+		}
 	},
 
 	handleSubmit() {

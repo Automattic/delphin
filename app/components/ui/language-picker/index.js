@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import languages from './languages';
+import config from 'config';
 import Select from 'components/ui/form/select';
 import styles from './styles.scss';
 
@@ -21,16 +21,17 @@ class LanguagePicker extends React.Component {
 	}
 
 	render() {
+		const languages = config( 'languages' );
 		const { isDark, isSelectVisible, showSelect } = this.props;
-		const currentLanguage = find( languages, { locale: i18n.getLocaleSlug() } );
+		const currentLanguage = find( languages, { langSlug: i18n.getLocaleSlug() } );
 
 		let content;
 		if ( isSelectVisible ) {
 			content = (
 				<Select className={ styles.select } onChange={ this.handleChange } defaultValue="">
 					<option value="" disabled>{ i18n.translate( 'Select a language' ) }</option>
-					{ languages.map( ( { locale, name } ) => (
-						<option value={ locale } key={ locale }>{ name }</option>
+					{ languages.map( ( { langSlug, name } ) => (
+						<option value={ langSlug } key={ langSlug }>{ name }</option>
 					) ) }
 				</Select>
 			);

@@ -70,7 +70,7 @@ class SunriseConfirmDomain extends React.Component {
 						} ) }
 					</div>
 					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+						{ i18n.translate( '%(domainCost)s yearly registration + %(applicationCost)s one-time application fee', {
 							args: {
 								applicationCost,
 								domainCost

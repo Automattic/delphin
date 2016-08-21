@@ -30,11 +30,8 @@ const SunriseHome = React.createClass( {
 
 		// Trigger validation if we have an initialValue for query
 		if ( query.initialValue ) {
-			// wait for query.value to be populated by query.initialValue
-			setTimeout( () => {
-				this.props.touch( query.name );
-				this.props.asyncValidate();
-			}, 1000 );
+			this.props.touch( query.name );
+			this.props.asyncValidate();
 		}
 	},
 

@@ -14,8 +14,8 @@ import phone from './phone.json';
  * @return {function} Function that returns a promise that is resolved/rejected based on errors in the
  * given validate function.
  */
-export const getAsyncValidateFunction = validate => values => new Promise( ( resolve, reject ) => {
-	const errors = validate( values );
+export const getAsyncValidateFunction = validate => ( values, dispatch, props ) => new Promise( ( resolve, reject ) => {
+	const errors = validate( values, dispatch, props );
 
 	if ( isEmpty( errors ) ) {
 		resolve();

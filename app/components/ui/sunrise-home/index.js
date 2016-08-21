@@ -15,7 +15,6 @@ const SunriseHome = React.createClass( {
 	propTypes: {
 		asyncValidate: PropTypes.func.isRequired,
 		confirmDomainPath: PropTypes.string.isRequired,
-		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
@@ -38,10 +37,7 @@ const SunriseHome = React.createClass( {
 	handleSubmit() {
 		const { query } = this.props.values;
 
-		this.props.fetchDomainPrice( query ).then( action => {
-			this.props.selectDomain( action.result );
-			this.props.redirectToConfirmDomain();
-		} );
+		this.props.redirectToConfirmDomain( query );
 	},
 
 	render() {

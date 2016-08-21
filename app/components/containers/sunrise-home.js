@@ -4,8 +4,6 @@ import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import { fetchDomainPrice } from 'actions/domain-price';
-import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getPath } from 'routes';
 import { selectDomain } from 'actions/domain-search';
@@ -26,11 +24,7 @@ export default reduxForm(
 		initialValues: ownProps.location.query
 	} ),
 	dispatch => bindActionCreators( {
-		fetchDomainPrice: withAnalytics(
-			domain => recordTracksEvent( 'delphin_domain_search', { search_string: domain } ),
-			fetchDomainPrice
-		),
 		selectDomain,
-		redirectToConfirmDomain: () => push( getPath( 'confirmDomain' ) )
+		redirectToConfirmDomain: domain => push( { pathname: getPath( 'confirmDomain' ), query: { query: domain } } )
 	}, dispatch )
 )( SunriseHome );

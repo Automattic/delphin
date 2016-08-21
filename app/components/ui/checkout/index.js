@@ -184,11 +184,11 @@ const Checkout = React.createClass( {
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
 							{ domainApplicationCost && <div className={ styles.orderItem }>
-								<span>{ i18n.translate( 'One-time Application Fee' ) }</span>
+								<span>{ i18n.translate( 'Application' ) } { i18n.translate( '(one-time fee)' ) }</span>
 								<span>{ domainApplicationCost }</span>
 							</div> }
 							<div className={ styles.orderItem }>
-								<span>{ i18n.translate( 'Yearly Domain Registration' ) }</span>
+								<span>{ i18n.translate( 'Domain Registration' ) } { i18n.translate( '(recurring yearly fee)' ) }</span>
 								<span>{ domainCost }</span>
 							</div>
 							<div className={ styles.orderItem }>

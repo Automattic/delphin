@@ -12,7 +12,8 @@ import { selectDomain } from 'actions/domain-search';
 import { validateDomain } from 'lib/domains';
 import SunriseHome from 'components/ui/sunrise-home';
 
-const validate = values => validateDomain( values.query );
+// validate input value if present or query string query if present
+const validate = ( values, dispatch, props ) => validateDomain( values.query || props.location.query.query );
 
 export default reduxForm(
 	{

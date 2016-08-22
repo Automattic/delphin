@@ -78,6 +78,10 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 15px 0;
+
+	.item-description {
+		padding: 0 10px 0 0;
+	}
 }
 
 .order-total {

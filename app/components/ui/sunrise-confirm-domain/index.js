@@ -81,12 +81,12 @@ class SunriseConfirmDomain extends React.Component {
 						{ i18n.translate( 'Apply for this domain' ) }
 					</Button>
 					<div className={ styles.feeNotice }>
-						<h3 className={ styles.headline }>{ i18n.translate( 'Apply risk free' ) }</h3>
+						<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
 						<p className={ styles.happyCircle }>
-							{ i18n.translate( 'Even though .blog domains are not yet available for everyone, submitting an application puts you in the running to claim mike.blog, risk free.' ) }
+							{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure example.blog before everyone else.' ) }
 						</p>
 						<p>
-							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+							{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
 						</p>
 						<p>
 							<a href="#" className={ styles.more }>
@@ -94,13 +94,13 @@ class SunriseConfirmDomain extends React.Component {
 							</a>
 						</p>
 						<p>
-							{ i18n.translate( 'You can register any mike.blog without an application fee starting on November 21.' +
-							'Just beware you could miss out if your domain if you\'re not the first to grab it. If you don\'t want to apply now, ' +
-							'{{link}}sign-up for updates{{/link}} and we\'ll email you when it\'s time to register.',
-								{
-									components: { link: <a href="https://dotblog.wordpress.com/" target="_blank" /> }
-								}
-							) }
+							{ i18n.translate( 'If others apply for example.blog, it will go to an auction, with no price limit. If example.blog contains a trademark, the owners may register it in a separate process, cancelling out your application.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
 						</p>
 					</div>
 				</SunriseStep.Form>

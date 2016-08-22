@@ -104,7 +104,13 @@ class SunriseConfirmDomain extends React.Component {
 						{ moreInformationIsVisible && (
 							<div>
 								<p>
-									{ i18n.translate( 'If others apply for example.blog, it will go to an auction, with no price limit. If example.blog contains a trademark, the owners may register it in a separate process, cancelling out your application.' ) }
+									{ i18n.translate(
+										'If others apply for %(domainName)s, it will go to an auction, with no price limit. ' +
+										'If %(domainName)s contains a trademark, the owners may register it in a separate process, ' +
+										'cancelling out your application.', {
+											args: { domainName }
+										}
+									) }
 								</p>
 								<p>
 									{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }

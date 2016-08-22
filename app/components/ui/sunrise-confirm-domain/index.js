@@ -94,11 +94,13 @@ class SunriseConfirmDomain extends React.Component {
 						<p>
 							{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
 						</p>
-						<p>
-							<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
-								{ i18n.translate( 'More about the application process' ) }
-							</a>
-						</p>
+						{ ! moreInformationIsVisible && (
+							<p>
+								<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
+									{ i18n.translate( 'More about the application process' ) }
+								</a>
+							</p>
+						) }
 						{ moreInformationIsVisible && (
 							<div>
 								<p>

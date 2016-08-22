@@ -34,8 +34,14 @@ class SunriseConfirmDomain extends React.Component {
 		}
 	}
 
+	handleClickMoreInformationLink( event ) {
+		event.preventDefault();
+
+		this.props.showConfirmDomainMoreInformation();
+	}
+
 	render() {
-		const { domain, domainCost, applicationCost } = this.props;
+		const { domain, domainCost, applicationCost, moreInformationIsVisible } = this.props;
 
 		const { domainName, isPremium, totalCost } = domain;
 
@@ -89,19 +95,23 @@ class SunriseConfirmDomain extends React.Component {
 							{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
 						</p>
 						<p>
-							<a href="#" className={ styles.more }>
+							<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
 								{ i18n.translate( 'More about the application process' ) }
 							</a>
 						</p>
-						<p>
-							{ i18n.translate( 'If others apply for example.blog, it will go to an auction, with no price limit. If example.blog contains a trademark, the owners may register it in a separate process, cancelling out your application.' ) }
-						</p>
-						<p>
-							{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
-						</p>
-						<p>
-							{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
-						</p>
+						{ moreInformationIsVisible && (
+							<div>
+								<p>
+									{ i18n.translate( 'If others apply for example.blog, it will go to an auction, with no price limit. If example.blog contains a trademark, the owners may register it in a separate process, cancelling out your application.' ) }
+								</p>
+								<p>
+									{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
+								</p>
+								<p>
+									{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
+								</p>
+							</div>
+						) }
 					</div>
 				</SunriseStep.Form>
 				<div className={ styles.backNotice }>
@@ -123,8 +133,10 @@ SunriseConfirmDomain.propTypes = {
 	domainCost: PropTypes.string.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
+	moreInformationIsVisible: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
-	trackSubmit: PropTypes.func.isRequired
+	showConfirmDomainMoreInformation: PropTypes.func.isRequired,
+	trackSubmit: PropTypes.func.isRequired,
 };
 
 export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) ) );

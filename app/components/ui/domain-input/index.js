@@ -18,10 +18,14 @@ const DomainInput = props => {
 
 	return (
 		<div className={ inputClassName }>
-			<label htmlFor="domain-input" className={ styles.label }>{ i18n.translate( 'Enter your domain name' ) }</label>
+			<label
+				htmlFor={ field.name } // `Input` uses `field.name` as the field ID
+				className={ styles.label }
+			>
+				{ i18n.translate( 'Enter your domain name' ) }
+			</label>
 			<Input
 				className={ styles.inputContainer }
-				id="domain-input"
 				inputClassName={ styles.input }
 				gridIconSize={ 32 }
 				{ ...removeInvalidInputProps( inputProps ) }

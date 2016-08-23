@@ -12,7 +12,8 @@ const ResendSignupEmail = React.createClass( {
 		connectUser: PropTypes.func.isRequired,
 		domain: PropTypes.string,
 		email: PropTypes.string.isRequired,
-		intention: PropTypes.string.isRequired
+		intention: PropTypes.string.isRequired,
+		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
 	},
 
 	getInitialState() {
@@ -25,11 +26,21 @@ const ResendSignupEmail = React.createClass( {
 		} );
 	},
 
+	handleTryDifferentEmailClick( event ) {
+		event.preventDefault();
+
+		this.props.redirectToTryWithDifferentEmail();
+	},
+
 	render() {
 		let text = i18n.translate(
-			"On its way! If you don't receive it in within a few minutes, {{a}}send us a message{{/a}}.",
+			"We sent the code to %(email)s. If you still can't find it, {{supportLink}}send us a message{{/supportLink}} or {{backLink}}try a different email{{/backLink}}.",
 			{
-				components: { a: <a href={ config( 'support_link' ) } /> }
+				args: { email: this.props.email },
+				components: {
+					supportLink: <a href={ config( 'support_link' ) } />,
+					backLink: <a href="#" onClick={ this.handleTryDifferentEmailClick } />
+				}
 			}
 		);
 

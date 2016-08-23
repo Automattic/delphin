@@ -100,29 +100,30 @@ const Checkout = React.createClass( {
 		this.props.fields.number.onChange( card.format( rawFieldValue ) );
 	},
 
-	getCardTypeCSS( cardType ) {
-		switch ( cardType ) {
-			case 'Visa':
-				return styles.visa;
+	renderCreditCards() {
+		const number = this.props.fields.number.value;
+		const cardType = card.type( card.parse( number ), true );
+		const enableAllCards = ! cardType;
+		const classes = {
+			visa: ( enableAllCards || cardType === 'Visa' ) ? styles.visa : styles.visaDisabled,
+			mastercard: ( enableAllCards || cardType === 'MasterCard' ) ? styles.mastercard : styles.mastercardDisabled,
+			discover: ( enableAllCards || cardType === 'Discover' ) ? styles.discover : styles.discoverDisabled,
+			amex: ( enableAllCards || cardType === 'American Express' ) ? styles.amex : styles.amexDisabled,
+		};
 
-			case 'MasterCard':
-				return styles.mastercard;
-
-			case 'Discover':
-				return styles.discover;
-
-			case 'American Express':
-				return styles.amex;
-
-			default:
-				return styles.creditCardNumber;
-		}
+		return (
+			<div className={ styles.creditCards }>
+				<div alt="Visa" className={ classes.visa } />
+				<div alt="Mastercard" className={ classes.mastercard } />
+				<div alt="Discover" className={ classes.discover } />
+				<div alt="American Express" className={ classes.amex } />
+			</div>
+		);
 	},
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props,
-			cardType = card.type( card.parse( fields.number.value ), true );
+			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -148,19 +149,9 @@ const Checkout = React.createClass( {
 								<ValidationError field={ fields.name } />
 							</fieldset>
 
-							<fieldset className={ this.getCardTypeCSS( cardType ) }>
-								<label>{ i18n.translate( 'Card Number' ) }</label>
-								<div className={ styles.creditCards }>
-									<img alt="Visa" className={ styles.visa } src="/images/credit-cards/cc-visa.svg" width="32" />
-									<img alt="Visa" className={ styles.visaDisabled } src="/images/credit-cards/cc-visa-disabled.svg" width="32" />
-									<img alt="MasterCard" className={ styles.mastercard } src="/images/credit-cards/cc-mastercard.svg" width="32" />
-									<img alt="MasterCard" className={ styles.mastercardDisabled } src="/images/credit-cards/cc-mastercard-disabled.svg" width="32" />
-									<img alt="Discover" className={ styles.discover } src="/images/credit-cards/cc-discover.svg" width="32" />
-									<img alt="Discover" className={ styles.discoverDisabled } src="/images/credit-cards/cc-discover-disabled.svg" width="32" />
-									<img alt="American Express" className={ styles.amex } src="/images/credit-cards/cc-amex.svg" width="32" />
-									<img alt="American Express" className={ styles.amexDisabled } src="/images/credit-cards/cc-amex-disabled.svg" width="32" />
-								</div>
-
+							<fieldset>
+								<label className={ styles.numberLabel }>{ i18n.translate( 'Card Number' ) }</label>
+								{ this.renderCreditCards() }
 								<Input
 									type="text"
 									field={ omit( fields.number, 'onChange' ) }

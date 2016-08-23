@@ -11,6 +11,8 @@ import { validateDomain } from 'lib/domains';
 import SunriseHome from 'components/ui/sunrise-home';
 
 // validate input value if present or query string query if present
+// Use the field value only once redux-form has been updated to fix this issue:
+// https://github.com/erikras/redux-form/issues/621
 const validate = ( values, dispatch, props ) => validateDomain( values.query || props.location.query.query );
 
 export default reduxForm(

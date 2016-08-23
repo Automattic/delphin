@@ -7,6 +7,7 @@ import { createRequestReducer } from 'lib/create-request-reducer';
 import {
 	CHECKOUT_REQUESTS_RESET,
 	DOMAIN_SELECT,
+	DOMAIN_UNSELECT,
 	PAYGATE_CONFIGURATION_FETCH,
 	PAYGATE_CONFIGURATION_FETCH_COMPLETE,
 	PAYGATE_CONFIGURATION_FETCH_FAIL,
@@ -25,6 +26,9 @@ export const selectedDomain = ( state = {}, action ) => {
 	switch ( type ) {
 		case DOMAIN_SELECT:
 			return camelizeKeys( action.value );
+
+		case DOMAIN_UNSELECT:
+			return {};
 
 		default:
 			return state;

@@ -8,7 +8,7 @@ import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 import { getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { isLoggedIn } from 'reducers/user/selectors';
 import { redirect } from 'actions/routes';
-import { selectDomain } from 'actions/domain-search';
+import { selectDomain, unselectDomain } from 'actions/domain-search';
 import SunriseConfirmDomain from 'components/ui/sunrise-confirm-domain';
 
 export default connect(
@@ -27,6 +27,7 @@ export default connect(
 		),
 		redirect,
 		selectDomain,
-		trackSubmit: ( isPremium ) => recordTracksEvent( 'delphin_select_domain', { is_premium: isPremium } )
+		trackSubmit: ( isPremium ) => recordTracksEvent( 'delphin_select_domain', { is_premium: isPremium } ),
+		unselectDomain
 	}, dispatch )
 )( SunriseConfirmDomain );

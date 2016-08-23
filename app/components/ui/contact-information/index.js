@@ -1,6 +1,5 @@
 // External dependencies
 import classNames from 'classnames';
-import debounce from 'lodash/debounce';
 import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
@@ -42,8 +41,6 @@ const fieldsInOrder = [
 class ContactInformation extends React.Component {
 	constructor( props ) {
 		super( props );
-
-		this.debouncedValidateBound = debounce( this.validate.bind( this ), 500 );
 
 		this.elements = {};
 
@@ -202,12 +199,6 @@ class ContactInformation extends React.Component {
 		} );
 	}
 
-	handleBlur( event ) {
-		this.debouncedValidateBound();
-
-		this.props.fields[ event.target.name ].onBlur();
-	}
-
 	render() {
 		const { fields, handleSubmit, untouch } = this.props;
 
@@ -242,7 +233,6 @@ class ContactInformation extends React.Component {
 											field={ fields.firstName }
 											autoFocus
 											untouch={ untouch }
-											onBlur={ this.handleBlur }
 											className={ styles.firstName }
 											placeholder={ i18n.translate( 'First Name' ) }
 											ref={ this.saveRef }
@@ -256,7 +246,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.lastName }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.lastName }
 										placeholder={ i18n.translate( 'Last Name' ) }
 										ref={ this.saveRef }
@@ -276,7 +265,6 @@ class ContactInformation extends React.Component {
 										<Input
 											field={ fields.organization }
 											untouch={ untouch }
-											onBlur={ this.handleBlur }
 											className={ styles.organization }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Organization' ) }
@@ -292,7 +280,6 @@ class ContactInformation extends React.Component {
 										<Input
 											disabled={ this.isDataLoading() }
 											field={ fields.email }
-											onBlur={ this.handleBlur }
 											placeholder={ i18n.translate( 'Email' ) }
 											untouch={ untouch }
 											ref={ this.saveRef }
@@ -307,7 +294,6 @@ class ContactInformation extends React.Component {
 									<Input
 										field={ fields.address1 }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.address1 }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 1' ) }
@@ -318,7 +304,6 @@ class ContactInformation extends React.Component {
 										<Input
 											field={ fields.address2 }
 											untouch={ untouch }
-											onBlur={ this.handleBlur }
 											className={ styles.address2 }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Address Line 2' ) }
@@ -351,7 +336,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.city }
-										onBlur={ this.handleBlur }
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
 										ref={ this.saveRef }
@@ -365,7 +349,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.state }
 										states={ this.props.states }
 										ref={ this.saveRef }
@@ -379,7 +362,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.postalCode }
-										onBlur={ this.handleBlur }
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Postal Code' ) }
 										ref={ this.saveRef }
@@ -394,7 +376,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.phone }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.phone }
 										ref={ this.saveRef }
 									/>

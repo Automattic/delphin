@@ -30,7 +30,8 @@ var config = merge.smart( baseConfig, {
 	},
 
 	output: {
-		path: path.resolve( __dirname, 'server/build' )
+		path: path.resolve( __dirname, 'server/build' ),
+		filename: 'bundle.js'
 	},
 
 	target: 'node',

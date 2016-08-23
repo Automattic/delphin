@@ -64,7 +64,9 @@ function renderPage( props, localeData ) {
 	const title = DocumentTitle.rewind();
 
 	const bundlePath = '/scripts/';
-	const bundleFileName = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) ).main;
+	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
+	// `main` is an array of JS files after a hot update has been applied
+	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
 
 	return templateCompiler( { content, localeData, title, css: css.join( '' ), bundle: path.join( bundlePath, bundleFileName ) } );
 }

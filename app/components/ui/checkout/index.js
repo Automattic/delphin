@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
 import range from 'lodash/range';
+import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
@@ -162,7 +163,7 @@ const Checkout = React.createClass( {
 
 								<Input
 									type="text"
-									field={ fields.number }
+									field={ omit( fields.number, 'onChange' ) }
 									onChange={ this.handleCreditCardNumberChange }
 								/>
 								<ValidationError field={ fields.number } />

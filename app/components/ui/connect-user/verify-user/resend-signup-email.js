@@ -4,8 +4,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
+import { getPath } from 'routes';
 import i18n from 'i18n-calypso';
 import styles from './styles.scss';
+import TrackingLink from 'components/containers/tracking-link';
 
 const ResendSignupEmail = React.createClass( {
 	propTypes: {
@@ -27,9 +29,13 @@ const ResendSignupEmail = React.createClass( {
 
 	render() {
 		let text = i18n.translate(
-			"On its way! If you don't receive it in within a few minutes, {{a}}send us a message{{/a}}.",
+			"We sent the code to %(email)s. If you still can't find it, {{supportLink}}send us a message{{/supportLink}} or {{backLink}}try a different email{{/backLink}}.",
 			{
-				components: { a: <a href={ config( 'support_link' ) } /> }
+				args: { email: this.props.email },
+				components: {
+					supportLink: <a href={ config( 'support_link' ) } />,
+					backLink: <TrackingLink to={ getPath( 'signup' ) } eventName="delphin_try_different_email_click" />
+				}
 			}
 		);
 

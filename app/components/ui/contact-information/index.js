@@ -150,6 +150,10 @@ class ContactInformation extends React.Component {
 		return ! props.contactInformation.hasLoadedFromServer;
 	}
 
+	isFormValidating( props = this.props ) {
+		return props.contactInformation.isValidating;
+	}
+
 	isSubmitButtonDisabled() {
 		const { invalid, submitting } = this.props;
 
@@ -385,7 +389,7 @@ class ContactInformation extends React.Component {
 						}
 						submitArea={
 							<div>
-								<Button disabled={ this.isSubmitButtonDisabled() }>
+								<Button disabled={ this.isSubmitButtonDisabled() || this.isFormValidating() }>
 									{ i18n.translate( 'Continue to checkout' ) }
 								</Button>
 							</div>

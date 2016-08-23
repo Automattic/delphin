@@ -40,8 +40,7 @@ const Header = ( { intention } ) => {
 };
 
 Header.propTypes = {
-	intention: PropTypes.string.isRequired,
-	twoFactorAuthenticationEnabled: PropTypes.bool
+	intention: PropTypes.string.isRequired
 };
 
 export default withStyles( styles )( Header );

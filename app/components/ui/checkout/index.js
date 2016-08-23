@@ -77,12 +77,12 @@ const Checkout = React.createClass( {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
-			this.focusFirstFieldWithErrors();
+			this.focusFirstFieldWithErrors( nextProps );
 		}
 	},
 
-	focusFirstFieldWithErrors() {
-		const fieldName = find( fieldsInOrder, name => this.props.errors[ name ] );
+	focusFirstFieldWithErrors( props = this.props ) {
+		const fieldName = find( fieldsInOrder, name => props.errors[ name ] );
 		const node = ReactDOM.findDOMNode( this.elements[ fieldName ] );
 		focusField( node );
 	},

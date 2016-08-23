@@ -163,6 +163,10 @@ describe( 'lib/domains', () => {
 			expect( ! isEmpty( validateDomain( 'foo$bar' ) ) ).toBeTruthy();
 		} );
 
+		it( 'should return an error if a reserved domain is submitted', () => {
+			expect( ! isEmpty( validateDomain( 'design' ) ) ).toBeTruthy();
+		} );
+
 		it( 'should return an empty object if a valid query is submitted', () => {
 			expect( isEmpty( validateDomain( 'thisisavalidquery' ) ) ).toBeTruthy();
 		} );

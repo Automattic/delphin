@@ -58,7 +58,7 @@ class SunriseConfirmDomain extends React.Component {
 	handleClickMoreInformationLink( event ) {
 		event.preventDefault();
 
-		this.props.showConfirmDomainMoreInformation();
+		this.props.showToggle( 'isMoreInformationVisible' );
 	}
 
 	renderDomainInformation() {
@@ -98,7 +98,7 @@ class SunriseConfirmDomain extends React.Component {
 	}
 
 	renderFreeNotice() {
-		const { domain, hasSelectedDomain, moreInformationIsVisible } = this.props;
+		const { domain, hasSelectedDomain, isMoreInformationVisible } = this.props;
 
 		if ( ! hasSelectedDomain ) {
 			return null;
@@ -117,14 +117,14 @@ class SunriseConfirmDomain extends React.Component {
 				<p>
 					{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
 				</p>
-				{ ! moreInformationIsVisible && (
+				{ ! isMoreInformationVisible && (
 					<p>
 						<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
 							{ i18n.translate( 'More about the application process' ) }
 						</a>
 					</p>
 				) }
-				{ moreInformationIsVisible && (
+				{ isMoreInformationVisible && (
 					<div>
 						<p>
 							{ i18n.translate(
@@ -215,11 +215,11 @@ SunriseConfirmDomain.propTypes = {
 	fetchDomainPrice: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
-	moreInformationIsVisible: PropTypes.bool.isRequired,
+	isMoreInformationVisible: PropTypes.bool.isRequired,
 	query: PropTypes.string,
 	redirect: PropTypes.func.isRequired,
 	selectDomain: PropTypes.func.isRequired,
-	showConfirmDomainMoreInformation: PropTypes.func.isRequired,
+	showToggle: PropTypes.func.isRequired,
 	trackSubmit: PropTypes.func.isRequired,
 	unselectDomain: PropTypes.func.isRequired
 };

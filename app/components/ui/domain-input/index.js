@@ -1,5 +1,6 @@
 // External dependencies
 import classNames from 'classnames';
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -31,6 +32,12 @@ class DomainInput extends React.Component {
 
 		return (
 			<div className={ inputClassName }>
+				<label
+					htmlFor={ field.name } // `Input` uses `field.name` as the field ID
+					className={ styles.label }
+				>
+					{ i18n.translate( 'Enter your domain name' ) }
+				</label>
 				<Input
 					className={ styles.inputContainer }
 					inputClassName={ styles.input }

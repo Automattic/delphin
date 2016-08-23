@@ -1,5 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
+import isEmpty from 'lodash/isEmpty';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -9,16 +10,36 @@ import Button from 'components/ui/button';
 import PartialUnderline from 'components/ui/partial-underline';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
+import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
-import scrollToTop from 'components/containers/scroll-to-top';
+import { validateDomain, withTld } from 'lib/domains';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
-		if ( ! this.props.hasSelectedDomain ) {
-			this.props.redirect( 'home' );
+		const { query, redirect, unselectDomain } = this.props;
+
+		if ( query && ! isEmpty( validateDomain( query ) ) ) {
+			redirect( 'home', '?query=' + query );
+		}
+
+		if ( ! query ) {
+			redirect( 'home' );
+		} else {
+			// unselect domain so we can replace it using the new query given
+			unselectDomain();
+		}
+	}
+
+	componentDidMount() {
+		const { fetchDomainPrice, query, selectDomain } = this.props;
+
+		if ( query ) {
+			fetchDomainPrice( query ).then( action => {
+				selectDomain( action.result );
+			} );
 		}
 	}
 
@@ -40,10 +61,102 @@ class SunriseConfirmDomain extends React.Component {
 		this.props.showConfirmDomainMoreInformation();
 	}
 
-	render() {
-		const { domain, domainCost, applicationCost, moreInformationIsVisible } = this.props;
+	renderDomainInformation() {
+		const { domain, domainCost, applicationCost, hasSelectedDomain } = this.props;
 
-		const { domainName, isPremium, totalCost } = domain;
+		if ( ! hasSelectedDomain ) {
+			return (
+				<div>
+					<div className={ styles.priceTag }>
+					</div>
+					<div className={ styles.renewalInfo }>
+						{ i18n.translate( 'Loading domain information…' ) }
+					</div>
+				</div>
+			);
+		}
+
+		const { totalCost } = domain;
+
+		return (
+			<div>
+				<div className={ styles.priceTag }>
+					{ i18n.translate( '%(totalCost)s Early Application', {
+						args: { totalCost }
+					} ) }
+				</div>
+				<div className={ styles.renewalInfo }>
+					{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+						args: {
+							applicationCost,
+							domainCost
+						}
+					} ) }
+				</div>
+			</div>
+		);
+	}
+
+	renderFreeNotice() {
+		const { domain, hasSelectedDomain, moreInformationIsVisible } = this.props;
+
+		if ( ! hasSelectedDomain ) {
+			return null;
+		}
+
+		const { domainName } = domain;
+
+		return (
+			<div className={ styles.feeNotice }>
+				<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
+				<p className={ styles.happyCircle }>
+					{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure example.blog before everyone else.' ) }
+				</p>
+				<p>
+					{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
+				</p>
+				{ ! moreInformationIsVisible && (
+					<p>
+						<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
+							{ i18n.translate( 'More about the application process' ) }
+						</a>
+					</p>
+				) }
+				{ moreInformationIsVisible && (
+					<div>
+						<p>
+							{ i18n.translate(
+								'If others apply for %(domainName)s, it will go to an auction, with no price limit. ' +
+								'If %(domainName)s contains a trademark, the owners may register it in a separate process, ' +
+								'cancelling out your application.', {
+									args: { domainName }
+								}
+							) }
+						</p>
+						<p>
+							{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
+						</p>
+					</div>
+				) }
+			</div>
+		);
+	}
+
+	render() {
+		const { domain, hasSelectedDomain, query } = this.props;
+
+		let domainName, isPremium = false;
+		if ( hasSelectedDomain ) {
+			domainName = domain.domainName;
+			isPremium = domain.isPremium;
+		} else if ( query ) {
+			domainName = withTld( query );
+		} else {
+			domainName = 'mydomain.blog';
+		}
 
 		return (
 			<SunriseStep>
@@ -70,57 +183,13 @@ class SunriseConfirmDomain extends React.Component {
 						<h3>{ domainName }</h3>
 					</PartialUnderline>
 
-					<div className={ styles.priceTag }>
-						{ i18n.translate( '%(totalCost)s Early Application', {
-							args: { totalCost }
-						} ) }
-					</div>
-					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '%(domainCost)s yearly registration + %(applicationCost)s one-time application fee', {
-							args: {
-								applicationCost,
-								domainCost
-							}
-						} ) }
-					</div>
-					<Button className={ styles.button }>
+					{ this.renderDomainInformation() }
+
+					<Button className={ styles.button } disabled={ ! hasSelectedDomain }>
 						{ i18n.translate( 'Apply for this domain' ) }
 					</Button>
-					<div className={ styles.feeNotice }>
-						<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
-						<p className={ styles.happyCircle }>
-							{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure example.blog before everyone else.' ) }
-						</p>
-						<p>
-							{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
-						</p>
-						{ ! moreInformationIsVisible && (
-							<p>
-								<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
-									{ i18n.translate( 'More about the application process' ) }
-								</a>
-							</p>
-						) }
-						{ moreInformationIsVisible && (
-							<div>
-								<p>
-									{ i18n.translate(
-										'If others apply for %(domainName)s, it will go to an auction, with no price limit. ' +
-										'If %(domainName)s contains a trademark, the owners may register it in a separate process, ' +
-										'cancelling out your application.', {
-											args: { domainName }
-										}
-									) }
-								</p>
-								<p>
-									{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
-								</p>
-								<p>
-									{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
-								</p>
-							</div>
-						) }
-					</div>
+
+					{ this.renderFreeNotice() }
 				</SunriseStep.Form>
 				<div className={ styles.backNotice }>
 					<div>
@@ -136,15 +205,19 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
-	applicationCost: PropTypes.string.isRequired,
+	applicationCost: PropTypes.string,
 	domain: PropTypes.object,
-	domainCost: PropTypes.string.isRequired,
+	domainCost: PropTypes.string,
+	fetchDomainPrice: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	moreInformationIsVisible: PropTypes.bool.isRequired,
+	query: PropTypes.string,
 	redirect: PropTypes.func.isRequired,
+	selectDomain: PropTypes.func.isRequired,
 	showConfirmDomainMoreInformation: PropTypes.func.isRequired,
 	trackSubmit: PropTypes.func.isRequired,
+	unselectDomain: PropTypes.func.isRequired
 };
 
 export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) ) );

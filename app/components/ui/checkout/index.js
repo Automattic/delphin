@@ -1,4 +1,5 @@
 // External dependencies
+import { card } from 'creditcards';
 import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
@@ -91,6 +92,13 @@ const Checkout = React.createClass( {
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},
 
+	handleCreditCardNumberChange( event ) {
+		const { value } = event.target,
+			rawFieldValue = card.parse( value );
+
+		this.props.fields.number.onChange( card.format( rawFieldValue ) );
+	},
+
 	renderForm() {
 		const months = i18n.moment.months(),
 			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
@@ -124,6 +132,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.number }
+									onChange={ this.handleCreditCardNumberChange }
 								/>
 								<ValidationError field={ fields.number } />
 							</fieldset>

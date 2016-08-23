@@ -98,6 +98,7 @@ const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ]
  * @return {object} - Object that may contain validation messages.
  */
 export const validateDomain = query => {
+	query = query.toLowerCase();
 	query = query.trim();
 	query = query.replace( /\.blog$/gi, '' );
 

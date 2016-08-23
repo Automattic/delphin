@@ -27,6 +27,7 @@ const VerifyUser = React.createClass( {
 		query: PropTypes.object,
 		recordPageView: PropTypes.func.isRequired,
 		redirect: PropTypes.func.isRequired,
+		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
@@ -183,6 +184,7 @@ const VerifyUser = React.createClass( {
 
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }
+								redirectToTryWithDifferentEmail={ this.props.redirectToTryWithDifferentEmail }
 								email={ user.data.email }
 								intention={ user.intention }
 								domain={ this.props.hasSelectedDomain ? domain.domainName : null }

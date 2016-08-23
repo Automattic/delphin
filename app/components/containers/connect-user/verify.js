@@ -5,7 +5,7 @@ import { change, reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
-import { connectUser, connectUserComplete, verifyUser } from 'actions/user';
+import { connectUser, connectUserComplete, verifyUser, clearConnectUser } from 'actions/user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
@@ -49,6 +49,10 @@ export default reduxForm(
 		addNotice,
 		connectUser,
 		connectUserComplete,
+		redirectToTryWithDifferentEmail: withAnalytics( recordTracksEvent( 'delphin_try_different_email_click' ), () => thunkDispatch => {
+			thunkDispatch( clearConnectUser() );
+			thunkDispatch( redirect( 'signupUser' ) );
+		} ),
 		recordPageView,
 		redirect,
 		selectDomain,

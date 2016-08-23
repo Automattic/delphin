@@ -203,6 +203,20 @@ class ContactInformation extends React.Component {
 		} );
 	}
 
+	getSubmitButtonText() {
+		const { submitting } = this.props;
+
+		if ( this.isFormValidating() ) {
+			return i18n.translate( 'Checking your details…' );
+		}
+
+		if ( submitting ) {
+			return i18n.translate( 'Taking you to checkout…' );
+		}
+
+		return i18n.translate( 'Continue to checkout' );
+	}
+
 	render() {
 		const { fields, handleSubmit, untouch } = this.props;
 
@@ -390,7 +404,7 @@ class ContactInformation extends React.Component {
 						submitArea={
 							<div>
 								<Button disabled={ this.isSubmitButtonDisabled() || this.isFormValidating() }>
-									{ i18n.translate( 'Continue to checkout' ) }
+									{ this.getSubmitButtonText() }
 								</Button>
 							</div>
 						} />

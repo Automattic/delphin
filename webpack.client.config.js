@@ -53,7 +53,7 @@ var config = merge.smart( baseConfig, {
 		} ),
 		function() {
 			// We extract the bundle assets to a file to be used later for serving the correct hashed file
-			this.plugin( 'done', function ( stats ) {
+			this.plugin( 'done', function( stats ) {
 				fs.writeFileSync(
 					path.join( path.resolve( __dirname, 'public/scripts' ), 'assets.json' ),
 					JSON.stringify( stats.toJson().assetsByChunkName )

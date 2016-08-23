@@ -4,17 +4,16 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import { getPath } from 'routes';
 import i18n from 'i18n-calypso';
 import styles from './styles.scss';
-import TrackingLink from 'components/containers/tracking-link';
 
 const ResendSignupEmail = React.createClass( {
 	propTypes: {
 		connectUser: PropTypes.func.isRequired,
 		domain: PropTypes.string,
 		email: PropTypes.string.isRequired,
-		intention: PropTypes.string.isRequired
+		intention: PropTypes.string.isRequired,
+		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
 	},
 
 	getInitialState() {
@@ -27,6 +26,12 @@ const ResendSignupEmail = React.createClass( {
 		} );
 	},
 
+	handleTryDifferentEmailClick( event ) {
+		event.preventDefault();
+
+		this.props.redirectToTryWithDifferentEmail();
+	},
+
 	render() {
 		let text = i18n.translate(
 			"We sent the code to %(email)s. If you still can't find it, {{supportLink}}send us a message{{/supportLink}} or {{backLink}}try a different email{{/backLink}}.",
@@ -34,7 +39,7 @@ const ResendSignupEmail = React.createClass( {
 				args: { email: this.props.email },
 				components: {
 					supportLink: <a href={ config( 'support_link' ) } />,
-					backLink: <TrackingLink to={ getPath( 'signup' ) } eventName="delphin_try_different_email_click" />
+					backLink: <a href="#" onClick={ this.handleTryDifferentEmailClick } />
 				}
 			}
 		);

@@ -34,8 +34,14 @@ class SunriseConfirmDomain extends React.Component {
 		}
 	}
 
+	handleClickMoreInformationLink( event ) {
+		event.preventDefault();
+
+		this.props.showConfirmDomainMoreInformation();
+	}
+
 	render() {
-		const { domain, domainCost, applicationCost } = this.props;
+		const { domain, domainCost, applicationCost, moreInformationIsVisible } = this.props;
 
 		const { domainName, isPremium, totalCost } = domain;
 
@@ -77,24 +83,53 @@ class SunriseConfirmDomain extends React.Component {
 							}
 						} ) }
 					</div>
-					<div>
-						<p className={ styles.refundNotice }>
-							<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
-							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
-						</p>
-					</div>
 					<Button className={ styles.button }>
 						{ i18n.translate( 'Apply for this domain' ) }
 					</Button>
-					<div className={ styles.backNotice }>
-						<div>
-							{ i18n.translate( 'Not what you wanted?' ) }
-						</div>
-						<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
-							{ i18n.translate( 'Try a different domain' ) }
-						</TrackingLink>
+					<div className={ styles.feeNotice }>
+						<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
+						<p className={ styles.happyCircle }>
+							{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure example.blog before everyone else.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
+						</p>
+						{ ! moreInformationIsVisible && (
+							<p>
+								<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
+									{ i18n.translate( 'More about the application process' ) }
+								</a>
+							</p>
+						) }
+						{ moreInformationIsVisible && (
+							<div>
+								<p>
+									{ i18n.translate(
+										'If others apply for %(domainName)s, it will go to an auction, with no price limit. ' +
+										'If %(domainName)s contains a trademark, the owners may register it in a separate process, ' +
+										'cancelling out your application.', {
+											args: { domainName }
+										}
+									) }
+								</p>
+								<p>
+									{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
+								</p>
+								<p>
+									{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
+								</p>
+							</div>
+						) }
 					</div>
 				</SunriseStep.Form>
+				<div className={ styles.backNotice }>
+					<div>
+						{ i18n.translate( 'Not what you wanted?' ) }
+					</div>
+					<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
+						{ i18n.translate( 'Try a different domain' ) }
+					</TrackingLink>
+				</div>
 			</SunriseStep>
 		);
 	}
@@ -106,8 +141,10 @@ SunriseConfirmDomain.propTypes = {
 	domainCost: PropTypes.string.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
+	moreInformationIsVisible: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
-	trackSubmit: PropTypes.func.isRequired
+	showConfirmDomainMoreInformation: PropTypes.func.isRequired,
+	trackSubmit: PropTypes.func.isRequired,
 };
 
 export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) ) );

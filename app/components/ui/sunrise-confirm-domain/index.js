@@ -10,13 +10,12 @@ import Button from 'components/ui/button';
 import PartialUnderline from 'components/ui/partial-underline';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
-import LoadingScreen from 'components/ui/loading-screen';
 import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
-import { validateDomain } from 'lib/domains';
+import { validateDomain, withTld } from 'lib/domains';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
@@ -55,14 +54,54 @@ class SunriseConfirmDomain extends React.Component {
 		}
 	}
 
-	render() {
+	renderDomainInformation() {
 		const { domain, domainCost, applicationCost, hasSelectedDomain } = this.props;
 
 		if ( ! hasSelectedDomain ) {
-			return <LoadingScreen />;
+			return (
+				<div>
+					<div className={ styles.priceTag }>
+					</div>
+					<div className={ styles.renewalInfo }>
+						{ i18n.translate( 'Loading domain information…' ) }
+					</div>
+				</div>
+			);
 		}
 
-		const { domainName, isPremium, totalCost } = domain;
+		const { totalCost } = domain;
+
+		return (
+			<div>
+				<div className={ styles.priceTag }>
+					{ i18n.translate( '%(totalCost)s Early Application', {
+						args: { totalCost }
+					} ) }
+				</div>
+				<div className={ styles.renewalInfo }>
+					{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+						args: {
+							applicationCost,
+							domainCost
+						}
+					} ) }
+				</div>
+			</div>
+		);
+	}
+
+	render() {
+		const { domain, hasSelectedDomain, query } = this.props;
+
+		let domainName, isPremium = false;
+		if ( hasSelectedDomain ) {
+			domainName = domain.domainName;
+			isPremium = domain.isPremium;
+		} else if ( query ) {
+			domainName = withTld( query );
+		} else {
+			domainName = 'mydomain.blog';
+		}
 
 		return (
 			<SunriseStep>
@@ -89,22 +128,12 @@ class SunriseConfirmDomain extends React.Component {
 						<h3>{ domainName }</h3>
 					</PartialUnderline>
 
-					<div className={ styles.priceTag }>
-						{ i18n.translate( '%(totalCost)s Early Application', {
-							args: { totalCost }
-						} ) }
-					</div>
-					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
-							args: {
-								applicationCost,
-								domainCost
-							}
-						} ) }
-					</div>
-					<Button className={ styles.button }>
+					{ this.renderDomainInformation() }
+
+					<Button className={ styles.button } disabled={ ! hasSelectedDomain }>
 						{ i18n.translate( 'Apply for this domain' ) }
 					</Button>
+
 					<div className={ styles.backNotice }>
 						<div>
 							{ i18n.translate( 'Not what you wanted?' ) }

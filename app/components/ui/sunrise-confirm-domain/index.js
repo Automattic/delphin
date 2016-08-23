@@ -20,21 +20,23 @@ import { validateDomain } from 'lib/domains';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
-		const { hasSelectedDomain, query, redirect } = this.props;
+		const { query, redirect, unselectDomain } = this.props;
 
 		if ( query && ! isEmpty( validateDomain( query ) ) ) {
 			redirect( 'home', '?query=' + query );
 		}
 
-		if ( ! hasSelectedDomain && ! query ) {
+		if ( ! query ) {
 			redirect( 'home' );
+		} else {
+			unselectDomain();
 		}
 	}
 
 	componentDidMount() {
-		const { fetchDomainPrice, hasSelectedDomain, query, selectDomain } = this.props;
+		const { fetchDomainPrice, query, selectDomain } = this.props;
 
-		if ( ! hasSelectedDomain && query ) {
+		if ( query ) {
 			fetchDomainPrice( query ).then( action => {
 				selectDomain( action.result );
 			} );
@@ -127,7 +129,8 @@ SunriseConfirmDomain.propTypes = {
 	query: PropTypes.string,
 	redirect: PropTypes.func.isRequired,
 	selectDomain: PropTypes.func.isRequired,
-	trackSubmit: PropTypes.func.isRequired
+	trackSubmit: PropTypes.func.isRequired,
+	unselectDomain: PropTypes.func.isRequired
 };
 
 export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( SunriseConfirmDomain ), 'Confirm Domain' ) ) );

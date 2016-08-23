@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
+import { getPath } from 'routes';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
@@ -14,7 +15,6 @@ import withPageView from 'lib/analytics/with-page-view';
 const SunriseHome = React.createClass( {
 	propTypes: {
 		asyncValidate: PropTypes.func.isRequired,
-		confirmDomainPath: PropTypes.string.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
@@ -41,7 +41,8 @@ const SunriseHome = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit, confirmDomainPath } = this.props;
+		const { fields: { query }, handleSubmit } = this.props;
+		const confirmDomainPath = getPath( 'confirmDomain' );
 
 		return (
 			<div className={ styles.homeContainer }>

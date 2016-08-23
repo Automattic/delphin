@@ -150,14 +150,10 @@ class ContactInformation extends React.Component {
 		return ! props.contactInformation.hasLoadedFromServer;
 	}
 
-	isFormValidating( props = this.props ) {
-		return props.contactInformation.isValidating;
-	}
-
 	isSubmitButtonDisabled() {
-		const { invalid, submitting } = this.props;
+		const { asyncValidating, invalid, submitting } = this.props;
 
-		return invalid || submitting || this.isDataLoading();
+		return asyncValidating || invalid || submitting || this.isDataLoading();
 	}
 
 	address2InputIsVisible() {
@@ -204,9 +200,9 @@ class ContactInformation extends React.Component {
 	}
 
 	getSubmitButtonText() {
-		const { submitting } = this.props;
+		const { asyncValidating, submitting } = this.props;
 
-		if ( this.isFormValidating() ) {
+		if ( asyncValidating ) {
 			return i18n.translate( 'Checking your details…' );
 		}
 
@@ -403,7 +399,7 @@ class ContactInformation extends React.Component {
 						}
 						submitArea={
 							<div>
-								<Button disabled={ this.isSubmitButtonDisabled() || this.isFormValidating() }>
+								<Button disabled={ this.isSubmitButtonDisabled() }>
 									{ this.getSubmitButtonText() }
 								</Button>
 							</div>
@@ -415,6 +411,10 @@ class ContactInformation extends React.Component {
 }
 
 ContactInformation.propTypes = {
+	asyncValidating: PropTypes.oneOfType( [
+		PropTypes.bool,
+		PropTypes.string,
+	] ),
 	contactInformation: PropTypes.object.isRequired,
 	domain: PropTypes.object,
 	errors: PropTypes.object,

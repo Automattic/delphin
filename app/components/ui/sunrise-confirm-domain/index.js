@@ -110,7 +110,9 @@ class SunriseConfirmDomain extends React.Component {
 			<div className={ styles.feeNotice }>
 				<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
 				<p className={ styles.happyCircle }>
-					{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure example.blog before everyone else.' ) }
+					{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure %(domainName)s before everyone else.', {
+						args: { domainName }
+					} ) }
 				</p>
 				<p>
 					{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
@@ -155,7 +157,9 @@ class SunriseConfirmDomain extends React.Component {
 		} else if ( query ) {
 			domainName = withTld( query );
 		} else {
-			domainName = 'mydomain.blog';
+			// this is the name that is displayed before redirecting if the
+			// user accesses this page directly
+			domainName = 'example.blog';
 		}
 
 		return (

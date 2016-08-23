@@ -8,7 +8,6 @@ import {
 
 export const initialState = {
 	isRequesting: false,
-	isValidating: false,
 	hasLoadedFromServer: false,
 	data: null
 };
@@ -26,20 +25,6 @@ export const contactInformation = ( state = initialState, action ) => {
 				hasLoadedFromServer: true,
 				data: camelizeKeys( data )
 			} );
-
-		case 'redux-form/START_ASYNC_VALIDATION':
-			if ( action.form === 'contactInformation' ) {
-				return Object.assign( {}, state, { isValidating: true } );
-			}
-
-			return state;
-
-		case 'redux-form/STOP_ASYNC_VALIDATION':
-			if ( action.form === 'contactInformation' ) {
-				return Object.assign( {}, state, { isValidating: false } );
-			}
-
-			return state;
 
 		case LOGOUT_USER:
 			return initialState;

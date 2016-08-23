@@ -89,7 +89,7 @@ export const omitTld = ( string = '' ) => string.replace( /\.(.*)/g, '' );
  */
 export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^([a-z0-9\-]+)(\.\w+)?$/g, '$1.' + tld );
 
-const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight' ];
+const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ];
 
 /**
  * Returns validation messages for the given domain.

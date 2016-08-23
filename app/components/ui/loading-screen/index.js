@@ -8,7 +8,7 @@ import styles from './styles.scss';
 
 const LoadingScreen = ( { message } ) => (
 	<div className={ styles.container }>
-		<img src="/images/rocket-launch.svg"/>
+		<img src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/rocket-launch.svg"/>
 		<h1 className={ styles.heading }>
 			{ message || i18n.translate( "Let's get started…" ) }
 		</h1>

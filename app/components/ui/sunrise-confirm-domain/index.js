@@ -28,6 +28,7 @@ class SunriseConfirmDomain extends React.Component {
 		if ( ! query ) {
 			redirect( 'home' );
 		} else {
+			// unselect domain so we can replace it using the new query given
 			unselectDomain();
 		}
 	}

@@ -14,7 +14,8 @@ import {
 	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
-	DOMAIN_SUGGESTIONS_FETCH_FAIL
+	DOMAIN_SUGGESTIONS_FETCH_FAIL,
+	DOMAIN_UNSELECT
 } from 'reducers/action-types';
 import { omitTld } from 'lib/domains';
 
@@ -71,6 +72,12 @@ export function selectDomain( domainProduct ) {
 	return {
 		type: DOMAIN_SELECT,
 		value: domainProduct
+	};
+}
+
+export function unselectDomain() {
+	return {
+		type: DOMAIN_UNSELECT
 	};
 }
 

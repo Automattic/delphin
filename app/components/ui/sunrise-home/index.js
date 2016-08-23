@@ -7,47 +7,48 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import DomainInput from 'components/ui/domain-input';
+import { getPath } from 'routes';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
-		fetchDomainPrice: PropTypes.func.isRequired,
+		asyncValidate: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		isRequestingDomainPrice: PropTypes.bool.isRequired,
 		redirectToConfirmDomain: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
+		touch: PropTypes.func.isRequired,
 		values: PropTypes.object.isRequired
 	},
 
-	getInitialState() {
-		return { disabledWhileServerSide: true };
-	},
-
 	componentDidMount() {
-		// Enables the submit button only when we switch from server-side to client-side rendering using the fact that
-		// componentDidMount is only invoked on the client
-		this.setState( { disabledWhileServerSide: false } ); /* eslint react/no-did-mount-set-state: 0 */
+		const { fields: { query } } = this.props;
+
+		// Trigger validation if we have an initialValue for query
+		if ( query.initialValue ) {
+			this.props.touch( query.name );
+			this.props.asyncValidate();
+		}
 	},
 
 	handleSubmit() {
 		const { query } = this.props.values;
 
-		this.props.fetchDomainPrice( query ).then( action => {
-			this.props.selectDomain( action.result );
-			this.props.redirectToConfirmDomain();
-		} );
+		this.props.redirectToConfirmDomain( query );
 	},
 
 	render() {
 		const { fields: { query }, handleSubmit } = this.props;
+		const confirmDomainPath = getPath( 'confirmDomain' );
 
 		return (
 			<div className={ styles.homeContainer }>
-				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<form className={ styles.form }
+						onSubmit={ handleSubmit( this.handleSubmit ) }
+						method="get" action={ confirmDomainPath } >
 					<DocumentTitle />
 
 					<div className={ styles.whatsYourStory } />
@@ -71,8 +72,8 @@ const SunriseHome = React.createClass( {
 							<ValidationError field={ this.props.fields.query } submitFailed={ this.props.submitFailed } />
 						</div>
 
-						<Button className={ styles.button } disabled={ this.state.disabledWhileServerSide || this.props.isRequestingDomainPrice }>
-							{ ! this.state.disabledWhileServerSide ? i18n.translate( 'Get started' ) : i18n.translate( 'Loading…' ) }
+						<Button className={ styles.button }>
+							{ i18n.translate( 'Get started' ) }
 						</Button>
 					</div>
 

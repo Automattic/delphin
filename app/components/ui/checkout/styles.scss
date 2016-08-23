@@ -153,6 +153,36 @@
 	position: relative;
 }
 
+.credit-cards {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.credit-card-number {
+	position: relative;
+}
+
+.visa {
+
+}
+
+.mastercard {
+}
+
+.discover {
+}
+
+.amex {
+}
+
+.visaDisabled,
+.mastercardDisabled,
+.discoverDisabled,
+.amexDisabled {
+	display: none;
+}
+
 @-webkit-keyframes fadeIn {
 	0% {
 		opacity: 0;

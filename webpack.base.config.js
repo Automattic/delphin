@@ -36,10 +36,6 @@ var config = {
 		]
 	},
 
-	output: {
-		filename: 'bundle.js'
-	},
-
 	postcss() {
 		return [ autoprefixer ];
 	},

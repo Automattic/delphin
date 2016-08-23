@@ -1,7 +1,6 @@
 // External dependencies
 import auth from 'http-auth';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import crypto from 'crypto';
 import curry from 'lodash/curry';
 import DocumentTitle from 'react-document-title';
 import express from 'express';
@@ -43,31 +42,6 @@ if ( config( 'env' ) === 'production' ) {
 	} ) ) );
 }
 
-/**
- * Calculate an md5 hash based on the contents of the file. If reading the file fails,
- * fallback to using the current timestamp.
- * From https://github.com/Automattic/wp-calypso/blob/ef197713caaab74f920829e335e5a3b190fb1c5d/server/pages/index.js#L36
- *
- * @param {string} filePath - the path of the file to hash
- * @return {string} a hash representing the file, which can be used for cache busting
- **/
-const hashFile = filePath => {
-	const md5 = crypto.createHash( 'md5' );
-
-	let hash;
-
-	try {
-		const data = fs.readFileSync( filePath );
-		md5.update( data );
-		hash = md5.digest( 'hex' );
-	} catch ( error ) {
-		console.log( 'Could not hash file: ' + filePath + ' using current timestamp', error );
-		hash = new Date().getTime().toString();
-	}
-
-	return hash;
-};
-
 function renderPage( props, localeData ) {
 	const store = createStore(
 		combineReducers( {
@@ -89,10 +63,10 @@ function renderPage( props, localeData ) {
 
 	const title = DocumentTitle.rewind();
 
-	const bundlePath = '/scripts/bundle.js';
-	const bundle = bundlePath + '?' + hashFile( process.cwd() + '/public' + bundlePath );
+	const bundlePath = '/scripts/';
+	const bundleFileName = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) ).main;
 
-	return templateCompiler( { content, localeData, title, css: css.join( '' ), bundle } );
+	return templateCompiler( { content, localeData, title, css: css.join( '' ), bundle: path.join( bundlePath, bundleFileName ) } );
 }
 
 const generateStaticFile = filePath => {

@@ -22,7 +22,6 @@ export default reduxForm(
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
 	( state, ownProps ) => ( {
-		confirmDomainPath: getPath( 'confirmDomain' ),
 		initialValues: ownProps.location.query
 	} ),
 	dispatch => bindActionCreators( {

@@ -24,12 +24,14 @@ const VerifyUser = React.createClass( {
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
 		invalid: PropTypes.bool.isRequired,
+		isConfirmationCodeVisible: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
 		query: PropTypes.object,
 		recordPageView: PropTypes.func.isRequired,
 		redirect: PropTypes.func.isRequired,
 		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
+		showToggle: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		updateCode: PropTypes.func.isRequired,
@@ -96,6 +98,12 @@ const VerifyUser = React.createClass( {
 		return invalid || submitting || isRequesting;
 	},
 
+	handleConfirmationCodeLinkClick( event ) {
+		event.preventDefault();
+
+		this.props.showToggle( 'isConfirmationCodeVisible' );
+	},
+
 	handleSubmit() {
 		const { fields, user: { data: { email }, intention } } = this.props;
 
@@ -136,14 +144,8 @@ const VerifyUser = React.createClass( {
 		}
 	},
 
-	renderNotice() {
-		let text = i18n.translate( 'Using another device or the link doesn\'t work? Enter the confirmation code from the email.' );
-
-		return text;
-	},
-
 	render() {
-		const { domain, errors, fields, handleSubmit, submitFailed, user } = this.props;
+		const { domain, errors, fields, handleSubmit, isConfirmationCodeVisible, submitFailed, user } = this.props;
 
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
@@ -162,30 +164,52 @@ const VerifyUser = React.createClass( {
 				>
 					<Form.FieldArea errors={ errors } focusOnError>
 						<fieldset>
-							<strong className={ styles.instructions }>{ this.renderNotice() }</strong>
+							<div className={ styles.instructions }>
+								<p>{ i18n.translate( 'Using another device or the link doesn\'t work?' ) }</p>
+								{ ! isConfirmationCodeVisible && (
+									<div className={ styles.confirmationCodeLinkContainer }>
+										<a
+											className={ styles.confirmationCodeLink }
+											href="#"
+											onClick={ this.handleConfirmationCodeLinkClick }
+										>
+											{ i18n.translate( 'Enter the confirmation code' ) }
+										</a>
+									</div>
+								) }
+							</div>
 
-							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
+							{ isConfirmationCodeVisible && (
+								<div>
+									<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<Input
-								field={ fields.code }
-								autoFocus={ ! this.isUsingCodeFromQuery() }
-								autoComplete="off"
-							/>
+									<Input
+										field={ fields.code }
+										autoFocus={ ! this.isUsingCodeFromQuery() }
+										autoComplete="off"
+									/>
 
-							<ValidationError field={ fields.code } submitFailed={ submitFailed } />
+									<ValidationError field={ fields.code } submitFailed={ submitFailed } />
 
-							{ this.twoFactorFields() }
+									{ this.twoFactorFields() }
+								</div>
+							) }
 						</fieldset>
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
 						<div>
-							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ user.intention === 'login'
-									? i18n.translate( 'Next' )
-									: i18n.translate( 'Verify my email' )
-								}
-							</Button>
+							{ isConfirmationCodeVisible && (
+								<Button
+									className={ styles.button }
+									disabled={ this.isSubmitButtonDisabled() }
+								>
+									{ user.intention === 'login'
+										? i18n.translate( 'Next' )
+										: i18n.translate( 'Verify my email' )
+									}
+								</Button>
+							) }
 
 							<ResendSignupEmail
 								connectUser={ this.props.connectUser }

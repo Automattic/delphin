@@ -101,9 +101,15 @@ const Checkout = React.createClass( {
 	},
 
 	renderCreditCards() {
+		const supportedCards = [
+			'Visa',
+			'Mastercard',
+			'Discover',
+			'American Express',
+		];
 		const number = this.props.fields.number.value;
 		const cardType = card.type( card.parse( number ), true );
-		const enableAllCards = ! cardType;
+		const enableAllCards = supportedCards.indexOf( cardType ) === -1;
 		const classes = {
 			visa: ( enableAllCards || cardType === 'Visa' ) ? styles.visa : styles.visaDisabled,
 			mastercard: ( enableAllCards || cardType === 'MasterCard' ) ? styles.mastercard : styles.mastercardDisabled,

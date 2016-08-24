@@ -130,7 +130,7 @@ const VerifyUser = React.createClass( {
 		if ( user.data.twoFactorAuthenticationEnabled ) {
 			return (
 				<div className={ styles.twoFactorFields }>
-					<label>{ i18n.translate( 'Two-step authentication code:' ) }</label>
+					<label>{ i18n.translate( 'WordPress.com two-step authentication code:' ) }</label>
 
 					<Input
 						field={ fields.twoFactorAuthenticationCode }
@@ -139,6 +139,16 @@ const VerifyUser = React.createClass( {
 					/>
 
 					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
+
+					<div className={ styles.twoFactorAuthenticationMessage }>
+						<p>
+							{ i18n.translate( 'We are using your WordPress.com account to speed things up.' ) }
+						</p>
+						<p>
+							{ i18n.translate( 'Enter the confirmation code from your authenticator app or from the text ' +
+							'message to proceed.' ) }
+						</p>
+					</div>
 				</div>
 			);
 		}

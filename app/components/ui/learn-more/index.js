@@ -6,20 +6,19 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
+import SunriseStep from 'components/ui/sunrise-step';
 
 const LearnMore = () => {
 	return (
-		<div className={ styles.learnMore }>
+		<SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Get .blog updates in your email' ) } />
-			<header className={ styles.container }>
-				<div className={ styles.header }>
-					<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
-					<div className={ styles.text }>
-						{ i18n.translate( 'Sign up to receive updates about the launch and be the first to know when you can claim your own .blog domain' ) }
-					</div>
+			<SunriseStep.Header className={ styles.container }>
+				<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
+				<div className={ styles.text }>
+					{ i18n.translate( 'Sign up to receive updates about the launch and be the first to know when you can claim your own .blog domain' ) }
 				</div>
-			</header>
-			<div>
+			</SunriseStep.Header>
+			<SunriseStep.Footer>
 				<h2>{ i18n.translate( 'How does the .blog launch work?' ) }</h2>
 				<div>
 					<div>{ i18n.translate( 'Trademark owners' ) }</div>
@@ -38,8 +37,8 @@ const LearnMore = () => {
 					<div>{ i18n.translate( 'November 21st' ) }</div>
 					<div>{ i18n.translate( 'When .blog goes live, anyone will be able to register a .blog domain in seconds.' ) }</div>
 				</div>
-			</div>
-		</div>
+			</SunriseStep.Footer>
+		</SunriseStep>
 	);
 };
 

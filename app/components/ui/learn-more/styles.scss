@@ -1,0 +1,49 @@
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/breakpoints';
+
+.heading {
+	font-family: $heading-font;
+	font-size: 3rem;
+	margin-top: 40px;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 2.6rem;
+		margin-top: 0;
+	}
+}
+
+.text {
+	color: $white;
+	font-size: 2rem;
+	font-weight: 300;
+	line-height: 1.4;
+	margin-top: 10px;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.8rem;
+	}
+}
+
+.form-container {
+	background-color: lighten( $blue-background, 10% );
+	padding: 15px 0;
+}
+
+.form {
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+.input-container {
+	display: inline-block;
+	margin-right: 15px;
+	vertical-align: bottom;
+}
+
+.input {
+	border: 0;
+	border-radius: 3px;
+	font-size: 1em;
+	padding: 20px 16px;
+}

@@ -7,6 +7,7 @@ jest.mock( 'components/containers/connect-user/login', () => {} );
 jest.mock( 'components/containers/connect-user/signup', () => {} );
 jest.mock( 'components/containers/connect-user/verify', () => {} );
 jest.mock( 'components/containers/contact-information', () => {} );
+jest.mock( 'components/containers/learn-more', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );

@@ -54,6 +54,7 @@ const VerifyUser = React.createClass( {
 
 			// the sign-in email directs the user to this component only if two factor authentication is enabled
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
+			this.props.showToggle( 'isConfirmationCodeVisible' );
 			this.props.updateCode( query.code );
 		} else if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );

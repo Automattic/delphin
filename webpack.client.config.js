@@ -2,6 +2,7 @@
 var baseConfig = require( './webpack.base.config' ),
 	merge = require( 'webpack-merge' ),
 	path = require( 'path' ),
+	fs = require( 'fs' ),
 	webpack = require( 'webpack' ),
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -38,7 +39,9 @@ var config = merge.smart( baseConfig, {
 	output: {
 		path: path.resolve( __dirname, 'public/scripts' ),
 		publicPath: '/scripts/',
-		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
+		devtoolModuleFilenameTemplate: 'app:///[resource-path]',
+		filename: 'bundle.[hash].js'
+
 	},
 
 	plugins: [
@@ -47,7 +50,16 @@ var config = merge.smart( baseConfig, {
 				NODE_ENV: JSON.stringify( NODE_ENV ),
 				BROWSER: JSON.stringify( true )
 			}
-		} )
+		} ),
+		function() {
+			// We extract the bundle assets to a file to be used later for serving the correct hashed file
+			this.plugin( 'done', function( stats ) {
+				fs.writeFileSync(
+					path.join( path.resolve( __dirname, 'public/scripts' ), 'assets.json' ),
+					JSON.stringify( stats.toJson().assetsByChunkName )
+				);
+			} );
+		}
 	]
 } );
 

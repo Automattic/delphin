@@ -9,7 +9,7 @@ import ContactInformationContainer from 'components/containers/contact-informati
 import CheckoutReviewContainer from 'components/containers/checkout-review';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import Layout from 'components/ui/layout';
-import LearnMore from 'components/ui/learn-more';
+import LearnMore from 'components/containers/learn-more';
 import LoginContainer from 'components/containers/connect-user/login';
 import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';

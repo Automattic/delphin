@@ -7,8 +7,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import Button from 'components/ui/button';
+import Input from 'components/ui/form/input';
 
-const LearnMore = () => {
+const LearnMore = ( { fields } ) => {
 	return (
 		<SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Get .blog updates in your email' ) } />
@@ -18,6 +20,25 @@ const LearnMore = () => {
 					{ i18n.translate( 'Sign up to receive updates about the launch and be the first to know when you can claim your own .blog domain' ) }
 				</div>
 			</SunriseStep.Header>
+			<div className={ styles.formContainer }>
+				<form className={ styles.form }>
+					<Input
+						className={ styles.inputContainer }
+						inputClassName={ styles.input }
+						field={ fields.domain }
+						placeholder={ i18n.translate( 'What domain are you interested in?' ) }
+					/>
+
+					<Input
+						className={ styles.inputContainer }
+						inputClassName={ styles.input }
+						field={ fields.email }
+						placeholder={ i18n.translate( 'Enter your email' ) }
+					/>
+
+					<Button>{ i18n.translate( 'Get updates' ) }</Button>
+				</form>
+			</div>
 			<SunriseStep.Footer>
 				<h2>{ i18n.translate( 'How does the .blog launch work?' ) }</h2>
 				<div>
@@ -43,7 +64,8 @@ const LearnMore = () => {
 };
 
 LearnMore.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
+	fields: PropTypes.object.isRequired,
 };
 
 export default withStyles( styles )( LearnMore );

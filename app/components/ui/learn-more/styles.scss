@@ -24,3 +24,26 @@
 		font-size: 1.8rem;
 	}
 }
+
+.form-container {
+	background-color: lighten( $blue-background, 10% );
+	padding: 15px 0;
+}
+
+.form {
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+.input-container {
+	display: inline-block;
+	margin-right: 15px;
+	vertical-align: bottom;
+}
+
+.input {
+	border: 0;
+	border-radius: 3px;
+	font-size: 1em;
+	padding: 20px 16px;
+}

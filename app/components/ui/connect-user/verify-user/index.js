@@ -7,7 +7,6 @@ import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import i18n from 'i18n-calypso';
-import Input from 'components/ui/form/input';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
@@ -19,6 +18,7 @@ const VerifyUser = React.createClass( {
 		connectUser: PropTypes.func.isRequired,
 		connectUserComplete: PropTypes.func.isRequired,
 		domain: PropTypes.object,
+		errors: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
@@ -123,7 +123,7 @@ const VerifyUser = React.createClass( {
 				<div className={ styles.twoFactorFields }>
 					<label>{ i18n.translate( 'Two-step authentication code:' ) }</label>
 
-					<Input
+					<Form.FieldArea.Input
 						field={ fields.twoFactorAuthenticationCode }
 						autoFocus={ this.isUsingCodeFromQuery() }
 						autoComplete="off"
@@ -142,7 +142,7 @@ const VerifyUser = React.createClass( {
 	},
 
 	render() {
-		const { domain, fields, handleSubmit, submitFailed, user } = this.props;
+		const { domain, errors, fields, handleSubmit, submitFailed, user } = this.props;
 
 		if ( ! user.intention ) {
 			// Don't render until the state is populated with user data or in
@@ -154,15 +154,14 @@ const VerifyUser = React.createClass( {
 			<div>
 				<Header intention={ 'verifyUser' } />
 
-				<Form
-					onSubmit={ handleSubmit( this.handleSubmit ) }
-					fieldArea={
+				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+					<Form.FieldArea errors={ errors } focusOnError>
 						<fieldset>
 							<strong className={ styles.instructions }>{ this.renderNotice() }</strong>
 
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<Input
+							<Form.FieldArea.Input
 								field={ fields.code }
 								autoFocus={ ! this.isUsingCodeFromQuery() }
 								autoComplete="off"
@@ -172,8 +171,9 @@ const VerifyUser = React.createClass( {
 
 							{ this.twoFactorFields() }
 						</fieldset>
-					}
-					submitArea={
+					</Form.FieldArea>
+
+					<Form.SubmitArea>
 						<div>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ user.intention === 'login'
@@ -190,7 +190,8 @@ const VerifyUser = React.createClass( {
 								domain={ this.props.hasSelectedDomain ? domain.domainName : null }
 							/>
 						</div>
-					} />
+					</Form.SubmitArea>
+				</Form>
 			</div>
 		);
 	}

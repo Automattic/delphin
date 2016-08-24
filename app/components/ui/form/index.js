@@ -5,22 +5,25 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const Form = ( { onSubmit, fieldArea, submitArea } ) => (
-	<form onSubmit={ onSubmit } className={ styles.form }>
-		<div className={ styles.fieldArea }>
-			{ fieldArea }
-		</div>
+import FieldArea from 'components/ui/form/field-area';
+import SubmitArea from 'components/ui/form/submit-area';
 
-		<div className={ styles.submitArea }>
-			{ submitArea }
-		</div>
+const Form = withStyles( styles )( ( { children, className, onSubmit } ) => (
+	<form onSubmit={ onSubmit } className={ className || styles.form }>
+		{ children }
 	</form>
-);
+) );
+
+Form.FieldArea = FieldArea;
+Form.SubmitArea = SubmitArea;
 
 Form.propTypes = {
-	fieldArea: PropTypes.element.isRequired,
-	onSubmit: PropTypes.func.isRequired,
-	submitArea: PropTypes.element.isRequired
+	children: PropTypes.oneOfType( [
+		PropTypes.arrayOf( React.PropTypes.node ),
+		PropTypes.node
+	] ).isRequired,
+	className: PropTypes.string,
+	onSubmit: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( Form );
+export default Form;

@@ -1,10 +1,7 @@
 // External dependencies
 import classnames from 'classnames';
-import find from 'lodash/find';
 import i18n from 'i18n-calypso';
-import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import range from 'lodash/range';
 import padStart from 'lodash/padStart';
@@ -14,29 +11,16 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
+import Form from 'components/ui/form';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import capitalize from 'lodash/capitalize';
-import FormToggle from 'components/ui/form/form-toggle';
 import ValidationError from 'components/ui/form/validation-error';
-import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
-import Select from 'components/ui/form/select';
 import Tooltip from 'components/ui/tooltip';
 import scrollToTop from 'components/containers/scroll-to-top';
-import { focusField } from 'lib/form';
-
-const fieldsInOrder = [
-	'name',
-	'number',
-	'expirationMonth',
-	'expirationYear',
-	'cvv',
-	'countryCode',
-	'postalCode',
-];
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -59,32 +43,12 @@ const Checkout = React.createClass( {
 		user: PropTypes.object.isRequired
 	},
 
-	elements: {},
-
-	saveRef( element ) {
-		if ( element ) {
-			this.elements[ element.props.name || element.props.field.name ] = element;
-		}
-	},
-
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
-	},
-
-	componentWillReceiveProps( nextProps ) {
-		if ( isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
-			this.focusFirstFieldWithErrors( nextProps );
-		}
-	},
-
-	focusFirstFieldWithErrors( props = this.props ) {
-		const fieldName = find( fieldsInOrder, name => props.errors[ name ] );
-		const node = ReactDOM.findDOMNode( this.elements[ fieldName ] );
-		focusField( node );
 	},
 
 	isSubmitButtonDisabled() {
@@ -126,7 +90,7 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
+			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -135,14 +99,13 @@ const Checkout = React.createClass( {
 						<CheckoutProgressbar currentStep={ 3 } />
 					</div>
 
-					<form className={ styles.form } onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }>
-						<div className={ styles.fieldArea }>
+					<Form onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }>
+						<Form.FieldArea errors={ errors } focusOnError>
 							<fieldset>
 								<label>{ i18n.translate( 'Name on Card' ) }</label>
-								<Input
+								<Form.FieldArea.Input
 									type="text"
 									field={ fields.name }
-									ref={ this.saveRef }
 									autoFocus
 								/>
 								<ValidationError field={ fields.name } />
@@ -150,10 +113,9 @@ const Checkout = React.createClass( {
 
 							<fieldset>
 								<label>{ i18n.translate( 'Card Number' ) }</label>
-								<Input
+								<Form.FieldArea.Input
 									type="text"
 									field={ fields.number }
-									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.number } />
 							</fieldset>
@@ -161,10 +123,9 @@ const Checkout = React.createClass( {
 							<fieldset>
 								<label>{ i18n.translate( 'Expiration' ) }</label>
 								<div className={ styles.expiration }>
-									<Select
+									<Form.FieldArea.Select
 										{ ...removeInvalidInputProps( fields.expirationMonth ) }
 										className={ styles.expirationMonth }
-										ref={ this.saveRef }
 									>
 										<option value="">{ i18n.translate( 'Month' ) }</option>
 										{ months.map( ( monthName, monthIndex ) => {
@@ -175,12 +136,11 @@ const Checkout = React.createClass( {
 												</option>
 											);
 										} ) }
-									</Select>
+									</Form.FieldArea.Select>
 
-									<Select
+									<Form.FieldArea.Select
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }
-										ref={ this.saveRef }
 									>
 										<option value="">{ i18n.translate( 'Year' ) }</option>
 										{
@@ -189,7 +149,7 @@ const Checkout = React.createClass( {
 											)
 										}
 
-									</Select>
+									</Form.FieldArea.Select>
 								</div>
 								<ValidationError fields={ [
 									fields.expirationMonth,
@@ -199,10 +159,9 @@ const Checkout = React.createClass( {
 
 							<fieldset className={ styles.securityCode }>
 								<label>{ i18n.translate( 'Security Code' ) }</label>
-								<Input
+								<Form.FieldArea.Input
 									type="text"
 									field={ fields.cvv }
-									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.cvv } />
 							</fieldset>
@@ -212,21 +171,19 @@ const Checkout = React.createClass( {
 								<Country
 									field={ fields.countryCode }
 									supportedBy="checkout"
-									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.countryCode } />
 							</fieldset>
 
 							<fieldset>
 								<label>{ i18n.translate( 'Postal Code' ) }</label>
-								<Input
+								<Form.FieldArea.Input
 									type="text"
 									field={ fields.postalCode }
-									ref={ this.saveRef }
 								/>
 								<ValidationError field={ fields.postalCode } />
 							</fieldset>
-						</div>
+						</Form.FieldArea>
 
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
@@ -258,7 +215,7 @@ const Checkout = React.createClass( {
 									</Tooltip>
 								</label>
 								<span>
-									<FormToggle
+									<Form.FieldArea.FormToggle
 										name="privacy-protection"
 										{ ...fields.privacyProtection }
 										trackChange={ this.props.trackPrivacyToggle }
@@ -279,14 +236,14 @@ const Checkout = React.createClass( {
 							</p>
 						</div>
 
-						<div className={ styles.submitArea }>
+						<Form.SubmitArea className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Review application' ) }
 							</Button>
-						</div>
+						</Form.SubmitArea>
 
 						{ this.hasError() && this.renderCheckoutError() }
-					</form>
+					</Form>
 				</div>
 			</DocumentTitle>
 		);

@@ -1,10 +1,8 @@
 // External dependencies
 import classNames from 'classnames';
-import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
@@ -14,43 +12,13 @@ import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
 import { isCallingCode } from 'lib/form';
 import Form from 'components/ui/form';
-import Phone from 'components/ui/form/phone';
-import State from 'components/ui/form/state';
-import Input from 'components/ui/form/input';
 import styles from './styles.scss';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 import scrollToTop from 'components/containers/scroll-to-top';
-import { focusField } from 'lib/form';
-
-const fieldsInOrder = [
-	'firstName',
-	'lastName',
-	'organization',
-	'email',
-	'address1',
-	'address2',
-	'countryCode',
-	'city',
-	'state',
-	'postalCode',
-	'phone',
-];
 
 class ContactInformation extends React.Component {
-	constructor( props ) {
-		super( props );
-
-		this.elements = {};
-
-		this.saveRef = element => {
-			if ( element ) {
-				this.elements[ element.props.field.name ] = element;
-			}
-		};
-	}
-
 	componentWillMount() {
 		if ( this.props.isLoggedOut || ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
@@ -191,10 +159,6 @@ class ContactInformation extends React.Component {
 
 			if ( isEmpty( errors ) ) {
 				this.props.redirectToCheckout();
-			} else {
-				const fieldName = find( fieldsInOrder, name => errors[ name ] );
-				const node = ReactDOM.findDOMNode( this.elements[ fieldName ] );
-				focusField( node );
 			}
 		} );
 	}
@@ -236,33 +200,30 @@ class ContactInformation extends React.Component {
 						</h3>
 					</div>
 
-					<Form
-						onSubmit={ handleSubmit( this.handleSubmission ) }
-						fieldArea={
+					<Form onSubmit={ handleSubmit( this.handleSubmission ) }>
+						<Form.FieldArea errors={ this.props.errors } focusOnError>
 							<div>
 								<fieldset>
 									<label>{ i18n.translate( 'First Name' ) }</label>
-									<Input
+									<Form.FieldArea.Input
 											disabled={ this.isDataLoading() }
 											field={ fields.firstName }
 											autoFocus
 											untouch={ untouch }
 											className={ styles.firstName }
 											placeholder={ i18n.translate( 'First Name' ) }
-											ref={ this.saveRef }
 										/>
 									<ValidationError field={ fields.firstName } />
 								</fieldset>
 
 								<fieldset>
 									<label>{ i18n.translate( 'Last Name' ) }</label>
-									<Input
+									<Form.FieldArea.Input
 										disabled={ this.isDataLoading() }
 										field={ fields.lastName }
 										untouch={ untouch }
 										className={ styles.lastName }
 										placeholder={ i18n.translate( 'Last Name' ) }
-										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.lastName } />
 								</fieldset>
@@ -276,13 +237,12 @@ class ContactInformation extends React.Component {
 								{ this.organizationInputIsVisible() && (
 									<fieldset>
 										<label>{ i18n.translate( 'Organization' ) }</label>
-										<Input
+										<Form.FieldArea.Input
 											field={ fields.organization }
 											untouch={ untouch }
 											className={ styles.organization }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Organization' ) }
-											ref={ this.saveRef }
 										/>
 										<ValidationError field={ fields.organization } />
 									</fieldset>
@@ -291,12 +251,11 @@ class ContactInformation extends React.Component {
 								{ this.emailInputIsVisible() && (
 									<fieldset>
 										<label>{ i18n.translate( 'Email' ) }</label>
-										<Input
+										<Form.FieldArea.Input
 											disabled={ this.isDataLoading() }
 											field={ fields.email }
 											placeholder={ i18n.translate( 'Email' ) }
 											untouch={ untouch }
-											ref={ this.saveRef }
 										/>
 										<ValidationError field={ fields.email } />
 									</fieldset>
@@ -305,23 +264,21 @@ class ContactInformation extends React.Component {
 								<fieldset className={ classNames( { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
 									<label>{ i18n.translate( 'Address' ) }</label>
 
-									<Input
+									<Form.FieldArea.Input
 										field={ fields.address1 }
 										untouch={ untouch }
 										className={ styles.address1 }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 1' ) }
-										ref={ this.saveRef }
 									/>
 
 									{ this.address2InputIsVisible() && (
-										<Input
+										<Form.FieldArea.Input
 											field={ fields.address2 }
 											untouch={ untouch }
 											className={ styles.address2 }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Address Line 2' ) }
-											ref={ this.saveRef }
 										/>
 									) }
 
@@ -346,64 +303,62 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'City' ) }</label>
-									<Input
+									<Form.FieldArea.Input
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.city }
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
-										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.city } />
 								</fieldset>
 
 								<fieldset>
 									<label>{ i18n.translate( 'State/Province' ) }</label>
-									<State
+									<Form.FieldArea.State
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
 										untouch={ untouch }
 										className={ styles.state }
 										states={ this.props.states }
-										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.state } />
 								</fieldset>
 
 								<fieldset>
 									<label>{ i18n.translate( 'Postal Code' ) }</label>
-									<Input
+									<Form.FieldArea.Input
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.postalCode }
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Postal Code' ) }
-										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.postalCode } />
 								</fieldset>
 
 								<fieldset>
 									<label>{ i18n.translate( 'Phone' ) }</label>
-									<Phone
+									<Form.FieldArea.Phone
 										countryCode={ fields.countryCode.value }
 										disabled={ this.isDataLoading() }
 										field={ fields.phone }
 										untouch={ untouch }
 										className={ styles.phone }
-										ref={ this.saveRef }
 									/>
 									<ValidationError field={ fields.phone } />
 								</fieldset>
 							</div>
-						}
-						submitArea={
+						</Form.FieldArea>
+
+						<Form.SubmitArea>
 							<div>
 								<Button disabled={ this.isSubmitButtonDisabled() }>
 									{ this.getSubmitButtonText() }
 								</Button>
 							</div>
-						} />
+						</Form.SubmitArea>
+					</Form>
 				</div>
 			</DocumentTitle>
 		);

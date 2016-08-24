@@ -89,6 +89,8 @@ export const omitTld = ( string = '' ) => string.replace( /\.(.*)/g, '' );
  */
 export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.replace( /^([a-z0-9\-]+)(\.\w+)?$/g, '$1.' + tld );
 
+const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ];
+
 /**
  * Returns validation messages for the given domain.
  *
@@ -96,6 +98,7 @@ export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.
  * @return {object} - Object that may contain validation messages.
  */
 export const validateDomain = query => {
+	query = query.toLowerCase();
 	query = query.trim();
 	query = query.replace( /\.blog$/gi, '' );
 
@@ -123,7 +126,18 @@ export const validateDomain = query => {
 		return { query: i18n.translate( 'Don’t use a "." (period) in your domain.' ) };
 	}
 
-	if ( ! isDomain( query + '.blog' ) ) {
+	if ( reservedDomains.indexOf( query ) > -1 ) {
+		return {
+			query: i18n.translate( 'The domain %(domain)s is not available for registration.',
+				{
+					args: {
+						domain: withTld( query )
+					},
+				} )
+		};
+	}
+
+	if ( ! isDomain( withTld( query ) ) ) {
 		return { query: i18n.translate( 'Use only lowercase letters, numbers, and hyphens (a to z, 0 to 9, and -). Spaces or other characters are not supported.' ) };
 	}
 

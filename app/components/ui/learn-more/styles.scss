@@ -2,21 +2,6 @@
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
 
-.container {
-	background-color: $blue-background;
-}
-
-.header {
-	margin: 0 auto;
-	max-width: 500px;
-	padding: 50px 20px 80px;
-	text-align: center;
-
-	@include breakpoint( '<480px' ) {
-		padding-bottom: 70px;
-	}
-}
-
 .heading {
 	font-family: $heading-font;
 	font-size: 3rem;

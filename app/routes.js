@@ -112,7 +112,7 @@ export const defaultRoutes = [
 			{
 				path: 'learn-more',
 				slug: 'learnMore',
-				static: false,
+				static: true,
 				component: LearnMore
 			}
 		]

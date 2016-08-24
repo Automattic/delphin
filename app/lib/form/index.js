@@ -3,9 +3,12 @@
 // External dependencies
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
+import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 
 // Internal dependencies
 import phone from './phone.json';
+import { recordTracksEvent } from 'actions/analytics';
 
 /**
  * Creates a new validate function that returns a promise.
@@ -99,4 +102,63 @@ export const removeInvalidInputProps = ( props ) => {
 	} = props;
 
 	return validProps;
+};
+
+/***
+ * Tracks errors
+ * @param {Array} errors the errors array
+ * @returns {Function} thunk that dispatches all the errors
+ */
+const trackErrors = ( errors ) => dispatch => {
+	errors.forEach( ( error ) => dispatch( recordTracksEvent( 'delphin_client_validation_error', omit( error, 'errorMessage' ) ) ) );
+};
+
+/***
+ * Transforms errors from errors array to redux errors object
+ * @param {Array} errors errors definition array
+ * @returns {Object} errors object where each property is the field with it's error
+ */
+const transformErrorsToReduxFormErrors = ( errors ) =>
+	errors.reduce( ( accumlatedValue, currentError ) => Object.assign( accumlatedValue, {
+		[ currentError.field ]: currentError.errorMessage
+	} ), {} );
+
+/***
+ * Transforms errors object to a promise
+ * @param {Object} errors redux form errors object
+ * @returns {Promise} resolved/rejected based on whether we have errors
+ */
+export const getAsyncErrorsFunction = errors => () => new Promise( ( resolve, reject ) => {
+	if ( isEmpty( errors ) ) {
+		resolve();
+	} else {
+		reject( errors );
+	}
+} );
+
+/***
+ * A helper to capture dispatch from redux form
+ * @returns {Object} object with captureDispatch and bindActionCreator helpers that has internal state
+ */
+const getFormAsyncValidationHelpers = () => {
+	let dispatch = null;
+
+	return {
+		captureDispatch: ( values, capturedDispatch ) => {
+			dispatch = capturedDispatch;
+			return values;
+		},
+		bindActionCreator: ( actionCreator ) => ( ...args ) => dispatch( actionCreator( ...args ) )
+	};
+};
+
+/***
+ * Creates an async validation function with tracking
+ * @param {function} validate - Validate function that returns an array conaining error description
+ * @return {function} Function that returns a promise that is resolved/rejected based on errors in the
+ * given validate function.
+ */
+export const getAsyncValidateFunctionWithTracking = ( validate ) => {
+	const formHelpers = getFormAsyncValidationHelpers();
+	return flow( formHelpers.captureDispatch, validate, formHelpers.bindActionCreator( trackErrors ), transformErrorsToReduxFormErrors, getAsyncErrorsFunction );
 };

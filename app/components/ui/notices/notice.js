@@ -13,7 +13,7 @@ const Notice = function( { notice, removeNotice } ) {
 			<Gridicon
 				className={ styles.noticeIcon }
 				icon="notice-outline"
-				size="32"
+				size={ 32 }
 			/>
 
 			{ notice.message }

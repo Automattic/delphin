@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 import validator from 'validator';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import ConnectUser from 'components/ui/connect-user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
@@ -39,6 +40,10 @@ export default reduxForm(
 	} ),
 	( dispatch, ownProps ) => bindActionCreators( {
 		clearConnectUser,
+		displayError: ( errorMessage ) => addNotice( {
+			message: errorMessage,
+			status: 'error'
+		} ),
 		connectUser: withAnalytics(
 			recordTracksEvent( 'delphin_signup_submit' ),
 			( fields, domain ) => connectUser( fields.email, ownProps.intention, domain )

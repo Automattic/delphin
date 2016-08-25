@@ -5,6 +5,7 @@ import {
 	CONNECT_USER,
 	CONNECT_USER_CLEAR,
 	CONNECT_USER_COMPLETE,
+	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -159,6 +160,17 @@ describe( 'state.user.connect', () => {
 			data: null
 		}, {
 			type: VERIFY_USER_FAIL
+		} ).isRequesting ).toEqual( false );
+	} );
+
+	it( 'should update `isRequesting` if user connect fails', () => {
+		expect( connect( {
+			intention: null,
+			isRequesting: true,
+			wasCreated: false,
+			data: null
+		}, {
+			type: CONNECT_USER_FAIL
 		} ).isRequesting ).toEqual( false );
 	} );
 } );

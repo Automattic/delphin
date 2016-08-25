@@ -18,6 +18,7 @@ const ConnectUser = React.createClass( {
 	propTypes: {
 		clearConnectUser: PropTypes.func.isRequired,
 		connectUser: PropTypes.func.isRequired,
+		displayError: PropTypes.func.isRequired,
 		domain: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
@@ -60,7 +61,8 @@ const ConnectUser = React.createClass( {
 	},
 
 	handleSubmit() {
-		this.props.connectUser( this.props.values, this.props.domain.domainName );
+		this.props.connectUser( this.props.values, this.props.domain.domainName )
+			.catch( () => this.props.displayError( i18n.translate( 'Something went wrong. Please try again.' ) ) );
 	},
 
 	renderTermsOfService() {

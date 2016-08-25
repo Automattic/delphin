@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
+import { withErrorFocusable } from 'components/ui/form/error-focuser';
 
 class Input extends React.Component {
 	constructor( props ) {
@@ -83,4 +84,4 @@ Input.propTypes = {
 	untouch: PropTypes.func
 };
 
-export default withStyles( styles )( Input );
+export default withErrorFocusable( withStyles( styles )( Input ) );

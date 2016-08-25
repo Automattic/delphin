@@ -15,7 +15,7 @@ const Country = ( { className, disabled, field, countries } ) => (
 		<option disabled />
 		{ countries.hasLoadedFromServer && countries.data.map( ( country, index ) => (
 			country.name
-				? <option value={ country.code } key={ country.code }>{ country.name }</option>
+				? <option value={ country.code } key={ index }>{ country.name }</option>
 				: <option value=" " key={ index } disabled />
 		) ) }
 	</Select>

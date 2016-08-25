@@ -82,9 +82,8 @@ const ConnectUser = React.createClass( {
 				<div>
 					<Header intention={ intention } />
 
-					<Form
-						onSubmit={ handleSubmit( this.handleSubmit ) }
-						fieldArea={
+					<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+						<Form.FieldArea>
 							<div>
 								<fieldset>
 									<label>{ i18n.translate( 'Email address:' ) }</label>
@@ -93,12 +92,14 @@ const ConnectUser = React.createClass( {
 								</fieldset>
 								{ this.renderTermsOfService() }
 							</div>
-						}
-						submitArea={
+						</Form.FieldArea>
+
+						<Form.SubmitArea>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Next' ) }
 							</Button>
-						} />
+						</Form.SubmitArea>
+					</Form>
 
 					<Footer />
 				</div>

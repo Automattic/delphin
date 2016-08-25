@@ -100,3 +100,22 @@ export const removeInvalidInputProps = ( props ) => {
 
 	return validProps;
 };
+
+/**
+ * Focuses the given node if it is an input or select, or the descendant select
+ * or input of the given node.
+ *
+ * @param {elementNodeReference} node - Node for a given field component like `Input`
+ */
+export const focusField = node => {
+	if ( [ 'select', 'input' ].indexOf( node.tagName.toLowerCase() ) > -1 ) {
+		node.focus();
+		return;
+	}
+
+	const field = node.querySelector( 'input, select' );
+
+	if ( field ) {
+		field.focus();
+	}
+};

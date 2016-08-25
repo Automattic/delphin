@@ -5,6 +5,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
 import { bindHandlers } from 'react-bind-handlers';
+import { withErrorFocusable } from 'components/ui/form/error-focuser';
 
 /**
  * Internal dependencies
@@ -91,4 +92,4 @@ FormToggle.defaultProps = {
 	disabled: false
 };
 
-export default withStyles( styles )( bindHandlers( FormToggle ) );
+export default withErrorFocusable( withStyles( styles )( bindHandlers( FormToggle ) ) );

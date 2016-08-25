@@ -1,10 +1,10 @@
 // External dependencies
 import classnames from 'classnames';
 import i18n from 'i18n-calypso';
+import padStart from 'lodash/padStart';
+import range from 'lodash/range';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import range from 'lodash/range';
-import padStart from 'lodash/padStart';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
@@ -12,17 +12,18 @@ import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
-import styles from './styles.scss';
-import capitalize from 'lodash/capitalize';
+import Form from 'components/ui/form';
 import FormToggle from 'components/ui/form/form-toggle';
-import ValidationError from 'components/ui/form/validation-error';
 import Input from 'components/ui/form/input';
-import { removeInvalidInputProps } from 'lib/form';
-import SiftScience from 'lib/sift-science';
-import withPageView from 'lib/analytics/with-page-view';
 import Select from 'components/ui/form/select';
+import styles from './styles.scss';
 import Tooltip from 'components/ui/tooltip';
+import capitalize from 'lodash/capitalize';
+import { removeInvalidInputProps } from 'lib/form';
 import scrollToTop from 'components/containers/scroll-to-top';
+import SiftScience from 'lib/sift-science';
+import ValidationError from 'components/ui/form/validation-error';
+import withPageView from 'lib/analytics/with-page-view';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -30,6 +31,7 @@ const Checkout = React.createClass( {
 		domain: PropTypes.object,
 		domainApplicationCost: PropTypes.string.isRequired,
 		domainCost: PropTypes.string.isRequired,
+		errors: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
@@ -91,7 +93,7 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
+			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -100,8 +102,13 @@ const Checkout = React.createClass( {
 						<CheckoutProgressbar currentStep={ 3 } />
 					</div>
 
-					<form className={ styles.form } onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }>
-						<div className={ styles.fieldArea }>
+					<Form
+						className={ styles.form }
+						onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }
+						errors={ errors }
+						focusOnError
+					>
+						<Form.FieldArea>
 							<fieldset>
 								<label>{ i18n.translate( 'Name on Card' ) }</label>
 								<Input
@@ -126,7 +133,8 @@ const Checkout = React.createClass( {
 								<div className={ styles.expiration }>
 									<Select
 										{ ...removeInvalidInputProps( fields.expirationMonth ) }
-										className={ styles.expirationMonth }>
+										className={ styles.expirationMonth }
+									>
 										<option value="">{ i18n.translate( 'Month' ) }</option>
 										{ months.map( ( monthName, monthIndex ) => {
 											const monthNumber = padStart( monthIndex + 1, 2, '0' );
@@ -140,7 +148,8 @@ const Checkout = React.createClass( {
 
 									<Select
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
-										className={ styles.expirationYear }>
+										className={ styles.expirationYear }
+									>
 										<option value="">{ i18n.translate( 'Year' ) }</option>
 										{
 											range( ( new Date() ).getFullYear(), ( new Date() ).getFullYear() + 6 ).map(
@@ -167,7 +176,10 @@ const Checkout = React.createClass( {
 
 							<fieldset>
 								<label>{ i18n.translate( 'Country' ) }</label>
-								<Country field={ fields.countryCode } supportedBy="checkout" />
+								<Country
+									field={ fields.countryCode }
+									supportedBy="checkout"
+								/>
 								<ValidationError field={ fields.countryCode } />
 							</fieldset>
 
@@ -179,7 +191,7 @@ const Checkout = React.createClass( {
 								/>
 								<ValidationError field={ fields.postalCode } />
 							</fieldset>
-						</div>
+						</Form.FieldArea>
 
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
@@ -232,14 +244,14 @@ const Checkout = React.createClass( {
 							</p>
 						</div>
 
-						<div className={ styles.submitArea }>
+						<Form.SubmitArea className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
 								{ i18n.translate( 'Review application' ) }
 							</Button>
-						</div>
+						</Form.SubmitArea>
 
 						{ this.hasError() && this.renderCheckoutError() }
-					</form>
+					</Form>
 				</div>
 			</DocumentTitle>
 		);

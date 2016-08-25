@@ -40,14 +40,13 @@ class Phone extends React.Component {
 	}
 
 	render() {
-		const { className, disabled, field, onBlur, untouch } = this.props;
+		const { className, disabled, field, untouch } = this.props;
 
 		return (
 			<Input
 				className={ className }
 				disabled={ disabled }
 				field={ field }
-				onBlur={ onBlur }
 				onChange={ this.handleChange }
 				untouch={ untouch } />
 		);
@@ -59,7 +58,6 @@ Phone.propTypes = {
 	countryCode: PropTypes.string,
 	disabled: PropTypes.bool,
 	field: PropTypes.object.isRequired,
-	onBlur: PropTypes.func.isRequired,
 	untouch: PropTypes.func.isRequired
 };
 

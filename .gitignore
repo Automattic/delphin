@@ -24,7 +24,7 @@ coverage
 .lock-wscript
 
 # Compiled scripts and build directories
-public/scripts/bundle.*.js
+public/scripts/bundle*.js
 public/scripts/assets.json
 public/static
 server/build

@@ -103,6 +103,7 @@ const Checkout = React.createClass( {
 					</div>
 
 					<Form
+						className={ styles.form }
 						onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }
 						errors={ errors }
 						focusOnError

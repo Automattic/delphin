@@ -16,8 +16,9 @@ export const withErrorFocusable = Component => {
 
 		saveRef( element ) {
 			// call ErrorFocuser's setElementRef function
-			if ( element && this.props.field && 'function' === typeof this.context.setElementRef ) {
-				this.context.setElementRef( element, this.props.field.name );
+			const fieldName = this.props.field ? this.props.field.name : this.props.name;
+			if ( element && fieldName && 'function' === typeof this.context.setElementRef ) {
+				this.context.setElementRef( element, fieldName );
 			}
 		}
 
@@ -27,7 +28,8 @@ export const withErrorFocusable = Component => {
 	}
 
 	ErrorFocusable.propTypes = {
-		field: PropTypes.object
+		field: PropTypes.object,
+		name: PropTypes.string
 	};
 
 	ErrorFocusable.contextTypes = {

@@ -24,7 +24,10 @@ const fetchLanguage = locale => {
 
 		debug( 'fetching', getLanguageUrl( locale ) );
 		request.get( getLanguageUrl( locale ) ).end( ( error, response ) => {
-			const result = ! error && { locale, response: ! error && response.body };
+			if ( error ) {
+				return callback( error );
+			}
+			const result = { locale, response: response.body };
 			callback( null, result );
 		} );
 	};

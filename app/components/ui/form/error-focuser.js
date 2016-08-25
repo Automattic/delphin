@@ -16,8 +16,8 @@ export const withErrorFocusable = Component => {
 
 		saveRef( element ) {
 			// call ErrorFocuser's elementRefSetter function
-			if ( element && typeof this.context.elementRefSetter === 'function' ) {
-				this.context.elementRefSetter( element, this.props );
+			if ( element && this.props.field && typeof this.context.elementRefSetter === 'function' ) {
+				this.context.elementRefSetter( element, this.props.field.name );
 			}
 		}
 
@@ -25,6 +25,10 @@ export const withErrorFocusable = Component => {
 			return <Component { ...this.props } ref={ this.saveRefBound }/>;
 		}
 	}
+
+	ErrorFocusable.propTypes = {
+		field: PropTypes.object
+	};
 
 	ErrorFocusable.contextTypes = {
 		elementRefSetter: React.PropTypes.func
@@ -42,10 +46,10 @@ export const withErrorFocuser = FieldGroup => {
 
 		getChildContext() {
 			return {
-				elementRefSetter: ( element, parentProps ) => {
-					if ( element && parentProps && parentProps.field ) {
+				elementRefSetter: ( element, fieldName ) => {
+					if ( element && fieldName ) {
 						this.fieldElements.push( {
-							name: parentProps.field.name,
+							name: fieldName,
 							ref: element
 						} );
 					}

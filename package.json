@@ -22,7 +22,7 @@
     "start": "npm install && node server/build/bundle",
     "start:static": "npm run prod:static && node server/static",
     "test": "NODE_PATH=.:app jest",
-    "translate": "i18n-calypso -p delphin -e date -i public/scripts/bundle.js -i server/build/bundle.js -o server/build/delphin.pot"
+    "translate": "i18n-calypso -p delphin -e date -i 'app/**/*.js' -o server/build/delphin.pot"
   },
   "repository": {
     "type": "git",
@@ -71,7 +71,7 @@
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "http-auth": "^2.3.1",
-    "i18n-calypso": "1.5.0",
+    "i18n-calypso": "1.6.3",
     "inherits": "^2.0.1",
     "isomorphic-style-loader": "^1.0.0",
     "jed": "1.0.2",

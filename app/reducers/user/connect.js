@@ -6,6 +6,7 @@ import {
 	CONNECT_USER,
 	CONNECT_USER_CLEAR,
 	CONNECT_USER_COMPLETE,
+	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
@@ -54,6 +55,11 @@ export const connect = ( state = initialState, action ) => {
 				intention,
 				isRequesting: false,
 				wasCreated: true
+			} );
+
+		case CONNECT_USER_FAIL:
+			return Object.assign( {}, state, {
+				isRequesting: false
 			} );
 
 		case CONNECT_USER_WARNING:

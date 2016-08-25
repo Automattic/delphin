@@ -1,7 +1,8 @@
 // External dependencies
+import find from 'lodash/find';
+import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import isEmpty from 'lodash/isEmpty';
 
 // Internal dependencies
 import { focusField } from 'lib/form';
@@ -53,7 +54,7 @@ export const withErrorFocuser = FieldGroup => {
 
 		componentWillReceiveProps( nextProps ) {
 			if ( nextProps.focusOnError && isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
-				const fieldName = this.fieldElementsList.find( name => nextProps.errors[ name ] );
+				const fieldName = find( this.fieldElementsList, name => nextProps.errors[ name ] );
 				const node = ReactDOM.findDOMNode( this.fieldElements[ fieldName ] );
 				if ( node ) {
 					focusField( node );

@@ -1,26 +1,29 @@
 // External dependencies
 import classnames from 'classnames';
 import i18n from 'i18n-calypso';
+import padStart from 'lodash/padStart';
+import range from 'lodash/range';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import range from 'lodash/range';
-import padStart from 'lodash/padStart';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import Button from 'components/ui/button';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
-import Form from 'components/ui/form';
 import DocumentTitle from 'components/ui/document-title';
+import Form from 'components/ui/form';
+import FormToggle from 'components/ui/form/form-toggle';
+import Input from 'components/ui/form/input';
+import Select from 'components/ui/form/select';
 import styles from './styles.scss';
-import capitalize from 'lodash/capitalize';
-import ValidationError from 'components/ui/form/validation-error';
-import { removeInvalidInputProps } from 'lib/form';
-import SiftScience from 'lib/sift-science';
-import withPageView from 'lib/analytics/with-page-view';
 import Tooltip from 'components/ui/tooltip';
+import capitalize from 'lodash/capitalize';
+import { removeInvalidInputProps } from 'lib/form';
 import scrollToTop from 'components/containers/scroll-to-top';
+import SiftScience from 'lib/sift-science';
+import ValidationError from 'components/ui/form/validation-error';
+import withPageView from 'lib/analytics/with-page-view';
 
 const Checkout = React.createClass( {
 	propTypes: {
@@ -99,11 +102,15 @@ const Checkout = React.createClass( {
 						<CheckoutProgressbar currentStep={ 3 } />
 					</div>
 
-					<Form onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }>
-						<Form.FieldArea errors={ errors } focusOnError>
+					<Form
+						onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }
+						errors={ errors }
+						focusOnError
+					>
+						<Form.FieldArea>
 							<fieldset>
 								<label>{ i18n.translate( 'Name on Card' ) }</label>
-								<Form.FieldArea.Input
+								<Input
 									type="text"
 									field={ fields.name }
 									autoFocus
@@ -113,7 +120,7 @@ const Checkout = React.createClass( {
 
 							<fieldset>
 								<label>{ i18n.translate( 'Card Number' ) }</label>
-								<Form.FieldArea.Input
+								<Input
 									type="text"
 									field={ fields.number }
 								/>
@@ -123,7 +130,7 @@ const Checkout = React.createClass( {
 							<fieldset>
 								<label>{ i18n.translate( 'Expiration' ) }</label>
 								<div className={ styles.expiration }>
-									<Form.FieldArea.Select
+									<Select
 										{ ...removeInvalidInputProps( fields.expirationMonth ) }
 										className={ styles.expirationMonth }
 									>
@@ -136,9 +143,9 @@ const Checkout = React.createClass( {
 												</option>
 											);
 										} ) }
-									</Form.FieldArea.Select>
+									</Select>
 
-									<Form.FieldArea.Select
+									<Select
 										{ ...removeInvalidInputProps( fields.expirationYear ) }
 										className={ styles.expirationYear }
 									>
@@ -149,7 +156,7 @@ const Checkout = React.createClass( {
 											)
 										}
 
-									</Form.FieldArea.Select>
+									</Select>
 								</div>
 								<ValidationError fields={ [
 									fields.expirationMonth,
@@ -159,7 +166,7 @@ const Checkout = React.createClass( {
 
 							<fieldset className={ styles.securityCode }>
 								<label>{ i18n.translate( 'Security Code' ) }</label>
-								<Form.FieldArea.Input
+								<Input
 									type="text"
 									field={ fields.cvv }
 								/>
@@ -177,7 +184,7 @@ const Checkout = React.createClass( {
 
 							<fieldset>
 								<label>{ i18n.translate( 'Postal Code' ) }</label>
-								<Form.FieldArea.Input
+								<Input
 									type="text"
 									field={ fields.postalCode }
 								/>
@@ -215,7 +222,7 @@ const Checkout = React.createClass( {
 									</Tooltip>
 								</label>
 								<span>
-									<Form.FieldArea.FormToggle
+									<FormToggle
 										name="privacy-protection"
 										{ ...fields.privacyProtection }
 										trackChange={ this.props.trackPrivacyToggle }

@@ -10,6 +10,7 @@ import Select from 'components/ui/form/select';
 import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
+import { withErrorFocusable } from 'components/ui/form/error-focuser';
 
 const State = ( { className, disabled, field, states } ) => {
 	let content;
@@ -47,4 +48,4 @@ State.propTypes = {
 	states: PropTypes.object.isRequired
 };
 
-export default withStyles( styles )( State );
+export default withErrorFocusable( withStyles( styles )( State ) );

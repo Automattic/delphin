@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
+import Input from 'components/ui/form/input';
 import i18n from 'i18n-calypso';
 import ResendSignupEmail from './resend-signup-email';
 import styles from './styles.scss';
@@ -123,7 +124,7 @@ const VerifyUser = React.createClass( {
 				<div className={ styles.twoFactorFields }>
 					<label>{ i18n.translate( 'Two-step authentication code:' ) }</label>
 
-					<Form.FieldArea.Input
+					<Input
 						field={ fields.twoFactorAuthenticationCode }
 						autoFocus={ this.isUsingCodeFromQuery() }
 						autoComplete="off"
@@ -154,14 +155,18 @@ const VerifyUser = React.createClass( {
 			<div>
 				<Header intention={ 'verifyUser' } />
 
-				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<Form
+					onSubmit={ handleSubmit( this.handleSubmit ) }
+					errors={ errors }
+					focusOnError
+				>
 					<Form.FieldArea errors={ errors } focusOnError>
 						<fieldset>
 							<strong className={ styles.instructions }>{ this.renderNotice() }</strong>
 
 							<label>{ i18n.translate( 'Confirmation code:' ) }</label>
 
-							<Form.FieldArea.Input
+							<Input
 								field={ fields.code }
 								autoFocus={ ! this.isUsingCodeFromQuery() }
 								autoComplete="off"

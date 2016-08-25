@@ -1,6 +1,5 @@
 // External dependencies
 import classNames from 'classnames';
-import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -9,26 +8,20 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
-import { isCallingCode } from 'lib/form';
 import Form from 'components/ui/form';
+import Input from 'components/ui/form/input';
+import { isCallingCode } from 'lib/form';
 import Phone from 'components/ui/form/phone';
 import State from 'components/ui/form/state';
-import Input from 'components/ui/form/input';
 import styles from './styles.scss';
-import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 import scrollToTop from 'components/containers/scroll-to-top';
 
 class ContactInformation extends React.Component {
-	constructor( props ) {
-		super( props );
-
-		this.debouncedValidateBound = debounce( this.validate.bind( this ), 500 );
-	}
-
 	componentWillMount() {
 		if ( this.props.isLoggedOut || ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
@@ -129,9 +122,9 @@ class ContactInformation extends React.Component {
 	}
 
 	isSubmitButtonDisabled() {
-		const { invalid, submitting } = this.props;
+		const { asyncValidating, invalid, submitting } = this.props;
 
-		return invalid || submitting || this.isDataLoading();
+		return asyncValidating || invalid || submitting || this.isDataLoading();
 	}
 
 	address2InputIsVisible() {
@@ -165,16 +158,26 @@ class ContactInformation extends React.Component {
 
 	handleSubmission() {
 		this.validate().then( () => {
-			if ( isEmpty( this.props.errors ) ) {
+			const { errors } = this.props;
+
+			if ( isEmpty( errors ) ) {
 				this.props.redirectToCheckout();
 			}
 		} );
 	}
 
-	handleBlur( event ) {
-		this.debouncedValidateBound();
+	getSubmitButtonText() {
+		const { asyncValidating, submitting } = this.props;
 
-		this.props.fields[ event.target.name ].onBlur();
+		if ( asyncValidating ) {
+			return i18n.translate( 'Checking your details…' );
+		}
+
+		if ( submitting ) {
+			return i18n.translate( 'Taking you to checkout…' );
+		}
+
+		return i18n.translate( 'Continue to checkout' );
 	}
 
 	render() {
@@ -202,7 +205,10 @@ class ContactInformation extends React.Component {
 
 					<Form
 						onSubmit={ handleSubmit( this.handleSubmission ) }
-						fieldArea={
+						errors={ this.props.errors }
+						focusOnError
+					>
+						<Form.FieldArea>
 							<div>
 								<fieldset>
 									<label>{ i18n.translate( 'First Name' ) }</label>
@@ -211,7 +217,6 @@ class ContactInformation extends React.Component {
 											field={ fields.firstName }
 											autoFocus
 											untouch={ untouch }
-											onBlur={ this.handleBlur }
 											className={ styles.firstName }
 											placeholder={ i18n.translate( 'First Name' ) }
 										/>
@@ -224,7 +229,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.lastName }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.lastName }
 										placeholder={ i18n.translate( 'Last Name' ) }
 									/>
@@ -243,7 +247,6 @@ class ContactInformation extends React.Component {
 										<Input
 											field={ fields.organization }
 											untouch={ untouch }
-											onBlur={ this.handleBlur }
 											className={ styles.organization }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Organization' ) }
@@ -258,7 +261,6 @@ class ContactInformation extends React.Component {
 										<Input
 											disabled={ this.isDataLoading() }
 											field={ fields.email }
-											onBlur={ this.handleBlur }
 											placeholder={ i18n.translate( 'Email' ) }
 											untouch={ untouch }
 										/>
@@ -272,7 +274,6 @@ class ContactInformation extends React.Component {
 									<Input
 										field={ fields.address1 }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.address1 }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 1' ) }
@@ -282,7 +283,6 @@ class ContactInformation extends React.Component {
 										<Input
 											field={ fields.address2 }
 											untouch={ untouch }
-											onBlur={ this.handleBlur }
 											className={ styles.address2 }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Address Line 2' ) }
@@ -314,7 +314,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.city }
-										onBlur={ this.handleBlur }
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
 									/>
@@ -327,9 +326,9 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.state }
-										states={ this.props.states } />
+										states={ this.props.states }
+									/>
 									<ValidationError field={ fields.state } />
 								</fieldset>
 
@@ -339,7 +338,6 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.postalCode }
-										onBlur={ this.handleBlur }
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Postal Code' ) }
 									/>
@@ -353,20 +351,21 @@ class ContactInformation extends React.Component {
 										disabled={ this.isDataLoading() }
 										field={ fields.phone }
 										untouch={ untouch }
-										onBlur={ this.handleBlur }
 										className={ styles.phone }
 									/>
 									<ValidationError field={ fields.phone } />
 								</fieldset>
 							</div>
-						}
-						submitArea={
+						</Form.FieldArea>
+
+						<Form.SubmitArea>
 							<div>
 								<Button disabled={ this.isSubmitButtonDisabled() }>
-									{ i18n.translate( 'Continue to checkout' ) }
+									{ this.getSubmitButtonText() }
 								</Button>
 							</div>
-						} />
+						</Form.SubmitArea>
+					</Form>
 				</div>
 			</DocumentTitle>
 		);
@@ -374,6 +373,10 @@ class ContactInformation extends React.Component {
 }
 
 ContactInformation.propTypes = {
+	asyncValidating: PropTypes.oneOfType( [
+		PropTypes.bool,
+		PropTypes.string,
+	] ),
 	contactInformation: PropTypes.object.isRequired,
 	domain: PropTypes.object,
 	errors: PropTypes.object,

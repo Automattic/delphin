@@ -1,0 +1,10 @@
+@import 'app/styles/breakpoints';
+
+.submit-area {
+	padding: 0 30px 30px;
+	text-align: center;
+
+	@include breakpoint( '<480px' ) {
+		padding: 0 0 15px;
+	}
+}

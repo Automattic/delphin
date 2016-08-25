@@ -7,10 +7,6 @@
 	padding: 30px 20px 80px;
 }
 
-.form {
-	position: relative;
-}
-
 .expiration {
 	display: flex;
 	justify-content: space-between;
@@ -151,6 +147,10 @@
 		color: $alert-red;
 		text-decoration: underline;
 	}
+}
+
+.form {
+	position: relative;
 }
 
 @-webkit-keyframes fadeIn {

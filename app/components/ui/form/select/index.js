@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { withErrorFocusable } from 'components/ui/form/error-focuser';
 
 // Internal dependencies
 import styles from './styles.scss';
@@ -22,4 +23,4 @@ Select.propTypes = {
 	className: PropTypes.string,
 };
 
-export default withStyles( styles )( Select );
+export default withErrorFocusable( withStyles( styles )( Select ) );

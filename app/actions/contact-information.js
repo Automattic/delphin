@@ -55,7 +55,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 					}, {} );
 				}
 
-				dispatch( stopAsyncValidation( 'contactInformation', errors ) );
+				return dispatch( stopAsyncValidation( 'contactInformation', errors ) );
 			};
 		},
 		fail: ( error ) => {

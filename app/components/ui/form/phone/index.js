@@ -5,7 +5,6 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import { getCallingCode, maskPhone } from 'lib/form';
 import Input from 'components/ui/form/input';
-import { withErrorFocusable } from 'components/ui/form/error-focuser';
 
 class Phone extends React.Component {
 	componentWillReceiveProps( nextProps ) {
@@ -62,4 +61,4 @@ Phone.propTypes = {
 	untouch: PropTypes.func.isRequired
 };
 
-export default withErrorFocusable( bindHandlers( Phone ) );
+export default bindHandlers( Phone );

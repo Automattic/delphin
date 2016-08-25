@@ -7,7 +7,7 @@ var express = require( 'express' ),
 app.use( serveStatic( path.join( publicDir, 'static' ), { index: [ 'index.html' ] } ) );
 app.use( serveStatic( publicDir ) );
 app.get( '*', function( req, res ) {
-	res.sendFile( path.join( publicDir, 'static', '*', 'index.html' ) );
+	res.sendFile( path.join( publicDir, 'static', 'index.html' ) );
 } );
 
 app.listen( 1337, function( error ) {

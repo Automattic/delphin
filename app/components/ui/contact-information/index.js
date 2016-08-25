@@ -8,12 +8,15 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
-import { isCallingCode } from 'lib/form';
 import Form from 'components/ui/form';
+import Input from 'components/ui/form/input';
+import { isCallingCode } from 'lib/form';
+import Phone from 'components/ui/form/phone';
+import State from 'components/ui/form/state';
 import styles from './styles.scss';
-import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 import scrollToTop from 'components/containers/scroll-to-top';
@@ -200,12 +203,16 @@ class ContactInformation extends React.Component {
 						</h3>
 					</div>
 
-					<Form onSubmit={ handleSubmit( this.handleSubmission ) }>
-						<Form.FieldArea errors={ this.props.errors } focusOnError>
+					<Form
+						onSubmit={ handleSubmit( this.handleSubmission ) }
+						errors={ this.props.errors }
+						focusOnError
+					>
+						<Form.FieldArea>
 							<div>
 								<fieldset>
 									<label>{ i18n.translate( 'First Name' ) }</label>
-									<Form.FieldArea.Input
+									<Input
 											disabled={ this.isDataLoading() }
 											field={ fields.firstName }
 											autoFocus
@@ -218,7 +225,7 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'Last Name' ) }</label>
-									<Form.FieldArea.Input
+									<Input
 										disabled={ this.isDataLoading() }
 										field={ fields.lastName }
 										untouch={ untouch }
@@ -237,7 +244,7 @@ class ContactInformation extends React.Component {
 								{ this.organizationInputIsVisible() && (
 									<fieldset>
 										<label>{ i18n.translate( 'Organization' ) }</label>
-										<Form.FieldArea.Input
+										<Input
 											field={ fields.organization }
 											untouch={ untouch }
 											className={ styles.organization }
@@ -251,7 +258,7 @@ class ContactInformation extends React.Component {
 								{ this.emailInputIsVisible() && (
 									<fieldset>
 										<label>{ i18n.translate( 'Email' ) }</label>
-										<Form.FieldArea.Input
+										<Input
 											disabled={ this.isDataLoading() }
 											field={ fields.email }
 											placeholder={ i18n.translate( 'Email' ) }
@@ -264,7 +271,7 @@ class ContactInformation extends React.Component {
 								<fieldset className={ classNames( { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
 									<label>{ i18n.translate( 'Address' ) }</label>
 
-									<Form.FieldArea.Input
+									<Input
 										field={ fields.address1 }
 										untouch={ untouch }
 										className={ styles.address1 }
@@ -273,7 +280,7 @@ class ContactInformation extends React.Component {
 									/>
 
 									{ this.address2InputIsVisible() && (
-										<Form.FieldArea.Input
+										<Input
 											field={ fields.address2 }
 											untouch={ untouch }
 											className={ styles.address2 }
@@ -303,7 +310,7 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'City' ) }</label>
-									<Form.FieldArea.Input
+									<Input
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.city }
@@ -315,7 +322,7 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'State/Province' ) }</label>
-									<Form.FieldArea.State
+									<State
 										disabled={ this.isDataLoading() }
 										field={ fields.state }
 										untouch={ untouch }
@@ -327,7 +334,7 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'Postal Code' ) }</label>
-									<Form.FieldArea.Input
+									<Input
 										disabled={ this.isDataLoading() }
 										untouch={ untouch }
 										field={ fields.postalCode }
@@ -339,7 +346,7 @@ class ContactInformation extends React.Component {
 
 								<fieldset>
 									<label>{ i18n.translate( 'Phone' ) }</label>
-									<Form.FieldArea.Phone
+									<Phone
 										countryCode={ fields.countryCode.value }
 										disabled={ this.isDataLoading() }
 										field={ fields.phone }

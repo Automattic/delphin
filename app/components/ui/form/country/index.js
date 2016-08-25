@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import Select from 'components/ui/form/select';
 import { removeInvalidInputProps } from 'lib/form';
+import { withErrorFocusable } from 'components/ui/form/error-focuser';
 
 const Country = ( { className, disabled, field, countries } ) => (
 	<Select
@@ -28,4 +29,4 @@ Country.propTypes = {
 	field: PropTypes.object.isRequired
 };
 
-export default Country;
+export default withErrorFocusable( Country );

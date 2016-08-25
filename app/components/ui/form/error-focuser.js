@@ -37,16 +37,17 @@ export const withErrorFocuser = FieldGroup => {
 	class ErrorFocuser extends React.Component {
 		constructor( props ) {
 			super( props );
-			this.fieldElementsList = [];
-			this.fieldElements = {};
+			this.fieldElements = [];
 		}
 
 		getChildContext() {
 			return {
 				elementRefSetter: ( element, parentProps ) => {
 					if ( element && parentProps && parentProps.field ) {
-						this.fieldElementsList.push( parentProps.field.name );
-						this.fieldElements[ parentProps.field.name ] = element;
+						this.fieldElements.push( {
+							name: parentProps.field.name,
+							ref: element
+						} );
 					}
 				}
 			};
@@ -54,8 +55,8 @@ export const withErrorFocuser = FieldGroup => {
 
 		componentWillReceiveProps( nextProps ) {
 			if ( nextProps.focusOnError && isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
-				const fieldName = find( this.fieldElementsList, name => nextProps.errors[ name ] );
-				const node = ReactDOM.findDOMNode( this.fieldElements[ fieldName ] );
+				const fieldElement = find( this.fieldElements, field => nextProps.errors[ field.name ] );
+				const node = ReactDOM.findDOMNode( fieldElement.ref );
 				if ( node ) {
 					focusField( node );
 				}

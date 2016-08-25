@@ -9,14 +9,17 @@ const config = {
 	default_tld: 'blog',
 	default_search_sort: 'recommended',
 	env: NODE_ENV || 'development',
+	google_conversion_id: 881304566,
+	google_conversion_label: 'WLR1CIHt3WkQ9seepAM',
 	hostname: 'get.blog',
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
 	features: {
+		ad_tracking: productionOnly,
 		boom_analytics_enabled: productionOnly,
 		google_analytics_enabled: productionOnly,
 		mc_analytics_enabled: productionOnly,
-		tracks_enabled: productionOnly
+		tracks_enabled: productionOnly,
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',

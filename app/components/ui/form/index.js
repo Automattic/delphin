@@ -9,8 +9,8 @@ import FieldArea from 'components/ui/form/field-area';
 import SubmitArea from 'components/ui/form/submit-area';
 import { withErrorFocuser } from 'components/ui/form/error-focuser';
 
-const Form = withErrorFocuser( withStyles( styles )( ( { children, className, onSubmit } ) => (
-	<form onSubmit={ onSubmit } className={ className || styles.form }>
+const Form = withErrorFocuser( withStyles( styles )( ( { children, onSubmit } ) => (
+	<form onSubmit={ onSubmit } className={ styles.form }>
 		{ children }
 	</form>
 ) ) );
@@ -23,7 +23,6 @@ Form.propTypes = {
 		PropTypes.arrayOf( React.PropTypes.node ),
 		PropTypes.node
 	] ).isRequired,
-	className: PropTypes.string,
 	errors: PropTypes.object,
 	onSubmit: PropTypes.func.isRequired
 };

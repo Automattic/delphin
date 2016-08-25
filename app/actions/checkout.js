@@ -1,4 +1,5 @@
 // External dependencies
+import { card } from 'creditcards';
 import { getValues } from 'redux-form';
 
 // Internal dependencies
@@ -75,7 +76,7 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 		checkoutForm = getValues( getState().form.checkout ),
 		cardDetails = {
 			name: checkoutForm.name,
-			number: checkoutForm.number,
+			number: card.parse( checkoutForm.number ),
 			cvv: checkoutForm.cvv,
 			expirationDate: checkoutForm.expirationMonth + checkoutForm.expirationYear,
 			countryCode: checkoutForm.countryCode,

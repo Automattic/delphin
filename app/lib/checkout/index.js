@@ -33,7 +33,7 @@ export const validateCheckoutForm = values => {
 		errors.countryCode = i18n.translate( 'Choose your country from the list.' );
 	}
 
-	if ( ! errors.number && ! card.isValid( values.number ) ) {
+	if ( ! errors.number && ! card.isValid( card.parse( values.number ) ) ) {
 		errors.number = i18n.translate( 'Enter your number as it is on your card.' );
 	}
 

@@ -60,9 +60,11 @@ export const withErrorFocuser = FieldGroup => {
 		componentWillReceiveProps( nextProps ) {
 			if ( nextProps.focusOnError && isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
 				const fieldElement = find( this.fieldElements, field => nextProps.errors[ field.name ] );
-				const node = ReactDOM.findDOMNode( fieldElement.ref );
-				if ( node ) {
-					focusField( node );
+				if ( fieldElement && fieldElement.ref ) {
+					const node = ReactDOM.findDOMNode( fieldElement.ref );
+					if ( node ) {
+						focusField( node );
+					}
 				}
 			}
 		}

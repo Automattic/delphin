@@ -46,8 +46,7 @@
     "npm": "^3.9.6",
     "react-addons-test-utils": "^15.1.0",
     "sass-lint": "^1.8.0",
-    "serve-static": "^1.10.2",
-    "xgettext-js": "^0.3.0"
+    "serve-static": "^1.10.2"
   },
   "dependencies": {
     "@automattic/dops-components": "github:automattic/dops-components",

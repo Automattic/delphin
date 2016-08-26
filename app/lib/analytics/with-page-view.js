@@ -27,7 +27,7 @@ export default ( WrappedComponent, title ) => {
 		}
 
 		render() {
-			const props = omit( this.props, [ 'recordPageView' ] );
+			const props = omit( this.props, [ 'recordPageView', 'recordTracksEvent' ] );
 
 			return (
 				<WrappedComponent { ...props } />

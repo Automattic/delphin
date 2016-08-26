@@ -10,22 +10,20 @@ import { recordPageView, recordTracksEvent } from 'actions/analytics';
 export default ( WrappedComponent, title ) => {
 	class WithPageView extends React.Component {
 		componentDidMount() {
-			if ( process.env.BROWSER ) {
-				const { location: { query } } = this.props;
+			const { location: { query } } = this.props;
 
-				if ( query && query.utm_source && query.utm_campaign ) {
-					// If these params are present, this is a landing page from
-					// a SEM campaign
-					this.props.recordTracksEvent( 'delphin_landing_page_view', {
-						pathname: window.location.pathname,
-						title,
-						utm_source: query.utm_source,
-						utm_campaign: query.utm_campaign
-					} );
-				}
-
-				this.props.recordPageView( window.location.pathname, title );
+			if ( query && query.utm_source && query.utm_campaign ) {
+				// If these params are present, this is a landing page from
+				// a SEM campaign
+				this.props.recordTracksEvent( 'delphin_landing_page_view', {
+					pathname: window.location.pathname,
+					title,
+					utm_source: query.utm_source,
+					utm_campaign: query.utm_campaign
+				} );
 			}
+
+			this.props.recordPageView( window.location.pathname, title );
 		}
 
 		render() {

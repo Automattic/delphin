@@ -1,4 +1,5 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Internal dependencies
@@ -24,21 +25,11 @@ export default connect(
 		relatedWords: getRelatedWords( state ),
 		selectedKeyword: getSelectedKeyword( state )
 	} ),
-	dispatch => ( {
-		onInputFocus() {
-			dispatch( domainSearchInputFocus() );
-		},
-		removeLastKeyword() {
-			dispatch( domainSearchLastKeywordRemove() );
-		},
-		submit() {
-			dispatch( domainSearchSubmit() );
-		},
-		changeInput( value ) {
-			dispatch( domainSearchInputChange( value ) );
-		},
-		replace( value ) {
-			dispatch( domainSearchKeywordReplaceSelected( value ) );
-		}
-	} )
+	dispatch => bindActionCreators( {
+		onInputFocus: domainSearchInputFocus,
+		removeLastKeyword: domainSearchLastKeywordRemove,
+		submit: domainSearchSubmit,
+		changeInput: domainSearchInputChange,
+		replace: domainSearchKeywordReplaceSelected,
+	}, dispatch )
 )( SearchInput );

@@ -1,5 +1,4 @@
 // External dependencies
-import auth from 'http-auth';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import curry from 'lodash/curry';
 import DocumentTitle from 'react-document-title';
@@ -34,13 +33,6 @@ const app = express(),
 	templatePath = path.join( __dirname, 'views', 'index.pug' ),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
-
-if ( config( 'env' ) === 'production' ) {
-	app.use( auth.connect( auth.basic( {
-		realm: 'Delphin',
-		file: path.join( __dirname, 'credentials' )
-	} ) ) );
-}
 
 function renderPage( props, localeData ) {
 	const store = createStore(

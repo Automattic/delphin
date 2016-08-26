@@ -1,7 +1,8 @@
 // Internal dependencies
 import {
 	RELATED_WORD_FETCH,
-	RELATED_WORD_FETCH_COMPLETE
+	RELATED_WORD_FETCH_COMPLETE,
+	RELATED_WORD_FETCH_FAIL,
 } from 'reducers/action-types';
 import relatedWords from '../related-words';
 
@@ -94,6 +95,25 @@ describe( 'related-words reducer', () => {
 				data: [ 'foo', 'bar', 'baz' ],
 				isRequesting: false,
 				hasLoadedFromServer: true
+			} ] );
+		} );
+
+		it( 'should replace related words if they are already in the store', () => {
+			const initialState = [ {
+				word: 'foobar',
+				data: null,
+				isRequesting: true,
+				hasLoadedFromServer: false
+			} ];
+
+			expect( relatedWords( initialState, {
+				type: RELATED_WORD_FETCH_FAIL,
+				word: 'foobar',
+			} ) ).toEqual( [ {
+				word: 'foobar',
+				data: null,
+				isRequesting: false,
+				hasLoadedFromServer: false
 			} ] );
 		} );
 	} );

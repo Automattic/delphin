@@ -5,7 +5,8 @@ import union from 'lodash/union';
 // Internal dependencies
 import {
 	RELATED_WORD_FETCH,
-	RELATED_WORD_FETCH_COMPLETE
+	RELATED_WORD_FETCH_COMPLETE,
+	RELATED_WORD_FETCH_FAIL,
 } from 'reducers/action-types';
 
 const initialRelatedWordsState = {
@@ -47,6 +48,11 @@ export default function relatedWords( state = [], action ) {
 				data: union( data ),
 				isRequesting: false,
 				hasLoadedFromServer: true
+			} );
+
+		case RELATED_WORD_FETCH_FAIL:
+			return addRelatedWord( state, word, {
+				isRequesting: false
 			} );
 
 		default:

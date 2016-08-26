@@ -137,6 +137,8 @@ const VerifyUser = React.createClass( {
 						field={ fields.twoFactorAuthenticationCode }
 						autoFocus={ this.isUsingCodeFromQuery() }
 						autoComplete="off"
+						pattern="[0-9]*"
+						type="tel"
 					/>
 
 					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
@@ -198,6 +200,8 @@ const VerifyUser = React.createClass( {
 										field={ fields.code }
 										autoFocus={ ! this.isUsingCodeFromQuery() }
 										autoComplete="off"
+										pattern="[0-9]*"
+										type="tel"
 									/>
 
 									<ValidationError field={ fields.code } submitFailed={ submitFailed } />

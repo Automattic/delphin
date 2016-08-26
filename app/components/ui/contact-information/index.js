@@ -263,6 +263,7 @@ class ContactInformation extends React.Component {
 											field={ fields.email }
 											placeholder={ i18n.translate( 'Email' ) }
 											untouch={ untouch }
+											type="email"
 										/>
 										<ValidationError field={ fields.email } />
 									</fieldset>

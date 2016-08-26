@@ -4,16 +4,17 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import SearchInput from 'components/ui/search-input';
 import {
+	domainSearchInputFocus,
 	domainSearchKeywordReplaceSelected,
 	domainSearchLastKeywordRemove,
 	domainSearchInputChange,
-	domainSearchSubmit
+	domainSearchSubmit,
 } from 'actions/domain-search';
 import {
 	getInputValue,
 	getSelectedKeyword,
 	getKeywords,
-	getRelatedWords
+	getRelatedWords,
 } from 'reducers/ui/domain-search/selectors';
 
 export default connect(
@@ -24,6 +25,9 @@ export default connect(
 		selectedKeyword: getSelectedKeyword( state )
 	} ),
 	dispatch => ( {
+		onInputFocus() {
+			dispatch( domainSearchInputFocus() );
+		},
 		removeLastKeyword() {
 			dispatch( domainSearchLastKeywordRemove() );
 		},

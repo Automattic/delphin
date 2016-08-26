@@ -7,12 +7,13 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 // Internal dependencies
 import {
 	DOMAIN_SEARCH_INPUT_CHANGE,
+	DOMAIN_SEARCH_INPUT_FOCUS,
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_KEYWORD_SELECT,
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
-	DOMAIN_SEARCH_SUBMIT
+	DOMAIN_SEARCH_SUBMIT,
 } from 'reducers/action-types';
 import { getPath } from 'routes';
 
@@ -126,6 +127,11 @@ export default function domainKeywords( state = initialState, action ) {
 			return Object.assign( {}, state, {
 				inputValue: keywordValue.substring( 0, keywordValue.length - 1 ),
 				keywords: state.keywords.slice( 0, state.keywords.length - 1 )
+			} );
+
+		case DOMAIN_SEARCH_INPUT_FOCUS:
+			return Object.assign( {}, state, {
+				keywords: state.keywords.map( keyword => Object.assign( {}, keyword, { isSelected: false } ) )
 			} );
 
 		default:

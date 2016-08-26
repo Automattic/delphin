@@ -8,6 +8,7 @@ import {
 	DOMAIN_SEARCH_KEYWORD_SELECT,
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_INPUT_CHANGE,
+	DOMAIN_SEARCH_INPUT_FOCUS,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SELECT,
@@ -15,7 +16,7 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL,
-	DOMAIN_UNSELECT
+	DOMAIN_UNSELECT,
 } from 'reducers/action-types';
 import { omitTld } from 'lib/domains';
 
@@ -114,4 +115,7 @@ export function domainSearchKeywordRemove( value ) {
 export function domainSearchKeywordReplaceSelected( value ) {
 	return { type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED, value };
 }
+
 export const submitEmptySearch = () => ( { type: DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT } );
+
+export const domainSearchInputFocus = () => ( { type: DOMAIN_SEARCH_INPUT_FOCUS } );

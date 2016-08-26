@@ -10,6 +10,7 @@ import { routerMiddleware, routerReducer, syncHistoryWithStore } from 'react-rou
 import thunk from 'redux-thunk';
 
 // Internal dependencies
+import { adTrackingMiddleware } from './ad-tracking-middleware';
 import { analyticsMiddleware } from './analytics-middleware';
 import config from 'config';
 import { default as wpcomMiddleware } from './wpcom-middleware';
@@ -26,6 +27,7 @@ import { switchLocaleMiddleware } from './switch-locale-middleware';
 const middlewares = [
 	routerMiddleware( browserHistory ),
 	thunk,
+	adTrackingMiddleware,
 	analyticsMiddleware,
 	logErrorNoticesMiddleware,
 	wpcomMiddleware,

@@ -48,6 +48,7 @@ class Phone extends React.Component {
 				disabled={ disabled }
 				field={ field }
 				onChange={ this.handleChange }
+				type="tel"
 				untouch={ untouch } />
 		);
 	}

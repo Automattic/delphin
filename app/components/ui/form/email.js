@@ -28,6 +28,7 @@ class Email extends React.Component {
 				inputClassName={ inputClassName }
 				gridIconSize={ gridIconSize }
 				pattern={ this.state.inputPattern }
+				type="email"
 				{ ...removeInvalidInputProps( inputProps ) }
 			/>
 		);

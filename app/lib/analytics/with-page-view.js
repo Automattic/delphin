@@ -5,14 +5,25 @@ import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 
 // Internal dependencies
-import { recordPageView } from 'actions/analytics';
+import { recordPageView, recordTracksEvent } from 'actions/analytics';
 
 export default ( WrappedComponent, title ) => {
 	class WithPageView extends React.Component {
 		componentDidMount() {
-			if ( process.env.BROWSER ) {
-				this.props.recordPageView( window.location.pathname, title );
+			const { location: { query } } = this.props;
+
+			if ( query && query.utm_source && query.utm_campaign ) {
+				// If these params are present, this is a landing page from
+				// a SEM campaign
+				this.props.recordTracksEvent( 'delphin_landing_page_view', {
+					pathname: window.location.pathname,
+					title,
+					utm_source: query.utm_source,
+					utm_campaign: query.utm_campaign
+				} );
 			}
+
+			this.props.recordPageView( window.location.pathname, title );
 		}
 
 		render() {
@@ -25,13 +36,16 @@ export default ( WrappedComponent, title ) => {
 	}
 
 	WithPageView.propTypes = {
-		recordPageView: PropTypes.func.isRequired
+		location: PropTypes.object.isRequired,
+		recordPageView: PropTypes.func.isRequired,
+		recordTracksEvent: PropTypes.func.isRequired
 	};
 
 	return connect(
 		undefined,
 		dispatch => bindActionCreators( {
-			recordPageView
+			recordPageView,
+			recordTracksEvent
 		}, dispatch )
 	)( WithPageView );
 };

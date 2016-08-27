@@ -10,7 +10,7 @@ import SubmitArea from 'components/ui/form/submit-area';
 import { withErrorFocuser } from 'components/ui/form/error-focuser';
 
 const Form = withErrorFocuser( withStyles( styles )( ( { children, onSubmit, className } ) => (
-	<form onSubmit={ onSubmit } className={ classNames( styles.form, className ) }>
+	<form onSubmit={ onSubmit } className={ classNames( styles.form, className ) } noValidate>
 		{ children }
 	</form>
 ) ) );

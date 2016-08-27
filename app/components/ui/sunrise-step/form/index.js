@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 const SunriseStepForm = ( { children, onSubmit, className } ) => (
-	<form className={ classNames( className, styles.form ) } onSubmit={ onSubmit }>
+	<form className={ classNames( className, styles.form ) } noValidate onSubmit={ onSubmit }>
 		{ children }
 	</form>
 );

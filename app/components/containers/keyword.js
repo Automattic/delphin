@@ -13,13 +13,13 @@ export default connect(
 	undefined,
 	dispatch => ( {
 		remove( keyword ) {
-			dispatch( domainSearchKeywordRemove( keyword.value ) );
+			dispatch( domainSearchKeywordRemove( keyword ) );
 		},
 		toggleSelect( keyword ) {
 			if ( keyword.isSelected ) {
 				dispatch( deselectKeyword() );
 			} else {
-				dispatch( selectKeyword( keyword.value ) );
+				dispatch( selectKeyword( keyword ) );
 			}
 		}
 	} )

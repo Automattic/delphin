@@ -24,23 +24,97 @@ const initialState = {
 
 const initialKeywordState = {
 	value: '',
+	index: null,
 	isSelected: false
 };
 
+/**
+ * Check if two keywords corresponds to the same one displayed in the domain search input.
+ *
+ * @param {object} keyword - first keyword to compare
+ * @param {object} anotherKeyword - second keyword to compare
+ * @returns {boolean} - true if both keywords match, false otherwise
+ */
+const isSameKeyword = ( keyword, { value, index } ) => {
+	return keyword.value === value && keyword.index === index;
+};
+
 const isValidKeyword = value => typeof value === 'string' && value.trim().length > 0;
-const getKeywordFromValue = value => ( Object.assign( {}, initialKeywordState, { value: value.trim() } ) );
+
+const createKeyword = ( value, index ) => (
+	Object.assign( {}, initialKeywordState, { value: value.trim(), index } )
+);
 
 const addKeyword = ( state, value ) => {
-	value = value.trim();
+	const { keywords } = state;
 
-	// if we already have that keyword, no need to add it.
-	if ( find( state.keywords, keyword => keyword.value === value ) ) {
-		return Object.assign( {}, state, { inputValue: '' } );
-	}
+	value = value.trim();
 
 	return Object.assign( {}, state, {
 		inputValue: '',
-		keywords: state.keywords.concat( getKeywordFromValue( value ) )
+		keywords: keywords.concat( createKeyword( value, keywords.length ) )
+	} );
+};
+
+/**
+ * Returns a new state with the specified keyword removed.
+ *
+ * @param {object} state - current state
+ * @param {object} keyword - keyword to remove
+ * @returns {object} - the new state
+ */
+const removeKeyword = ( state, { value, index } ) => {
+	const newKeywords = state.keywords.filter( ( keyword ) => {
+		return ! isSameKeyword( keyword, { value, index } );
+	} );
+
+	// Updates indexes to avoid holes
+	return Object.assign( {}, state, {
+		keywords: newKeywords.map( ( keyword, newIndex ) => {
+			return Object.assign( {}, keyword, {
+				index: newIndex
+			} );
+		} )
+	} );
+};
+
+/**
+ * Returns a new state with the specified keyword selected.
+ *
+ * @param {object} state - current state
+ * @param {object} keyword - keyword to select
+ * @returns {object} - the new state
+ */
+const selectKeyword = ( state, { value, index } ) => {
+	return Object.assign( {}, state, {
+		keywords: state.keywords.map( ( keyword ) => {
+			return Object.assign( {}, keyword, {
+				isSelected: isSameKeyword( keyword, { value, index } )
+			} );
+		} )
+	} );
+};
+
+/**
+ * Returns a new state with the specified keyword updated with the given value.
+ *
+ * @param {object} state - current state
+ * @param {object} keyword - keyword to update
+ * @param {string} newValue - new value
+ * @returns {object} - the new state
+ */
+const updateKeyword = ( state, { value, index }, newValue ) => {
+	return Object.assign( {}, state, {
+		keywords: state.keywords.map( ( keyword ) => {
+			if ( isSameKeyword( keyword, { value, index } ) ) {
+				return Object.assign( {}, keyword, {
+					value: newValue,
+					isSelected: false
+				} );
+			}
+
+			return keyword;
+		} )
 	} );
 };
 
@@ -56,7 +130,7 @@ export default function domainKeywords( state = initialState, action ) {
 				if ( state.keywords.length !== queryKeywords.length ||
 					! state.keywords.every( ( keyword, index ) => keyword.value === queryKeywords[ index ] ) ) {
 					return Object.assign( {}, state, {
-						keywords: queryKeywords.map( getKeywordFromValue )
+						keywords: queryKeywords.map( createKeyword )
 					} );
 				}
 			}
@@ -78,11 +152,7 @@ export default function domainKeywords( state = initialState, action ) {
 			return Object.assign( {}, state, { inputValue: value } );
 
 		case DOMAIN_SEARCH_KEYWORD_SELECT:
-			return Object.assign( {}, state, {
-				keywords: state.keywords.map( keyword => {
-					return Object.assign( {}, keyword, { isSelected: keyword.value === value } );
-				} )
-			} );
+			return selectKeyword( state, action.keyword );
 
 		case DOMAIN_SEARCH_KEYWORD_DESELECT:
 			return Object.assign( {}, state, {
@@ -92,9 +162,7 @@ export default function domainKeywords( state = initialState, action ) {
 			} );
 
 		case DOMAIN_SEARCH_KEYWORD_REMOVE:
-			return Object.assign( {}, state, {
-				keywords: state.keywords.filter( keyword => keyword.value !== value )
-			} );
+			return removeKeyword( state, action.keyword );
 
 		case DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED:
 			if ( isValidKeyword( value ) ) {
@@ -104,15 +172,7 @@ export default function domainKeywords( state = initialState, action ) {
 					return state;
 				}
 
-				const existingKeyword = find( state.keywords, keyword => keyword.value === value.trim() );
-
-				if ( existingKeyword ) {
-					return state;
-				}
-
-				return Object.assign( {}, state, {
-					keywords: state.keywords.map( keyword => keyword === selectedKeyword ? getKeywordFromValue( value ) : keyword )
-				} );
+				return updateKeyword( state, selectedKeyword, value );
 			}
 
 			return state;

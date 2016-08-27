@@ -7,6 +7,7 @@ import {
 	DOMAIN_SEARCH_INPUT_CHANGE,
 	DOMAIN_SEARCH_INPUT_FOCUS,
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
+	DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
 	DOMAIN_SEARCH_KEYWORD_SELECT,
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
@@ -47,7 +48,7 @@ describe( 'ui.domainSearch reducer', () => {
 			value: 'foobar '
 		} ) ).toEqual( {
 			inputValue: '',
-			keywords: [ { value: 'foobar', isSelected: false } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: false } ]
 		} );
 	} );
 
@@ -59,36 +60,36 @@ describe( 'ui.domainSearch reducer', () => {
 			type: DOMAIN_SEARCH_SUBMIT
 		} ) ).toEqual( {
 			inputValue: '',
-			keywords: [ { value: 'foobar', isSelected: false } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: false } ]
 		} );
 	} );
 
 	it( 'should be possible to select a keyword', () => {
 		const initialState = {
 			inputValue: '',
-			keywords: [ { value: 'foobar', isSelected: false } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: false } ]
 		};
 
 		expect( domainKeywords( initialState, {
 			type: DOMAIN_SEARCH_KEYWORD_SELECT,
-			value: 'foobar'
+			keyword: { value: 'foobar', index: 0 }
 		} ) ).toEqual( {
 			inputValue: '',
-			keywords: [ { value: 'foobar', isSelected: true } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: true } ]
 		} );
 	} );
 
 	it( 'should be possible to deselect a keyword', () => {
 		const initialState = {
 			inputValue: '',
-			keywords: [ { value: 'foobar', isSelected: true } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: true } ]
 		};
 
 		expect( domainKeywords( initialState, {
 			type: DOMAIN_SEARCH_KEYWORD_DESELECT
 		} ) ).toEqual( {
 			inputValue: '',
-			keywords: [ { value: 'foobar', isSelected: false } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: false } ]
 		} );
 	} );
 
@@ -96,17 +97,43 @@ describe( 'ui.domainSearch reducer', () => {
 		const initialState = {
 			inputValue: 'foobaz',
 			keywords: [
-				{ value: 'foobar', isSelected: false },
-				{ value: 'barbaz', isSelected: false }
+				{ value: 'foobar', index: 0, isSelected: false },
+				{ value: 'barbaz', index: 1, isSelected: false }
 			]
 		};
 
 		expect( domainKeywords( initialState, {
 			type: DOMAIN_SEARCH_KEYWORD_REMOVE,
-			value: 'foobar'
+			keyword: { value: 'barbaz', index: 1 }
 		} ) ).toEqual( {
 			inputValue: 'foobaz',
-			keywords: [ { value: 'barbaz', isSelected: false } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: false } ]
+		} );
+	} );
+
+	it( 'should be possible to remove a keyword when multiple keywords have the same value', () => {
+		const initialState = {
+			inputValue: '',
+			keywords: [
+				{ value: 'barbaz', index: 0, isSelected: false },
+				{ value: 'foobar', index: 1, isSelected: false },
+				{ value: 'foobar', index: 2, isSelected: false },
+				{ value: 'foobar', index: 3, isSelected: false },
+				{ value: 'foofoo', index: 4, isSelected: false }
+			]
+		};
+
+		expect( domainKeywords( initialState, {
+			type: DOMAIN_SEARCH_KEYWORD_REMOVE,
+			keyword: { value: 'foobar', index: 2 }
+		} ) ).toEqual( {
+			inputValue: '',
+			keywords: [
+				{ value: 'barbaz', index: 0, isSelected: false },
+				{ value: 'foobar', index: 1, isSelected: false },
+				{ value: 'foobar', index: 2, isSelected: false },
+				{ value: 'foofoo', index: 3, isSelected: false }
+			]
 		} );
 	} );
 
@@ -114,8 +141,8 @@ describe( 'ui.domainSearch reducer', () => {
 		const initialState = {
 			inputValue: '',
 			keywords: [
-				{ value: 'foobar', isSelected: false },
-				{ value: 'barbaz', isSelected: false }
+				{ value: 'foobar', index: 0, isSelected: false },
+				{ value: 'barbaz', index: 1, isSelected: false }
 			]
 		};
 
@@ -123,7 +150,7 @@ describe( 'ui.domainSearch reducer', () => {
 			type: DOMAIN_SEARCH_LAST_KEYWORD_REMOVE
 		} ) ).toEqual( {
 			inputValue: 'barba',
-			keywords: [ { value: 'foobar', isSelected: false } ]
+			keywords: [ { value: 'foobar', index: 0, isSelected: false } ]
 		} );
 	} );
 
@@ -155,6 +182,29 @@ describe( 'ui.domainSearch reducer', () => {
 			keywords: [
 				{ value: 'foobar', isSelected: false },
 				{ value: 'barbaz', isSelected: false }
+			]
+		} );
+	} );
+
+	it( 'should be possible to replace the selected keyword with a new value', () => {
+		const initialState = {
+			inputValue: '',
+			keywords: [
+				{ value: 'foobar', index: 1, isSelected: false },
+				{ value: 'foobar', index: 2, isSelected: true },
+				{ value: 'foobar', index: 3, isSelected: false }
+			]
+		};
+
+		expect( domainKeywords( initialState, {
+			type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
+			value: 'barbaz'
+		} ) ).toEqual( {
+			inputValue: '',
+			keywords: [
+				{ value: 'foobar', index: 1, isSelected: false },
+				{ value: 'barbaz', index: 2, isSelected: false },
+				{ value: 'foobar', index: 3, isSelected: false }
 			]
 		} );
 	} );

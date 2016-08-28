@@ -103,7 +103,7 @@ const Checkout = React.createClass( {
 	renderCreditCards() {
 		const supportedCards = [
 			'Visa',
-			'Mastercard',
+			'MasterCard',
 			'Discover',
 			'American Express',
 		];

@@ -5,6 +5,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import {
 	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SEARCH_INPUT_CHANGE,
+	DOMAIN_SEARCH_INPUT_FOCUS,
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_KEYWORD_SELECT,
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
@@ -137,6 +138,24 @@ describe( 'ui.domainSearch reducer', () => {
 		} ) ).toEqual( {
 			inputValue: '',
 			keywords: []
+		} );
+	} );
+
+	it( 'should deselect the selected keyword when the input is focused', () => {
+		const initialState = {
+			inputValue: '',
+			keywords: [
+				{ value: 'foobar', isSelected: false },
+				{ value: 'barbaz', isSelected: true }
+			]
+		};
+
+		expect( domainKeywords( initialState, { type: DOMAIN_SEARCH_INPUT_FOCUS } ) ).toEqual( {
+			inputValue: '',
+			keywords: [
+				{ value: 'foobar', isSelected: false },
+				{ value: 'barbaz', isSelected: false }
+			]
 		} );
 	} );
 } );

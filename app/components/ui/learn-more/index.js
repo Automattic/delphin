@@ -10,7 +10,7 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import Button from 'components/ui/button';
 import DomainInput from 'components/ui/form/domain-input';
-import Input from 'components/ui/form/input';
+import Email from 'components/ui/form/email';
 import { subscribeUser } from 'actions/learn-more';
 import ValidationError from 'components/ui/form/validation-error';
 
@@ -49,18 +49,15 @@ class LearnMore extends React.Component {
 								inputClassName={ styles.input }
 								field={ fields.domain }
 								placeholder={ i18n.translate( 'What domain are you interested in?' ) }
-								required
 							/>
 							<ValidationError field={ fields.domain } />
 						</div>
 
 						<div className={ styles.inputContainer }>
-							<Input
-								type="email"
+							<Email
 								inputClassName={ styles.input }
 								field={ fields.email }
 								placeholder={ i18n.translate( 'Enter your email' ) }
-								required
 							/>
 							<ValidationError field={ fields.email } />
 						</div>

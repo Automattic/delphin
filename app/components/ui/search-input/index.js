@@ -67,6 +67,7 @@ class SearchInput extends React.Component {
 					className="search"
 					value={ this.props.inputValue }
 					placeholder={ this.props.placeholder }
+					onFocus={ this.props.onInputFocus }
 					onChange={ this.handleInputChange }
 					onKeyDown={ this.handleInputKeydown }
 				/>
@@ -82,6 +83,7 @@ SearchInput.propTypes = {
 		value: PropTypes.string.isRequired,
 		isSelected: PropTypes.bool.isRequired
 	} ) ).isRequired,
+	onInputFocus: PropTypes.func.isRequired,
 	placeholder: PropTypes.string.isRequired,
 	relatedWords: PropTypes.array.isRequired,
 	removeLastKeyword: PropTypes.func.isRequired,

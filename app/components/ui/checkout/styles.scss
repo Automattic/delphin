@@ -153,6 +153,61 @@
 	position: relative;
 }
 
+.credit-cards {
+	float: right;
+}
+
+.visa,
+.visa-disabled,
+.mastercard,
+.mastercard-disabled,
+.discover,
+.discover-disabled,
+.amex,
+.amex-disabled {
+	background-size: contain;
+	display: inline-block;
+	height: 20px;
+	margin-left: 3px;
+	width: 32px;
+}
+
+.visa {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-visa.svg );
+}
+
+.visa-disabled {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-visa-disabled.svg );
+}
+
+.mastercard {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-mastercard.svg );
+}
+
+.mastercard-disabled {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-mastercard-disabled.svg );
+}
+
+.discover {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-discover.svg );
+}
+
+.discover-disabled {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-discover-disabled.svg );
+}
+
+.amex {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-amex.svg );
+}
+
+.amex-disabled {
+	background-image: url( https://s0.wordpress.com/i/delphin/cc-amex-disabled.svg );
+}
+
+.number-label {
+	float: left;
+}
+
 @-webkit-keyframes fadeIn {
 	0% {
 		opacity: 0;

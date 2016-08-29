@@ -1,6 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import creditcards from 'creditcards';
+import { card, cvc } from 'creditcards';
 
 export const validateCheckoutForm = values => {
 	const errors = {};
@@ -33,18 +33,11 @@ export const validateCheckoutForm = values => {
 		errors.countryCode = i18n.translate( 'Choose your country from the list.' );
 	}
 
-	const cardErrors = creditcards.validate( {
-		number: values.number,
-		expirationMonth: values.expirationMonth,
-		expirationYear: values.expirationYear,
-		cvc: values.cvv
-	} );
-
-	if ( ! errors.number && ! cardErrors.validCardNumber ) {
+	if ( ! errors.number && ! card.isValid( card.parse( values.number ) ) ) {
 		errors.number = i18n.translate( 'Enter your number as it is on your card.' );
 	}
 
-	if ( ! errors.cvv && ! cardErrors.validCvc ) {
+	if ( ! errors.cvv && ! cvc.isValid( values.cvv ) ) {
 		errors.cvv = i18n.translate( 'Enter your security code as it is on your card.' );
 	}
 

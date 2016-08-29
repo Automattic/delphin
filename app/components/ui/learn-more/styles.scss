@@ -65,3 +65,67 @@
 	padding: 20px 16px;
 	width: 100%;
 }
+
+.content {
+	color: $blue-dark;
+	line-height: 1.4;
+	margin: 30px auto 70px;
+	max-width: 700px;
+	padding: 0 20px;
+	text-align: center;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: $blue-dark;
+	}
+
+	h2 {
+		font-size: 2.5rem;
+		font-weight: 300;
+		margin-top: 30px;
+		padding: 20px;
+	}
+
+	.three-boxes {
+		color: $blue-dark;
+		display: flex;
+		margin-top: 80px;
+
+		@include breakpoint( '<660px' ) {
+			flex-direction: column;
+		}
+
+		& > div {
+			border: 2px solid $gray-light;
+			border-radius: 3px;
+			flex-basis: 200px;
+			flex-grow: 1;
+			margin: 10px;
+			padding: 30px 20px;
+			text-align: left;
+		}
+
+		.box-title {
+			color: $blue-dark;
+			font-size: 1.4rem;
+			font-weight: 600;
+			text-align: center;
+		}
+
+		.box-title-notice {
+			color: $gray;
+			font-size: 1.3rem;
+			font-style: italic;
+			font-weight: 300;
+			text-align: center;
+		}
+
+		.box-content {
+			margin-top: 20px;
+		}
+	}
+}

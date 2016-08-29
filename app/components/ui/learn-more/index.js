@@ -11,6 +11,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 import Button from 'components/ui/button';
 import DomainInput from 'components/ui/form/domain-input';
 import Email from 'components/ui/form/email';
+import PartialUnderline from 'components/ui/partial-underline';
 import { subscribeUser } from 'actions/learn-more';
 import ValidationError from 'components/ui/form/validation-error';
 
@@ -67,26 +68,50 @@ class LearnMore extends React.Component {
 						</div>
 					</form>
 				</div>
-				<SunriseStep.Footer>
-					<h2>{ i18n.translate( 'How does the .blog launch work?' ) }</h2>
-					<div>
-						<div>{ i18n.translate( 'Trademark owners' ) }</div>
-						<div>{ i18n.translate( '* Not offered on get.blog' ) }</div>
-						<div>{ i18n.translate( 'Registered trademark owners can apply for .blog domains associated with their brands.' ) }</div>
-					</div>
 
-					<div>
-						<div>{ i18n.translate( 'Open for application' ) }</div>
-						<div>{ i18n.translate( 'August 18th - November 2nd' ) }</div>
-						<div>{ i18n.translate( 'During the "Landrush" period, anyone can apply for their desired .blog domains.' ) }</div>
-					</div>
+				<div className={ styles.content }>
+					<PartialUnderline centered>
+						<h2>{ i18n.translate( 'How does the .blog launch work?' ) }</h2>
+					</PartialUnderline>
 
-					<div>
-						<div>{ i18n.translate( 'Public launch' ) }</div>
-						<div>{ i18n.translate( 'November 21st' ) }</div>
-						<div>{ i18n.translate( 'When .blog goes live, anyone will be able to register a .blog domain in seconds.' ) }</div>
+					<div className={ styles.threeBoxes }>
+						<div>
+							<div className={ styles.boxTitle }>
+								{ i18n.translate( 'Trademark owners' ) }
+							</div>
+							<div className={ styles.boxTitleNotice }>
+								{ i18n.translate( '* Not offered on get.blog' ) }
+							</div>
+							<div className={ styles.boxContent }>
+								{ i18n.translate( 'Registered trademark owners can apply for .blog domains associated with their brands.' ) }
+							</div>
+						</div>
+
+						<div>
+							<div className={ styles.boxTitle }>
+								{ i18n.translate( 'Open for application' ) }
+							</div>
+							<div className={ styles.boxTitleNotice }>
+								{ i18n.translate( 'August 18th - November 2nd' ) }
+							</div>
+							<div className={ styles.boxContent }>
+								{ i18n.translate( 'During the "Landrush" period, anyone can apply for their desired .blog domains.' ) }
+							</div>
+						</div>
+
+						<div>
+							<div className={ styles.boxTitle }>
+								{ i18n.translate( 'Public launch' ) }
+							</div>
+							<div className={ styles.boxTitleNotice }>
+								{ i18n.translate( 'November 21st' ) }
+							</div>
+							<div className={ styles.boxContent }>
+								{ i18n.translate( 'When .blog goes live, anyone will be able to register a .blog domain in seconds.' ) }
+							</div>
+						</div>
 					</div>
-				</SunriseStep.Footer>
+				</div>
 			</SunriseStep>
 		);
 	}

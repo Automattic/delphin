@@ -146,7 +146,9 @@ if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 
 	publicRoutes = publicRoutes.map( route => {
 		if ( route.slug === 'home' ) {
-			return Object.assign( {}, route, { childRoutes: [
+			const existingChildRoutes = route.childRoutes || [];
+
+			return Object.assign( {}, route, { childRoutes: existingChildRoutes.concat( [
 				{
 					path: 'my-domains',
 					slug: 'myDomains',
@@ -165,7 +167,7 @@ if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 					component: HostInfoContainer,
 					static: false
 				}
-			] } );
+			] ) } );
 		}
 
 		return route;

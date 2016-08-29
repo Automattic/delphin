@@ -14,10 +14,12 @@ function Keywords( props ) {
 	return (
 		<span>
 			<ul className={ styles.keywords }>
-				{ props.keywords.map( ( keyword, index ) => <KeywordContainer
-					key={ keyword.value + index }
-					keyword={ keyword }
-				/> ) }
+				{ props.keywords.map( keyword => (
+					<KeywordContainer
+						key={ keyword.id }
+						keyword={ keyword }
+					/>
+				) ) }
 			</ul>
 		</span>
 	);

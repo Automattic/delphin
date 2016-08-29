@@ -2,6 +2,7 @@
 import find from 'lodash/find';
 import isEmpty from 'lodash/isEmpty';
 import last from 'lodash/last';
+import uniqueId from 'lodash/uniqueId';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
@@ -24,25 +25,14 @@ const initialState = {
 
 const initialKeywordState = {
 	value: '',
-	index: null,
+	id: null,
 	isSelected: false
-};
-
-/**
- * Check if two keywords corresponds to the same one displayed in the domain search input.
- *
- * @param {object} keyword - first keyword to compare
- * @param {object} anotherKeyword - second keyword to compare
- * @returns {boolean} - true if both keywords match, false otherwise
- */
-const isSameKeyword = ( keyword, { value, index } ) => {
-	return keyword.value === value && keyword.index === index;
 };
 
 const isValidKeyword = value => typeof value === 'string' && value.trim().length > 0;
 
-const createKeyword = ( value, index ) => (
-	Object.assign( {}, initialKeywordState, { value: value.trim(), index } )
+const createKeyword = value => (
+	Object.assign( {}, initialKeywordState, { value: value.trim(), id: parseInt( uniqueId(), 10 ) } )
 );
 
 const addKeyword = ( state, value ) => {
@@ -52,7 +42,7 @@ const addKeyword = ( state, value ) => {
 
 	return Object.assign( {}, state, {
 		inputValue: '',
-		keywords: keywords.concat( createKeyword( value, keywords.length ) )
+		keywords: keywords.concat( createKeyword( value ) )
 	} );
 };
 
@@ -60,21 +50,16 @@ const addKeyword = ( state, value ) => {
  * Returns a new state with the specified keyword removed.
  *
  * @param {object} state - current state
- * @param {object} keyword - keyword to remove
+ * @param {object} id - id of the keyword to remove
  * @returns {object} - the new state
  */
-const removeKeyword = ( state, { value, index } ) => {
+const removeKeyword = ( state, id ) => {
 	const newKeywords = state.keywords.filter( ( keyword ) => {
-		return ! isSameKeyword( keyword, { value, index } );
+		return keyword.id !== id;
 	} );
 
-	// Updates indexes to avoid holes
 	return Object.assign( {}, state, {
-		keywords: newKeywords.map( ( keyword, newIndex ) => {
-			return Object.assign( {}, keyword, {
-				index: newIndex
-			} );
-		} )
+		keywords: newKeywords
 	} );
 };
 
@@ -82,14 +67,14 @@ const removeKeyword = ( state, { value, index } ) => {
  * Returns a new state with the specified keyword selected.
  *
  * @param {object} state - current state
- * @param {object} keyword - keyword to select
+ * @param {object} id - id of the keyword to remove
  * @returns {object} - the new state
  */
-const selectKeyword = ( state, { value, index } ) => {
+const selectKeyword = ( state, id ) => {
 	return Object.assign( {}, state, {
 		keywords: state.keywords.map( ( keyword ) => {
 			return Object.assign( {}, keyword, {
-				isSelected: isSameKeyword( keyword, { value, index } )
+				isSelected: keyword.id === id
 			} );
 		} )
 	} );
@@ -99,14 +84,14 @@ const selectKeyword = ( state, { value, index } ) => {
  * Returns a new state with the specified keyword updated with the given value.
  *
  * @param {object} state - current state
- * @param {object} keyword - keyword to update
+ * @param {object} id - id of the keyword to remove
  * @param {string} newValue - new value
  * @returns {object} - the new state
  */
-const updateKeyword = ( state, { value, index }, newValue ) => {
+const updateKeyword = ( state, id, newValue ) => {
 	return Object.assign( {}, state, {
 		keywords: state.keywords.map( ( keyword ) => {
-			if ( isSameKeyword( keyword, { value, index } ) ) {
+			if ( keyword.id === id ) {
 				return Object.assign( {}, keyword, {
 					value: newValue,
 					isSelected: false
@@ -152,7 +137,7 @@ export default function domainKeywords( state = initialState, action ) {
 			return Object.assign( {}, state, { inputValue: value } );
 
 		case DOMAIN_SEARCH_KEYWORD_SELECT:
-			return selectKeyword( state, action.keyword );
+			return selectKeyword( state, action.keyword.id );
 
 		case DOMAIN_SEARCH_KEYWORD_DESELECT:
 			return Object.assign( {}, state, {
@@ -162,7 +147,7 @@ export default function domainKeywords( state = initialState, action ) {
 			} );
 
 		case DOMAIN_SEARCH_KEYWORD_REMOVE:
-			return removeKeyword( state, action.keyword );
+			return removeKeyword( state, action.keyword.id );
 
 		case DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED:
 			if ( isValidKeyword( value ) ) {
@@ -172,7 +157,7 @@ export default function domainKeywords( state = initialState, action ) {
 					return state;
 				}
 
-				return updateKeyword( state, selectedKeyword, value );
+				return updateKeyword( state, selectedKeyword.id, value );
 			}
 
 			return state;

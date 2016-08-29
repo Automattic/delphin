@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
-import DomainInput from 'components/ui/domain-input';
+import SunriseDomainInput from 'components/ui/sunrise-domain-input';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
@@ -61,7 +61,7 @@ const SunriseHome = React.createClass( {
 
 					<div className={ styles.domainSearch }>
 						<div className={ styles.field }>
-							<DomainInput
+							<SunriseDomainInput
 								{ ...query }
 								autoComplete="off"
 								autoFocus

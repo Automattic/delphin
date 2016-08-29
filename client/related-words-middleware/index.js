@@ -9,7 +9,8 @@ import { getKeywords, getRelatedWords } from 'reducers/ui/domain-search/selector
 import {
 	DOMAIN_SUGGESTIONS_FETCH,
 	RELATED_WORD_FETCH,
-	RELATED_WORD_FETCH_COMPLETE
+	RELATED_WORD_FETCH_COMPLETE,
+	RELATED_WORD_FETCH_FAIL,
 } from 'reducers/action-types';
 import { isDomain } from 'lib/domains';
 import { isEnglishWord, translateWord } from 'lib/translate';
@@ -73,11 +74,9 @@ export const relatedWordsMiddleware = store => next => action => {
 				type: RELATED_WORD_FETCH_COMPLETE,
 				word: originalWord,
 				data: words
-			} ) ).catch( ( error ) => store.dispatch( {
-				type: RELATED_WORD_FETCH_COMPLETE,
-				word: originalWord,
-				data: null,
-				error: error.toString()
+			} ) ).catch( () => store.dispatch( {
+				type: RELATED_WORD_FETCH_FAIL,
+				word: originalWord
 			} ) );
 		} );
 	}

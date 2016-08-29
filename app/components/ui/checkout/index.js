@@ -1,8 +1,10 @@
 // External dependencies
+import { card } from 'creditcards';
 import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
 import range from 'lodash/range';
+import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
@@ -91,6 +93,40 @@ const Checkout = React.createClass( {
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},
 
+	handleCreditCardNumberChange( event ) {
+		const { value } = event.target,
+			rawFieldValue = card.parse( value );
+
+		this.props.fields.number.onChange( card.format( rawFieldValue ) );
+	},
+
+	renderCreditCards() {
+		const supportedCards = [
+			'Visa',
+			'MasterCard',
+			'Discover',
+			'American Express',
+		];
+		const number = this.props.fields.number.value;
+		const cardType = card.type( card.parse( number ), true );
+		const enableAllCards = supportedCards.indexOf( cardType ) === -1;
+		const classes = {
+			visa: ( enableAllCards || cardType === 'Visa' ) ? styles.visa : styles.visaDisabled,
+			mastercard: ( enableAllCards || cardType === 'MasterCard' ) ? styles.mastercard : styles.mastercardDisabled,
+			discover: ( enableAllCards || cardType === 'Discover' ) ? styles.discover : styles.discoverDisabled,
+			amex: ( enableAllCards || cardType === 'American Express' ) ? styles.amex : styles.amexDisabled,
+		};
+
+		return (
+			<div className={ styles.creditCards }>
+				<div alt="Visa" className={ classes.visa } />
+				<div alt="Mastercard" className={ classes.mastercard } />
+				<div alt="Discover" className={ classes.discover } />
+				<div alt="American Express" className={ classes.amex } />
+			</div>
+		);
+	},
+
 	renderForm() {
 		const months = i18n.moment.months(),
 			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
@@ -120,10 +156,12 @@ const Checkout = React.createClass( {
 							</fieldset>
 
 							<fieldset>
-								<label>{ i18n.translate( 'Card Number' ) }</label>
+								<label className={ styles.numberLabel }>{ i18n.translate( 'Card Number' ) }</label>
+								{ this.renderCreditCards() }
 								<Input
 									type="text"
-									field={ fields.number }
+									field={ omit( fields.number, 'onChange' ) }
+									onChange={ this.handleCreditCardNumberChange }
 								/>
 								<ValidationError field={ fields.number } />
 							</fieldset>

@@ -27,7 +27,7 @@ class CheckoutReview extends React.Component {
 
 	renderPaymentReview() {
 		const ccSuffix = this.props.checkout.number.substring( this.props.checkout.number.length - 4 );
-		const ccType = card.type( this.props.checkout.number ).replace( / /g, '' ).toLowerCase();
+		const ccType = card.type( card.parse( this.props.checkout.number ) ).replace( / /g, '' ).toLowerCase();
 
 		return <section className={ styles.paymentReview }>
 			<h3 className={ styles.paymentTitle }>{ i18n.translate( 'Total' ) }</h3>

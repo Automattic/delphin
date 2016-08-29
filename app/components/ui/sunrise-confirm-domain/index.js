@@ -1,6 +1,5 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
-import isEmpty from 'lodash/isEmpty';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -21,7 +20,7 @@ class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
 		const { query, redirect, unselectDomain } = this.props;
 
-		if ( query && ! isEmpty( validateDomain( query ) ) ) {
+		if ( query && validateDomain( query ) ) {
 			redirect( 'home', '?query=' + query );
 		}
 

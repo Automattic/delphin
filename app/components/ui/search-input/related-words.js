@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { isEnglishWord } from 'lib/translate';
 import styles from './styles.scss';
 import RelatedWord from './related-word';
 
@@ -13,8 +14,10 @@ const RelatedWords = ( { target, replace, relatedWords } ) => {
 	if ( ! relatedWords ) {
 		return null;
 	}
+
 	const showRelatedWords = relatedWords.hasLoadedFromServer && relatedWords.data.length > 0,
-		isGoogleTranslateAttributionVisible = i18n.getLocaleSlug() !== config( 'i18n_default_locale_slug' ) && showRelatedWords,
+		isDefaultLocale = i18n.getLocaleSlug() === config( 'i18n_default_locale_slug' ),
+		isGoogleTranslateAttributionVisible = ( ! isDefaultLocale || ! isEnglishWord( relatedWords.word ) ) && showRelatedWords,
 		{ isRequesting } = relatedWords;
 
 	return (

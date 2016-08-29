@@ -94,52 +94,49 @@ const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ]
 /**
  * Returns validation messages for the given domain.
  *
- * @param {string} query - Query to validate.
+ * @param {string} domain - domain to validate.
  * @return {object} - Object that may contain validation messages.
  */
-export const validateDomain = query => {
-	query = query.toLowerCase();
-	query = query.trim();
-	query = query.replace( /\.blog$/gi, '' );
+export const validateDomain = domain => {
+	domain = domain.toLowerCase();
+	domain = domain.trim();
+	domain = domain.replace( /\.blog$/gi, '' );
 
-	if ( query === '' ) {
-		return { query: i18n.translate( 'Please enter a domain name' ) };
+	if ( domain === '' ) {
+		return i18n.translate( 'Please enter a domain name' );
 	}
 
-	if ( query.length < 4 ) {
-		return { query: i18n.translate( 'Choose a longer domain, at least four characters.' ) };
+	if ( domain.length < 4 ) {
+		return i18n.translate( 'Choose a longer domain, at least four characters.' );
 	}
 
-	if ( query.length > 63 ) {
-		return { query: i18n.translate( 'Choose a shorter domain, up to 63 characters (not including the ".blog" part).' ) };
+	if ( domain.length > 63 ) {
+		return i18n.translate( 'Choose a shorter domain, up to 63 characters (not including the ".blog" part).' );
 	}
 
-	if ( query.charAt( 0 ) === '-' ) {
-		return { query: i18n.translate( 'Don’t use a "-" (hyphen) as the first character in your domain.' ) };
+	if ( domain.charAt( 0 ) === '-' ) {
+		return i18n.translate( 'Don’t use a "-" (hyphen) as the first character in your domain.' );
 	}
 
-	if ( query.charAt( query.length - 1 ) === '-' ) {
-		return { query: i18n.translate( 'Don’t use a "-" (hyphen) as the last character in your domain.' ) };
+	if ( domain.charAt( domain.length - 1 ) === '-' ) {
+		return i18n.translate( 'Don’t use a "-" (hyphen) as the last character in your domain.' );
 	}
 
-	if ( query.indexOf( '.' ) > -1 ) {
-		return { query: i18n.translate( 'Don’t use a "." (period) in your domain.' ) };
+	if ( domain.indexOf( '.' ) > -1 ) {
+		return i18n.translate( 'Don’t use a "." (period) in your domain.' );
 	}
 
-	if ( reservedDomains.indexOf( query ) > -1 ) {
-		return {
-			query: i18n.translate( 'The domain %(domain)s is not available for registration.',
-				{
-					args: {
-						domain: withTld( query )
-					},
-				} )
-		};
+	if ( reservedDomains.indexOf( domain ) > -1 ) {
+		return i18n.translate( 'The domain %(domain)s is not available for registration.', {
+			args: {
+				domain: withTld( domain )
+			}
+		} );
 	}
 
-	if ( ! isDomain( withTld( query ) ) ) {
-		return { query: i18n.translate( 'Use only lowercase letters, numbers, and hyphens (a to z, 0 to 9, and -). Spaces or other characters are not supported.' ) };
+	if ( ! isDomain( withTld( domain ) ) ) {
+		return i18n.translate( 'Use only lowercase letters, numbers, and hyphens (a to z, 0 to 9, and -). Spaces or other characters are not supported.' );
 	}
 
-	return {};
+	return null;
 };

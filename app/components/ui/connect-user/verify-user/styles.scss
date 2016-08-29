@@ -4,12 +4,13 @@
 .instructions {
 	background: url( https://s0.wordpress.com/i/delphin/click-email.svg ) no-repeat right top;
 	background-size: auto 100px;
-	border-bottom: 1px solid $gray-light;
 	display: block;
 	font-size: 1.6rem;
+	font-weight: bold;
 	line-height: 1.4;
-	margin: 0 0 30px;
-	padding: 10px 100px 40px 0;
+	margin: 0;
+	min-height: 90px;
+	padding: 10px 100px 0 0;
 
 	@include breakpoint( '<480px' ) {
 		background-size: auto 80px;
@@ -17,11 +18,32 @@
 	}
 }
 
+.confirmation-code-link-container {
+	margin-top: 15px;
+}
+
+.confirmation-code-link {
+	color: $blue;
+	font-weight: 400;
+	margin-top: 40px;
+}
+
+.button {
+	margin-bottom: 30px;
+}
+
+.two-factor-authentication-message {
+	color: $gray;
+	font-size: 1.2rem;
+	margin-top: 5px;
+}
+
 .legend {
+	border-top: 1px solid $gray-light;
 	color: $gray;
 	font-size: 1.4rem;
 	font-style: normal;
-	margin-top: 30px;
+	padding-top: 20px;
 
 	a {
 		color: inherit;

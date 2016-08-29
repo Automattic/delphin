@@ -14,7 +14,7 @@ import { subscribeUser } from 'actions/learn-more';
 
 class LearnMore extends React.Component {
 	handleSubscribeUser( event ) {
-		const { addNotice, fields: { email, domain } } = this.props;
+		const { addNotice, fields: { email, domain }, resetForm } = this.props;
 
 		event.preventDefault();
 
@@ -23,6 +23,10 @@ class LearnMore extends React.Component {
 				message: msg.replace( /\d+ - (.*)/, '$1' ),
 				status: result
 			} );
+
+			if ( 'success' === result ) {
+				resetForm();
+			}
 		} );
 	}
 
@@ -83,7 +87,8 @@ class LearnMore extends React.Component {
 
 LearnMore.propTypes = {
 	addNotice: PropTypes.func.isRequired,
-	fields: PropTypes.object.isRequired
+	fields: PropTypes.object.isRequired,
+	resetForm: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( LearnMore ) );

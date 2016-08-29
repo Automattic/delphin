@@ -1,5 +1,5 @@
 // External dependencies
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -12,6 +12,7 @@ export default reduxForm(
 	},
 	undefined,
 	{
-		addNotice
+		addNotice,
+		resetForm: dispatch => dispatch( reset( 'learn-more' ) )
 	}
 )( LearnMore );

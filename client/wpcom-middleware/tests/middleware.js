@@ -117,39 +117,6 @@ describe( 'wpcom-middleware', () => {
 			expect( WPCOM().req[ method ] ).lastCalledWith( paramsWithNamespace, { _locale: 'ja' }, payload );
 		} );
 
-		it( 'should make a request with the locale of the user if present', () => {
-			const store = {
-				getState: jest.genMockFunction().mockReturnValue( {
-					user: {
-						isLoggedIn: true,
-						connect: {
-							data: {
-								bearerToken: 'foobar'
-							}
-						},
-						settings: {
-							data: {
-								locale: 'pt-br'
-							}
-						}
-					}
-				} ),
-				dispatch: jest.genMockFunction()
-			};
-
-			middleware( store )( () => {} )( {
-				type: WPCOM_REQUEST,
-				method,
-				params,
-				payload,
-				loading: LOADING_ACTION,
-				success: SUCCESS_ACTION,
-				fail: FAIL_ACTION
-			} );
-
-			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'pt-br' }, payload );
-		} );
-
 		pit( 'should dispatch success action', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {} ),

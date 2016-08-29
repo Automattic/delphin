@@ -9,14 +9,14 @@ import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import Button from 'components/ui/button';
+import DomainInput from 'components/ui/form/domain-input';
 import Input from 'components/ui/form/input';
 import { subscribeUser } from 'actions/learn-more';
+import ValidationError from 'components/ui/form/validation-error';
 
 class LearnMore extends React.Component {
-	handleSubscribeUser( event ) {
+	handleSubscribeUser() {
 		const { addNotice, fields: { email, domain }, resetForm } = this.props;
-
-		event.preventDefault();
 
 		subscribeUser( email.value, domain.value ).then( ( { result, msg } ) => {
 			addNotice( {
@@ -31,7 +31,8 @@ class LearnMore extends React.Component {
 	}
 
 	render() {
-		const { fields } = this.props;
+		const { fields, handleSubmit } = this.props;
+
 		return (
 			<SunriseStep>
 				<DocumentTitle title={ i18n.translate( 'Get .blog updates in your email' ) } />
@@ -42,22 +43,31 @@ class LearnMore extends React.Component {
 					</div>
 				</SunriseStep.Header>
 				<div className={ styles.formContainer }>
-					<form className={ styles.form } onSubmit={ this.handleSubscribeUser }>
-						<Input
-							className={ styles.inputContainer }
-							inputClassName={ styles.input }
-							field={ fields.domain }
-							placeholder={ i18n.translate( 'What domain are you interested in?' ) }
-						/>
+					<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
+						<div className={ styles.inputContainer }>
+							<DomainInput
+								inputClassName={ styles.input }
+								field={ fields.domain }
+								placeholder={ i18n.translate( 'What domain are you interested in?' ) }
+								required
+							/>
+							<ValidationError field={ fields.domain } />
+						</div>
 
-						<Input
-							className={ styles.inputContainer }
-							inputClassName={ styles.input }
-							field={ fields.email }
-							placeholder={ i18n.translate( 'Enter your email' ) }
-						/>
+						<div className={ styles.inputContainer }>
+							<Input
+								type="email"
+								inputClassName={ styles.input }
+								field={ fields.email }
+								placeholder={ i18n.translate( 'Enter your email' ) }
+								required
+							/>
+							<ValidationError field={ fields.email } />
+						</div>
 
-						<Button>{ i18n.translate( 'Get updates' ) }</Button>
+						<div className={ styles.buttonContainer }>
+							<Button>{ i18n.translate( 'Get updates' ) }</Button>
+						</div>
 					</form>
 				</div>
 				<SunriseStep.Footer>
@@ -88,6 +98,7 @@ class LearnMore extends React.Component {
 LearnMore.propTypes = {
 	addNotice: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
 	resetForm: PropTypes.func.isRequired
 };
 

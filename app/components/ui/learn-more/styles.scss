@@ -31,19 +31,37 @@
 }
 
 .form {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 	margin: 0 auto;
-	max-width: 600px;
+	max-width: 800px;
+
+	@include breakpoint( '<660px' ) {
+		flex-direction: column;
+	}
 }
 
 .input-container {
-	display: inline-block;
-	margin-right: 15px;
+	flex-grow: 3;
+	margin: 5px;
 	vertical-align: bottom;
+}
+
+.button-container {
+	flex-grow: 2;
+	margin: 5px;
+
+	& > button {
+		width: 100%;
+	}
 }
 
 .input {
 	border: 0;
 	border-radius: 3px;
+	box-sizing: border-box;
 	font-size: 1em;
 	padding: 20px 16px;
+	width: 100%;
 }

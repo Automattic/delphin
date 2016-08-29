@@ -28,6 +28,11 @@ class LearnMore extends React.Component {
 			if ( 'success' === result ) {
 				resetForm();
 			}
+		} ).catch( error => {
+			addNotice( {
+				message: error.message,
+				status: 'error'
+			} );
 		} );
 	}
 

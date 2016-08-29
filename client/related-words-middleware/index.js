@@ -13,7 +13,7 @@ import {
 	RELATED_WORD_FETCH_FAIL,
 } from 'reducers/action-types';
 import { isDomain } from 'lib/domains';
-import { isEnglishWord, translateWord } from 'lib/translate';
+import { shouldTranslateWord, translateWord } from 'lib/translate';
 
 function requestRelatedWords( word ) {
 	return new Promise( ( resolve, reject ) => {
@@ -49,7 +49,7 @@ export const relatedWordsMiddleware = store => next => action => {
 
 			new Promise( ( resolve ) => {
 				// If we're on non english site or the word has non english alphabet - translate it
-				if ( ( locale && locale !== 'en' ) || ! isEnglishWord( originalWord ) ) {
+				if ( shouldTranslateWord( originalWord ) ) {
 					resolve( translateWord( originalWord, 'en' ) );
 				}
 

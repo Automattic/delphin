@@ -1,12 +1,11 @@
 // External dependencies
 import classNames from 'classnames';
-import config from 'config';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { isEnglishWord } from 'lib/translate';
+import { shouldTranslateWord } from 'lib/translate';
 import styles from './styles.scss';
 import RelatedWord from './related-word';
 
@@ -16,8 +15,7 @@ const RelatedWords = ( { target, replace, relatedWords } ) => {
 	}
 
 	const showRelatedWords = relatedWords.hasLoadedFromServer && relatedWords.data.length > 0,
-		isDefaultLocale = i18n.getLocaleSlug() === config( 'i18n_default_locale_slug' ),
-		isGoogleTranslateAttributionVisible = ( ! isDefaultLocale || ! isEnglishWord( relatedWords.word ) ) && showRelatedWords,
+		isGoogleTranslateAttributionVisible = shouldTranslateWord( relatedWords.word ) && showRelatedWords,
 		{ isRequesting } = relatedWords;
 
 	return (

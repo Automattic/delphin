@@ -36,15 +36,15 @@ function requestWordTranslation( word, targetLanguage, sourceLanguage ) {
 	} );
 }
 
-const englishWordRegex = /^[\w-\s0-9']+$/i;
+const romanAlphabetRegex = /^[\w-\s0-9']+$/i;
 
 /***
  * Returns whether that's an "English" word (including -, space, and numbers
  * @param {String} word a word
  * @returns {Boolean} true if the word is with english characters
  */
-export function isEnglishWord( word ) {
-	return word.match( englishWordRegex );
+export function isRomanAlphabetWord( word ) {
+	return word.match( romanAlphabetRegex );
 }
 
 export const translateWord = memoize( requestWordTranslation, ( ...args ) => args.join( '___' ) );
@@ -55,5 +55,5 @@ export const translateWord = memoize( requestWordTranslation, ( ...args ) => arg
  *
  * @param {String} word - a word
  * @returns {Boolean} true if the word should be translated
- */
-export const shouldTranslateWord = word => i18n.getLocaleSlug() !== config( 'i18n_default_locale_slug' ) || ! isEnglishWord( word );
+ 0 ) } )*/
+export const shouldTranslateWord = word => i18n.getLocaleSlug() !== config( 'i18n_default_locale_slug' ) || ! isRomanAlphabetWord( word );

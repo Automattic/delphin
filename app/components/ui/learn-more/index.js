@@ -20,7 +20,7 @@ class LearnMore extends React.Component {
 	handleSubscribeUser() {
 		const { addNotice, fields: { email, domain }, resetForm } = this.props;
 
-		subscribeUser( email.value, withTld( domain.value ) ).then( ( { result, msg } ) => {
+		return subscribeUser( email.value, withTld( domain.value ) ).then( ( { result, msg } ) => {
 			addNotice( {
 				// Mailchimp error messages are prefixed with an integer to indicate which field has errored,
 				// let's just strip it
@@ -37,6 +37,12 @@ class LearnMore extends React.Component {
 				status: 'error'
 			} );
 		} );
+	}
+
+	isSubmitButtonDisabled() {
+		const { asyncValidating, invalid, submitting } = this.props;
+
+		return asyncValidating || invalid || submitting;
 	}
 
 	render() {
@@ -76,7 +82,7 @@ class LearnMore extends React.Component {
 						</div>
 
 						<div className={ styles.buttonContainer }>
-							<Button>{ i18n.translate( 'Get updates' ) }</Button>
+							<Button disabled={ this.isSubmitButtonDisabled() }>{ i18n.translate( 'Get updates' ) }</Button>
 						</div>
 					</form>
 				</div>
@@ -131,9 +137,12 @@ class LearnMore extends React.Component {
 
 LearnMore.propTypes = {
 	addNotice: PropTypes.func.isRequired,
+	asyncValidating: PropTypes.bool.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
-	resetForm: PropTypes.func.isRequired
+	invalid: PropTypes.bool.isRequired,
+	resetForm: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( LearnMore ) );

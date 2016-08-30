@@ -22,6 +22,8 @@ class LearnMore extends React.Component {
 
 		subscribeUser( email.value, withTld( domain.value ) ).then( ( { result, msg } ) => {
 			addNotice( {
+				// Mailchimp error messages are prefixed with an integer to indicate which field has errored,
+				// let's just strip it
 				message: msg.replace( /\d+ - (.*)/, '$1' ),
 				status: result
 			} );

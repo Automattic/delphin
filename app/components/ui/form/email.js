@@ -20,12 +20,13 @@ class Email extends React.Component {
 	}
 
 	render() {
-		const { className, inputClassName, ...inputProps } = this.props;
+		const { className, inputClassName, gridIconSize, ...inputProps } = this.props;
 
 		return (
 			<Input
 				className={ className }
 				inputClassName={ inputClassName }
+				gridIconSize={ gridIconSize }
 				pattern={ this.state.inputPattern }
 				{ ...removeInvalidInputProps( inputProps ) }
 			/>
@@ -36,6 +37,7 @@ class Email extends React.Component {
 Email.propTypes = {
 	className: PropTypes.string,
 	field: PropTypes.object,
+	gridIconSize: PropTypes.number,
 	inputClassName: PropTypes.string
 };
 

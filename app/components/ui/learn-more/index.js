@@ -67,6 +67,7 @@ class LearnMore extends React.Component {
 							<DomainInput
 								inputClassName={ styles.input }
 								field={ fields.domain }
+								gridIconSize={ 32 }
 								placeholder={ i18n.translate( 'What domain are you interested in?' ) }
 							/>
 							<ValidationError field={ fields.domain } />
@@ -76,6 +77,7 @@ class LearnMore extends React.Component {
 							<Email
 								inputClassName={ styles.input }
 								field={ fields.email }
+								gridIconSize={ 32 }
 								placeholder={ i18n.translate( 'Enter your email' ) }
 							/>
 							<ValidationError field={ fields.email } />

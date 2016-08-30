@@ -3,9 +3,7 @@ import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import Input from 'components/ui/form/input';
-import { removeInvalidInputProps } from 'lib/form';
-
-export const emailValidator = '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$';
+import { emailValidator, removeInvalidInputProps } from 'lib/form';
 
 class Email extends React.Component {
 	constructor( props ) {

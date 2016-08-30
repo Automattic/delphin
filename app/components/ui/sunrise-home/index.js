@@ -11,7 +11,6 @@ import { getPath } from 'routes';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
-import { preventWidows } from 'lib/formatters';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
@@ -84,9 +83,8 @@ const SunriseHome = React.createClass( {
 							{ i18n.translate(
 								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
 							) }
-							{ preventWidows( i18n.translate(
+							{ i18n.translate(
 								'Apply now to secure the perfect domain for your blog.'
-								), 2
 							) }
 						</h3>
 					</div>

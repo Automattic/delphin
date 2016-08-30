@@ -28,7 +28,7 @@ export function subscribeUser( email, domainName ) {
 					}
 
 					if ( ~response.body.msg.indexOf( 'is already subscribed to list' ) ) {
-						response.body.msg = i18n.translate( 'You already subscribed to this list.' );
+						response.body.msg = i18n.translate( 'You are already subscribed to this list.' );
 					}
 				}
 

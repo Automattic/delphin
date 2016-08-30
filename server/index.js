@@ -45,6 +45,8 @@ function renderPage( props, localeData ) {
 
 	const css = [];
 
+	// We're actually not rendering <App /> component here, but one of the routes components,
+	// props.children has that actualy component
 	const content = renderToString(
 		<Provider store={ store }>
 			<Stylizer onInsertCss={ curry( addCss )( css ) }>

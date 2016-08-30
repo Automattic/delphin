@@ -12,6 +12,7 @@ import {
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 } from 'reducers/action-types';
+jest.unmock( 'lodash/uniqueId' );
 import domainKeywords from '../domain-keywords';
 
 jest.mock( 'routes' );
@@ -186,25 +187,26 @@ describe( 'ui.domainSearch reducer', () => {
 		} );
 	} );
 
-	it( 'should be possible to replace the selected keyword with a new value', () => {
+	it( 'should be possible to replace the selected keyword with one or more keywords', () => {
 		const initialState = {
 			inputValue: '',
 			keywords: [
-				{ value: 'foobar', id: 1, isSelected: false },
-				{ value: 'foobar', id: 2, isSelected: true },
-				{ value: 'foobar', id: 3, isSelected: false }
+				{ value: 'foobar', id: 100, isSelected: false },
+				{ value: 'foobar', id: 101, isSelected: true },
+				{ value: 'foobar', id: 102, isSelected: false }
 			]
 		};
 
 		expect( domainKeywords( initialState, {
 			type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
-			value: 'barbaz'
+			value: 'bar baz'
 		} ) ).toEqual( {
 			inputValue: '',
 			keywords: [
-				{ value: 'foobar', id: 1, isSelected: false },
-				{ value: 'barbaz', id: 2, isSelected: false },
-				{ value: 'foobar', id: 3, isSelected: false }
+				{ value: 'foobar', id: 100, isSelected: false },
+				{ value: 'bar', id: 3, isSelected: false },
+				{ value: 'baz', id: 4, isSelected: false },
+				{ value: 'foobar', id: 102, isSelected: false },
 			]
 		} );
 	} );

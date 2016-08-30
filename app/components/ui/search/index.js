@@ -20,7 +20,6 @@ const Search = React.createClass( {
 		isRequesting: PropTypes.bool.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
 		query: PropTypes.string.isRequired,
-		recordPageView: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,

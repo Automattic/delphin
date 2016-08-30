@@ -2,6 +2,7 @@
 import find from 'lodash/find';
 import isEmpty from 'lodash/isEmpty';
 import last from 'lodash/last';
+import uniqueId from 'lodash/uniqueId';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
@@ -24,23 +25,81 @@ const initialState = {
 
 const initialKeywordState = {
 	value: '',
+	id: null,
 	isSelected: false
 };
 
 const isValidKeyword = value => typeof value === 'string' && value.trim().length > 0;
-const getKeywordFromValue = value => ( Object.assign( {}, initialKeywordState, { value: value.trim() } ) );
+
+const createKeyword = value => (
+	Object.assign( {}, initialKeywordState, { value: value.trim(), id: parseInt( uniqueId(), 10 ) } )
+);
 
 const addKeyword = ( state, value ) => {
-	value = value.trim();
+	const { keywords } = state;
 
-	// if we already have that keyword, no need to add it.
-	if ( find( state.keywords, keyword => keyword.value === value ) ) {
-		return Object.assign( {}, state, { inputValue: '' } );
-	}
+	value = value.trim();
 
 	return Object.assign( {}, state, {
 		inputValue: '',
-		keywords: state.keywords.concat( getKeywordFromValue( value ) )
+		keywords: keywords.concat( createKeyword( value ) )
+	} );
+};
+
+/**
+ * Returns a new state with the specified keyword removed.
+ *
+ * @param {object} state - current state
+ * @param {object} id - id of the keyword to remove
+ * @returns {object} - the new state
+ */
+const removeKeyword = ( state, id ) => {
+	const newKeywords = state.keywords.filter( ( keyword ) => {
+		return keyword.id !== id;
+	} );
+
+	return Object.assign( {}, state, {
+		keywords: newKeywords
+	} );
+};
+
+/**
+ * Returns a new state with the specified keyword selected.
+ *
+ * @param {object} state - current state
+ * @param {object} id - id of the keyword to remove
+ * @returns {object} - the new state
+ */
+const selectKeyword = ( state, id ) => {
+	return Object.assign( {}, state, {
+		keywords: state.keywords.map( ( keyword ) => {
+			return Object.assign( {}, keyword, {
+				isSelected: keyword.id === id
+			} );
+		} )
+	} );
+};
+
+/**
+ * Returns a new state with the specified keyword updated with the given value.
+ *
+ * @param {object} state - current state
+ * @param {object} id - id of the keyword to remove
+ * @param {string} newValue - new value
+ * @returns {object} - the new state
+ */
+const updateKeyword = ( state, id, newValue ) => {
+	return Object.assign( {}, state, {
+		keywords: state.keywords.map( ( keyword ) => {
+			if ( keyword.id === id ) {
+				return Object.assign( {}, keyword, {
+					value: newValue,
+					isSelected: false
+				} );
+			}
+
+			return keyword;
+		} )
 	} );
 };
 
@@ -56,7 +115,7 @@ export default function domainKeywords( state = initialState, action ) {
 				if ( state.keywords.length !== queryKeywords.length ||
 					! state.keywords.every( ( keyword, index ) => keyword.value === queryKeywords[ index ] ) ) {
 					return Object.assign( {}, state, {
-						keywords: queryKeywords.map( getKeywordFromValue )
+						keywords: queryKeywords.map( createKeyword )
 					} );
 				}
 			}
@@ -78,11 +137,7 @@ export default function domainKeywords( state = initialState, action ) {
 			return Object.assign( {}, state, { inputValue: value } );
 
 		case DOMAIN_SEARCH_KEYWORD_SELECT:
-			return Object.assign( {}, state, {
-				keywords: state.keywords.map( keyword => {
-					return Object.assign( {}, keyword, { isSelected: keyword.value === value } );
-				} )
-			} );
+			return selectKeyword( state, action.keyword.id );
 
 		case DOMAIN_SEARCH_KEYWORD_DESELECT:
 			return Object.assign( {}, state, {
@@ -92,9 +147,7 @@ export default function domainKeywords( state = initialState, action ) {
 			} );
 
 		case DOMAIN_SEARCH_KEYWORD_REMOVE:
-			return Object.assign( {}, state, {
-				keywords: state.keywords.filter( keyword => keyword.value !== value )
-			} );
+			return removeKeyword( state, action.keyword.id );
 
 		case DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED:
 			if ( isValidKeyword( value ) ) {
@@ -104,15 +157,7 @@ export default function domainKeywords( state = initialState, action ) {
 					return state;
 				}
 
-				const existingKeyword = find( state.keywords, keyword => keyword.value === value.trim() );
-
-				if ( existingKeyword ) {
-					return state;
-				}
-
-				return Object.assign( {}, state, {
-					keywords: state.keywords.map( keyword => keyword === selectedKeyword ? getKeywordFromValue( value ) : keyword )
-				} );
+				return updateKeyword( state, selectedKeyword.id, value );
 			}
 
 			return state;

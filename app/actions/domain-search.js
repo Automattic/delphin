@@ -82,10 +82,10 @@ export function unselectDomain() {
 	};
 }
 
-export function selectKeyword( value ) {
+export function selectKeyword( keyword ) {
 	return {
 		type: DOMAIN_SEARCH_KEYWORD_SELECT,
-		value
+		keyword
 	};
 }
 
@@ -108,12 +108,18 @@ export function domainSearchLastKeywordRemove() {
 	return { type: DOMAIN_SEARCH_LAST_KEYWORD_REMOVE };
 }
 
-export function domainSearchKeywordRemove( value ) {
-	return { type: DOMAIN_SEARCH_KEYWORD_REMOVE, value };
+export function domainSearchKeywordRemove( keyword ) {
+	return {
+		type: DOMAIN_SEARCH_KEYWORD_REMOVE,
+		keyword
+	};
 }
 
 export function domainSearchKeywordReplaceSelected( value ) {
-	return { type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED, value };
+	return {
+		type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
+		value
+	};
 }
 
 export const submitEmptySearch = () => ( { type: DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT } );

@@ -55,9 +55,7 @@ class LearnMore extends React.Component {
 					<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
 					<div className={ styles.text }>
 						{
-							i18n.translate( 'Domains that are still not taken when .blog launches will be available ' +
-								'starting at $30 a year. Sign up to receive updates about .blog and be the first ' +
-								'to hear when it goes live.' )
+							i18n.translate( 'Sign up to receive updates about .blog and be the first to hear when it launches on November 21.' )
 						}
 					</div>
 				</SunriseStep.Header>

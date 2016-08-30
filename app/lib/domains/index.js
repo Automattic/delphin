@@ -95,7 +95,7 @@ const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ]
  * Returns validation messages for the given domain.
  *
  * @param {string} domain - domain to validate.
- * @return {object} - Object that may contain validation messages.
+ * @return {string} - String that may contain validation messages.
  */
 export const validateDomain = domain => {
 	domain = domain.toLowerCase();

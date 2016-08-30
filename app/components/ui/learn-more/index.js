@@ -1,10 +1,12 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
+import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -119,7 +121,7 @@ class LearnMore extends React.Component {
 							<div className={ styles.boxContent }>
 								{ i18n.translate( '{{link}}Apply now{{/link}} to secure the perfect domain for your blog and get a new .blog domain before the official launch.',
 									{
-										components: { link: <a href="/" /> }
+										components: { link: <Link to={ getPath( 'home' ) } /> }
 									}
 								) }
 							</div>

@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone } from '..';
+import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone, validateEmail } from '..';
 
 describe( 'getAsyncValidateFunction', () => {
 	pit( 'should resolve with no arguments if the validation returns no errors', () => {
@@ -115,5 +115,21 @@ describe( 'maskPhone', () => {
 
 	it( 'should remove any duplicate plus sign', () => {
 		expect( maskPhone( '++1234567890' ) ).toBe( '+1234567890' );
+	} );
+} );
+
+describe( 'validateEmail', () => {
+	it( 'should match valid email addresses', () => {
+		expect( validateEmail( 'thisisavalidemail@domain.com' ) ).toBeNull();
+		expect( validateEmail( 'this-is+a-valid-email@dom-ain.co.uk' ) ).toBeNull();
+		expect( validateEmail( 'this-is+a-valid-email@domain' ) ).toBeNull();
+	} );
+
+	it( 'should not match invalid email addresses', () => {
+		expect( validateEmail( undefined ) ).not.toBeNull();
+		expect( validateEmail( null ) ).not.toBeNull();
+		expect( validateEmail( false ) ).not.toBeNull();
+		expect( validateEmail( 'thisisaninvalidemail' ) ).not.toBeNull();
+		expect( validateEmail( 'this is an invalid email@domain' ) ).not.toBeNull();
 	} );
 } );

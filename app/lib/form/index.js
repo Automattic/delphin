@@ -121,8 +121,17 @@ export const focusField = node => {
 	}
 };
 
+/**
+ * Regex which matches an email address
+ */
 export const emailValidator = '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$';
 
+/**
+ * Returns validation messages for the given email.
+ *
+ * @param {string} email - email address to validate.
+ * @return {string} - String that may contain validation messages.
+ */
 export const validateEmail = email => {
 	if ( ! email ) {
 		return i18n.translate( 'Enter your email address' );

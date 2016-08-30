@@ -89,43 +89,51 @@ class LearnMore extends React.Component {
 
 				<div className={ styles.content }>
 					<PartialUnderline centered>
-						<h2>{ i18n.translate( 'How does the .blog launch work?' ) }</h2>
+						<h2>{ i18n.translate( 'When can I get my .blog domain?' ) }</h2>
 					</PartialUnderline>
 
 					<div className={ styles.threeBoxes }>
 						<div>
 							<div className={ styles.boxTitle }>
-								{ i18n.translate( 'Trademark owners' ) }
+								{ i18n.translate( 'Trademark application' ) }
 							</div>
 							<div className={ styles.boxTitleNotice }>
 								{ i18n.translate( '* Not offered on get.blog' ) }
 							</div>
 							<div className={ styles.boxContent }>
-								{ i18n.translate( 'Registered trademark owners can apply for .blog domains associated with their brands.' ) }
+								{ i18n.translate( 'Trademark holders can apply for .blog domains associated with their brands in a special process called {{link}}Sunrise{{/link}}.',
+									{
+										components: { link: <a href="http://www.trademark-clearinghouse.com/content/sunrise-services" target="_blank" /> }
+									}
+								) }
 							</div>
 						</div>
 
 						<div>
 							<div className={ styles.boxTitle }>
-								{ i18n.translate( 'Open for application' ) }
+								{ i18n.translate( 'Early application' ) }
 							</div>
 							<div className={ styles.boxTitleNotice }>
-								{ i18n.translate( 'August 18th - November 2nd' ) }
+								{ i18n.translate( 'Closes November 9th' ) }
 							</div>
 							<div className={ styles.boxContent }>
-								{ i18n.translate( 'During the "Landrush" period, anyone can apply for their desired .blog domains.' ) }
+								{ i18n.translate( '{{link}}Apply now{{/link}} to secure the perfect domain for your blog and get a new .blog domain before the official launch.',
+									{
+										components: { link: <a href="/" /> }
+									}
+								) }
 							</div>
 						</div>
 
 						<div>
 							<div className={ styles.boxTitle }>
-								{ i18n.translate( 'Public launch' ) }
+								{ i18n.translate( 'Registration' ) }
 							</div>
 							<div className={ styles.boxTitleNotice }>
-								{ i18n.translate( 'November 21st' ) }
+								{ i18n.translate( 'Opens November 21st' ) }
 							</div>
 							<div className={ styles.boxContent }>
-								{ i18n.translate( 'When .blog goes live, anyone will be able to register a .blog domain in seconds.' ) }
+								{ i18n.translate( 'Domains that are still not taken when .blog launches will be available starting at $30 a year.' ) }
 							</div>
 						</div>
 					</div>

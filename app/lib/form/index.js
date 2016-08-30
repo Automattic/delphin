@@ -134,7 +134,7 @@ export const emailValidator = '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(
  */
 export const validateEmail = email => {
 	if ( ! email ) {
-		return i18n.translate( 'Enter your email address' );
+		return i18n.translate( 'Enter your email address.' );
 	}
 
 	if ( ! new RegExp( emailValidator ).test( email ) ) {

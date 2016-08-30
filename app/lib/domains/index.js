@@ -103,7 +103,7 @@ export const validateDomain = domain => {
 	domain = domain.replace( /\.blog$/gi, '' );
 
 	if ( domain === '' ) {
-		return i18n.translate( 'Please enter a domain name' );
+		return i18n.translate( 'Please enter a domain name.' );
 	}
 
 	if ( domain.length < 4 ) {

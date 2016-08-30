@@ -69,7 +69,6 @@
     "css-loader": "^0.23.1",
     "debug": "^2.2.0",
     "express": "^4.14.0",
-    "http-auth": "^2.3.1",
     "i18n-calypso": "1.6.3",
     "inherits": "^2.0.1",
     "isomorphic-style-loader": "^1.0.0",

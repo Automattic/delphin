@@ -23,7 +23,7 @@ import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
 
-export const defaultRoutes = [
+let publicRoutes = [
 	{
 		component: NoMarginLayout,
 		indexRoute: {
@@ -129,6 +129,52 @@ export const defaultRoutes = [
 		]
 	}
 ];
+
+if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
+	const SearchContainer = require( 'components/containers/search' ).default;
+
+	publicRoutes.push( {
+		path: 'search',
+		slug: 'search',
+		static: true,
+		component: SearchContainer
+	} );
+
+	const MyDomainsContainer = require( 'components/containers/my-domains' ).default;
+	const HostsContainer = require( 'components/containers/hosts' ).default;
+	const HostInfoContainer = require( 'components/containers/host-info' ).default;
+
+	publicRoutes = publicRoutes.map( route => {
+		if ( route.slug === 'home' ) {
+			const existingChildRoutes = route.childRoutes || [];
+
+			return Object.assign( {}, route, { childRoutes: existingChildRoutes.concat( [
+				{
+					path: 'my-domains',
+					slug: 'myDomains',
+					static: false,
+					component: MyDomainsContainer
+				},
+				{
+					path: 'hosts',
+					slug: 'hosts',
+					static: false,
+					component: HostsContainer
+				},
+				{
+					path: 'hosts/:slug',
+					slug: 'hostInfo',
+					component: HostInfoContainer,
+					static: false
+				}
+			] ) } );
+		}
+
+		return route;
+	} );
+}
+
+export const defaultRoutes = publicRoutes;
 
 const localizedRoutes = getLocalizedRoutes( defaultRoutes );
 

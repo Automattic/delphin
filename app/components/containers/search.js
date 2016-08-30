@@ -64,7 +64,7 @@ export default connect(
 			dispatch( fetchDomainSuggestions( query ) );
 		}
 	} ),
-	( stateProps, dispatchProps ) => Object.assign( {}, stateProps, dispatchProps, {
+	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
 		selectDomain( domainProduct ) {
 			dispatchProps.selectDomain( domainProduct, stateProps.isLoggedIn );
 		},

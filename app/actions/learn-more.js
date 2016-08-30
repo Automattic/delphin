@@ -1,4 +1,5 @@
-
+// External dependencies
+import i18n from 'i18n-calypso';
 import request from 'superagent';
 import jsonp from 'superagent-jsonp';
 
@@ -17,6 +18,18 @@ export function subscribeUser( email, domainName ) {
 			.end( ( error, response ) => {
 				if ( error ) {
 					return reject( new Error( error ) );
+				}
+
+				if ( response.body.msg ) {
+					// translate default success response
+					if ( ~response.body.msg.indexOf( 'We need to confirm your email address.' ) ) {
+						response.body.msg = i18n.translate( 'Almost finished… We need to confirm your email address. ' +
+							'To complete the subscription process, please click the link in the email we just sent you.' );
+					}
+
+					if ( ~response.body.msg.indexOf( 'is already subscribed to list' ) ) {
+						response.body.msg = i18n.translate( 'You already subscribed to this list.' );
+					}
 				}
 
 				resolve( response.body );

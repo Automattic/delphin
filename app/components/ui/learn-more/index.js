@@ -14,12 +14,13 @@ import Email from 'components/ui/form/email';
 import PartialUnderline from 'components/ui/partial-underline';
 import { subscribeUser } from 'actions/learn-more';
 import ValidationError from 'components/ui/form/validation-error';
+import { withTld } from 'lib/domains';
 
 class LearnMore extends React.Component {
 	handleSubscribeUser() {
 		const { addNotice, fields: { email, domain }, resetForm } = this.props;
 
-		subscribeUser( email.value, domain.value ).then( ( { result, msg } ) => {
+		subscribeUser( email.value, withTld( domain.value ) ).then( ( { result, msg } ) => {
 			addNotice( {
 				message: msg.replace( /\d+ - (.*)/, '$1' ),
 				status: result

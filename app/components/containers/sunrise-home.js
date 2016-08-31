@@ -1,5 +1,7 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
+import isEmpty from 'lodash/isEmpty';
+import omitBy from 'lodash/omitBy';
 import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
@@ -13,7 +15,7 @@ import SunriseHome from 'components/ui/sunrise-home';
 // validate input value if present or query string query if present
 // Use the field value only once redux-form has been updated to fix this issue:
 // https://github.com/erikras/redux-form/issues/621
-const validate = ( values, dispatch, props ) => validateDomain( values.query || props.location.query.query );
+const validate = ( values, dispatch, props ) => omitBy( { query: validateDomain( values.query || props.location.query.query ) }, isEmpty );
 
 export default reduxForm(
 	{

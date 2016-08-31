@@ -1,6 +1,7 @@
 /* eslint no-unused-vars: 0 */
 
 // External dependencies
+import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
@@ -118,4 +119,27 @@ export const focusField = node => {
 	if ( field ) {
 		field.focus();
 	}
+};
+
+/**
+ * Regex which matches an email address
+ */
+export const emailValidator = '^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$';
+
+/**
+ * Returns validation messages for the given email.
+ *
+ * @param {string} email - email address to validate.
+ * @return {string} - String that may contain validation messages.
+ */
+export const validateEmail = email => {
+	if ( ! email ) {
+		return i18n.translate( 'Enter your email address.' );
+	}
+
+	if ( ! new RegExp( emailValidator ).test( email ) ) {
+		return i18n.translate( 'Enter a valid email address.' );
+	}
+
+	return null;
 };

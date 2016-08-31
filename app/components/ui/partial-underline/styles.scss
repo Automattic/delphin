@@ -23,3 +23,10 @@
 		margin-bottom: 1rem;
 	}
 }
+
+.centered {
+	&::before {
+		left: 50%;
+		transform: translateX( -50% );
+	}
+}

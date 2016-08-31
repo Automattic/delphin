@@ -7,7 +7,7 @@ export function subscribeUser( email, domainName ) {
 	return new Promise( ( resolve, reject ) => {
 		const queryParams = {
 			u: '4471f40dba4ec0e34130a91a5',
-			id: '3358410f08',
+			id: 'd1fefd318f',
 			MERGE0: email,
 			MERGE1: domainName
 		};

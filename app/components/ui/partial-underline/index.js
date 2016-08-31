@@ -6,13 +6,21 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const PartialUnderline = ( { children, className, ...props } ) => (
-	<div className={ classNames( styles.partialUnderline, className ) } { ...props }>
-		{ children }
-	</div>
-);
+const PartialUnderline = ( { children, className, centered, ...props } ) => {
+	const cssClasses = classNames( {
+		[ styles.partialUnderline ]: true,
+		[ styles.centered ]: !! centered
+	}, className );
+
+	return (
+		<div className={ cssClasses } { ...props }>
+			{ children }
+		</div>
+	);
+};
 
 PartialUnderline.propTypes = {
+	centered: PropTypes.bool,
 	children: PropTypes.oneOfType( [
 		PropTypes.arrayOf( PropTypes.node ),
 		PropTypes.node

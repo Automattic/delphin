@@ -1,8 +1,5 @@
 jest.disableAutomock();
 
-// External dependencies
-import isEmpty from 'lodash/isEmpty';
-
 // Internal dependencies
 import {
 	isDomain,
@@ -134,41 +131,41 @@ describe( 'lib/domains', () => {
 
 	describe( 'validateDomain', () => {
 		it( 'should return an error if the query is empty', () => {
-			expect( ! isEmpty( validateDomain( '' ) ) ).toBeTruthy();
-			expect( ! isEmpty( validateDomain( '   ' ) ) ).toBeTruthy();
+			expect( validateDomain( '' ) ).not.toBeNull();
+			expect( validateDomain( '   ' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if the query is less than four characters', () => {
-			expect( ! isEmpty( validateDomain( 'foo' ) ) ).toBeTruthy();
+			expect( validateDomain( 'foo' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if the query is longer than 63 characterso ', () => {
-			expect( ! isEmpty( validateDomain( new Array( 65 ).join( 'a' ) ) ) ).toBeTruthy();
+			expect( validateDomain( new Array( 65 ).join( 'a' ) ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if the query begins with a hyphen', () => {
-			expect( ! isEmpty( validateDomain( '-foobar' ) ) ).toBeTruthy();
+			expect( validateDomain( '-foobar' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if the query ends with a hyphen', () => {
-			expect( ! isEmpty( validateDomain( 'foobar-' ) ) ).toBeTruthy();
+			expect( validateDomain( 'foobar-' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if the query contains a period', () => {
-			expect( ! isEmpty( validateDomain( 'foo.bar' ) ) ).toBeTruthy();
+			expect( validateDomain( 'foo.bar' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if the query is not a valid domain', () => {
 			// `isDomain` is tested and covers this
-			expect( ! isEmpty( validateDomain( 'foo$bar' ) ) ).toBeTruthy();
+			expect( validateDomain( 'foo$bar' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an error if a reserved domain is submitted', () => {
-			expect( ! isEmpty( validateDomain( 'design' ) ) ).toBeTruthy();
+			expect( validateDomain( 'design' ) ).not.toBeNull();
 		} );
 
 		it( 'should return an empty object if a valid query is submitted', () => {
-			expect( isEmpty( validateDomain( 'thisisavalidquery' ) ) ).toBeTruthy();
+			expect( validateDomain( 'thisisavalidquery' ) ).toBeNull();
 		} );
 	} );
 

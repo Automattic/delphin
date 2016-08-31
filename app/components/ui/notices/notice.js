@@ -9,7 +9,7 @@ import styles from './styles.scss';
 
 const Notice = function( { notice, removeNotice } ) {
 	return (
-		<div className={ classNames( styles.notice, notice.status ) }>
+		<div className={ classNames( styles.notice, styles[ notice.status ] ) }>
 			<Gridicon
 				className={ styles.noticeIcon }
 				icon="notice-outline"

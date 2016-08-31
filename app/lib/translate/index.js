@@ -1,4 +1,5 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import request from 'superagent';
 import config from 'config';
 import memoize from 'lodash/memoize';
@@ -35,15 +36,24 @@ function requestWordTranslation( word, targetLanguage, sourceLanguage ) {
 	} );
 }
 
-const englishWordRegex = /^[\w-\s0-9']+$/i;
+const romanAlphabetRegex = /^[\w-\s0-9']+$/i;
 
 /***
  * Returns whether that's an "English" word (including -, space, and numbers
  * @param {String} word a word
  * @returns {Boolean} true if the word is with english characters
  */
-export function isEnglishWord( word ) {
-	return word.match( englishWordRegex );
+export function isRomanAlphabetWord( word ) {
+	return word.match( romanAlphabetRegex );
 }
 
 export const translateWord = memoize( requestWordTranslation, ( ...args ) => args.join( '___' ) );
+
+/**
+ * Determines whether the given word is translated. Returns true if the given
+ * word contains non-Roman characters or if the app is in a non-default locale.
+ *
+ * @param {String} word - a word
+ * @returns {Boolean} true if the word should be translated
+ 0 ) } )*/
+export const shouldTranslateWord = word => i18n.getLocaleSlug() !== config( 'i18n_default_locale_slug' ) || ! isRomanAlphabetWord( word );

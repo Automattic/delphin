@@ -81,7 +81,8 @@ const selectKeyword = ( state, id ) => {
 };
 
 /**
- * Returns a new state with the specified keyword updated with the given value.
+ * Returns a new state with the specified keyword replaced with one or more
+ * keywords from the given `newValue`.
  *
  * @param {object} state - current state
  * @param {object} id - id of the keyword to remove
@@ -90,16 +91,13 @@ const selectKeyword = ( state, id ) => {
  */
 const updateKeyword = ( state, id, newValue ) => {
 	return Object.assign( {}, state, {
-		keywords: state.keywords.map( ( keyword ) => {
+		keywords: state.keywords.reduce( ( keywords, keyword ) => {
 			if ( keyword.id === id ) {
-				return Object.assign( {}, keyword, {
-					value: newValue,
-					isSelected: false
-				} );
+				const newKeywords = newValue.split( ' ' ).map( createKeyword );
+				return keywords.concat( newKeywords );
 			}
-
-			return keyword;
-		} )
+			return keywords.concat( keyword );
+		}, [] )
 	} );
 };
 

@@ -1,4 +1,5 @@
 // External dependencies
+import badWords from 'badwords/object';
 import config from 'config';
 import difference from 'lodash/difference';
 import request from 'superagent';
@@ -33,6 +34,8 @@ function requestRelatedWords( word ) {
 	} );
 }
 
+const sanitizeRelatedWords = words => words.filter( word => ! badWords[ word.toLowerCase() ] );
+
 export const relatedWordsMiddleware = store => next => action => {
 	if ( action.type === DOMAIN_SUGGESTIONS_FETCH ) {
 		const state = store.getState(),
@@ -59,7 +62,7 @@ export const relatedWordsMiddleware = store => next => action => {
 					.then( ( relatedWords ) => ( { relatedWords, sourceLanguage: translation.sourceLanguage } ) )
 			)
 			.then( params => {
-				const { relatedWords } = params;
+				const relatedWords = sanitizeRelatedWords( params.relatedWords );
 
 				// We should translate the related words according to user's locale
 				if ( ! locale || locale === 'en' ) {

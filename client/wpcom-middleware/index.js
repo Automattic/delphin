@@ -7,7 +7,7 @@ import WPCOM from 'wpcom';
 
 // Internal dependencies
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
-import { getUserConnect, getUserLocale } from 'reducers/user/selectors';
+import { getUserConnect } from 'reducers/user/selectors';
 import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';
@@ -50,7 +50,6 @@ function addLocaleQueryParam( locale, query, apiNamespace ) {
  */
 function makeWpcomRequest( state, action ) {
 	let token;
-	let locale;
 
 	// get token from state if user is verified
 	// user is logged in only when fetch user is complete
@@ -59,20 +58,12 @@ function makeWpcomRequest( state, action ) {
 		token = getUserConnect( state ).data.bearerToken;
 	}
 
-	// get from state if user logged in
-	if ( getPath( state, 'user.isLoggedIn' ) ) {
-		locale = getUserLocale( state );
-	}
-
-	// If there's no language for the user, get if from the URL
-	if ( ! locale ) {
-		locale = i18n.getLocaleSlug();
-	}
-
 	// If there's no token for the user get it from the cookie
 	if ( ! token ) {
 		token = getTokenFromBearerCookie();
 	}
+
+	const locale = i18n.getLocaleSlug();
 
 	let { method, params, query, payload } = action;
 

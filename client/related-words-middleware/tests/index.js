@@ -1,4 +1,6 @@
 // External dependencies
+jest.unmock( 'i18n-calypso' );
+import i18n from 'i18n-calypso';
 import request from 'superagent';
 
 // The tested module:
@@ -17,8 +19,7 @@ import {
 	RELATED_WORD_FETCH,
 	RELATED_WORD_FETCH_COMPLETE
 } from 'reducers/action-types';
-import { isEnglishWord, translateWord } from 'lib/translate';
-import { getUserLocale } from 'reducers/user/selectors';
+import { isRomanAlphabetWord, translateWord } from 'lib/translate';
 
 describe( 'related-words-middleware', () => {
 	it( 'should do nothing on unrelated action', () => {
@@ -69,7 +70,7 @@ describe( 'related-words-middleware', () => {
 	} );
 
 	pit( 'should dispatch related word fetch complete', () => {
-		isEnglishWord.mockImplementation( () => true );
+		isRomanAlphabetWord.mockImplementation( () => true );
 		const word = 'one';
 		const relatedWords = [ 'hello' ];
 		const moreRelatedWords = [ 'bye' ];
@@ -116,10 +117,8 @@ describe( 'related-words-middleware', () => {
 		};
 
 		// make it translate
-		isEnglishWord.mockImplementation( () => false );
-
-		// results should be according to locale:
-		getUserLocale.mockImplementation( () => 'ru' );
+		isRomanAlphabetWord.mockImplementation( () => false );
+		i18n.getLocaleSlug = () => 'ru';
 
 		// Mock translation to not go out for API
 		translateWord.mockImplementation( ( word, targetLanguage ) => {

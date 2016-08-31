@@ -143,7 +143,7 @@ const Search = React.createClass( {
 							} )
 						) }
 						{ ! exactMatchUnavailable && (
-							i18n.translate( 'Show me {{sortOption/}} addresses for my blog:', {
+							i18n.translate( 'Show me {{sortOption/}} domains:', {
 								components: {
 									context: 'sortOption will be one of "recommended", "unique" or "short"',
 									sortOption: this.renderSortOptions()

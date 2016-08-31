@@ -1,6 +1,8 @@
 // External dependencies
 var autoprefixer = require( 'autoprefixer' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	rtlcss = require( 'rtlcss' ),
+	webpack = require( 'webpack' );
 
 var config = {
 	module: {
@@ -37,7 +39,7 @@ var config = {
 	},
 
 	postcss() {
-		return [ autoprefixer ];
+		return process.env.BUILD_RTL ? [ autoprefixer, rtlcss ] : [ autoprefixer ];
 	},
 
 	resolve: {
@@ -54,7 +56,13 @@ var config = {
 	// - This is required in production to be able to debug client-side errors more easily.
 	// Note however that source maps won't be used server-side in production since we serve static pages,
 	// in this case it's only useful for the dev server.
-	devtool: 'source-map'
+	devtool: 'source-map',
+
+	plugins: [
+		new webpack.DefinePlugin( {
+			BUILD_RTL: JSON.stringify( !! process.env.BUILD_RTL )
+		} )
+	]
 };
 
 module.exports = config;

@@ -16,7 +16,7 @@ const SearchHeader = ( { query, onQueryChange } ) => {
 			<SearchInputContainer
 				{ ...{ query } }
 				onQueryChange={ onQueryChange }
-				placeholder={ i18n.translate( 'Type a few keywords or an address' ) } />
+				placeholder={ i18n.translate( 'Type a few keywords or a domain' ) } />
 
 			<Link className={ styles.logo } to={ getPath( 'home' ) }>
 				<img alt="get.blog" src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/get-dot-blog-logo.svg" />

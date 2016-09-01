@@ -42,7 +42,9 @@ export const get = locale => {
 };
 
 export const fetch = callback => {
-	const fetchFunctions = config( 'languages' ).map( language => fetchLanguage( language.langSlug ) );
+	const fetchFunctions = config( 'languages' )
+		.filter( language => language.langSlug !== config( 'i18n_default_locale_slug' ) )
+		.map( language => fetchLanguage( language.langSlug ) );
 
 	async.parallel( fetchFunctions, ( errors, results ) => {
 		compact( results ).forEach( language => {

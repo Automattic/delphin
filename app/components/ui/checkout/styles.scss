@@ -26,7 +26,8 @@
 	padding: 0 0 25px;
 
 	p {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat right 10px;
+		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat;
+		background-position: right 10px;
 		color: $gray-dark;
 		font-size: 1.4rem;
 		line-height: 1.8rem;

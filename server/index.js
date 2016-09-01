@@ -117,9 +117,11 @@ const generateStaticFiles = rootRoutes => {
 
 	addStaticSlugs( rootRoutes );
 
-	config( 'languages' ).map( language => language.langSlug ).forEach( locale => {
-		staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
-	} );
+	config( 'languages' )
+		.filter( language => language.isRtl === BUILD_RTL )
+		.map( language => language.langSlug ).forEach( locale => {
+			staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
+		} );
 };
 
 const init = () => {

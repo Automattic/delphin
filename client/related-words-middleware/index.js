@@ -16,6 +16,9 @@ import { isDomain } from 'lib/domains';
 import { shouldTranslateWord, translateWord } from 'lib/translate';
 
 function requestRelatedWords( word ) {
+	// Wordnik does not return related words for uppercase words
+	word = word.toLowerCase();
+
 	return new Promise( ( resolve, reject ) => {
 		request
 			.get( `https://api.wordnik.com/v4/word.json/${ encodeURIComponent( word ) }/relatedWords` +

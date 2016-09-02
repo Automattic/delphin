@@ -26,8 +26,9 @@
 }
 
 .form-container {
-	background-color: lighten( $blue-background, 10% );
-	padding: 15px 0;
+	background-color: lighten( $blue-background, 5% );
+	border-top: 1px solid lighten( $blue-background, 10% );
+	padding: 30px 0;
 }
 
 .form {
@@ -35,7 +36,8 @@
 	flex-direction: row;
 	justify-content: space-around;
 	margin: 0 auto;
-	max-width: 800px;
+	max-width: 900px;
+	padding: 0 15px;
 
 	@include breakpoint( '<660px' ) {
 		flex-direction: column;
@@ -49,7 +51,7 @@
 }
 
 .button-container {
-	flex-grow: 2;
+	flex-grow: 1;
 	margin: 5px;
 
 	& > button {

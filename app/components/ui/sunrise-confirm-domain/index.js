@@ -75,13 +75,13 @@ class SunriseConfirmDomain extends React.Component {
 			);
 		}
 
-		const { totalCost } = domain;
+		const { currencyCode, totalCost } = domain;
 
 		return (
 			<div>
 				<div className={ styles.priceTag }>
-					{ i18n.translate( '%(totalCost)s Early Application', {
-						args: { totalCost }
+					{ i18n.translate( '%(totalCost)s %(currencyCode)s Early Application', {
+						args: { currencyCode, totalCost }
 					} ) }
 				</div>
 				<div className={ styles.renewalInfo }>

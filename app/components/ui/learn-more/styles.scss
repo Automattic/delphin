@@ -72,7 +72,7 @@
 	color: $blue-dark;
 	line-height: 1.4;
 	margin: 30px auto 70px;
-	max-width: 700px;
+	max-width: 1200px;
 	padding: 0 20px;
 	text-align: center;
 
@@ -89,17 +89,17 @@
 		font-size: 2.5rem;
 		font-weight: 300;
 		margin-top: 30px;
-		padding: 20px;
+		padding: 20px 0;
 	}
 }
 
 .three-boxes {
 	color: $blue-dark;
 	display: flex;
-	margin-top: 80px;
 
-	@include breakpoint( '<660px' ) {
+	@include breakpoint( '<960px' ) {
 		flex-direction: column;
+		margin-top: 40px;
 	}
 
 	& > div {
@@ -108,26 +108,33 @@
 		flex-basis: 10px;
 		flex-grow: 1;
 		margin: 10px;
+		max-width: 400px;
 		padding: 30px 20px;
 		text-align: left;
+
+		@include breakpoint( '<960px' ) {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 
 	.box-title {
 		color: $blue-dark;
-		font-size: 1.4rem;
+		font-size: 1.8rem;
 		font-weight: 600;
 		text-align: center;
 	}
 
 	.box-title-notice {
 		color: $gray;
-		font-size: 1.3rem;
+		font-size: 1.6rem;
 		font-style: italic;
 		font-weight: 300;
 		text-align: center;
 	}
 
 	.box-content {
+		font-size: 1.6rem;
 		margin-top: 20px;
 	}
 }

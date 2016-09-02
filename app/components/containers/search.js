@@ -14,6 +14,7 @@ export default connect(
 	( state, ownProps ) => ( {
 		lastQuery: state.domainSearch.query,
 		results: state.domainSearch.results,
+		hasLoadedFromServer: state.domainSearch.hasLoadedFromServer,
 		isRequesting: state.domainSearch.isRequesting,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,

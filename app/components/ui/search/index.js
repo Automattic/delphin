@@ -17,6 +17,7 @@ const Search = React.createClass( {
 	propTypes: {
 		defaultTLD: PropTypes.string.isRequired,
 		fetchDomainSuggestions: PropTypes.func.isRequired,
+		hasLoadedFromServer: PropTypes.bool.isRequired,
 		isRequesting: PropTypes.bool.isRequired,
 		numberOfResultsToDisplay: PropTypes.number,
 		query: PropTypes.string.isRequired,
@@ -155,9 +156,11 @@ const Search = React.createClass( {
 
 					<Suggestions
 						count={ this.props.numberOfResultsToDisplay }
+						hasLoadedFromServer={ this.props.hasLoadedFromServer }
 						results={ this.props.results }
 						selectDomain={ this.selectDomain }
-						sort={ this.props.sort } />
+						sort={ this.props.sort }
+					/>
 
 					{ showAdditionalResultsLink && (
 						<div className={ styles.additionalResultsLinkContainer }>

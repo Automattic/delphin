@@ -63,6 +63,10 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
+	if ( window.Raven ) {
+		window.Raven.config( 'https://02c1c1625528468ea40a86143860cdb7@sentry.io/96319' ).install();
+	}
+
 	if ( window.localeData ) {
 		i18n.setLocale( window.localeData );
 	}

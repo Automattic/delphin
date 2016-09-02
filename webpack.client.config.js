@@ -12,6 +12,8 @@ var config = merge.smart( baseConfig, {
 		historyApiFallback: true
 	},
 
+	devtool: 'source-map',
+
 	entry: [
 		'babel-polyfill',
 		path.join( __dirname, 'client' )
@@ -40,8 +42,8 @@ var config = merge.smart( baseConfig, {
 		path: path.resolve( __dirname, 'public/scripts' ),
 		publicPath: '/scripts/',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]',
-		filename: 'bundle.[hash].js'
-
+		filename: 'bundle.[hash].js',
+		sourceMapFilename: 'bundle.[hash].map.js'
 	},
 
 	plugins: [
@@ -68,7 +70,8 @@ if ( NODE_ENV === 'development' ) {
 	// http://bit.ly/1VTOHrK for more information).
 	config.debug = true;
 
-	// Enables source maps
+	// Use a more performant type of sourcemaps for our development env
+	// For a comparison see: https://webpack.github.io/docs/configuration.html#devtool
 	config.devtool = 'cheap-module-eval-source-map';
 }
 

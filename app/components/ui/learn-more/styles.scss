@@ -29,6 +29,10 @@
 	background-color: lighten( $blue-background, 5% );
 	border-top: 1px solid lighten( $blue-background, 10% );
 	padding: 30px 0;
+
+	@include breakpoint( '<660px' ) {
+		padding: 15px 0;
+	}
 }
 
 .form {
@@ -55,6 +59,7 @@
 	margin: 5px;
 
 	& > button {
+		height: 100%;
 		width: 100%;
 	}
 }
@@ -63,7 +68,7 @@
 	border: 0;
 	border-radius: 3px;
 	box-sizing: border-box;
-	font-size: 1em;
+	font-size: 1.6rem;
 	padding: 20px 16px;
 	width: 100%;
 }

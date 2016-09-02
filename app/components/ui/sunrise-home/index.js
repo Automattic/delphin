@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
+import { preventWidows } from 'lib/formatters';
 import SunriseDomainInput from 'components/ui/sunrise-domain-input';
 import { getPath } from 'routes';
 import styles from './styles.scss';
@@ -41,8 +42,16 @@ const SunriseHome = React.createClass( {
 	},
 
 	render() {
-		const { fields: { query }, handleSubmit } = this.props;
-		const confirmDomainPath = getPath( 'confirmDomain' );
+		const { fields: { query }, handleSubmit } = this.props,
+			confirmDomainPath = getPath( 'confirmDomain' ),
+			pageHeading = i18n.translate( 'Every .blog is a story. Tell yours.', {
+				components: { em: <em className="emphasis" /> }
+			} ),
+			pageContent = i18n.translate(
+				'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
+			) + i18n.translate(
+				'Apply now to secure the perfect domain for your blog.'
+			);
 
 		return (
 			<div className={ styles.homeContainer }>
@@ -54,9 +63,7 @@ const SunriseHome = React.createClass( {
 					<div className={ styles.whatsYourStory } />
 
 					<h2 className={ styles.heading }>
-						{ i18n.translate( 'Every .blog is a story. Tell yours.', {
-							components: { em: <em className="emphasis" /> }
-						} ) }
+						{ preventWidows( pageHeading, 2 ) }
 					</h2>
 
 					<div className={ styles.domainSearch }>
@@ -80,12 +87,7 @@ const SunriseHome = React.createClass( {
 
 					<div className={ styles.secondaryHeadingContainer }>
 						<h3 className={ styles.secondaryHeading }>
-							{ i18n.translate(
-								'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. '
-							) }
-							{ i18n.translate(
-								'Apply now to secure the perfect domain for your blog.'
-							) }
+							{ preventWidows( pageContent, 3 ) }
 						</h3>
 					</div>
 				</form>

@@ -22,11 +22,6 @@ import SunriseSuccessLayout from 'components/ui/layout/sunrise/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
-import { withPreventWidows } from 'lib/formatters';
-
-// Patch translate function with preventWidows wrapper
-const originalTranslate = i18n.translate;
-i18n.translate = withPreventWidows( originalTranslate, 2 );
 
 let publicRoutes = [
 	{

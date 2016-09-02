@@ -266,7 +266,9 @@ const Checkout = React.createClass( {
 										{ ...fields.privacyProtection }
 										trackChange={ this.props.trackPrivacyToggle }
 									/>
-									<span className={ styles.privacyProtectionPrice }>FREE</span>
+									<span className={ styles.privacyProtectionPrice }>
+										{ i18n.translate( 'Free' ) }
+									</span>
 								</span>
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>

@@ -96,9 +96,9 @@ class LearnMore extends React.Component {
 
 					<div className={ styles.threeBoxes }>
 						<div>
-							<div className={ styles.boxTitle }>
+							<h3 className={ styles.boxTitle }>
 								{ i18n.translate( 'Trademark application' ) }
-							</div>
+							</h3>
 							<div className={ styles.boxTitleNotice }>
 								{ i18n.translate( '* Not offered on get.blog' ) }
 							</div>
@@ -112,9 +112,9 @@ class LearnMore extends React.Component {
 						</div>
 
 						<div>
-							<div className={ styles.boxTitle }>
+							<h3 className={ styles.boxTitle }>
 								{ i18n.translate( 'Early application' ) }
-							</div>
+							</h3>
 							<div className={ styles.boxTitleNotice }>
 								{ i18n.translate( 'Closes November 9th' ) }
 							</div>
@@ -128,9 +128,9 @@ class LearnMore extends React.Component {
 						</div>
 
 						<div>
-							<div className={ styles.boxTitle }>
+							<h3 className={ styles.boxTitle }>
 								{ i18n.translate( 'Registration' ) }
-							</div>
+							</h3>
 							<div className={ styles.boxTitleNotice }>
 								{ i18n.translate( 'Opens November 21st' ) }
 							</div>

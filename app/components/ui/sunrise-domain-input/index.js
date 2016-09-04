@@ -15,7 +15,7 @@ const SunriseDomainInput = ( { className, ...inputProps, field } ) => {
 		} );
 
 	return (
-		<div className={ inputClassName }>
+		<div className={ inputClassName } dir="ltr">
 			<label
 				htmlFor={ field.name } // `Input` uses `field.name` as the field ID
 				className={ styles.label }
@@ -26,6 +26,7 @@ const SunriseDomainInput = ( { className, ...inputProps, field } ) => {
 				className={ styles.inputContainer }
 				inputClassName={ styles.input }
 				gridIconSize={ 32 }
+				dir="ltr"
 				{ ...inputProps }
 			/>
 			<div className={ styles.tldContainer }>

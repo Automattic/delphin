@@ -1,5 +1,6 @@
 @import 'app/styles/colors';
 
+/*rtl:ignore*/
 .domain-input {
 	border-radius: 3px;
 	display: flex;
@@ -44,6 +45,7 @@
 	width: 1px;
 }
 
+/*rtl:ignore*/
 .input-container {
 	flex-grow: 1;
 
@@ -54,6 +56,7 @@
 	}
 }
 
+/*rtl:ignore*/
 .tld-container {
 	align-items: center;
 	background: $gray-light;
@@ -65,6 +68,7 @@
 	text-align: center;
 }
 
+/*rtl:ignore*/
 .tld {
 	padding: 0 20px;
 }

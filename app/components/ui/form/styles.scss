@@ -76,6 +76,11 @@ input::-ms-reveal {
 	position: absolute;
 	right: 10px;
 	top: 12px;
+
+	/*rtl:ignore*/
+	&.gridicon-ltr {
+		left: auto;
+	}
 }
 
 .input {
@@ -84,5 +89,11 @@ input::-ms-reveal {
 		border-bottom-right-radius: 0;
 		border-color: $alert-yellow;
 		padding-right: 30px;
+
+		/*rtl:ignore*/
+		&.error-ltr {
+			padding-left: 16px;
+			padding-right: 30px;
+		}
 	}
 }

@@ -47,7 +47,12 @@ var config = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	}
+	},
+
+	// Enables source maps
+	// This is for the server since it won't be used in production
+	// Also, we want sourcemaps for the client to debug errors sent to Sentry
+	devtool: 'source-map'
 };
 
 module.exports = config;

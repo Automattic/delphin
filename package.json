@@ -24,7 +24,7 @@
     "qs": "npm run build && node server/build/bundle",
     "qs:rtl": "BUILD_RTL=true npm run build && node server/build/bundle.rtl",
     "start": "npm install && node server/build/bundle",
-    "start:rtl": "BUILD_RTL=true npm install && node server/build/bundle.rtl",
+    "start:rtl": "BUILD_RTL=true npm install && BUILD_RTL=true node server/build/bundle.rtl",
     "start:static": "npm run prod:static && node server/static",
     "test": "NODE_PATH=.:app jest",
     "translate": "i18n-calypso -p delphin -e date -i 'app/**/*.js' -o server/build/delphin.pot"

@@ -162,6 +162,7 @@ const Checkout = React.createClass( {
 									type="text"
 									field={ omit( fields.number, 'onChange' ) }
 									onChange={ this.handleCreditCardNumberChange }
+									pattern="[0-9 ]*"
 								/>
 								<ValidationError field={ fields.number } />
 							</fieldset>
@@ -206,8 +207,9 @@ const Checkout = React.createClass( {
 							<fieldset className={ styles.securityCode }>
 								<label>{ i18n.translate( 'Security Code' ) }</label>
 								<Input
-									type="text"
+									type="tel"
 									field={ fields.cvv }
+									pattern="[0-9]*"
 								/>
 								<ValidationError field={ fields.cvv } />
 							</fieldset>

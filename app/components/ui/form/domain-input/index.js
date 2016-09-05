@@ -24,6 +24,7 @@ class DomainInput extends React.Component {
 
 		return (
 			<Input
+				autoCapitalize="off"
 				className={ className }
 				inputClassName={ inputClassName }
 				gridIconSize={ gridIconSize }

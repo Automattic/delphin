@@ -62,7 +62,7 @@ class LearnMore extends React.Component {
 					</div>
 				</SunriseStep.Header>
 				<div className={ styles.formContainer }>
-					<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
+					<form className={ styles.form } noValidate onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
 						<div className={ styles.inputContainer }>
 							<DomainInput
 								inputClassName={ styles.input }

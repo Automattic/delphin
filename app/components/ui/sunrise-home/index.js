@@ -64,6 +64,7 @@ const SunriseHome = React.createClass( {
 							<SunriseDomainInput
 								{ ...query }
 								autoComplete="off"
+								autoCapitalize="off"
 								autoFocus
 								placeholder={ i18n.translate( 'Enter your domain name' ) }
 								field={ this.props.fields.query }

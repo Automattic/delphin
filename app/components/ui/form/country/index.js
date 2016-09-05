@@ -6,10 +6,11 @@ import React, { PropTypes } from 'react';
 import Select from 'components/ui/form/select';
 import { removeInvalidInputProps } from 'lib/form';
 
-const Country = ( { className, disabled, field, countries } ) => (
+const Country = ( { className, disabled, field, countries, dir } ) => (
 	<Select
 		{ ...removeInvalidInputProps( field ) }
 		disabled={ disabled }
+		dir={ dir }
 		className={ className }>
 		<option value="">{ i18n.translate( 'Country' ) }</option>
 		<option disabled />
@@ -24,6 +25,7 @@ const Country = ( { className, disabled, field, countries } ) => (
 Country.propTypes = {
 	className: PropTypes.string,
 	countries: PropTypes.object.isRequired,
+	dir: PropTypes.string,
 	disabled: PropTypes.bool.isRequired,
 	field: PropTypes.object.isRequired
 };

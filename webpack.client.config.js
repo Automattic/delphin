@@ -12,8 +12,6 @@ var config = merge.smart( baseConfig, {
 		historyApiFallback: true
 	},
 
-	devtool: 'source-map',
-
 	entry: [
 		'babel-polyfill',
 		path.join( __dirname, 'client' )

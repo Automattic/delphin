@@ -1,4 +1,5 @@
 // External dependencies
+import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -17,6 +18,7 @@ const getNumberFromPrice = price => Number( price.replace( /[^0-9.]/g, '' ) );
 const Suggestions = React.createClass( {
 	propTypes: {
 		count: PropTypes.number,
+		hasLoadedFromServer: PropTypes.bool.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
 		sort: PropTypes.string.isRequired
@@ -53,8 +55,16 @@ const Suggestions = React.createClass( {
 	},
 
 	render() {
-		if ( ! this.props.results ) {
+		if ( ! this.props.hasLoadedFromServer ) {
 			return null;
+		}
+
+		if ( this.props.hasLoadedFromServer && ! this.props.results.length ) {
+			return (
+				<div className={ styles.noResultsMessage }>
+					{ i18n.translate( "We couldn't find any domains. Try a different search." ) }
+				</div>
+			);
 		}
 
 		return (

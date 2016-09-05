@@ -5,6 +5,7 @@
 	border-radius: 3px;
 	display: flex;
 
+	/*rtl:ignore*/
 	.input {
 		border: 1px solid $white;
 		border-right: 0;
@@ -24,10 +25,12 @@
 			border-top: 1px solid $alert-yellow;
 		}
 
+		/*rtl:ignore*/
 		.input {
 			border-left: 1px solid $alert-yellow;
 		}
 
+		/*rtl:ignore*/
 		.tld-container {
 			border-right: 1px solid $alert-yellow;
 		}
@@ -49,6 +52,7 @@
 .input-container {
 	flex-grow: 1;
 
+	/*rtl:ignore*/
 	.input {
 		border-bottom-right-radius: 0;
 		border-top-right-radius: 0;

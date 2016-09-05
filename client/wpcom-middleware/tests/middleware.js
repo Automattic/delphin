@@ -8,6 +8,10 @@ jest.unmock( 'reducers/user/selectors' );
 jest.unmock( 'i18n-calypso' );
 jest.unmock( 'lib/formatters' );
 
+global.localStorage = {
+	getItem: () => null
+};
+
 import i18n from 'i18n-calypso';
 import middleware from '..';
 import { WPCOM_REQUEST } from 'reducers/action-types.js';
@@ -95,6 +99,31 @@ describe( 'wpcom-middleware', () => {
 			} );
 
 			expect( handler.mock.calls[ 0 ][ 0 ].query ).toEqual( { locale: 'fr' } );
+		} );
+
+		it( 'should make a request with the key/value in the `delphin:checkout` property of `localStorage` to checkout endpoints if it is set', () => {
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction()
+			};
+
+			const paramsForCheckout = Object.assign( {}, { path: '/me/paygate-configuration' } );
+
+			global.localStorage = {
+				getItem: () => 'some_key:some_value'
+			};
+
+			middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params: paramsForCheckout,
+				payload,
+				loading: LOADING_ACTION,
+				success: SUCCESS_ACTION,
+				fail: FAIL_ACTION
+			} );
+
+			expect( handler.mock.calls[ 0 ][ 0 ].query ).toEqual( { locale: 'fr', some_key: 'some_value' } );
 		} );
 
 		it( 'should make a request with the `_locale` property if using the v2 API namespace', () => {

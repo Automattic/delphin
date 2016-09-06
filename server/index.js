@@ -131,6 +131,10 @@ const init = () => {
 		return;
 	}
 
+	// Use a development env for express js, even with NODE_ENV set to production
+	// so we have the errors printed when a route fails
+	app.set( 'env', 'development' );
+
 	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
 
 	app.use( api() );

@@ -139,6 +139,7 @@ const VerifyUser = React.createClass( {
 						autoComplete="off"
 						pattern="[0-9]*"
 						type="tel"
+						dir="ltr"
 					/>
 
 					<ValidationError field={ fields.twoFactorAuthenticationCode } submitFailed={ submitFailed } />
@@ -202,6 +203,7 @@ const VerifyUser = React.createClass( {
 										autoComplete="off"
 										pattern="[0-9]*"
 										type="tel"
+										dir="ltr"
 									/>
 
 									<ValidationError field={ fields.code } submitFailed={ submitFailed } />

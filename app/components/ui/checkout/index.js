@@ -161,6 +161,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ omit( fields.number, 'onChange' ) }
+									dir="ltr"
 									onChange={ this.handleCreditCardNumberChange }
 									pattern="[0-9 ]*"
 								/>
@@ -210,6 +211,7 @@ const Checkout = React.createClass( {
 									type="tel"
 									field={ fields.cvv }
 									pattern="[0-9]*"
+									dir="ltr"
 								/>
 								<ValidationError field={ fields.cvv } />
 							</fieldset>
@@ -228,6 +230,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.postalCode }
+									dir="ltr"
 								/>
 								<ValidationError field={ fields.postalCode } />
 							</fieldset>

@@ -108,20 +108,28 @@
 	}
 }
 
+/*rtl:ignore*/
 .online-contact {
+	direction: ltr;
 	margin-bottom: 2rem;
+	text-align: left;
 }
 
+/*rtl:ignore*/
 .offline-contact {
+	direction: ltr;
 	margin-bottom: 1rem;
+	text-align: left;
 }
 
+/*rtl:ignore*/
 .credit-card {
 	box-sizing: border-box;
 	float: left;
 	width: 80%;
 }
 
+/*rtl:ignore*/
 .cost {
 	float: left;
 	text-align: right;
@@ -132,14 +140,18 @@
 	}
 }
 
+/*rtl:ignore*/
 .payment-line {
+	direction: ltr;
 	margin-bottom: 1rem;
 	overflow: auto;
+	text-align: left;
 }
 
 
 $card-type-width: 32px;
 
+/*rtl:ignore*/
 .card-type {
 	background-position: 100% center;
 	background-repeat: no-repeat;
@@ -151,7 +163,9 @@ $card-type-width: 32px;
 	width: $card-type-width;
 }
 
+/*rtl:ignore*/
 .card-number {
+	direction: ltr;
 	margin-left: 4px + $card-type-width;
 }
 

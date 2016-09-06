@@ -19,7 +19,7 @@ import thunk from 'redux-thunk';
 
 // Internal dependencies
 import api from './wpcom-rest-api-proxy';
-import config from 'config';
+import config, { isEnabled } from 'config';
 import { fileExists } from './utils';
 import generateSourceMap from './sitemap-generator';
 import i18nCache from './i18n-cache';
@@ -60,7 +60,14 @@ function renderPage( props, localeData ) {
 	// `main` is an array of JS files after a hot update has been applied
 	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
 
-	return templateCompiler( { content, localeData, title, css: css.join( '' ), bundle: path.join( bundlePath, bundleFileName ) } );
+	return templateCompiler( {
+		content,
+		isEnabled,
+		localeData,
+		title,
+		css: css.join( '' ),
+		bundle: path.join( bundlePath, bundleFileName )
+	} );
 }
 
 const generateStaticFile = filePath => {
@@ -123,6 +130,10 @@ const init = () => {
 		// No need to start the server
 		return;
 	}
+
+	// Use a development env for express js, even with NODE_ENV set to production
+	// so we have the errors printed when a route fails
+	app.set( 'env', 'development' );
 
 	app.use( express.static( path.join( __dirname, '..', 'public' ) ) );
 

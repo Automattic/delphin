@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 // Internal dependencies
 import { adTrackingMiddleware } from './ad-tracking-middleware';
 import { analyticsMiddleware } from './analytics-middleware';
-import config from 'config';
+import config, { isEnabled } from 'config';
 import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
 import { logErrorNoticesMiddleware } from './log-error-notices-middleware';
@@ -63,6 +63,15 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
+	if ( window.Raven && isEnabled( 'sentry_enabled' ) ) {
+		window.Raven.config( 'https://02c1c1625528468ea40a86143860cdb7@sentry.io/96319' ).install();
+		// This is an experiment to send uncaught error in Promises to Sentry
+		// We might want to remove it if we receive too many errors
+		window.addEventListener( 'unhandledrejection', ( err ) => {
+			window.Raven.captureException( err.reason );
+		} );
+	}
+
 	if ( window.localeData ) {
 		i18n.setLocale( window.localeData );
 	}

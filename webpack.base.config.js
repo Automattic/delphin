@@ -47,7 +47,14 @@ var config = {
 			path.join( __dirname, 'app' ),
 			__dirname
 		]
-	}
+	},
+
+	// Enables source maps both for the client and server.
+	// - In development this property might be overridden to make debugging easier/faster.
+	// - This is required in production to be able to debug client-side errors more easily.
+	// Note however that source maps won't be used server-side in production since we serve static pages,
+	// in this case it's only useful for the dev server.
+	devtool: 'source-map'
 };
 
 module.exports = config;

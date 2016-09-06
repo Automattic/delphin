@@ -37,7 +37,7 @@ class CheckoutReview extends React.Component {
 					<span className={ styles.cardNumber }>**** { ccSuffix }</span>
 				</div>
 				<div className={ styles.cost }>
-					{ this.props.selectedDomain.totalCost }
+					{ this.props.selectedDomain.totalCost } { this.props.selectedDomain.currencyCode }
 				</div>
 			</div>
 			<TrackingLink className={ styles.editLink } to={ getPath( 'checkout' ) } eventName="delphin_edit_payment_click">{ i18n.translate( 'edit payment method' ) }</TrackingLink>

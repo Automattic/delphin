@@ -20,6 +20,7 @@ const Suggestion = React.createClass( {
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
 				<div className={ styles.suggestionInfo }>
+					<span className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</span>
 					<div className={ styles.suggestionTitle }>
 						{ this.props.suggestion.domain_name }
 					</div>

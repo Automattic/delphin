@@ -49,7 +49,7 @@ export default connect(
 
 		selectDomain( domainProduct ) {
 			dispatch( selectDomain( domainProduct ) );
-			dispatch( push( { pathname: getPath( 'confirmDomain' ), query: { query: domainProduct.domaiNname } } ) );
+			dispatch( push( { pathname: getPath( 'confirmDomain' ), query: { domain: domainProduct.domainName } } ) );
 		},
 
 		fetchDomainSuggestions( query ) {

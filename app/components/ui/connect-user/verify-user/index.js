@@ -20,6 +20,7 @@ const VerifyUser = React.createClass( {
 		connectUserComplete: PropTypes.func.isRequired,
 		domain: PropTypes.object,
 		errors: PropTypes.object,
+		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
@@ -49,7 +50,9 @@ const VerifyUser = React.createClass( {
 
 		if ( this.isUsingCodeFromQuery() ) {
 			if ( query.domain ) {
-				this.props.selectDomain( { domainName: query.domain } );
+				this.props.fetchDomainPrice( query.domain ).then( action => {
+					this.props.selectDomain( action.result );
+				} );
 			}
 
 			// the sign-in email directs the user to this component only if two factor authentication is enabled

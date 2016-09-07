@@ -10,6 +10,7 @@ import { getAsyncValidateFunction } from 'lib/form';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
+import { fetchDomainPrice } from 'actions/domain-price';
 import { recordPageView } from 'actions/analytics';
 import { redirect } from 'actions/routes';
 import { selectDomain } from 'actions/domain-search';
@@ -52,6 +53,7 @@ export default reduxForm(
 		addNotice,
 		connectUser,
 		connectUserComplete,
+		fetchDomainPrice,
 		redirectToTryWithDifferentEmail: withAnalytics( recordTracksEvent( 'delphin_try_different_email_click' ), () => thunkDispatch => {
 			thunkDispatch( clearConnectUser() );
 			thunkDispatch( redirect( 'signupUser' ) );

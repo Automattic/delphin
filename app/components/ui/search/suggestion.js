@@ -1,4 +1,5 @@
 // External dependencies
+import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -18,6 +19,8 @@ const Suggestion = React.createClass( {
 	},
 
 	render() {
+		const cost = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } ).cost;
+
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
 				<div className={ styles.suggestionInfo }>
@@ -25,11 +28,16 @@ const Suggestion = React.createClass( {
 						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
 					) }
 					<div className={ styles.suggestionTitle }>
-						{ this.props.suggestion.domain_name }
+						{ this.props.suggestion.domainName }
 					</div>
 					<hr />
 					<div className={ styles.cost }>
-						{ this.props.suggestion.total_cost }
+						{ i18n.translate( '%(cost)s per year', {
+							args: { cost }
+						} ) }
+					</div>
+					<div className={ styles.applicationFeeMessage }>
+						{ i18n.translate( '+ early application fee' ) }
 					</div>
 				</div>
 				<div className={ styles.buyButton }>

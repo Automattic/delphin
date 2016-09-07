@@ -70,22 +70,22 @@ describe( 'lib/domains', () => {
 	describe( 'queryIsInResults', () => {
 		it( 'should return true if the query is a domain that exists in the given results', () => {
 			expect( queryIsInResults( [
-				{ domain_name: 'foo.com' },
-				{ domain_name: 'baz.com' }
+				{ domainName: 'foo.com' },
+				{ domainName: 'baz.com' }
 			], 'foo.com' ) ).toBe( true );
 		} );
 
 		it( 'should return true if the query is a second level domain that exists in the given results', () => {
 			expect( queryIsInResults( [
-				{ domain_name: 'foo.com' },
-				{ domain_name: 'baz.com' }
+				{ domainName: 'foo.com' },
+				{ domainName: 'baz.com' }
 			], 'foo' ) ).toBe( true );
 		} );
 
 		it( 'should return true if the query is not in the given results', () => {
 			expect( queryIsInResults( [
-				{ domain_name: 'foo.com' },
-				{ domain_name: 'baz.com' }
+				{ domainName: 'foo.com' },
+				{ domainName: 'baz.com' }
 			], 'not' ) ).toBe( false );
 		} );
 	} );

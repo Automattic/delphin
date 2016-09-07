@@ -69,7 +69,7 @@ export function isDomainSearch( value ) {
  * @returns {boolean} - Whether there is a match for the given query.
  */
 export const queryIsInResults = ( results, query ) => (
-	results.some( result => result.domain_name === query || secondLevelDomainOf( result.domain_name ) === query )
+	results.some( result => result.domainName === query || secondLevelDomainOf( result.domainName ) === query )
 );
 
 /**

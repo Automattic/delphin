@@ -1,16 +1,17 @@
 doctype html
 html(dir=isRtl ? 'rtl' : 'ltr' )
 	head
-		if localeData
-			script(type='text/javascript')!='var localeData = ' + JSON.stringify( localeData ) + ';'
 		title=title
 		meta(name="viewport" content="width=device-width, initial-scale=1.0")
 		link(rel="stylesheet", href="/styles/reset.css")
-		style(type='text/css').
-			#{css}
-
+		if css
+			style(type='text/css').
+				#{css}
+		link(rel="stylesheet", href=styles)
 	body
 		#content!= content
 		if isEnabled( 'sentry' )
 			script(src="https://cdn.ravenjs.com/3.7.0/raven.min.js")
+		if localeData
+			script(type='text/javascript')!='var localeData = ' + JSON.stringify( localeData ) + ';'
 		script(src=bundle)

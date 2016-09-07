@@ -13,6 +13,7 @@ import thunk from 'redux-thunk';
 import { adTrackingMiddleware } from './ad-tracking-middleware';
 import { analyticsMiddleware } from './analytics-middleware';
 import config, { isEnabled } from 'config';
+import { getLocaleSlug } from 'lib/routes';
 import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
 import { logErrorNoticesMiddleware } from './log-error-notices-middleware';
@@ -72,8 +73,12 @@ function init() {
 		} );
 	}
 
+	window.switchLocale = switchLocale;
+	const currentRouteSlug = getLocaleSlug( window.location.pathname );
 	if ( window.localeData ) {
 		i18n.setLocale( window.localeData );
+	} else if ( currentRouteSlug ) {
+		switchLocale( currentRouteSlug );
 	}
 
 	injectTapEventPlugin();
@@ -97,8 +102,6 @@ function boot() {
 
 	render();
 	i18n.stateObserver.on( 'change', render );
-
-	window.switchLocale = switchLocale;
 
 	setLocaleCookie( i18n.getLocaleSlug() );
 }

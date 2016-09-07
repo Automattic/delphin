@@ -1,7 +1,6 @@
 // External dependencies
 var autoprefixer = require( 'autoprefixer' ),
 	path = require( 'path' ),
-	rtlcss = require( 'rtlcss' ),
 	webpack = require( 'webpack' );
 
 var config = {
@@ -39,7 +38,7 @@ var config = {
 	},
 
 	postcss() {
-		return process.env.BUILD_RTL ? [ autoprefixer, rtlcss ] : [ autoprefixer ];
+		return [ autoprefixer ];
 	},
 
 	resolve: {

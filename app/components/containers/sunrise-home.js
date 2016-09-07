@@ -15,19 +15,19 @@ import SunriseHome from 'components/ui/sunrise-home';
 // validate input value if present or query string query if present
 // Use the field value only once redux-form has been updated to fix this issue:
 // https://github.com/erikras/redux-form/issues/621
-const validate = ( values, dispatch, props ) => omitBy( { query: validateDomain( values.query || props.location.query.query ) }, isEmpty );
+const validate = ( values, dispatch, props ) => omitBy( { q: validateDomain( values.q || props.location.query.q ) }, isEmpty );
 
 export default reduxForm(
 	{
 		form: 'sunrise-home',
-		fields: [ 'query' ],
+		fields: [ 'q' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
 	( state, ownProps ) => ( {
-		initialValues: ownProps.location.query
+		initialValues: ownProps.location.q
 	} ),
 	dispatch => bindActionCreators( {
 		selectDomain,
-		redirectToConfirmDomain: domain => push( { pathname: getPath( 'confirmDomain' ), query: { query: domain } } )
+		redirectToSearch: domain => push( { pathname: getPath( 'search' ), query: { q: domain } } )
 	}, dispatch )
 )( SunriseHome );

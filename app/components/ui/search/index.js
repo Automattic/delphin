@@ -160,6 +160,7 @@ const Search = React.createClass( {
 						results={ this.props.results }
 						selectDomain={ this.selectDomain }
 						sort={ this.props.sort }
+						query={ this.props.query }
 					/>
 
 					{ showAdditionalResultsLink && (

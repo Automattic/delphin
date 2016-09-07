@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { omitTld } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestion from './suggestion';
 
@@ -19,6 +20,7 @@ const Suggestions = React.createClass( {
 	propTypes: {
 		count: PropTypes.number,
 		hasLoadedFromServer: PropTypes.bool.isRequired,
+		query: PropTypes.string,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
 		sort: PropTypes.string.isRequired
@@ -73,9 +75,11 @@ const Suggestions = React.createClass( {
 					.slice( 0, this.props.count )
 					.map( ( suggestion ) => (
 					<Suggestion
+						isBestMatch={ omitTld( this.props.query ) === omitTld( suggestion.domain_name ) }
 						key={ suggestion.domain_name }
 						selectDomain={ this.props.selectDomain }
-						suggestion={ suggestion } />
+						suggestion={ suggestion }
+					/>
 				) ) }
 			</ul>
 		);

@@ -279,7 +279,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ this.props.domain.totalCost } { this.props.domain.currencyCode }</span>
+								<span className="_price-with-currency-code">{ this.props.domain.totalCost } { this.props.domain.currencyCode }</span>
 							</div>
 						</div>
 

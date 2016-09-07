@@ -76,16 +76,16 @@ if ( NODE_ENV === 'production' ) {
 				{
 					test: /\.scss$/,
 					loader: ExtractTextPlugin.extract( 'style', [
-						'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+						'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes',
 						'postcss',
-						'sass?sourceMap'
+						'sass'
 					] )
 				}
 			]
 		},
 		plugins: [
 			new ExtractTextPlugin( '../styles/bundle.[contenthash].css' ),
-			new WebpackRTLPlugin( { filename: '../styles/bundle.[contenthash].rtl.css', minify: false } ),
+			new WebpackRTLPlugin( { filename: '../styles/bundle.[contenthash].rtl.css' } ),
 			new webpack.optimize.UglifyJsPlugin( {
 				sourceMap: !! config.devtool,
 				output: {

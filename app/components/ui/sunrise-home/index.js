@@ -72,13 +72,9 @@ const SunriseHome = React.createClass( {
 					<div className={ styles.domainSearch }>
 						<div className={ styles.field }>
 							<SunriseDomainInput
-								{ ...queryField }
-								autoComplete="off"
-								autoCapitalize="off"
-								autoFocus
-								placeholder={ i18n.translate( 'Enter your domain name' ) }
 								field={ queryField }
-								ref="q" />
+								ref="q"
+							/>
 
 							<ValidationError field={ queryField } submitFailed={ this.props.submitFailed } />
 						</div>

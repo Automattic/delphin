@@ -47,14 +47,9 @@ export default connect(
 			} ) );
 		},
 
-		selectDomain( domainProduct, isUserLoggedIn ) {
+		selectDomain( domainProduct ) {
 			dispatch( selectDomain( domainProduct ) );
-
-			if ( isUserLoggedIn ) {
-				dispatch( push( getPath( 'contactInformation' ) ) );
-			} else {
-				dispatch( push( getPath( 'signupUser' ) ) );
-			}
+			dispatch( push( { pathname: getPath( 'confirmDomain' ), query: { query: domainProduct.domaiNname } } ) );
 		},
 
 		fetchDomainSuggestions( query ) {
@@ -62,10 +57,6 @@ export default connect(
 		}
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
-		selectDomain( domainProduct ) {
-			dispatchProps.selectDomain( domainProduct, stateProps.isLoggedIn );
-		},
-
 		fetchDomainSuggestions( query ) {
 			if ( query === stateProps.lastQuery ) {
 				// no need to fetch the cached query repeatedly

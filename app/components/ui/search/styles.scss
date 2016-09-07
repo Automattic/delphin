@@ -47,6 +47,7 @@
 
 .suggestion-info {
 	padding: 20px;
+	position: relative;
 
 	hr {
 		border: 0;
@@ -61,6 +62,20 @@
 	overflow: hidden;
 	padding: 0;
 	text-overflow: ellipsis;
+}
+
+.exact-match {
+	background: $green;
+	border-radius: 3px 3px 0 0;
+	box-sizing: border-box;
+	color: #fff;
+	left: 0;
+	padding: 5px 10px;
+	position: absolute;
+	text-align: center;
+	text-transform: uppercase;
+	top: -24px;
+	width: 100%;
 }
 
 .buy-button {

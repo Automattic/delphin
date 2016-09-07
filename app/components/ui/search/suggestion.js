@@ -8,6 +8,7 @@ import styles from './styles.scss';
 
 const Suggestion = React.createClass( {
 	propTypes: {
+		isBestMatch: PropTypes.bool.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		suggestion: PropTypes.object.isRequired
 	},
@@ -20,6 +21,9 @@ const Suggestion = React.createClass( {
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
 				<div className={ styles.suggestionInfo }>
+					{ this.props.isBestMatch && (
+						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
+					) }
 					<div className={ styles.suggestionTitle }>
 						{ this.props.suggestion.domain_name }
 					</div>

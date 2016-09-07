@@ -151,6 +151,7 @@ const Checkout = React.createClass( {
 									type="text"
 									field={ fields.name }
 									autoFocus
+									dir="ltr"
 								/>
 								<ValidationError field={ fields.name } />
 							</fieldset>

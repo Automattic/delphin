@@ -77,7 +77,7 @@ let publicRoutes = [
 			{
 				path: 'confirm-domain',
 				slug: 'confirmDomain',
-				static: false,
+				static: true,
 				component: SunriseConfirmDomainContainer
 			},
 			{

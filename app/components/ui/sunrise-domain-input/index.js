@@ -5,10 +5,10 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import DomainInput from 'components/ui/form/domain-input';
+import Input from 'components/ui/form/input';
 import styles from './styles.scss';
 
-const SunriseDomainInput = ( { className, ...inputProps, field } ) => {
+const SunriseDomainInput = ( { className, field } ) => {
 	const isInvalid = field.touched && field.error,
 		inputClassName = classNames( className, styles.domainInput, {
 			[ styles.hasError ]: isInvalid
@@ -22,12 +22,16 @@ const SunriseDomainInput = ( { className, ...inputProps, field } ) => {
 			>
 				{ i18n.translate( 'Enter your domain name' ) }
 			</label>
-			<DomainInput
+			<Input
+				autoComplete="off"
+				autoCapitalize="off"
+				autoFocus
+				placeholder={ i18n.translate( 'Enter your domain name' ) }
 				className={ styles.inputContainer }
 				inputClassName={ styles.input }
 				gridIconSize={ 32 }
 				dir="ltr"
-				{ ...inputProps }
+				field={ field }
 			/>
 			<div className={ styles.tldContainer }>
 				<div className={ styles.tld }>.blog</div>

@@ -30,7 +30,7 @@ const Suggestions = React.createClass( {
 		const sortFunctions = {
 				recommended: ( a, b ) => b.relevance - a.relevance,
 				unique: ( a, b ) => a.relevance - b.relevance,
-				short: ( a, b ) => a.domain_name.length - b.domain_name.length,
+				short: ( a, b ) => a.domainName.length - b.domainName.length,
 				affordable: ( a, b ) => {
 					const costA = getNumberFromPrice( a.cost ),
 						costB = getNumberFromPrice( b.cost );
@@ -75,8 +75,8 @@ const Suggestions = React.createClass( {
 					.slice( 0, this.props.count )
 					.map( ( suggestion ) => (
 					<Suggestion
-						isBestMatch={ omitTld( this.props.query ) === omitTld( suggestion.domain_name ) }
-						key={ suggestion.domain_name }
+						isBestMatch={ omitTld( this.props.query ) === omitTld( suggestion.domainName ) }
+						key={ suggestion.domainName }
 						selectDomain={ this.props.selectDomain }
 						suggestion={ suggestion }
 					/>

@@ -26,7 +26,7 @@ export function fetchDomainPrice( domainQuery = '' ) {
 		loading: () => ( { type: DOMAIN_PRICE_FETCH, query: domainQuery } ),
 		success: ( result ) => ( {
 			type: DOMAIN_PRICE_FETCH_COMPLETE,
-			result,
+			result: result,
 			query: domainQuery
 		} ),
 		fail: ( error ) => {

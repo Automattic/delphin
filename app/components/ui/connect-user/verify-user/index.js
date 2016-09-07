@@ -49,7 +49,7 @@ const VerifyUser = React.createClass( {
 
 		if ( this.isUsingCodeFromQuery() ) {
 			if ( query.domain ) {
-				this.props.selectDomain( { domain_name: query.domain } );
+				this.props.selectDomain( { domainName: query.domain } );
 			}
 
 			// the sign-in email directs the user to this component only if two factor authentication is enabled

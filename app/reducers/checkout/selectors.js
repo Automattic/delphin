@@ -5,22 +5,22 @@ export const getCheckout = state => state.checkout;
 export const getSelectedDomain = state => getCheckout( state ).selectedDomain;
 export const getSelectedDomainPrice = state => getCheckout( state ).selectedDomainPrice.data;
 
-export const getSelectedDomainPriceDetails = state => {
-	if ( ! getCheckout( state ).selectedDomainPrice.hasLoadedFromServer ) {
+export const getSelectedDomainDetails = state => {
+	if ( ! getCheckout( state ).selectedDomain.details ) {
 		return [];
 	}
 
-	return getCheckout( state ).selectedDomainPrice.data.result.details;
+	return getCheckout( state ).selectedDomain.details;
 };
 
 export const getSelectedDomainCost = state => {
-	const domainCostDetail = getSelectedDomainPriceDetails( state ).find( detail => detail.productSlug === 'delphin-domain' );
+	const domainCostDetail = getSelectedDomainDetails( state ).find( detail => detail.productSlug === 'delphin-domain' );
 
 	return domainCostDetail ? domainCostDetail.cost : null;
 };
 
 export const getSelectedDomainApplicationCost = state => {
-	const applicationCostDetail = getSelectedDomainPriceDetails( state ).find( detail => detail.productSlug === 'delphin-domain-app' );
+	const applicationCostDetail = getSelectedDomainDetails( state ).find( detail => detail.productSlug === 'delphin-domain-app' );
 
 	return applicationCostDetail ? applicationCostDetail.cost : null;
 };

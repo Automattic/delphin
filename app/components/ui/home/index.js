@@ -32,7 +32,7 @@ const Home = React.createClass( {
 			const { results, query } = nextProps.domainSearch;
 
 			if ( isDomain( query ) && queryIsInResults( results, query ) ) {
-				const product = results.find( result => result.domain_name === query );
+				const product = results.find( result => result.domainName === query );
 				this.props.selectDomain( product );
 			} else {
 				this.props.redirectToSearch( query );

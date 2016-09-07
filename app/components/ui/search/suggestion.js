@@ -28,7 +28,7 @@ const Suggestion = React.createClass( {
 					{ this.props.isBestMatch && (
 						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
 					) }
-					<div className={ styles.suggestionTitle }>
+					<div className={ styles.suggestionTitle } title={ this.props.suggestion.domainName }>
 						{ this.props.suggestion.domainName }
 					</div>
 					<hr />

@@ -19,7 +19,7 @@ const Suggestion = React.createClass( {
 	},
 
 	render() {
-		const cost = find( this.props.suggestion.details, { product_slug: 'delphin-domain' } ).cost;
+		const cost = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } ).cost;
 
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
@@ -28,7 +28,7 @@ const Suggestion = React.createClass( {
 						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
 					) }
 					<div className={ styles.suggestionTitle }>
-						{ this.props.suggestion.domain_name }
+						{ this.props.suggestion.domainName }
 					</div>
 					<hr />
 					<div className={ styles.cost }>

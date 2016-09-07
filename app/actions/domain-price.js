@@ -1,5 +1,6 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
+import { camelizeKeys } from 'lib/formatters';
 import {
 	WPCOM_REQUEST,
 	DOMAIN_PRICE_FETCH,
@@ -26,7 +27,7 @@ export function fetchDomainPrice( domainQuery = '' ) {
 		loading: () => ( { type: DOMAIN_PRICE_FETCH, query: domainQuery } ),
 		success: ( result ) => ( {
 			type: DOMAIN_PRICE_FETCH_COMPLETE,
-			result,
+			result: camelizeKeys( result ),
 			query: domainQuery
 		} ),
 		fail: ( error ) => {

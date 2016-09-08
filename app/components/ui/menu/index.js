@@ -22,7 +22,7 @@ Link.propTypes = {
 	to: PropTypes.string.isRequired
 };
 
-const Menu = () => {
+const Menu = ( { isLoggedIn, logoutUser } ) => {
 	return (
 		<menu className={ styles.menu }>
 			<Link to={ getPath( 'learnMore' ) }>
@@ -33,10 +33,22 @@ const Menu = () => {
 				{ i18n.translate( 'Support' ) }
 			</Link>
 
-			{ isEnabled( 'my_domains' ) && (
+			{ isEnabled( 'm3' ) && isLoggedIn && (
 				<Link to={ getPath( 'myDomains' ) }>
 					{ i18n.translate( 'My Domains' ) }
 				</Link>
+			) }
+
+			{ isEnabled( 'm3' ) && ! isLoggedIn && (
+				<Link to={ getPath( 'loginUser' ) }>
+					{ i18n.translate( 'Log In' ) }
+				</Link>
+			) }
+
+			{ isEnabled( 'm3' ) && isLoggedIn && (
+				<a className={ styles.link } onClick={ logoutUser }>
+					{ i18n.translate( 'Log Out' ) }
+				</a>
 			) }
 
 			<Link to="https://automattic.com/privacy/">

@@ -59,7 +59,7 @@ const VerifyUser = React.createClass( {
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
 			this.props.showToggle( 'isConfirmationCodeVisible' );
 			this.props.updateCode( query.code );
-		} else if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
+		} else if ( this.props.isLoggedIn ) {
 			this.props.redirect( 'home' );
 
 			return;

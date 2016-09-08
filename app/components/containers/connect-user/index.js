@@ -8,7 +8,7 @@ import validator from 'validator';
 import { addNotice } from 'actions/notices';
 import ConnectUser from 'components/ui/connect-user';
 import { getAsyncValidateFunction } from 'lib/form';
-import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
+import { getSelectedDomain } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
@@ -33,7 +33,6 @@ export default reduxForm(
 	},
 	state => ( {
 		domain: getSelectedDomain( state ),
-		hasSelectedDomain: hasSelectedDomain( state ),
 		initialValues: { email: getUserConnect( state ).data.email || '' },
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state )

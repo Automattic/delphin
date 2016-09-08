@@ -9,21 +9,34 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
+import { getPath } from 'routes';
 import Select from 'components/ui/form/select';
 import styles from './styles.scss';
 
 class LanguagePicker extends React.Component {
+	getCurrentLanguage() {
+		return find( config( 'languages' ), { langSlug: i18n.getLocaleSlug() } );
+	}
+
 	handleChange( event ) {
 		const locale = event.target.value;
+		const currentLanguage = this.getCurrentLanguage();
+		const nextLanguage = find( config( 'languages' ), { langSlug: locale } );
 
-		this.props.switchLocale( locale );
-		this.props.hideSelect();
+		if ( currentLanguage.isRtl !== nextLanguage.isRtl ) {
+			// RTL and LTR languages use a different build, so we need to
+			// reload the page if the language direction changes
+			window.location.href = getPath( 'home', {}, { locale } );
+		} else {
+			this.props.switchLocale( locale );
+			this.props.hideSelect();
+		}
 	}
 
 	render() {
 		const languages = config( 'languages' );
 		const { isDark, isSelectVisible, showSelect } = this.props;
-		const currentLanguage = find( languages, { langSlug: i18n.getLocaleSlug() } );
+		const currentLanguage = this.getCurrentLanguage();
 
 		let content;
 		if ( isSelectVisible ) {

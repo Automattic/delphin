@@ -1,3 +1,4 @@
+/* global BUILD_RTL*/
 // External dependencies
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import curry from 'lodash/curry';
@@ -65,6 +66,7 @@ function renderPage( props, localeData ) {
 	return templateCompiler( {
 		content,
 		isEnabled,
+		isRtl: BUILD_RTL,
 		localeData,
 		title,
 		css: css.join( '' ),
@@ -115,9 +117,11 @@ const generateStaticFiles = rootRoutes => {
 
 	addStaticSlugs( rootRoutes );
 
-	config( 'languages' ).map( language => language.langSlug ).forEach( locale => {
-		staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
-	} );
+	config( 'languages' )
+		.filter( language => language.isRtl === BUILD_RTL )
+		.map( language => language.langSlug ).forEach( locale => {
+			staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
+		} );
 };
 
 const init = () => {

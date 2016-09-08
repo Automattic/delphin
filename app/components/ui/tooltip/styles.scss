@@ -2,6 +2,7 @@
 
 .tooltip {
 	color: $gray;
+	display: inline-block;
 	position: relative;
 
 	&:hover .text {

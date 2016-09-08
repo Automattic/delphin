@@ -219,6 +219,7 @@ class ContactInformation extends React.Component {
 											untouch={ untouch }
 											className={ styles.firstName }
 											placeholder={ i18n.translate( 'First Name' ) }
+											dir="ltr"
 										/>
 									<ValidationError field={ fields.firstName } />
 								</fieldset>
@@ -231,6 +232,7 @@ class ContactInformation extends React.Component {
 										untouch={ untouch }
 										className={ styles.lastName }
 										placeholder={ i18n.translate( 'Last Name' ) }
+										dir="ltr"
 									/>
 									<ValidationError field={ fields.lastName } />
 								</fieldset>
@@ -250,6 +252,7 @@ class ContactInformation extends React.Component {
 											className={ styles.organization }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Organization' ) }
+											dir="ltr"
 										/>
 										<ValidationError field={ fields.organization } />
 									</fieldset>
@@ -264,6 +267,7 @@ class ContactInformation extends React.Component {
 											placeholder={ i18n.translate( 'Email' ) }
 											untouch={ untouch }
 											type="email"
+											dir="ltr"
 										/>
 										<ValidationError field={ fields.email } />
 									</fieldset>
@@ -278,6 +282,7 @@ class ContactInformation extends React.Component {
 										className={ styles.address1 }
 										disabled={ this.isDataLoading() }
 										placeholder={ i18n.translate( 'Address Line 1' ) }
+										dir="ltr"
 									/>
 
 									{ this.address2InputIsVisible() && (
@@ -287,6 +292,7 @@ class ContactInformation extends React.Component {
 											className={ styles.address2 }
 											disabled={ this.isDataLoading() }
 											placeholder={ i18n.translate( 'Address Line 2' ) }
+											dir="ltr"
 										/>
 									) }
 
@@ -305,6 +311,7 @@ class ContactInformation extends React.Component {
 										field={ fields.countryCode }
 										className={ styles.countryCode }
 										supportedBy="domains"
+										dir="ltr"
 									/>
 									<ValidationError field={ fields.countryCode } />
 								</fieldset>
@@ -317,6 +324,7 @@ class ContactInformation extends React.Component {
 										field={ fields.city }
 										className={ styles.city }
 										placeholder={ i18n.translate( 'City' ) }
+										dir="ltr"
 									/>
 									<ValidationError field={ fields.city } />
 								</fieldset>
@@ -329,6 +337,7 @@ class ContactInformation extends React.Component {
 										untouch={ untouch }
 										className={ styles.state }
 										states={ this.props.states }
+										dir="ltr"
 									/>
 									<ValidationError field={ fields.state } />
 								</fieldset>
@@ -341,6 +350,7 @@ class ContactInformation extends React.Component {
 										field={ fields.postalCode }
 										className={ styles.postalCode }
 										placeholder={ i18n.translate( 'Postal Code' ) }
+										dir="ltr"
 									/>
 									<ValidationError field={ fields.postalCode } />
 								</fieldset>

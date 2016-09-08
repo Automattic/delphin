@@ -89,7 +89,7 @@ const ConnectUser = React.createClass( {
 							<div>
 								<fieldset>
 									<label>{ i18n.translate( 'Email address:' ) }</label>
-									<Input field={ fields.email } autoFocus type="email" />
+									<Input field={ fields.email } autoFocus type="email" dir="ltr" />
 									<ValidationError field={ fields.email } submitFailed={ submitFailed } />
 								</fieldset>
 								{ this.renderTermsOfService() }

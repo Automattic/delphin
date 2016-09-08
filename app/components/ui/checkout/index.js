@@ -151,6 +151,7 @@ const Checkout = React.createClass( {
 									type="text"
 									field={ fields.name }
 									autoFocus
+									dir="ltr"
 								/>
 								<ValidationError field={ fields.name } />
 							</fieldset>
@@ -161,6 +162,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ omit( fields.number, 'onChange' ) }
+									dir="ltr"
 									onChange={ this.handleCreditCardNumberChange }
 									pattern="[0-9 ]*"
 								/>
@@ -210,6 +212,7 @@ const Checkout = React.createClass( {
 									type="tel"
 									field={ fields.cvv }
 									pattern="[0-9]*"
+									dir="ltr"
 								/>
 								<ValidationError field={ fields.cvv } />
 							</fieldset>
@@ -228,6 +231,7 @@ const Checkout = React.createClass( {
 								<Input
 									type="text"
 									field={ fields.postalCode }
+									dir="ltr"
 								/>
 								<ValidationError field={ fields.postalCode } />
 							</fieldset>
@@ -275,7 +279,7 @@ const Checkout = React.createClass( {
 							</div>
 							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span>{ this.props.domain.totalCost } { this.props.domain.currencyCode }</span>
+								<span className="_price-with-currency-code">{ this.props.domain.totalCost } { this.props.domain.currencyCode }</span>
 							</div>
 						</div>
 

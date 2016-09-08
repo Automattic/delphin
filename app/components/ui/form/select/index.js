@@ -9,7 +9,9 @@ import { withErrorFocusable } from 'components/ui/form/error-focuser';
 import styles from './styles.scss';
 
 const Select = props => {
-	const classes = classNames( props.className, styles.formSelect );
+	const classes = classNames( props.className, styles.formSelect, {
+		[ styles.ltr ]: props.dir === 'ltr'
+	} );
 
 	return (
 		<select { ...omit( props, 'className' ) } className={ classes }>
@@ -21,6 +23,7 @@ const Select = props => {
 Select.propTypes = {
 	children: PropTypes.array.isRequired,
 	className: PropTypes.string,
+	dir: PropTypes.string
 };
 
 export default withErrorFocusable( withStyles( styles )( Select ) );

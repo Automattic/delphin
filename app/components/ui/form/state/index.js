@@ -11,12 +11,13 @@ import Input from 'components/ui/form/input';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 
-const State = ( { className, disabled, field, states } ) => {
+const State = ( { className, disabled, field, states, dir } ) => {
 	let content;
 
 	if ( ! states.hasLoadedFromServer || isEmpty( states.data ) ) {
 		content = (
 			<Input
+				dir={ dir }
 				field={ field }
 				disabled={ ! states.hasLoadedFromServer || disabled }
 				placeholder={ i18n.translate( 'State/Province' ) } />
@@ -24,6 +25,7 @@ const State = ( { className, disabled, field, states } ) => {
 	} else {
 		content = (
 			<Select
+				dir={ dir }
 				{ ...removeInvalidInputProps( field ) }
 				disabled={ disabled }>
 				<option value="" disabled>{ i18n.translate( 'State/Province' ) }</option>
@@ -42,6 +44,7 @@ const State = ( { className, disabled, field, states } ) => {
 
 State.propTypes = {
 	className: PropTypes.string,
+	dir: PropTypes.string,
 	disabled: PropTypes.bool.isRequired,
 	field: PropTypes.object.isRequired,
 	states: PropTypes.object.isRequired

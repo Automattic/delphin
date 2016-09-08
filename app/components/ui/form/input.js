@@ -50,7 +50,8 @@ class Input extends React.Component {
 			className = classNames( this.props.className, styles.inputContainer ),
 			isInvalid = field.touched && field.error,
 			inputClassName = classNames( this.props.inputClassName, styles.input, {
-				[ styles.hasError ]: isInvalid
+				[ styles.hasError ]: isInvalid,
+				[ styles.errorLtr ]: this.props.dir === 'ltr'
 			} ),
 			newProps = omit( this.props, [ 'className', 'field', 'untouch', 'gridIconSize', 'inputClassName' ] );
 
@@ -61,11 +62,12 @@ class Input extends React.Component {
 					className={ inputClassName }
 					{ ...removeInvalidInputProps( field ) }
 					{ ...newProps }
+					dir={ this.props.dir }
 					ref={ this.saveRef }
 				/>
 				{ isInvalid && (
 					<Gridicon
-						className={ styles.gridicon }
+						className={ classNames( styles.gridicon, { [ styles.gridiconLtr ]: this.props.dir === 'ltr' } ) }
 						onClick={ this.onClickGridicon }
 						icon="cross"
 						size={ gridIconSize }
@@ -78,6 +80,7 @@ class Input extends React.Component {
 
 Input.propTypes = {
 	className: PropTypes.string,
+	dir: PropTypes.string,
 	field: PropTypes.object.isRequired,
 	gridIconSize: PropTypes.number,
 	inputClassName: PropTypes.string,

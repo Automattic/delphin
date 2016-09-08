@@ -2,15 +2,14 @@
 import { bindActionCreators } from 'redux';
 import isEmpty from 'lodash/isEmpty';
 import omitBy from 'lodash/omitBy';
-import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { getAsyncValidateFunction } from 'lib/form';
-import { getPath } from 'routes';
 import { selectDomain } from 'actions/domain-search';
 import { validateDomain } from 'lib/domains';
 import SunriseHome from 'components/ui/sunrise-home';
+import { redirect } from 'actions/routes';
 
 // validate input value if present or query string query if present
 // Use the field value only once redux-form has been updated to fix this issue:
@@ -26,6 +25,6 @@ export default reduxForm(
 	undefined,
 	dispatch => bindActionCreators( {
 		selectDomain,
-		redirectToSearch: domain => push( { pathname: getPath( 'search' ), query: { q: domain } } )
+		redirectToSearch: domain => redirect( 'search', { q: domain } )
 	}, dispatch )
 )( SunriseHome );

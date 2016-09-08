@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import config from 'config';
+import config, { isEnabled } from 'config';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import TrackingLink from 'components/containers/tracking-link';
@@ -14,6 +14,7 @@ const Menu = () => {
 		<menu className={ styles.menu }>
 			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ getPath( 'learnMore' ) }>{ i18n.translate( 'Learn More' ) }</TrackingLink>
 			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ config( 'support_link' ) }>{ i18n.translate( 'Support' ) }</TrackingLink>
+			{ isEnabled( 'my_domains' ) && <TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ getPath( 'myDomains' ) }>{ i18n.translate( 'My Domains' ) }</TrackingLink> }
 			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to="https://automattic.com/privacy/">{ i18n.translate( 'Privacy Policy' ) }</TrackingLink>
 			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to="https://wordpress.com">{ i18n.translate( 'A WordPress.com Service' ) }</TrackingLink>
 		</menu>

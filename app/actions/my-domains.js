@@ -1,4 +1,5 @@
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import {
 	MY_DOMAINS_FETCH,
 	MY_DOMAINS_FETCH_COMPLETE,
@@ -23,8 +24,15 @@ export const fetchMyDomains = () => ( {
 		type: MY_DOMAINS_FETCH_COMPLETE,
 		results
 	} ),
-	fail: error => dispatch => dispatch( {
-		type: MY_DOMAINS_FETCH_FAIL,
-		error
-	} )
+	fail: error => dispatch => {
+		dispatch( {
+			type: MY_DOMAINS_FETCH_FAIL,
+			error
+		} );
+
+		dispatch( addNotice( {
+			message: error.message,
+			status: 'error'
+		} ) );
+	}
 } );

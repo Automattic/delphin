@@ -2,7 +2,6 @@
 import { combineReducers } from 'redux';
 
 // Internal dependencies
-import { camelizeKeys } from 'lib/formatters';
 import { createRequestReducer } from 'lib/create-request-reducer';
 import {
 	CHECKOUT_REQUESTS_RESET,
@@ -25,7 +24,7 @@ export const selectedDomain = ( state = {}, action ) => {
 
 	switch ( type ) {
 		case DOMAIN_SELECT:
-			return camelizeKeys( action.value );
+			return action.value;
 
 		case DOMAIN_UNSELECT:
 			return {};

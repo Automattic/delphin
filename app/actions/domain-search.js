@@ -1,6 +1,5 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
-import { camelizeKeys } from 'lib/formatters';
 import {
 	WPCOM_REQUEST,
 	DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT,
@@ -53,7 +52,7 @@ export function fetchDomainSuggestions( domainQuery = '' ) {
 		loading: () => ( { type: DOMAIN_SUGGESTIONS_FETCH, query: domainQuery } ),
 		success: ( results ) => ( {
 			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
-			results: results.map( camelizeKeys ),
+			results,
 			query: domainQuery
 		} ),
 		fail: ( error ) => {

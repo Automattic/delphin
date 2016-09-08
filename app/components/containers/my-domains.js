@@ -21,7 +21,7 @@ export default connect(
 	dispatch => (
 		bindActionCreators( {
 			fetchMyDomains,
-			redirectToLogin: () => push( getPath( 'loginUser' ) ),
+			redirectToHome: () => push( getPath( 'home' ) ),
 			showDomainDetails,
 			hideDomainDetails
 		}, dispatch )

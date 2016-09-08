@@ -36,7 +36,7 @@
 		.buy-button {
 			background: darken( $gray-light, 3% );
 
-			&:before {
+			&::before {
 				opacity: 1;
 				transform: translateY( -2px );
 				width: 100%;
@@ -98,7 +98,7 @@
 	text-align: center;
 	transition: background 200ms ease-in-out;
 
-	&:before {
+	&::before {
 		background: darken( $gray-light, 10% );
 		content: '';
 		display: block;

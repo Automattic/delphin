@@ -76,7 +76,7 @@
 		left: 50%;
 		opacity: 0;
 		position: absolute;
-		top: 47px;
+		top: 37px;
 		transition: opacity .2s ease-in-out;
 		width: 0;
 	}
@@ -137,8 +137,9 @@
 	max-width: 400px;
 	padding: 20px 10px;
 	position: absolute;
-	top: 55px;
+	top: 45px;
 	width: calc(100vw - 50px);
+	z-index: 2;
 
 	h3 {
 		color: darken( $gray-medium, 20% );
@@ -188,6 +189,7 @@
 	font-size: 15px;
 	margin-top: 10px;
 	padding: 10px 15px;
+	transition: border 150ms ease-in-out, color 150ms ease-in-out;
 	user-select: none;
 
 	&:hover {

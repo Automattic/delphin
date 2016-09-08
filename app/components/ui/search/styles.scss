@@ -111,11 +111,18 @@
 .sort {
 	color: rgba( $white, 0.7 );
 	font-size: 1.6rem;
-	margin-top: 83px;
+	margin-top: 150px;
 	padding: 10px 20px;
 
 	@include breakpoint( '>660px' ) {
 		font-size: 1.6rem;
+		margin-top: 83px;
+	}
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.4rem;
+		margin-top: 0;
+		padding: 10px;
 	}
 }
 
@@ -140,6 +147,10 @@
 		background: $white;
 		color: $blue-dark;
 	}
+
+	@include breakpoint( '<480px' ) {
+		font-size: 1.4rem;
+	}
 }
 
 .search-info {
@@ -152,7 +163,11 @@
 }
 
 .logo {
-	padding: 30px;
+	padding: 30px 30px 30px 10px;
+
+	@include breakpoint( '<660px' ) {
+		padding: 15px 10px 5px;
+	}
 }
 
 .no-results-message {

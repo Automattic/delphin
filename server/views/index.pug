@@ -1,5 +1,5 @@
 doctype html
-html
+html(dir=isRtl ? 'rtl' : 'ltr' )
 	head
 		if localeData
 			script(type='text/javascript')!='var localeData = ' + JSON.stringify( localeData ) + ';'

@@ -110,7 +110,11 @@ class CheckoutReview extends React.Component {
 			<SunriseStep.Form className={ styles.checkoutReview } onSubmit={ this.handleSubmission }>
 				<section className={ styles.summary }>
 					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
-					<p className={ styles.applicationFee }>{ i18n.translate( '%(applicationFeeCost)s Early Application', { args: { applicationFeeCost: this.props.applicationCost } } ) }</p>
+					<p className={ styles.applicationFee }>
+						{ this.props.applicationCost }
+						{ ' ' }
+						{ i18n.translate( 'Early Application' ) }
+					</p>
 					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
 				</section>
 				{ this.renderPaymentReview() }
@@ -123,7 +127,7 @@ class CheckoutReview extends React.Component {
 				{ this.props.isPurchasing && this.renderProcessing() }
 			</SunriseStep.Form>
 
-			{/* This is here so Cancel Application will have some space */}
+			{ /* This is here so Cancel Application will have some space */ }
 			<SunriseStep.Footer></SunriseStep.Footer>
 		</SunriseStep> );
 	}

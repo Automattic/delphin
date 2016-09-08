@@ -116,9 +116,7 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "webpack-merge": "^0.12.0",
-    "wpcom": "^4.9.1",
-    "wpcom-proxy-request": "^2.0.0",
-    "wpcom-unpublished": "^1.1.0"
+    "wpcom-xhr-request": "^1.0.0"
   },
   "jest": {
     "testDirectoryName": "tests",

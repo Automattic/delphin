@@ -1,13 +1,12 @@
 // External dependencies
-import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
 import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
-import { getPath } from 'routes';
 import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
+import { redirect } from 'actions/routes';
 
 export default connect(
 	( state, ownProps ) => ( {
@@ -37,19 +36,16 @@ export default connect(
 			// hide sort if it is the default
 			sort = sort === config( 'default_search_sort' ) ? undefined : sort;
 
-			dispatch( push( {
-				pathname: getPath( 'search' ),
-				query: {
-					q: query,
-					r: numberOfResultsToDisplay,
-					sort
-				}
+			dispatch( redirect( 'search', {
+				q: query,
+				r: numberOfResultsToDisplay,
+				sort
 			} ) );
 		},
 
 		selectDomain( domainProduct ) {
 			dispatch( selectDomain( domainProduct ) );
-			dispatch( push( { pathname: getPath( 'confirmDomain' ), query: { domain: domainProduct.domainName } } ) );
+			dispatch( redirect( 'confirmDomain', { domain: domainProduct.domainName } ) );
 		},
 
 		fetchDomainSuggestions( query ) {

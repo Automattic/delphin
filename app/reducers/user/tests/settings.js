@@ -3,7 +3,8 @@ jest.disableAutomock();
 // Internal dependencies
 import {
 	FETCH_USER,
-	FETCH_USER_COMPLETE
+	FETCH_USER_COMPLETE,
+	LOGOUT_USER
 } from 'reducers/action-types';
 import { settings, initialState } from '../settings';
 
@@ -25,5 +26,17 @@ describe( 'state.user.settings', () => {
 				locale: 'fr'
 			}
 		} );
+	} );
+
+	it( 'should return the initial state after the user is logged out', () => {
+		expect( settings( {
+			hasLoadedFromServer: true,
+			isRequesting: false,
+			data: {
+				email: 'foo@bar.com'
+			}
+		}, {
+			type: LOGOUT_USER
+		} ) ).toEqual( initialState );
 	} );
 } );

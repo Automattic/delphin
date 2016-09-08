@@ -35,6 +35,10 @@
 	}
 }
 
+.keywords-wrapper {
+	flex-shrink: 0;
+}
+
 .keywords {
 	display: flex;
 
@@ -49,10 +53,11 @@
 	border-radius: 5px;
 	color: #fff;
 	cursor: pointer;
+	flex-shrink: 0;
 	font-size: 15px;
 	line-height: 21px;
 	margin-right: 5px;
-	padding: 5px 40px 5px 10px;
+	padding: 5px 30px 5px 10px;
 	position: relative;
 	user-select: none;
 	white-space: nowrap;

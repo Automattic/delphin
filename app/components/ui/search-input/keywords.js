@@ -12,7 +12,7 @@ function Keywords( props ) {
 	}
 
 	return (
-		<span>
+		<span className={ styles.keywordsWrapper }>
 			<ul className={ styles.keywords }>
 				{ props.keywords.map( keyword => (
 					<KeywordContainer

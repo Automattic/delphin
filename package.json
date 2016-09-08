@@ -18,7 +18,6 @@
     "hooks": "node hooks/manage",
     "lint": "eslint --max-warnings 0 app client server && sass-lint --config .sass-lint.yml --max-warnings 0 --verbose",
     "preinstall": "npm run-script clean",
-    "prod": "NODE_ENV=production REFRESH_I18N_CACHE=true node server/build/bundle",
     "prod:static": "NODE_ENV=production npm install && NODE_ENV=production npm run generate && NODE_ENV=production npm run generate:rtl",
     "qs": "npm run build && node server/build/bundle",
     "qs:rtl": "BUILD_RTL=true npm run build && node server/build/bundle.rtl",

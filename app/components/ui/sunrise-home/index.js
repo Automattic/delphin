@@ -7,11 +7,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { preventWidows } from 'lib/formatters';
-import SunriseDomainInput from 'components/ui/sunrise-domain-input';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
+import Input from 'components/ui/form/input';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
@@ -59,7 +59,12 @@ const SunriseHome = React.createClass( {
 
 					<div className={ styles.domainSearch }>
 						<div className={ styles.field }>
-							<SunriseDomainInput
+							<Input
+								autoComplete="off"
+								autoCapitalize="off"
+								autoFocus
+								placeholder={ i18n.translate( 'Type a few keywords or a domain' ) }
+								inputClassName={ styles.input }
 								field={ queryField }
 								ref="q"
 							/>

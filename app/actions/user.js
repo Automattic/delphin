@@ -65,7 +65,7 @@ export function connectUser( email, intention, domain, callback ) {
 
 				dispatch( connectUserComplete( {
 					email,
-					twoFactorAuthenticationEnabled: !! data.two_factor_authentication_enabled
+					twoFactorAuthenticationEnabled: !! data.twoFactorAuthenticationEnabled
 				} ) );
 
 				callback && callback();
@@ -132,7 +132,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 		loading: VERIFY_USER,
 		success: ( data ) => {
 			return dispatch => {
-				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.access_token } );
+				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.accessToken } );
 
 				return dispatch( fetchUser() );
 			};

@@ -13,11 +13,4 @@ describe( 'checkout reducer for select domain action', () => {
 
 		expect( newState ).toBe( undefined );
 	} );
-
-	it( 'should return state with new domain with props camelized', () => {
-		const originalState = Object.freeze( { domain: 'example.com', cost: '$15.00' } ),
-			newState = selectedDomain( originalState, { value: { domain_name: 'wordpress.org', cost: '$20.00' }, type: DOMAIN_SELECT } );
-
-		expect( newState ).toEqual( { domainName: 'wordpress.org', cost: '$20.00' } );
-	} );
 } );

@@ -1,5 +1,4 @@
 // External dependencies
-import { camelizeKeys } from 'lib/formatters';
 import omit from 'lodash/omit';
 
 export const initialState = {
@@ -17,7 +16,7 @@ export const createRequestReducer = ( { loading, success, fail, reset } = {}, ad
 	}
 
 	if ( success && type === success ) {
-		const data = camelizeKeys( action.data ? action.data : omit( action, 'type' ) );
+		const data = action.data ? action.data : omit( action, 'type' );
 
 		return Object.assign( {}, state, {
 			hasLoadedFromServer: true,

@@ -17,13 +17,13 @@ import { stripLocaleSlug } from 'lib/routes';
 
 // Load tracking scripts
 if ( process.env.BROWSER ) {
-	if ( isEnabled( 'tracks_enabled' ) ) {
+	if ( isEnabled( 'tracks' ) ) {
 		window._tkq = window._tkq || [];
 
 		loadScript( '//stats.wp.com/w.js?53' );
 	}
 
-	if ( isEnabled( 'google_analytics_enabled' ) ) {
+	if ( isEnabled( 'google_analytics' ) ) {
 		window.ga = window.ga || function() {
 			( window.ga.q = window.ga.q || [] ).push( arguments );
 		};
@@ -85,7 +85,7 @@ const analytics = {
 	mc: {
 		bumpStat( group, name ) {
 			const uriComponent = buildQuerystring( group, name ); // prints debug info
-			if ( isEnabled( 'mc_analytics_enabled' ) ) {
+			if ( isEnabled( 'mc_analytics' ) ) {
 				new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + uriComponent + '&t=' + Math.random();
 			}
 		},
@@ -93,7 +93,7 @@ const analytics = {
 		bumpStatWithPageView( group, name ) {
 			// this function is fairly dangerous, as it bumps page views for wpcom and should only be called in very specific cases.
 			const uriComponent = buildQuerystringNoPrefix( group, name ); // prints debug info
-			if ( isEnabled( 'mc_analytics_enabled' ) ) {
+			if ( isEnabled( 'mc_analytics' ) ) {
 				new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom' + uriComponent + '&t=' + Math.random();
 			}
 		}
@@ -118,7 +118,7 @@ const analytics = {
 
 	tracks: {
 		identifyUser( { id, username } ) {
-			if ( ! isEnabled( 'tracks_enabled' ) ) {
+			if ( ! isEnabled( 'tracks' ) ) {
 				return;
 			}
 
@@ -128,7 +128,7 @@ const analytics = {
 		},
 
 		recordEvent( eventName, eventProperties = {} ) {
-			if ( ! isEnabled( 'tracks_enabled' ) ) {
+			if ( ! isEnabled( 'tracks' ) ) {
 				return;
 			}
 
@@ -155,7 +155,7 @@ const analytics = {
 		},
 
 		recordPageView: function( urlPath ) {
-			if ( ! isEnabled( 'tracks_enabled' ) ) {
+			if ( ! isEnabled( 'tracks' ) ) {
 				return;
 			}
 
@@ -168,7 +168,7 @@ const analytics = {
 
 	statsd: {
 		recordTiming( pageUrl, eventType, duration ) {
-			if ( isEnabled( 'boom_analytics_enabled' ) ) {
+			if ( isEnabled( 'boom_analytics' ) ) {
 				let featureSlug = pageUrl === '/' ? 'homepage' : pageUrl.replace( /^\//, '' ).replace( /\.|\/|:/g, '_' ),
 					matched;
 
@@ -213,7 +213,7 @@ const analytics = {
 		initialize() {
 			let parameters = {};
 
-			if ( ! analytics.ga.initialized && isEnabled( 'google_analytics_enabled' ) ) {
+			if ( ! analytics.ga.initialized && isEnabled( 'google_analytics' ) ) {
 				if ( this.user ) {
 					parameters = { userId: 'u-' + this.user.id };
 				}
@@ -223,7 +223,7 @@ const analytics = {
 		},
 
 		recordPageView( urlPath, pageTitle ) {
-			if ( ! isEnabled( 'google_analytics_enabled' ) ) {
+			if ( ! isEnabled( 'google_analytics' ) ) {
 				return;
 			}
 
@@ -242,7 +242,7 @@ const analytics = {
 		},
 
 		recordEvent( category, action, label, value ) {
-			if ( ! isEnabled( 'google_analytics_enabled' ) ) {
+			if ( ! isEnabled( 'google_analytics' ) ) {
 				return;
 			}
 
@@ -264,7 +264,7 @@ const analytics = {
 		},
 
 		recordTiming( urlPath, eventType, duration, triggerName ) {
-			if ( ! isEnabled( 'google_analytics_enabled' ) ) {
+			if ( ! isEnabled( 'google_analytics' ) ) {
 				return;
 			}
 

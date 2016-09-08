@@ -9,14 +9,43 @@ import { getPath } from 'routes';
 import styles from './styles.scss';
 import TrackingLink from 'components/containers/tracking-link';
 
+const Link = ( { children, to } ) => {
+	return (
+		<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ to }>
+			{ children }
+		</TrackingLink>
+	);
+};
+
+Link.propTypes = {
+	children: PropTypes.node.isRequired,
+	to: PropTypes.string.isRequired
+};
+
 const Menu = () => {
 	return (
 		<menu className={ styles.menu }>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ getPath( 'learnMore' ) }>{ i18n.translate( 'Learn More' ) }</TrackingLink>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ config( 'support_link' ) }>{ i18n.translate( 'Support' ) }</TrackingLink>
-			{ isEnabled( 'my_domains' ) && <TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ getPath( 'myDomains' ) }>{ i18n.translate( 'My Domains' ) }</TrackingLink> }
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to="https://automattic.com/privacy/">{ i18n.translate( 'Privacy Policy' ) }</TrackingLink>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to="https://wordpress.com">{ i18n.translate( 'A WordPress.com Service' ) }</TrackingLink>
+			<Link to={ getPath( 'learnMore' ) }>
+				{ i18n.translate( 'Learn More' ) }
+			</Link>
+
+			<Link to={ config( 'support_link' ) }>
+				{ i18n.translate( 'Support' ) }
+			</Link>
+
+			{ isEnabled( 'my_domains' ) && (
+				<Link to={ getPath( 'myDomains' ) }>
+					{ i18n.translate( 'My Domains' ) }
+				</Link>
+			) }
+
+			<Link to="https://automattic.com/privacy/">
+				{ i18n.translate( 'Privacy Policy' ) }
+			</Link>
+
+			<Link to="https://wordpress.com">
+				{ i18n.translate( 'A WordPress.com Service' ) }
+			</Link>
 		</menu>
 	);
 };

@@ -3,7 +3,7 @@ import debugFactory from 'debug';
 import config from 'config';
 import { default as getPath } from 'lodash/get';
 import i18n from 'i18n-calypso';
-import WPCOM from 'wpcom';
+import handler from 'wpcom-xhr-request';
 
 // Internal dependencies
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
@@ -44,10 +44,32 @@ function addLocaleQueryParam( locale, query, apiNamespace ) {
 }
 
 /**
+ * Adds arbitrary properties to the local storage `delphin:checkout` value to
+ * checkout endpoint requests.
+ *
+ * @param {string} path - Endpoint path
+ * @param {object} query - Query parameter object
+ * @return {object} New query parameter object with additional properties
+ */
+function addLocalStorageCheckoutPropertiesToQuery( path, query ) {
+	const checkoutPaths = [ '/me/paygate-configuration', '/delphin/transactions' ];
+	const checkoutPropertiesString = localStorage.getItem( 'delphin:checkout' );
+	if ( checkoutPaths.indexOf( path ) === -1 || ! checkoutPropertiesString ) {
+		return query;
+	}
+
+	const checkoutProperties = checkoutPropertiesString.split( ':' );
+
+	return Object.assign( {}, query, {
+		[ checkoutProperties[ 0 ] ]: checkoutProperties[ 1 ]
+	} );
+}
+
+/**
  * Performs a wpcom request using the state for bearer token and locale
  * @param {Object} state application redux state
  * @param {Object} action the WPCOM_REQUEST action
- * @returns {Promise} promise from WPCOM
+ * @returns {Promise} promise for request
  */
 function makeWpcomRequest( state, action ) {
 	let token;
@@ -64,12 +86,14 @@ function makeWpcomRequest( state, action ) {
 		token = getTokenFromBearerCookie();
 	}
 
-	const locale = i18n.getLocaleSlug();
-
 	let { method, params, query, payload } = action;
 
 	// Endpoints are authenticated by default, with the exception of UNAUTHENTICATED_NAMESPACES
-	const api = WPCOM( UNAUTHENTICATED_NAMESPACES.indexOf( params.apiNamespace ) === -1 ? token : undefined );
+	if ( UNAUTHENTICATED_NAMESPACES.indexOf( params.apiNamespace ) !== -1 ) {
+		token = null;
+	}
+
+	const locale = i18n.getLocaleSlug();
 
 	// not supplied method or unsupported, revert to GET
 	if ( SUPPORTED_API_METHODS.indexOf( method ) === -1 ) {
@@ -82,6 +106,8 @@ function makeWpcomRequest( state, action ) {
 		};
 	}
 
+	query = addLocalStorageCheckoutPropertiesToQuery( params.path, query );
+
 	const wordpressConfig = config( 'wordpress' );
 	if ( wordpressConfig && method !== 'get' ) {
 		payload = Object.assign( {}, payload, {
@@ -92,19 +118,28 @@ function makeWpcomRequest( state, action ) {
 
 	query = addLocaleQueryParam( locale, query || {}, params.apiNamespace );
 
-	const reqArgs = [ params, query ];
+	params = Object.assign( {}, params, {
+		query,
+		authToken: token,
+		body: payload,
+		method,
+	} );
 
-	if ( payload ) {
-		reqArgs.push( payload );
-	}
+	debug( 'requesting', params );
 
-	debug( 'requesting', reqArgs );
-	return api.req[ method ].apply( api.req, reqArgs )
-			.then( ( data ) => ( {
-				data: camelizeKeys( data ),
-				requestArguments: reqArgs,
-				requestToken: token
-			} ) );
+	return new Promise( ( resolve, reject ) => {
+		handler( params, ( error, body ) => {
+			if ( error ) {
+				reject( error );
+			} else {
+				resolve( {
+					data: camelizeKeys( body ),
+					requestParams: params,
+					requestToken: token,
+				} );
+			}
+		} );
+	} );
 }
 
 /**

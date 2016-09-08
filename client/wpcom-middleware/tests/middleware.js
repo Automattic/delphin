@@ -8,10 +8,14 @@ jest.unmock( 'reducers/user/selectors' );
 jest.unmock( 'i18n-calypso' );
 jest.unmock( 'lib/formatters' );
 
+global.localStorage = {
+	getItem: () => null
+};
+
 import i18n from 'i18n-calypso';
 import middleware from '..';
 import { WPCOM_REQUEST } from 'reducers/action-types.js';
-import WPCOM from 'wpcom';
+import handler from 'wpcom-xhr-request';
 
 describe( 'wpcom-middleware', () => {
 	describe( 'unrelated action', () => {
@@ -51,6 +55,10 @@ describe( 'wpcom-middleware', () => {
 		const SUCCESS_ACTION = 'SUCCESS_ACTION';
 		const FAIL_ACTION = 'FAIL_ACTION';
 
+		afterEach( () => {
+			handler.mockClear();
+		} );
+
 		it( 'should make proper api request with the default locale', () => {
 			const store = {
 				getState: jest.genMockFunction().mockReturnValue( {} ),
@@ -67,7 +75,7 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'en' }, payload );
+			expect( handler.mock.calls[ 0 ][ 0 ].query ).toEqual( { locale: 'en' } );
 		} );
 
 		it( 'should make a request with the locale when it changes in the `i18n` module', () => {
@@ -90,7 +98,32 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).lastCalledWith( params, { locale: 'fr' }, payload );
+			expect( handler.mock.calls[ 0 ][ 0 ].query ).toEqual( { locale: 'fr' } );
+		} );
+
+		it( 'should make a request with the key/value in the `delphin:checkout` property of `localStorage` to checkout endpoints if it is set', () => {
+			const store = {
+				getState: jest.genMockFunction().mockReturnValue( {} ),
+				dispatch: jest.genMockFunction()
+			};
+
+			const paramsForCheckout = Object.assign( {}, { path: '/me/paygate-configuration' } );
+
+			global.localStorage = {
+				getItem: () => 'some_key:some_value'
+			};
+
+			middleware( store )( () => {} )( {
+				type: WPCOM_REQUEST,
+				method,
+				params: paramsForCheckout,
+				payload,
+				loading: LOADING_ACTION,
+				success: SUCCESS_ACTION,
+				fail: FAIL_ACTION
+			} );
+
+			expect( handler.mock.calls[ 0 ][ 0 ].query ).toEqual( { locale: 'fr', some_key: 'some_value' } );
 		} );
 
 		it( 'should make a request with the `_locale` property if using the v2 API namespace', () => {
@@ -115,7 +148,7 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).lastCalledWith( paramsWithNamespace, { _locale: 'ja' }, payload );
+			expect( handler.mock.calls[ 0 ][ 0 ].query ).toEqual( { _locale: 'ja' } );
 		} );
 
 		pit( 'should dispatch success action', () => {
@@ -134,7 +167,7 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalled();
+			expect( handler ).toBeCalled();
 			expect( store.dispatch ).lastCalledWith( { type: LOADING_ACTION } );
 
 			return promise.then( () => expect( store.dispatch ).lastCalledWith( { type: SUCCESS_ACTION } ) );
@@ -156,7 +189,7 @@ describe( 'wpcom-middleware', () => {
 				fail: FAIL_ACTION
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalled();
+			expect( handler ).toBeCalled();
 			expect( store.dispatch ).lastCalledWith( { type: LOADING_ACTION } );
 
 			return promise.catch( () => expect( store.dispatch ).lastCalledWith( { type: FAIL_ACTION } ) );
@@ -267,7 +300,8 @@ describe( 'wpcom-middleware', () => {
 				payload
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalled();
+			expect( handler ).toBeCalled();
+
 			// the result is camelCase although mocked WPCOM returns snake_case, this is intentional
 			return promise.then( res => expect( res ).toEqual( { greatSuccess: true } ) );
 		} );
@@ -285,7 +319,7 @@ describe( 'wpcom-middleware', () => {
 				payload
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalled();
+			expect( handler ).toBeCalled();
 
 			return promise.then( result => {
 				throw new Error( 'We expected a rejected promise, but got a successful one: ' + result );
@@ -308,7 +342,7 @@ describe( 'wpcom-middleware', () => {
 				payload
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalled();
+			expect( handler ).toBeCalled();
 			return promise.then( result => {
 				throw new Error( 'We expected a rejected promise, but got a successful one: ' + result );
 			}, result => {
@@ -330,7 +364,7 @@ describe( 'wpcom-middleware', () => {
 				payload
 			} );
 
-			expect( WPCOM().req[ method ] ).toBeCalled();
+			expect( handler ).toBeCalled();
 
 			return promise.then( result => {
 				throw new Error( 'We expected a rejected promise, but got a successful one: ' + result );

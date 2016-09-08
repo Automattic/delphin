@@ -116,7 +116,7 @@
 	max-width: 400px;
 	padding: 20px 10px;
 	position: absolute;
-	top: 51px;
+	top: 55px;
 	width: calc(100vw - 50px);
 
 	&::before {
@@ -124,6 +124,7 @@
 		content: '';
 		display: block;
 		height: 10px;
+		left: 50px;
 		position: absolute;
 		top: -5px;
 		transform: rotate(45deg);

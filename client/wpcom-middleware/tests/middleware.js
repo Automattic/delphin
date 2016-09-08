@@ -6,6 +6,7 @@ jest.unmock( '..' );
 jest.unmock( 'debug' );
 jest.unmock( 'reducers/user/selectors' );
 jest.unmock( 'i18n-calypso' );
+jest.unmock( 'lib/formatters' );
 
 import i18n from 'i18n-calypso';
 import middleware from '..';
@@ -267,7 +268,8 @@ describe( 'wpcom-middleware', () => {
 			} );
 
 			expect( WPCOM().req[ method ] ).toBeCalled();
-			return promise.then( res => expect( res ).toEqual( { great_success: true } ) );
+			// the result is camelCase although mocked WPCOM returns snake_case, this is intentional
+			return promise.then( res => expect( res ).toEqual( { greatSuccess: true } ) );
 		} );
 
 		pit( 'default action creator just passes through the error object', () => {

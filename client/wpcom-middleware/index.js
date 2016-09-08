@@ -11,6 +11,7 @@ import { getUserConnect } from 'reducers/user/selectors';
 import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import { camelizeKeys } from 'lib/formatters';
 
 // Module variables
 const debug = debugFactory( 'delphin:wpcom-middleware' );
@@ -99,7 +100,11 @@ function makeWpcomRequest( state, action ) {
 
 	debug( 'requesting', reqArgs );
 	return api.req[ method ].apply( api.req, reqArgs )
-			.then( ( data ) => ( { data: data, requestArguments: reqArgs, requestToken: token } ) );
+			.then( ( data ) => ( {
+				data: camelizeKeys( data ),
+				requestArguments: reqArgs,
+				requestToken: token
+			} ) );
 }
 
 /**
@@ -148,7 +153,7 @@ const wpcomMiddleware = store => next => action => {
 		// so the result of dispatch( ... ) will return the result of store.dispatch
 		// on request success / failure.
 		return makeWpcomRequest( store.getState(), action ).then( ( result ) => {
-			debug( 'request success', action );
+			debug( 'request success', action, result );
 			// The result from here will be returned to the original dispatch:
 			return store.dispatch( getActionCreator( action.success, 'success' )( result.data, result.requestArguments, result.requestToken ) );
 		} ).catch( ( error ) => {

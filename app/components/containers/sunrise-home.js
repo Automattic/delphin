@@ -23,9 +23,7 @@ export default reduxForm(
 		fields: [ 'q' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
-	( state, ownProps ) => ( {
-		initialValues: ownProps.location.q
-	} ),
+	undefined,
 	dispatch => bindActionCreators( {
 		selectDomain,
 		redirectToSearch: domain => push( { pathname: getPath( 'search' ), query: { q: domain } } )

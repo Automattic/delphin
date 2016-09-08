@@ -15,24 +15,12 @@ import withPageView from 'lib/analytics/with-page-view';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
-		asyncValidate: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
-		touch: PropTypes.func.isRequired,
 		values: PropTypes.object.isRequired
-	},
-
-	componentDidMount() {
-		const queryField = this.props.fields.q;
-
-		// Trigger validation if we have an initialValue for query
-		if ( queryField.initialValue ) {
-			this.props.touch( queryField.name );
-			this.props.handleSubmit( () => null )();
-		}
 	},
 
 	handleSubmit() {

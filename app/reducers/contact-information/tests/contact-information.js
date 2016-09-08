@@ -38,19 +38,6 @@ describe( 'state.user.contactInformation reducer', () => {
 		} );
 	} );
 
-	it( 'should camelCase the keys of `data`', () => {
-		expect( contactInformation( {
-			isRequesting: true,
-			hasLoadedFromServer: false,
-			data: null
-		}, {
-			type: CONTACT_INFORMATION_FETCH_COMPLETE,
-			data: {
-				first_name: 'Foo'
-			}
-		} ).data ).toEqual( { firstName: 'Foo' } );
-	} );
-
 	it( 'should return the initial state after the user is logged out', () => {
 		expect( contactInformation( {
 			isRequesting: false,

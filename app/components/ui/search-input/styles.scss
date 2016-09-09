@@ -79,6 +79,7 @@
 		top: 37px;
 		transition: opacity .2s ease-in-out;
 		width: 0;
+		z-index: 2;
 	}
 
 	&.keyword-is-selected {

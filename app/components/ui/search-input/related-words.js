@@ -31,7 +31,7 @@ const RelatedWords = React.createClass( {
 	handleResize() {
 		const { right } = this.container.getBoundingClientRect();
 
-		const delta = window.innerWidth - Math.round( right ) - 25;
+		const delta = window.innerWidth - Math.round( right ) - 15;
 
 		const left = delta + this.container.offsetLeft;
 

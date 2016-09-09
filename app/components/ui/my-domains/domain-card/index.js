@@ -29,7 +29,7 @@ const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
 	return (
 		<div className={ domainCardClassNames } onClick={ toggleDetails }>
 			<div className={ styles.domainScreenshot }>
-				<img src="http://domainsearchproto.herokuapp.com/img/domain-screenshots/theroamingforks_com.jpg"/>
+				<img src={ 'https://s0.wp.com/mshots/v1/http://' + name + '/?w=500' }/>
 			</div>
 			<div className={ styles.domainInfo }>
 				<h3>{ name }</h3>

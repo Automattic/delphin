@@ -31,7 +31,7 @@ const SunriseHome = React.createClass( {
 		// Trigger validation if we have an initialValue for query
 		if ( query.initialValue ) {
 			this.props.touch( query.name );
-			this.props.asyncValidate();
+			this.props.handleSubmit( () => null )();
 		}
 	},
 

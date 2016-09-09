@@ -16,7 +16,8 @@ function requestWordTranslation( word, targetLanguage, sourceLanguage ) {
 		const requestParams = {
 			key: config( 'google_translate_api_key' ),
 			target: targetLanguage,
-			q: word
+			q: word,
+			format: 'text'
 		};
 
 		if ( sourceLanguage ) {

@@ -1,6 +1,7 @@
 // External dependencies
+import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -8,25 +9,22 @@ import { shouldTranslateWord } from 'lib/translate';
 import styles from './styles.scss';
 import RelatedWord from './related-word';
 
-const RelatedWords = React.createClass( {
-	propTypes: {
-		relatedWords: PropTypes.object,
-		replace: PropTypes.func.isRequired,
-		target: PropTypes.shape( {
-			value: PropTypes.string.isRequired,
-			isSelected: PropTypes.bool.isRequired
-		} ).isRequired
-	},
+class RelatedWords extends Component {
+	constructor( props ) {
+		super( props );
+
+		this.saveRef = container => this.container = container;
+	}
 
 	componentDidMount() {
 		window.addEventListener( 'resize', this.handleResize );
 
 		this.handleResize();
-	},
+	}
 
 	componentWillUnmount() {
 		window.removeEventListener( 'resize', this.handleResize );
-	},
+	}
 
 	handleResize() {
 		const { right } = this.container.getBoundingClientRect();
@@ -40,11 +38,7 @@ const RelatedWords = React.createClass( {
 		} else {
 			this.container.style.left = `${left}px`;
 		}
-	},
-
-	saveRef( container ) {
-		this.container = container;
-	},
+	}
 
 	render() {
 		const { target, replace, relatedWords } = this.props;
@@ -98,6 +92,15 @@ const RelatedWords = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
-export default withStyles( styles )( RelatedWords );
+RelatedWords.propTypes = {
+	relatedWords: PropTypes.object,
+	replace: PropTypes.func.isRequired,
+	target: PropTypes.shape( {
+		value: PropTypes.string.isRequired,
+		isSelected: PropTypes.bool.isRequired
+	} ).isRequired
+};
+
+export default withStyles( styles )( bindHandlers( RelatedWords ) );

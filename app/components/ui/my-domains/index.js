@@ -15,13 +15,13 @@ const MyDomains = React.createClass( {
 		domains: PropTypes.object.isRequired,
 		fetchMyDomains: PropTypes.func.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
-		redirectToLogin: PropTypes.func.isRequired,
+		redirectToHome: PropTypes.func.isRequired,
 		toggleDomainDetails: PropTypes.func.isRequired
 	},
 
 	componentWillMount() {
 		if ( this.props.isLoggedOut ) {
-			this.props.redirectToLogin();
+			this.props.redirectToHome();
 		} else if ( ! this.props.domains.hasLoadedFromServer && ! this.props.domains.isRequesting ) {
 			this.props.fetchMyDomains();
 		}
@@ -29,7 +29,7 @@ const MyDomains = React.createClass( {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedOut ) {
-			this.props.redirectToLogin();
+			this.props.redirectToHome();
 		}
 	},
 

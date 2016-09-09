@@ -16,11 +16,12 @@ const config = {
 	initial_number_of_search_results: 6,
 	features: {
 		ad_tracking: productionOnly,
-		boom_analytics_enabled: productionOnly,
-		google_analytics_enabled: productionOnly,
-		mc_analytics_enabled: productionOnly,
-		sentry_enabled: productionOnly,
-		tracks_enabled: productionOnly
+		boom_analytics: productionOnly,
+		google_analytics: productionOnly,
+		mc_analytics: productionOnly,
+		m3: ! productionOnly,
+		sentry: productionOnly,
+		tracks: productionOnly
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',

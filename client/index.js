@@ -63,7 +63,7 @@ const store = createStore(
 const history = syncHistoryWithStore( browserHistory, store );
 
 function init() {
-	if ( window.Raven && isEnabled( 'sentry_enabled' ) ) {
+	if ( window.Raven && isEnabled( 'sentry' ) ) {
 		window.Raven.config( 'https://02c1c1625528468ea40a86143860cdb7@sentry.io/96319' ).install();
 		// This is an experiment to send uncaught error in Promises to Sentry
 		// We might want to remove it if we receive too many errors

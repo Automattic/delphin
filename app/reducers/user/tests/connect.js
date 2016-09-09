@@ -7,11 +7,12 @@ import {
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
+	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
 	VERIFY_USER_FAIL
 } from 'reducers/action-types';
-import { connect } from '../connect';
+import { connect, initialState } from '../connect';
 
 describe( 'state.user.connect', () => {
 	it( 'should update `email`, `intention`, `notice` and `isRequesting` when a `CONNECT_USER` action is triggered', () => {
@@ -172,5 +173,21 @@ describe( 'state.user.connect', () => {
 		}, {
 			type: CONNECT_USER_FAIL
 		} ).isRequesting ).toEqual( false );
+	} );
+
+	it( 'should return the initial state after the user is logged out', () => {
+		expect( connect( {
+			intention: 'login',
+			isRequesting: false,
+			wasCreated: true,
+			data: {
+				bearerToken: 'nkdslhskjdfhsdofndslfndslfsdjfljdsfll',
+				email: 'foo@bar.com',
+				notice: 'Some random error happened',
+				twoFactorAuthenticationEnabled: false
+			}
+		}, {
+			type: LOGOUT_USER
+		} ) ).toEqual( initialState );
 	} );
 } );

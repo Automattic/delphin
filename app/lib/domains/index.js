@@ -92,6 +92,15 @@ export const withTld = ( domain = '', tld = config( 'default_tld' ) ) => domain.
 const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ];
 
 /**
+ * Determines if the given query contains at least one alphanumeric character.
+ *
+ * @param {string} query - A search query
+ * @return {boolean} - A flag representing whether the given query contains at
+ * least one alphanumeric character.
+ */
+export const containsAlphanumericCharacters = query => query.replace( /\W+/g, '' ).length > 0;
+
+/**
  * Returns validation messages for the given domain.
  *
  * @param {string} domain - domain to validate.

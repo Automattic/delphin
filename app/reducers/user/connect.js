@@ -8,12 +8,13 @@ import {
 	CONNECT_USER_COMPLETE,
 	CONNECT_USER_FAIL,
 	CONNECT_USER_WARNING,
+	LOGOUT_USER,
 	VERIFY_USER,
 	VERIFY_USER_COMPLETE,
 	VERIFY_USER_FAIL
 } from 'reducers/action-types';
 
-const initialState = {
+export const initialState = {
 	intention: null,
 	isRequesting: false,
 	wasCreated: false,
@@ -67,6 +68,9 @@ export const connect = ( state = initialState, action ) => {
 				data: { notice },
 				intention
 			} );
+
+		case LOGOUT_USER:
+			return initialState;
 
 		case VERIFY_USER:
 			return Object.assign( {}, state, {

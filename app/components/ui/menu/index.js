@@ -4,18 +4,60 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import config from 'config';
+import config, { isEnabled } from 'config';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import TrackingLink from 'components/containers/tracking-link';
 
-const Menu = () => {
+const Link = ( { children, to } ) => {
+	return (
+		<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ to }>
+			{ children }
+		</TrackingLink>
+	);
+};
+
+Link.propTypes = {
+	children: PropTypes.node.isRequired,
+	to: PropTypes.string.isRequired
+};
+
+const Menu = ( { isLoggedIn, logoutUser } ) => {
 	return (
 		<menu className={ styles.menu }>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ getPath( 'learnMore' ) }>{ i18n.translate( 'Learn More' ) }</TrackingLink>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ config( 'support_link' ) }>{ i18n.translate( 'Support' ) }</TrackingLink>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to="https://automattic.com/privacy/">{ i18n.translate( 'Privacy Policy' ) }</TrackingLink>
-			<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to="https://wordpress.com">{ i18n.translate( 'A WordPress.com Service' ) }</TrackingLink>
+			<Link to={ getPath( 'learnMore' ) }>
+				{ i18n.translate( 'Learn More' ) }
+			</Link>
+
+			<Link to={ config( 'support_link' ) }>
+				{ i18n.translate( 'Support' ) }
+			</Link>
+
+			{ isEnabled( 'm3' ) && isLoggedIn && (
+				<Link to={ getPath( 'myDomains' ) }>
+					{ i18n.translate( 'My Domains' ) }
+				</Link>
+			) }
+
+			{ isEnabled( 'm3' ) && ! isLoggedIn && (
+				<Link to={ getPath( 'loginUser' ) }>
+					{ i18n.translate( 'Log In' ) }
+				</Link>
+			) }
+
+			{ isEnabled( 'm3' ) && isLoggedIn && (
+				<a className={ styles.link } onClick={ logoutUser }>
+					{ i18n.translate( 'Log Out' ) }
+				</a>
+			) }
+
+			<Link to="https://automattic.com/privacy/">
+				{ i18n.translate( 'Privacy Policy' ) }
+			</Link>
+
+			<Link to="https://wordpress.com">
+				{ i18n.translate( 'A WordPress.com Service' ) }
+			</Link>
 		</menu>
 	);
 };

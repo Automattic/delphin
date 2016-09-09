@@ -22,7 +22,6 @@ const ConnectUser = React.createClass( {
 		domain: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
-		hasSelectedDomain: PropTypes.bool.isRequired,
 		intention: PropTypes.string.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
@@ -36,7 +35,7 @@ const ConnectUser = React.createClass( {
 	},
 
 	componentDidMount() {
-		if ( this.props.isLoggedIn || ! this.props.hasSelectedDomain ) {
+		if ( this.props.isLoggedIn ) {
 			this.props.redirectToHome();
 
 			return;

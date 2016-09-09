@@ -19,7 +19,8 @@ const Suggestion = React.createClass( {
 	},
 
 	render() {
-		const cost = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } ).cost;
+		const domainDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } ),
+			{ cost, applicationFee } = domainDetails;
 
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
@@ -37,7 +38,9 @@ const Suggestion = React.createClass( {
 						} ) }
 					</div>
 					<div className={ styles.applicationFeeMessage }>
-						{ i18n.translate( '+ early application fee' ) }
+						{ i18n.translate( '+ %(applicationFee)s early application fee', {
+							args: { applicationFee }
+						} ) }
 					</div>
 				</div>
 				<div className={ styles.buyButton }>

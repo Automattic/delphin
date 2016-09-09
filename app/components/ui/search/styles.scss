@@ -11,7 +11,7 @@
 	flex-wrap: wrap;
 	justify-content: space-around;
 	margin: 30px auto 0;
-	max-width: 960px;
+	max-width: 1200px;
 	padding: 0 10px;
 }
 
@@ -20,9 +20,12 @@
 	border-radius: 3px;
 	color: #2e4453;
 	cursor: pointer;
-	display: block;
+	display: flex;
+	flex-direction: column;
 	font-size: 1.4rem;
+	justify-content: space-between;
 	margin-top: 15px;
+	max-width: 450px;
 	padding: 0;
 	text-decoration: none;
 	transition: background 150ms ease-in, border 150ms ease-in;
@@ -48,7 +51,7 @@
 		width: 48%;
 	}
 
-	@include breakpoint( '>960px' ) {
+	@include breakpoint( '>1040px' ) {
 		width: 31%;
 	}
 }
@@ -71,6 +74,7 @@
 	overflow: hidden;
 	padding: 0;
 	text-overflow: ellipsis;
+	word-break: break-word;
 }
 
 .exact-match {

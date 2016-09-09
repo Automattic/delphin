@@ -1,5 +1,4 @@
 // External dependencies
-import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -19,7 +18,7 @@ const RelatedWords = ( { target, replace, relatedWords } ) => {
 		{ isRequesting } = relatedWords;
 
 	return (
-		<div className={ classNames( styles.relatedWords, { [ styles.isGoogleTranslateAttributionVisible ]: isGoogleTranslateAttributionVisible } ) }>
+		<div className={ styles.relatedWords }>
 			{ showRelatedWords && (
 				<div>
 					<h3>
@@ -30,10 +29,17 @@ const RelatedWords = ( { target, replace, relatedWords } ) => {
 							}
 						} ) }
 					</h3>
-					<ul>
+
+					<ul className={ styles.relatedWordsList }>
 						{ relatedWords.data.map( word => (
 							<RelatedWord key={ word } word={ word } onClick={ replace } />
 						) ) }
+
+						{ isGoogleTranslateAttributionVisible && (
+							<li className={ styles.googleTranslateAttribution }>
+								<img src="/images/powered-by-google-translate.png" height={ 18 } width={ 175 } alt="Google Translate"/>
+							</li>
+						) }
 					</ul>
 				</div>
 			) }

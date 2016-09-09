@@ -65,6 +65,28 @@
 	@include breakpoint( '<660px' ) {
 		margin-bottom: 5px;
 	}
+
+	&::after {
+		border-color: transparent transparent $white;
+		border-style: solid;
+		border-width: 0 8px 9px;
+		content: '';
+		display: block;
+		height: 0;
+		left: calc( 50% - 8px );
+		opacity: 0;
+		position: absolute;
+		top: 37px;
+		transition: opacity .2s ease-in-out;
+		width: 0;
+		z-index: 2;
+	}
+
+	&.keyword-is-selected {
+		&::after {
+			opacity: 1;
+		}
+	}
 }
 
 .keyword-action {
@@ -109,19 +131,33 @@
 
 .related-words {
 	background: $white;
-	border-radius: 0 0 3px 3px;
+	border-radius: 3px;
 	border-top: 1px solid $gray-light;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 	left: 0;
-	padding: 20px 10px;
+	max-width: 400px;
+	padding: 15px 10px;
 	position: absolute;
-	top: 51px;
-	width: calc(100% - 20px);
+	top: 45px;
+	width: calc(100vw - 50px);
+	z-index: 2;
 
 	h3 {
 		color: darken( $gray-medium, 20% );
 		font-size: 14px;
 		margin: 0 0 5px;
 	}
+
+	strong {
+		font-weight: bold;
+	}
+}
+
+.related-words-list {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .related-words-enter {
@@ -142,21 +178,34 @@
 	transition: opacity 0.2s ease-in-out;
 }
 
+.google-translate-attribution {
+	margin-left: auto;
+	margin-right: 2px;
+	margin-top: 17px;
+}
+
 .related-words-list-item {
 	background: $white;
 	border: 1px solid $gray-medium;
 	border-bottom-width: 2px;
 	border-radius: 5px;
+	box-sizing: border-box;
 	color: $blue-dark;
 	cursor: pointer;
 	display: inline-block;
+	flex-basis: 100%;
 	font-size: 15px;
-	margin-right: 10px;
 	margin-top: 10px;
-	padding: 5px 10px 7px;
+	padding: 10px 15px;
+	transition: border 150ms ease-in-out, color 150ms ease-in-out;
 	user-select: none;
-}
 
-.is-google-translate-attribution-visible {
-	background: $white url( /images/powered-by-google-translate.png ) no-repeat bottom right;
+	&:hover {
+		border-color: $gray-dark;
+		color: $green;
+	}
+
+	@include breakpoint( '>480px' ) {
+		flex-basis: 48%;
+	}
 }

@@ -32,7 +32,10 @@ describe( 'domain search reducer', () => {
 		const originalState = Object.freeze( {
 				hasLoadedFromServer: false,
 				isRequesting: false,
-				results: [ 'example1.com', 'example2.com' ],
+				results: [
+					{ domain_name: 'example1.com' },
+					{ domain_name: 'example2.com' }
+				],
 				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {} );
@@ -44,7 +47,10 @@ describe( 'domain search reducer', () => {
 		const originalState = Object.freeze( {
 				hasLoadedFromServer: false,
 				isRequesting: false,
-				results: [ 'example1.com', 'example2.com' ],
+				results: [
+					{ domain_name: 'example1.com' },
+					{ domain_name: 'example2.com' }
+				],
 				query: 'example'
 			} ),
 			newState = domainSearch( originalState, { type: 'ORDER_CHEESE_BURGER' } );
@@ -71,7 +77,10 @@ describe( 'domain search reducer for domain suggestions clear action', () => {
 		const originalState = Object.freeze( {
 				hasLoadedFromServer: false,
 				isRequesting: true,
-				results: [ 'example1.com', 'example2.com' ],
+				results: [
+					{ domain_name: 'example1.com' },
+					{ domain_name: 'example2.com' }
+				],
 				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {
@@ -105,7 +114,10 @@ describe( 'domain search reducer for domain suggestions fetch action', () => {
 	it( 'should clear the results when fetching', () => {
 		const originalState = Object.freeze( {
 				isRequesting: false,
-				results: [ 'example1.com', 'example2.com' ],
+				results: [
+					{ domain_name: 'example1.com' },
+					{ domain_name: 'example2.com' }
+				],
 				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {
@@ -130,7 +142,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 			isRequesting: true,
 			query: 'example'
 		}, {
-			results: [ 'example.com' ],
+			results: [ { domain_name: 'example.com' } ],
 			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 			query: 'example'
 		} );
@@ -138,7 +150,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 		expect( newState ).toEqual( {
 			hasLoadedFromServer: true,
 			isRequesting: false,
-			results: [ 'example.com' ],
+			results: [ { domain_name: 'example.com' } ],
 			query: 'example'
 		} );
 	} );
@@ -147,15 +159,40 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 		const originalState = Object.freeze( {
 				hasLoadedFromServer: false,
 				isRequesting: true,
-				results: [ 'example1.com', 'example2.com' ],
+				results: [
+					{ domain_name: 'example1.com' },
+					{ domain_name: 'example2.com' }
+				],
 				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {
-				results: [ 'foobar.com' ],
+				results: [ { domain_name: 'foobar.com' } ],
 				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 				query: 'foobar'
 			} );
 
 		expect( newState ).toEqual( originalState );
+	} );
+} );
+
+describe( 'domain search reducer rewriting .live to .blog', () => {
+	it( 'should return .blog domains when provided with .live domains', () => {
+		const newState = domainSearch( {
+			results: null,
+			hasLoadedFromServer: false,
+			isRequesting: true,
+			query: 'example'
+		}, {
+			results: [ { domain_name: 'example.live' } ],
+			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
+			query: 'example'
+		} );
+
+		expect( newState ).toEqual( {
+			hasLoadedFromServer: true,
+			isRequesting: false,
+			results: [ { domain_name: 'example.blog' } ],
+			query: 'example'
+		} );
 	} );
 } );

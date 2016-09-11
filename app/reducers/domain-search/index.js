@@ -13,8 +13,17 @@ const initialState = {
 	query: null
 };
 
+const replaceDotLiveWithDotBlog = results => {
+	return results && results.map( result => {
+		const dotBlogDomainName = result.domain_name.replace( /\.live/, '.blog' );
+
+		return Object.assign( {}, result, { domain_name: dotBlogDomainName } );
+	} );
+};
+
 export function domainSearch( state = initialState, action ) {
-	const { results, query, type } = action;
+	const { query, type } = action,
+		results = replaceDotLiveWithDotBlog( action.results );
 
 	switch ( type ) {
 		case DOMAIN_SUGGESTIONS_CLEAR:

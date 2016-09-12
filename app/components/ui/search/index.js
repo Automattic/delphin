@@ -97,19 +97,27 @@ const Search = React.createClass( {
 		const sortOptions = [
 			{
 				value: 'recommended',
-				text: i18n.translate( 'recommended' )
+				text: i18n.translate( 'recommended', {
+					comment: "This refers to a list of domains, i.e. 'recommended domains'"
+				} )
 			},
 			{
 				value: 'unique',
-				text: i18n.translate( 'unique' )
+				text: i18n.translate( 'unique', {
+					comment: "This refers to a list of domains, i.e. 'unique domains'"
+				} )
 			},
 			{
 				value: 'short',
-				text: i18n.translate( 'short' )
+				text: i18n.translate( 'short', {
+					comment: "This refers to a list of domains, i.e. 'short domains'"
+				} )
 			},
 			{
 				value: 'affordable',
-				text: i18n.translate( 'affordable' )
+				text: i18n.translate( 'affordable', {
+					comment: "This refers to a list of domains, i.e. 'affordable domains'"
+				} )
 			}
 		];
 

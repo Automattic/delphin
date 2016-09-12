@@ -142,7 +142,7 @@ const Search = React.createClass( {
 
 					<div className={ styles.sort }>
 						{ exactMatchUnavailable && (
-							i18n.translate( "Don't fret, check out these {{sortOption/}} addresses:", {
+							i18n.translate( "Don't fret, check out these {{sortOption/}} domains:", {
 								components: {
 									sortOption: this.renderSortOptions()
 								},

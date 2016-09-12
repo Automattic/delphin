@@ -9,8 +9,8 @@ import FieldArea from 'components/ui/form/field-area';
 import SubmitArea from 'components/ui/form/submit-area';
 import { withErrorFocuser } from 'components/ui/form/error-focuser';
 
-const Form = withErrorFocuser( withStyles( styles )( ( { children, onSubmit, className } ) => (
-	<form onSubmit={ onSubmit } className={ classNames( styles.form, className ) } noValidate>
+const Form = withErrorFocuser( withStyles( styles )( ( { children, onSubmit, className, autoComplete } ) => (
+	<form onSubmit={ onSubmit } className={ classNames( styles.form, className ) } noValidate autoComplete={ autoComplete }>
 		{ children }
 	</form>
 ) ) );

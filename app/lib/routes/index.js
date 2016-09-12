@@ -2,6 +2,7 @@
 import find from 'lodash/find';
 import omit from 'lodash/omit';
 import flatten from 'lodash/flatten';
+import startsWith from 'lodash/startsWith';
 
 // Internal dependencies
 import config from 'config';
@@ -146,3 +147,13 @@ export const stripLocaleSlug = url => {
 
 	return url;
 };
+
+/**
+ * Determines if the given URL points to an external resource.
+ *
+ * @param {string} url - URL
+ * @return {boolean} Whether the given URL represents an external resource.
+ */
+export const isExternalUrl = url => startsWith( url, 'https://' ) ||
+	startsWith( url, 'http://' ) ||
+	startsWith( url, 'mailto:' );

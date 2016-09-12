@@ -13,6 +13,7 @@ import LearnMore from 'components/containers/learn-more';
 import LoginContainer from 'components/containers/connect-user/login';
 import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
+import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
@@ -127,19 +128,16 @@ let publicRoutes = [
 				component: SuccessContainer
 			}
 		]
-	}
-];
-
-if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
-	const SearchContainer = require( 'components/containers/search' ).default;
-
-	publicRoutes.push( {
+	},
+	{
 		path: 'search',
 		slug: 'search',
 		static: true,
 		component: SearchContainer
-	} );
+	}
+];
 
+if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 	const MyDomainsContainer = require( 'components/containers/my-domains' ).default;
 	const HostsContainer = require( 'components/containers/hosts' ).default;
 	const HostInfoContainer = require( 'components/containers/host-info' ).default;

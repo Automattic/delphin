@@ -130,6 +130,10 @@ describe( 'lib/domains', () => {
 	} );
 
 	describe( 'validateDomain', () => {
+		it( 'should return an error if the query is undefined', () => {
+			expect( validateDomain( undefined ) ).not.toBeNull();
+		} );
+
 		it( 'should return an error if the query is empty', () => {
 			expect( validateDomain( '' ) ).not.toBeNull();
 			expect( validateDomain( '   ' ) ).not.toBeNull();

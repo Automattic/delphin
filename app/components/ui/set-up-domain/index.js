@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import { preventWidows } from 'lib/formatters';
+import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
@@ -31,12 +32,12 @@ class SetUpDomain extends Component {
 					</h2>
 				</SunriseStep.Header>
 				<SunriseStep.Form onSubmit={ this.handleSubmit }>
-					<label htmlFor="existing">
-						<input type="radio" id="existing" name="blog-type" value="existing" />
+					<label className={ styles.label } htmlFor="existing">
+						<Radio className={ styles.radio } id="existing" name="blog-type" value="existing" />
 						{ i18n.translate( "A blog I've already created" ) }
 					</label>
-					<label htmlFor="new">
-						<input type="radio" id="new" name="blog-type" value="new" />
+					<label className={ styles.label } htmlFor="new">
+						<Radio className={ styles.radio } id="new" name="blog-type" value="new" />
 						{ i18n.translate( 'A blog I am going to create' ) }
 					</label>
 					<Button>

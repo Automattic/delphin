@@ -22,7 +22,7 @@ const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
 			<div className={ domainCardClassNames }>
 				<div className={ styles.domainSetup }>
 					<h3>{ name }</h3>
-					<Button href={ getPath( 'setUpDomain', { domainName: name } ) }>{ i18n.translate( 'Setup Now' ) }</Button>
+					<Button href={ getPath( 'setUpDomain', { domainName: name } ) }>{ i18n.translate( 'Set Up Now' ) }</Button>
 				</div>
 			</div>
 		);

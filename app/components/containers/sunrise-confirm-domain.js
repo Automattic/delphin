@@ -21,7 +21,7 @@ export default connect(
 		hasSelectedDomain: hasSelectedDomain( state ),
 		isLoggedIn: isLoggedIn( state ),
 		isMoreInformationVisible: getToggle( state, 'isMoreInformationVisible' ),
-		query: ownProps.location.query.query
+		query: ownProps.location.query.domain
 	} ),
 	dispatch => bindActionCreators( {
 		fetchDomainPrice: withAnalytics(

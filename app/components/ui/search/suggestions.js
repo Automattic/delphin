@@ -75,7 +75,7 @@ const Suggestions = React.createClass( {
 					.slice( 0, this.props.count )
 					.map( ( suggestion ) => (
 					<Suggestion
-						isBestMatch={ omitTld( this.props.query ) === omitTld( suggestion.domainName ) }
+						isBestMatch={ omitTld( this.props.query.replace( /\s+/g, '' ) ) === omitTld( suggestion.domainName ) }
 						key={ suggestion.domainName }
 						selectDomain={ this.props.selectDomain }
 						suggestion={ suggestion }

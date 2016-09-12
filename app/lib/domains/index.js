@@ -98,6 +98,10 @@ const reservedDomains = [ 'get', 'nic', 'dave', 'design', 'blacknight', 'matt' ]
  * @return {string} - String that may contain validation messages.
  */
 export const validateDomain = domain => {
+	if ( ! domain ) {
+		return i18n.translate( 'Please enter a domain name.' );
+	}
+
 	domain = domain.toLowerCase();
 	domain = domain.trim();
 	domain = domain.replace( /\.blog$/gi, '' );

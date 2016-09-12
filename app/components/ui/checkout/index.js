@@ -143,6 +143,7 @@ const Checkout = React.createClass( {
 						onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }
 						errors={ errors }
 						focusOnError
+						autoComplete="off"
 					>
 						<Form.FieldArea>
 							<fieldset>

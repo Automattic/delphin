@@ -153,27 +153,4 @@
 		margin: -10px 0 10px;
 		position: static;
 	}
-
-	button {
-		background: #00aadc;
-		border: 0;
-		border-bottom: 2px solid #0087be;
-		border-radius: 4px;
-		color: #fff;
-		display: inline-block;
-		font-size: 16px;
-		margin: auto;
-		padding: 18px 40px;
-
-		&:hover,
-		&:focus,
-		&:visited {
-			color: #fff;
-			text-decoration: none;
-		}
-
-		&:visited {
-			color: #0d72b2;
-		}
-	}
 }

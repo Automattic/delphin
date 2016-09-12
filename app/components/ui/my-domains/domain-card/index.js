@@ -5,6 +5,8 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import Button from 'components/ui/button';
+import { getPath } from 'routes';
 import styles from './styles.scss';
 import WordPressIcon from 'assets/svg/wordpress.svg';
 
@@ -20,7 +22,7 @@ const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
 			<div className={ domainCardClassNames }>
 				<div className={ styles.domainSetup }>
 					<h3>{ name }</h3>
-					<button>{ i18n.translate( 'Setup Now' ) }</button>
+					<Button href={ getPath( 'setUpDomain', { domainName: name } ) }>{ i18n.translate( 'Setup Now' ) }</Button>
 				</div>
 			</div>
 		);

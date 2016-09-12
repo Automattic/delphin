@@ -141,6 +141,7 @@ if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 	const MyDomainsContainer = require( 'components/containers/my-domains' ).default;
 	const HostsContainer = require( 'components/containers/hosts' ).default;
 	const HostInfoContainer = require( 'components/containers/host-info' ).default;
+	const SetUpDomain = require( 'components/ui/set-up-domain' ).default;
 
 	publicRoutes = publicRoutes.map( route => {
 		if ( route.slug === 'home' ) {
@@ -152,6 +153,12 @@ if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 					slug: 'myDomains',
 					static: false,
 					component: MyDomainsContainer
+				},
+				{
+					path: 'set-up-domain/:domain',
+					slug: 'setUpDomain',
+					static: false,
+					component: SetUpDomain
 				},
 				{
 					path: 'hosts',

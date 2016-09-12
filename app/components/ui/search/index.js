@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import config from 'config';
 import DocumentTitle from 'components/ui/document-title';
-import { isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
+import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
@@ -159,6 +159,12 @@ const Search = React.createClass( {
 						) }
 
 					</div>
+
+					{ query && ! containsAlphanumericCharacters( query ) && (
+						<div className={ styles.noResultsMessage }>
+							{ i18n.translate( "We couldn't find any domains. Try a different search." ) }
+						</div>
+					) }
 
 					<Suggestions
 						count={ this.props.numberOfResultsToDisplay }

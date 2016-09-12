@@ -18,7 +18,7 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH_FAIL,
 	DOMAIN_UNSELECT,
 } from 'reducers/action-types';
-import { omitTld } from 'lib/domains';
+import { containsAlphanumericCharacters, omitTld } from 'lib/domains';
 
 /**
  * Returns an action object to be used in signalling that domain suggestions have been cleared.
@@ -32,7 +32,7 @@ export function clearDomainSuggestions() {
 }
 
 export function fetchDomainSuggestions( domainQuery = '' ) {
-	if ( domainQuery.trim() === '' ) {
+	if ( ! containsAlphanumericCharacters( domainQuery ) ) {
 		return clearDomainSuggestions();
 	}
 

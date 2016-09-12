@@ -58,9 +58,9 @@ class RelatedWords extends Component {
 						<h3>
 							{ i18n.translate( 'Try one of these instead of {{keyword/}}:', {
 								components: {
-									context: 'keyword is a word a user entered to which we will display related words to follow',
 									keyword: <strong>{ target.value }</strong>
-								}
+								},
+								comment: 'keyword is a word a user entered to which we will display related words to follow'
 							} ) }
 						</h3>
 

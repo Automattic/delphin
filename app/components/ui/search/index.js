@@ -97,19 +97,27 @@ const Search = React.createClass( {
 		const sortOptions = [
 			{
 				value: 'recommended',
-				text: i18n.translate( 'recommended' )
+				text: i18n.translate( 'recommended', {
+					comment: "This refers to a list of domains, i.e. 'recommended domains'"
+				} )
 			},
 			{
 				value: 'unique',
-				text: i18n.translate( 'unique' )
+				text: i18n.translate( 'unique', {
+					comment: "This refers to a list of domains, i.e. 'unique domains'"
+				} )
 			},
 			{
 				value: 'short',
-				text: i18n.translate( 'short' )
+				text: i18n.translate( 'short', {
+					comment: "This refers to a list of domains, i.e. 'short domains'"
+				} )
 			},
 			{
 				value: 'affordable',
-				text: i18n.translate( 'affordable' )
+				text: i18n.translate( 'affordable', {
+					comment: "This refers to a list of domains, i.e. 'affordable domains'"
+				} )
 			}
 		];
 
@@ -142,19 +150,19 @@ const Search = React.createClass( {
 
 					<div className={ styles.sort }>
 						{ exactMatchUnavailable && (
-							i18n.translate( "Don't fret, check out these {{sortOption/}} addresses:", {
+							i18n.translate( "Don't fret, check out these {{sortOption/}} domains:", {
 								components: {
-									context: 'sortOption will be one of "recommended", "unique" or "short"',
 									sortOption: this.renderSortOptions()
-								}
+								},
+								comment: 'sortOption will be one of "recommended", "unique" or "short"'
 							} )
 						) }
 						{ ! exactMatchUnavailable && (
 							i18n.translate( 'Show me {{sortOption/}} domains:', {
 								components: {
-									context: 'sortOption will be one of "recommended", "unique" or "short"',
 									sortOption: this.renderSortOptions()
-								}
+								},
+								comment: 'sortOption will be one of "recommended", "unique" or "short"'
 							} )
 						) }
 

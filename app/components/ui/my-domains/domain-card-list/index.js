@@ -12,9 +12,9 @@ const DomainCardList = ( { domains, areDetailsVisible, toggleDomainDetails } ) =
 
 	return (
 		<div className={ styles.domainCardList }>
-			{ domains.map( ( { name, isSetup } ) =>
+			{ domains.map( ( { id, name, isSetup } ) =>
 				<DomainCard
-					key={ name }
+					key={ id }
 					name={ name }
 					isSetup={ !! isSetup /* TODO: remove !! once isSetup is returned by the API */ }
 					detailsVisible={ areDetailsVisible( name ) }

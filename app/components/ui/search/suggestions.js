@@ -32,8 +32,8 @@ const Suggestions = React.createClass( {
 				unique: ( a, b ) => a.relevance - b.relevance,
 				short: ( a, b ) => a.domainName.length - b.domainName.length,
 				affordable: ( a, b ) => {
-					const costA = getNumberFromPrice( a.cost ),
-						costB = getNumberFromPrice( b.cost );
+					const costA = getNumberFromPrice( a.totalCost ),
+						costB = getNumberFromPrice( b.totalCost );
 
 					if ( costA > costB ) {
 						return 1;

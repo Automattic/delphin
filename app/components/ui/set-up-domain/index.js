@@ -6,6 +6,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import { getPath } from 'routes';
+import { Link } from 'react-router';
 import { preventWidows } from 'lib/formatters';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
@@ -62,9 +64,17 @@ class SetUpDomain extends Component {
 						/>
 						{ i18n.translate( 'A blog I am going to create' ) }
 					</label>
-					<Button>
-						{ i18n.translate( 'Next' ) }
-					</Button>
+					<div className={ styles.buttonContainer }>
+						<Link
+							className={ styles.backLink }
+							to={ getPath( 'myDomains' ) }
+						>
+							{ i18n.translate( 'Back' ) }
+						</Link>
+						<Button className={ styles.button }>
+							{ i18n.translate( 'Next' ) }
+						</Button>
+					</div>
 				</SunriseStep.Form>
 			</SunriseStep>
 		);

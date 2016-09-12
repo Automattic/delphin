@@ -79,7 +79,7 @@ const ConnectUser = React.createClass( {
 		const { fields, handleSubmit, intention, submitFailed } = this.props;
 
 		return (
-			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Login' ) : i18n.translate( 'Signup' ) }>
+			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Log In' ) : i18n.translate( 'Sign Up' ) }>
 				<div>
 					<Header intention={ intention } />
 

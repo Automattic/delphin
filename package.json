@@ -25,7 +25,7 @@
     "start:rtl": "BUILD_RTL=true npm install && BUILD_RTL=true npm run build && BUILD_RTL=true node server/build/bundle.rtl",
     "start:static": "npm run prod:static && node server/static",
     "test": "NODE_PATH=.:app jest",
-    "translate": "i18n-calypso -p delphin -e date -i 'app/**/*.js' -o server/build/delphin.pot"
+    "translate": "mkdir -p server/build && i18n-calypso -p delphin -e date -i 'app/**/*.js' -o server/build/delphin.pot"
   },
   "repository": {
     "type": "git",

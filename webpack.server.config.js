@@ -38,7 +38,11 @@ var config = merge.smart( baseConfig, {
 
 	plugins: [
 		// inject source map support on top of the build file
-		new webpack.BannerPlugin( 'require("source-map-support").install();', { raw: true, entryOnly: false } )
+		new webpack.BannerPlugin( {
+			banner: 'require("source-map-support").install();',
+			raw: true,
+			entryOnly: false
+		} )
 	]
 } );
 

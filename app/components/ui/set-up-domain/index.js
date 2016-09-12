@@ -1,7 +1,7 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -12,32 +12,54 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class SetUpDomain extends Component {
-	handleSubmit( event ) {
-		event.preventDefault();
+	handleSubmit( values ) {
+		if ( values.newOrExisting === 'new' ) {
+			alert( "TODO: redirect to the 'new blog' setup page" );
+		}
+
+		if ( values.newOrExisting === 'existing' ) {
+			alert( "TODO: redirect to the 'existing blog' setup page" );
+		}
 	}
 
 	render() {
-		const { domain } = this.props.params;
+		const {
+			domainName,
+			handleSubmit,
+			fields: { newOrExisting },
+		} = this.props;
 
 		return (
 			<SunriseStep>
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
 					<h2>
-						{ preventWidows( i18n.translate( 'Just answer a few simple questions about your plans for %(domain)s, ' +
+						{ preventWidows( i18n.translate( 'Just answer a few simple questions about your plans for %(domainName)s, ' +
 							"then we'll take care of the heavy lifting for you!", {
-								args: { domain },
+								args: { domainName }
 							}
 						), 2 ) }
 					</h2>
 				</SunriseStep.Header>
-				<SunriseStep.Form onSubmit={ this.handleSubmit }>
+				<SunriseStep.Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<label className={ styles.label } htmlFor="existing">
-						<Radio className={ styles.radio } id="existing" name="blog-type" value="existing" />
+						<Radio
+							className={ styles.radio }
+							{ ...newOrExisting }
+							id="existing"
+							value="existing"
+							checked={ newOrExisting.value === 'existing' }
+						/>
 						{ i18n.translate( "A blog I've already created" ) }
 					</label>
 					<label className={ styles.label } htmlFor="new">
-						<Radio className={ styles.radio } id="new" name="blog-type" value="new" />
+						<Radio
+							className={ styles.radio }
+							{ ...newOrExisting }
+							id="new"
+							value="new"
+							checked={ newOrExisting.value === 'new' }
+						/>
 						{ i18n.translate( 'A blog I am going to create' ) }
 					</label>
 					<Button>
@@ -48,5 +70,11 @@ class SetUpDomain extends Component {
 		);
 	}
 }
+
+SetUpDomain.propTypes = {
+	domainName: PropTypes.string.isRequired,
+	fields: PropTypes.object.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+};
 
 export default withStyles( styles )( bindHandlers( SetUpDomain ) );

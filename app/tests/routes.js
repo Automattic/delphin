@@ -13,6 +13,7 @@ jest.mock( 'components/containers/learn-more', () => {} );
 jest.mock( 'components/containers/my-domains', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
+jest.mock( 'components/containers/set-up-domain', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );
 jest.mock( 'components/containers/sunrise-home', () => {} );
@@ -27,7 +28,6 @@ jest.mock( 'components/ui/layout/no-margin', () => {} );
 jest.mock( 'components/ui/layout/sunrise/flow', () => {} );
 jest.mock( 'components/ui/layout/sunrise/success', () => {} );
 jest.mock( 'components/ui/not-found', () => {} );
-jest.mock( 'components/ui/set-up-domain', () => {} );
 
 jest.unmock( 'routes' );
 

@@ -14,21 +14,26 @@
 }
 
 .header {
+	background-repeat: no-repeat;
+	background-size: cover;
 	color: $white;
 	margin-bottom: 20px;
 	padding: 30px;
 	text-align: center;
 
 	&.wordpress {
-		background: $host-wordpress;
+		background-color: $host-wordpress;
+		background-image: url( https://domainsearchproto.herokuapp.com/img/wordpress-bg.jpg );
 	}
 
 	&.medium {
-		background: $host-medium;
+		background-color: $host-medium;
+		background-image: url( https://domainsearchproto.herokuapp.com/img/medium-bg.jpg );
 	}
 
 	&.tumblr {
-		background: $host-tumblr;
+		background-color: $host-tumblr;
+		background-image: url( https://domainsearchproto.herokuapp.com/img/wordpress-bg.jpg );
 	}
 }
 

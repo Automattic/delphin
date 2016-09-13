@@ -1,6 +1,7 @@
 // External dependencies
 var autoprefixer = require( 'autoprefixer' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 var config = {
 	module: {

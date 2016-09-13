@@ -75,11 +75,13 @@ if ( NODE_ENV === 'production' ) {
 				},
 				{
 					test: /\.scss$/,
-					loader: ExtractTextPlugin.extract( 'style', [
-						'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes',
-						'postcss',
-						'sass'
-					] )
+					loader: ExtractTextPlugin.extract( {
+						loader: [
+							'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes',
+							'postcss',
+							'sass'
+						]
+					} )
 				}
 			]
 		},

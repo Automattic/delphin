@@ -87,6 +87,12 @@
 			opacity: 1;
 		}
 	}
+
+	&.keyword-is-domain {
+		&::after {
+			display: none;
+		}
+	}
 }
 
 .keyword-action {

@@ -148,12 +148,12 @@ export const stripLocaleSlug = url => {
 	return url;
 };
 
+const absoluteUrlRegex = /^(?:[a-z]+:)?\/\//;
+
 /**
  * Determines if the given URL points to an external resource.
  *
  * @param {string} url - URL
  * @return {boolean} Whether the given URL represents an external resource.
  */
-export const isExternalUrl = url => startsWith( url, 'https://' ) ||
-	startsWith( url, 'http://' ) ||
-	startsWith( url, 'mailto:' );
+export const isExternalUrl = url => absoluteUrlRegex.test( url ) || startsWith( url, 'mailto:' );

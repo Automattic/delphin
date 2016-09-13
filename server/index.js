@@ -124,12 +124,26 @@ const generateStaticFiles = rootRoutes => {
 		} );
 };
 
+const generateStatic404Files = () => {
+	config( 'languages' )
+		.filter( language => language.isRtl === BUILD_RTL )
+		// we filter out `en` because it lives in the top-level static directory, not under `/en/`
+		.filter( language => language.langSlug !== config( 'i18n_default_locale_slug' ) )
+		.map( language => `/${ language.langSlug }/404` )
+		.forEach( generateStaticFile );
+
+	if ( ! BUILD_RTL ) {
+		// generate English 404
+		generateStaticFile( '404' );
+	}
+};
+
 const init = () => {
 	if ( process.env.BUILD_STATIC ) {
 		generateStaticFiles( defaultRoutes );
 
-		// we need to explicitly generate a 404 page because it isn't in in the default routes
-		generateStaticFile( '404' );
+		// we need to explicitly generate 404 pages because 404 isn't in in the default routes
+		generateStatic404Files();
 
 		generateSourceMap();
 

@@ -27,6 +27,11 @@ class RelatedWords extends Component {
 	}
 
 	handleResize() {
+		// this can happen if ! relatedWords => we render null ( nothing, in case of domain keyword for example )
+		if ( ! this.container ) {
+			return;
+		}
+
 		const { right } = this.container.getBoundingClientRect();
 
 		const delta = window.innerWidth - Math.round( right ) - 15;

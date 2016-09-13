@@ -44,7 +44,7 @@ var config = {
 
 	resolve: {
 		extensions: [ '', '.json', '.js', '.jsx' ],
-		modulesDirectories: [
+		modules: [
 			'node_modules',
 			path.join( __dirname, 'app' ),
 			__dirname

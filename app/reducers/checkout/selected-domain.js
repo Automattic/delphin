@@ -4,7 +4,16 @@ import {
 	DOMAIN_UNSELECT
 } from 'reducers/action-types';
 
-export const selectedDomain = ( state = {}, action ) => {
+export const initialState = {
+	currencyCode: null,
+	details: null,
+	domainName: null,
+	isPremium: null,
+	relevance: null,
+	totalCost: null
+};
+
+export const selectedDomain = ( state = initialState, action ) => {
 	const { type } = action;
 
 	switch ( type ) {
@@ -12,7 +21,7 @@ export const selectedDomain = ( state = {}, action ) => {
 			return action.value;
 
 		case DOMAIN_UNSELECT:
-			return {};
+			return initialState;
 
 		default:
 			return state;

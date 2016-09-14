@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { selectedDomain } from '..';
+import { selectedDomain } from '../selected-domain';
 import {
 	DOMAIN_SELECT
 } from 'reducers/action-types';

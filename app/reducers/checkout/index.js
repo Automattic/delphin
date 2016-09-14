@@ -5,8 +5,6 @@ import { combineReducers } from 'redux';
 import { createRequestReducer } from 'lib/create-request-reducer';
 import {
 	CHECKOUT_REQUESTS_RESET,
-	DOMAIN_SELECT,
-	DOMAIN_UNSELECT,
 	PAYGATE_CONFIGURATION_FETCH,
 	PAYGATE_CONFIGURATION_FETCH_COMPLETE,
 	PAYGATE_CONFIGURATION_FETCH_FAIL,
@@ -18,20 +16,7 @@ import {
 	TRANSACTION_CREATE_FAIL
 } from 'reducers/action-types';
 
-export const selectedDomain = ( state = {}, action ) => {
-	const { type } = action;
-
-	switch ( type ) {
-		case DOMAIN_SELECT:
-			return action.value;
-
-		case DOMAIN_UNSELECT:
-			return {};
-
-		default:
-			return state;
-	}
-};
+import { selectedDomain } from './selected-domain';
 
 const paygateConfiguration = createRequestReducer( {
 	loading: PAYGATE_CONFIGURATION_FETCH,

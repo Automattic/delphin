@@ -3,7 +3,6 @@ import isEmpty from 'lodash/isEmpty';
 
 export const getCheckout = state => state.checkout;
 export const getSelectedDomain = state => getCheckout( state ).selectedDomain;
-export const getSelectedDomainPrice = state => getCheckout( state ).selectedDomainPrice.data;
 
 export const getSelectedDomainDetails = state => {
 	if ( ! getCheckout( state ).selectedDomain.details ) {
@@ -54,5 +53,3 @@ export const isPurchasing = state => {
 
 	return ! requestsWithError && completedRequests > 0 && completedRequests < requests.length;
 };
-
-export const isRequestingDomainPrice = state => getCheckout( state ).selectedDomainPrice.isRequesting;

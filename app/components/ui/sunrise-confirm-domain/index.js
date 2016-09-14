@@ -14,24 +14,23 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
-import { validateDomain, withTld } from 'lib/domains';
+import { normalizeDomain, validateDomain, withTld } from 'lib/domains';
 
 class SunriseConfirmDomain extends React.Component {
 	componentWillMount() {
-		const { query, redirect, unselectDomain } = this.props;
+		const { query, redirect } = this.props;
 
 		if ( ! query || validateDomain( query ) ) {
 			redirect( 'home' );
-		} else {
-			// unselect domain so we can replace it using the new query given
-			unselectDomain();
 		}
 	}
 
 	componentDidMount() {
-		const { fetchDomainPrice, query, selectDomain } = this.props;
+		const { domain, query } = this.props;
 
-		if ( query ) {
+		if ( domain.domainName !== normalizeDomain( query ) ) {
+			const { fetchDomainPrice, selectDomain } = this.props;
+
 			fetchDomainPrice( query ).then( action => {
 				selectDomain( action.result );
 			} );

@@ -6,12 +6,10 @@ import {
 	DOMAIN_PRICE_FETCH_COMPLETE,
 	DOMAIN_PRICE_FETCH_FAIL
 } from 'reducers/action-types';
-import { withTld } from 'lib/domains';
-
-const normalizeQuery = query => query.trim().toLowerCase();
+import { normalizeDomain, withTld } from 'lib/domains';
 
 export function fetchDomainPrice( domainQuery = '' ) {
-	const queryWithTld = withTld( normalizeQuery( domainQuery ) );
+	const queryWithTld = withTld( normalizeDomain( domainQuery ) );
 
 	return {
 		type: WPCOM_REQUEST,

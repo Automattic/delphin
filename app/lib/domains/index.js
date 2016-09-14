@@ -41,6 +41,16 @@ export function isValidSecondLevelDomain( value ) {
 }
 
 /**
+ * Normalizes the given domain name.
+ *
+ * @param {string} domain - raw domain name
+ * @returns {string} - the domain name normalized
+ */
+export function normalizeDomain( domain ) {
+	return domain.trim().toLowerCase();
+}
+
+/**
  * Extract the second level domain from a valid domain
  *
  * @param {string} validDomain - a valid domain to extract the sld from

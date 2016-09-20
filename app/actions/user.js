@@ -101,12 +101,12 @@ export function fetchUser() {
 		params: { path: '/me' },
 		loading: FETCH_USER,
 		success: withAnalytics(
-					data => identifyUser( data.ID, data.username ),
+					data => identifyUser( data.id, data.username ),
 					( data, requestArguments, requestToken ) => ( {
 						type: FETCH_USER_COMPLETE,
 						bearerToken: requestToken,
 						email: data.email,
-						id: data.ID,
+						id: data.id,
 						language: data.language
 					} )
 				),

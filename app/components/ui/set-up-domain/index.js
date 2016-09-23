@@ -36,9 +36,10 @@ class SetUpDomain extends Component {
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
 					<h2>
-						{ preventWidows( i18n.translate( 'Just answer a few simple questions about your plans for %(domainName)s, ' +
+						{ preventWidows( i18n.translate( 'Just answer a few simple questions about your plans for {{strong}}%(domainName)s{{/strong}}, ' +
 							"then we'll take care of the heavy lifting for you!", {
-								args: { domainName }
+								args: { domainName },
+								components: { strong: <strong /> }
 							}
 						), 2 ) }
 					</h2>

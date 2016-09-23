@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --config webpack.client.config.js --progress --colors",
-    "build:server": "webpack --config webpack.server.config.js --verbose --progress --colors",
+    "build:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:static": "BUILD_STATIC=true REFRESH_I18N_CACHE=true node server/build/bundle",
     "build:static:rtl": "BUILD_STATIC=true REFRESH_I18N_CACHE=true node server/build/bundle.rtl",
     "clean": "rm -f public/scripts/bundle.*.js && rm -f public/scripts/assets.json && rm -rf server/build && npm run clean:i18n-cache && npm run clean:static",

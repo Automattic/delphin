@@ -1,5 +1,5 @@
 // External dependencies
-import isEmpty from 'lodash/isEmpty';
+import every from 'lodash/every';
 
 export const getCheckout = state => state.checkout;
 export const getSelectedDomain = state => getCheckout( state ).selectedDomain;
@@ -24,7 +24,7 @@ export const getSelectedDomainApplicationCost = state => {
 	return applicationCostDetail ? applicationCostDetail.cost : null;
 };
 
-export const hasSelectedDomain = state => ! isEmpty( getSelectedDomain( state ) );
+export const hasSelectedDomain = state => every( getSelectedDomain( state ), value => value !== null );
 
 /**
  * Represents whether a purchase is currently being made. Returns true if:

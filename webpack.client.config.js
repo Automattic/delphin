@@ -76,7 +76,7 @@ if ( NODE_ENV === 'development' ) {
 if ( NODE_ENV === 'production' ) {
 	config.plugins.push(
 		new webpack.optimize.UglifyJsPlugin( {
-			sourceMap: true,
+			sourceMap: !! config.devtool,
 			output: {
 				comments: false
 			},

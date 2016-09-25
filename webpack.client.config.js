@@ -67,10 +67,6 @@ if ( NODE_ENV === 'development' ) {
 			]
 		},
 
-		// Switches loaders to debug mode. This is required to make CSS hot reloading works correctly (see
-		// http://bit.ly/1VTOHrK for more information).
-		debug: true,
-
 		// Use a more performant type of sourcemaps for our development env
 		// For a comparison see: https://webpack.github.io/docs/configuration.html#devtool
 		devtool: 'cheap-module-eval-source-map'

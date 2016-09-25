@@ -108,7 +108,7 @@
     "superagent-jsonp": "^0.1.1",
     "svg-react-loader": "^0.3.5",
     "validator": "^5.2.0",
-    "webpack": "2.1.0-beta.22",
+    "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.4",
     "webpack-merge": "^0.12.0",
     "wpcom-xhr-request": "^1.0.0"

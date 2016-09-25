@@ -36,16 +36,13 @@ var config = {
 		]
 	},
 
-	postcss() {
-		return [ autoprefixer ];
-	},
-
 	resolve: {
-		extensions: [ '', '.json', '.js', '.jsx' ],
+		extensions: [ '.json', '.js', '.jsx' ],
+		enforceExtension: false,
 		modules: [
 			'node_modules',
-			path.join( __dirname, 'app' ),
-			__dirname
+			path.join( path.resolve( path.dirname( '' ) ), 'app' ),
+			path.resolve( path.dirname( '' ) )
 		]
 	},
 

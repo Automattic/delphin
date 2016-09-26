@@ -7,6 +7,7 @@ import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'ac
 import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
 import { redirect } from 'actions/routes';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default connect(
 	( state, ownProps ) => ( {
@@ -51,7 +52,10 @@ export default connect(
 		},
 
 		fetchDomainSuggestions( query ) {
-			dispatch( fetchDomainSuggestions( query ) );
+			withAnalytics(
+				domain => recordTracksEvent( 'delphin_domain_search', { search_string: domain } ),
+				fetchDomainSuggestions
+			)( query )( dispatch );
 		}
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {

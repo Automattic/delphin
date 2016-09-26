@@ -13,6 +13,7 @@ jest.mock( 'components/containers/learn-more', () => {} );
 jest.mock( 'components/containers/my-domains', () => {} );
 jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
+jest.mock( 'components/containers/set-up-domain', () => {} );
 jest.mock( 'components/containers/success', () => {} );
 jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );
 jest.mock( 'components/containers/sunrise-home', () => {} );

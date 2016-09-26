@@ -7,7 +7,8 @@ html(dir=isRtl ? 'rtl' : 'ltr' )
 		if css
 			style(type='text/css').
 				#{css}
-		link(rel="stylesheet", href=styles)
+		if styles
+			link(rel="stylesheet", href=styles)
 	body
 		#content!= content
 		if isEnabled( 'sentry' )

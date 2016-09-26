@@ -99,7 +99,6 @@
     "react-router-redux": "^4.0.5",
     "react-router-sitemap": "^1.0.7",
     "react-tap-event-plugin": "^1.0.0",
-    "psuedomap": "bmb330/pseudomap",
     "redux": "^3.3.1",
     "redux-form": "^5.3.1",
     "redux-logger": "^2.6.1",

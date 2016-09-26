@@ -16,11 +16,14 @@ import config, { isEnabled } from 'config';
 import { default as wpcomMiddleware } from './wpcom-middleware';
 import App from 'app';
 import { logErrorNoticesMiddleware } from './log-error-notices-middleware';
+import { fetchUser } from 'actions/user';
+import { getTokenFromBearerCookie } from './bearer-cookie';
 import reducers from 'reducers';
 import i18n from 'i18n-calypso';
 import { setLocaleCookie } from './locale-cookie';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
+import { userMiddleware } from './user-middleware';
 import { relatedWordsMiddleware } from './related-words-middleware';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
 
@@ -30,6 +33,7 @@ const middlewares = [
 	adTrackingMiddleware,
 	analyticsMiddleware,
 	logErrorNoticesMiddleware,
+	userMiddleware,
 	wpcomMiddleware,
 	relatedWordsMiddleware,
 	switchLocaleMiddleware,
@@ -74,6 +78,14 @@ function init() {
 
 	if ( window.localeData ) {
 		i18n.setLocale( window.localeData );
+	}
+
+	const bearerToken = getTokenFromBearerCookie();
+
+	// if user has prev. bearer token, we'll dispatch the fetch user action
+	// the internals will handle the bearer token.
+	if ( bearerToken ) {
+		store.dispatch( fetchUser() );
 	}
 
 	injectTapEventPlugin();

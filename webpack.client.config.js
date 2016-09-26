@@ -1,7 +1,7 @@
 // External dependencies
 var baseConfig = require( './webpack.base.config' ),
 	ExtractTextPlugin = require( 'extract-text-webpack-plugin' ),
-	WebpackRTLPlugin = require( 'webpack-rtl-plugin' ),
+	WebpackRTLPlugin = require( '@automattic/webpack-rtl-plugin' ),
 	merge = require( 'webpack-merge' ),
 	path = require( 'path' ),
 	fs = require( 'fs' ),

@@ -3,7 +3,13 @@ jest.disableAutomock();
 import find from 'lodash/find';
 
 // Internal dependencies
-import { getRouteWithLanguageSlug, getLocaleSlug, getLocalizedRoutes, stripLocaleSlug } from '..';
+import {
+	getRouteWithLanguageSlug,
+	getLocaleSlug,
+	getLocalizedRoutes,
+	isExternalUrl,
+	stripLocaleSlug,
+} from '..';
 
 describe( 'lib/routes', () => {
 	describe( 'getRouteWithLanguageSlug', () => {
@@ -95,6 +101,24 @@ describe( 'lib/routes', () => {
 			expect( find( localizedRoutes, { path: 'fr/foo' } ).childRoutes ).toEqual( [ {
 				path: 'bar'
 			} ] );
+		} );
+	} );
+
+	describe( 'isExternalUrl', () => {
+		it( 'should return true for absolute URLs', () => {
+			expect( isExternalUrl( 'https://example.com' ) ).toBeTruthy();
+			expect( isExternalUrl( 'http://example.com' ) ).toBeTruthy();
+			expect( isExternalUrl( '//example.com' ) ).toBeTruthy();
+			expect( isExternalUrl( 'ftp://example.com' ) ).toBeTruthy();
+		} );
+
+		it( 'should return false for relative URLs', () => {
+			expect( isExternalUrl( 'example.com' ) ).toBeFalsy();
+			expect( isExternalUrl( '/example' ) ).toBeFalsy();
+		} );
+
+		it( 'should return true for mailto: URLs', () => {
+			expect( isExternalUrl( 'mailto:foo@bar.com' ) ).toBeTruthy();
 		} );
 	} );
 } );

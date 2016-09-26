@@ -1,0 +1,13 @@
+@import 'app/styles/colors';
+
+.radio {
+	border: solid 1px $black;
+	border-radius: 50%;
+	height: 16px;
+	outline: none;
+	width: 16px;
+
+	&:checked {
+		background: $blue;
+	}
+}

@@ -4,12 +4,12 @@ import { Link } from 'react-router';
 import omit from 'lodash/omit';
 import startsWith from 'lodash/startsWith';
 
+// Internal dependencies
+import { isExternalUrl } from 'lib/routes';
+
 const TrackingLink = props => {
 	const { onClick } = props;
 	const newProps = omit( props, [ 'eventName', 'eventParams', 'trackEvent' ] );
-	const isExternalLink = startsWith( props.to, 'https://' ) ||
-		startsWith( props.to, 'http://' ) ||
-		startsWith( props.to, 'mailto:' );
 
 	newProps.onClick = ( ...args ) => {
 		// track event, it's already bound with eventName on the container
@@ -20,7 +20,7 @@ const TrackingLink = props => {
 		}
 	};
 
-	if ( isExternalLink ) {
+	if ( isExternalUrl( newProps.to ) ) {
 		const href = newProps.to;
 
 		if ( ! startsWith( href, 'mailto:' ) ) {

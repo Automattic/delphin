@@ -61,7 +61,7 @@ function renderPage( props, localeData, isRtl = false ) {
 	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
 	// `main` is an array of JS files after a hot update has been applied
 	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
-	let stylesFileName = '';
+	let stylesFileName;
 	if ( Array.isArray( assets.main ) ) {
 		stylesFileName = assets.main.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
 	}
@@ -74,7 +74,7 @@ function renderPage( props, localeData, isRtl = false ) {
 		title,
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
 		bundle: path.join( bundlePath, bundleFileName ),
-		styles: path.resolve( bundlePath, stylesFileName )
+		styles: stylesFileName ? path.resolve( bundlePath, stylesFileName ) : undefined
 	} );
 }
 

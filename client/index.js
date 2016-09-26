@@ -12,17 +12,20 @@ import thunk from 'redux-thunk';
 // Internal dependencies
 import { adTrackingMiddleware } from './ad-tracking-middleware';
 import { analyticsMiddleware } from './analytics-middleware';
+import App from 'app';
 import config, { isEnabled } from 'config';
 import { default as wpcomMiddleware } from './wpcom-middleware';
-import App from 'app';
+import { fetchUser } from 'actions/user';
+import { getTokenFromBearerCookie } from './bearer-cookie';
+import i18n from 'i18n-calypso';
 import { logErrorNoticesMiddleware } from './log-error-notices-middleware';
 import reducers from 'reducers';
-import i18n from 'i18n-calypso';
+import { relatedWordsMiddleware } from './related-words-middleware';
 import { setLocaleCookie } from './locale-cookie';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
-import { relatedWordsMiddleware } from './related-words-middleware';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
+import { userMiddleware } from './user-middleware';
 
 const middlewares = [
 	routerMiddleware( browserHistory ),
@@ -37,17 +40,21 @@ const middlewares = [
 
 const isDevelopment = 'production' !== config( 'env' );
 
-if ( isDevelopment && localStorage.ENABLE_REDUX_LOGGER ) {
-	middlewares.push( createLogger( {
-		collapsed: true,
-		level: {
-			action: 'log',
-			error: 'log',
-			prevState: false,
-			nextState: 'log'
-		},
-		timestamp: false
-	} ) );
+if ( isDevelopment ) {
+	middlewares.push( userMiddleware );
+
+	if ( localStorage.ENABLE_REDUX_LOGGER ) {
+		middlewares.push( createLogger( {
+			collapsed: true,
+			level: {
+				action: 'log',
+				error: 'log',
+				prevState: false,
+				nextState: 'log'
+			},
+			timestamp: false
+		} ) );
+	}
 }
 
 const store = createStore(
@@ -103,4 +110,10 @@ function boot() {
 	setLocaleCookie( i18n.getLocaleSlug() );
 }
 
-boot();
+const bearerToken = getTokenFromBearerCookie();
+
+if ( isDevelopment && bearerToken ) {
+	store.dispatch( fetchUser() ).then( boot );
+} else {
+	boot();
+}

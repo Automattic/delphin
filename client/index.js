@@ -33,11 +33,14 @@ const middlewares = [
 	adTrackingMiddleware,
 	analyticsMiddleware,
 	logErrorNoticesMiddleware,
-	userMiddleware,
 	wpcomMiddleware,
 	relatedWordsMiddleware,
 	switchLocaleMiddleware,
 ];
+
+if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
+	middlewares.push( userMiddleware );
+}
 
 const isDevelopment = 'production' !== config( 'env' );
 

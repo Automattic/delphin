@@ -28,8 +28,8 @@ var config = merge.smart( baseConfig, {
 		path: path.resolve( __dirname, 'public/scripts' ),
 		publicPath: '/scripts/',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]',
-		filename: process.env.BUILD_RTL ? 'bundle.rtl.[hash].js' : 'bundle.[hash].js',
-		sourceMapFilename: process.env.BUILD_RTL ? 'bundle.rtl.[hash].map.js' : 'bundle.[hash].map.js'
+		filename: 'bundle.[hash].js',
+		sourceMapFilename: 'bundle.[hash].map.js'
 	},
 
 	plugins: [

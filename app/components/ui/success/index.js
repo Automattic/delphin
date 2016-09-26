@@ -20,6 +20,10 @@ class Success extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		this.props.fetchMyDomains();
+	}
+
 	render() {
 		const { domain, email } = this.props;
 
@@ -97,6 +101,7 @@ class Success extends React.Component {
 Success.propTypes = {
 	domain: PropTypes.string,
 	email: PropTypes.string,
+	fetchMyDomains: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 };

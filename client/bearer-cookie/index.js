@@ -18,7 +18,7 @@ export function getTokenFromBearerCookie() {
  * @returns {boolean} true if the bearer cookie was deleted, false otherwise
  */
 export function removeBearerCookie() {
-	return cookies.remove( 'wpcom_token' );
+	return cookies.remove( 'wpcom_token', { path: '/' } );
 }
 
 /**

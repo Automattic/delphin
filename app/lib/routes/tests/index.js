@@ -14,8 +14,8 @@ import {
 describe( 'lib/routes', () => {
 	describe( 'getRouteWithLanguageSlug', () => {
 		it( 'should prefix the path of the given route with a locale slug', () => {
-			expect( getRouteWithLanguageSlug( { langSlug: 'ja' }, { path: 'about' } ) ).toEqual( {
-				path: 'ja/about'
+			expect( getRouteWithLanguageSlug( { langSlug: 'ja' }, { path: 'learn-more' } ) ).toEqual( {
+				path: 'ja/learn-more'
 			} );
 		} );
 

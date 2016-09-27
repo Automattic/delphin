@@ -73,7 +73,7 @@ function init() {
 	}
 
 	window.switchLocale = switchLocale;
-	
+
 	if ( window.localeData ) {
 		i18n.setLocale( window.localeData );
 	}

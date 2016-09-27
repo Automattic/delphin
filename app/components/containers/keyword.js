@@ -17,8 +17,15 @@ export default connect(
 	state => ( {
 		relatedWords: getRelatedWords( state ),
 	} ),
-	dispatch => bindActionCreators( {
-		replace: domainSearchKeywordReplaceSelected,
+	( dispatch, ownProps ) => bindActionCreators( {
+		replace: withAnalytics(
+			newKeyword => recordTracksEvent( 'delphin_synonym_select', {
+				old_keyword: ownProps.keyword.value,
+				new_keyword: newKeyword
+			} ),
+			domainSearchKeywordReplaceSelected
+		),
+
 		remove: withAnalytics(
 			keyword => recordTracksEvent( 'delphin_keyword_remove', { keyword: keyword } ),
 			domainSearchKeywordRemove

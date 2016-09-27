@@ -61,7 +61,8 @@ if ( NODE_ENV === 'development' ) {
 	// http://bit.ly/1VTOHrK for more information).
 	config.debug = true;
 
-	// Enables source maps
+	// Use a more performant type of sourcemaps for our development env
+	// For a comparison see: https://webpack.github.io/docs/configuration.html#devtool
 	config.devtool = 'cheap-module-eval-source-map';
 }
 

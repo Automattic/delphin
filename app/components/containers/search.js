@@ -58,6 +58,11 @@ export default connect(
 			)( query )( dispatch );
 		},
 
+		showAdditionalResults( query, numberOfResultsToDisplay, sort ) {
+			dispatch( recordTracksEvent( 'delphin_results_show_more', { num_results_shown: numberOfResultsToDisplay } ) );
+			this.redirectToSearch( query, numberOfResultsToDisplay, sort );
+		},
+
 		sortChange( query, value ) {
 			dispatch( recordTracksEvent( 'delphin_results_sort', { sort_type: value } ) );
 			this.redirectToSearch( query, config( 'initial_number_of_search_results' ), value );

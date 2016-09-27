@@ -47,6 +47,11 @@ export default connect(
 		},
 
 		selectDomain( domainProduct ) {
+			dispatch( recordTracksEvent( 'delphin_search_result_select', {
+				is_premium: domainProduct.isPremium,
+				relevance: domainProduct.relevance,
+				num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
+			} ) );
 			dispatch( selectDomain( domainProduct ) );
 			dispatch( redirect( 'confirmDomain', { queryParams: { domain: domainProduct.domainName } } ) );
 		},

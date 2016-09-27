@@ -60,11 +60,12 @@ function renderPage( props, localeData, isRtl = false ) {
 	const bundlePath = '/scripts/';
 	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
 	// `main` is an array of JS files after a hot update has been applied
-	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
+	const bundleFileName = typeof assets.app === 'string' ? assets.app : assets.app[ 0 ];
 	let stylesFileName;
 	if ( Array.isArray( assets.app ) ) {
 		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
 	}
+	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
 
 	return templateCompiler( {
 		content,
@@ -74,6 +75,7 @@ function renderPage( props, localeData, isRtl = false ) {
 		title,
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
 		bundle: path.join( bundlePath, bundleFileName ),
+		vendor: path.join( bundlePath, vendorFileName ),
 		styles: stylesFileName ? path.resolve( bundlePath, stylesFileName ) : undefined
 	} );
 }
@@ -178,8 +180,8 @@ const init = () => {
 	if ( isDevelopment ) {
 		const backendPort = port + 1;
 
-		webpackConfig.entry.unshift( 'webpack/hot/only-dev-server' );
-		webpackConfig.entry.unshift( 'webpack-dev-server/client?/' );
+		webpackConfig.entry.app.unshift( 'webpack/hot/only-dev-server' );
+		webpackConfig.entry.app.unshift( 'webpack-dev-server/client?/' );
 		webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
 
 		const devServer = new WebpackDevServer( webpack( webpackConfig ), {

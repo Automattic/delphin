@@ -29,6 +29,6 @@ export default reduxForm(
 	undefined,
 	dispatch => bindActionCreators( {
 		selectDomain,
-		redirectToSearch: domain => redirect( 'search', { q: domain } )
+		redirectToSearch: domain => redirect( 'search', { queryParams: { q: domain } } )
 	}, dispatch )
 )( SunriseHome );

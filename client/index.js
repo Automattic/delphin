@@ -26,6 +26,7 @@ import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
 import { userMiddleware } from './user-middleware';
+import { provideStore } from 'sections';
 
 const middlewares = [
 	routerMiddleware( browserHistory ),
@@ -68,6 +69,10 @@ const store = createStore(
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );
+
+// Provide the store to `sections` to enable a loading state when fetching
+// section chunks
+provideStore( store );
 
 function init() {
 	if ( window.Raven && isEnabled( 'sentry' ) ) {

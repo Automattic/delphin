@@ -56,6 +56,11 @@ export default connect(
 				domain => recordTracksEvent( 'delphin_domain_search', { search_string: domain } ),
 				fetchDomainSuggestions
 			)( query )( dispatch );
+		},
+
+		sortChange( query, value ) {
+			dispatch( recordTracksEvent( 'delphin_results_sort', { sort_type: value } ) );
+			this.redirectToSearch( query, config( 'initial_number_of_search_results' ), value );
 		}
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {

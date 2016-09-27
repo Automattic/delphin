@@ -24,7 +24,8 @@ const Search = React.createClass( {
 		redirectToSearch: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
-		sort: PropTypes.string
+		sort: PropTypes.string,
+		sortChange: PropTypes.func.isRequired
 	},
 
 	getDefaultProps() {
@@ -90,7 +91,7 @@ const Search = React.createClass( {
 	},
 
 	sortChange( event ) {
-		this.props.redirectToSearch( this.props.query, config( 'initial_number_of_search_results' ), event.target.value );
+		this.props.sortChange( this.props.query, event.target.value );
 	},
 
 	renderSortOptions() {

@@ -14,6 +14,15 @@ var config = merge.smart( baseConfig, {
 		path.join( __dirname, 'client' )
 	],
 
+	module: {
+		loaders: [
+			{
+				test: /\.jsx?$/,
+				loaders: [ 'react-hot' ]
+			}
+		]
+	},
+
 	node: {
 		console: false,
 		process: true,
@@ -70,10 +79,6 @@ if ( NODE_ENV === 'production' ) {
 	config = merge.smart( config, {
 		module: {
 			loaders: [
-				{
-					test: /\.jsx?$/,
-					loaders: [ 'react-hot' ]
-				},
 				{
 					test: /\.scss$/,
 					loader: ExtractTextPlugin.extract( {

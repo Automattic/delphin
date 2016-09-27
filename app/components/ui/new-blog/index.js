@@ -48,7 +48,7 @@ class NewBlog extends Component {
 								checked={ simpleOrAdvanced.value === 'simple' }
 							/>
 							{ i18n.translate( 'Simple & Quick' ) }
-							<p>
+							<p className={ styles.labelDescription }>
 								{
 									i18n.translate( 'Having a simple tool (with no coding) is more important than full ' +
 									'control over the layout and look.' )
@@ -64,7 +64,7 @@ class NewBlog extends Component {
 								checked={ simpleOrAdvanced.value === 'advanced' }
 							/>
 							{ i18n.translate( 'More Control & Power' ) }
-							<p>
+							<p className={ styles.labelDescription }>
 								{
 									i18n.translate( "I want full control of the look and feel and I don't mind getting " +
 										'my hands dirty with code as needed.' )

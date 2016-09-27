@@ -22,7 +22,7 @@ import thunk from 'redux-thunk';
 import api from './wpcom-rest-api-proxy';
 import config, { isEnabled } from 'config';
 import { fileExists } from './utils';
-import generateSourceMap from './sitemap-generator';
+import generateSiteMap from './sitemap-generator';
 import i18nCache from './i18n-cache';
 import { getPath, defaultRoutes, routes } from 'app/routes';
 import { getLocaleSlug } from 'lib/routes';
@@ -145,7 +145,7 @@ const init = () => {
 		// we need to explicitly generate 404 pages because 404 isn't in in the default routes
 		generateStatic404Files();
 
-		generateSourceMap();
+		generateSiteMap();
 
 		// No need to start the server
 		return;

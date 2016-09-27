@@ -3,9 +3,6 @@ import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
-import CheckoutContainer from 'components/containers/checkout';
-import ContactInformationContainer from 'components/containers/contact-information';
-import CheckoutReviewContainer from 'components/containers/checkout-review';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import Layout from 'components/ui/layout';
 import LearnMoreContainer from 'components/containers/learn-more';
@@ -14,7 +11,6 @@ import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
-import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
@@ -89,8 +85,8 @@ let publicRoutes = [
 			{
 				path: 'contact-information',
 				slug: 'contactInformation',
-				component: ContactInformationContainer,
-				static: false
+				static: false,
+				getComponent: getComponent( 'checkout', 'contactInformation' )
 			},
 			{
 				path: 'confirm-domain',
@@ -120,13 +116,13 @@ let publicRoutes = [
 				path: 'checkout',
 				slug: 'checkout',
 				static: false,
-				component: CheckoutContainer
+				getComponent: getComponent( 'checkout', 'checkout' )
 			},
 			{
 				path: 'checkout-review',
 				slug: 'checkoutReview',
 				static: false,
-				component: CheckoutReviewContainer
+				getComponent: getComponent( 'checkout', 'checkoutReview' )
 			},
 			{
 				path: 'learn-more',
@@ -143,7 +139,7 @@ let publicRoutes = [
 				path: 'success',
 				slug: 'success',
 				static: false,
-				component: SuccessContainer
+				getComponent: getComponent( 'checkout', 'success' )
 			}
 		]
 	},

@@ -65,7 +65,13 @@ let publicRoutes = [
 				slug: 'connectExistingBlog',
 				static: false,
 				getComponent: getComponent( 'setUp', 'connectExistingBlog' )
-			}
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog',
+				slug: 'newBlog',
+				static: false,
+				getComponent: getComponent( 'setUp', 'newBlog' )
+			},
 		]
 	},
 	{

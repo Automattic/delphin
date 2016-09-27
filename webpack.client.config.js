@@ -8,11 +8,36 @@ var baseConfig = require( './webpack.base.config' ),
 	webpack = require( 'webpack' ),
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
+const vendorModules = [
+	'badwords',
+	'cookie-dough',
+	'creditcards',
+	'classnames',
+	'i18n-calypso',
+	'lodash',
+	'random-words',
+	'react',
+	'react-dom',
+	'react-redux',
+	'react-router',
+	'redux',
+	'redux-thunk',
+	'wpcom-xhr-request',
+];
+
 var config = merge.smart( baseConfig, {
-	entry: [
-		'babel-polyfill',
-		path.join( __dirname, 'client' )
-	],
+	devServer: {
+		port: 1337,
+		historyApiFallback: true
+	},
+
+	entry: {
+		app: [
+			'babel-polyfill',
+			path.join( __dirname, 'client' )
+		],
+		vendor: vendorModules
+	},
 
 	node: {
 		console: false,
@@ -33,6 +58,10 @@ var config = merge.smart( baseConfig, {
 	},
 
 	plugins: [
+		new webpack.optimize.CommonsChunkPlugin( {
+			name: 'vendor',
+			filename: '[name].[hash].js'
+		} ),
 		new webpack.DefinePlugin( {
 			'process.env': {
 				NODE_ENV: JSON.stringify( NODE_ENV ),

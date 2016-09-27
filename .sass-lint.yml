@@ -60,7 +60,10 @@ rules:
   variable-name-format: 1
 
   # Style Guide
-  attribute-quotes: 1
+  attribute-quotes:
+    - 1
+    -
+      include: false
   bem-depth: 0
   border-zero: 1
   brace-style: 1

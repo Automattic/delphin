@@ -3,7 +3,6 @@ import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
-import About from 'components/ui/about';
 import CheckoutContainer from 'components/containers/checkout';
 import ContactInformationContainer from 'components/containers/contact-information';
 import CheckoutReviewContainer from 'components/containers/checkout-review';
@@ -37,20 +36,6 @@ let publicRoutes = [
 	{
 		component: DefaultLayoutWithHeader,
 		childRoutes: [
-			{
-				path: 'about',
-				slug: 'about',
-				static: true,
-				component: About,
-				childRoutes: [
-					{
-						path: 'testnest',
-						slug: 'testnest',
-						component: About,
-						static: true
-					}
-				]
-			},
 			{
 				path: 'sign-in-with-email',
 				slug: 'signInWithEmail',
@@ -114,7 +99,15 @@ let publicRoutes = [
 				path: 'learn-more',
 				slug: 'learnMore',
 				static: true,
-				component: LearnMore
+				component: LearnMore,
+				childRoutes: [
+					{
+						path: 'testnest',
+						slug: 'testnest',
+						component: LearnMore,
+						static: true
+					}
+				]
 			}
 		]
 	},

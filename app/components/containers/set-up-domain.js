@@ -7,6 +7,7 @@ import { reduxForm } from 'redux-form';
 import { getPath } from 'routes';
 import RequireLogin from './require-login';
 import SetUpDomain from 'components/ui/set-up-domain';
+import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
@@ -17,6 +18,7 @@ export default reduxForm(
 		domainName: ownProps.params.domainName,
 	} ),
 	dispatch => bindActionCreators( {
-		redirectToSetUpExistingBlog: ( domainName ) => push( getPath( 'setUpExistingBlog', { domainName } ) )
+		redirectToSetUpExistingBlog: ( domainName ) => push( getPath( 'setUpExistingBlog', { domainName } ) ),
+		redirect
 	}, dispatch )
 )( RequireLogin( SetUpDomain ) );

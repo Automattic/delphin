@@ -34,7 +34,11 @@ export default connect(
 			if ( keyword.isSelected ) {
 				return deselectKeyword();
 			}
-			return selectKeyword( keyword );
+
+			return withAnalytics(
+				selectedKeyword => recordTracksEvent( 'delphin_synonyms_show', { keyword: selectedKeyword } ),
+				selectKeyword
+			)( keyword );
 		}
 	}, dispatch )
 )( Keyword );

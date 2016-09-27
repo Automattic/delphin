@@ -26,7 +26,7 @@ import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
 import { userMiddleware } from './user-middleware';
-import { provideStore } from 'sections';
+import { provideStore, sections } from 'sections';
 
 const middlewares = [
 	routerMiddleware( browserHistory ),
@@ -91,6 +91,9 @@ function init() {
 	}
 
 	injectTapEventPlugin();
+
+	// pre-load checkout chunk
+	sections.checkout();
 }
 
 function render() {

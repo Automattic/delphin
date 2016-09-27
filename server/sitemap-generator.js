@@ -15,11 +15,10 @@ const filterConfig = {
 		/\/verify/,
 		/\/checkout/,
 		/\/checkout-review/,
-		/\/about\/testnest/,
+		/\/testnest/,
 		/\/sign-in-with-email/,
 		/\/sign-up-with-email/,
 		/\/success/,
-		/\/about/,
 		/\/log-in/,
 		/\/signup/,
 		/\/\*/

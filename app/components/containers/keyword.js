@@ -1,6 +1,7 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { recordTracksEvent, withAnalytics } from 'actions/analytics';
 
 // Internal dependencies
 import Keyword from 'components/ui/search-input/keyword';
@@ -18,7 +19,10 @@ export default connect(
 	} ),
 	dispatch => bindActionCreators( {
 		replace: domainSearchKeywordReplaceSelected,
-		remove: domainSearchKeywordRemove,
+		remove: withAnalytics(
+			keyword => recordTracksEvent( 'delphin_keyword_remove', { keyword: keyword } ),
+			domainSearchKeywordRemove
+		),
 		toggleSelect: keyword => {
 			if ( keyword.isSelected ) {
 				return deselectKeyword();

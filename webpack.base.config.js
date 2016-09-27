@@ -1,6 +1,7 @@
 // External dependencies
 var autoprefixer = require( 'autoprefixer' ),
-	path = require( 'path' );
+	path = require( 'path' ),
+	webpack = require( 'webpack' );
 
 var config = {
 	module: {
@@ -47,7 +48,21 @@ var config = {
 	},
 
 	// Enables source maps both for the client and server.
-	devtool: process.env.NODE_ENV === 'production' ? undefined : 'source-map'
+	devtool: process.env.NODE_ENV === 'production' ? undefined : 'source-map',
+
+	plugins: [
+		new webpack.LoaderOptionsPlugin( {
+			test: /\.scss$/,
+			debug: ! process.env.NODE_ENV || process.env.NODE_ENV === 'development',
+			options: {
+				sassLoader: {
+					includePaths: [ path.resolve( __dirname, 'app' ) ]
+				},
+				context: __dirname,
+				postcss: () => [ autoprefixer ]
+			}
+		} )
+	]
 };
 
 module.exports = config;

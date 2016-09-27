@@ -37,15 +37,17 @@ export default connect(
 			sort = sort === config( 'default_search_sort' ) ? undefined : sort;
 
 			dispatch( redirect( 'search', {
-				q: query,
-				r: numberOfResultsToDisplay,
-				sort
+				queryParams: {
+					q: query,
+					r: numberOfResultsToDisplay,
+					sort
+				}
 			} ) );
 		},
 
 		selectDomain( domainProduct ) {
 			dispatch( selectDomain( domainProduct ) );
-			dispatch( redirect( 'confirmDomain', { domain: domainProduct.domainName } ) );
+			dispatch( redirect( 'confirmDomain', { queryParams: { domain: domainProduct.domainName } } ) );
 		},
 
 		fetchDomainSuggestions( query ) {

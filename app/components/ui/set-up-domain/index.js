@@ -23,7 +23,7 @@ class SetUpDomain extends Component {
 		}
 
 		if ( values.newOrExisting === 'existing' ) {
-			this.props.redirectToSetUpExistingBlog( this.props.domainName );
+			redirect( 'setUpExistingBlog', { pathParams: { domainName } } );
 		}
 	}
 
@@ -103,8 +103,8 @@ SetUpDomain.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
-	redirectToSetUpExistingBlog: PropTypes.func.isRequired,
-	submitting: PropTypes.bool.isRequired
+	redirect: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( SetUpDomain ) );

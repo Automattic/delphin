@@ -25,7 +25,7 @@
 		margin-bottom: 5px;
 	}
 
-	input,
+	input:not([type=radio]),
 	select {
 		appearance: none;
 		border: 1px solid $gray-medium;

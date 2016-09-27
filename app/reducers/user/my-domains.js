@@ -16,7 +16,9 @@ export const myDomains = createRequestReducer( {
 
 	switch ( type ) {
 		case LOGOUT_USER:
-		default:
 			return initialState;
+
+		default:
+			return state;
 	}
 } );

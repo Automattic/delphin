@@ -1,13 +1,14 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
+import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
 import { getPath } from 'routes';
-import { Link } from 'react-router';
+import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
@@ -20,7 +21,7 @@ class SetUpDomain extends Component {
 		}
 
 		if ( values.newOrExisting === 'existing' ) {
-			alert( "TODO: redirect to the 'existing blog' setup page" );
+			this.props.redirectToSetUpExistingBlog( this.props.domainName );
 		}
 	}
 
@@ -35,6 +36,7 @@ class SetUpDomain extends Component {
 			<SunriseStep>
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
+
 					<h2>
 						{ preventWidows( i18n.translate( 'Just answer a few simple questions about your plans for {{strong}}%(domainName)s{{/strong}}, ' +
 							"then we'll take care of the heavy lifting for you!", {
@@ -44,39 +46,42 @@ class SetUpDomain extends Component {
 						), 2 ) }
 					</h2>
 				</SunriseStep.Header>
-				<SunriseStep.Form onSubmit={ handleSubmit( this.handleSubmit ) }>
-					<label className={ styles.label } htmlFor="existing">
-						<Radio
-							className={ styles.radio }
-							{ ...newOrExisting }
-							id="existing"
-							value="existing"
-							checked={ newOrExisting.value === 'existing' }
-						/>
-						{ i18n.translate( "A blog I've already created" ) }
-					</label>
-					<label className={ styles.label } htmlFor="new">
-						<Radio
-							className={ styles.radio }
-							{ ...newOrExisting }
-							id="new"
-							value="new"
-							checked={ newOrExisting.value === 'new' }
-						/>
-						{ i18n.translate( 'A blog I am going to create' ) }
-					</label>
-					<div className={ styles.buttonContainer }>
-						<Link
-							className={ styles.backLink }
-							to={ getPath( 'myDomains' ) }
-						>
+
+				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+					<Form.FieldArea>
+						<label className={ styles.label } htmlFor="existing">
+							<Radio
+								className={ styles.radio }
+								{ ...newOrExisting }
+								id="existing"
+								value="existing"
+								checked={ newOrExisting.value === 'existing' }
+							/>
+							{ i18n.translate( "A blog I've already created" ) }
+						</label>
+
+						<label className={ styles.label } htmlFor="new">
+							<Radio
+								className={ styles.radio }
+								{ ...newOrExisting }
+								id="new"
+								value="new"
+								checked={ newOrExisting.value === 'new' }
+							/>
+							{ i18n.translate( 'A blog I am going to create' ) }
+						</label>
+					</Form.FieldArea>
+
+					<Form.SubmitArea>
+						<Link to={ getPath( 'myDomains' ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
-						<Button className={ styles.button }>
+
+						<Button>
 							{ i18n.translate( 'Next' ) }
 						</Button>
-					</div>
-				</SunriseStep.Form>
+					</Form.SubmitArea>
+				</Form>
 			</SunriseStep>
 		);
 	}
@@ -86,6 +91,7 @@ SetUpDomain.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	redirectToSetUpExistingBlog: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( SetUpDomain ) );

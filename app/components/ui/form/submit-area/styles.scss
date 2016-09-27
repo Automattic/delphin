@@ -1,10 +1,17 @@
 @import 'app/styles/breakpoints';
 
 .submit-area {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
 	padding: 0 30px 30px;
-	text-align: center;
 
 	@include breakpoint( '<480px' ) {
 		padding: 0 0 15px;
+	}
+
+	a,
+	button {
+		flex-basis: 100%;
 	}
 }

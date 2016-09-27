@@ -29,8 +29,13 @@
 	margin-top: 40px;
 }
 
-.button {
-	margin-bottom: 30px;
+.submit-area {
+	flex-direction: column;
+
+	.button {
+		margin-bottom: 30px;
+		width: 100%;
+	}
 }
 
 .two-factor-authentication-message {
@@ -45,6 +50,7 @@
 	font-size: 1.4rem;
 	font-style: normal;
 	padding-top: 20px;
+	text-align: center;
 
 	a {
 		color: inherit;

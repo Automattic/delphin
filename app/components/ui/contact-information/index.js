@@ -370,11 +370,9 @@ class ContactInformation extends React.Component {
 						</Form.FieldArea>
 
 						<Form.SubmitArea>
-							<div>
-								<Button disabled={ this.isSubmitButtonDisabled() }>
-									{ this.getSubmitButtonText() }
-								</Button>
-							</div>
+							<Button disabled={ this.isSubmitButtonDisabled() }>
+								{ this.getSubmitButtonText() }
+							</Button>
 						</Form.SubmitArea>
 					</Form>
 				</div>

@@ -217,28 +217,26 @@ const VerifyUser = React.createClass( {
 						</fieldset>
 					</Form.FieldArea>
 
-					<Form.SubmitArea>
-						<div>
-							{ isConfirmationCodeVisible && (
-								<Button
-									className={ styles.button }
-									disabled={ this.isSubmitButtonDisabled() }
-								>
-									{ user.intention === 'login'
-										? i18n.translate( 'Next' )
-										: i18n.translate( 'Verify my email' )
-									}
-								</Button>
-							) }
+					<Form.SubmitArea className={ styles.submitArea }>
+						{ isConfirmationCodeVisible && (
+							<Button
+								className={ styles.button }
+								disabled={ this.isSubmitButtonDisabled() }
+							>
+								{ user.intention === 'login'
+									? i18n.translate( 'Next' )
+									: i18n.translate( 'Verify my email' )
+								}
+							</Button>
+						) }
 
-							<ResendSignupEmail
-								connectUser={ this.props.connectUser }
-								redirectToTryWithDifferentEmail={ this.props.redirectToTryWithDifferentEmail }
-								email={ user.data.email }
-								intention={ user.intention }
-								domain={ this.props.hasSelectedDomain ? domain.domainName : null }
-							/>
-						</div>
+						<ResendSignupEmail
+							connectUser={ this.props.connectUser }
+							redirectToTryWithDifferentEmail={ this.props.redirectToTryWithDifferentEmail }
+							email={ user.data.email }
+							intention={ user.intention }
+							domain={ this.props.hasSelectedDomain ? domain.domainName : null }
+						/>
 					</Form.SubmitArea>
 				</Form>
 			</div>

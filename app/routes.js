@@ -142,6 +142,7 @@ if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 	const HostsContainer = require( 'components/containers/hosts' ).default;
 	const HostInfoContainer = require( 'components/containers/host-info' ).default;
 	const SetUpDomainContainer = require( 'components/containers/set-up-domain' ).default;
+	const SetUpExistingBlogContainer = require( 'components/containers/set-up-existing-blog' ).default;
 
 	publicRoutes = publicRoutes.map( route => {
 		if ( route.slug === 'home' ) {
@@ -159,6 +160,12 @@ if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
 					slug: 'setUpDomain',
 					static: false,
 					component: SetUpDomainContainer
+				},
+				{
+					path: 'set-up-domain/:domainName/existing-blog',
+					slug: 'setUpExistingBlog',
+					static: false,
+					component: SetUpExistingBlogContainer
 				},
 				{
 					path: 'hosts',

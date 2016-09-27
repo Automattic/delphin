@@ -62,8 +62,8 @@ function renderPage( props, localeData, isRtl = false ) {
 	// `main` is an array of JS files after a hot update has been applied
 	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
 	let stylesFileName;
-	if ( Array.isArray( assets.main ) ) {
-		stylesFileName = assets.main.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
+	if ( Array.isArray( assets.app ) ) {
+		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
 	}
 
 	return templateCompiler( {

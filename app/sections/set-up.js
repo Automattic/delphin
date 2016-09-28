@@ -1,4 +1,8 @@
+// Internal dependencies
+import setUpDomain from 'components/containers/set-up-domain';
+import setUpExistingBlog from 'components/containers/set-up-existing-blog';
+
 export default {
-	setUpDomain: require( 'components/containers/set-up-domain' ),
-	setUpExistingBlog: require( 'components/containers/set-up-existing-blog' ),
+	setUpDomain,
+	setUpExistingBlog,
 };

@@ -30,6 +30,6 @@ export const getComponent = ( sectionSlug, routeSlug ) => ( location, callback )
 	sections[ sectionSlug ]().then( module => {
 		dispatch( hideToggle( 'isSectionLoading' ) );
 
-		callback( null, module.default[ routeSlug ].default );
+		callback( null, module.default[ routeSlug ] );
 	} );
 };

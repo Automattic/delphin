@@ -1,4 +1,8 @@
+// Internal dependencies
+import hosts from 'components/containers/hosts';
+import hostInfo from 'components/containers/host-info';
+
 export default {
-	hosts: require( 'components/containers/hosts' ),
-	hostInfo: require( 'components/containers/host-info' ),
+	hosts,
+	hostInfo,
 };

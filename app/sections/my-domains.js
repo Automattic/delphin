@@ -1,3 +1,6 @@
+// Internal dependencies
+import myDomains from 'components/containers/my-domains';
+
 export default {
-	myDomains: require( 'components/containers/my-domains' ),
+	myDomains,
 };

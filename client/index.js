@@ -79,6 +79,8 @@ function init() {
 		} );
 	}
 
+	window.switchLocale = switchLocale;
+
 	if ( window.localeData ) {
 		i18n.setLocale( window.localeData );
 	}
@@ -104,8 +106,6 @@ function boot() {
 
 	render();
 	i18n.stateObserver.on( 'change', render );
-
-	window.switchLocale = switchLocale;
 
 	setLocaleCookie( i18n.getLocaleSlug() );
 }

@@ -31,7 +31,7 @@ var config = merge.smart( baseConfig, {
 
 	output: {
 		path: path.resolve( __dirname, 'server/build' ),
-		filename: process.env.BUILD_RTL ? 'bundle.rtl.js' : 'bundle.js'
+		filename: 'bundle.js'
 	},
 
 	target: 'node',

@@ -1,4 +1,3 @@
-/* global BUILD_RTL*/
 // External dependencies
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import curry from 'lodash/curry';
@@ -35,7 +34,7 @@ const app = express(),
 	template = fs.readFileSync( templatePath, 'utf8' ),
 	templateCompiler = pug.compile( template, { filename: templatePath, pretty: true } );
 
-function renderPage( props, localeData ) {
+function renderPage( props, localeData, isRtl = false ) {
 	const store = createStore(
 		combineReducers( {
 			...reducers,
@@ -62,19 +61,24 @@ function renderPage( props, localeData ) {
 	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
 	// `main` is an array of JS files after a hot update has been applied
 	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
+	let stylesFileName;
+	if ( Array.isArray( assets.main ) ) {
+		stylesFileName = assets.main.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
+	}
 
 	return templateCompiler( {
 		content,
 		isEnabled,
-		isRtl: BUILD_RTL,
+		isRtl,
 		localeData,
 		title,
-		css: css.join( '' ),
-		bundle: path.join( bundlePath, bundleFileName )
+		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
+		bundle: path.join( bundlePath, bundleFileName ),
+		styles: stylesFileName ? path.resolve( bundlePath, stylesFileName ) : undefined
 	} );
 }
 
-const generateStaticFile = filePath => {
+const generateStaticFile = ( filePath, isRtl ) => {
 	match( { routes, location: filePath }, ( error, redirectLocation, props ) => {
 		const locale = getLocaleSlug( filePath ),
 			localeData = i18nCache.get( locale ),
@@ -91,7 +95,7 @@ const generateStaticFile = filePath => {
 			fs.mkdirSync( directory );
 		}
 
-		fs.writeFile( path.join( directory, 'index.html' ), renderPage( props, localeData ), function( writeError ) {
+		fs.writeFile( path.join( directory, 'index.html' ), renderPage( props, localeData, isRtl ), function( writeError ) {
 			if ( writeError ) {
 				return console.log( writeError );
 			}
@@ -117,25 +121,21 @@ const generateStaticFiles = rootRoutes => {
 
 	addStaticSlugs( rootRoutes );
 
-	config( 'languages' )
-		.filter( language => language.isRtl === BUILD_RTL )
-		.map( language => language.langSlug ).forEach( locale => {
-			staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale } ) ) );
-		} );
+	config( 'languages' ).forEach( language => {
+		const { langSlug, isRtl } = language;
+		staticSlugs.forEach( slug => generateStaticFile( getPath( slug, {}, { locale: langSlug } ), isRtl ) );
+	} );
 };
 
 const generateStatic404Files = () => {
 	config( 'languages' )
-		.filter( language => language.isRtl === BUILD_RTL )
 		// we filter out `en` because it lives in the top-level static directory, not under `/en/`
 		.filter( language => language.langSlug !== config( 'i18n_default_locale_slug' ) )
 		.map( language => `/${ language.langSlug }/404` )
 		.forEach( generateStaticFile );
 
-	if ( ! BUILD_RTL ) {
-		// generate English 404
-		generateStaticFile( '404' );
-	}
+	// generate English 404
+	generateStaticFile( '404' );
 };
 
 const init = () => {

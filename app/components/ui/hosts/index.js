@@ -27,7 +27,7 @@ const Hosts = ( { domainName } ) => {
 					{ i18n.translate( 'Here are a few powerful options that can be connected automatically to your domain using MagicDomains.' ) }
 				</h3>
 				<ul className={ styles.hostThumbnailsList } >
-					{ hosts.map( host => <HostThumbnail key={ host.name } { ...host } /> ) }
+					{ hosts.map( host => <HostThumbnail key={ host.name } domainName={ domainName } { ...host } /> ) }
 				</ul>
 			</section>
 		</DocumentTitle>

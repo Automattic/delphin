@@ -37,18 +37,6 @@ let publicRoutes = [
 				getComponent: getComponent( 'myDomains', 'myDomains' )
 			},
 			{
-				path: 'hosts',
-				slug: 'hosts',
-				static: false,
-				getComponent: getComponent( 'hosts', 'hosts' )
-			},
-			{
-				path: 'hosts/:slug',
-				slug: 'hostInfo',
-				static: false,
-				getComponent: getComponent( 'hosts', 'hostInfo' )
-			},
-			{
 				path: 'set-up-domain/:domainName',
 				slug: 'setUpDomain',
 				static: false,
@@ -71,6 +59,18 @@ let publicRoutes = [
 				slug: 'setUpNewBlog',
 				static: false,
 				getComponent: getComponent( 'setUp', 'setUpNewBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/hosts',
+				slug: 'hosts',
+				static: false,
+				getComponent: getComponent( 'setUp', 'hosts' )
+			},
+			{
+				path: 'set-up-domain/:domainName/hosts/:slug',
+				slug: 'hostInfo',
+				static: false,
+				getComponent: getComponent( 'setUp', 'hostInfo' )
 			},
 		]
 	},

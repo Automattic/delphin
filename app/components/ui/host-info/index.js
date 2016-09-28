@@ -21,11 +21,12 @@ class HostInfo extends React.Component {
 
 	render() {
 		const host = find( hosts, { slug: this.props.slug } );
+		const { domainName } = this.props;
 
 		return (
 			<section>
 				<div className={ styles.backLinkContainer }>
-					<Link className={ styles.backLink } to={ getPath( 'hosts' ) }>← { i18n.translate( 'View All' ) }</Link>
+					<Link className={ styles.backLink } to={ getPath( 'hosts', { domainName } ) }>← { i18n.translate( 'View All' ) }</Link>
 				</div>
 
 				<div className={ styles.header + ' ' + styles[ host.slug ] }>
@@ -55,6 +56,7 @@ class HostInfo extends React.Component {
 }
 
 HostInfo.propTypes = {
+	domainName: PropTypes.string.isRequired,
 	recordPageView: PropTypes.func.isRequired,
 	slug: PropTypes.string.isRequired
 };

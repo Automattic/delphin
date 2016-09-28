@@ -26,7 +26,7 @@ class SetUpNewBlog extends Component {
 	handleSubmit() {
 		const { redirect, domainName } = this.props;
 
-		redirect( 'hosts', { queryParams: { domainName } } );
+		redirect( 'hosts', { pathParams: { domainName } } );
 	}
 
 	render() {

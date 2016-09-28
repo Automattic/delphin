@@ -107,7 +107,8 @@ export function fetchUser() {
 						bearerToken: requestToken,
 						email: data.email,
 						id: data.id,
-						language: data.language
+						language: data.language,
+						username: data.username,
 					} )
 				),
 		fail: FETCH_USER_FAIL

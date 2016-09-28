@@ -15,6 +15,14 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class SetUpNewBlog extends Component {
+	componentWillMount() {
+		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
+
+		if ( ! hasAnsweredPreviousQuestion ) {
+			redirect( 'setUpDomain', { pathParams: { domainName } } );
+		}
+	}
+
 	handleSubmit() {
 		const { redirect, domainName } = this.props;
 		redirect( 'hosts', { pathParams: { domainName } } );
@@ -90,6 +98,7 @@ SetUpNewBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

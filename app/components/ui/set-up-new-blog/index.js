@@ -1,6 +1,7 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
+import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -8,7 +9,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import { Link } from 'react-router';
 import { preventWidows } from 'lib/formatters';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
@@ -25,7 +25,8 @@ class SetUpNewBlog extends Component {
 
 	handleSubmit() {
 		const { redirect, domainName } = this.props;
-		redirect( 'hosts', { pathParams: { domainName } } );
+
+		redirect( 'hosts', { queryParams: { domainName } } );
 	}
 
 	render() {
@@ -41,7 +42,11 @@ class SetUpNewBlog extends Component {
 					<h1>{ i18n.translate( "Let's create a new a blog!" ) }</h1>
 					<h2>
 						{ preventWidows( i18n.translate( "We'll help you create your blog by suggesting popular services" +
-							" based on your needs. Then we'll get your domain connected."
+							" based on your needs. Then we'll get {{strong}}%(domainName)s{{/strong}} connected.",
+							{
+								args: { domainName },
+								components: { strong: <strong /> }
+							}
 						), 2 ) }
 					</h2>
 				</SunriseStep.Header>

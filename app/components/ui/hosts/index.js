@@ -1,6 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import HostThumbnail from 'components/ui/hosts/host-thumbnail';
 
@@ -10,12 +10,18 @@ import { hosts } from 'lib/hosts';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
 
-const Hosts = () => {
+const Hosts = ( { domainName } ) => {
 	return (
 		<DocumentTitle title={ i18n.translate( 'Hosts' ) }>
 			<section className={ styles.content }>
 				<h2 className={ styles.heading2 }>
-					{ i18n.translate( 'Where would you like to create your blog?' ) }
+					{
+						domainName
+						? i18n.translate( 'Where would you like to create {{strong}}%(domainName)s{{/strong}}?', {
+							args: { domainName },
+							components: { strong: <strong /> }
+						} )
+						: i18n.translate( 'Where would you like to create your blog?' ) }
 				</h2>
 				<h3 className={ styles.heading3 }>
 					{ i18n.translate( 'Here are a few powerful options that can be connected automatically to your domain using MagicDomains.' ) }
@@ -26,6 +32,10 @@ const Hosts = () => {
 			</section>
 		</DocumentTitle>
 	);
+};
+
+Hosts.propTypes = {
+	domainName: PropTypes.string
 };
 
 export default withStyles( styles )( withPageView( Hosts, 'Hosts' ) );

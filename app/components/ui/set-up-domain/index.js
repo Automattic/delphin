@@ -18,6 +18,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 class SetUpDomain extends Component {
 	handleSubmit( values ) {
 		const { redirect, domainName } = this.props;
+
 		if ( values.newOrExisting === 'new' ) {
 			redirect( 'setUpNewBlog', { pathParams: { domainName } } );
 		}

@@ -1,6 +1,7 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { recordTracksEvent, withAnalytics } from 'actions/analytics';
 
 // Internal dependencies
 import Keyword from 'components/ui/search-input/keyword';
@@ -16,14 +17,28 @@ export default connect(
 	state => ( {
 		relatedWords: getRelatedWords( state ),
 	} ),
-	dispatch => bindActionCreators( {
-		replace: domainSearchKeywordReplaceSelected,
-		remove: domainSearchKeywordRemove,
+	( dispatch, ownProps ) => bindActionCreators( {
+		replace: withAnalytics(
+			newKeyword => recordTracksEvent( 'delphin_synonym_select', {
+				old_keyword: ownProps.keyword.value,
+				new_keyword: newKeyword
+			} ),
+			domainSearchKeywordReplaceSelected
+		),
+
+		remove: withAnalytics(
+			keyword => recordTracksEvent( 'delphin_keyword_remove', { keyword: keyword } ),
+			domainSearchKeywordRemove
+		),
 		toggleSelect: keyword => {
 			if ( keyword.isSelected ) {
 				return deselectKeyword();
 			}
-			return selectKeyword( keyword );
+
+			return withAnalytics(
+				selectedKeyword => recordTracksEvent( 'delphin_synonyms_show', { keyword: selectedKeyword } ),
+				selectKeyword
+			)( keyword );
 		}
 	}, dispatch )
 )( Keyword );

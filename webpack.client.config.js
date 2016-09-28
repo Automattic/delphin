@@ -119,7 +119,10 @@ if ( NODE_ENV === 'production' ) {
 			]
 		},
 		plugins: [
-			new ExtractTextPlugin( '../styles/bundle.[contenthash].css' ),
+			new ExtractTextPlugin( {
+				filename: '../styles/bundle.[contenthash].css',
+				allChunks: true
+			} ),
 			new WebpackRTLPlugin( { filename: '../styles/bundle.[contenthash].rtl.css' } ),
 			new webpack.optimize.UglifyJsPlugin( {
 				sourceMap: !! config.devtool,

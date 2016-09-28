@@ -17,7 +17,7 @@ export const userMiddleware = () => next => action => {
 			break;
 		case FETCH_USER_COMPLETE:
 		case VERIFY_USER_COMPLETE:
-			saveTokenInBearerCookie( action.bearerToken );
+			saveTokenInBearerCookie( action );
 			break;
 	}
 

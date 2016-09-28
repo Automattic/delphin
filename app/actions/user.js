@@ -132,7 +132,7 @@ export function verifyUser( email, code, twoFactorAuthenticationCode ) {
 		loading: VERIFY_USER,
 		success: ( data ) => {
 			return dispatch => {
-				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.accessToken } );
+				dispatch( { type: VERIFY_USER_COMPLETE, bearerToken: data.token.accessToken, login: data.login } );
 
 				return dispatch( fetchUser() );
 			};

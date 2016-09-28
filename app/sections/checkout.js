@@ -1,6 +1,12 @@
+// Internal dependencies
+import contactInformation from 'components/containers/contact-information';
+import checkout from 'components/containers/checkout';
+import checkoutReview from 'components/containers/checkout-review';
+import success from 'components/containers/success';
+
 export default {
-	contactInformation: require( 'components/containers/contact-information' ),
-	checkout: require( 'components/containers/checkout' ),
-	checkoutReview: require( 'components/containers/checkout-review' ),
-	success: require( 'components/containers/success' ),
+	contactInformation,
+	checkout,
+	checkoutReview,
+	success,
 };

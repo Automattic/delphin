@@ -19,7 +19,7 @@ class SetUpDomain extends Component {
 	handleSubmit( values ) {
 		const { redirect, domainName } = this.props;
 		if ( values.newOrExisting === 'new' ) {
-			redirect( 'newBlog', { pathParams: { domainName } } );
+			redirect( 'setUpNewBlog', { pathParams: { domainName } } );
 		}
 
 		if ( values.newOrExisting === 'existing' ) {

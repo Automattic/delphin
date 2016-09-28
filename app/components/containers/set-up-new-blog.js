@@ -4,12 +4,12 @@ import { bindActionCreators } from 'redux';
 
 // Internal dependencies
 import RequireLogin from './require-login';
-import NewBlog from 'components/ui/new-blog';
+import SetUpNewBlog from 'components/ui/set-up-new-blog';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'new-blog',
+		form: 'set-up-new-blog',
 		fields: [ 'simpleOrAdvanced' ]
 	},
 	( state, ownProps ) => ( {
@@ -18,4 +18,4 @@ export default reduxForm(
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( NewBlog ) );
+)( RequireLogin( SetUpNewBlog ) );

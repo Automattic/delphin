@@ -31,5 +31,6 @@ export const getComponent = ( section, routeSlug ) => ( location, callback ) => 
 		dispatch( sectionWasFetched( section ) );
 
 		callback( null, module.default[ routeSlug ] );
-	} );
+	} )
+	.catch( callback );
 };

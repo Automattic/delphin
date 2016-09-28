@@ -1,5 +1,5 @@
 // External dependencies
-import { reduxForm } from 'redux-form';
+import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
@@ -14,6 +14,7 @@ export default reduxForm(
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
+		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpDomain ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect

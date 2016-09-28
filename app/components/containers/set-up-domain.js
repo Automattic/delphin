@@ -10,7 +10,8 @@ import { redirect } from 'actions/routes';
 export default reduxForm(
 	{
 		form: 'setUpDomain',
-		fields: [ 'newOrExisting' ]
+		fields: [ 'newOrExisting' ],
+		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,

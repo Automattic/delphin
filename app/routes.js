@@ -68,9 +68,9 @@ let publicRoutes = [
 			},
 			{
 				path: 'set-up-domain/:domainName/new-blog',
-				slug: 'newBlog',
+				slug: 'setUpNewBlog',
 				static: false,
-				getComponent: getComponent( 'setUp', 'newBlog' )
+				getComponent: getComponent( 'setUp', 'setUpNewBlog' )
 			},
 		]
 	},

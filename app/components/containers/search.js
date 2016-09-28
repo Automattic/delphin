@@ -7,6 +7,7 @@ import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'ac
 import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
 import { redirect } from 'actions/routes';
+import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default connect(
 	( state, ownProps ) => ( {
@@ -46,12 +47,30 @@ export default connect(
 		},
 
 		selectDomain( domainProduct ) {
+			dispatch( recordTracksEvent( 'delphin_search_result_select', {
+				is_premium: domainProduct.isPremium,
+				relevance: domainProduct.relevance,
+				num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
+			} ) );
 			dispatch( selectDomain( domainProduct ) );
 			dispatch( redirect( 'confirmDomain', { queryParams: { domain: domainProduct.domainName } } ) );
 		},
 
 		fetchDomainSuggestions( query ) {
-			dispatch( fetchDomainSuggestions( query ) );
+			withAnalytics(
+				domain => recordTracksEvent( 'delphin_domain_search', { search_string: domain } ),
+				fetchDomainSuggestions
+			)( query )( dispatch );
+		},
+
+		showAdditionalResults( query, numberOfResultsToDisplay, sort ) {
+			dispatch( recordTracksEvent( 'delphin_results_show_more', { num_results_shown: numberOfResultsToDisplay } ) );
+			this.redirectToSearch( query, numberOfResultsToDisplay, sort );
+		},
+
+		sortChange( query, value ) {
+			dispatch( recordTracksEvent( 'delphin_results_sort', { sort_type: value } ) );
+			this.redirectToSearch( query, config( 'initial_number_of_search_results' ), value );
 		}
 	} ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {

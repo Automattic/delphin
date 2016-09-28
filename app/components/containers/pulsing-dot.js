@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import PulsingDot from 'components/ui/pulsing-dot';
-import { getToggle } from 'reducers/ui/toggle/selectors';
+import { isAnySectionLoading } from 'reducers/ui/is-section-loading/selectors';
 
 export default connect(
 	state => ( {
-		isVisible: getToggle( state, 'isSectionLoading' ),
+		isVisible: isAnySectionLoading( state ),
 	} )
 )( PulsingDot );

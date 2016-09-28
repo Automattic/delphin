@@ -1,5 +1,5 @@
 // Internal dependencies
-import { hideToggle, showToggle } from 'actions/ui/toggle';
+import { sectionIsFetching, sectionWasFetched } from 'actions/ui/is-section-loading';
 
 // Module variables
 let store;
@@ -22,13 +22,13 @@ export const sections = {
 	checkout: () => System.import( './checkout' ),
 };
 
-export const getComponent = ( sectionSlug, routeSlug ) => ( location, callback ) => {
+export const getComponent = ( section, routeSlug ) => ( location, callback ) => {
 	const dispatch = store && store.dispatch ? store.dispatch : () => {};
 
-	dispatch( showToggle( 'isSectionLoading' ) );
+	dispatch( sectionIsFetching( section ) );
 
-	sections[ sectionSlug ]().then( module => {
-		dispatch( hideToggle( 'isSectionLoading' ) );
+	sections[ section ]().then( module => {
+		dispatch( sectionWasFetched( section ) );
 
 		callback( null, module.default[ routeSlug ] );
 	} );

@@ -8,7 +8,7 @@ import { getPath } from 'routes';
 
 export default connect(
 	( state, ownProps ) => ( {
-		domainName: ownProps.location.query.domainName
+		domainName: ownProps.params.domainName
 	} ),
 	dispatch => ( {
 		redirectToHostInfo: ( hostName ) => dispatch( push( { pathname: getPath( 'hostInfo' ) + '/' + hostName } ) )

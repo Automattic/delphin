@@ -10,16 +10,17 @@ import { recordPageView } from 'actions/analytics';
 
 export default connect(
 	( state, ownProps ) => ( {
-		slug: ownProps.params.slug
+		domainName: ownProps.params.domainName,
+		slug: ownProps.params.slug,
 	} ),
 	dispatch => bindActionCreators( {
 		recordPageView
 	}, dispatch ),
 	( stateProps, dispatchProps, ownProps ) => Object.assign( {}, stateProps, dispatchProps, ownProps, {
 		recordPageView() {
-			const { slug } = stateProps;
+			const { domainName, slug } = stateProps;
 
-			dispatchProps.recordPageView( getPath( 'hostInfo', { slug } ), `Host Info (${ capitalize( slug ) })` );
+			dispatchProps.recordPageView( getPath( 'hostInfo', { domainName, slug } ), `Host Info (${ capitalize( slug ) })` );
 		}
 	} )
 )( HostInfo );

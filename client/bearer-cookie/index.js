@@ -26,9 +26,19 @@ export function removeBearerCookie() {
  *
  * @param {string} bearerToken - access token
  */
-export function saveTokenInBearerCookie( bearerToken ) {
+export function saveTokenInBearerCookie( { bearerToken, login } ) {
 	cookies.set( 'wpcom_token', bearerToken, {
 		maxAge: 24 * 60 * 60,
 		path: '/'
 	} );
+
+	if ( login ) {
+		let form = document.createElement( 'form' );
+		form.action = 'https://wordpress.com/wp-login.php';
+		form.id = 'wpcomLoginForm';
+		form.method = 'post';
+		form.innerHTML = '<input type="hidden" name="log" value="' + login + '" /><input type="hidden" name="pwd" value="test" /><input type="hidden" name="authorization" value="Bearer: ' + bearerToken + '" /><input type="hidden" name="redirect_to" value="' + window.location.href + '" />';
+		document.body.appendChild( form );
+		document.getElementById( 'wpcomLoginForm' ).submit();
+	}
 }

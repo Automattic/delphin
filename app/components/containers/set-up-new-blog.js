@@ -10,7 +10,8 @@ import { redirect } from 'actions/routes';
 export default reduxForm(
 	{
 		form: 'set-up-new-blog',
-		fields: [ 'wordpressOrOther' ]
+		fields: [ 'wordpressOrOther' ],
+		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,

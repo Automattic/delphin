@@ -1,5 +1,5 @@
 // External dependencies
-import { reduxForm } from 'redux-form';
+import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
@@ -10,9 +10,13 @@ import { redirect } from 'actions/routes';
 export default reduxForm(
 	{
 		form: 'set-up-connect-other',
-		fields: [ 'providerText' ]
+		fields: [ 'providerText' ],
+		destroyOnUnmount: false
 	},
-	undefined,
+	( state, ownProps ) => ( {
+		domainName: ownProps.params.domainName,
+		hasAnsweredPreviousQuestion: !! getValues( state.form[ 'set-up-new-blog' ] ),
+	} ),
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )

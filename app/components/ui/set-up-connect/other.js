@@ -15,6 +15,14 @@ import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 
 class SetUpConnectOther extends Component {
+	componentWillMount() {
+		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
+
+		if ( ! hasAnsweredPreviousQuestion ) {
+			redirect( 'setUpDomain', { pathParams: { domainName } } );
+		}
+	}
+
 	handleSubmit( { providerText } ) {
 		if ( providerText ) {
 			alert( 'Dispatching Happiness Engineers to handle ' + providerText );
@@ -56,7 +64,7 @@ class SetUpConnectOther extends Component {
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpDomain', { domainName } ) }>
+						<Link to={ getPath( 'setUpNewBlog', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 						<Button>
@@ -73,6 +81,7 @@ SetUpConnectOther.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

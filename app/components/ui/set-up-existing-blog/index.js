@@ -11,10 +11,17 @@ import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
 import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
+import ValidationError from 'components/ui/form/validation-error';
 
 class SetUpExistingBlog extends Component {
 	handleSubmit() {
 		alert( 'TODO' );
+	}
+
+	isSubmitButtonDisabled() {
+		const { asyncValidating, invalid, pristine, submitting } = this.props;
+
+		return asyncValidating || invalid || pristine || submitting;
 	}
 
 	render() {
@@ -42,6 +49,8 @@ class SetUpExistingBlog extends Component {
 							field={ fields.url }
 							placeholder={ i18n.translate( 'e.g. www.yourblog.com' ) }
 							type="text" />
+
+						<ValidationError field={ fields.url } />
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
@@ -49,7 +58,7 @@ class SetUpExistingBlog extends Component {
 							{ i18n.translate( 'Back' ) }
 						</Link>
 
-						<Button>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -60,9 +69,13 @@ class SetUpExistingBlog extends Component {
 }
 
 SetUpExistingBlog.propTypes = {
+	asyncValidating: PropTypes.bool.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
-	handleSubmit: PropTypes.func.isRequired
+	handleSubmit: PropTypes.func.isRequired,
+	invalid: PropTypes.bool.isRequired,
+	pristine: PropTypes.bool.isRequired,
+	submitting: PropTypes.bool.isRequired
 };
 
 export default bindHandlers( SetUpExistingBlog ) ;

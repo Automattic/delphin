@@ -1,1 +1,1 @@
-server/build/bundle.js
+server/build/*.js

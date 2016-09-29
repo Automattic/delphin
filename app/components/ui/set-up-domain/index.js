@@ -25,6 +25,12 @@ class SetUpDomain extends Component {
 		}
 	}
 
+	isSubmitButtonDisabled() {
+		const { invalid, pristine, submitting } = this.props;
+
+		return invalid || pristine || submitting;
+	}
+
 	render() {
 		const {
 			domainName,
@@ -77,7 +83,7 @@ class SetUpDomain extends Component {
 							{ i18n.translate( 'Back' ) }
 						</Link>
 
-						<Button>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -91,7 +97,10 @@ SetUpDomain.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
-	redirectToSetUpExistingBlog: PropTypes.func.isRequired
+	invalid: PropTypes.bool.isRequired,
+	pristine: PropTypes.bool.isRequired,
+	redirectToSetUpExistingBlog: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( SetUpDomain ) );

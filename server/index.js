@@ -60,11 +60,13 @@ function renderPage( props, localeData, isRtl = false ) {
 	const bundlePath = '/scripts/';
 	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
 	// `main` is an array of JS files after a hot update has been applied
-	const bundleFileName = typeof assets.main === 'string' ? assets.main : assets.main[ 0 ];
+	const bundleFileName = typeof assets.app === 'string' ? assets.app : assets.app[ 0 ];
 	let stylesFileName;
-	if ( Array.isArray( assets.main ) ) {
-		stylesFileName = assets.main.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
+	if ( Array.isArray( assets.app ) ) {
+		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^ltr].css$/ ).test( asset ) ).shift();
 	}
+	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
+	const { CDN_PREFIX } = process.env;
 
 	return templateCompiler( {
 		content,
@@ -73,8 +75,9 @@ function renderPage( props, localeData, isRtl = false ) {
 		localeData,
 		title,
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
-		bundle: path.join( bundlePath, bundleFileName ),
-		styles: stylesFileName ? path.resolve( bundlePath, stylesFileName ) : undefined
+		bundle: CDN_PREFIX + path.join( bundlePath, bundleFileName ),
+		vendor: CDN_PREFIX + path.join( bundlePath, vendorFileName ),
+		styles: stylesFileName ? CDN_PREFIX + path.resolve( bundlePath, stylesFileName ) : undefined
 	} );
 }
 
@@ -178,8 +181,8 @@ const init = () => {
 	if ( isDevelopment ) {
 		const backendPort = port + 1;
 
-		webpackConfig.entry.unshift( 'webpack/hot/only-dev-server' ); // "only" prevents reload on syntax errors
-		webpackConfig.entry.unshift( 'webpack-dev-server/client?/' );
+		webpackConfig.entry.app.unshift( 'webpack/hot/only-dev-server' ); // "only" prevents reload on syntax errors
+		webpackConfig.entry.app.unshift( 'webpack-dev-server/client?/' );
 		webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
 
 		const devServer = new WebpackDevServer( webpack( webpackConfig ), {

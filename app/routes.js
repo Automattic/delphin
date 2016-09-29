@@ -3,18 +3,14 @@ import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
-import CheckoutContainer from 'components/containers/checkout';
-import ContactInformationContainer from 'components/containers/contact-information';
-import CheckoutReviewContainer from 'components/containers/checkout-review';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import Layout from 'components/ui/layout';
-import LearnMore from 'components/containers/learn-more';
+import LearnMoreContainer from 'components/containers/learn-more';
 import LoginContainer from 'components/containers/connect-user/login';
 import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
-import SuccessContainer from 'components/containers/success';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
@@ -22,6 +18,7 @@ import SunriseSuccessLayout from 'components/ui/layout/sunrise/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
+import { getComponent } from 'sections';
 
 let publicRoutes = [
 	{
@@ -31,7 +28,39 @@ let publicRoutes = [
 		},
 		path: '/',
 		slug: 'home',
-		static: true
+		static: true,
+		childRoutes: [
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				getComponent: getComponent( 'myDomains', 'myDomains' )
+			},
+			{
+				path: 'hosts',
+				slug: 'hosts',
+				static: false,
+				getComponent: getComponent( 'hosts', 'hosts' )
+			},
+			{
+				path: 'hosts/:slug',
+				slug: 'hostInfo',
+				static: false,
+				getComponent: getComponent( 'hosts', 'hostInfo' )
+			},
+			{
+				path: 'set-up-domain/:domainName',
+				slug: 'setUpDomain',
+				static: false,
+				getComponent: getComponent( 'setUp', 'setUpDomain' )
+			},
+			{
+				path: 'set-up-domain/:domainName/existing-blog',
+				slug: 'setUpExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUp', 'setUpExistingBlog' )
+			},
+		]
 	},
 	{
 		component: DefaultLayoutWithHeader,
@@ -56,8 +85,8 @@ let publicRoutes = [
 			{
 				path: 'contact-information',
 				slug: 'contactInformation',
-				component: ContactInformationContainer,
-				static: false
+				static: false,
+				getComponent: getComponent( 'checkout', 'contactInformation' )
 			},
 			{
 				path: 'confirm-domain',
@@ -87,27 +116,19 @@ let publicRoutes = [
 				path: 'checkout',
 				slug: 'checkout',
 				static: false,
-				component: CheckoutContainer
+				getComponent: getComponent( 'checkout', 'checkout' )
 			},
 			{
 				path: 'checkout-review',
 				slug: 'checkoutReview',
 				static: false,
-				component: CheckoutReviewContainer
+				getComponent: getComponent( 'checkout', 'checkoutReview' )
 			},
 			{
 				path: 'learn-more',
 				slug: 'learnMore',
 				static: true,
-				component: LearnMore,
-				childRoutes: [
-					{
-						path: 'testnest',
-						slug: 'testnest',
-						component: LearnMore,
-						static: true
-					}
-				]
+				component: LearnMoreContainer
 			}
 		]
 	},
@@ -118,7 +139,7 @@ let publicRoutes = [
 				path: 'success',
 				slug: 'success',
 				static: false,
-				component: SuccessContainer
+				getComponent: getComponent( 'checkout', 'success' )
 			}
 		]
 	},
@@ -129,55 +150,6 @@ let publicRoutes = [
 		component: SearchContainer
 	}
 ];
-
-if ( ! process.env.NODE_ENV || process.env.NODE_ENV === 'development' ) {
-	const MyDomainsContainer = require( 'components/containers/my-domains' ).default;
-	const HostsContainer = require( 'components/containers/hosts' ).default;
-	const HostInfoContainer = require( 'components/containers/host-info' ).default;
-	const SetUpDomainContainer = require( 'components/containers/set-up-domain' ).default;
-	const SetUpExistingBlogContainer = require( 'components/containers/set-up-existing-blog' ).default;
-
-	publicRoutes = publicRoutes.map( route => {
-		if ( route.slug === 'home' ) {
-			const existingChildRoutes = route.childRoutes || [];
-
-			return Object.assign( {}, route, { childRoutes: existingChildRoutes.concat( [
-				{
-					path: 'my-domains',
-					slug: 'myDomains',
-					static: false,
-					component: MyDomainsContainer
-				},
-				{
-					path: 'set-up-domain/:domainName',
-					slug: 'setUpDomain',
-					static: false,
-					component: SetUpDomainContainer
-				},
-				{
-					path: 'set-up-domain/:domainName/existing-blog',
-					slug: 'setUpExistingBlog',
-					static: false,
-					component: SetUpExistingBlogContainer
-				},
-				{
-					path: 'hosts',
-					slug: 'hosts',
-					static: false,
-					component: HostsContainer
-				},
-				{
-					path: 'hosts/:slug',
-					slug: 'hostInfo',
-					component: HostInfoContainer,
-					static: false
-				}
-			] ) } );
-		}
-
-		return route;
-	} );
-}
 
 export const defaultRoutes = publicRoutes;
 

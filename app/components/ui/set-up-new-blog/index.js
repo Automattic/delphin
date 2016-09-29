@@ -23,17 +23,22 @@ class SetUpNewBlog extends Component {
 		}
 	}
 
-	handleSubmit() {
+	handleSubmit( { wordpressOrOther } ) {
 		const { redirect, domainName } = this.props;
 
-		redirect( 'hosts', { pathParams: { domainName } } );
+		redirect( 'setUpConnect', {
+			pathParams: {
+				domainName,
+				provider: wordpressOrOther // 'wordpress' -or- 'other'
+			}
+		} );
 	}
 
 	render() {
 		const {
 			domainName,
 			handleSubmit,
-			fields: { simpleOrAdvanced },
+			fields: { wordpressOrOther },
 		} = this.props;
 
 		return (
@@ -41,8 +46,8 @@ class SetUpNewBlog extends Component {
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( "Let's create a new a blog!" ) }</h1>
 					<h2>
-						{ preventWidows( i18n.translate( "We'll help you create your blog by suggesting popular services" +
-							" based on your needs. Then we'll get {{strong}}%(domainName)s{{/strong}} connected.",
+						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog. " +
+							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",
 							{
 								args: { domainName },
 								components: { strong: <strong /> }
@@ -52,35 +57,36 @@ class SetUpNewBlog extends Component {
 				</SunriseStep.Header>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<label className={ styles.label } htmlFor="simple">
+						<label className={ styles.label } htmlFor="wordpress">
 							<Radio
 								className={ styles.radio }
-								{ ...simpleOrAdvanced }
-								id="simple"
-								value="simple"
-								checked={ simpleOrAdvanced.value === 'simple' }
+								{ ...wordpressOrOther }
+								id="wordpress"
+								value="wordpress"
+								checked={ wordpressOrOther.value === 'wordpress' }
 							/>
-							{ i18n.translate( 'Simple & Quick' ) }
+							{ i18n.translate( 'WordPress.com' ) }
 							<p className={ styles.labelDescription }>
 								{
-									i18n.translate( 'Having a simple tool (with no coding) is more important than full ' +
-									'control over the layout and look.' )
+									i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
+										' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+										'Free hosting and support.' )
 								}
 							</p>
 						</label>
-						<label className={ styles.label } htmlFor="advanced">
+						<label className={ styles.label } htmlFor="other">
 							<Radio
 								className={ styles.radio }
-								{ ...simpleOrAdvanced }
-								id="advanced"
-								value="advanced"
-								checked={ simpleOrAdvanced.value === 'advanced' }
+								{ ...wordpressOrOther }
+								id="other"
+								value="other"
+								checked={ wordpressOrOther.value === 'other' }
 							/>
-							{ i18n.translate( 'More Control & Power' ) }
+							{ i18n.translate( 'Somewhere else' ) }
 							<p className={ styles.labelDescription }>
 								{
-									i18n.translate( "I want full control of the look and feel and I don't mind getting " +
-										'my hands dirty with code as needed.' )
+									i18n.translate( "We're adding more options soon, but in the meantime" +
+										' our happiness engineers can help you. ' )
 								}
 							</p>
 						</label>

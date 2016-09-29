@@ -12,10 +12,13 @@ import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import { removeInvalidInputProps } from 'lib/form';
 
-class ConnectOther extends Component {
+class SetUpConnectOther extends Component {
 	handleSubmit( { providerText } ) {
-		alert( 'Dispatching Happiness Engineers to handle ' + providerText );
+		if ( providerText ) {
+			alert( 'Dispatching Happiness Engineers to handle ' + providerText );
+		}
 	}
 
 	render() {
@@ -50,7 +53,7 @@ class ConnectOther extends Component {
 							id="providerText"
 							name="providerText"
 							className={ styles.otherProviderText }
-							{ ...providerText } />
+							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
 						<Link to={ getPath( 'setUpDomain', { domainName } ) }>
@@ -66,11 +69,11 @@ class ConnectOther extends Component {
 	}
 }
 
-ConnectOther.propTypes = {
+SetUpConnectOther.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( ConnectOther ) );
+export default withStyles( styles )( bindHandlers( SetUpConnectOther ) );

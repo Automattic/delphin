@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 // Internal dependencies
 import RequireLogin from './require-login';
-import ConnectOther from 'components/ui/set-up-connect/other';
+import SetUpConnectOther from 'components/ui/set-up-connect/other';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
@@ -16,4 +16,4 @@ export default reduxForm(
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( ConnectOther ) );
+)( RequireLogin( SetUpConnectOther ) );

@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 
 // Internal dependencies
 import wordpress from './wordpress';
-import other from './other';
+import other from 'components/containers/set-up-connect-other';
 
 const providers = {
 	wordpress,

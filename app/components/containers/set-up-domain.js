@@ -10,7 +10,7 @@ import SetUpDomain from 'components/ui/set-up-domain';
 
 export default reduxForm(
 	{
-		form: 'set-up-domain',
+		form: 'setUpDomain',
 		fields: [ 'newOrExisting' ]
 	},
 	( state, ownProps ) => ( {

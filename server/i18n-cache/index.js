@@ -1,11 +1,9 @@
 // External dependencies
 import async from 'async';
 import compact from 'lodash/compact';
-import debugFactory from 'debug';
 import fs from 'fs';
 import path from 'path';
 import request from 'superagent';
-const debug = debugFactory( 'delphin:i18n-cache' );
 
 // Internal dependencies
 import config from 'config';
@@ -17,12 +15,12 @@ const getLocaleFilePath = locale => path.resolve( __dirname, 'data', `${ locale 
 const fetchLanguage = locale => {
 	return callback => {
 		if ( ! process.env.REFRESH_I18N_CACHE && fs.existsSync( getLocaleFilePath( locale ) ) ) {
-			debug( `Using cached locale data for ${ locale }` );
+			console.log( `Using cached locale data for ${ locale }` );
 			callback();
 			return;
 		}
 
-		debug( 'fetching', getLanguageUrl( locale ) );
+		console.log( 'fetching', getLanguageUrl( locale ) );
 		request.get( getLanguageUrl( locale ) ).end( ( error, response ) => {
 			if ( error ) {
 				return callback( error );

@@ -24,7 +24,7 @@ class SetUpExistingBlog extends Component {
 	}
 
 	handleSubmit() {
-		this.props.redirectToConnectExistingBlog( this.props.domainName );
+		this.props.redirect( 'connectExistingBlog', { pathParams: { domainName: this.props.domainName } } );
 	}
 
 	isSubmitButtonDisabled() {

@@ -26,12 +26,14 @@ class SetUpNewBlog extends Component {
 	handleSubmit( { wordpressOrOther } ) {
 		const { redirect, domainName } = this.props;
 
-		redirect( 'setUpConnect', {
-			pathParams: {
-				domainName,
-				provider: wordpressOrOther // 'wordpress' -or- 'other'
-			}
-		} );
+		if ( wordpressOrOther ) {
+			redirect( 'setUpConnect', {
+				pathParams: {
+					domainName,
+					provider: wordpressOrOther // 'wordpress' -or- 'other'
+				}
+			} );
+		}
 	}
 
 	render() {
@@ -86,7 +88,7 @@ class SetUpNewBlog extends Component {
 							<p className={ styles.labelDescription }>
 								{
 									i18n.translate( "We're adding more options soon, but in the meantime" +
-										' our happiness engineers can help you. ' )
+										' our Happiness Engineers can help you. ' )
 								}
 							</p>
 						</label>

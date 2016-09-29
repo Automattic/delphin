@@ -66,6 +66,7 @@ function renderPage( props, localeData, isRtl = false ) {
 		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^ltr].css$/ ).test( asset ) ).shift();
 	}
 	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
+	const { CDN_PREFIX } = process.env;
 
 	return templateCompiler( {
 		content,
@@ -74,9 +75,9 @@ function renderPage( props, localeData, isRtl = false ) {
 		localeData,
 		title,
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
-		bundle: path.join( bundlePath, bundleFileName ),
-		vendor: path.join( bundlePath, vendorFileName ),
-		styles: stylesFileName ? path.resolve( bundlePath, stylesFileName ) : undefined
+		bundle: CDN_PREFIX + path.join( bundlePath, bundleFileName ),
+		vendor: CDN_PREFIX + path.join( bundlePath, vendorFileName ),
+		styles: stylesFileName ? CDN_PREFIX + path.resolve( bundlePath, stylesFileName ) : undefined
 	} );
 }
 

@@ -22,7 +22,7 @@ const validate = values => {
 
 export default reduxForm(
 	{
-		form: 'sunrise-home',
+		form: 'sunriseHome',
 		fields: [ 'q' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},

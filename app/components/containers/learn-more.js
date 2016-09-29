@@ -15,13 +15,13 @@ const validate = ( values ) => ( {
 
 export default reduxForm(
 	{
-		form: 'learn-more',
+		form: 'learnMore',
 		fields: [ 'domain', 'email' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
 	undefined,
 	{
 		addNotice,
-		resetForm: dispatch => dispatch( reset( 'learn-more' ) )
+		resetForm: dispatch => dispatch( reset( 'learnMore' ) )
 	}
 )( LearnMore );

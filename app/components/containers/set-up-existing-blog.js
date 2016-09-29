@@ -7,7 +7,7 @@ import SetUpExistingBlog from 'components/ui/set-up-existing-blog';
 
 export default reduxForm(
 	{
-		form: 'set-up-existing-blog',
+		form: 'setUpExistingBlog',
 		fields: [ 'url' ]
 	},
 	( state, ownProps ) => ( {

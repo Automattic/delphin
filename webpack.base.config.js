@@ -63,6 +63,7 @@ var config = {
 				postcss: () => [ autoprefixer ]
 			}
 		} ),
+		// Exclude unused locales from moment.js
 		new webpack.ContextReplacementPlugin( /moment[\/\\]locale$/, new RegExp( supportedLocales.join('|') ) )
 	]
 };

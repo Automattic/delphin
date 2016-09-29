@@ -66,7 +66,7 @@ function renderPage( props, localeData, isRtl = false ) {
 		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^ltr].css$/ ).test( asset ) ).shift();
 	}
 	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
-	const { CDN_PREFIX } = process.env;
+	const CDN_PREFIX = process.env.CDN_PREFIX || '';
 
 	return templateCompiler( {
 		content,

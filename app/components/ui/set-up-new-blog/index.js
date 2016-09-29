@@ -4,6 +4,7 @@ import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import capitalize from 'lodash/capitalize';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -27,12 +28,8 @@ class SetUpNewBlog extends Component {
 		const { redirect, domainName } = this.props;
 
 		if ( wordpressOrOther ) {
-			redirect( 'setUpConnect', {
-				pathParams: {
-					domainName,
-					provider: wordpressOrOther // 'wordpress' -or- 'other'
-				}
-			} );
+			const connectPageSlug = 'setUpConnect' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+			redirect( connectPageSlug, { pathParams: { domainName } } );
 		}
 	}
 

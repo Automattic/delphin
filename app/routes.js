@@ -73,10 +73,16 @@ let publicRoutes = [
 				getComponent: getComponent( 'setUp', 'hostInfo' )
 			},
 			{
-				path: 'set-up-domain/:domainName/connect/:provider',
-				slug: 'setUpConnect',
+				path: 'set-up-domain/:domainName/connect/wordpress',
+				slug: 'setUpConnectWordpress',
 				static: false,
-				getComponent: getComponent( 'setUp', 'setUpConnect' )
+				getComponent: getComponent( 'setUp', 'setUpConnectWordpress' )
+			},
+			{
+				path: 'set-up-domain/:domainName/connect/other',
+				slug: 'setUpConnectOther',
+				static: false,
+				getComponent: getComponent( 'setUp', 'setUpConnectOther' )
 			},
 		]
 	},

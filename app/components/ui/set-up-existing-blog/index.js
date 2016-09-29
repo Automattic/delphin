@@ -6,6 +6,7 @@ import React, { Component, PropTypes } from 'react';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
@@ -29,6 +30,8 @@ class SetUpExistingBlog extends Component {
 
 		return (
 			<SunriseStep>
+				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
+
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Connect to your blog' ) }</h1>
 

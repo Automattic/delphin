@@ -15,7 +15,7 @@ import ValidationError from 'components/ui/form/validation-error';
 
 class SetUpExistingBlog extends Component {
 	handleSubmit() {
-		alert( 'TODO' );
+		this.props.redirectToConnectExistingBlog( this.props.domainName );
 	}
 
 	isSubmitButtonDisabled() {
@@ -75,6 +75,7 @@ SetUpExistingBlog.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
+	redirectToConnectExistingBlog: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired
 };
 

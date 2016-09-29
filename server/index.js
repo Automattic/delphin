@@ -63,7 +63,7 @@ function renderPage( props, localeData, isRtl = false ) {
 	const bundleFileName = typeof assets.app === 'string' ? assets.app : assets.app[ 0 ];
 	let stylesFileName;
 	if ( Array.isArray( assets.app ) ) {
-		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rlt].css$/ ).test( asset ) ).shift();
+		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^ltr].css$/ ).test( asset ) ).shift();
 	}
 	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
 

@@ -15,4 +15,5 @@ html(dir=isRtl ? 'rtl' : 'ltr' )
 			script(src="https://cdn.ravenjs.com/3.7.0/raven.min.js")
 		if localeData
 			script(type='text/javascript')!='var localeData = ' + JSON.stringify( localeData ) + ';'
+		script(src=vendor)
 		script(src=bundle)

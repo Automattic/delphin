@@ -6,13 +6,39 @@ var baseConfig = require( './webpack.base.config' ),
 	path = require( 'path' ),
 	fs = require( 'fs' ),
 	webpack = require( 'webpack' ),
+	CDN_PREFIX = process.env.CDN_PREFIX || '',
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
+const vendorModules = [
+	'badwords',
+	'cookie-dough',
+	'creditcards',
+	'classnames',
+	'i18n-calypso',
+	'lodash',
+	'random-words',
+	'react',
+	'react-dom',
+	'react-redux',
+	'react-router',
+	'redux',
+	'redux-thunk',
+	'wpcom-xhr-request',
+];
+
 var config = merge.smart( baseConfig, {
-	entry: [
-		'babel-polyfill',
-		path.join( __dirname, 'client' )
-	],
+	devServer: {
+		port: 1337,
+		historyApiFallback: true
+	},
+
+	entry: {
+		app: [
+			'babel-polyfill',
+			path.join( __dirname, 'client' )
+		],
+		vendor: vendorModules
+	},
 
 	node: {
 		console: false,
@@ -26,13 +52,17 @@ var config = merge.smart( baseConfig, {
 
 	output: {
 		path: path.resolve( __dirname, 'public/scripts' ),
-		publicPath: '/scripts/',
+		publicPath: CDN_PREFIX + '/scripts/',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]',
 		filename: 'bundle.[hash].js',
 		sourceMapFilename: 'bundle.[hash].map.js'
 	},
 
 	plugins: [
+		new webpack.optimize.CommonsChunkPlugin( {
+			name: 'vendor',
+			filename: '[name].[hash].js'
+		} ),
 		new webpack.DefinePlugin( {
 			'process.env': {
 				NODE_ENV: JSON.stringify( NODE_ENV ),
@@ -90,7 +120,10 @@ if ( NODE_ENV === 'production' ) {
 			]
 		},
 		plugins: [
-			new ExtractTextPlugin( '../styles/bundle.[contenthash].css' ),
+			new ExtractTextPlugin( {
+				filename: '../styles/bundle.[contenthash].css',
+				allChunks: true
+			} ),
 			new WebpackRTLPlugin( { filename: '../styles/bundle.[contenthash].rtl.css' } ),
 			new webpack.optimize.UglifyJsPlugin( {
 				sourceMap: !! config.devtool,

@@ -26,6 +26,7 @@ import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
 import { userMiddleware } from './user-middleware';
+import { provideStore, sections } from 'sections';
 
 const middlewares = [
 	routerMiddleware( browserHistory ),
@@ -69,6 +70,10 @@ const store = createStore(
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );
 
+// Provide the store to `sections` to enable a loading state when fetching
+// section chunks
+provideStore( store );
+
 function init() {
 	if ( window.Raven && isEnabled( 'sentry' ) ) {
 		window.Raven.config( 'https://02c1c1625528468ea40a86143860cdb7@sentry.io/96319' ).install();
@@ -86,6 +91,9 @@ function init() {
 	}
 
 	injectTapEventPlugin();
+
+	// pre-load checkout chunk
+	sections.checkout();
 }
 
 function render() {

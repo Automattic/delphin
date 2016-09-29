@@ -8,7 +8,7 @@
     "build:client": "webpack --config webpack.client.config.js --progress --colors",
     "build:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:static": "BUILD_STATIC=true REFRESH_I18N_CACHE=true node server/build/bundle",
-    "clean": "rm -f public/scripts/bundle.*.js && rm -f public/styles/bundle.*.css && rm -f public/scripts/assets.json && rm -rf server/build && npm run clean:i18n-cache && npm run clean:static",
+    "clean": "rm -f public/scripts/*.bundle.*.js && rm -f public/scripts/bundle.*.js && rm -f public/styles/bundle.*.css && rm -f public/scripts/assets.json && rm -rf server/build && npm run clean:i18n-cache && npm run clean:static",
     "clean:all": "rm -rf node_modules && npm run clean",
     "clean:i18n-cache": "rm -f server/i18n-cache/data/*",
     "clean:static": "rm -rf public/static",

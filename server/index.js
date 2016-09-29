@@ -180,7 +180,7 @@ const init = () => {
 	if ( isDevelopment ) {
 		const backendPort = port + 1;
 
-		webpackConfig.entry.app.unshift( 'webpack/hot/only-dev-server' );
+		webpackConfig.entry.app.unshift( 'webpack/hot/only-dev-server' ); // "only" prevents reload on syntax errors
 		webpackConfig.entry.app.unshift( 'webpack-dev-server/client?/' );
 		webpackConfig.plugins.push( new webpack.HotModuleReplacementPlugin() );
 

@@ -1,4 +1,4 @@
-export default [
+module.exports = [
 	{ value: 1, langSlug: 'en', name: 'English', popular: 1, isRtl: false },
 	{ value: 19, langSlug: 'es', name: 'Español', popular: 2, isRtl: false },
 	{ value: 438, langSlug: 'pt-br', name: 'Português do Brasil', popular: 3, isRtl: false },

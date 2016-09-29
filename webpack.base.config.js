@@ -1,7 +1,8 @@
 // External dependencies
 var autoprefixer = require( 'autoprefixer' ),
 	path = require( 'path' ),
-	webpack = require( 'webpack' );
+	webpack = require( 'webpack' ),
+	supportedLocales = require( './app/config/languages' ).map( function( language ) { return language.langSlug; } );
 
 var config = {
 	module: {
@@ -61,7 +62,8 @@ var config = {
 				context: __dirname,
 				postcss: () => [ autoprefixer ]
 			}
-		} )
+		} ),
+		new webpack.ContextReplacementPlugin( /moment[\/\\]locale$/, new RegExp( supportedLocales.join('|') ) )
 	]
 };
 

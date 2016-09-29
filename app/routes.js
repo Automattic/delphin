@@ -72,6 +72,12 @@ let publicRoutes = [
 				static: false,
 				getComponent: getComponent( 'setUp', 'hostInfo' )
 			},
+			{
+				path: 'set-up-domain/:domainName/connect/:provider',
+				slug: 'setUpConnect',
+				static: false,
+				getComponent: getComponent( 'setUp', 'setUpConnect' )
+			},
 		]
 	},
 	{

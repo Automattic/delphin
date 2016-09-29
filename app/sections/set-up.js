@@ -5,6 +5,7 @@ import hostInfo from 'components/containers/host-info';
 import setUpDomain from 'components/containers/set-up-domain';
 import setUpExistingBlog from 'components/containers/set-up-existing-blog';
 import setUpNewBlog from 'components/containers/set-up-new-blog';
+import setUpConnect from 'components/containers/set-up-connect';
 
 export default {
 	connectExistingBlog,
@@ -13,4 +14,5 @@ export default {
 	setUpDomain,
 	setUpExistingBlog,
 	setUpNewBlog,
+	setUpConnect,
 };

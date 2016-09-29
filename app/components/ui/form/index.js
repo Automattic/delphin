@@ -25,7 +25,7 @@ Form.propTypes = {
 	] ).isRequired,
 	className: PropTypes.string,
 	errors: PropTypes.object,
-	onSubmit: PropTypes.func.isRequired
+	onSubmit: PropTypes.func
 };
 
 export default Form;

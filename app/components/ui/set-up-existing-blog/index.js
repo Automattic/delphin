@@ -15,8 +15,16 @@ import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
 
 class SetUpExistingBlog extends Component {
+	componentWillMount() {
+		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
+
+		if ( ! hasAnsweredPreviousQuestion ) {
+			redirect( 'setUpDomain', { pathParams: { domainName } } );
+		}
+	}
+
 	handleSubmit() {
-		this.props.redirectToConnectExistingBlog( this.props.domainName );
+		this.props.redirect( 'connectExistingBlog', { pathParams: { domainName: this.props.domainName } } );
 	}
 
 	isSubmitButtonDisabled() {
@@ -76,9 +84,10 @@ SetUpExistingBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
-	redirectToConnectExistingBlog: PropTypes.func.isRequired,
+	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired
 };
 

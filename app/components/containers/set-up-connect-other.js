@@ -1,22 +1,23 @@
 // External dependencies
+import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import RequireLogin from './require-login';
-import SetUpDomain from 'components/ui/set-up-domain';
+import SetUpConnectOther from 'components/ui/set-up-connect/other';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'setUpDomain',
-		fields: [ 'newOrExisting' ],
+		form: 'setUpConnectOther',
+		fields: [ 'providerText' ],
 		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
+		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpNewBlog ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( SetUpDomain ) );
+)( RequireLogin( SetUpConnectOther ) );

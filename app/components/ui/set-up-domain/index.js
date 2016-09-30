@@ -17,12 +17,14 @@ import SunriseStep from 'components/ui/sunrise-step';
 
 class SetUpDomain extends Component {
 	handleSubmit( values ) {
+		const { redirect, domainName } = this.props;
+
 		if ( values.newOrExisting === 'new' ) {
-			alert( "TODO: redirect to the 'new blog' setup page" );
+			redirect( 'setUpNewBlog', { pathParams: { domainName } } );
 		}
 
 		if ( values.newOrExisting === 'existing' ) {
-			this.props.redirectToSetUpExistingBlog( this.props.domainName );
+			redirect( 'setUpExistingBlog', { pathParams: { domainName } } );
 		}
 	}
 
@@ -102,8 +104,8 @@ SetUpDomain.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
-	redirectToSetUpExistingBlog: PropTypes.func.isRequired,
-	submitting: PropTypes.bool.isRequired
+	redirect: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( SetUpDomain ) );

@@ -17,13 +17,15 @@ describe( 'state.user.settings', () => {
 		expect( settings( Object.assign( {}, initialState, { isRequesting: true } ), {
 			type: FETCH_USER_COMPLETE,
 			email: 'foo@bar.com',
-			locale: 'fr'
+			locale: 'fr',
+			username: 'foo',
 		} ) ).toEqual( {
 			hasLoadedFromServer: true,
 			isRequesting: false,
 			data: {
 				email: 'foo@bar.com',
-				locale: 'fr'
+				locale: 'fr',
+				username: 'foo',
 			}
 		} );
 	} );

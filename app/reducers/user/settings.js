@@ -20,6 +20,7 @@ export const settings = ( state = initialState, action ) => {
 		email,
 		id,
 		locale,
+		username,
 		type
 	} = action;
 
@@ -36,7 +37,8 @@ export const settings = ( state = initialState, action ) => {
 				data: {
 					email,
 					id,
-					locale
+					locale,
+					username,
 				}
 			} );
 

@@ -9,8 +9,7 @@ import {
 	recordTracksEvent,
 	recordPageView
 } from 'actions/analytics';
-import { dispatcher as dispatch } from '../index';
-import analyticsMiddleware from 'index';
+import { analyticsMiddleware, dispatcher as dispatch } from '../index';
 import analytics from 'lib/analytics';
 
 describe( 'middleware', () => {

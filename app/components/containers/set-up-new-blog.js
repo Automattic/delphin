@@ -9,7 +9,7 @@ import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'set-up-new-blog',
+		form: 'setUpNewBlog',
 		fields: [ 'wordpressOrOther' ],
 		destroyOnUnmount: false
 	},

@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
@@ -25,6 +26,12 @@ class SetUpDomain extends Component {
 		}
 	}
 
+	isSubmitButtonDisabled() {
+		const { invalid, pristine, submitting } = this.props;
+
+		return invalid || pristine || submitting;
+	}
+
 	render() {
 		const {
 			domainName,
@@ -34,6 +41,8 @@ class SetUpDomain extends Component {
 
 		return (
 			<SunriseStep>
+				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
+
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
 
@@ -77,7 +86,7 @@ class SetUpDomain extends Component {
 							{ i18n.translate( 'Back' ) }
 						</Link>
 
-						<Button>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -91,7 +100,10 @@ SetUpDomain.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
-	redirectToSetUpExistingBlog: PropTypes.func.isRequired
+	invalid: PropTypes.bool.isRequired,
+	pristine: PropTypes.bool.isRequired,
+	redirectToSetUpExistingBlog: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( SetUpDomain ) );

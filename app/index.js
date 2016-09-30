@@ -1,4 +1,5 @@
 // External dependencies
+import { bindHandlers } from 'react-bind-handlers';
 import React, { PropTypes } from 'react';
 import { Router } from 'react-router';
 
@@ -7,26 +8,24 @@ import DocumentTitle from 'components/ui/document-title';
 import i18n from 'i18n-calypso';
 import { routes } from 'routes';
 
-const App = React.createClass( {
-	propTypes: {
-		history: PropTypes.object.isRequired
-	},
+class App extends React.Component {
+	constructor( props ) {
+		super( props );
+
+		this.state = { key: new Date().getTime() };
+	}
 
 	componentWillMount() {
-		i18n.stateObserver.on( 'change', this.reRender );
-	},
+		// The entire app must re-render when the language changes.
+		// `forceUpdate` was causing some components in the render tree to
+		// return stale markup, so we're forcing an update with `setState`
+		// here.
+		i18n.stateObserver.on( 'change', this.handleUpdate );
+	}
 
-	getInitialState() {
-		return {
-			key: 1
-		};
-	},
-
-	reRender() {
-		this.setState( {
-			key: Math.random()
-		} );
-	},
+	handleUpdate() {
+		this.setState( { key: new Date().getTime() } );
+	}
 
 	render() {
 		return (
@@ -35,6 +34,10 @@ const App = React.createClass( {
 			</DocumentTitle>
 		);
 	}
-} );
+}
 
-export default App;
+App.propTypes = {
+	history: PropTypes.object.isRequired,
+};
+
+export default bindHandlers( App );

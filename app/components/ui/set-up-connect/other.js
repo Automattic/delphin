@@ -67,7 +67,7 @@ class SetUpConnectOther extends Component {
 						<Link to={ getPath( 'setUpNewBlog', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
-						<Button>
+						<Button disabled={ ! providerText.value }>
 							{ i18n.translate( 'Submit Request' ) }
 						</Button>
 					</Form.SubmitArea>

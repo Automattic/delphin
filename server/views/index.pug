@@ -11,6 +11,7 @@ html(dir=isRtl ? 'rtl' : 'ltr' )
 			link(rel="stylesheet", href=styles)
 	body
 		#content!= content
+		#wpcom-log-in
 		if isEnabled( 'sentry' )
 			script(src="https://cdn.ravenjs.com/3.7.0/raven.min.js")
 		if localeData

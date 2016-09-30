@@ -9,13 +9,13 @@ import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'set-up-connect-other',
+		form: 'setUpConnectOther',
 		fields: [ 'providerText' ],
 		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		hasAnsweredPreviousQuestion: !! getValues( state.form[ 'set-up-new-blog' ] ),
+		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpNewBlog ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect

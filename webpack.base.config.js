@@ -49,7 +49,7 @@ var config = {
 	},
 
 	// Enables source maps both for the client and server.
-	devtool: process.env.NODE_ENV === 'production' ? undefined : 'source-map',
+	devtool: 'source-map',
 
 	plugins: [
 		new webpack.LoaderOptionsPlugin( {

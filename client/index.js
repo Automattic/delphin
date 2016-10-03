@@ -113,7 +113,6 @@ function boot() {
 	init();
 
 	render();
-	i18n.stateObserver.on( 'change', render );
 
 	setLocaleCookie( i18n.getLocaleSlug() );
 }

@@ -1,6 +1,5 @@
 // External dependencies
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import curry from 'lodash/curry';
 import DocumentTitle from 'react-document-title';
 import express from 'express';
 import fs from 'fs';
@@ -13,6 +12,7 @@ import { Provider } from 'react-redux';
 import pug from 'pug';
 import { renderToString } from 'react-dom/server';
 import React from 'react';
+import rtlcss from 'rtlcss';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import thunk from 'redux-thunk';
@@ -25,7 +25,7 @@ import generateSiteMap from './sitemap-generator';
 import i18nCache from './i18n-cache';
 import { getPath, defaultRoutes, routes } from 'app/routes';
 import { getLocaleSlug } from 'lib/routes';
-import Stylizer, { addCss } from 'lib/stylizer';
+import Stylizer from 'lib/stylizer';
 import webpackConfig from '../webpack.client.config';
 
 const app = express(),
@@ -45,11 +45,15 @@ function renderPage( props, localeData, isRtl = false ) {
 
 	const css = [];
 
+	const addCss = styles => (
+		css.push( isRtl ? rtlcss.process( styles._getCss() ) : styles._getCss() )
+	);
+
 	// We're actually not rendering <App /> component here, but one of the routes components,
 	// props.children has that actualy component
 	const content = renderToString(
 		<Provider store={ store }>
-			<Stylizer onInsertCss={ curry( addCss )( css ) }>
+			<Stylizer onInsertCss={ addCss }>
 				<RouterContext { ...props } />
 			</Stylizer>
 		</Provider>
@@ -164,16 +168,20 @@ const init = () => {
 
 	app.get( '/*', ( request, response ) => {
 		match( { routes, location: request.url }, ( error, redirectLocation, props ) => {
-			const locale = getLocaleSlug( request.url ),
-				localeData = i18nCache.get( locale );
+			const localeSlug = getLocaleSlug( request.url ),
+				localeData = i18nCache.get( localeSlug );
 
 			i18n.setLocale( localeData );
+
+			const language = config( 'languages' ).find( lang => (
+				( ! localeSlug && lang.langSlug === 'en' ) || lang.langSlug === localeSlug
+			) );
 
 			if ( props.routes.some( route => route.slug === 'notFound' ) ) {
 				response.status( 404 );
 			}
 
-			response.send( renderPage( props, localeData ) );
+			response.send( renderPage( props, localeData, language.isRtl ) );
 		} );
 	} );
 

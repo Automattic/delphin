@@ -65,10 +65,16 @@ function renderPage( props, localeData, isRtl = false ) {
 	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
 	// `main` is an array of JS files after a hot update has been applied
 	const bundleFileName = typeof assets.app === 'string' ? assets.app : assets.app[ 0 ];
+
 	let stylesFileName;
 	if ( Array.isArray( assets.app ) ) {
-		stylesFileName = assets.app.filter( asset => ( isRtl ? /rtl\.css$/ : /[^rtl].css$/ ).test( asset ) ).shift();
+		stylesFileName = assets.app.filter( asset => (
+			asset.endsWith( '.css' )
+		) ).filter( asset => (
+			isRtl === asset.endsWith( '.rtl.css' )
+		) ).shift();
 	}
+
 	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
 	const CDN_PREFIX = process.env.CDN_PREFIX || '';
 

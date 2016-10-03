@@ -99,7 +99,7 @@ if ( NODE_ENV === 'development' ) {
 
 		// Use a more performant type of sourcemaps for our development env
 		// For a comparison see: https://webpack.github.io/docs/configuration.html#devtool
-		devtool: 'cheap-module-eval-source-map'
+		devtool: 'eval'
 	} );
 }
 

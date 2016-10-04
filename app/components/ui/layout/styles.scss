@@ -2,10 +2,6 @@
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
 
-body {
-	background: $blue-background;
-}
-
 h1,
 h2,
 h3,
@@ -17,7 +13,6 @@ h6 {
 }
 
 .layout {
-	color: $blue-dark;
 	font-family: $body-font;
 	font-weight: 400;
 }

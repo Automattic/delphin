@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import config from 'config';
 import DocumentTitle from 'components/ui/document-title';
 import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
+import FixedBackground from 'components/ui/fixed-background';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
@@ -144,6 +145,7 @@ const Search = React.createClass( {
 		return (
 			<DocumentTitle title={ i18n.translate( 'Search' ) }>
 				<div className={ styles.search }>
+					<FixedBackground dark/>
 					<SearchHeader
 						{ ... { query } }
 						onQueryChange={ this.debouncedFetchResults } />

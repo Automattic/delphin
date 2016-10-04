@@ -8,11 +8,13 @@ import Header from 'components/ui/header';
 import FixedBackground from 'components/ui/fixed-background';
 import styles from './styles.scss';
 
-const DefaultLayoutWithHeader = ( { children } ) => {
+const LightLayoutWithHeader = ( { children } ) => {
 	return (
 		<div className={ styles.layout }>
-			<FixedBackground dark/>
+			<FixedBackground light/>
+
 			<Header/>
+
 			<div className={ styles.content }>
 				{ children }
 			</div>
@@ -22,8 +24,8 @@ const DefaultLayoutWithHeader = ( { children } ) => {
 	);
 };
 
-DefaultLayoutWithHeader.propTypes = {
+LightLayoutWithHeader.propTypes = {
 	children: PropTypes.node.isRequired
 };
 
-export default withStyles( styles )( DefaultLayoutWithHeader );
+export default withStyles( styles )( LightLayoutWithHeader );

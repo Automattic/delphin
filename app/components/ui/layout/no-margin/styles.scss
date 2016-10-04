@@ -1,4 +1,9 @@
 @import 'app/styles/breakpoints';
+@import 'app/styles/layouts';
+
+.layout {
+	@include layout-dark;
+}
 
 .content {
 	margin: 0 auto;

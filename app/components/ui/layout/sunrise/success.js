@@ -1,13 +1,11 @@
 // External dependencies
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import SunriseLayout from '.';
-import styles from './success.scss';
+import SunriseLayout from './index';
 
 const SunriseSuccessLayout = ( { children } ) => (
-	<SunriseLayout>
+	<SunriseLayout dark={ false }>
 		{ children }
 	</SunriseLayout>
 );
@@ -16,4 +14,4 @@ SunriseSuccessLayout.propTypes = {
 	children: PropTypes.node.isRequired
 };
 
-export default withStyles( styles )( SunriseSuccessLayout );
+export default SunriseSuccessLayout;

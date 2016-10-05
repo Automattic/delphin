@@ -1,0 +1,11 @@
+@import './colors';
+
+@mixin layout-dark {
+	background: $blue-background;
+	color: $white;
+}
+
+@mixin layout-light {
+	background: $white;
+	color: $blue-dark;
+}

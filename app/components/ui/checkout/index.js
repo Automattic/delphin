@@ -69,10 +69,12 @@ const Checkout = React.createClass( {
 	},
 
 	renderCheckoutError() {
-		let errorMessage = i18n.translate( 'We weren\'t able to process your payment.' );
+		let errorMessage = i18n.translate( "We weren't able to process your payment." );
 
-		if ( this.props.checkout.transaction.error.code === 'duplicate_purchase' ) {
-			errorMessage = this.props.checkout.transaction.error.message;
+		const { transaction } = this.props.checkout;
+
+		if ( transaction.error && transaction.error.code === 'duplicate_purchase' ) {
+			errorMessage = transaction.error.message;
 		}
 
 		return (

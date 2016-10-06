@@ -17,6 +17,7 @@ import {
 	TRANSACTION_CREATE_FAIL,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import config from 'config';
 import { getCheckout } from 'reducers/checkout/selectors';
 import { snakeifyKeys } from 'lib/formatters';
 import paygateLoader from 'lib/paygate-loader';
@@ -107,7 +108,8 @@ export function createTransaction() {
 			payment_key: paygateToken,
 			payment_method: 'paygate',
 			locale: 'en',
-			contact_information: snakeifyKeys( contactInformationForm )
+			contact_information: snakeifyKeys( contactInformationForm ),
+			type: config( 'transaction_type' )
 		};
 
 		return dispatch( {

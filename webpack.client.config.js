@@ -6,7 +6,6 @@ var baseConfig = require( './webpack.base.config' ),
 	path = require( 'path' ),
 	fs = require( 'fs' ),
 	webpack = require( 'webpack' ),
-	CDN_PREFIX = process.env.CDN_PREFIX || '',
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
 const vendorModules = [
@@ -52,7 +51,6 @@ var config = merge.smart( baseConfig, {
 
 	output: {
 		path: path.resolve( __dirname, 'public/scripts' ),
-		publicPath: CDN_PREFIX + '/scripts/',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]',
 		filename: 'bundle.[hash].js',
 		sourceMapFilename: 'bundle.[hash].map.js'

@@ -1,6 +1,6 @@
 deployment:
   production:
-    branch: master
+    branch: /.*/
     commands:
       - CDN_PREFIX=https://s0.wp.com/wp-content/themes/a8c/getdotblog/public npm run prod:static
       - tar cvzf $CIRCLE_ARTIFACTS/public.tar.gz -C public .

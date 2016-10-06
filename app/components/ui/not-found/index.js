@@ -4,13 +4,15 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import FixedBackground from 'components/ui/fixed-background';
 import Footer from 'components/ui/footer';
 import Header from 'components/ui/header';
 import withPageView from 'lib/analytics/with-page-view';
 import styles from './styles.scss';
 
 const NotFound = () => (
-	<div>
+	<div className={ styles.layout }>
+		<FixedBackground dark/>
 		<div className={ styles.content }>
 			<Header/>
 			<div className={ styles.fourOhFour }>

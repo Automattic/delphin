@@ -109,7 +109,7 @@ export function createTransaction() {
 			payment_method: 'paygate',
 			locale: 'en',
 			contact_information: snakeifyKeys( contactInformationForm ),
-			application_type: config( 'application_type' )
+			type: config( 'transaction_type' )
 		};
 
 		return dispatch( {

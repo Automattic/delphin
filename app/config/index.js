@@ -5,7 +5,7 @@ const NODE_ENV = process.env.NODE_ENV,
 	productionOnly = NODE_ENV === 'production';
 
 const config = {
-	application_type: 'pre_reg',
+	transaction_type: 'application',
 	available_tlds: [ 'blog' ],
 	default_tld: 'blog',
 	default_search_sort: 'recommended',

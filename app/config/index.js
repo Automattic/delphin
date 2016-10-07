@@ -9,6 +9,8 @@ const config = {
 	default_tld: 'blog',
 	default_search_sort: 'recommended',
 	env: NODE_ENV || 'development',
+	staging_cdn_prefix: 'https://s0.wp.com/wp-content/themes/a8c/getdotblogstaging/public',
+	production_cdn_prefix: 'https://s0.wp.com/wp-content/themes/a8c/getdotblog/public',
 	google_conversion_id: 881304566,
 	google_conversion_label: 'WLR1CIHt3WkQ9seepAM',
 	hostname: 'get.blog',

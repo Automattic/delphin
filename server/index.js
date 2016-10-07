@@ -76,7 +76,6 @@ function renderPage( props, localeData, isRtl = false ) {
 	}
 
 	const vendorFileName = typeof assets.vendor === 'string' ? assets.vendor : assets.vendor[ 0 ];
-	const CDN_PREFIX = process.env.CDN_PREFIX || '';
 
 	return templateCompiler( {
 		content,
@@ -85,10 +84,10 @@ function renderPage( props, localeData, isRtl = false ) {
 		localeData,
 		title,
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
-		resetCss: CDN_PREFIX + '/styles/reset.css',
-		bundle: CDN_PREFIX + path.join( bundlePath, bundleFileName ),
-		vendor: CDN_PREFIX + path.join( bundlePath, vendorFileName ),
-		styles: stylesFileName ? CDN_PREFIX + path.resolve( bundlePath, stylesFileName ) : undefined
+		resetCss: '/styles/reset.css',
+		bundle: path.join( bundlePath, bundleFileName ),
+		vendor: path.join( bundlePath, vendorFileName ),
+		styles: stylesFileName ? path.resolve( bundlePath, stylesFileName ) : undefined
 	} );
 }
 

@@ -2,6 +2,7 @@ jest.disableAutomock();
 
 // Internal dependencies
 import {
+	extractHostName,
 	isDomain,
 	isDomainSearch,
 	isValidSecondLevelDomain,
@@ -20,7 +21,7 @@ describe( 'lib/domains', () => {
 			expect( isDomain( 'hell-o.com' ) ).toBe( true );
 		} );
 
-		it( 'should not match unvalid domain', () => {
+		it( 'should not match invalid domain', () => {
 			expect( isDomain() ).toBe( false ); // needs a parameter
 			expect( isDomain( null ) ).toBe( false ); // needs a string parameter
 			expect( isDomain( 'helloworld' ) ).toBe( false ); // needs a tld
@@ -45,7 +46,7 @@ describe( 'lib/domains', () => {
 			expect( isValidSecondLevelDomain( 'hello1' ) ).toBe( true );
 		} );
 
-		it( 'should not match unvalid second-level domains', () => {
+		it( 'should not match invalid second-level domains', () => {
 			expect( isValidSecondLevelDomain( 'hello.world' ) ).toBe( false );
 			expect( isValidSecondLevelDomain( 'hello_world' ) ).toBe( false );
 			expect( isValidSecondLevelDomain( '/hello-world' ) ).toBe( false );
@@ -180,6 +181,29 @@ describe( 'lib/domains', () => {
 
 		it( 'should replace an existing TLD with the given one', () => {
 			expect( withTld( 'foo.com', 'blog' ) ).toBe( 'foo.blog' );
+		} );
+	} );
+
+	describe( 'extractHostName', () => {
+		it( 'should return a host name for a valid url', () => {
+			expect( extractHostName( 'hello.com' ) ).toBe( 'hello.com' );
+			expect( extractHostName( 'hello.com/blah_blah' ) ).toBe( 'hello.com' );
+			expect( extractHostName( 'http://hello-world.com' ) ).toBe( 'hello-world.com' );
+			expect( extractHostName( 'https://hello.world.com' ) ).toBe( 'hello.world.com' );
+			expect( extractHostName( 'http://foo.co/blah_blah' ) ).toBe( 'foo.co' );
+			expect( extractHostName( 'http://foo.co/blah_blah.' ) ).toBe( 'foo.co' );
+			expect( extractHostName( 'http://foo.co/blah_blah,' ) ).toBe( 'foo.co' );
+			expect( extractHostName( '(http://foo.co/blah_blah)' ) ).toBe( 'foo.co' );
+			expect( extractHostName( 'http:\\\\foo.co\\blah_blah' ) ).toBe( 'foo.co' );
+			expect( extractHostName( 'foo.co\\\\blah_blah' ) ).toBe( 'foo.co' );
+		} );
+
+		it( 'should return null for an invalid url', () => {
+			expect( extractHostName() ).toBe( null );
+			expect( extractHostName( null ) ).toBe( null );
+			expect( extractHostName( 'helloworld' ) ).toBe( null );
+			expect( extractHostName( '.com' ) ).toBe( null );
+			expect( extractHostName( 'hello.whatever' ) ).toBe( null );
 		} );
 	} );
 } );

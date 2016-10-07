@@ -83,6 +83,8 @@ function renderPage( props, localeData, isRtl = false ) {
 		isRtl,
 		localeData,
 		title,
+		ogDescription: i18n.translate( 'Every .blog is a story. Tell yours.' ),
+		ogTitle: i18n.translate( 'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. Apply now to secure the perfect domain for your blog.' ),
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),
 		resetCss: '/styles/reset.css',
 		bundle: path.join( bundlePath, bundleFileName ),

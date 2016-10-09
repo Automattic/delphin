@@ -36,7 +36,7 @@ if ( window.location.host.indexOf( 'getdotblogstaging' ) > -1 ) {
 	cdnPrefix = config( 'production_cdn_prefix' );
 }
 
-__webpack_public_path__ = cdnPrefix + '/scripts/'; // eslint-disable-line
+__webpack_public_path__ = cdnPrefix + __webpack_public_path__; // eslint-disable-line
 
 const middlewares = [
 	routerMiddleware( browserHistory ),

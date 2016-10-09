@@ -51,6 +51,7 @@ var config = merge.smart( baseConfig, {
 
 	output: {
 		path: path.resolve( __dirname, 'public/scripts' ),
+		publicPath: '/scripts/',
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]',
 		filename: 'bundle.[hash].js',
 		sourceMapFilename: 'bundle.[hash].map.js'

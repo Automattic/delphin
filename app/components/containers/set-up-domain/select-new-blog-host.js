@@ -4,12 +4,12 @@ import { bindActionCreators } from 'redux';
 
 // Internal dependencies
 import RequireLogin from 'components/containers/require-login';
-import SetUpNewBlog from 'components/ui/set-up-new-blog';
+import SelectNewBlogHost from 'components/ui/set-up-domain/select-new-blog-host';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'setUpNewBlog',
+		form: 'selectNewBlogHost',
 		fields: [ 'wordpressOrOther' ],
 		destroyOnUnmount: false
 	},
@@ -20,4 +20,4 @@ export default reduxForm(
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( SetUpNewBlog ) );
+)( RequireLogin( SelectNewBlogHost ) );

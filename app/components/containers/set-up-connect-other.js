@@ -15,7 +15,7 @@ export default reduxForm(
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpNewBlog ),
+		hasAnsweredPreviousQuestion: !! getValues( state.form.selectNewBlogHost ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect

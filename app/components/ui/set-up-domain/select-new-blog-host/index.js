@@ -8,6 +8,7 @@ import capitalize from 'lodash/capitalize';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
@@ -43,6 +44,8 @@ class SelectNewBlogHost extends Component {
 
 		return (
 			<SunriseStep>
+				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
+
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( "Let's create a new a blog!" ) }</h1>
 					<h2>

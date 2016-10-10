@@ -1,5 +1,6 @@
 // Internal dependencies
 import connectExistingBlog from 'components/containers/set-up-domain/connect-existing-blog';
+import connectingExistingBlog from 'components/containers/set-up-domain/connecting-existing-blog';
 import hosts from 'components/containers/hosts';
 import hostInfo from 'components/containers/host-info';
 import selectBlogType from 'components/containers/set-up-domain/select-blog-type';
@@ -10,6 +11,7 @@ import connectNewBlogToWordpress from 'components/ui/set-up-domain/connect-new-b
 
 export default {
 	connectExistingBlog,
+	connectingExistingBlog,
 	connectNewBlogToOther,
 	connectNewBlogToWordpress,
 	findExistingBlog,

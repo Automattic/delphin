@@ -6,7 +6,7 @@ import { getValues, reduxForm } from 'redux-form';
 import { extractHostName } from 'lib/domains';
 import { getAsyncValidateFunction } from 'lib/form';
 import i18n from 'i18n-calypso';
-import RequireLogin from './require-login';
+import RequireLogin from 'components/containers/require-login';
 import SetUpExistingBlog from 'components/ui/set-up-existing-blog';
 import { redirect } from 'actions/routes';
 

@@ -3,7 +3,7 @@ import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
-import RequireLogin from './require-login';
+import RequireLogin from 'components/containers/require-login';
 import SetUpNewBlog from 'components/ui/set-up-new-blog';
 import { redirect } from 'actions/routes';
 

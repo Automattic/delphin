@@ -56,7 +56,7 @@ const ConnectUser = React.createClass( {
 	isSubmitButtonDisabled() {
 		const { invalid, submitting, user: { isRequesting } } = this.props;
 
-		return invalid || submitting || isRequesting;
+		return invalid || submitting || isRequesting || ! process.env.BROWSER;
 	},
 
 	handleSubmit() {

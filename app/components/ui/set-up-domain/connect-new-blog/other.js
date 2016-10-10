@@ -14,7 +14,7 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 
-class SetUpConnectOther extends Component {
+class ConnectNewBlogToOther extends Component {
 	componentWillMount() {
 		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
 
@@ -77,7 +77,7 @@ class SetUpConnectOther extends Component {
 	}
 }
 
-SetUpConnectOther.propTypes = {
+ConnectNewBlogToOther.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
@@ -85,4 +85,4 @@ SetUpConnectOther.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( SetUpConnectOther ) );
+export default withStyles( styles )( bindHandlers( ConnectNewBlogToOther ) );

@@ -28,7 +28,8 @@ class SelectNewBlogHost extends Component {
 		const { redirect, domainName } = this.props;
 
 		if ( wordpressOrOther ) {
-			const connectPageSlug = 'setUpConnect' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+			const connectPageSlug = 'connectNewBlogTo' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+
 			redirect( connectPageSlug, { pathParams: { domainName } } );
 		}
 	}

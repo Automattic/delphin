@@ -5,8 +5,8 @@ import hostInfo from 'components/containers/host-info';
 import selectBlogType from 'components/containers/set-up-domain/select-blog-type';
 import findExistingBlog from 'components/containers/set-up-domain/find-existing-blog';
 import selectNewBlogHost from 'components/containers/set-up-domain/select-new-blog-host';
-import setUpConnectOther from 'components/containers/set-up-connect-other';
-import setUpConnectWordpress from 'components/ui/set-up-connect/wordpress';
+import connectNewBlogToOther from 'components/containers/set-up-domain/connect-new-blog-to-other';
+import connectNewBlogToWordpress from 'components/ui/set-up-domain/connect-new-blog/wordpress';
 
 export default {
 	connectExistingBlog,
@@ -15,6 +15,6 @@ export default {
 	selectBlogType,
 	findExistingBlog,
 	selectNewBlogHost,
-	setUpConnectOther,
-	setUpConnectWordpress,
+	connectNewBlogToOther,
+	connectNewBlogToWordpress,
 };

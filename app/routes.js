@@ -39,51 +39,51 @@ let publicRoutes = [
 			},
 			{
 				path: 'set-up-domain/:domainName',
-				slug: 'setUpDomain',
+				slug: 'selectBlogType',
 				static: false,
-				getComponent: getComponent( 'setUp', 'setUpDomain' )
+				getComponent: getComponent( 'setUpDomain', 'selectBlogType' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog',
+				slug: 'selectNewBlogHost',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'selectNewBlogHost' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/connect/other',
+				slug: 'connectNewBlogToOther',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectNewBlogToOther' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/connect/wordpress',
+				slug: 'connectNewBlogToWordpress',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectNewBlogToWordpress' )
 			},
 			{
 				path: 'set-up-domain/:domainName/existing-blog',
-				slug: 'setUpExistingBlog',
+				slug: 'findExistingBlog',
 				static: false,
-				getComponent: getComponent( 'setUp', 'setUpExistingBlog' )
+				getComponent: getComponent( 'setUpDomain', 'findExistingBlog' )
 			},
 			{
 				path: 'set-up-domain/:domainName/existing-blog/connect',
 				slug: 'connectExistingBlog',
 				static: false,
-				getComponent: getComponent( 'setUp', 'connectExistingBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/new-blog',
-				slug: 'setUpNewBlog',
-				static: false,
-				getComponent: getComponent( 'setUp', 'setUpNewBlog' )
+				getComponent: getComponent( 'setUpDomain', 'connectExistingBlog' )
 			},
 			{
 				path: 'set-up-domain/:domainName/hosts',
 				slug: 'hosts',
 				static: false,
-				getComponent: getComponent( 'setUp', 'hosts' )
+				getComponent: getComponent( 'setUpDomain', 'hosts' )
 			},
 			{
 				path: 'set-up-domain/:domainName/hosts/:slug',
 				slug: 'hostInfo',
 				static: false,
-				getComponent: getComponent( 'setUp', 'hostInfo' )
-			},
-			{
-				path: 'set-up-domain/:domainName/connect/wordpress',
-				slug: 'setUpConnectWordpress',
-				static: false,
-				getComponent: getComponent( 'setUp', 'setUpConnectWordpress' )
-			},
-			{
-				path: 'set-up-domain/:domainName/connect/other',
-				slug: 'setUpConnectOther',
-				static: false,
-				getComponent: getComponent( 'setUp', 'setUpConnectOther' )
+				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
 			},
 		]
 	},

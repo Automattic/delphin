@@ -14,12 +14,12 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 
-class SetUpConnectOther extends Component {
+class ConnectNewBlogToOther extends Component {
 	componentWillMount() {
 		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
 
 		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'setUpDomain', { pathParams: { domainName } } );
+			redirect( 'selectBlogType', { pathParams: { domainName } } );
 		}
 	}
 
@@ -64,7 +64,7 @@ class SetUpConnectOther extends Component {
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpNewBlog', { domainName } ) }>
+						<Link to={ getPath( 'selectNewBlogHost', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 						<Button disabled={ ! providerText.value }>
@@ -77,7 +77,7 @@ class SetUpConnectOther extends Component {
 	}
 }
 
-SetUpConnectOther.propTypes = {
+ConnectNewBlogToOther.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
@@ -85,4 +85,4 @@ SetUpConnectOther.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( SetUpConnectOther ) );
+export default withStyles( styles )( bindHandlers( ConnectNewBlogToOther ) );

@@ -14,12 +14,12 @@ import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
 
-class SetUpExistingBlog extends Component {
+class FindExistingBlog extends Component {
 	componentWillMount() {
 		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
 
 		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'setUpDomain', { pathParams: { domainName } } );
+			redirect( 'selectBlogType', { pathParams: { domainName } } );
 		}
 	}
 
@@ -65,7 +65,7 @@ class SetUpExistingBlog extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpDomain', { domainName } ) }>
+						<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 
@@ -79,7 +79,7 @@ class SetUpExistingBlog extends Component {
 	}
 }
 
-SetUpExistingBlog.propTypes = {
+FindExistingBlog.propTypes = {
 	asyncValidating: PropTypes.bool.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
@@ -91,4 +91,4 @@ SetUpExistingBlog.propTypes = {
 	submitting: PropTypes.bool.isRequired
 };
 
-export default bindHandlers( SetUpExistingBlog ) ;
+export default bindHandlers( FindExistingBlog ) ;

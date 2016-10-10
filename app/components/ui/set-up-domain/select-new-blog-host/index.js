@@ -15,12 +15,12 @@ import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
-class SetUpNewBlog extends Component {
+class SelectNewBlogHost extends Component {
 	componentWillMount() {
 		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
 
 		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'setUpDomain', { pathParams: { domainName } } );
+			redirect( 'selectBlogType', { pathParams: { domainName } } );
 		}
 	}
 
@@ -28,7 +28,8 @@ class SetUpNewBlog extends Component {
 		const { redirect, domainName } = this.props;
 
 		if ( wordpressOrOther ) {
-			const connectPageSlug = 'setUpConnect' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+			const connectPageSlug = 'connectNewBlogTo' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+
 			redirect( connectPageSlug, { pathParams: { domainName } } );
 		}
 	}
@@ -91,7 +92,7 @@ class SetUpNewBlog extends Component {
 						</label>
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpDomain', { domainName } ) }>
+						<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 						<Button>
@@ -104,7 +105,7 @@ class SetUpNewBlog extends Component {
 	}
 }
 
-SetUpNewBlog.propTypes = {
+SelectNewBlogHost.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
@@ -112,4 +113,4 @@ SetUpNewBlog.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( SetUpNewBlog ) );
+export default withStyles( styles )( bindHandlers( SelectNewBlogHost ) );

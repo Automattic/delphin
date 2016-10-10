@@ -6,8 +6,8 @@ import { getValues, reduxForm } from 'redux-form';
 import { extractHostName } from 'lib/domains';
 import { getAsyncValidateFunction } from 'lib/form';
 import i18n from 'i18n-calypso';
-import RequireLogin from './require-login';
-import SetUpExistingBlog from 'components/ui/set-up-existing-blog';
+import RequireLogin from 'components/containers/require-login';
+import FindExistingBlog from 'components/ui/set-up-domain/find-existing-blog';
 import { redirect } from 'actions/routes';
 
 const validate = values => {
@@ -28,15 +28,15 @@ const validate = values => {
 
 export default reduxForm(
 	{
-		form: 'setUpExistingBlog',
+		form: 'findExistingBlog',
 		fields: [ 'url' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpDomain ),
+		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( SetUpExistingBlog ) );
+)( RequireLogin( FindExistingBlog ) );

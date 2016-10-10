@@ -1,5 +1,5 @@
 // Internal dependencies
-import connectExistingBlog from 'components/containers/connect-existing-blog';
+import connectExistingBlog from 'components/containers/set-up-domain/connect-existing-blog';
 import hosts from 'components/containers/hosts';
 import hostInfo from 'components/containers/host-info';
 import selectBlogType from 'components/containers/set-up-domain/select-blog-type';

@@ -7,7 +7,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
 
-class ConnectingExistingBlog extends Component {
+class ConnectingBlog extends Component {
 	render() {
 		const { domainName, hostName } = this.props;
 
@@ -30,9 +30,9 @@ class ConnectingExistingBlog extends Component {
 	}
 }
 
-ConnectingExistingBlog.propTypes = {
+ConnectingBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string.isRequired
 };
 
-export default ConnectingExistingBlog;
+export default ConnectingBlog;

@@ -2,11 +2,11 @@
 import { connect } from 'react-redux';
 
 // Internal dependencies
-import ConnectingExistingBlog from 'components/ui/set-up-domain/connecting-existing-blog';
+import ConnectingBlog from 'components/ui/set-up-domain/connecting-blog';
 
 export default connect(
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
 		hostName: ownProps.params.hostName
 	} )
-)( ConnectingExistingBlog );
+)( ConnectingBlog );

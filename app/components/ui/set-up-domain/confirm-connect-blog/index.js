@@ -18,7 +18,19 @@ class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		this.props.logInToWpcom();
+		const { blogType, domainName } = this.props;
+
+		let destination;
+
+		if ( blogType === 'new' ) {
+			destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+		}
+
+		if ( blogType === 'existing' ) {
+			destination = 'https://wordpress.com/';
+		}
+
+		this.props.logInToWpcom( destination );
 	}
 
 	render() {

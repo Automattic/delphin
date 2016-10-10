@@ -16,6 +16,7 @@ class WpcomLoginForm extends React.Component {
 		const {
 			username,
 			bearerToken,
+			destination,
 		} = this.props;
 
 		return (
@@ -23,10 +24,11 @@ class WpcomLoginForm extends React.Component {
 				method="post"
 				action="https://wordpress.com/wp-login.php"
 				ref={ this.saveRef }
+				target="_blank"
 			>
 				<input type="hidden" name="log" value={ username } />
 				<input type="hidden" name="authorization" value={ 'Bearer ' + bearerToken } />
-				<input type="hidden" name="redirect_to" value="https://wordpress.com" />
+				<input type="hidden" name="redirect_to" value={ destination } />
 			</form>
 		);
 	}
@@ -34,6 +36,7 @@ class WpcomLoginForm extends React.Component {
 
 WpcomLoginForm.propTypes = {
 	bearerToken: PropTypes.string.isRequired,
+	destination: PropTypes.string.isRequired,
 	username: PropTypes.string.isRequired,
 };
 

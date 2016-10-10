@@ -17,7 +17,7 @@ export const provideStore = storeGlobal => {
 
 export const sections = {
 	myDomains: () => System.import( './my-domains' ),
-	setUp: () => System.import( './set-up' ),
+	setUpDomain: () => System.import( './set-up-domain' ),
 	checkout: () => System.import( './checkout' ),
 };
 

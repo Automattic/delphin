@@ -3,21 +3,21 @@ import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
-import RequireLogin from './require-login';
-import SetUpNewBlog from 'components/ui/set-up-new-blog';
+import RequireLogin from 'components/containers/require-login';
+import SelectNewBlogHost from 'components/ui/set-up-domain/select-new-blog-host';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'setUpNewBlog',
+		form: 'selectNewBlogHost',
 		fields: [ 'wordpressOrOther' ],
 		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpDomain ),
+		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( SetUpNewBlog ) );
+)( RequireLogin( SelectNewBlogHost ) );

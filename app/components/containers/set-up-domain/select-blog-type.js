@@ -3,13 +3,13 @@ import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
-import RequireLogin from './require-login';
-import SetUpDomain from 'components/ui/set-up-domain';
+import RequireLogin from 'components/containers/require-login';
+import SelectBlogType from 'components/ui/set-up-domain/select-blog-type';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
-		form: 'setUpDomain',
+		form: 'selectBlogType',
 		fields: [ 'newOrExisting' ],
 		destroyOnUnmount: false
 	},
@@ -19,4 +19,4 @@ export default reduxForm(
 	dispatch => bindActionCreators( {
 		redirect
 	}, dispatch )
-)( RequireLogin( SetUpDomain ) );
+)( RequireLogin( SelectBlogType ) );

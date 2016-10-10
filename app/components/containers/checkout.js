@@ -11,7 +11,7 @@ import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
-import RequireLogin from './require-login';
+import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 /**

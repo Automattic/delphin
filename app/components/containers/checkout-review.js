@@ -9,7 +9,7 @@ import CheckoutReview from 'components/ui/checkout-review';
 import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
 import { isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
-import RequireLogin from './require-login';
+import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default connect(

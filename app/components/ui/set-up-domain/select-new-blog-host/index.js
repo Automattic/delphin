@@ -4,7 +4,6 @@ import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import capitalize from 'lodash/capitalize';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -28,11 +27,15 @@ class SelectNewBlogHost extends Component {
 	handleSubmit( { wordpressOrOther } ) {
 		const { redirect, domainName } = this.props;
 
-		if ( wordpressOrOther ) {
-			const connectPageSlug = 'connectNewBlogTo' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+		let nextPageSlug = '';
 
-			redirect( connectPageSlug, { pathParams: { domainName } } );
+		if ( wordpressOrOther === 'wordpress' ) {
+			nextPageSlug = 'connectingNewBlog';
+		} else {
+			nextPageSlug = 'connectNewBlogToOther';
 		}
+
+		redirect( nextPageSlug, { pathParams: { domainName } } );
 	}
 
 	render() {

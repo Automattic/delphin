@@ -9,7 +9,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 
 class ConnectingBlog extends Component {
 	render() {
-		const { domainName, hostName } = this.props;
+		const { blogType, domainName, hostName } = this.props;
 
 		return (
 			<SunriseStep>
@@ -19,10 +19,19 @@ class ConnectingBlog extends Component {
 					<h1>{ i18n.translate( 'Connecting your domain' ) }</h1>
 
 					<h2>
-						{ preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your WordPress.com blog at {{strong}}%(hostName)s{{/strong}}.', {
-							args: { domainName, hostName },
-							components: { strong: <strong /> }
-						} ), 2 ) }
+						{ blogType === 'existing' && (
+							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your WordPress.com blog at {{strong}}%(hostName)s{{/strong}}.', {
+								args: { domainName, hostName },
+								components: { strong: <strong /> }
+							} ), 2 )
+						) }
+
+						{ blogType === 'new' && (
+							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with WordPress.com.', {
+								args: { domainName },
+								components: { strong: <strong /> }
+							} ), 2 )
+						) }
 					</h2>
 				</SunriseStep.Header>
 			</SunriseStep>
@@ -31,8 +40,9 @@ class ConnectingBlog extends Component {
 }
 
 ConnectingBlog.propTypes = {
+	blogType: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
-	hostName: PropTypes.string.isRequired
+	hostName: PropTypes.string,
 };
 
 export default ConnectingBlog;

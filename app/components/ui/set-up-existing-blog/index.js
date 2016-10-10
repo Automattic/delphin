@@ -19,7 +19,7 @@ class SetUpExistingBlog extends Component {
 		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
 
 		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'setUpDomain', { pathParams: { domainName } } );
+			redirect( 'selectBlogType', { pathParams: { domainName } } );
 		}
 	}
 
@@ -65,7 +65,7 @@ class SetUpExistingBlog extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpDomain', { domainName } ) }>
+						<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 

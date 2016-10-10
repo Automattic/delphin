@@ -15,7 +15,7 @@ import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
-class SetUpDomain extends Component {
+class SelectBlogType extends Component {
 	handleSubmit( values ) {
 		const { redirect, domainName } = this.props;
 
@@ -98,7 +98,7 @@ class SetUpDomain extends Component {
 	}
 }
 
-SetUpDomain.propTypes = {
+SelectBlogType.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
@@ -108,4 +108,4 @@ SetUpDomain.propTypes = {
 	submitting: PropTypes.bool.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( SetUpDomain ) );
+export default withStyles( styles )( bindHandlers( SelectBlogType ) );

@@ -64,7 +64,7 @@ class SetUpConnectOther extends Component {
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpNewBlog', { domainName } ) }>
+						<Link to={ getPath( 'selectNewBlogHost', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 						<Button disabled={ ! providerText.value }>

@@ -34,7 +34,7 @@ export default reduxForm(
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		hasAnsweredPreviousQuestion: !! getValues( state.form.setUpDomain ),
+		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect

@@ -19,7 +19,7 @@ class SetUpConnectOther extends Component {
 		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
 
 		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'setUpDomain', { pathParams: { domainName } } );
+			redirect( 'selectBlogType', { pathParams: { domainName } } );
 		}
 	}
 

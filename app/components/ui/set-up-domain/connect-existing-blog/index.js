@@ -46,7 +46,7 @@ class ConnectExistingBlog extends Component {
 				<Form>
 					<Form.FieldArea>
 						<p>
-							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s? ', {
+							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
 								args: { hostName, domainName }
 							} ) }
 						</p>

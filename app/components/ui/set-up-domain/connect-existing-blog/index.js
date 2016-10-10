@@ -18,7 +18,9 @@ class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		alert( 'TODO' );
+		const { domainName, redirect } = this.props;
+
+		redirect( 'connectingExistingBlog', { pathParams: { domainName } } );
 	}
 
 	render() {
@@ -67,7 +69,8 @@ class ConnectExistingBlog extends Component {
 
 ConnectExistingBlog.propTypes = {
 	blogUrl: PropTypes.string.isRequired,
-	domainName: PropTypes.string.isRequired
+	domainName: PropTypes.string.isRequired,
+	redirect: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( ConnectExistingBlog ) );

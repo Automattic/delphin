@@ -18,7 +18,7 @@ class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		alert( 'TODO' );
+		this.props.logInToWpcom();
 	}
 
 	render() {
@@ -90,7 +90,8 @@ class ConfirmConnectBlog extends Component {
 ConfirmConnectBlog.propTypes = {
 	blogType: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
-	hostName: PropTypes.string
+	hostName: PropTypes.string,
+	logInToWpcom: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( ConfirmConnectBlog ) );

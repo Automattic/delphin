@@ -1,6 +1,5 @@
 // Internal dependencies
-import confirmConnectExistingBlog from 'components/containers/set-up-domain/confirm-connect-existing-blog';
-import confirmConnectNewBlog from 'components/containers/set-up-domain/confirm-connect-new-blog';
+import confirmConnectBlog from 'components/containers/set-up-domain/confirm-connect-blog';
 import connectExistingBlog from 'components/containers/set-up-domain/connect-existing-blog';
 import connectingExistingBlog from 'components/containers/set-up-domain/connecting-existing-blog';
 import connectingNewBlog from 'components/containers/set-up-domain/connecting-new-blog';
@@ -12,8 +11,7 @@ import selectBlogType from 'components/containers/set-up-domain/select-blog-type
 import selectNewBlogHost from 'components/containers/set-up-domain/select-new-blog-host';
 
 export default {
-	confirmConnectExistingBlog,
-	confirmConnectNewBlog,
+	confirmConnectBlog,
 	connectExistingBlog,
 	connectingExistingBlog,
 	connectingNewBlog,

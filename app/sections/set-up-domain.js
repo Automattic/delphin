@@ -10,11 +10,11 @@ import connectNewBlogToWordpress from 'components/ui/set-up-domain/connect-new-b
 
 export default {
 	connectExistingBlog,
-	hosts,
-	hostInfo,
-	selectBlogType,
-	findExistingBlog,
-	selectNewBlogHost,
 	connectNewBlogToOther,
 	connectNewBlogToWordpress,
+	findExistingBlog,
+	hostInfo,
+	hosts,
+	selectBlogType,
+	selectNewBlogHost,
 };

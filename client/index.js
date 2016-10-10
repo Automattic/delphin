@@ -108,7 +108,6 @@ function init() {
 
 function render() {
 	var containerElement = document.getElementById( 'content' );
-	ReactDOM.unmountComponentAtNode( containerElement );
 	ReactDOM.render(
 		<Provider store={ store }>
 			<Stylizer onInsertCss={ insertCss }>

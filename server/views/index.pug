@@ -3,6 +3,13 @@ html(dir=isRtl ? 'rtl' : 'ltr' )
 	head
 		title=title
 		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(name="twitter:card" content="summary")
+		meta(name="twitter:creator" content="@wordpressdotcom")
+		meta(property="og:url" content="https://get.blog")
+		meta(property="og:type" content="website")
+		meta(property="og:title" content=ogTitle)
+		meta(property="og:description" content=ogDescription)
+		meta(property="og:image" content="https://s0.wordpress.com/i/delphin/tell-your-story-dark.png")
 		link(rel="stylesheet", href=resetCss)
 		if css
 			style(type='text/css').

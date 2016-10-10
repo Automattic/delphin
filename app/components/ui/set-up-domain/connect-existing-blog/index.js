@@ -24,15 +24,15 @@ class ConnectExistingBlog extends Component {
 	}
 
 	render() {
-		const { domainName, blogUrl } = this.props;
+		const { domainName, hostName } = this.props;
 
 		return (
 			<SunriseStep>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Good news, we found %(blogUrl)s!', {
-						args: { blogUrl }
+					<h1>{ i18n.translate( 'Good news, we found %(hostName)s!', {
+						args: { hostName }
 					} ) }</h1>
 
 					<h2>
@@ -46,8 +46,8 @@ class ConnectExistingBlog extends Component {
 				<Form>
 					<Form.FieldArea>
 						<p>
-							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(blogUrl)s? ', {
-								args: { blogUrl, domainName }
+							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s? ', {
+								args: { hostName, domainName }
 							} ) }
 						</p>
 
@@ -68,8 +68,8 @@ class ConnectExistingBlog extends Component {
 }
 
 ConnectExistingBlog.propTypes = {
-	blogUrl: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
+	hostName: PropTypes.string.isRequired,
 	redirect: PropTypes.func.isRequired
 };
 

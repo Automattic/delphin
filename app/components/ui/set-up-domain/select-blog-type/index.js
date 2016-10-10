@@ -24,7 +24,7 @@ class SelectBlogType extends Component {
 		}
 
 		if ( values.newOrExisting === 'existing' ) {
-			redirect( 'setUpExistingBlog', { pathParams: { domainName } } );
+			redirect( 'findExistingBlog', { pathParams: { domainName } } );
 		}
 	}
 

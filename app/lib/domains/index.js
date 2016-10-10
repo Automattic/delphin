@@ -31,6 +31,38 @@ export function isDomain( value ) {
 }
 
 /**
+ * Retrieves a host name from the specified url.
+ *
+ * @param {string} url - url
+ * @returns {string|null} the corresponding host name, or null if not found
+ */
+export function extractHostName( url ) {
+	// Prepares the url for parsing by removing or converting invalid characters
+	if ( url ) {
+		url = url.replace( /\\/g, '/' );
+		url = url.replace( /[()]/g, '' );
+	}
+
+	const data = parseDomain( url );
+
+	if ( data ) {
+		const { subdomain, domain, tld } = data;
+
+		if ( domain && tld ) {
+			const parts = [ domain, tld ];
+
+			if ( subdomain ) {
+				parts.unshift( subdomain );
+			}
+
+			return parts.join( '.' );
+		}
+	}
+
+	return null;
+}
+
+/**
  * Check if a string is a valid second level domain.
  *
  * @param {string} value - the string to test

@@ -6,6 +6,7 @@ import ConnectingExistingBlog from 'components/ui/set-up-domain/connecting-exist
 
 export default connect(
 	( state, ownProps ) => ( {
-		domainName: ownProps.params.domainName
+		domainName: ownProps.params.domainName,
+		hostName: ownProps.params.hostName
 	} )
 )( ConnectingExistingBlog );

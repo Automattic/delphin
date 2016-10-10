@@ -14,7 +14,7 @@ import { preventWidows } from 'lib/formatters';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
-class connectExistingBlog extends Component {
+class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
@@ -65,9 +65,9 @@ class connectExistingBlog extends Component {
 	}
 }
 
-connectExistingBlog.propTypes = {
+ConnectExistingBlog.propTypes = {
 	blogUrl: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( connectExistingBlog ) );
+export default withStyles( styles )( bindHandlers( ConnectExistingBlog ) );

@@ -75,15 +75,15 @@ let publicRoutes = [
 			},
 			{
 				path: 'set-up-domain/:domainName/connect/wordpress',
-				slug: 'setUpConnectWordpress',
+				slug: 'connectNewBlogToWordpress',
 				static: false,
-				getComponent: getComponent( 'setUp', 'setUpConnectWordpress' )
+				getComponent: getComponent( 'setUp', 'connectNewBlogToWordpress' )
 			},
 			{
 				path: 'set-up-domain/:domainName/connect/other',
-				slug: 'setUpConnectOther',
+				slug: 'connectNewBlogToOther',
 				static: false,
-				getComponent: getComponent( 'setUp', 'setUpConnectOther' )
+				getComponent: getComponent( 'setUp', 'connectNewBlogToOther' )
 			},
 		]
 	},

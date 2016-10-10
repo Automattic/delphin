@@ -55,7 +55,7 @@ class connectExistingBlog extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Link to={ getPath( 'setUpExistingBlog', { domainName } ) }>
+						<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
 					</Form.SubmitArea>

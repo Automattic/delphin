@@ -18,9 +18,9 @@ class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { domainName, redirect } = this.props;
+		const { domainName, hostName, redirect } = this.props;
 
-		redirect( 'connectingExistingBlog', { pathParams: { domainName } } );
+		redirect( 'connectingExistingBlog', { pathParams: { domainName, hostName } } );
 	}
 
 	render() {

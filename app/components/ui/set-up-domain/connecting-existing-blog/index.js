@@ -9,7 +9,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 
 class ConnectingExistingBlog extends Component {
 	render() {
-		const { domainName } = this.props;
+		const { domainName, hostName } = this.props;
 
 		return (
 			<SunriseStep>
@@ -19,8 +19,8 @@ class ConnectingExistingBlog extends Component {
 					<h1>{ i18n.translate( 'Connecting your domain' ) }</h1>
 
 					<h2>
-						{ preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your WordPress.com blog.', {
-							args: { domainName },
+						{ preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your WordPress.com blog at {{strong}}%(hostName)s{{/strong}}.', {
+							args: { domainName, hostName },
 							components: { strong: <strong /> }
 						} ), 2 ) }
 					</h2>
@@ -31,7 +31,8 @@ class ConnectingExistingBlog extends Component {
 }
 
 ConnectingExistingBlog.propTypes = {
-	domainName: PropTypes.string.isRequired
+	domainName: PropTypes.string.isRequired,
+	hostName: PropTypes.string.isRequired
 };
 
 export default ConnectingExistingBlog;

@@ -63,4 +63,8 @@
 	select {
 		padding-bottom: 11px;
 	}
+
+	p:not(:first-child) {
+		margin-top: 15px;
+	}
 }

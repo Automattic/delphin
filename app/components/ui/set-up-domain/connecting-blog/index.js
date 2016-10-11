@@ -8,6 +8,12 @@ import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class ConnectingBlog extends Component {
+	componentDidMount() {
+		setTimeout( () => {
+			this.props.redirectToConfirmConnectBlog();
+		}, 1500 );
+	}
+
 	render() {
 		const { blogType, domainName, hostName } = this.props;
 
@@ -43,6 +49,7 @@ ConnectingBlog.propTypes = {
 	blogType: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
+	redirectToConfirmConnectBlog: PropTypes.func.isRequired
 };
 
 export default ConnectingBlog;

@@ -12,6 +12,10 @@ class WpcomLoginForm extends React.Component {
 		this.form.submit();
 	}
 
+	componentDidUpdate() {
+		this.form.submit();
+	}
+
 	render() {
 		const {
 			username,

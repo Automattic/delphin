@@ -57,9 +57,9 @@ let publicRoutes = [
 			},
 			{
 				path: 'set-up-domain/:domainName/new-blog/connect/wordpress',
-				slug: 'connectNewBlogToWordpress',
+				slug: 'connectingNewBlog',
 				static: false,
-				getComponent: getComponent( 'setUpDomain', 'connectNewBlogToWordpress' )
+				getComponent: getComponent( 'setUpDomain', 'connectingNewBlog' )
 			},
 			{
 				path: 'set-up-domain/:domainName/existing-blog',
@@ -72,6 +72,12 @@ let publicRoutes = [
 				slug: 'connectExistingBlog',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'connectExistingBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName',
+				slug: 'connectingExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectingExistingBlog' )
 			},
 			{
 				path: 'set-up-domain/:domainName/hosts',

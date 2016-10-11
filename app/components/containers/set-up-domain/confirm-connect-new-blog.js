@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import ConfirmConnectBlog from 'components/ui/set-up-domain/confirm-connect-blog';
+import { getBlogType } from 'reducers/form/selectors';
 
 export default connect(
 	( state, ownProps ) => ( {
-		blogType: 'new',
+		blogType: getBlogType( state ),
 		domainName: ownProps.params.domainName
 	} )
 )( ConfirmConnectBlog );

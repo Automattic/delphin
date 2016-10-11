@@ -30,7 +30,8 @@ export default reduxForm(
 	{
 		form: 'findExistingBlog',
 		fields: [ 'url' ],
-		asyncValidate: getAsyncValidateFunction( validate )
+		asyncValidate: getAsyncValidateFunction( validate ),
+		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,

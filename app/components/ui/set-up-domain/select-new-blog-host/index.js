@@ -4,10 +4,10 @@ import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import capitalize from 'lodash/capitalize';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
@@ -27,11 +27,15 @@ class SelectNewBlogHost extends Component {
 	handleSubmit( { wordpressOrOther } ) {
 		const { redirect, domainName } = this.props;
 
-		if ( wordpressOrOther ) {
-			const connectPageSlug = 'connectNewBlogTo' + capitalize( wordpressOrOther ); // 'wordpress' -or- 'other'
+		let nextPageSlug = '';
 
-			redirect( connectPageSlug, { pathParams: { domainName } } );
+		if ( wordpressOrOther === 'wordpress' ) {
+			nextPageSlug = 'connectingNewBlog';
+		} else {
+			nextPageSlug = 'connectNewBlogToOther';
 		}
+
+		redirect( nextPageSlug, { pathParams: { domainName } } );
 	}
 
 	render() {
@@ -43,6 +47,8 @@ class SelectNewBlogHost extends Component {
 
 		return (
 			<SunriseStep>
+				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
+
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( "Let's create a new a blog!" ) }</h1>
 					<h2>

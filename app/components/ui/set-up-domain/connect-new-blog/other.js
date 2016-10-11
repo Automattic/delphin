@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
@@ -38,6 +39,8 @@ class ConnectNewBlogToOther extends Component {
 
 		return (
 			<SunriseStep>
+				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
+
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
 					<h2>

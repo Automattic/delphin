@@ -61,7 +61,7 @@ class ContactInformation extends React.Component {
 			this.setCountryCode( nextProps );
 		}
 
-		if ( this.props.fields.countryCode.value !== nextProps.fields.countryCode.value ) {
+		if ( this.shouldFetchStates( nextProps ) ) {
 			this.props.fetchStates( nextProps.fields.countryCode.value );
 
 			if ( this.props.fields.countryCode.value ) {
@@ -115,6 +115,10 @@ class ContactInformation extends React.Component {
 	canUpdateCountryFromLocation( props = this.props ) {
 		return ! this.isDataLoading( props ) &&
 			( props.location.hasLoadedFromServer || props.location.hasFailedToLoad );
+	}
+
+	shouldFetchStates( nextProps ) {
+		return this.props.fields.countryCode.value !== nextProps.fields.countryCode.value && nextProps.fields.countryCode.value !== '';
 	}
 
 	isDataLoading( props = this.props ) {

@@ -43,7 +43,7 @@ class ConnectExistingBlog extends Component {
 					</h2>
 				</SunriseStep.Header>
 
-				<Form>
+				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
 						<p>
 							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
@@ -51,7 +51,7 @@ class ConnectExistingBlog extends Component {
 							} ) }
 						</p>
 
-						<Button className={ styles.button } onClick={ this.handleSubmit }>
+						<Button className={ styles.button }>
 							{ i18n.translate( 'Yes, Connect Now' ) }
 						</Button>
 					</Form.FieldArea>

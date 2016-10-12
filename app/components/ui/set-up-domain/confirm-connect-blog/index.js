@@ -18,7 +18,19 @@ class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		alert( 'TODO' );
+		const { blogType, domainName } = this.props;
+
+		let destination;
+
+		if ( blogType === 'new' ) {
+			destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+		}
+
+		if ( blogType === 'existing' ) {
+			destination = 'https://wordpress.com/';
+		}
+
+		this.props.logInToWpcom( destination );
 	}
 
 	render() {
@@ -90,7 +102,8 @@ class ConfirmConnectBlog extends Component {
 ConfirmConnectBlog.propTypes = {
 	blogType: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
-	hostName: PropTypes.string
+	hostName: PropTypes.string,
+	logInToWpcom: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( ConfirmConnectBlog ) );

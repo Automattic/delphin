@@ -2,8 +2,8 @@
 @import 'app/styles/breakpoints';
 
 .container {
-	color: $white;
-	fill: $white;
+	color: $gray-dark;
+	fill: $gray-dark;
 
 	svg {
 		margin-left: 5px;
@@ -16,19 +16,10 @@
 }
 
 .current-language {
-	color: $white;
+	color: $gray-dark;
 	cursor: pointer;
 	font-size: 1.4rem;
 	margin-top: 15px;
-}
-
-.is-dark {
-	color: $blue-dark;
-	fill: $blue-dark;
-
-	.current-language {
-		color: $blue-dark;
-	}
 }
 
 .select {

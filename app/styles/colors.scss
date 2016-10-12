@@ -1,15 +1,16 @@
 // Blues
-$blue:                  #26affc;
-$blue-bright:           #26cffc;
+$blue:                  #35a4de;
+$blue-bright:           $blue;
+$blue-medium:           $blue;
 $blue-light:            #f3f6f8;
-$blue-medium:           #00aadc;
 $blue-background:       #374555;
-$blue-dark:             #33404f;
+$blue-dark:             $blue-background;
 
 // Grays
 $gray:                  #87a6bc;
 $gray-medium:           #ced7df;
 $gray-light:            #e3eaef;
+$gray-xlight:           #f3f6f8;
 $gray-dark:             #667c8b;
 
 // Primary Accents

@@ -8,7 +8,7 @@ import styles from './styles.scss';
 
 const LoadingScreen = ( { message } ) => (
 	<div className={ styles.container }>
-		<img src="/images/rocket-launch-dark.svg"/>
+		<img src="https://s0.wordpress.com/i/delphin/rocket-launch-dark.svg"/>
 		<h1 className={ styles.heading }>
 			{ message || i18n.translate( "Let's get started…" ) }
 		</h1>

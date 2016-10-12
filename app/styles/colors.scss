@@ -1,6 +1,6 @@
 // Blues
 $blue:                  #35a4de;
-$blue-bright:           $blue;
+$blue-bright:           saturate( $blue, 50% );
 $blue-medium:           $blue;
 $blue-light:            #f3f6f8;
 $blue-background:       #374555;

@@ -3,7 +3,7 @@
 @import 'app/styles/fonts';
 
 .header {
-	background: $blue-background;
+	background: $gray-xlight;
 	padding: 30px 20px 80px;
 	text-align: center;
 
@@ -13,6 +13,7 @@
 }
 
 .heading {
+	color: $blue-dark;
 	font-family: $heading-font;
 	font-size: 3rem;
 	margin-top: 40px;
@@ -24,6 +25,7 @@
 }
 
 .text {
+	color: $gray;
 	font-size: 2rem;
 	font-weight: 300;
 	line-height: 1.4;

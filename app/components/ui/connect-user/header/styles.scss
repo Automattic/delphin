@@ -3,7 +3,7 @@
 @import 'app/styles/breakpoints';
 
 .container {
-	background-color: $blue-background;
+	background-color: $gray-xlight;
 }
 
 .header {
@@ -18,6 +18,7 @@
 }
 
 .heading {
+	color: $blue-dark;
 	font-family: $heading-font;
 	font-size: 3rem;
 	margin-top: 40px;
@@ -29,7 +30,7 @@
 }
 
 .text {
-	color: $white;
+	color: $gray;
 	font-size: 2rem;
 	font-weight: 300;
 	line-height: 1.4;

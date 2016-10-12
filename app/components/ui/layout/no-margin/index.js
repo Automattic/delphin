@@ -11,13 +11,13 @@ import styles from './styles.scss';
 const LayoutNoMargin = ( { children } ) => {
 	return (
 		<div className={ styles.layout }>
-			<FixedBackground dark/>
+			<FixedBackground light/>
 			<div className={ styles.content }>
 				<Header/>
 				{ children }
 			</div>
 
-			<Footer hasBorder />
+			<Footer hasBorder isDark />
 		</div>
 	);
 };

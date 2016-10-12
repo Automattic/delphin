@@ -3,7 +3,9 @@
 
 %header {
 	align-items: center;
-	background: $blue-dark;
+	background: $white;
+	border-bottom: 1px solid $gray-light;
+	border-top: 4px solid $blue-dark;
 	display: flex;
 	justify-content: space-between;
 }

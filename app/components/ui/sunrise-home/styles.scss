@@ -13,7 +13,7 @@
 }
 
 .whats-your-story {
-	background: url( https://s0.wordpress.com/i/delphin/tell-your-story.svg ) no-repeat bottom center;
+	background: url( /images/tell-your-story-dark.svg ) no-repeat bottom center;
 	background-size: contain;
 	height: 30vmin;
 	margin: 6vmin auto 0;
@@ -27,6 +27,7 @@
 }
 
 .heading {
+	color: $gray-dark;
 	font-family: $heading-font;
 	font-size: 3.4rem;
 	font-weight: 400;
@@ -42,7 +43,7 @@
 }
 
 .secondary-heading {
-	color: $gray-medium;
+	color: $gray;
 	font-size: 1.8rem;
 	font-weight: 300;
 	line-height: 1.4;
@@ -86,7 +87,7 @@
 
 .input {
 	background-color: $white;
-	border: 0;
+	border: 1px solid $gray-medium;
 	border-radius: 3px;
 	box-sizing: border-box;
 	color: $blue-dark;
@@ -97,7 +98,8 @@
 	width: 100%;
 
 	&:focus {
-		box-shadow: none;
+		border-color: $green;
+		box-shadow: inset 0 0 0 2px $green-light;
 		outline: none;
 	}
 }

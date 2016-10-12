@@ -145,7 +145,7 @@ const Search = React.createClass( {
 		return (
 			<DocumentTitle title={ i18n.translate( 'Search' ) }>
 				<div className={ styles.search }>
-					<FixedBackground dark/>
+					<FixedBackground light/>
 					<SearchHeader
 						{ ... { query } }
 						onQueryChange={ this.debouncedFetchResults } />

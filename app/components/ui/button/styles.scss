@@ -23,6 +23,7 @@
 
 	&:hover {
 		background: $green-dark;
+		color: $white;
 	}
 
 	@include breakpoint( '<480px' ) {

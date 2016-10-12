@@ -11,7 +11,7 @@ import styles from './styles.scss';
 const LayoutNoMargin = ( { children } ) => {
 	return (
 		<div className={ styles.layout }>
-			<FixedBackground light/>
+			<FixedBackground dark/>
 			<div className={ styles.content }>
 				<Header/>
 				{ children }

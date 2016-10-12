@@ -11,7 +11,7 @@ import styles from './styles.scss';
 const DefaultLayoutWithHeader = ( { children } ) => {
 	return (
 		<div className={ styles.layout }>
-			<FixedBackground dark/>
+			<FixedBackground light/>
 			<Header/>
 			<div className={ styles.content }>
 				{ children }

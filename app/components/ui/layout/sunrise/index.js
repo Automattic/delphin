@@ -11,7 +11,7 @@ import styles from '../no-margin/styles.scss';
 const Sunrise = ( { children, dark } ) => {
 	return (
 		<div>
-			<FixedBackground dark={ dark }/>
+			<FixedBackground light/>
 
 			<div className={ styles.content }>
 				<Header />

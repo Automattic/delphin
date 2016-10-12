@@ -21,7 +21,8 @@
 	text-align: center;
 
 	h1 {
-		background: url( https://s0.wordpress.com/i/delphin/404-browser.svg ) no-repeat center top;
+		background: url( /images/404-browser-dark.svg ) no-repeat center top;
+		color: $blue-dark;
 		font: 300 3.4rem $heading-font;
 		margin-bottom: 10px;
 		padding-top: 120px;
@@ -32,6 +33,7 @@
 	}
 
 	h2 {
+		color: $gray;
 		font: 300 2rem $body-font;
 
 		@include breakpoint( '<480px' ) {

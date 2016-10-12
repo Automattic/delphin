@@ -27,6 +27,7 @@ import switchLocale from './switch-locale';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
 import { userMiddleware } from './user-middleware';
 import { provideStore, sections } from 'sections';
+import { wpcomLoginMiddleware } from './wpcom-login-middleware';
 
 // Set the public path based on the current environment
 let cdnPrefix = '';
@@ -45,6 +46,7 @@ const middlewares = [
 	analyticsMiddleware,
 	logErrorNoticesMiddleware,
 	wpcomMiddleware,
+	wpcomLoginMiddleware,
 	relatedWordsMiddleware,
 	switchLocaleMiddleware,
 ];

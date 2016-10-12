@@ -11,7 +11,7 @@ import {
 import WpcomLoginForm from './form';
 
 export const wpcomLoginMiddleware = store => next => action => {
-	const { type } = action;
+	const { type, destination } = action;
 
 	switch ( type ) {
 		case WPCOM_LOG_IN:
@@ -25,6 +25,7 @@ export const wpcomLoginMiddleware = store => next => action => {
 					<WpcomLoginForm
 						username={ username }
 						bearerToken={ bearerToken }
+						destination={ destination }
 					/>,
 					document.getElementById( 'wpcom-log-in' )
 				);

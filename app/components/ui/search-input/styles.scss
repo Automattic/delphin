@@ -87,6 +87,7 @@
 		border-color: transparent transparent $white;
 		border-width: 0 7px 8px;
 		margin: 1px 0 0 1px;
+		transition: opacity 0.1s ease-in-out;
 	}
 
 	&.keyword-is-selected {
@@ -97,7 +98,8 @@
 	}
 
 	&.keyword-is-domain {
-		&::after {
+		&::after,
+		&::before {
 			display: none;
 		}
 	}

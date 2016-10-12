@@ -18,7 +18,7 @@ class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { blogType, domainName } = this.props;
+		const { blogType, domainName, hostName } = this.props;
 
 		let destination;
 
@@ -27,7 +27,7 @@ class ConfirmConnectBlog extends Component {
 		}
 
 		if ( blogType === 'existing' ) {
-			destination = 'https://wordpress.com/';
+			destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
 		}
 
 		this.props.logInToWpcom( destination );

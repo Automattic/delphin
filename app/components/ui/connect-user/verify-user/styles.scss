@@ -33,6 +33,8 @@
 	flex-direction: column;
 
 	.button {
+		display: block;
+		flex-shrink: 0;
 		margin-bottom: 30px;
 		width: 100%;
 	}

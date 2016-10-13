@@ -17,7 +17,7 @@
 .search-header {
 	@extend %header;
 
-	height: 83px;
+	height: 86px;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -44,7 +44,7 @@
 	}
 
 	@include breakpoint( '>480px' ) {
-		padding: 20px;
+		padding: 30px;
 
 		img {
 			width: auto;

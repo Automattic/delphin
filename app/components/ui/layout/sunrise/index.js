@@ -8,7 +8,7 @@ import Footer from 'components/ui/footer';
 import Header from 'components/ui/header';
 import styles from '../no-margin/styles.scss';
 
-const Sunrise = ( { children, dark } ) => {
+const Sunrise = ( { children } ) => {
 	return (
 		<div>
 			<FixedBackground light/>
@@ -18,14 +18,13 @@ const Sunrise = ( { children, dark } ) => {
 				{ children }
 			</div>
 
-			<Footer isDark={ dark } />
+			<Footer />
 		</div>
 	);
 };
 
 Sunrise.propTypes = {
 	children: PropTypes.node.isRequired,
-	dark: PropTypes.bool,
 };
 
 export default withStyles( styles )( Sunrise );

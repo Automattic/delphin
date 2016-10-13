@@ -17,7 +17,7 @@ const LayoutNoMargin = ( { children } ) => {
 				{ children }
 			</div>
 
-			<Footer hasBorder isDark />
+			<Footer hasBorder />
 		</div>
 	);
 };

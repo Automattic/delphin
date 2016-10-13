@@ -15,7 +15,7 @@ const HostThumbnail = ( { domainName, slug, name, shortDescription } ) => (
 		<p className={ styles.thumbnailDescription }>{ shortDescription }</p>
 		<Link className={ styles.thumbnailLearnMore } to={ getPath( 'hostInfo', { domainName, slug } ) }>{ i18n.translate( 'Learn More' ) }</Link>
 		<a className={ styles.thumbnailConnect }>
-			<img className={ styles.thumbnailLinkIcon } src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/link.svg" />
+			<img className={ styles.thumbnailLinkIcon } src="/images/link.svg" />
 			{ i18n.translate( 'Connect Now' ) }
 		</a>
 	</li>

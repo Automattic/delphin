@@ -170,19 +170,19 @@ $card-type-width: 32px;
 }
 
 .visa {
-	background-image: url( https://s0.wp.com/i/delphin/cc-visa.svg );
+	background-image: url( /images/credit-cards/cc-visa.svg );
 }
 
 .americanexpress {
-	background-image: url( https://s0.wp.com/i/delphin/cc-amex.svg );
+	background-image: url( /images/credit-cards/cc-amex.svg );
 }
 
 .discover {
-	background-image: url( https://s0.wp.com/i/delphin/cc-discover.svg );
+	background-image: url( /images/credit-cards/cc-discover.svg );
 }
 
 .mastercard {
-	background-image: url( https://s0.wp.com/i/delphin/cc-mastercard.svg );
+	background-image: url( /images/credit-cards/cc-mastercard.svg );
 }
 
 .purchase-button {
@@ -214,7 +214,7 @@ $card-type-width: 32px;
 	width: 100%;
 
 	.icon {
-		background: url( https://s0.wp.com/i/delphin/card-blue.svg ) no-repeat;
+		background: url( /images/card-blue.svg ) no-repeat;
 		height: 39px;
 		margin: 0 auto;
 		position: relative;

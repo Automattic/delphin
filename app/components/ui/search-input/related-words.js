@@ -76,7 +76,7 @@ class RelatedWords extends Component {
 
 							{ isGoogleTranslateAttributionVisible && (
 								<li className={ styles.googleTranslateAttribution }>
-									<img src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/powered-by-google-translate.png" height={ 18 } width={ 175 } alt="Google Translate" />
+									<img src="/images/powered-by-google-translate.png" height={ 18 } width={ 175 } alt="Google Translate" />
 								</li>
 							) }
 						</ul>

@@ -1,6 +1,19 @@
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - yarn run preinstall
+  override:
+    - yarn
+
 deployment:
   production:
-    branch: master
+    branch:
+      master
     commands:
       - npm run prod:static
       - tar cvzf $CIRCLE_ARTIFACTS/public.tar.gz -C public .
+
+test:
+  override:
+    - npm test
+    - npm run lint

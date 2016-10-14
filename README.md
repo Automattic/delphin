@@ -6,9 +6,9 @@ It’s built with JavaScript – a very light [Node.js](https://nodejs.org) serv
 
 ## Getting started
 
-1. Make sure you have `git`, `node`, and `npm` installed
+1. Make sure you have [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [`node`](https://nodejs.org/en/download/package-manager/), [`npm`](https://docs.npmjs.com/getting-started/installing-node), and [`yarn`](https://yarnpkg.com/en/docs/install) installed
 2. Clone this repository locally with `git@github.com:Automattic/delphin.git`
-3. Execute `npm start` to install packages and start the server
+3. Execute `yarn start` to install packages and start the server
 4. Add `127.0.0.1 delphin.localhost` to your `hosts` file
 5. Open http://delphin.localhost:1337 in your browser
 

@@ -1,6 +1,12 @@
 deployment:
   production:
-    branch: master
+    branch:
+      master
     commands:
       - npm run prod:static
       - tar cvzf $CIRCLE_ARTIFACTS/public.tar.gz -C public .
+
+test:
+  override:
+    - npm test
+    - npm run lint

@@ -29,16 +29,6 @@ import { userMiddleware } from './user-middleware';
 import { provideStore, sections } from 'sections';
 import { wpcomLoginMiddleware } from './wpcom-login-middleware';
 
-// Set the public path based on the current environment
-let cdnPrefix = '';
-if ( window.location.host.indexOf( 'getdotblogstaging' ) > -1 ) {
-	cdnPrefix = config( 'staging_cdn_prefix' );
-} else if ( window.location.host.indexOf( 'get.blog' ) > -1 ) {
-	cdnPrefix = config( 'production_cdn_prefix' );
-}
-
-__webpack_public_path__ = cdnPrefix + __webpack_public_path__; // eslint-disable-line
-
 const middlewares = [
 	routerMiddleware( browserHistory ),
 	thunk,

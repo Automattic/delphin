@@ -1,3 +1,10 @@
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - yarn run preinstall
+  override:
+    - yarn
+
 deployment:
   production:
     branch:

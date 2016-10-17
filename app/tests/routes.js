@@ -23,7 +23,6 @@ jest.mock( 'components/containers/verify-user-with-query-container-factory', () 
 jest.mock( 'components/ui/document-title', () => {} );
 jest.mock( 'components/ui/header', () => {} );
 jest.mock( 'components/ui/layout', () => {} );
-jest.mock( 'components/ui/layout/default-with-header', () => {} );
 jest.mock( 'components/ui/layout/no-margin', () => {} );
 jest.mock( 'components/ui/layout/sunrise/flow', () => {} );
 jest.mock( 'components/ui/layout/sunrise/success', () => {} );

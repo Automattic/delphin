@@ -3,10 +3,10 @@ import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
+import { DefaultDarkLayout, DefaultLightLayout } from 'components/ui/layout/default';
 import Layout from 'components/ui/layout';
 import LearnMoreContainer from 'components/containers/learn-more';
 import LoginContainer from 'components/containers/connect-user/login';
-import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
@@ -21,7 +21,7 @@ import { getComponent } from 'sections';
 
 let publicRoutes = [
 	{
-		component: NoMarginLayout,
+		component: DefaultDarkLayout,
 		indexRoute: {
 			component: SunriseHomeContainer
 		},
@@ -29,12 +29,6 @@ let publicRoutes = [
 		slug: 'home',
 		static: true,
 		childRoutes: [
-			{
-				path: 'learn-more',
-				slug: 'learnMore',
-				static: true,
-				component: LearnMoreContainer
-			},
 			{
 				path: 'my-domains',
 				slug: 'myDomains',
@@ -118,6 +112,17 @@ let publicRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
+			}
+		]
+	},
+	{
+		component: DefaultLightLayout,
+		childRoutes: [
+			{
+				path: 'learn-more',
+				slug: 'learnMore',
+				static: true,
+				component: LearnMoreContainer
 			}
 		]
 	},

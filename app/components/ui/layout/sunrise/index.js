@@ -5,7 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import FixedBackground from 'components/ui/fixed-background';
 import Header from 'components/ui/header';
-import styles from '../no-margin/styles.scss';
+import styles from '../default/styles.scss';
 
 const Sunrise = ( { children } ) => {
 	return (

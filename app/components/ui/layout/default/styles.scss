@@ -1,7 +1,11 @@
 @import 'app/styles/layouts';
 
-.layout {
+.dark {
 	@include layout-dark;
+}
+
+.light {
+	@include layout-light;
 }
 
 .content {

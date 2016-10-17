@@ -3,9 +3,9 @@
 $step-inner-dot-size: 12px;
 $step-dot-size: 24px;
 $step-line-size: 6px;
-$inactive-step-color: $gray-dark;
+$inactive-step-color: $gray-medium;
 $active-step-color: $green;
-$inner-dot-color: $blue-background;
+$inner-dot-color: $gray-xlight;
 
 .progressbar {
 	display: flex;
@@ -104,7 +104,7 @@ $inner-dot-color: $blue-background;
 }
 
 .progressbar-step-caption {
-	color: lighten( $inactive-step-color, 10% );
+	color: darken( $inactive-step-color, 10% );
 	font-size: 1.1rem;
 	text-align: center;
 	text-transform: uppercase;

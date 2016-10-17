@@ -6,7 +6,7 @@
 	border: 0;
 	display: flex;
 	justify-content: space-between;
-	margin-left: 15px;
+	margin-left: 10px;
 	padding: 10px;
 	position: relative;
 	width: 100%;
@@ -14,7 +14,7 @@
 	input {
 		background: transparent;
 		border: 0;
-		color: $white;
+		color: $blue-dark;
 		display: inline-block;
 		font-size: 18px;
 		margin-top: 3px;
@@ -66,8 +66,9 @@
 		margin-bottom: 5px;
 	}
 
-	&::after {
-		border-color: transparent transparent $white;
+	&::after,
+	&::before {
+		border-color: transparent transparent $gray-light;
 		border-style: solid;
 		border-width: 0 8px 9px;
 		content: '';
@@ -82,14 +83,23 @@
 		z-index: 2;
 	}
 
+	&::after {
+		border-color: transparent transparent $white;
+		border-width: 0 7px 8px;
+		margin: 1px 0 0 1px;
+		transition: opacity 0.1s ease-in-out;
+	}
+
 	&.keyword-is-selected {
-		&::after {
+		&::after,
+		&::before {
 			opacity: 1;
 		}
 	}
 
 	&.keyword-is-domain {
-		&::after {
+		&::after,
+		&::before {
 			display: none;
 		}
 	}
@@ -137,9 +147,9 @@
 
 .related-words {
 	background: $white;
+	border: 1px solid $gray-light;
 	border-radius: 3px;
-	border-top: 1px solid $gray-light;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 2px 0 rgba( $gray-dark, 0.2 );
 	left: 0;
 	max-width: 400px;
 	padding: 15px 10px;
@@ -207,8 +217,8 @@
 	user-select: none;
 
 	&:hover {
-		border-color: $gray-dark;
-		color: $green;
+		border-color: $gray;
+		color: $blue-dark;
 	}
 
 	@include breakpoint( '>480px' ) {

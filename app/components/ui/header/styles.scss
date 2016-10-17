@@ -3,7 +3,9 @@
 
 %header {
 	align-items: center;
-	background: $blue-dark;
+	background: $white;
+	border-bottom: 1px solid $gray-light;
+	border-top: 4px solid $blue-dark;
 	display: flex;
 	justify-content: space-between;
 }
@@ -15,7 +17,7 @@
 .search-header {
 	@extend %header;
 
-	height: 83px;
+	height: 86px;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -42,7 +44,7 @@
 	}
 
 	@include breakpoint( '>480px' ) {
-		padding: 20px;
+		padding: 30px;
 
 		img {
 			width: auto;

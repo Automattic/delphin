@@ -28,6 +28,7 @@
 }
 
 .back-notice {
+	color: $gray;
 	font-size: 1.3rem;
 	margin: 25px 0 20px;
 	text-align: center;
@@ -46,11 +47,12 @@
 }
 
 .fee-notice {
-	background: $gray-light;
+	background: $gray-xlight;
 	margin: 0 -30px -30px;
 	padding: 30px;
 
 	p {
+		color: $gray-dark;
 		font-weight: 400;
 		margin: 0 0 15px;
 

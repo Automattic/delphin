@@ -3,7 +3,6 @@ import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
-import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import Layout from 'components/ui/layout';
 import LearnMoreContainer from 'components/containers/learn-more';
 import LoginContainer from 'components/containers/connect-user/login';
@@ -107,12 +106,7 @@ let publicRoutes = [
 				slug: 'hostInfo',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
-			}
-		]
-	},
-	{
-		component: DefaultLayoutWithHeader,
-		childRoutes: [
+			},
 			{
 				path: 'sign-in-with-email',
 				slug: 'signInWithEmail',

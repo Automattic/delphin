@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import FieldArea from 'components/ui/form/field-area';
 import SubmitArea from 'components/ui/form/submit-area';
+import Footer from 'components/ui/form/footer';
 import { withErrorFocuser } from 'components/ui/form/error-focuser';
 
 const Form = withErrorFocuser( withStyles( styles )( ( { children, onSubmit, className, autoComplete } ) => (
@@ -17,6 +18,7 @@ const Form = withErrorFocuser( withStyles( styles )( ( { children, onSubmit, cla
 
 Form.FieldArea = FieldArea;
 Form.SubmitArea = SubmitArea;
+Form.Footer = Footer;
 
 Form.propTypes = {
 	children: PropTypes.oneOfType( [

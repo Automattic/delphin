@@ -82,6 +82,12 @@ class FindExistingBlog extends Component {
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
+
+					<Form.Footer>
+						{ i18n.translate( 'We\'ll scan your blog and find the right settings to connect it to %(domainName)s.', {
+							args: { domainName }
+						} ) }
+					</Form.Footer>
 				</Form>
 
 				<SunriseStep.Footer>

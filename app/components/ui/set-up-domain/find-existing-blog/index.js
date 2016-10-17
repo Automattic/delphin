@@ -86,15 +86,17 @@ class FindExistingBlog extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Link to={ getPath( 'selectBlogType', { domainName } ) }>
-							{ i18n.translate( 'Back' ) }
-						</Link>
-
 						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
 				</Form>
+
+				<SunriseStep.Footer>
+					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
+						{ i18n.translate( 'Back' ) }
+					</Link>
+				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

@@ -55,13 +55,13 @@ class ConnectExistingBlog extends Component {
 							{ i18n.translate( 'Yes, Connect Now' ) }
 						</Button>
 					</Form.FieldArea>
-
-					<Form.SubmitArea>
-						<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
-							{ i18n.translate( 'Back' ) }
-						</Link>
-					</Form.SubmitArea>
 				</Form>
+
+				<SunriseStep.Footer>
+					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
+						{ i18n.translate( 'Back' ) }
+					</Link>
+				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

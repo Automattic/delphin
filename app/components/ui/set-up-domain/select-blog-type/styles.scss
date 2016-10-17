@@ -1,19 +1,19 @@
 @import 'app/styles/colors';
 
-.label {
-	border: solid 1px $gray-light;
-	border-radius: 3px;
-	cursor: pointer;
-	font-weight: bold;
-	margin: 10px 0;
-	padding: 10px;
+.setup-label {
+	font-size: 1.8rem;
+	font-weight: 600;
+}
 
-	&:hover {
-		background: $gray-light;
-	}
+.label {
+	cursor: pointer;
+	display: flex;
+	font-size: 1.6rem;
+	margin: 15px 0;
+	transition: background 0.15s;
 }
 
 .radio {
 	margin-right: 10px;
-	vertical-align: bottom;
+	margin-top: 0;
 }

@@ -6,7 +6,6 @@ import i18n from 'i18n-calypso';
 import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
 import Layout from 'components/ui/layout';
 import LearnMoreContainer from 'components/containers/learn-more';
-import LightLayoutWithHeader from 'components/ui/layout/light-with-header';
 import LoginContainer from 'components/containers/connect-user/login';
 import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
@@ -31,6 +30,12 @@ let publicRoutes = [
 		slug: 'home',
 		static: true,
 		childRoutes: [
+			{
+				path: 'learn-more',
+				slug: 'learnMore',
+				static: true,
+				component: LearnMoreContainer
+			},
 			{
 				path: 'my-domains',
 				slug: 'myDomains',
@@ -102,7 +107,7 @@ let publicRoutes = [
 				slug: 'hostInfo',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
-			},
+			}
 		]
 	},
 	{
@@ -119,17 +124,6 @@ let publicRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
-			}
-		]
-	},
-	{
-		component: LightLayoutWithHeader,
-		childRoutes: [
-			{
-				path: 'learn-more',
-				slug: 'learnMore',
-				static: true,
-				component: LearnMoreContainer
 			}
 		]
 	},

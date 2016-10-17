@@ -10,7 +10,6 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import { preventWidows } from 'lib/formatters';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
@@ -34,13 +33,6 @@ class ConnectExistingBlog extends Component {
 					<h1>{ i18n.translate( 'Good news, we found %(hostName)s!', {
 						args: { hostName }
 					} ) }</h1>
-
-					<h2>
-						{ preventWidows( i18n.translate( "It looks like it's a WordPress.com site. We can connect {{strong}}%(domainName)s{{/strong}} to WordPress.com for you.", {
-							args: { domainName },
-							components: { strong: <strong /> }
-						} ), 2 ) }
-					</h2>
 				</SunriseStep.Header>
 
 				<Form onSubmit={ this.handleSubmit }>

@@ -11,7 +11,6 @@ import { extractHostName } from 'lib/domains';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
-import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
@@ -63,18 +62,11 @@ class FindExistingBlog extends Component {
 
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Connect to your blog' ) }</h1>
-
-					<h2>
-						{ preventWidows( i18n.translate( "Let us know the address to your current blog and we'll help you connect {{strong}}%(domainName)s{{/strong}} to it.", {
-							args: { domainName },
-							components: { strong: <strong /> }
-						} ), 2 ) }
-					</h2>
 				</SunriseStep.Header>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<label>{ i18n.translate( 'Site Address:' ) }</label>
+						<label>{ i18n.translate( 'Enter your blog\'s address:' ) }</label>
 
 						<Input
 							autoFocus

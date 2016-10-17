@@ -10,7 +10,6 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import { preventWidows } from 'lib/formatters';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -47,19 +46,16 @@ class SelectBlogType extends Component {
 
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
-
-					<h2>
-						{ preventWidows( i18n.translate( 'Just answer a few simple questions about your plans for {{strong}}%(domainName)s{{/strong}}, ' +
-							"then we'll take care of the heavy lifting for you!", {
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						), 2 ) }
-					</h2>
 				</SunriseStep.Header>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
+						<strong className={ styles.setupLabel }>
+							{ i18n.translate( 'What do you want to do with %(domainName)s?', {
+								args: { domainName }
+							} ) }
+						</strong>
+
 						<label className={ styles.label } htmlFor="existing">
 							<Radio
 								className={ styles.radio }
@@ -68,7 +64,7 @@ class SelectBlogType extends Component {
 								value="existing"
 								checked={ newOrExisting.value === 'existing' }
 							/>
-							{ i18n.translate( "A blog I've already created" ) }
+							{ i18n.translate( 'Use it for a blog I already started' ) }
 						</label>
 
 						<label className={ styles.label } htmlFor="new">
@@ -79,7 +75,7 @@ class SelectBlogType extends Component {
 								value="new"
 								checked={ newOrExisting.value === 'new' }
 							/>
-							{ i18n.translate( 'A blog I am going to create' ) }
+							{ i18n.translate( 'Start building a new blog now' ) }
 						</label>
 					</Form.FieldArea>
 

@@ -84,15 +84,17 @@ class SelectBlogType extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Link to={ getPath( 'myDomains' ) }>
-							{ i18n.translate( 'Back' ) }
-						</Link>
-
 						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
 				</Form>
+
+				<SunriseStep.Footer>
+					<Link to={ getPath( 'myDomains' ) }>
+						{ i18n.translate( 'I\'ll set up my domain later' ) }
+					</Link>
+				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

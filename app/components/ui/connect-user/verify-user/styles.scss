@@ -30,9 +30,8 @@
 }
 
 .submit-area {
-	flex-direction: column;
-
 	.button {
+		display: block;
 		margin-bottom: 30px;
 		width: 100%;
 	}
@@ -47,14 +46,17 @@
 .legend {
 	border-top: 1px solid $gray-light;
 	color: $gray;
+	display: inline-block;
 	font-size: 1.4rem;
 	font-style: normal;
+	margin: 0 auto;
 	padding-top: 20px;
 	text-align: center;
 
 	a {
 		color: inherit;
 		cursor: pointer;
+		display: inline;
 		text-decoration: underline;
 
 		&:hover {

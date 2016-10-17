@@ -99,7 +99,7 @@
 
 		svg {
 			box-sizing: border-box;
-			fill: $blue-medium;
+			fill: $blue;
 			flex-shrink: 0;
 			height: 68px;
 			padding: 10px;
@@ -142,14 +142,15 @@
 
 .not-connected {
 	align-items: center;
-	background: #f3f6f8;
+	background: $white;
+	border: 1px solid $gray-light;
 	cursor: auto;
 	display: flex;
 	justify-content: center;
 	text-align: center;
 
 	h3 {
-		color: #87a6bc;
+		color: $gray;
 		margin: -10px 0 10px;
 		position: static;
 	}

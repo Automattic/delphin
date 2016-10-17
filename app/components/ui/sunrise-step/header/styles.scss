@@ -3,7 +3,7 @@
 @import 'app/styles/breakpoints';
 
 .container {
-	background-color: $blue-background;
+	background-color: $gray-xlight;
 }
 
 .header {
@@ -17,7 +17,7 @@
 	}
 
 	h1 {
-		color: $white;
+		color: $blue-dark;
 		font-family: $heading-font;
 		font-size: 3rem;
 		font-weight: 400;
@@ -30,6 +30,7 @@
 	}
 
 	h2 {
+		color: $gray-dark;
 		font-family: $body-font;
 		font-size: 2rem;
 		font-weight: 300;

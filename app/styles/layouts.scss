@@ -1,8 +1,8 @@
 @import './colors';
 
 @mixin layout-dark {
-	background: $blue-background;
-	color: $white;
+	background: $gray-xlight;
+	color: $blue-dark;
 }
 
 @mixin layout-light {

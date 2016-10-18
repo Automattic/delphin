@@ -1,14 +1,15 @@
-@import 'app/styles/layouts';
+@import 'app/styles/colors';
 
 .dark {
-	@include layout-dark;
+	background: $gray-xlight;
 }
 
 .light {
-	@include layout-light;
+	background: $white;
 }
 
 .content {
+	color: $blue-dark;
 	margin: 0 auto;
 
 	strong {

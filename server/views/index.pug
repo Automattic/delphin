@@ -16,7 +16,7 @@ html(dir=isRtl ? 'rtl' : 'ltr' )
 				#{css}
 		if styles
 			link(rel="stylesheet", href=styles)
-	body
+	body(class=bodyClassName)
 		#content!= content
 		#wpcom-log-in
 		if isEnabled( 'sentry' )

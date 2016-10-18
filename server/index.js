@@ -1,4 +1,5 @@
 // External dependencies
+import BodyClassName from 'react-body-classname';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import DocumentTitle from 'react-document-title';
 import express from 'express';
@@ -60,6 +61,7 @@ function renderPage( props, localeData, isRtl = false ) {
 	);
 
 	const title = DocumentTitle.rewind();
+	const bodyClassName = BodyClassName.rewind();
 
 	const bundlePath = '/scripts/';
 	const assets = JSON.parse( fs.readFileSync( path.join( 'public', bundlePath, 'assets.json' ) ) );
@@ -83,6 +85,7 @@ function renderPage( props, localeData, isRtl = false ) {
 		isRtl,
 		localeData,
 		title,
+		bodyClassName,
 		ogDescription: i18n.translate( 'Every .blog is a story. Tell yours.' ),
 		ogTitle: i18n.translate( 'Millions of short, easy to remember domains will be available when the .blog domain goes live November 21. Apply now to secure the perfect domain for your blog.' ),
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),

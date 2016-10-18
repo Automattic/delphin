@@ -3,19 +3,15 @@ import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
-import DefaultLayoutWithHeader from 'components/ui/layout/default-with-header';
+import { DefaultDarkLayout, DefaultLightLayout } from 'components/ui/layout/default';
 import Layout from 'components/ui/layout';
 import LearnMoreContainer from 'components/containers/learn-more';
-import LightLayoutWithHeader from 'components/ui/layout/light-with-header';
 import LoginContainer from 'components/containers/connect-user/login';
-import NoMarginLayout from 'components/ui/layout/no-margin';
 import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
-import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
-import SunriseSuccessLayout from 'components/ui/layout/sunrise/success';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
@@ -23,7 +19,7 @@ import { getComponent } from 'sections';
 
 let publicRoutes = [
 	{
-		component: NoMarginLayout,
+		component: DefaultDarkLayout,
 		indexRoute: {
 			component: SunriseHomeContainer
 		},
@@ -36,6 +32,12 @@ let publicRoutes = [
 				slug: 'myDomains',
 				static: false,
 				getComponent: getComponent( 'myDomains', 'myDomains' )
+			},
+			{
+				path: 'search',
+				slug: 'search',
+				static: true,
+				component: SearchContainer
 			},
 			{
 				path: 'set-up-domain/:domainName',
@@ -103,11 +105,6 @@ let publicRoutes = [
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
 			},
-		]
-	},
-	{
-		component: DefaultLayoutWithHeader,
-		childRoutes: [
 			{
 				path: 'sign-in-with-email',
 				slug: 'signInWithEmail',
@@ -123,19 +120,14 @@ let publicRoutes = [
 		]
 	},
 	{
-		component: LightLayoutWithHeader,
+		component: DefaultLightLayout,
 		childRoutes: [
 			{
 				path: 'learn-more',
 				slug: 'learnMore',
 				static: true,
 				component: LearnMoreContainer
-			}
-		]
-	},
-	{
-		component: SunriseFlowLayout,
-		childRoutes: [
+			},
 			{
 				path: 'contact-information',
 				slug: 'contactInformation',
@@ -177,12 +169,7 @@ let publicRoutes = [
 				slug: 'checkoutReview',
 				static: false,
 				getComponent: getComponent( 'checkout', 'checkoutReview' )
-			}
-		]
-	},
-	{
-		component: SunriseSuccessLayout,
-		childRoutes: [
+			},
 			{
 				path: 'success',
 				slug: 'success',
@@ -190,12 +177,6 @@ let publicRoutes = [
 				getComponent: getComponent( 'checkout', 'success' )
 			}
 		]
-	},
-	{
-		path: 'search',
-		slug: 'search',
-		static: true,
-		component: SearchContainer
 	}
 ];
 
@@ -213,10 +194,15 @@ export const routes = {
 		// fragment like `/:locale` so that routes like `/foobar/about` still 404.
 		...localizedRoutes,
 		{
-			path: '*',
-			component: NotFound,
-			static: true,
-			slug: 'notFound'
+			component: DefaultDarkLayout,
+			childRoutes: [
+				{
+					path: '*',
+					component: NotFound,
+					static: true,
+					slug: 'notFound'
+				}
+			]
 		}
 	]
 };

@@ -34,6 +34,12 @@ let publicRoutes = [
 				getComponent: getComponent( 'myDomains', 'myDomains' )
 			},
 			{
+				path: 'search',
+				slug: 'search',
+				static: true,
+				component: SearchContainer
+			},
+			{
 				path: 'set-up-domain/:domainName',
 				slug: 'selectBlogType',
 				static: false,
@@ -171,12 +177,6 @@ let publicRoutes = [
 				getComponent: getComponent( 'checkout', 'success' )
 			}
 		]
-	},
-	{
-		path: 'search',
-		slug: 'search',
-		static: true,
-		component: SearchContainer
 	}
 ];
 

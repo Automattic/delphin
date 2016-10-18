@@ -50,11 +50,11 @@ class SelectBlogType extends Component {
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<strong className={ styles.setupLabel }>
+						<p>
 							{ i18n.translate( 'What do you want to do with %(domainName)s?', {
 								args: { domainName }
 							} ) }
-						</strong>
+						</p>
 
 						<label className={ styles.label } htmlFor="existing">
 							<Radio
@@ -84,6 +84,12 @@ class SelectBlogType extends Component {
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
+
+					<Form.Footer>
+						{ i18n.translate( 'If you already have a blog and you know its current address, enter it in the next step to connect it to %(domainName)s.', {
+							args: { domainName }
+						} ) }
+					</Form.Footer>
 				</Form>
 
 				<SunriseStep.Footer>

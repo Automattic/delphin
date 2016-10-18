@@ -194,10 +194,15 @@ export const routes = {
 		// fragment like `/:locale` so that routes like `/foobar/about` still 404.
 		...localizedRoutes,
 		{
-			path: '*',
-			component: NotFound,
-			static: true,
-			slug: 'notFound'
+			component: DefaultDarkLayout,
+			childRoutes: [
+				{
+					path: '*',
+					component: NotFound,
+					static: true,
+					slug: 'notFound'
+				}
+			]
 		}
 	]
 };

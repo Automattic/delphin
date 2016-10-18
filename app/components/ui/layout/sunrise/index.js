@@ -7,7 +7,7 @@ import FixedBackground from 'components/ui/fixed-background';
 import Header from 'components/ui/header';
 import styles from '../default/styles.scss';
 
-const Sunrise = ( { children } ) => {
+const SunriseLayout = ( { children } ) => {
 	return (
 		<div>
 			<FixedBackground light />
@@ -20,8 +20,8 @@ const Sunrise = ( { children } ) => {
 	);
 };
 
-Sunrise.propTypes = {
+SunriseLayout.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-export default withStyles( styles )( Sunrise );
+export default withStyles( styles )( SunriseLayout );

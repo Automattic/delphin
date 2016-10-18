@@ -12,8 +12,7 @@ import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
-import SunriseFlowLayout from 'components/ui/layout/sunrise/flow';
-import SunriseSuccessLayout from 'components/ui/layout/sunrise/success';
+import SunriseLayout from 'components/ui/layout/sunrise';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
@@ -127,7 +126,7 @@ let publicRoutes = [
 		]
 	},
 	{
-		component: SunriseFlowLayout,
+		component: SunriseLayout,
 		childRoutes: [
 			{
 				path: 'contact-information',
@@ -170,12 +169,7 @@ let publicRoutes = [
 				slug: 'checkoutReview',
 				static: false,
 				getComponent: getComponent( 'checkout', 'checkoutReview' )
-			}
-		]
-	},
-	{
-		component: SunriseSuccessLayout,
-		childRoutes: [
+			},
 			{
 				path: 'success',
 				slug: 'success',

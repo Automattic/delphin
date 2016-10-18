@@ -11,9 +11,9 @@ import styles from './styles.scss';
 const Layout = ( { children } ) => {
 	return (
 		<div className={ styles.layout }>
-			<PulsingDot />
-
 			{ children }
+
+			<PulsingDot />
 
 			<NoticesContainer />
 

@@ -9,11 +9,6 @@
 
 .content {
 	margin: 0 auto;
-	min-height: 83vh;
-
-	@include breakpoint( '>480px' ) {
-		min-height: 92vh;
-	}
 }
 
 .four-oh-four {

@@ -26,13 +26,13 @@
 		border-color: $gray-medium;
 	}
 
-	&[for='wordpress'] {
+	&[for=wordpress] {
 		.label-host {
 			background-image: url( /images/hosts/wordpress-blue.svg );
 		}
 	}
 
-	&[for='pressable'] {
+	&[for=pressable] {
 		.label-host {
 			background-image: url( /images/hosts/pressable-color.svg );
 		}

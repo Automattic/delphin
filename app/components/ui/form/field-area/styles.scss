@@ -26,7 +26,8 @@
 	}
 
 	input:not([type=radio]),
-	select {
+	select,
+	textarea {
 		appearance: none;
 		border: 1px solid $gray-medium;
 		border-radius: 0;

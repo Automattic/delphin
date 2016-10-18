@@ -17,7 +17,7 @@ export const fetchMyDomains = () => ( {
 	method: 'get',
 	params: {
 		apiNamespace: 'wpcom/v2',
-		path: '/delphin/purchases'
+		path: '/delphin/domains'
 	},
 	loading: MY_DOMAINS_FETCH,
 	success: results => dispatch => dispatch( {

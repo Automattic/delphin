@@ -12,7 +12,6 @@ import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
-import SunriseLayout from 'components/ui/layout/sunrise';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
@@ -122,12 +121,7 @@ let publicRoutes = [
 				slug: 'learnMore',
 				static: true,
 				component: LearnMoreContainer
-			}
-		]
-	},
-	{
-		component: SunriseLayout,
-		childRoutes: [
+			},
 			{
 				path: 'contact-information',
 				slug: 'contactInformation',

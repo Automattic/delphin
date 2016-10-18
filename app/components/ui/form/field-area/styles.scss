@@ -21,7 +21,7 @@
 	label {
 		color: $gray-dark;
 		display: block;
-		font-size: 1.4rem;
+		font-size: 1.6rem;
 		margin-bottom: 5px;
 	}
 
@@ -64,7 +64,12 @@
 		padding-bottom: 11px;
 	}
 
-	p:not(:first-child) {
-		margin-top: 15px;
+	p {
+		font-size: 1.8rem;
+		line-height: 1.3;
+
+		&:not(:first-child) {
+			margin-top: 20px;
+		}
 	}
 }

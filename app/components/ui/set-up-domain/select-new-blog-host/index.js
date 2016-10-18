@@ -63,6 +63,13 @@ class SelectNewBlogHost extends Component {
 				</SunriseStep.Header>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
+						<p>
+							{ i18n.translate( 'Where would you like to create your new blog?' ) }
+						</p>
+
+						<strong className={ styles.preLabel }>
+							{ i18n.translate( 'I want simple and quick:' ) }
+						</strong>
 						<label className={ styles.label } htmlFor="wordpress">
 							<Radio
 								className={ styles.radio }
@@ -71,7 +78,9 @@ class SelectNewBlogHost extends Component {
 								value="wordpress"
 								checked={ wordpressOrOther.value === 'wordpress' }
 							/>
-							{ i18n.translate( 'WordPress.com' ) }
+							<h3 className={ styles.labelHost }>
+								{ i18n.translate( 'WordPress.com' ) }
+							</h3>
 							<p className={ styles.labelDescription }>
 								{
 									i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
@@ -80,19 +89,26 @@ class SelectNewBlogHost extends Component {
 								}
 							</p>
 						</label>
-						<label className={ styles.label } htmlFor="other">
+
+						<strong className={ styles.preLabel }>
+							{ i18n.translate( 'I want more control and power:' ) }
+						</strong>
+						<label className={ styles.label } htmlFor="pressable">
 							<Radio
 								className={ styles.radio }
 								{ ...wordpressOrOther }
-								id="other"
-								value="other"
-								checked={ wordpressOrOther.value === 'other' }
+								id="pressable"
+								value="pressable"
+								checked={ wordpressOrOther.value === 'pressable' }
 							/>
-							{ i18n.translate( 'Somewhere else' ) }
+							<h3 className={ styles.labelHost }>
+								{ i18n.translate( 'Pressable' ) }
+							</h3>
 							<p className={ styles.labelDescription }>
 								{
-									i18n.translate( "We're adding more options soon, but in the meantime" +
-										' our Happiness Engineers can help you. ' )
+									i18n.translate( 'Create a website or easily build a blog.' +
+										' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+										'Upload your own themes and plugins.' )
 								}
 							</p>
 						</label>
@@ -102,6 +118,14 @@ class SelectNewBlogHost extends Component {
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
+					<Form.Footer>
+						<h3>{ i18n.translate( 'Want a different blogging platform?' ) }</h3>
+						<p>
+							{ i18n.translate( 'We\'re adding more options soon, but in the meantime our Happiness Engineers can help you {{link}}create a new blog somewhere else{{/link}}.', {
+								components: { link: <a href="#" /> }
+							} ) }
+						</p>
+					</Form.Footer>
 				</Form>
 
 				<SunriseStep.Footer>

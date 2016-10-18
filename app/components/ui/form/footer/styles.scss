@@ -7,6 +7,11 @@
 	line-height: 1.4;
 	padding: 20px 30px;
 
+	h3 {
+		color: $gray-dark;
+		font-weight: 600;
+	}
+
 	@include breakpoint( '<480px' ) {
 		background: 0;
 		border-top: 1px solid $gray-light;

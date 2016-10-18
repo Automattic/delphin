@@ -29,6 +29,11 @@ export default connect(
 
 		// TODO: remove duplicate in search-form.js
 		redirectToSearch( query, numberOfResultsToDisplay, sort ) {
+			if ( ! query ) {
+				dispatch( redirect( 'search' ) );
+				return;
+			}
+
 			if ( query !== ownProps.location.query.q || config( 'initial_number_of_search_results' ) === numberOfResultsToDisplay ) {
 				// reset the result count when the query changes and hide it from the url if it is the default
 				numberOfResultsToDisplay = undefined;

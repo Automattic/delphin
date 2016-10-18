@@ -41,12 +41,8 @@ const Search = React.createClass( {
 		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
 
 		const trimmedQuery = this.props.query.trim();
-		if ( ! trimmedQuery ) {
-			return;
-		}
 
-		if ( this.props.query !== trimmedQuery ) {
-			this.props.redirectToSearch( trimmedQuery, this.props.numberOfResultsToDisplay, this.props.sort );
+		if ( ! trimmedQuery ) {
 			return;
 		}
 

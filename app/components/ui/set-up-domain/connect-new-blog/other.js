@@ -44,10 +44,7 @@ class ConnectNewBlogToOther extends Component {
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
 					<h2>
-						{ preventWidows( i18n.translate( 'Currently we are only able to automatically connect your blog ' +
-							"to WordPress.com (we're working on it though!)." +
-							'No worries, our Happiness Engineers will assist you in ' +
-							'connecting {{strong}}%(domainName)s{{/strong}} to your new site.',
+						{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
 							{
 								args: { domainName },
 								components: { strong: <strong /> }
@@ -58,7 +55,7 @@ class ConnectNewBlogToOther extends Component {
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<label className={ styles.label } htmlFor="providerText">
-							{ i18n.translate( 'Let us know where you would like to create your site.' ) }
+							{ i18n.translate( 'Let us know any additional information about your request we might need to know.' ) }
 						</label>
 						<textarea
 							id="providerText"
@@ -67,14 +64,22 @@ class ConnectNewBlogToOther extends Component {
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Link to={ getPath( 'selectNewBlogHost', { domainName } ) }>
-							{ i18n.translate( 'Back' ) }
-						</Link>
 						<Button disabled={ ! providerText.value }>
-							{ i18n.translate( 'Submit Request' ) }
+							{ i18n.translate( 'Submit my request' ) }
 						</Button>
 					</Form.SubmitArea>
+					<Form.Footer>
+						<p>
+							{ i18n.translate( 'Once you submit your request our Happiness Engineers will get started connecting your blog. We will contact you once your request has been completed or if we have further questions.' ) }
+						</p>
+					</Form.Footer>
 				</Form>
+
+				<SunriseStep.Footer>
+					<Link to={ getPath( 'selectNewBlogHost', { domainName } ) }>
+						{ i18n.translate( 'Back' ) }
+					</Link>
+				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

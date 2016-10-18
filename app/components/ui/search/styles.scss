@@ -3,7 +3,7 @@
 @import 'app/styles/breakpoints';
 
 .search {
-	margin-bottom: 60px;
+	margin-bottom: 30px;
 }
 
 .suggestions {
@@ -140,17 +140,14 @@
 	color: $gray;
 	cursor: pointer;
 	font-size: 1.6rem;
-	margin-top: 150px;
 	padding: 10px 20px;
 
 	@include breakpoint( '>660px' ) {
 		font-size: 1.6rem;
-		margin-top: 86px;
 	}
 
 	@include breakpoint( '<480px' ) {
 		font-size: 1.4rem;
-		margin-top: 0;
 		padding: 10px;
 	}
 }

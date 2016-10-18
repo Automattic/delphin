@@ -1,0 +1,18 @@
+@import 'app/styles/colors';
+
+.dark {
+	background: $gray-xlight;
+}
+
+.light {
+	background: $white;
+}
+
+.content {
+	color: $blue-dark;
+	margin: 0 auto;
+
+	strong {
+		font-weight: bold;
+	}
+}

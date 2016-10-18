@@ -1,15 +1,6 @@
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
 @import 'app/styles/fonts';
-@import 'app/styles/layouts';
-
-.layout {
-	@include layout-dark;
-}
-
-.content {
-	margin: 0 auto;
-}
 
 .four-oh-four {
 	margin: 12vmin 10px 0;

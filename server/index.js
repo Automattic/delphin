@@ -146,8 +146,7 @@ const generateStatic404Files = () => {
 	config( 'languages' )
 		// we filter out `en` because it lives in the top-level static directory, not under `/en/`
 		.filter( language => language.langSlug !== config( 'i18n_default_locale_slug' ) )
-		.map( language => `/${ language.langSlug }/404` )
-		.forEach( generateStaticFile );
+		.forEach( language => generateStaticFile( `/${ language.langSlug }/404`, language.isRtl ) );
 
 	// generate English 404
 	generateStaticFile( '404' );

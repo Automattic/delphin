@@ -69,6 +69,7 @@ class FindExistingBlog extends Component {
 						<label>{ i18n.translate( 'Enter your blog\'s address:' ) }</label>
 
 						<Input
+							prefix={ 'http://' }
 							autoFocus
 							field={ fields.url }
 							placeholder={ i18n.translate( 'e.g. www.yourblog.com' ) }

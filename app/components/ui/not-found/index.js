@@ -21,7 +21,7 @@ const NotFound = () => (
 			</div>
 		</div>
 
-		<Footer hasBorder />
+		<Footer />
 	</div>
 );
 

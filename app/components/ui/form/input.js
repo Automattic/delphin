@@ -57,6 +57,11 @@ class Input extends React.Component {
 
 		return (
 			<div className={ className }>
+				{ this.props.prefix && (
+					<span className={ styles.inputPrefix }>
+						{ this.props.prefix }
+					</span>
+				) }
 				<input
 					id={ field.name }
 					className={ inputClassName }
@@ -84,6 +89,7 @@ Input.propTypes = {
 	field: PropTypes.object.isRequired,
 	gridIconSize: PropTypes.number,
 	inputClassName: PropTypes.string,
+	prefix: PropTypes.string,
 	untouch: PropTypes.func
 };
 

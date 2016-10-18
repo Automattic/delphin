@@ -13,8 +13,15 @@ h6 {
 }
 
 .layout {
+	display: flex;
+	flex-direction: column;
 	font-family: $body-font;
 	font-weight: 400;
+	min-height: 100vh;
+}
+
+.content {
+	flex: 1;
 }
 
 a {

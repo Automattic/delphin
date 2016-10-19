@@ -7,7 +7,7 @@ import { contactInformation } from './contact-information';
 import territories from './territories';
 import { domainSearch } from './domain-search';
 import { notices } from './notices';
-import { services } from './services';
+import { service } from './service';
 import ui from './ui';
 import { user } from './user';
 
@@ -17,7 +17,7 @@ export default {
 	domainSearch,
 	form,
 	notices,
-	services,
+	service,
 	territories,
 	ui,
 	user

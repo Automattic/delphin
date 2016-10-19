@@ -24,7 +24,9 @@ class FindExistingBlog extends Component {
 	}
 
 	handleSubmit() {
-		this.props.redirect( 'connectExistingBlog', { pathParams: { domainName: this.props.domainName } } );
+		this.props.fetchService( this.props.fields.url.value ).then( () => {
+			this.props.redirect( 'connectExistingBlog', { pathParams: { domainName: this.props.domainName } } );
+		} );
 	}
 
 	isSubmitButtonDisabled() {
@@ -82,6 +84,7 @@ class FindExistingBlog extends Component {
 FindExistingBlog.propTypes = {
 	asyncValidating: PropTypes.bool.isRequired,
 	domainName: PropTypes.string.isRequired,
+	fetchService: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,

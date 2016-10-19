@@ -34,6 +34,12 @@ export default connect(
 				numberOfResultsToDisplay = undefined;
 			}
 
+			if ( query === '' ) {
+				// Instead of adding an empty query parameter in the URL,
+				// remove it entirely
+				query = undefined;
+			}
+
 			// hide sort if it is the default
 			sort = sort === config( 'default_search_sort' ) ? undefined : sort;
 

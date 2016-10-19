@@ -37,19 +37,29 @@ const Search = React.createClass( {
 	},
 
 	componentWillMount() {
-		this.debouncedFetchResults = debounce( this.fetchResults, 500 );
+		this.debouncedRedirectToSearch = debounce( this.redirectToSearch, 500 );
 
 		const trimmedQuery = this.props.query.trim();
-		if ( this.props.query !== trimmedQuery ) {
-			this.props.redirectToSearch( trimmedQuery, this.props.numberOfResultsToDisplay, this.props.sort );
+
+		if ( ! trimmedQuery ) {
+			return;
 		}
 
-		this.fetchResults( trimmedQuery );
+		if ( trimmedQuery !== this.props.query ) {
+			this.redirectToSearch( trimmedQuery );
+		} else {
+			this.props.fetchDomainSuggestions( this.props.query );
+		}
 	},
 
-	fetchResults( query ) {
+	componentWillReceiveProps( nextProps ) {
+		if ( this.props.query !== nextProps.query ) {
+			this.props.fetchDomainSuggestions( nextProps.query );
+		}
+	},
+
+	redirectToSearch( query ) {
 		this.props.redirectToSearch( query, this.props.numberOfResultsToDisplay, this.props.sort );
-		this.props.fetchDomainSuggestions( query );
 	},
 
 	selectDomain( suggestion ) {
@@ -146,7 +156,7 @@ const Search = React.createClass( {
 				<div className={ styles.search }>
 					<SearchHeader
 						{ ... { query } }
-						onQueryChange={ this.debouncedFetchResults } />
+						onQueryChange={ this.debouncedRedirectToSearch } />
 
 					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 

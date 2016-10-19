@@ -30,9 +30,13 @@ class FindExistingBlog extends Component {
 	}
 
 	isSubmitButtonDisabled() {
-		const { asyncValidating, invalid, pristine, submitting } = this.props;
-
-		return asyncValidating || invalid || pristine || submitting;
+		return [
+			'asyncValidating',
+			'invalid',
+			'pristine',
+			'submitting',
+			'isRequestingService',
+		].some( prop => this.props[ prop ] );
 	}
 
 	render() {
@@ -89,6 +93,7 @@ FindExistingBlog.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	invalid: PropTypes.bool.isRequired,
+	isRequestingService: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired

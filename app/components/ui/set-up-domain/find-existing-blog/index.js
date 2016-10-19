@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 // Internal dependencies
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
+import { extractHostName } from 'lib/domains';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
@@ -23,9 +24,22 @@ class FindExistingBlog extends Component {
 		}
 	}
 
-	handleSubmit() {
-		this.props.fetchService( this.props.fields.url.value ).then( () => {
-			this.props.redirect( 'connectExistingBlog', { pathParams: { domainName: this.props.domainName } } );
+	handleSubmit( values ) {
+		const hostName = extractHostName( values.url );
+
+		this.props.fetchService( hostName ).then( result => {
+			let slug;
+
+			if ( result.service === 'wpcom' || result.service === 'pressable' ) {
+				slug = 'connectExistingBlog';
+			} else {
+				slug = 'contactUsExistingBlog';
+			}
+
+			this.props.redirect( slug, { pathParams: {
+				domainName: this.props.domainName,
+				hostName,
+			} } );
 		} );
 	}
 

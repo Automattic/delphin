@@ -4,6 +4,7 @@ import connectExistingBlog from 'components/containers/set-up-domain/connect-exi
 import connectingExistingBlog from 'components/containers/set-up-domain/connecting-existing-blog';
 import connectingNewBlog from 'components/containers/set-up-domain/connecting-new-blog';
 import connectNewBlogToOther from 'components/containers/set-up-domain/connect-new-blog-to-other';
+import contactUsExistingBlog from 'components/containers/set-up-domain/contact-us-existing-blog';
 import findExistingBlog from 'components/containers/set-up-domain/find-existing-blog';
 import hostInfo from 'components/containers/host-info';
 import hosts from 'components/containers/hosts';
@@ -16,6 +17,7 @@ export default {
 	connectingExistingBlog,
 	connectingNewBlog,
 	connectNewBlogToOther,
+	contactUsExistingBlog,
 	findExistingBlog,
 	hostInfo,
 	hosts,

@@ -8,6 +8,7 @@ import ConnectExistingBlog from 'components/ui/set-up-domain/connect-existing-bl
 import { extractHostName } from 'lib/domains';
 import { redirect } from 'actions/routes';
 import { getService } from 'reducers/service/selectors';
+import { updateDomain } from 'actions/my-domains';
 
 /**
  * Retrieves the host name from the url entered at the previous step.
@@ -28,6 +29,7 @@ export default connect(
 		service: getService( state ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
+		redirect,
+		updateDomain
 	}, dispatch )
 )( ConnectExistingBlog );

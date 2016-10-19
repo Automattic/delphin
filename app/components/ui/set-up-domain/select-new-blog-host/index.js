@@ -25,11 +25,13 @@ class SelectNewBlogHost extends Component {
 	}
 
 	handleSubmit( { service } ) {
-		const { redirect, domainName } = this.props;
+		const { redirect, domainName, updateDomain } = this.props;
 
 		let nextPageSlug = '';
 		if ( service === 'wpcom' || service === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
+
+			updateDomain( domainName, 'wpcom' );
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';
 		}
@@ -143,6 +145,7 @@ SelectNewBlogHost.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
+	updateDomain: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( bindHandlers( SelectNewBlogHost ) );

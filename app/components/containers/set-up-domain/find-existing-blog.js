@@ -10,6 +10,7 @@ import RequireLogin from 'components/containers/require-login';
 import FindExistingBlog from 'components/ui/set-up-domain/find-existing-blog';
 import { redirect } from 'actions/routes';
 import { fetchService } from 'actions/services';
+import { isRequestingService } from 'reducers/services/selectors';
 
 const validate = values => {
 	const { url } = values;
@@ -37,6 +38,7 @@ export default reduxForm(
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
 		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
+		isRequestingService: isRequestingService( state ),
 	} ),
 	dispatch => bindActionCreators( {
 		fetchService,

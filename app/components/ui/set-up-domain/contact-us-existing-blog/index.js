@@ -15,7 +15,7 @@ import { removeInvalidInputProps } from 'lib/form';
 
 class ContactUsExistingBlog extends Component {
 	handleSubmit() {
-
+		// TODO: Email HEs the message the user entered, as well as info about their request
 	}
 
 	render() {
@@ -23,7 +23,7 @@ class ContactUsExistingBlog extends Component {
 			domainName,
 			handleSubmit,
 			hostName,
-			fields,
+			fields: { message },
 		} = this.props;
 
 		return (
@@ -57,14 +57,12 @@ class ContactUsExistingBlog extends Component {
 
 						<textarea
 							className={ styles.message }
-							{ ...removeInvalidInputProps( fields.message ) }
+							{ ...removeInvalidInputProps( message ) }
 						/>
 
 						<p className={ styles.paragraph }>
 							{ i18n.translate( 'Once you submit your request to our Happiness Engineers, we will get started connecting your blog.' ) }
-
 							{ ' ' }
-
 							{ i18n.translate( 'We will contact you once your request has been completed or if we have further questions.' ) }
 						</p>
 					</Form.FieldArea>
@@ -73,7 +71,7 @@ class ContactUsExistingBlog extends Component {
 						<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
-						<Button>
+						<Button disabled={ ! message.value }>
 							{ i18n.translate( 'Submit Request' ) }
 						</Button>
 					</Form.SubmitArea>

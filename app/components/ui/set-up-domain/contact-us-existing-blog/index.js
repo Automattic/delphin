@@ -20,8 +20,13 @@ class ContactUsExistingBlog extends Component {
 		this.handleSubmit = this.props.handleSubmit( this.handleSubmit );
 	}
 
-	handleSubmit() {
-		// TODO: Email HEs the message the user entered, as well as info about their request
+	handleSubmit( values ) {
+		const {
+			domainName,
+			hostName,
+		} = this.props;
+
+		this.props.contactSupport( domainName, hostName, values.message ).then( console.log ).catch( console.log );
 	}
 
 	render() {
@@ -88,6 +93,7 @@ class ContactUsExistingBlog extends Component {
 }
 
 ContactUsExistingBlog.propTypes = {
+	contactSupport: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,

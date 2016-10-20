@@ -1,7 +1,6 @@
 // External dependencies
 import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -13,6 +12,7 @@ import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomai
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
+import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 const Search = React.createClass( {
@@ -208,7 +208,7 @@ const Search = React.createClass( {
 					<div className={ styles.emailSignup }>
 						{ i18n.translate( 'Not ready to apply? {{link}}Sign up{{/link}} to get .blog updates in your email.', {
 							components: {
-								link: <Link to={ getPath( 'learnMore' ) } />
+								link: <TrackingLink eventName="delphin_search_email_signup_click" to={ getPath( 'learnMore' ) } />
 							}
 						} ) }
 					</div>

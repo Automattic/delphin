@@ -40,7 +40,10 @@ export const fetchPaygateConfiguration = () => ( {
 	method: 'get',
 	loading: PAYGATE_CONFIGURATION_FETCH,
 	params: { path: '/me/paygate-configuration' },
-	query: { request_type: 'new_payment' },
+	query: {
+		request_type: 'new_payment',
+		client_app: 'delphin'
+	},
 	success: configuration => ( {
 		type: PAYGATE_CONFIGURATION_FETCH_COMPLETE,
 		configuration

@@ -1,11 +1,13 @@
 // External dependencies
 import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
+import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
+import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
 import styles from './styles.scss';
@@ -202,6 +204,14 @@ const Search = React.createClass( {
 							</a>
 						</div>
 					) }
+
+					<div className={ styles.emailSignup }>
+						{ i18n.translate( 'Not ready to apply? {{link}}Sign up{{/link}} to get .blog updates in your email.', {
+							components: {
+								link: <Link to={ getPath( 'learnMore' ) } />
+							}
+						} ) }
+					</div>
 				</div>
 			</DocumentTitle>
 		);

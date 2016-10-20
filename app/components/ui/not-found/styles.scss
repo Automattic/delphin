@@ -1,3 +1,4 @@
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
 @import 'app/styles/fonts';
@@ -7,7 +8,7 @@
 	text-align: center;
 
 	h1 {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/404-browser-dark.svg ) no-repeat center top;
+		background: url( #{$image-assets-url}/404-browser-dark.svg ) no-repeat center top;
 		color: $blue-dark;
 		font: 300 3.4rem $heading-font;
 		margin-bottom: 10px;

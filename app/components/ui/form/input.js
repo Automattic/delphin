@@ -47,7 +47,7 @@ class Input extends React.Component {
 	render() {
 		const { field } = this.props,
 			gridIconSize = this.props.gridIconSize ? this.props.gridIconSize : 16,
-			className = classNames( this.props.className, styles.inputContainer ),
+			className = classNames( this.props.className, styles.inputContainer, this.props.prefix ? styles.withPrefix : null ),
 			isInvalid = field.touched && field.error,
 			inputClassName = classNames( this.props.inputClassName, styles.input, {
 				[ styles.hasError ]: isInvalid,

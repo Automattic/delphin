@@ -63,8 +63,11 @@ input::-ms-reveal {
 }
 
 .input-container {
-	display: flex;
 	position: relative;
+
+	&.with-prefix {
+		display: flex;
+	}
 }
 
 .input-prefix {

@@ -1,5 +1,4 @@
 // External dependencies
-import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
@@ -14,6 +13,13 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { removeInvalidInputProps } from 'lib/form';
 
 class ContactUsExistingBlog extends Component {
+	constructor( props ) {
+		super( props );
+
+		// submit through the redux-form submit handler
+		this.handleSubmit = this.props.handleSubmit( this.handleSubmit );
+	}
+
 	handleSubmit() {
 		// TODO: Email HEs the message the user entered, as well as info about their request
 	}
@@ -21,7 +27,6 @@ class ContactUsExistingBlog extends Component {
 	render() {
 		const {
 			domainName,
-			handleSubmit,
 			hostName,
 			fields: { message },
 		} = this.props;
@@ -44,7 +49,7 @@ class ContactUsExistingBlog extends Component {
 					</h2>
 				</SunriseStep.Header>
 
-				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
 						<strong>
 							{ i18n.translate( 'Connect %(domainName)s to %(hostName)s.', {
@@ -89,4 +94,4 @@ ContactUsExistingBlog.propTypes = {
 	hostName: PropTypes.string.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( ContactUsExistingBlog ) );
+export default withStyles( styles )( ContactUsExistingBlog );

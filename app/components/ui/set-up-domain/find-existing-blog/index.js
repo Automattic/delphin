@@ -14,6 +14,7 @@ import Input from 'components/ui/form/input';
 import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
+import { canConnectToService } from 'lib/services';
 
 class FindExistingBlog extends Component {
 	componentWillMount() {
@@ -30,7 +31,7 @@ class FindExistingBlog extends Component {
 		this.props.fetchService( hostName ).then( result => {
 			let slug;
 
-			if ( result.service === 'wpcom' || result.service === 'pressable' ) {
+			if ( canConnectToService( result.service ) ) {
 				slug = 'connectExistingBlog';
 			} else {
 				slug = 'contactUsExistingBlog';

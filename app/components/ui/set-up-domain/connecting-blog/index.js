@@ -9,10 +9,10 @@ import SunriseStep from 'components/ui/sunrise-step';
 import { getServiceName } from 'lib/services';
 
 class ConnectingBlog extends Component {
-	componentDidMount() {
-		setTimeout( () => {
+	componentWillReceiveProps() {
+		if ( this.props.connected ) {
 			this.props.redirectToConfirmConnectBlog();
-		}, 1500 );
+		}
 	}
 
 	render() {

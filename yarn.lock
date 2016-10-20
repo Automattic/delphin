@@ -1125,7 +1125,7 @@ babel-register@^6.16.0:
     path-exists "^1.0.0"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.6.1, babel-runtime@^6.9.0, babel-runtime@^6.9.1:
+babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.6.1, babel-runtime@^6.9.0, babel-runtime@^6.9.1, babel-runtime@^6.9.2:
   version "6.11.6"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.11.6.tgz#6db707fef2d49c49bfa3cb64efdb436b518b8222"
   dependencies:
@@ -7356,7 +7356,7 @@ wpcom-xhr-request@^0.3.2:
     debug "~2.2.0"
     superagent "1.2.0"
 
-wpcom-xhr-request@^1.0.0:
+wpcom-xhr-request@^1.0.0, wpcom-xhr-request@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wpcom-xhr-request/-/wpcom-xhr-request-1.0.0.tgz#629689e06f916b10f17be6693272ac994b0d8b2c"
   dependencies:
@@ -7371,6 +7371,15 @@ wpcom-xhr-request@0.5.0:
     debug "~2.2.0"
     superagent "1.2.0"
     wp-error "^1.1.0"
+
+wpcom@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/wpcom/-/wpcom-5.2.0.tgz#0e418be4e35c86c5f9769dded0cf05ce307402cd"
+  dependencies:
+    babel-runtime "^6.9.2"
+    debug "^2.2.0"
+    qs "^4.0.0"
+    wpcom-xhr-request "1.0.0"
 
 wpcom@4.9.12:
   version "4.9.12"

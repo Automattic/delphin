@@ -1,3 +1,4 @@
+@import 'app/styles/assets';
 @import 'app/styles/breakpoints';
 @import 'app/styles/fonts';
 @import 'app/styles/colors';
@@ -23,17 +24,17 @@
 
 	&.wordpress {
 		background-color: $host-wordpress;
-		background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-bg.jpg );
+		background-image: url( #{$image-assets-url}/hosts/wordpress-bg.jpg );
 	}
 
 	&.medium {
 		background-color: $host-medium;
-		background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/medium-bg.jpg );
+		background-image: url( #{$image-assets-url}/hosts/medium-bg.jpg );
 	}
 
 	&.tumblr {
 		background-color: $host-tumblr;
-		background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-bg.jpg );
+		background-image: url( #{$image-assets-url}/hosts/wordpress-bg.jpg );
 	}
 }
 
@@ -43,17 +44,17 @@
 	width: 250px;
 
 	&.wordpress {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-horizontal.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}/hosts/wordpress-horizontal.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/medium-horizontal.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}/hosts/medium-horizontal.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/tumblr-horizontal.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}/hosts/tumblr-horizontal.svg ) no-repeat center center;
 		background-size: contain;
 	}
 }

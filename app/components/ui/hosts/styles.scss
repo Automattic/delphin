@@ -1,3 +1,4 @@
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 $thumb-width: 350px;
@@ -104,17 +105,17 @@ $thumb-horizontal-margin: 15px;
 	width: 150px;
 
 	&.wordpress {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-small.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}/hosts/wordpress-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/medium-small.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}/hosts/medium-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/tumblr-small.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}/hosts/tumblr-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 }

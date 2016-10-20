@@ -9,7 +9,7 @@ import {
 	UPDATE_DOMAIN_POST
 } from 'reducers/action-types';
 
-const updateDomain = createRequestReducer( {
+export const updateDomain = createRequestReducer( {
 	loading: UPDATE_DOMAIN_POST,
 	success: UPDATE_DOMAIN_COMPLETE,
 	fail: UPDATE_DOMAIN_FAIL

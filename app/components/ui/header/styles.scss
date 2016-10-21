@@ -62,8 +62,8 @@
 	padding: 15px 10px 5px;
 
 	@include breakpoint( '>660px' ) {
-		right: 0;
 		padding: 30px 30px 30px 10px;
 		position: absolute;
+		right: 0;
 	}
 }

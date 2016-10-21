@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 // Internal dependencies
 import ContactUsExistingBlog from 'components/ui/set-up-domain/contact-us-existing-blog';
 import { contactSupport } from 'actions/contact-support';
+import { isContactingSupport } from 'reducers/contact-support/selectors';
 
 export default reduxForm(
 	{
@@ -14,6 +15,7 @@ export default reduxForm(
 	( state, { params: { domainName, hostName } } ) => ( {
 		domainName,
 		hostName,
+		isContactingSupport: isContactingSupport( state ),
 	} ),
 	dispatch => bindActionCreators( {
 		contactSupport,

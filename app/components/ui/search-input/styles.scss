@@ -120,12 +120,12 @@
 }
 
 .keyword-delete {
-	background-image: url( #{$image-assets-url}/trash.svg );
+	background-image: url( #{$image-assets-url}trash.svg );
 	background-size: 12px;
 }
 
 .keyword-select {
-	background-image: url( #{$image-assets-url}/down-arrow.svg );
+	background-image: url( #{$image-assets-url}down-arrow.svg );
 	background-size: 15px;
 	margin: 1px 0 0;
 }

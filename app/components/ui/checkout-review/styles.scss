@@ -171,19 +171,19 @@ $card-type-width: 32px;
 }
 
 .visa {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-visa.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-visa.svg );
 }
 
 .americanexpress {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-amex.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-amex.svg );
 }
 
 .discover {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-discover.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-discover.svg );
 }
 
 .mastercard {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-mastercard.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-mastercard.svg );
 }
 
 .purchase-button {
@@ -216,7 +216,7 @@ $card-type-width: 32px;
 	width: 100%;
 
 	.icon {
-		background: url( #{$image-assets-url}/card-blue.svg ) no-repeat;
+		background: url( #{$image-assets-url}card-blue.svg ) no-repeat;
 		height: 39px;
 		margin: 0 auto;
 		position: relative;

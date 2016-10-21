@@ -27,7 +27,7 @@
 	padding: 0 0 25px;
 
 	p {
-		background: url( #{$image-assets-url}/happy-surprise.svg ) no-repeat;
+		background: url( #{$image-assets-url}happy-surprise.svg ) no-repeat;
 		background-position: right 10px;
 		color: $gray-dark;
 		font-size: 1.4rem;
@@ -126,7 +126,7 @@
 	.icon {
 		animation-duration: 0.5s;
 		animation-name: bounceIn;
-		background: url( #{$image-assets-url}/checkout-error.svg );
+		background: url( #{$image-assets-url}checkout-error.svg );
 		height: 46px;
 		margin: 0 auto;
 		width: 72px;
@@ -177,35 +177,35 @@
 }
 
 .visa {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-visa.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-visa.svg );
 }
 
 .visa-disabled {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-visa-disabled.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-visa-disabled.svg );
 }
 
 .mastercard {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-mastercard.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-mastercard.svg );
 }
 
 .mastercard-disabled {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-mastercard-disabled.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-mastercard-disabled.svg );
 }
 
 .discover {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-discover.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-discover.svg );
 }
 
 .discover-disabled {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-discover-disabled.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-discover-disabled.svg );
 }
 
 .amex {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-amex.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-amex.svg );
 }
 
 .amex-disabled {
-	background-image: url( #{$image-assets-url}/credit-cards/cc-amex-disabled.svg );
+	background-image: url( #{$image-assets-url}credit-cards/cc-amex-disabled.svg );
 }
 
 .number-label {

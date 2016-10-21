@@ -105,17 +105,17 @@ $thumb-horizontal-margin: 15px;
 	width: 150px;
 
 	&.wordpress {
-		background: url( #{$image-assets-url}/hosts/wordpress-small.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}hosts/wordpress-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.medium {
-		background: url( #{$image-assets-url}/hosts/medium-small.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}hosts/medium-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 
 	&.tumblr {
-		background: url( #{$image-assets-url}/hosts/tumblr-small.svg ) no-repeat center center;
+		background: url( #{$image-assets-url}hosts/tumblr-small.svg ) no-repeat center center;
 		background-size: contain;
 	}
 }

@@ -136,6 +136,17 @@
 	}
 }
 
+.email-signup {
+	color: lighten( $blue-dark, 20% );
+	font-size: 1.4rem;
+	margin: 40px 10px 0;
+	text-align: center;
+
+	a {
+		text-decoration: underline;
+	}
+}
+
 .sort {
 	color: $gray;
 	cursor: pointer;

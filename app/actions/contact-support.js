@@ -8,14 +8,24 @@ import {
 } from 'reducers/action-types';
 import { snakeifyKeys } from 'lib/formatters';
 
-export const contactSupport = ( domainName, hostName, message ) => ( {
+export const contactSupport = ( {
+	domainName,
+	hostName,
+	blogType,
+	message
+} ) => ( {
 	type: WPCOM_REQUEST,
 	method: 'post',
 	params: {
 		apiNamespace: 'wpcom/v2',
 		path: '/delphin/contact-support'
 	},
-	payload: snakeifyKeys( { domain: domainName, hostName, message } ),
+	payload: snakeifyKeys( {
+		blogType,
+		domain: domainName,
+		hostName,
+		message
+	} ),
 	loading: { type: CONTACT_SUPPORT_FETCH },
 	success: ( {
 		type: CONTACT_SUPPORT_FETCH_COMPLETE

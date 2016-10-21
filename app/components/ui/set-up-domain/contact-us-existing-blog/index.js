@@ -20,13 +20,18 @@ class ContactUsExistingBlog extends Component {
 		this.handleSubmit = this.props.handleSubmit( this.handleSubmit );
 	}
 
-	handleSubmit( values ) {
+	handleSubmit( { message } ) {
 		const {
 			domainName,
 			hostName,
 		} = this.props;
 
-		this.props.contactSupport( domainName, hostName, values.message ).then( console.log ).catch( console.log );
+		this.props.contactSupport( {
+			blogType: 'existing',
+			domainName,
+			hostName,
+			message
+		} ).then( console.log ).catch( console.log );
 	}
 
 	render() {

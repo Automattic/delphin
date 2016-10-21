@@ -29,12 +29,12 @@
 		height: auto;
 	}
 
-	@include breakpoint( '<480px' ) {
-		position: static;
+	@include breakpoint( '<660px' ) {
+		//position: static;
 	}
 }
 
-.logo {
+%logo {
 	flex-basis: 100%;
 	padding: 15px;
 	text-align: center;
@@ -49,5 +49,21 @@
 		img {
 			width: auto;
 		}
+	}
+}
+
+.logo {
+	@extend %logo;
+}
+
+.search-logo {
+	@extend %logo;
+
+	padding: 15px 10px 5px;
+
+	@include breakpoint( '>660px' ) {
+		padding: 30px 30px 30px 10px;
+		position: absolute;
+		right: 0;
 	}
 }

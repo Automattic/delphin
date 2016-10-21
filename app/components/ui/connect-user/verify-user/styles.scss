@@ -35,12 +35,10 @@
 		margin-bottom: 30px;
 		width: 100%;
 	}
-}
 
-.two-factor-authentication-message {
-	color: $gray;
-	font-size: 1.2rem;
-	margin-top: 5px;
+	.legend a { // overriding default display: block
+		display: inline;
+	}
 }
 
 .legend {
@@ -56,7 +54,6 @@
 	a {
 		color: inherit;
 		cursor: pointer;
-		display: inline;
 		text-decoration: underline;
 
 		&:hover {
@@ -67,6 +64,12 @@
 
 .two-factor-fields {
 	margin-top: 1.5em;
+
+	.two-factor-authentication-message p {
+		color: $gray;
+		font-size: 1.4rem;
+		margin-top: 10px;
+	}
 }
 
 .logging-in {

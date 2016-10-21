@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import RequireLogin from 'components/containers/require-login';
 import ConnectNewBlogToOther from 'components/ui/set-up-domain/connect-new-blog/other';
 import { redirect } from 'actions/routes';
+import { contactSupport } from 'actions/contact-support';
 
 export default reduxForm(
 	{
@@ -18,6 +19,7 @@ export default reduxForm(
 		hasAnsweredPreviousQuestion: !! getValues( state.form.selectNewBlogHost ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
+		contactSupport,
+		redirect,
 	}, dispatch )
 )( RequireLogin( ConnectNewBlogToOther ) );

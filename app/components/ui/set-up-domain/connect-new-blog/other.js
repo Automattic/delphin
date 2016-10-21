@@ -25,9 +25,13 @@ class ConnectNewBlogToOther extends Component {
 	}
 
 	handleSubmit( { providerText } ) {
-		if ( providerText ) {
-			alert( 'Dispatching Happiness Engineers to handle ' + providerText );
-		}
+		const { domainName } = this.props;
+
+		this.props.contactSupport( {
+			blogType: 'new',
+			domainName,
+			message: providerText
+		} );
 	}
 
 	render() {
@@ -86,6 +90,7 @@ class ConnectNewBlogToOther extends Component {
 }
 
 ConnectNewBlogToOther.propTypes = {
+	contactSupport: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,

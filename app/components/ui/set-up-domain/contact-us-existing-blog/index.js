@@ -17,7 +17,7 @@ class ContactUsExistingBlog extends Component {
 		super( props );
 
 		// submit through the redux-form submit handler
-		this.handleSubmit = this.props.handleSubmit( this.handleSubmit );
+		this.handleSubmit = this.props.handleSubmit( this.handleSubmit.bind( this ) );
 	}
 
 	handleSubmit( { message } ) {
@@ -38,6 +38,7 @@ class ContactUsExistingBlog extends Component {
 		const {
 			domainName,
 			hostName,
+			isContactingSupport,
 			fields: { message },
 		} = this.props;
 
@@ -86,7 +87,7 @@ class ContactUsExistingBlog extends Component {
 						<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
-						<Button disabled={ ! message.value }>
+						<Button disabled={ ! message.value || isContactingSupport }>
 							{ i18n.translate( 'Submit Request' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -103,6 +104,7 @@ ContactUsExistingBlog.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hostName: PropTypes.string.isRequired,
+	isContactingSupport: PropTypes.bool.isRequired,
 };
 
 export default withStyles( styles )( ContactUsExistingBlog );

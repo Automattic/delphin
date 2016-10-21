@@ -38,6 +38,7 @@ class ConnectNewBlogToOther extends Component {
 		const {
 			domainName,
 			handleSubmit,
+			isContactingSupport,
 			fields: { providerText },
 		} = this.props;
 
@@ -68,7 +69,7 @@ class ConnectNewBlogToOther extends Component {
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Button disabled={ ! providerText.value }>
+						<Button disabled={ ! providerText.value || isContactingSupport }>
 							{ i18n.translate( 'Submit my request' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -95,6 +96,7 @@ ConnectNewBlogToOther.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
+	isContactingSupport: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

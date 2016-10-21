@@ -47,7 +47,7 @@ class Input extends React.Component {
 	render() {
 		const { field } = this.props,
 			gridIconSize = this.props.gridIconSize ? this.props.gridIconSize : 16,
-			className = classNames( this.props.className, styles.inputContainer ),
+			className = classNames( this.props.className, styles.inputContainer, this.props.prefix ? styles.withPrefix : null ),
 			isInvalid = field.touched && field.error,
 			inputClassName = classNames( this.props.inputClassName, styles.input, {
 				[ styles.hasError ]: isInvalid,
@@ -57,6 +57,11 @@ class Input extends React.Component {
 
 		return (
 			<div className={ className }>
+				{ this.props.prefix && (
+					<span className={ styles.inputPrefix }>
+						{ this.props.prefix }
+					</span>
+				) }
 				<input
 					id={ field.name }
 					className={ inputClassName }
@@ -84,6 +89,7 @@ Input.propTypes = {
 	field: PropTypes.object.isRequired,
 	gridIconSize: PropTypes.number,
 	inputClassName: PropTypes.string,
+	prefix: PropTypes.string,
 	untouch: PropTypes.func
 };
 

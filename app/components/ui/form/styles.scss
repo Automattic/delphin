@@ -64,6 +64,19 @@ input::-ms-reveal {
 
 .input-container {
 	position: relative;
+
+	&.with-prefix {
+		display: flex;
+	}
+}
+
+.input-prefix {
+	background: $gray-xlight;
+	border: 1px solid $gray-medium;
+	border-right: 0;
+	color: $gray-dark;
+	font-size: 1.6rem;
+	padding: 10px 15px;
 }
 
 .gridicon {

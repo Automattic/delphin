@@ -40,78 +40,6 @@ let publicRoutes = [
 				component: SearchContainer
 			},
 			{
-				path: 'set-up-domain/:domainName',
-				slug: 'selectBlogType',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'selectBlogType' )
-			},
-			{
-				path: 'set-up-domain/:domainName/new-blog',
-				slug: 'selectNewBlogHost',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'selectNewBlogHost' )
-			},
-			{
-				path: 'set-up-domain/:domainName/new-blog/connect/other',
-				slug: 'connectNewBlogToOther',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'connectNewBlogToOther' )
-			},
-			{
-				path: 'set-up-domain/:domainName/new-blog/connect/wordpress',
-				slug: 'connectingNewBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'connectingNewBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/new-blog/connect/wordpress/success',
-				slug: 'confirmConnectNewBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/existing-blog',
-				slug: 'findExistingBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'findExistingBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/existing-blog/contact-us/:hostName',
-				slug: 'contactUsExistingBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'contactUsExistingBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/existing-blog/connect',
-				slug: 'connectExistingBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'connectExistingBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName',
-				slug: 'connectingExistingBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'connectingExistingBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName/success',
-				slug: 'confirmConnectExistingBlog',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/hosts',
-				slug: 'hosts',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'hosts' )
-			},
-			{
-				path: 'set-up-domain/:domainName/hosts/:slug',
-				slug: 'hostInfo',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
-			},
-			{
 				path: 'sign-in-with-email',
 				slug: 'signInWithEmail',
 				static: true,
@@ -181,6 +109,72 @@ let publicRoutes = [
 				slug: 'success',
 				static: false,
 				getComponent: getComponent( 'checkout', 'success' )
+			},
+			{
+				path: 'set-up-domain/:domainName',
+				slug: 'selectBlogType',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'selectBlogType' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog',
+				slug: 'selectNewBlogHost',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'selectNewBlogHost' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/connect/other',
+				slug: 'connectNewBlogToOther',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectNewBlogToOther' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/connect/wordpress',
+				slug: 'connectingNewBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectingNewBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/connect/wordpress/success',
+				slug: 'confirmConnectNewBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/existing-blog',
+				slug: 'findExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'findExistingBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/existing-blog/connect',
+				slug: 'connectExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectExistingBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName',
+				slug: 'connectingExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'connectingExistingBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName/success',
+				slug: 'confirmConnectExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
+			},
+			{
+				path: 'set-up-domain/:domainName/hosts',
+				slug: 'hosts',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'hosts' )
+			},
+			{
+				path: 'set-up-domain/:domainName/hosts/:slug',
+				slug: 'hostInfo',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
 			}
 		]
 	}

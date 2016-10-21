@@ -9,6 +9,8 @@ import i18n from 'i18n-calypso';
 import RequireLogin from 'components/containers/require-login';
 import FindExistingBlog from 'components/ui/set-up-domain/find-existing-blog';
 import { redirect } from 'actions/routes';
+import { fetchService } from 'actions/service';
+import { isRequestingService } from 'reducers/service/selectors';
 
 const validate = values => {
 	const { url } = values;
@@ -36,8 +38,10 @@ export default reduxForm(
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
 		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
+		isRequestingService: isRequestingService( state ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
+		fetchService,
+		redirect,
 	}, dispatch )
 )( RequireLogin( FindExistingBlog ) );

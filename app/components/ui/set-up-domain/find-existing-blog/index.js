@@ -7,12 +7,14 @@ import React, { Component, PropTypes } from 'react';
 // Internal dependencies
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
+import { extractHostName } from 'lib/domains';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
 import { preventWidows } from 'lib/formatters';
 import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
+import { canConnectToService } from 'lib/services';
 
 class FindExistingBlog extends Component {
 	componentWillMount() {
@@ -23,14 +25,33 @@ class FindExistingBlog extends Component {
 		}
 	}
 
-	handleSubmit() {
-		this.props.redirect( 'connectExistingBlog', { pathParams: { domainName: this.props.domainName } } );
+	handleSubmit( values ) {
+		const hostName = extractHostName( values.url );
+
+		this.props.fetchService( hostName ).then( result => {
+			let slug;
+
+			if ( canConnectToService( result.service ) ) {
+				slug = 'connectExistingBlog';
+			} else {
+				slug = 'contactUsExistingBlog';
+			}
+
+			this.props.redirect( slug, { pathParams: {
+				domainName: this.props.domainName,
+				hostName,
+			} } );
+		} );
 	}
 
 	isSubmitButtonDisabled() {
-		const { asyncValidating, invalid, pristine, submitting } = this.props;
-
-		return asyncValidating || invalid || pristine || submitting;
+		return [
+			'asyncValidating',
+			'invalid',
+			'pristine',
+			'submitting',
+			'isRequestingService',
+		].some( prop => this.props[ prop ] );
 	}
 
 	render() {
@@ -82,10 +103,12 @@ class FindExistingBlog extends Component {
 FindExistingBlog.propTypes = {
 	asyncValidating: PropTypes.bool.isRequired,
 	domainName: PropTypes.string.isRequired,
+	fetchService: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	invalid: PropTypes.bool.isRequired,
+	isRequestingService: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired

@@ -3,6 +3,7 @@ import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import RequireLogin from 'components/containers/require-login';
 import ConnectNewBlogToOther from 'components/ui/set-up-domain/connect-new-blog/other';
 import { redirect } from 'actions/routes';
@@ -21,6 +22,7 @@ export default reduxForm(
 		isContactingSupport: isContactingSupport( state ),
 	} ),
 	dispatch => bindActionCreators( {
+		addNotice,
 		contactSupport,
 		redirect,
 	}, dispatch )

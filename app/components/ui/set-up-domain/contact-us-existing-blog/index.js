@@ -22,8 +22,10 @@ class ContactUsExistingBlog extends Component {
 
 	handleSubmit( { message } ) {
 		const {
+			addNotice,
 			domainName,
 			hostName,
+			redirect,
 		} = this.props;
 
 		this.props.contactSupport( {
@@ -31,7 +33,19 @@ class ContactUsExistingBlog extends Component {
 			domainName,
 			hostName,
 			message
-		} ).then( console.log ).catch( console.log );
+		} ).then( () => {
+			redirect( 'myDomains' );
+
+			addNotice( {
+				status: 'success',
+				message: i18n.translate( "Your request has been sent. We'll be in touch with you soon." )
+			} );
+		} ).catch( () => {
+			addNotice( {
+				status: 'error',
+				message: i18n.translate( 'There was an error when sending your request.' )
+			} );
+		} );
 	}
 
 	render() {
@@ -99,12 +113,14 @@ class ContactUsExistingBlog extends Component {
 }
 
 ContactUsExistingBlog.propTypes = {
+	addNotice: PropTypes.func.isRequired,
 	contactSupport: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hostName: PropTypes.string.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
+	redirect: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( ContactUsExistingBlog );

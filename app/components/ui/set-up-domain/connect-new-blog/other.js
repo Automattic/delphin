@@ -25,12 +25,28 @@ class ConnectNewBlogToOther extends Component {
 	}
 
 	handleSubmit( { providerText } ) {
-		const { domainName } = this.props;
+		const {
+			addNotice,
+			domainName,
+			redirect,
+		} = this.props;
 
 		this.props.contactSupport( {
 			blogType: 'new',
 			domainName,
 			message: providerText
+		} ).then( () => {
+			redirect( 'myDomains' );
+
+			addNotice( {
+				status: 'success',
+				message: i18n.translate( "Your request has been sent. We'll be in touch with you soon." )
+			} );
+		} ).catch( () => {
+			addNotice( {
+				status: 'error',
+				message: i18n.translate( 'There was an error when sending your request.' )
+			} );
 		} );
 	}
 
@@ -91,6 +107,7 @@ class ConnectNewBlogToOther extends Component {
 }
 
 ConnectNewBlogToOther.propTypes = {
+	addNotice: PropTypes.func.isRequired,
 	contactSupport: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,

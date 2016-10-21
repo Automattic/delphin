@@ -9,8 +9,9 @@ import { getPath } from 'routes';
 import SearchInputContainer from 'components/containers/search-input';
 import headerStyles from 'components/ui/header/styles.scss';
 import styles from './styles.scss';
+import withAssets from 'lib/assets/with-assets';
 
-const SearchHeader = ( { query, onQueryChange } ) => {
+const SearchHeader = ( { query, imageUrl, onQueryChange } ) => {
 	return (
 		<header className={ headerStyles.searchHeader }>
 			<SearchInputContainer
@@ -18,16 +19,17 @@ const SearchHeader = ( { query, onQueryChange } ) => {
 				onQueryChange={ onQueryChange }
 				placeholder={ i18n.translate( 'Type a few keywords or a domain' ) } />
 
-			<Link className={ headerStyles.searchLogo } to={ getPath( 'home' ) }>
-				<img alt="get.blog" src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/get-dot-blog-logo-dark.svg" />
+			<Link className={ headerStyles.logo } to={ getPath( 'home' ) }>
+				<img alt="get.blog" src={ imageUrl( 'get-dot-blog-logo-dark.svg' ) } />
 			</Link>
 		</header>
 	);
 };
 
 SearchHeader.propTypes = {
+	imageUrl: PropTypes.func.isRequired,
 	onQueryChange: PropTypes.func.isRequired,
 	query: PropTypes.string.isRequired
 };
 
-export default withStyles( headerStyles, styles )( SearchHeader );
+export default withStyles( headerStyles, styles )( withAssets( SearchHeader ) );

@@ -5,10 +5,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
+import withAssets from 'lib/assets/with-assets';
 
-const LoadingScreen = ( { message } ) => (
+const LoadingScreen = ( { imageUrl, message } ) => (
 	<div className={ styles.container }>
-		<img src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/rocket-launch-dark.svg" />
+		<img src={ imageUrl( 'rocket-launch-dark.svg' ) } />
 		<h1 className={ styles.heading }>
 			{ message || i18n.translate( "Let's get started…" ) }
 		</h1>
@@ -16,7 +17,8 @@ const LoadingScreen = ( { message } ) => (
 );
 
 LoadingScreen.propTypes = {
+	imageUrl: PropTypes.func.isRequired,
 	message: PropTypes.string
 };
 
-export default withStyles( styles )( LoadingScreen );
+export default withStyles( styles )( withAssets( LoadingScreen ) );

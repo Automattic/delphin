@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { shouldTranslateWord } from 'lib/translate';
 import styles from './styles.scss';
 import RelatedWord from './related-word';
+import withAssets from 'lib/assets/with-assets';
 
 class RelatedWords extends Component {
 	constructor( props ) {
@@ -46,7 +47,7 @@ class RelatedWords extends Component {
 	}
 
 	render() {
-		const { target, replace, relatedWords } = this.props;
+		const { imageUrl, target, replace, relatedWords } = this.props;
 
 		if ( ! relatedWords ) {
 			return null;
@@ -76,7 +77,7 @@ class RelatedWords extends Component {
 
 							{ isGoogleTranslateAttributionVisible && (
 								<li className={ styles.googleTranslateAttribution }>
-									<img src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/powered-by-google-translate.png" height={ 18 } width={ 175 } alt="Google Translate" />
+									<img src={ imageUrl( 'powered-by-google-translate.png' ) } height={ 18 } width={ 175 } alt="Google Translate" />
 								</li>
 							) }
 						</ul>
@@ -100,6 +101,7 @@ class RelatedWords extends Component {
 }
 
 RelatedWords.propTypes = {
+	imageUrl: PropTypes.func.isRequired,
 	relatedWords: PropTypes.object,
 	replace: PropTypes.func.isRequired,
 	target: PropTypes.shape( {
@@ -108,4 +110,4 @@ RelatedWords.propTypes = {
 	} ).isRequired
 };
 
-export default withStyles( styles )( bindHandlers( RelatedWords ) );
+export default withStyles( styles )( withAssets( bindHandlers( RelatedWords ) ) );

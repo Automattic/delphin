@@ -1,8 +1,13 @@
 // External dependencies
+import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import ContactUsExistingBlog from 'components/ui/set-up-domain/contact-us-existing-blog';
+import { contactSupport } from 'actions/contact-support';
+import { isContactingSupport } from 'reducers/contact-support/selectors';
+import { redirect } from 'actions/routes';
 
 export default reduxForm(
 	{
@@ -12,5 +17,11 @@ export default reduxForm(
 	( state, { params: { domainName, hostName } } ) => ( {
 		domainName,
 		hostName,
-	} )
+		isContactingSupport: isContactingSupport( state ),
+	} ),
+	dispatch => bindActionCreators( {
+		addNotice,
+		contactSupport,
+		redirect,
+	}, dispatch )
 )( ContactUsExistingBlog );

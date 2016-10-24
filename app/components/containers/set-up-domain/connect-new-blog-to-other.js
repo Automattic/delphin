@@ -3,9 +3,12 @@ import { getValues, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import RequireLogin from 'components/containers/require-login';
 import ConnectNewBlogToOther from 'components/ui/set-up-domain/connect-new-blog/other';
 import { redirect } from 'actions/routes';
+import { contactSupport } from 'actions/contact-support';
+import { isContactingSupport } from 'reducers/contact-support/selectors';
 
 export default reduxForm(
 	{
@@ -16,8 +19,11 @@ export default reduxForm(
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
 		hasAnsweredPreviousQuestion: !! getValues( state.form.selectNewBlogHost ),
+		isContactingSupport: isContactingSupport( state ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
+		addNotice,
+		contactSupport,
+		redirect,
 	}, dispatch )
 )( RequireLogin( ConnectNewBlogToOther ) );

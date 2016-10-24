@@ -1,14 +1,14 @@
 // External dependencies
 import { Link } from 'react-router';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
+import { imageUrl } from 'lib/assets';
 import styles from './styles.scss';
-import withAssets from 'lib/assets/with-assets';
 
-const Header = ( { imageUrl } ) => {
+const Header = () => {
 	return (
 		<header className={ styles.header }>
 			<Link className={ styles.logo } to={ getPath( 'home' ) }>
@@ -18,8 +18,4 @@ const Header = ( { imageUrl } ) => {
 	);
 };
 
-Header.propTypes = {
-	imageUrl: PropTypes.func.isRequired
-};
-
-export default withStyles( styles )( withAssets( Header ) );
+export default withStyles( styles )( Header );

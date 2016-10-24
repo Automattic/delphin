@@ -6,10 +6,10 @@ import { Link } from 'react-router';
 
 // Internal dependencies
 import { getPath } from 'routes';
+import { imageUrl } from 'lib/assets';
 import styles from './styles.scss';
-import withAssets from 'lib/assets/with-assets';
 
-const HostThumbnail = ( { domainName, imageUrl, slug, name, shortDescription } ) => (
+const HostThumbnail = ( { domainName, slug, name, shortDescription } ) => (
 	<li className={ styles.thumbnail + ' ' + styles[ slug ] } key={ name }>
 		<div className={ styles.logo + ' ' + styles[ slug ] } />
 		<h3 className={ styles.thumbnailName }>{ name }</h3>
@@ -24,10 +24,9 @@ const HostThumbnail = ( { domainName, imageUrl, slug, name, shortDescription } )
 
 HostThumbnail.propTypes = {
 	domainName: PropTypes.string.isRequired,
-	imageUrl: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired,
 	shortDescription: PropTypes.string.isRequired,
 	slug: PropTypes.string.isRequired
 };
 
-export default withStyles( styles )( withAssets( HostThumbnail ) );
+export default withStyles( styles )( HostThumbnail );

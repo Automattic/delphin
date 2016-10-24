@@ -5,10 +5,10 @@ import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { imageUrl } from 'lib/assets';
 import { shouldTranslateWord } from 'lib/translate';
 import styles from './styles.scss';
 import RelatedWord from './related-word';
-import withAssets from 'lib/assets/with-assets';
 
 class RelatedWords extends Component {
 	constructor( props ) {
@@ -47,7 +47,7 @@ class RelatedWords extends Component {
 	}
 
 	render() {
-		const { imageUrl, target, replace, relatedWords } = this.props;
+		const { target, replace, relatedWords } = this.props;
 
 		if ( ! relatedWords ) {
 			return null;
@@ -101,7 +101,6 @@ class RelatedWords extends Component {
 }
 
 RelatedWords.propTypes = {
-	imageUrl: PropTypes.func.isRequired,
 	relatedWords: PropTypes.object,
 	replace: PropTypes.func.isRequired,
 	target: PropTypes.shape( {
@@ -110,4 +109,4 @@ RelatedWords.propTypes = {
 	} ).isRequired
 };
 
-export default withStyles( styles )( withAssets( bindHandlers( RelatedWords ) ) );
+export default withStyles( styles )( bindHandlers( RelatedWords ) );

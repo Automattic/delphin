@@ -6,12 +6,12 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
+import { imageUrl } from 'lib/assets';
 import SearchInputContainer from 'components/containers/search-input';
 import headerStyles from 'components/ui/header/styles.scss';
 import styles from './styles.scss';
-import withAssets from 'lib/assets/with-assets';
 
-const SearchHeader = ( { query, imageUrl, onQueryChange } ) => {
+const SearchHeader = ( { query, onQueryChange } ) => {
 	return (
 		<header className={ headerStyles.searchHeader }>
 			<SearchInputContainer
@@ -19,7 +19,7 @@ const SearchHeader = ( { query, imageUrl, onQueryChange } ) => {
 				onQueryChange={ onQueryChange }
 				placeholder={ i18n.translate( 'Type a few keywords or a domain' ) } />
 
-			<Link className={ headerStyles.logo } to={ getPath( 'home' ) }>
+			<Link className={ headerStyles.searchLogo } to={ getPath( 'home' ) }>
 				<img alt="get.blog" src={ imageUrl( 'get-dot-blog-logo-dark.svg' ) } />
 			</Link>
 		</header>
@@ -27,9 +27,8 @@ const SearchHeader = ( { query, imageUrl, onQueryChange } ) => {
 };
 
 SearchHeader.propTypes = {
-	imageUrl: PropTypes.func.isRequired,
 	onQueryChange: PropTypes.func.isRequired,
 	query: PropTypes.string.isRequired
 };
 
-export default withStyles( headerStyles, styles )( withAssets( SearchHeader ) );
+export default withStyles( headerStyles, styles )( SearchHeader );

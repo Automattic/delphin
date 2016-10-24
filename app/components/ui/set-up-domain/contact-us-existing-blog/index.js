@@ -17,17 +17,42 @@ class ContactUsExistingBlog extends Component {
 		super( props );
 
 		// submit through the redux-form submit handler
-		this.handleSubmit = this.props.handleSubmit( this.handleSubmit );
+		this.handleSubmit = this.props.handleSubmit( this.handleSubmit.bind( this ) );
 	}
 
-	handleSubmit() {
-		// TODO: Email HEs the message the user entered, as well as info about their request
+	handleSubmit( { message } ) {
+		const {
+			addNotice,
+			domainName,
+			hostName,
+			redirect,
+		} = this.props;
+
+		this.props.contactSupport( {
+			blogType: 'existing',
+			domainName,
+			hostName,
+			message
+		} ).then( () => {
+			redirect( 'myDomains' );
+
+			addNotice( {
+				status: 'success',
+				message: i18n.translate( "Your request has been sent. We'll be in touch with you soon." )
+			} );
+		} ).catch( () => {
+			addNotice( {
+				status: 'error',
+				message: i18n.translate( 'There was an error when sending your request.' )
+			} );
+		} );
 	}
 
 	render() {
 		const {
 			domainName,
 			hostName,
+			isContactingSupport,
 			fields: { message },
 		} = this.props;
 
@@ -76,7 +101,7 @@ class ContactUsExistingBlog extends Component {
 						<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
 							{ i18n.translate( 'Back' ) }
 						</Link>
-						<Button disabled={ ! message.value }>
+						<Button disabled={ ! message.value || isContactingSupport }>
 							{ i18n.translate( 'Submit Request' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -88,10 +113,14 @@ class ContactUsExistingBlog extends Component {
 }
 
 ContactUsExistingBlog.propTypes = {
+	addNotice: PropTypes.func.isRequired,
+	contactSupport: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hostName: PropTypes.string.isRequired,
+	isContactingSupport: PropTypes.bool.isRequired,
+	redirect: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( ContactUsExistingBlog );

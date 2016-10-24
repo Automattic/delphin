@@ -1,3 +1,4 @@
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
@@ -68,7 +69,7 @@
 }
 
 .happy-circle {
-	background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/happy-surprise.svg ) no-repeat;
+	background: url( #{$image-assets-url}happy-surprise.svg ) no-repeat;
 	background-position: right 20px;
 	padding: 15px 40px 0 0;
 }

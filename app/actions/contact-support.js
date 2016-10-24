@@ -1,9 +1,9 @@
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
-	CONTACT_SUPPORT_FETCH,
-	CONTACT_SUPPORT_FETCH_COMPLETE,
-	CONTACT_SUPPORT_FETCH_FAIL,
+	SUPPORT_CONTACT,
+	SUPPORT_CONTACT_COMPLETE,
+	SUPPORT_CONTACT_FAIL,
 	WPCOM_REQUEST,
 } from 'reducers/action-types';
 import { snakeifyKeys } from 'lib/formatters';
@@ -26,13 +26,13 @@ export const contactSupport = ( {
 		hostName,
 		message
 	} ),
-	loading: { type: CONTACT_SUPPORT_FETCH },
+	loading: { type: SUPPORT_CONTACT },
 	success: ( {
-		type: CONTACT_SUPPORT_FETCH_COMPLETE
+		type: SUPPORT_CONTACT_COMPLETE
 	} ),
 	fail: error => dispatch => {
 		dispatch( {
-			type: CONTACT_SUPPORT_FETCH_FAIL,
+			type: SUPPORT_CONTACT_FAIL,
 		} );
 
 		dispatch( addNotice( {

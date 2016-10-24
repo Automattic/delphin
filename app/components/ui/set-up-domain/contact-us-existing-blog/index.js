@@ -20,19 +20,20 @@ class ContactUsExistingBlog extends Component {
 		this.handleSubmit = this.props.handleSubmit( this.handleSubmit.bind( this ) );
 	}
 
-	handleSubmit( { message } ) {
+	handleSubmit() {
 		const {
 			addNotice,
 			domainName,
 			hostName,
 			redirect,
+			fields: { message }
 		} = this.props;
 
 		this.props.contactSupport( {
 			blogType: 'existing',
 			domainName,
 			hostName,
-			message
+			message: message.value
 		} ).then( () => {
 			redirect( 'myDomains' );
 

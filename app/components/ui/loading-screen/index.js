@@ -4,11 +4,12 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { imageUrl } from 'lib/assets';
 import styles from './styles.scss';
 
 const LoadingScreen = ( { message } ) => (
 	<div className={ styles.container }>
-		<img src="https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/rocket-launch-dark.svg" />
+		<img src={ imageUrl( 'rocket-launch-dark.svg' ) } />
 		<h1 className={ styles.heading }>
 			{ message || i18n.translate( "Let's get started…" ) }
 		</h1>

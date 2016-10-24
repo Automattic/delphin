@@ -1,10 +1,11 @@
 @import 'app/components/ui/button/styles';
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
 
 .header {
-	background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/smiley-blog-dark.svg );
+	background-image: url( #{$image-assets-url}smiley-blog-dark.svg );
 	background-position: center 70px;
 	background-repeat: no-repeat;
 

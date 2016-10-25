@@ -1,4 +1,6 @@
 // External dependencies
+import isEmpty from 'lodash/isEmpty';
+import omitBy from 'lodash/omitBy';
 import { reduxForm, reset } from 'redux-form';
 
 // Internal dependencies
@@ -8,10 +10,10 @@ import { validateDomain } from 'lib/domains';
 import { validateEmail } from 'lib/form';
 import LearnMore from 'components/ui/learn-more';
 
-const validate = ( values ) => ( {
+const validate = ( values ) => omitBy( {
 	domain: validateDomain( values.domain ),
 	email: validateEmail( values.email )
-} );
+}, isEmpty );
 
 export default reduxForm(
 	{

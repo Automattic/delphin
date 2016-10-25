@@ -165,6 +165,12 @@ let publicRoutes = [
 				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
 			},
 			{
+				path: 'set-up-domain/:domainName/existing-blog/contact-us/:hostName',
+				slug: 'contactUsExistingBlog',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'contactUsExistingBlog' )
+			},
+			{
 				path: 'set-up-domain/:domainName/hosts',
 				slug: 'hosts',
 				static: false,

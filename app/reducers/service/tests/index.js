@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import {
 	SERVICE_FETCH,

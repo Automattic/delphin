@@ -1,18 +1,12 @@
+jest.mock( 'lib/translate' );
+
 // External dependencies
-jest.unmock( 'i18n-calypso' );
 import i18n from 'i18n-calypso';
 import request from 'superagent';
 
-// The tested module:
-jest.unmock( '..' );
-jest.unmock( 'reducers/ui/domain-search/selectors.js' );
-jest.unmock( 'config' );
-
-// Breaks jest for some reason:
-// jest.unmock( 'wpcom' ); - replaced by a manual mock
-jest.unmock( 'debug' );
-jest.useRealTimers(); // needed for 'should dispatch related word fetch complete'
-
+/**
+ * Internal dependencies
+ */
 import { relatedWordsMiddleware } from '..';
 import {
 	DOMAIN_SUGGESTIONS_FETCH,

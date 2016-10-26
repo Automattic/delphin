@@ -1,4 +1,3 @@
-jest.disableAutomock();
 jest.mock( 'lib/analytics' );
 
 import {

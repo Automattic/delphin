@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone, validateEmail } from '..';
 

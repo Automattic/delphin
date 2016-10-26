@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import {
 	FETCH_USER_COMPLETE,

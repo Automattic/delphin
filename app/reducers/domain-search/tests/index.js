@@ -6,8 +6,6 @@ import {
 } from 'reducers/action-types';
 import { domainSearch } from '..';
 
-jest.unmock( '..' );
-
 describe( 'domain search reducer', () => {
 	it( 'should throw an error when state and action are undefined', () => {
 		expect( domainSearch ).toThrowError( TypeError );

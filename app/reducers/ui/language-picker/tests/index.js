@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import {
 	LANGUAGE_PICKER_SELECT_HIDE,

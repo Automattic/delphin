@@ -37,6 +37,7 @@
     "babel-eslint": "^6.1.2",
     "babel-jest": "^16.0.0",
     "commander": "^2.9.0",
+    "deep-freeze": "^0.0.1",
     "eslint": "^3.8.1",
     "eslint-config-wpcalypso": "^0.6.0",
     "eslint-plugin-react": "^6.4.1",

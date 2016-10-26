@@ -9,9 +9,9 @@ import SunriseStep from 'components/ui/sunrise-step';
 import { getServiceName } from 'lib/services';
 
 class ConnectingBlog extends Component {
-	componentWillReceiveProps() {
-		if ( this.props.connected ) {
-			this.props.redirectToConfirmConnectBlog();
+	componentWillReceiveProps( { connected, redirectToConfirmConnectBlog } ) {
+		if ( connected ) {
+			redirectToConfirmConnectBlog();
 		}
 	}
 
@@ -49,6 +49,7 @@ class ConnectingBlog extends Component {
 
 ConnectingBlog.propTypes = {
 	blogType: PropTypes.string.isRequired,
+	connected: PropTypes.bool.isRequired,
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
 	redirectToConfirmConnectBlog: PropTypes.func.isRequired,

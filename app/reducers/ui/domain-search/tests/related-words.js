@@ -7,7 +7,6 @@ import {
 import relatedWords from '../related-words';
 
 jest.mock( 'routes' );
-jest.unmock( '../related-words' );
 
 describe( 'related-words reducer', () => {
 	describe( 'related words', () => {

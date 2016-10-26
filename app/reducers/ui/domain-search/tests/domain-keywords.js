@@ -12,11 +12,9 @@ import {
 	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 } from 'reducers/action-types';
-jest.unmock( 'lodash/uniqueId' );
 import domainKeywords from '../domain-keywords';
 
 jest.mock( 'routes' );
-jest.unmock( '../domain-keywords' );
 
 describe( 'ui.domainSearch reducer', () => {
 	it( 'should have an empty `inputValue` initially', () => {

@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import { getToggle } from '../selectors';
 

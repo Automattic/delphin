@@ -17,7 +17,6 @@ module.exports = {
 		'react/sort-prop-types': 2,
 
 		// Legacy
-		'curly': 1,
 		'max-len': [ 1, { code: 140 } ],
 		'no-console': 1,
 		'no-var': 1,

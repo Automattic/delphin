@@ -14,7 +14,7 @@
     "clean:static": "rm -rf public/static",
     "generate": "npm run build && npm run build:static",
     "hooks": "node hooks/manage",
-    "lint": "eslint --max-warnings 130 app client server && sass-lint --config .sass-lint.yml --max-warnings 0 --verbose",
+    "lint": "eslint --max-warnings 0 app client server && sass-lint --config .sass-lint.yml --max-warnings 0 --verbose",
     "preinstall": "npm run-script clean",
     "prod:static": "NODE_ENV=production yarn install && NODE_ENV=production npm run generate",
     "start": "yarn install && npm run build && node server/build/bundle",

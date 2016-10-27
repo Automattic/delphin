@@ -31,18 +31,18 @@ const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
 	return (
 		<div className={ domainCardClassNames } onClick={ toggleDetails }>
 			<div className={ styles.domainScreenshot }>
-				<img src={ 'https://s0.wp.com/mshots/v1/http://' + name + '/?w=500' }/>
+				<img src={ 'https://s0.wp.com/mshots/v1/http://' + name + '/?w=500' } />
 			</div>
 			<div className={ styles.domainInfo }>
 				<h3>{ name }</h3>
 				<div className={ styles.domainDetails }>
 					<span className={ styles.icon }>
-						<WordPressIcon/>
+						<WordPressIcon />
 						<span>
 							{ i18n.translate( 'Connected to a WordPress.com site' ) }
-							<br/>
+							<br />
 							<span className={ styles.siteName }>{ name }</span>
-							<br/>
+							<br />
 							<a href="#" className={ styles.disconnect }>
 								{ i18n.translate( 'Disconnect' ) }
 							</a>

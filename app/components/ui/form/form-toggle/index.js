@@ -12,7 +12,7 @@ import { withErrorFocusable } from 'components/ui/form/error-focuser';
  */
 import styles from './styles.scss';
 
-var idNum = 0;
+let idNum = 0;
 
 class FormToggle extends React.Component {
 	handleKeyDown( event ) {

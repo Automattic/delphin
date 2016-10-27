@@ -1,4 +1,4 @@
-var express = require( 'express' ),
+let express = require( 'express' ),
 	serveStatic = require( 'serve-static' ),
 	path = require( 'path' ),
 	publicDir = path.resolve( __dirname, '../../public' ),

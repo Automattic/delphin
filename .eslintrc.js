@@ -13,7 +13,7 @@ module.exports = {
 		// REST API objects include underscores
 		'camelcase': 0,
 		// Custom PropTypes checks
-		'react/prop-types': 1, // promote to error
+		'react/prop-types': 2,
 		'react/sort-prop-types': 2,
 
 		// Legacy

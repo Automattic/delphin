@@ -25,11 +25,6 @@ module.exports = {
 		'react/jsx-no-target-blank': 1,
 		'react/jsx-space-before-closing': 1,
 		'react/prefer-es6-class': 1,
-		'space-unary-ops': [ 1, {
-			overrides: {
-				'!': true
-			}
-		} ],
 		'quote-props': [ 1, 'as-needed' ],
 		'template-curly-spacing': [ 1, 'always' ],
 		'wpcalypso/i18n-no-collapsible-whitespace': 1,

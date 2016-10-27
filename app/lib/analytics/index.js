@@ -27,7 +27,7 @@ if ( process.env.BROWSER ) {
 		window.ga = window.ga || function() {
 			( window.ga.q = window.ga.q || [] ).push( arguments );
 		};
-		window.ga.l = + new Date();
+		window.ga.l = Number( new Date() );
 
 		loadScript( '//www.google-analytics.com/analytics.js' );
 	}

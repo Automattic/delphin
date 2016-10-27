@@ -27,7 +27,6 @@ module.exports = {
 		'react/prefer-es6-class': 1,
 		'quote-props': [ 1, 'as-needed' ],
 		'template-curly-spacing': [ 1, 'always' ],
-		'wpcalypso/i18n-no-collapsible-whitespace': 1,
 		'wpcalypso/import-docblock': 0,
 		'wpcalypso/jsx-classname-namespace': 1,
 		'wpcalypso/jsx-gridicon-size': 1

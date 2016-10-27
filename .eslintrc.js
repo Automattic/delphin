@@ -19,14 +19,10 @@ module.exports = {
 		// Legacy
 		'max-len': [ 1, { code: 140 } ],
 		'no-console': 1,
-		'no-var': 1,
 		'prefer-const': 1,
-		'react/jsx-curly-spacing': [ 1, 'always' ],
 		'react/jsx-no-target-blank': 1,
-		'react/jsx-space-before-closing': 1,
 		'react/prefer-es6-class': 1,
 		'quote-props': [ 1, 'as-needed' ],
-		'template-curly-spacing': [ 1, 'always' ],
 		'wpcalypso/import-docblock': 0,
 		'wpcalypso/jsx-classname-namespace': 1,
 		'wpcalypso/jsx-gridicon-size': 1

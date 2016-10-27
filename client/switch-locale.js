@@ -9,7 +9,7 @@ const debug = debugFactory( 'delphin:i18n' );
 import { setLocaleCookie } from './locale-cookie';
 
 function languageFileUrl( localeSlug ) {
-	var protocol = typeof window === 'undefined' ? 'https://' : '//', // use a protocol-relative path in the browser
+	let protocol = typeof window === 'undefined' ? 'https://' : '//', // use a protocol-relative path in the browser
 		localeJson = `${ protocol }widgets.wp.com/languages/delphin/${ localeSlug }.json`;
 	return localeJson;
 }

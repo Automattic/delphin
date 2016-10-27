@@ -12,5 +12,5 @@ export const getCountriesSupportedByDomains = state => state.territories.countri
  * @returns {object} - the corresponding list of states
  */
 export const getStates = ( state, countryCode ) => {
-	return get( state, `territories.states.${countryCode}`, {} );
+	return get( state, `territories.states.${ countryCode }`, {} );
 };

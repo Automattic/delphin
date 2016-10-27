@@ -42,7 +42,7 @@ class RelatedWords extends Component {
 		if ( left > 0 ) {
 			this.container.style.left = 0;
 		} else {
-			this.container.style.left = `${left}px`;
+			this.container.style.left = `${ left }px`;
 		}
 	}
 

@@ -11,6 +11,8 @@ app.get( '*', function( req, res ) {
 } );
 
 app.listen( 1337, function( error ) {
-	if ( error ) throw error;
+	if ( error ) {
+		throw error;
+	}
 	console.log( 'Static server started on http://localhost:' + 1337 );
 } );

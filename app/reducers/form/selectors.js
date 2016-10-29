@@ -18,5 +18,5 @@ export const getBlogType = ( state ) => {
  * @returns {string|null} - the selected service of the blog to connect, or null if not found
  */
 export const getBlogService = ( state ) => {
-	return get( state, 'form.selectNewBlogHost.wordpressOrOther.value' );
+	return get( state, 'form.selectNewBlogHost.service.value' );
 };

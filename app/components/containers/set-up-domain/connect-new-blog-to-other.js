@@ -1,5 +1,5 @@
 // External dependencies
-import { getValues, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
@@ -9,6 +9,7 @@ import ConnectNewBlogToOther from 'components/ui/set-up-domain/connect-new-blog/
 import { redirect } from 'actions/routes';
 import { contactSupport } from 'actions/contact-support';
 import { isContactingSupport } from 'reducers/contact-support/selectors';
+import scrollToTop from 'components/containers/scroll-to-top';
 
 export default reduxForm(
 	{
@@ -18,7 +19,6 @@ export default reduxForm(
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		hasAnsweredPreviousQuestion: !! getValues( state.form.selectNewBlogHost ),
 		isContactingSupport: isContactingSupport( state ),
 	} ),
 	dispatch => bindActionCreators( {
@@ -26,4 +26,4 @@ export default reduxForm(
 		contactSupport,
 		redirect,
 	}, dispatch )
-)( RequireLogin( ConnectNewBlogToOther ) );
+)( scrollToTop( RequireLogin( ConnectNewBlogToOther ) ) );

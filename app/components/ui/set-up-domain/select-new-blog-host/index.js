@@ -122,7 +122,7 @@ class SelectNewBlogHost extends Component {
 						<h3>{ i18n.translate( 'Want a different blogging platform?' ) }</h3>
 						<p>
 							{ i18n.translate( 'We\'re adding more options soon, but in the meantime our Happiness Engineers can help you {{link}}create a new blog somewhere else{{/link}}.', {
-								components: { link: <a href="#" /> }
+								components: { link: <Link to={ getPath( 'connectNewBlogToOther', { domainName } ) } /> }
 							} ) }
 						</p>
 					</Form.Footer>

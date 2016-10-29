@@ -1,10 +1,11 @@
 // Internal dependencies
 import languages from './languages';
+import { applyQueryStringToConfig } from 'lib/config';
 
 const NODE_ENV = process.env.NODE_ENV,
 	productionOnly = NODE_ENV === 'production';
 
-const config = {
+let config = {
 	available_tlds: [ 'blog' ],
 	default_tld: 'blog',
 	default_search_sort: 'recommended',
@@ -37,6 +38,10 @@ const config = {
 	google_analytics_key: 'UA-10673494-28',
 	google_translate_api_key: '***REMOVED***'
 };
+
+if ( typeof window !== 'undefined' && window.location && window.location.search ) {
+	config = applyQueryStringToConfig( config, window.location.search );
+}
 
 export default function( key ) {
 	return config[ key ];

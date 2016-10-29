@@ -11,19 +11,21 @@ export const withErrorFocusable = Component => {
 	class ErrorFocusable extends React.Component {
 		constructor( props ) {
 			super( props );
+
 			this.saveRefBound = this.saveRef.bind( this );
 		}
 
 		saveRef( element ) {
 			// call ErrorFocuser's setElementRef function
 			const fieldName = this.props.field ? this.props.field.name : this.props.name;
+
 			if ( element && fieldName && 'function' === typeof this.context.setElementRef ) {
-				this.context.setElementRef( element, fieldName );
+				this.context.setElementRef( fieldName, element );
 			}
 		}
 
 		render() {
-			return <Component { ...this.props } ref={ this.saveRefBound }/>;
+			return <Component { ...this.props } ref={ this.saveRefBound } />;
 		}
 	}
 
@@ -43,12 +45,13 @@ export const withErrorFocuser = FieldGroup => {
 	class ErrorFocuser extends React.Component {
 		constructor( props ) {
 			super( props );
+
 			this.fieldElements = [];
 		}
 
 		getChildContext() {
 			return {
-				setElementRef: ( element, fieldName ) => {
+				setElementRef: ( fieldName, element ) => {
 					if ( element && fieldName ) {
 						this.fieldElements.push( {
 							name: fieldName,
@@ -62,8 +65,10 @@ export const withErrorFocuser = FieldGroup => {
 		componentWillReceiveProps( nextProps ) {
 			if ( nextProps.focusOnError && isEmpty( this.props.errors ) && ! isEmpty( nextProps.errors ) ) {
 				const fieldElement = find( this.fieldElements, field => nextProps.errors[ field.name ] );
+
 				if ( fieldElement && fieldElement.ref ) {
 					const node = ReactDOM.findDOMNode( fieldElement.ref );
+
 					if ( node ) {
 						focusField( node );
 					}

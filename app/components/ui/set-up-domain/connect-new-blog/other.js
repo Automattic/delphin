@@ -16,14 +16,6 @@ import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 
 class ConnectNewBlogToOther extends Component {
-	componentWillMount() {
-		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
-
-		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'selectBlogType', { pathParams: { domainName } } );
-		}
-	}
-
 	handleSubmit( { providerText } ) {
 		const {
 			addNotice,
@@ -112,7 +104,6 @@ ConnectNewBlogToOther.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
-	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 };

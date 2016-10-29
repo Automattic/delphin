@@ -1,6 +1,7 @@
 // External dependencies
 import find from 'lodash/find';
 import isEmpty from 'lodash/isEmpty';
+import reject from 'lodash/reject';
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -13,10 +14,9 @@ export const withErrorFocusable = Component => {
 			super( props );
 
 			this.saveRef = ( element ) => {
-				// call ErrorFocuser's setElementRef function
 				const fieldName = this.props.field ? this.props.field.name : this.props.name;
 
-				if ( element && fieldName && 'function' === typeof this.context.setElementRef ) {
+				if ( fieldName && 'function' === typeof this.context.setElementRef ) {
 					this.context.setElementRef( fieldName, element );
 				}
 			};
@@ -50,11 +50,13 @@ export const withErrorFocuser = FieldGroup => {
 		getChildContext() {
 			return {
 				setElementRef: ( fieldName, element ) => {
-					if ( element && fieldName ) {
+					if ( element ) {
 						this.fieldElements.push( {
 							name: fieldName,
 							ref: element
 						} );
+					} else {
+						this.fieldElements = reject( this.fieldElements, { name: fieldName } );
 					}
 				}
 			};

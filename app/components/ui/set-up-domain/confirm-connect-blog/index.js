@@ -21,31 +21,35 @@ class ConfirmConnectBlog extends Component {
 		const { blogType, domainName, hostName, service } = this.props;
 
 		let destination;
-		if ( blogType === 'new' ) {
-			if ( service === 'pressable' ) {
+		if ( service === 'pressable' ) {
+			if ( blogType === 'new' ) {
 				destination = 'https://my.pressable.com?domain=test.blog&new_site=true';
 			}
 
-			if ( service === 'wordpressdotcom' ) {
-				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
-			}
-		}
-
-		if ( blogType === 'existing' ) {
-			if ( service === 'pressable' ) {
+			if ( blogType === 'existing' ) {
 				destination = 'https://my.pressable.com?domain=test.blog&new_site=false';
 			}
 
-			if ( service === 'wordpressdotcom' ) {
-				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
-			}
+			window.open( destination, '_blank' );
+
+			return;
 		}
 
 		if ( service === 'wordpressdotcom' ) {
+			if ( blogType === 'new' ) {
+				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+			}
+
+			if ( blogType === 'existing' ) {
+				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			}
+
 			this.props.logInToWpcom( destination );
-		} else {
-			window.open( destination, '_blank' );
+
+			return;
 		}
+
+		throw new Error( 'This service is not supported' );
 	}
 
 	render() {

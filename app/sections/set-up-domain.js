@@ -10,6 +10,7 @@ import hostInfo from 'components/containers/host-info';
 import hosts from 'components/containers/hosts';
 import selectBlogType from 'components/containers/set-up-domain/select-blog-type';
 import selectNewBlogHost from 'components/containers/set-up-domain/select-new-blog-host';
+import updateNameservers from 'components/containers/set-up-domain/update-nameservers';
 
 export default {
 	confirmConnectBlog,
@@ -23,4 +24,5 @@ export default {
 	hosts,
 	selectBlogType,
 	selectNewBlogHost,
+	updateNameservers,
 };

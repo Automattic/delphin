@@ -24,24 +24,24 @@ class SelectNewBlogHost extends Component {
 		}
 	}
 
-	handleSubmit( { wordpressOrOther } ) {
+	handleSubmit( { service } ) {
 		const { redirect, domainName } = this.props;
 
 		let nextPageSlug = '';
-		if ( wordpressOrOther === 'wordpressdotcom' || wordpressOrOther === 'pressable' ) {
+		if ( service === 'wordpressdotcom' || service === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';
 		}
 
-		redirect( nextPageSlug, { pathParams: { domainName, service: wordpressOrOther } } );
+		redirect( nextPageSlug, { pathParams: { domainName, service } } );
 	}
 
 	render() {
 		const {
 			domainName,
 			handleSubmit,
-			fields: { wordpressOrOther },
+			fields: { service },
 		} = this.props;
 
 		return (
@@ -72,10 +72,10 @@ class SelectNewBlogHost extends Component {
 						<label className={ styles.label } htmlFor="wordpressdotcom">
 							<Radio
 								className={ styles.radio }
-								{ ...wordpressOrOther }
+								{ ...service }
 								id="wordpressdotcom"
 								value="wordpressdotcom"
-								checked={ wordpressOrOther.value === 'wordpressdotcom' }
+								checked={ service.value === 'wordpressdotcom' }
 							/>
 							<h3 className={ styles.labelHost }>
 								{ i18n.translate( 'WordPress.com' ) }
@@ -95,10 +95,10 @@ class SelectNewBlogHost extends Component {
 						<label className={ styles.label } htmlFor="pressable">
 							<Radio
 								className={ styles.radio }
-								{ ...wordpressOrOther }
+								{ ...service }
 								id="pressable"
 								value="pressable"
-								checked={ wordpressOrOther.value === 'pressable' }
+								checked={ service.value === 'pressable' }
 							/>
 							<h3 className={ styles.labelHost }>
 								{ i18n.translate( 'Pressable' ) }

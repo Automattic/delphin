@@ -12,20 +12,18 @@ export const withErrorFocusable = Component => {
 		constructor( props ) {
 			super( props );
 
-			this.saveRefBound = this.saveRef.bind( this );
-		}
+			this.saveRef = ( element ) => {
+				// call ErrorFocuser's setElementRef function
+				const fieldName = this.props.field ? this.props.field.name : this.props.name;
 
-		saveRef( element ) {
-			// call ErrorFocuser's setElementRef function
-			const fieldName = this.props.field ? this.props.field.name : this.props.name;
-
-			if ( element && fieldName && 'function' === typeof this.context.setElementRef ) {
-				this.context.setElementRef( fieldName, element );
-			}
+				if ( element && fieldName && 'function' === typeof this.context.setElementRef ) {
+					this.context.setElementRef( fieldName, element );
+				}
+			};
 		}
 
 		render() {
-			return <Component { ...this.props } ref={ this.saveRefBound } />;
+			return <Component { ...this.props } ref={ this.saveRef } />;
 		}
 	}
 

@@ -17,10 +17,10 @@ import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectNewBlogHost extends Component {
 	componentWillMount() {
-		const { hasAnsweredPreviousQuestion, domainName, redirect } = this.props;
+		const { hasAnsweredPreviousQuestion, domainName, redirect, service } = this.props;
 
 		if ( ! hasAnsweredPreviousQuestion ) {
-			redirect( 'selectBlogType', { pathParams: { domainName } } );
+			redirect( 'selectBlogType', { pathParams: { domainName, service } } );
 		}
 	}
 
@@ -34,7 +34,7 @@ class SelectNewBlogHost extends Component {
 			nextPageSlug = 'connectNewBlogToOther';
 		}
 
-		redirect( nextPageSlug, { pathParams: { domainName } } );
+		redirect( nextPageSlug, { pathParams: { domainName, service: wordpressOrOther } } );
 	}
 
 	render() {
@@ -143,6 +143,7 @@ SelectNewBlogHost.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
+	service: PropTypes.string
 };
 
 export default withStyles( styles )( bindHandlers( SelectNewBlogHost ) );

@@ -17,7 +17,7 @@ export default connect(
 		redirectToConfirmConnectBlog: () => {
 			const { domainName, hostName } = ownProps.params;
 
-			return redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName } } );
+			return redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName, service } } );
 		}
 	}, dispatch )
 )( ConnectingBlog );

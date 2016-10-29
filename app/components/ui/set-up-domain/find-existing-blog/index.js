@@ -39,6 +39,7 @@ class FindExistingBlog extends Component {
 			this.props.redirect( slug, { pathParams: {
 				domainName: this.props.domainName,
 				hostName,
+				service: result.service
 			} } );
 		} );
 	}

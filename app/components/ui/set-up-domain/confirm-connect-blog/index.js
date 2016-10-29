@@ -18,19 +18,34 @@ class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { blogType, domainName, hostName } = this.props;
+		const { blogType, domainName, hostName, service } = this.props;
 
 		let destination;
-
 		if ( blogType === 'new' ) {
-			destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+			if ( service === 'pressable' ) {
+				destination = 'https://my.pressable.com?domain=test.blog&new_site=true';
+			}
+
+			if ( service === 'wordpress' ) {
+				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+			}
 		}
 
 		if ( blogType === 'existing' ) {
-			destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			if ( service === 'pressable' ) {
+				destination = 'https://my.pressable.com?domain=test.blog&new_site=false';
+			}
+
+			if ( service === 'wordpress' ) {
+				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			}
 		}
 
-		this.props.logInToWpcom( destination );
+		if ( service === 'wordpress' ) {
+			this.props.logInToWpcom( destination );
+		} else {
+			window.open( destination, '_blank' );
+		}
 	}
 
 	render() {
@@ -98,6 +113,7 @@ ConfirmConnectBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
 	logInToWpcom: PropTypes.func.isRequired,
+	service: PropTypes.string.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( ConfirmConnectBlog ) );

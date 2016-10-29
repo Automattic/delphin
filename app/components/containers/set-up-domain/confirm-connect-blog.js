@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import ConfirmConnectBlog from 'components/ui/set-up-domain/confirm-connect-blog';
-import { getBlogType } from 'reducers/form/selectors';
+import { getBlogType, getBlogService } from 'reducers/form/selectors';
 import { logInToWpcom } from 'actions/wpcom-log-in';
 
 export default connect(
@@ -12,6 +12,7 @@ export default connect(
 		blogType: getBlogType( state ),
 		domainName: ownProps.params.domainName,
 		hostName: ownProps.params.hostName,
+		service: getBlogService( state )
 	} ),
 	dispatch => bindActionCreators( {
 		logInToWpcom,

@@ -28,8 +28,7 @@ class SelectNewBlogHost extends Component {
 		const { redirect, domainName } = this.props;
 
 		let nextPageSlug = '';
-
-		if ( wordpressOrOther === 'wordpress' ) {
+		if ( wordpressOrOther === 'wordpress' || wordpressOrOther === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';

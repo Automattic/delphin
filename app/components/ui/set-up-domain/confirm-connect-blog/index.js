@@ -26,7 +26,7 @@ class ConfirmConnectBlog extends Component {
 				destination = 'https://my.pressable.com?domain=test.blog&new_site=true';
 			}
 
-			if ( service === 'wordpress' ) {
+			if ( service === 'wordpressdotcom' ) {
 				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
 			}
 		}
@@ -36,12 +36,12 @@ class ConfirmConnectBlog extends Component {
 				destination = 'https://my.pressable.com?domain=test.blog&new_site=false';
 			}
 
-			if ( service === 'wordpress' ) {
+			if ( service === 'wordpressdotcom' ) {
 				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
 			}
 		}
 
-		if ( service === 'wordpress' ) {
+		if ( service === 'wordpressdotcom' ) {
 			this.props.logInToWpcom( destination );
 		} else {
 			window.open( destination, '_blank' );

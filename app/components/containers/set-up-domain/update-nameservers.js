@@ -2,8 +2,11 @@
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import { redirect } from 'actions/routes';
 import UpdateNameservers from 'components/ui/set-up-domain/update-nameservers';
+import { isUpdatingNameservers } from 'reducers/nameservers/selectors';
+import { updateNameservers } from 'actions/nameservers';
 
 export default reduxForm(
 	{
@@ -16,9 +19,12 @@ export default reduxForm(
 		]
 	},
 	( state, { params: { domainName } } ) => ( {
-		domainName
+		domainName,
+		isUpdatingNameservers: isUpdatingNameservers( state ),
 	} ),
 	{
-		redirect
+		addNotice,
+		redirect,
+		updateNameservers,
 	}
 )( UpdateNameservers );

@@ -7,6 +7,7 @@ import { contactInformation } from './contact-information';
 import { contactSupport } from './contact-support';
 import territories from './territories';
 import { domainSearch } from './domain-search';
+import nameservers from './nameservers';
 import { notices } from './notices';
 import { service } from './service';
 import ui from './ui';
@@ -18,6 +19,7 @@ export default {
 	contactSupport,
 	domainSearch,
 	form,
+	nameservers,
 	notices,
 	service,
 	territories,

@@ -23,11 +23,11 @@ class ConfirmConnectBlog extends Component {
 		let destination;
 		if ( service === 'pressable' ) {
 			if ( blogType === 'new' ) {
-				destination = 'https://my.pressable.com?domain=test.blog&new_site=true';
+				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=true';
 			}
 
 			if ( blogType === 'existing' ) {
-				destination = 'https://my.pressable.com?domain=test.blog&new_site=false';
+				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=false';
 			}
 
 			window.open( destination, '_blank' );

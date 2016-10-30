@@ -3,10 +3,12 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
+import { getAsyncValidateFunction } from 'lib/form';
 import { redirect } from 'actions/routes';
 import UpdateNameservers from 'components/ui/set-up-domain/update-nameservers';
 import { isUpdatingNameservers } from 'reducers/nameservers/selectors';
 import { updateNameservers } from 'actions/nameservers';
+import { validateUpdateNameserversForm } from 'lib/domains/nameservers';
 
 export default reduxForm(
 	{
@@ -16,7 +18,8 @@ export default reduxForm(
 			'nameserver2',
 			'nameserver3',
 			'nameserver4',
-		]
+		],
+		asyncValidate: getAsyncValidateFunction( validateUpdateNameserversForm ),
 	},
 	( state, { params: { domainName } } ) => ( {
 		domainName,

@@ -109,7 +109,7 @@ class UpdateNameservers extends Component {
 				</Form>
 
 				<SunriseStep.Footer>
-					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
+					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
 				</SunriseStep.Footer>

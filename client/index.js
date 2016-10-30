@@ -49,25 +49,22 @@ const middlewares = [
 	wpcomLoginMiddleware,
 	relatedWordsMiddleware,
 	switchLocaleMiddleware,
+	userMiddleware
 ];
 
 const isDevelopment = 'production' !== config( 'env' );
 
-if ( isDevelopment ) {
-	middlewares.push( userMiddleware );
-
-	if ( localStorage.ENABLE_REDUX_LOGGER ) {
-		middlewares.push( createLogger( {
-			collapsed: true,
-			level: {
-				action: 'log',
-				error: 'log',
-				prevState: false,
-				nextState: 'log'
-			},
-			timestamp: false
-		} ) );
-	}
+if ( isDevelopment && localStorage.ENABLE_REDUX_LOGGER ) {
+	middlewares.push( createLogger( {
+		collapsed: true,
+		level: {
+			action: 'log',
+			error: 'log',
+			prevState: false,
+			nextState: 'log'
+		},
+		timestamp: false
+	} ) );
 }
 
 const store = createStore(
@@ -130,7 +127,7 @@ function boot() {
 
 const bearerToken = getTokenFromBearerCookie();
 
-if ( isDevelopment && bearerToken ) {
+if ( bearerToken ) {
 	store.dispatch( fetchUser() ).then( boot );
 } else {
 	boot();

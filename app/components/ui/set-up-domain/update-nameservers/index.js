@@ -1,5 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
+import compact from 'lodash/compact';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
@@ -14,17 +15,36 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 
-class UpdateNamservers extends Component {
-	handleSubmit( event ) {
-		event.preventDefault();
+class UpdateNameservers extends Component {
+	handleSubmit( values ) {
+		const {
+			addNotice,
+			domainName,
+			redirect,
+			updateNameservers,
+		} = this.props;
 
-		const { redirect } = this.props;
+		updateNameservers( domainName, compact( Object.values( values ) ) ).then( () => {
+			redirect( 'myDomains' );
 
-		redirect( 'myDomains' );
+			addNotice( {
+				message: i18n.translate( 'Your nameservers have been updated.' ),
+				status: 'success'
+			} );
+		} ).catch( error => {
+			// TODO: display a better error message
+			addNotice( {
+				message: error.message,
+				status: 'error'
+			} );
+		} );
 	}
 
 	render() {
-		const { domainName } = this.props;
+		const {
+			domainName,
+			handleSubmit,
+		} = this.props;
 
 		return (
 			<SunriseStep>
@@ -34,7 +54,7 @@ class UpdateNamservers extends Component {
 					<h1>{ i18n.translate( 'Give me nameservers' ) }</h1>
 				</SunriseStep.Header>
 
-				<Form onSubmit={ this.handleSubmit }>
+				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<label>
 							{ i18n.translate( 'Are you ready to setup %(domainName)s?', {
@@ -44,7 +64,7 @@ class UpdateNamservers extends Component {
 
 						{ Object.keys( this.props.fields ).map( ( fieldName, index ) => (
 							<div key={ fieldName }>
-								<label for={ fieldName }>
+								<label htmlFor={ fieldName }>
 									{ i18n.translate( 'Nameserver %(number)d', { args: { number: index + 1 } } ) }
 								</label>
 
@@ -71,10 +91,14 @@ class UpdateNamservers extends Component {
 	}
 }
 
-UpdateNamservers.propTypes = {
+UpdateNameservers.propTypes = {
+	addNotice: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+	isUpdatingNameservers: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
+	updateNameservers: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( UpdateNamservers ) );
+export default withStyles( styles )( bindHandlers( UpdateNameservers ) );

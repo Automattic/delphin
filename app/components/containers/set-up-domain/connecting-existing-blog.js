@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 import ConnectingBlog from 'components/ui/set-up-domain/connecting-blog';
 import { getBlogType } from 'reducers/form/selectors';
 import { redirect } from 'actions/routes';
+import { getService } from 'reducers/service/selectors';
 
 export default connect(
 	( state, ownProps ) => ( {
 		blogType: getBlogType( state ),
 		domainName: ownProps.params.domainName,
 		hostName: ownProps.params.hostName,
-		service: ownProps.params.service
+		service: getService( state )
 	} ),
 	( dispatch, ownProps ) => bindActionCreators( {
 		redirectToConfirmConnectBlog: () => {

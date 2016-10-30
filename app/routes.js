@@ -144,7 +144,7 @@ let publicRoutes = [
 				path: 'set-up-domain/:domainName/new-blog/connect/:service/success',
 				slug: 'confirmConnectNewBlog',
 				static: false,
-				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
+				getComponent: getComponent( 'setUpDomain', 'confirmConnectNewBlog' )
 			},
 			{
 				path: 'set-up-domain/:domainName/existing-blog',
@@ -168,7 +168,7 @@ let publicRoutes = [
 				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName/success',
 				slug: 'confirmConnectExistingBlog',
 				static: false,
-				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )
+				getComponent: getComponent( 'setUpDomain', 'confirmConnectExistingBlog' )
 			},
 			{
 				path: 'set-up-domain/:domainName/existing-blog/contact-us/:hostName',

@@ -7,8 +7,8 @@ import { getAsyncValidateFunction } from 'lib/form';
 import { redirect } from 'actions/routes';
 import UpdateNameservers from 'components/ui/set-up-domain/update-nameservers';
 import { isRequestingNameservers } from 'reducers/nameservers/selectors';
-import { updateNameservers } from 'actions/nameservers';
 import { validateUpdateNameserversForm } from 'lib/domains/nameservers';
+import { fetchNameservers, updateNameservers } from 'actions/nameservers';
 
 export default reduxForm(
 	{
@@ -29,5 +29,6 @@ export default reduxForm(
 		addNotice,
 		redirect,
 		updateNameservers,
+		fetchNameservers,
 	}
 )( UpdateNameservers );

@@ -17,7 +17,7 @@ export const fetchNameservers = domain => ( {
 		path: '/delphin/domain/' + domain
 	},
 	loading: { type: NAMESERVERS_FETCH },
-	success: { type: NAMESERVERS_FETCH_COMPLETE },
+	success: ( { nameservers } ) => ( { type: NAMESERVERS_FETCH_COMPLETE, nameservers } ),
 	fail: { type: NAMESERVERS_FETCH_FAIL },
 } );
 

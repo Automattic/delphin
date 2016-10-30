@@ -53,7 +53,16 @@ class ConfirmConnectBlog extends Component {
 	}
 
 	render() {
-		const { blogType, domainName, hostName } = this.props;
+		const { blogType, domainName, hostName, service } = this.props;
+
+		let serviceName;
+		if ( service === 'wordpressdotcom' ) {
+			serviceName = 'WordPress.com';
+		}
+
+		if ( service === 'pressable' ) {
+			serviceName = 'Pressable.com';
+		}
 
 		return (
 			<SunriseStep>
@@ -80,7 +89,9 @@ class ConfirmConnectBlog extends Component {
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Go to my WordPress.com blog' ) }
+								{ i18n.translate( 'Go to my %(serviceName)s blog', {
+									args: { serviceName }
+								} ) }
 							</Button>
 						</Form.FieldArea>
 					) }
@@ -88,15 +99,21 @@ class ConfirmConnectBlog extends Component {
 					{ blogType === 'new' && (
 						<Form.FieldArea>
 							<p>
-								{ preventWidows( i18n.translate( "You're all set! Just sign up at WordPress.com and create your new blog." ), 2 ) }
+								{ preventWidows( i18n.translate( "You're all set! Just sign up at %(serviceName)s and create your new blog.", {
+									args: { serviceName }
+								} ), 2 ) }
 							</p>
 
 							<p>
-								{ preventWidows( i18n.translate( 'To get started, sign up at WordPress.com and create a new blog. Your domain will connect automatically.' ), 2 ) }
+								{ preventWidows( i18n.translate( 'To get started, sign up at %(serviceName)s and create a new blog. Your domain will connect automatically.', {
+									args: { serviceName }
+								} ), 2 ) }
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Sign up at WordPress.com' ) }
+								{ i18n.translate( 'Sign up at %(serviceName)s', {
+									args: { serviceName }
+								} ) }
 							</Button>
 						</Form.FieldArea>
 					) }

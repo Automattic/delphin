@@ -11,7 +11,8 @@ export default connect(
 	( state, ownProps ) => ( {
 		blogType: getBlogType( state ),
 		domainName: ownProps.params.domainName,
-		hostName: ownProps.params.hostName
+		hostName: ownProps.params.hostName,
+		service: ownProps.params.service
 	} ),
 	( dispatch, ownProps ) => bindActionCreators( {
 		redirectToConfirmConnectBlog: () => {

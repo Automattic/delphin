@@ -10,7 +10,8 @@ import { redirect } from 'actions/routes';
 export default connect(
 	( state, ownProps ) => ( {
 		blogType: getBlogType( state ),
-		domainName: ownProps.params.domainName
+		domainName: ownProps.params.domainName,
+		service: ownProps.params.service
 	} ),
 	( dispatch, ownProps ) => bindActionCreators( {
 		redirectToConfirmConnectBlog: () => {

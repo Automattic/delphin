@@ -15,7 +15,16 @@ class ConnectingBlog extends Component {
 	}
 
 	render() {
-		const { blogType, domainName, hostName } = this.props;
+		const { blogType, domainName, hostName, service } = this.props;
+
+		let serviceName;
+		if ( service === 'wordpressdotcom' ) {
+			serviceName = 'WordPress.com';
+		}
+
+		if ( service === 'pressable' ) {
+			serviceName = 'Pressable.com';
+		}
 
 		return (
 			<SunriseStep>
@@ -26,15 +35,15 @@ class ConnectingBlog extends Component {
 
 					<h2>
 						{ blogType === 'existing' && (
-							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your WordPress.com blog at {{strong}}%(hostName)s{{/strong}}.', {
-								args: { domainName, hostName },
+							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {
+								args: { domainName, hostName, serviceName },
 								components: { strong: <strong /> }
 							} ), 2 )
 						) }
 
 						{ blogType === 'new' && (
-							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with WordPress.com.', {
-								args: { domainName },
+							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with %(serviceName)s.', {
+								args: { domainName, serviceName },
 								components: { strong: <strong /> }
 							} ), 2 )
 						) }
@@ -49,7 +58,8 @@ ConnectingBlog.propTypes = {
 	blogType: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
-	redirectToConfirmConnectBlog: PropTypes.func.isRequired
+	redirectToConfirmConnectBlog: PropTypes.func.isRequired,
+	service: PropTypes.string
 };
 
 export default ConnectingBlog;

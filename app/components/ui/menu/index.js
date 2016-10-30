@@ -45,7 +45,7 @@ const Menu = ( { isLoggedIn, logoutUser } ) => {
 				</Link>
 			) }
 
-			{ isEnabled( 'm3' ) && isLoggedIn && (
+			{ isLoggedIn && (
 				<a className={ styles.link } onClick={ logoutUser }>
 					{ i18n.translate( 'Log Out' ) }
 				</a>

@@ -1,4 +1,5 @@
 // External dependencies
+import classnames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -8,8 +9,8 @@ import Form from './form';
 import Footer from './footer';
 import styles from './styles.scss';
 
-const SunriseStep = withStyles( styles )( ( { children } ) => (
-	<div className={ styles.sunriseStep }>
+const SunriseStep = withStyles( styles )( ( { children, className } ) => (
+	<div className={ classnames( className, styles.sunriseStep ) }>
 		{ children }
 	</div>
 ) );

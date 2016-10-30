@@ -23,11 +23,11 @@ class ConfirmConnectBlog extends Component {
 		let destination;
 
 		if ( blogType === 'new' ) {
-			destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+			destination = 'https://wpcalypso.wordpress.com/start/get-dot-blog?domain=' + domainName;
 		}
 
 		if ( blogType === 'existing' ) {
-			destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			destination = 'https://wpcalypso.wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
 		}
 
 		this.props.logInToWpcom( destination );

@@ -171,6 +171,12 @@ let publicRoutes = [
 				getComponent: getComponent( 'setUpDomain', 'contactUsExistingBlog' )
 			},
 			{
+				path: 'set-up-domain/:domainName/update-nameservers',
+				slug: 'updateNameservers',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'updateNameservers' )
+			},
+			{
 				path: 'set-up-domain/:domainName/hosts',
 				slug: 'hosts',
 				static: false,

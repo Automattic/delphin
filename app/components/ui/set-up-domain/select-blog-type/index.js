@@ -83,6 +83,10 @@ class SelectBlogType extends Component {
 						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
+
+						<Link to={ getPath( 'updateNameservers', { domainName } ) }>
+							{ i18n.translate( 'Gimme nameservers' ) }
+						</Link>
 					</Form.SubmitArea>
 
 					<Form.Footer>

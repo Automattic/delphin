@@ -7,6 +7,9 @@ const EXTRA_ACTION = 'EXTRA_ACTION';
 const FETCH = 'FETCH';
 const FETCH_COMPLETE = 'FETCH_COMPLETE';
 const FETCH_FAIL = 'FETCH_FAIL';
+const UPDATE = 'UPDATE';
+const UPDATE_COMPLETE = 'UPDATE_COMPLETE';
+const UPDATE_FAIL = 'UPDATE_FAIL';
 const RESET = 'RESET';
 
 describe( 'createRequestReducer', () => {
@@ -109,6 +112,62 @@ describe( 'createRequestReducer', () => {
 			expect( blankReducer( { initial: 'cool' }, { type: 'UNRELATED' } ) ).toEqual( {
 				initial: 'cool'
 			} );
+		} );
+	} );
+
+	describe( 'with an array of actions', () => {
+		const reducer = createRequestReducer( {
+			loading: [ FETCH, UPDATE ],
+			success: [ FETCH_COMPLETE, UPDATE_COMPLETE ],
+			fail: [ FETCH_FAIL, UPDATE_FAIL ],
+		} );
+
+		it( 'should allow an array of actions in the loading property', () => {
+			expect( reducer( {
+				hasLoadedFromServer: false,
+				isRequesting: false,
+				data: null,
+				error: null
+			}, { type: UPDATE } ).isRequesting ).toBeTruthy();
+
+			expect( reducer( {
+				hasLoadedFromServer: false,
+				isRequesting: false,
+				data: null,
+				error: null
+			}, { type: FETCH } ).isRequesting ).toBeTruthy();
+		} );
+
+		it( 'should allow an array of actions in the success property', () => {
+			expect( reducer( {
+				hasLoadedFromServer: false,
+				isRequesting: false,
+				data: null,
+				error: null
+			}, { type: UPDATE_COMPLETE } ).hasLoadedFromServer ).toBeTruthy();
+
+			expect( reducer( {
+				hasLoadedFromServer: false,
+				isRequesting: false,
+				data: null,
+				error: null
+			}, { type: FETCH_COMPLETE } ).hasLoadedFromServer ).toBeTruthy();
+		} );
+
+		it( 'should allow an array of actions in the fail property', () => {
+			expect( reducer( {
+				hasLoadedFromServer: false,
+				isRequesting: true,
+				data: null,
+				error: null
+			}, { type: UPDATE_FAIL } ).isRequesting ).toBeFalsy();
+
+			expect( reducer( {
+				hasLoadedFromServer: false,
+				isRequesting: true,
+				data: null,
+				error: null
+			}, { type: FETCH_FAIL } ).isRequesting ).toBeFalsy();
 		} );
 	} );
 } );

@@ -41,14 +41,8 @@ class ConfirmConnectBlog extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>
-						{ blogType === 'existing' &&
-							i18n.translate( 'Your new domain is connected!' )
-						}
-
-						{ blogType === 'new' &&
-							i18n.translate( 'Set up your blog at WordPress.com' )
-						}
+					<h1 className={ styles.setupCompleteHeader }>
+						{ i18n.translate( 'Setup Complete!' ) }
 					</h1>
 				</SunriseStep.Header>
 

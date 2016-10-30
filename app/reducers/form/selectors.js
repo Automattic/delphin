@@ -17,6 +17,6 @@ export const getBlogType = ( state ) => {
  * @param {object} state - global state tree
  * @returns {string|null} - the selected service of the blog to connect, or null if not found
  */
-export const getBlogService = ( state ) => {
+export const getBlogServiceSelected = ( state ) => {
 	return get( state, 'form.selectNewBlogHost.service.value' );
 };

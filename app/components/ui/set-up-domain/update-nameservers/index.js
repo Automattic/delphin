@@ -102,8 +102,8 @@ class UpdateNameservers extends Component {
 							</div>
 						) ) }
 
-						<Button className={ styles.button }>
-							{ i18n.translate( 'Yes, Go On' ) }
+						<Button className={ styles.button } disabled={ isRequestingNameservers }>
+							{ i18n.translate( 'Update Nameservers' ) }
 						</Button>
 					</Form.FieldArea>
 				</Form>

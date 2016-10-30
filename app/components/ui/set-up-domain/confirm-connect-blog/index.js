@@ -37,7 +37,7 @@ class ConfirmConnectBlog extends Component {
 		const { blogType, domainName, hostName } = this.props;
 
 		return (
-			<SunriseStep>
+			<SunriseStep isSetupDomain={ true }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>

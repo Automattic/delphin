@@ -12,7 +12,6 @@ import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
-import setupDomainStyles from '../styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectBlogType extends Component {
@@ -42,7 +41,7 @@ class SelectBlogType extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep className={ setupDomainStyles.setup }>
+			<SunriseStep isSetupDomain={ true }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
@@ -51,11 +50,11 @@ class SelectBlogType extends Component {
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
+						<h3>
 							{ i18n.translate( 'What do you want to do with %(domainName)s?', {
 								args: { domainName }
 							} ) }
-						</p>
+						</h3>
 
 						<label className={ styles.label } htmlFor="existing">
 							<Radio
@@ -113,4 +112,4 @@ SelectBlogType.propTypes = {
 	submitting: PropTypes.bool.isRequired,
 };
 
-export default withStyles( styles, setupDomainStyles )( bindHandlers( SelectBlogType ) );
+export default withStyles( styles )( bindHandlers( SelectBlogType ) );

@@ -58,7 +58,7 @@ class ContactUsExistingBlog extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<SunriseStep isSetupDomain={ true }>
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Submit Your Request' ) }</h1>
 

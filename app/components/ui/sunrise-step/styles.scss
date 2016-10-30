@@ -4,3 +4,17 @@
 	font-size: 1.4rem;
 	font-weight: 300;
 }
+
+.setup-domain {
+	form {
+		border-radius: 0 0 3px 3px;
+		box-shadow: 0 -3px 0 $blue;
+	}
+
+	h3 {
+		color: $blue-dark;
+		font-size: 2rem;
+		font-weight: 600;
+		margin-bottom: 30px;
+	}
+}

@@ -9,11 +9,19 @@ import Form from './form';
 import Footer from './footer';
 import styles from './styles.scss';
 
-const SunriseStep = withStyles( styles )( ( { children, className } ) => (
-	<div className={ classnames( className, styles.sunriseStep ) }>
-		{ children }
-	</div>
-) );
+const SunriseStep = withStyles( styles )( ( { children, isSetupDomain } ) => {
+	let classes = styles.sunriseStep;
+	console.log( isSetupDomain );
+	if ( isSetupDomain ) {
+		classes = classnames( styles.sunriseStep, styles.setupDomain );
+	}
+
+	return (
+		<div className={ classes }>
+			{ children }
+		</div>
+	);
+} );
 
 SunriseStep.propTypes = {
 	children: PropTypes.oneOfType( [

@@ -26,7 +26,7 @@ class ConnectExistingBlog extends Component {
 		const { domainName, hostName } = this.props;
 
 		return (
-			<SunriseStep>
+			<SunriseStep isSetupDomain={ true }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>

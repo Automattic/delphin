@@ -46,7 +46,7 @@ class SelectNewBlogHost extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<SunriseStep isSetupDomain={ true }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
@@ -63,9 +63,9 @@ class SelectNewBlogHost extends Component {
 				</SunriseStep.Header>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
+						<h3>
 							{ i18n.translate( 'Where would you like to create your new blog?' ) }
-						</p>
+						</h3>
 
 						<strong className={ styles.preLabel }>
 							{ i18n.translate( 'I want simple and quick:' ) }

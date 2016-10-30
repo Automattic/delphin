@@ -98,7 +98,7 @@ UpdateNameservers.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
-	isUpdatingNameservers: PropTypes.bool.isRequired,
+	isRequestingNameservers: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 	updateNameservers: PropTypes.func.isRequired,
 };

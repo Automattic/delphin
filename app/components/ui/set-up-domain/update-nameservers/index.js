@@ -12,6 +12,7 @@ import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import { removeInvalidInputProps } from 'lib/form';
 
 class UpdateNamservers extends Component {
 	handleSubmit( event ) {
@@ -41,6 +42,19 @@ class UpdateNamservers extends Component {
 							} ) }
 						</label>
 
+						{ Object.keys( this.props.fields ).map( ( fieldName, index ) => (
+							<div key={ fieldName }>
+								<label for={ fieldName }>
+									{ i18n.translate( 'Nameserver %(number)d', { args: { number: index + 1 } } ) }
+								</label>
+
+								<input
+									placeholder={ `ns${ ( index + 1 ) }.wordpress.com` }
+									{ ...removeInvalidInputProps( this.props.fields[ fieldName ] ) }
+								/>
+							</div>
+						) ) }
+
 						<Button className={ styles.button }>
 							{ i18n.translate( 'Yes, Go On' ) }
 						</Button>
@@ -59,7 +73,8 @@ class UpdateNamservers extends Component {
 
 UpdateNamservers.propTypes = {
 	domainName: PropTypes.string.isRequired,
-	redirect: PropTypes.func.isRequired
+	fields: PropTypes.object.isRequired,
+	redirect: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( UpdateNamservers ) );

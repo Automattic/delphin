@@ -61,7 +61,7 @@ class ConfirmConnectBlog extends Component {
 		}
 
 		if ( service === 'pressable' ) {
-			serviceName = 'Pressable.com';
+			serviceName = 'Pressable';
 		}
 
 		return (

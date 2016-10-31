@@ -71,5 +71,23 @@ describe( 'lib/domain/nameservers', () => {
 
 			expect( result ).toEqual( {} );
 		} );
+
+		it( 'should return object with errors for duplicate nameservers', () => {
+			const nameservers = {
+				nameserver1: 'ns1.example.com',
+				nameserver2: 'ns1.example.com',
+				nameserver3: 'ns2.example.com',
+				nameserver4: 'ns2.example.com',
+			};
+
+			const result = validateUpdateNameserversForm( nameservers );
+
+			expect( result ).toEqual( {
+				nameserver1: 'This is a duplicate field.',
+				nameserver2: 'This is a duplicate field.',
+				nameserver3: 'This is a duplicate field.',
+				nameserver4: 'This is a duplicate field.',
+			} );
+		} );
 	} );
 } );

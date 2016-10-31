@@ -1,4 +1,5 @@
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 .container {
 	margin: 80px auto;
@@ -11,6 +12,10 @@
 
 .form {
 	border: solid 1px $gray-light;
+	@include breakpoint( '<480px' ) {
+		background: #fff;
+		padding: 30px 30px 15px;
+	}
 }
 
 .field-container {

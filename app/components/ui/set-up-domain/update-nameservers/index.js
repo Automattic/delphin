@@ -14,6 +14,7 @@ import Form from 'components/ui/form';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
+import ValidationError from 'components/ui/form/validation-error';
 
 class UpdateNameservers extends Component {
 	handleSubmit( values ) {
@@ -72,6 +73,7 @@ class UpdateNameservers extends Component {
 									placeholder={ `ns${ ( index + 1 ) }.wordpress.com` }
 									{ ...removeInvalidInputProps( this.props.fields[ fieldName ] ) }
 								/>
+								<ValidationError field={ this.props.fields[ fieldName ] } />
 							</div>
 						) ) }
 

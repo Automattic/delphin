@@ -18,7 +18,7 @@ class ConnectingBlog extends Component {
 		const { blogType, domainName, hostName, service } = this.props;
 
 		let serviceName;
-		if ( service === 'wordpressdotcom' ) {
+		if ( service === 'wpcom' ) {
 			serviceName = 'WordPress.com';
 		}
 

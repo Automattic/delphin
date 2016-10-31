@@ -75,7 +75,7 @@ class UpdateNameservers extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<div className={ styles.header }>
-					<h1>{ i18n.translate( 'Edit Nameservers' ) }</h1>
+					<h1 className={ styles.headerTitle }>{ i18n.translate( 'Edit Nameservers' ) }</h1>
 				</div>
 
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>

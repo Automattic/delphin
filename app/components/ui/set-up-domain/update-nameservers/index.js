@@ -17,6 +17,29 @@ import { removeInvalidInputProps } from 'lib/form';
 import ValidationError from 'components/ui/form/validation-error';
 
 class UpdateNameservers extends Component {
+	componentWillMount() {
+		const {
+			domainName,
+			fetchNameservers,
+		} = this.props;
+
+		fetchNameservers( domainName ).then( result => this.initializeForm( result.nameservers ) );
+	}
+
+	initializeForm( nameservers ) {
+		const {
+			initializeForm,
+			fields,
+		} = this.props;
+
+		const form = Object.keys( fields ).reduce( ( currentForm, fieldName, index ) => {
+			currentForm[ fieldName ] = nameservers[ index ] || '';
+			return currentForm;
+		}, {} );
+
+		initializeForm( form );
+	}
+
 	handleSubmit( values ) {
 		const {
 			addNotice,
@@ -45,6 +68,7 @@ class UpdateNameservers extends Component {
 		const {
 			domainName,
 			handleSubmit,
+			isRequestingNameservers,
 		} = this.props;
 
 		return (
@@ -70,6 +94,7 @@ class UpdateNameservers extends Component {
 								</label>
 
 								<input
+									disabled={ isRequestingNameservers }
 									placeholder={ `ns${ ( index + 1 ) }.wordpress.com` }
 									{ ...removeInvalidInputProps( this.props.fields[ fieldName ] ) }
 								/>
@@ -77,14 +102,14 @@ class UpdateNameservers extends Component {
 							</div>
 						) ) }
 
-						<Button className={ styles.button }>
-							{ i18n.translate( 'Yes, Go On' ) }
+						<Button className={ styles.button } disabled={ isRequestingNameservers }>
+							{ i18n.translate( 'Update Nameservers' ) }
 						</Button>
 					</Form.FieldArea>
 				</Form>
 
 				<SunriseStep.Footer>
-					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
+					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
 				</SunriseStep.Footer>
@@ -96,9 +121,11 @@ class UpdateNameservers extends Component {
 UpdateNameservers.propTypes = {
 	addNotice: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
+	fetchNameservers: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
-	isUpdatingNameservers: PropTypes.bool.isRequired,
+	initializeForm: PropTypes.func.isRequired,
+	isRequestingNameservers: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 	updateNameservers: PropTypes.func.isRequired,
 };

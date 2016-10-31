@@ -83,16 +83,15 @@ class SelectBlogType extends Component {
 						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
-
-						<Link to={ getPath( 'updateNameservers', { domainName } ) }>
-							{ i18n.translate( 'Gimme nameservers' ) }
-						</Link>
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						{ i18n.translate( 'If you already have a blog and you know its current address, enter it in the next step to connect it to %(domainName)s.', {
-							args: { domainName }
-						} ) }
+						<p className={ styles.subHeader }>{ i18n.translate( 'Looking to edit your nameservers yourself?' ) }</p>
+						<p>
+							{ i18n.translate( "There is copy here about {{Link}}editing nameservers{{/Link}}. I'm not sure what to say here Ran.", {
+								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
+							} ) }
+						</p>
 					</Form.Footer>
 				</Form>
 

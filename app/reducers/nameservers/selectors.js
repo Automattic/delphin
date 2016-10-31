@@ -1,1 +1,1 @@
-export const isUpdatingNameservers = state => state.nameservers.isRequesting;
+export const isRequestingNameservers = state => state.nameservers.isRequesting;

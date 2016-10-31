@@ -2,6 +2,7 @@
 import compact from 'lodash/compact';
 import parseDomain from 'parse-domain';
 import { translate } from 'i18n-calypso';
+import values from 'lodash/values';
 
 export const isNameserverValid = value => {
 	const { subdomain, domain, tld } = parseDomain( value ) || {};
@@ -9,32 +10,34 @@ export const isNameserverValid = value => {
 	return compact( [ subdomain, domain, tld ] ).join( '.' ) === value;
 };
 
-export const validateUpdateNameserversForm = values => {
-	const requiredFields = [ 'nameserver1', 'nameserver2' ];
-	const allFields = [ ...requiredFields, 'nameserver3', 'nameserver4' ];
+export const validateUpdateNameserversForm = fields => {
+	const requiredFieldNames = [ 'nameserver1', 'nameserver2' ];
+	const fieldNames = [ ...requiredFieldNames, 'nameserver3', 'nameserver4' ];
 	const errors = {};
 
-	requiredFields.forEach( fieldName => {
-		if ( ! values[ fieldName ] ) {
+	requiredFieldNames.forEach( fieldName => {
+		if ( ! fields[ fieldName ] ) {
 			errors[ fieldName ] = translate( 'Field is required.' );
 		}
 	} );
 
-	allFields.forEach( fieldName => {
+	fieldNames.forEach( fieldName => {
 		if ( errors[ fieldName ] ) {
 			return;
 		}
 
-		if ( fieldName === 'nameserver3' && ! values.nameserver3 && ! values.nameserver4 ) {
+		if ( fieldName === 'nameserver3' && ! fields.nameserver3 && ! fields.nameserver4 ) {
 			return;
 		}
 
-		if ( fieldName === 'nameserver4' && ! values.nameserver4 ) {
+		if ( fieldName === 'nameserver4' && ! fields.nameserver4 ) {
 			return;
 		}
 
-		if ( ! values[ fieldName ] || ! isNameserverValid( values[ fieldName ] ) ) {
+		if ( ! fields[ fieldName ] || ! isNameserverValid( fields[ fieldName ] ) ) {
 			errors[ fieldName ] = translate( 'Invalid value provided.' );
+		} else if ( values( fields ).filter( name => name === fields[ fieldName ] ).length > 1 ) {
+			errors[ fieldName ] = translate( 'This is a duplicate field.' );
 		}
 	} );
 

@@ -35,7 +35,7 @@ class ConfirmConnectBlog extends Component {
 			return;
 		}
 
-		if ( service === 'wordpressdotcom' ) {
+		if ( service === 'wpcom' ) {
 			if ( blogType === 'new' ) {
 				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
 			}
@@ -56,7 +56,7 @@ class ConfirmConnectBlog extends Component {
 		const { blogType, domainName, hostName, service } = this.props;
 
 		let serviceName;
-		if ( service === 'wordpressdotcom' ) {
+		if ( service === 'wpcom' ) {
 			serviceName = 'WordPress.com';
 		}
 

@@ -28,7 +28,7 @@ class SelectNewBlogHost extends Component {
 		const { redirect, domainName } = this.props;
 
 		let nextPageSlug = '';
-		if ( service === 'wordpressdotcom' || service === 'pressable' ) {
+		if ( service === 'wpcom' || service === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';
@@ -69,13 +69,13 @@ class SelectNewBlogHost extends Component {
 						<strong className={ styles.preLabel }>
 							{ i18n.translate( 'I want simple and quick:' ) }
 						</strong>
-						<label className={ styles.label } htmlFor="wordpressdotcom">
+						<label className={ styles.label } htmlFor="wpcom">
 							<Radio
 								className={ styles.radio }
 								{ ...service }
-								id="wordpressdotcom"
-								value="wordpressdotcom"
-								checked={ service.value === 'wordpressdotcom' }
+								id="wpcom"
+								value="wpcom"
+								checked={ service.value === 'wpcom' }
 							/>
 							<h3 className={ styles.labelHost }>
 								{ i18n.translate( 'WordPress.com' ) }

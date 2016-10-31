@@ -3,4 +3,8 @@
 .sunrise-step {
 	font-size: 1.4rem;
 	font-weight: 300;
+
+	p {
+		word-wrap: break-word;
+	}
 }

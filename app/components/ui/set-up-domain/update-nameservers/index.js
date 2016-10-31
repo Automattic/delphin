@@ -12,7 +12,6 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 import ValidationError from 'components/ui/form/validation-error';
 
@@ -72,23 +71,17 @@ class UpdateNameservers extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.container }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Give me nameservers' ) }</h1>
-				</SunriseStep.Header>
+				<div className={ styles.header }>
+					<h1>{ i18n.translate( 'Edit Nameservers' ) }</h1>
+				</div>
 
-				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<label>
-							{ i18n.translate( 'Are you ready to setup %(domainName)s?', {
-								args: { domainName }
-							} ) }
-						</label>
-
 						{ Object.keys( this.props.fields ).map( ( fieldName, index ) => (
-							<div key={ fieldName }>
+							<div className={ styles.fieldContainer } key={ fieldName }>
 								<label htmlFor={ fieldName }>
 									{ i18n.translate( 'Nameserver %(number)d', { args: { number: index + 1 } } ) }
 								</label>
@@ -103,17 +96,17 @@ class UpdateNameservers extends Component {
 						) ) }
 
 						<Button className={ styles.button } disabled={ isRequestingNameservers }>
-							{ i18n.translate( 'Update Nameservers' ) }
+							{ i18n.translate( 'Set nameservers' ) }
 						</Button>
 					</Form.FieldArea>
-				</Form>
+				</form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.cancel }>
 					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
-						{ i18n.translate( 'Back' ) }
+						{ i18n.translate( 'Cancel' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

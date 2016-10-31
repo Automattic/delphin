@@ -1,0 +1,39 @@
+@import 'app/styles/colors';
+
+.container {
+	margin: 80px auto;
+	max-width: 440px;
+
+	input::placeholder {
+		font-style: italic;
+	}
+}
+
+.form {
+	border: solid 1px $gray-light;
+}
+
+.field-container {
+	margin-bottom: 15px;
+}
+
+.header {
+	background: $blue-background;
+	color: $white;
+	font-size: 1.4rem;
+	padding: 20px;
+}
+
+.button {
+	width: 100%;
+}
+
+.cancel {
+	margin-top: 15px;
+	text-align: center;
+	text-decoration: underline;
+
+	a {
+		color: $gray;
+	}
+}

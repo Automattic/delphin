@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 import { ANALYTICS_MULTI_TRACK } from 'reducers/action-types';
 import {
 	composeAnalytics,

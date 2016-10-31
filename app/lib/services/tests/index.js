@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import { canConnectToService } from '../index';
 

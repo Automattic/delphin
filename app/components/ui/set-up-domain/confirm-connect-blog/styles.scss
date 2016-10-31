@@ -1,4 +1,13 @@
+@import 'app/styles/assets';
+
 .button {
 	margin-top: 20px;
 	width: 100%;
 }
+
+.setup-complete-header {
+	background: url( #{$image-assets-url}party.svg ) no-repeat top right;
+	display: inline-block;
+	padding-right: 50px;
+}
+

@@ -14,15 +14,20 @@ const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
 	const domainCardClassNames = classNames( {
 		[ styles.domainCard ]: true,
 		[ styles.notConnected ]: ! isSetup,
+		[ styles.connectedConcierge ]: false, // concierge/HE setup
+		[ styles.connectedNameservers ]: false, // custom nameservers
 		[ styles.showDetails ]: isSetup && detailsVisible
 	} );
 
 	if ( ! isSetup ) {
 		return (
 			<div className={ domainCardClassNames }>
-				<div className={ styles.domainSetup }>
+				<div className={ styles.domainHeading }>
 					<h3>{ name }</h3>
-					<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set Up Now' ) }</Button>
+					<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set up' ) }</Button>
+				</div>
+				<div className={ styles.domainDetails }>
+					<p>{ i18n.translate( "You haven't set up this domain yet." ) }</p>
 				</div>
 			</div>
 		);

@@ -50,6 +50,12 @@ let publicRoutes = [
 				slug: 'signUpWithEmail',
 				static: true,
 				component: verifyUserWithQueryContainerFactory( 'signup' )
+			},
+			{
+				path: 'set-up-domain/:domainName/update-nameservers',
+				slug: 'updateNameservers',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'updateNameservers' )
 			}
 		]
 	},
@@ -169,12 +175,6 @@ let publicRoutes = [
 				slug: 'contactUsExistingBlog',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'contactUsExistingBlog' )
-			},
-			{
-				path: 'set-up-domain/:domainName/update-nameservers',
-				slug: 'updateNameservers',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'updateNameservers' )
 			},
 			{
 				path: 'set-up-domain/:domainName/hosts',

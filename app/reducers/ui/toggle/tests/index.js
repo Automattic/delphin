@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import {
 	TOGGLE_HIDE,

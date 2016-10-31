@@ -1,12 +1,7 @@
-// The tested module:
-jest.unmock( '..' );
-
-// Breaks jest for some reason:
-// jest.unmock( 'wpcom' ); - replaced by a manual mock
-jest.unmock( 'debug' );
-jest.unmock( 'reducers/user/selectors' );
-jest.unmock( 'i18n-calypso' );
-jest.unmock( 'lib/formatters' );
+jest.mock( 'wpcom-xhr-request' );
+jest.mock( 'client/bearer-cookie', () => ( {
+	getTokenFromBearerCookie: () => {}
+} ) );
 
 global.localStorage = {
 	getItem: () => null

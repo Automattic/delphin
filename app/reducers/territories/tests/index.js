@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import {
 	COUNTRIES_SUPPORTED_BY_DOMAINS_FETCH,

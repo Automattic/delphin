@@ -1,5 +1,3 @@
-jest.disableAutomock();
-
 // Internal dependencies
 import {
 	CONTACT_INFORMATION_ADDRESS2_INPUT_SHOW,

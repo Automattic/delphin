@@ -8,9 +8,6 @@ import {
 } from 'reducers/action-types';
 import { notices } from '..';
 
-jest.unmock( '..' );
-jest.unmock( 'lodash/uniqueId' );
-
 describe( 'notices reducer for location change action', () => {
 	it( 'should clear all notices', () => {
 		const originalState = Object.freeze( [ {

@@ -1,4 +1,3 @@
-jest.disableAutomock();
 // External dependencies
 import find from 'lodash/find';
 

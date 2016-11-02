@@ -31,7 +31,7 @@ const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
 		domain: PropTypes.object,
-		domainApplicationCost: PropTypes.string.isRequired,
+		domainApplicationCost: PropTypes.string,
 		domainCost: PropTypes.string.isRequired,
 		errors: PropTypes.object,
 		fields: PropTypes.object.isRequired,

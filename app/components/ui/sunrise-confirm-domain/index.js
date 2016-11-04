@@ -81,14 +81,16 @@ class SunriseConfirmDomain extends React.Component {
 					{ ' ' }
 					{ i18n.translate( 'Early Application' ) }
 				</div>
-				<div className={ styles.renewalInfo }>
-					{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
-						args: {
-							applicationCost,
-							domainCost
-						}
-					} ) }
-				</div>
+				{ applicationCost && (
+					<div className={ styles.renewalInfo }>
+						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
+							args: {
+								applicationCost,
+								domainCost
+							}
+						} ) }
+					</div>
+				) }
 			</div>
 		);
 	}

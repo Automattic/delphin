@@ -95,6 +95,8 @@ class CheckoutReview extends React.Component {
 	}
 
 	render() {
+		const { applicationCost } = this.props;
+
 		return ( <SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Review your application' ) } />
 			<SunriseStep.Header>
@@ -111,9 +113,10 @@ class CheckoutReview extends React.Component {
 				<section className={ styles.summary }>
 					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
 					<p className={ styles.applicationFee }>
-						{ this.props.applicationCost }
-						{ ' ' }
-						{ i18n.translate( 'Early Application' ) }
+						{ applicationCost && [
+							applicationCost,
+							i18n.translate( 'Early Application' )
+						].join( ' ' ) }
 					</p>
 					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
 				</section>
@@ -134,7 +137,7 @@ class CheckoutReview extends React.Component {
 }
 
 CheckoutReview.propTypes = {
-	applicationCost: PropTypes.string.isRequired,
+	applicationCost: PropTypes.string,
 	checkout: PropTypes.shape( {
 		number: PropTypes.string.isRequired
 	} ).isRequired,

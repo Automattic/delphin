@@ -19,8 +19,14 @@ const Suggestion = React.createClass( {
 	},
 
 	render() {
-		const domainDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } ),
-			{ cost, applicationFee } = domainDetails;
+		const domainDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } );
+		const { cost } = domainDetails;
+		const applicationDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain-app' } );
+
+		let applicationFee;
+		if ( applicationDetails ) {
+			applicationFee = applicationDetails.cost;
+		}
 
 		return (
 			<li className={ styles.suggestion } onClick={ this.selectDomain }>
@@ -37,11 +43,13 @@ const Suggestion = React.createClass( {
 							args: { cost }
 						} ) }
 					</div>
-					<div className={ styles.applicationFeeMessage }>
-						{ i18n.translate( '+ %(applicationFee)s early application fee', {
-							args: { applicationFee }
-						} ) }
-					</div>
+					{ applicationFee && (
+						<div className={ styles.applicationFeeMessage }>
+							{ i18n.translate( '+ %(applicationFee)s early application fee', {
+								args: { applicationFee }
+							} ) }
+						</div>
+					) }
 				</div>
 				<div className={ styles.buyButton }>
 					{ i18n.translate( 'Get started' ) }

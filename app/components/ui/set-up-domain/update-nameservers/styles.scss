@@ -1,0 +1,49 @@
+@import 'app/styles/colors';
+@import 'app/styles/breakpoints';
+
+.container {
+	margin: 80px auto;
+	max-width: 440px;
+
+	input::placeholder {
+		font-style: italic;
+	}
+}
+
+.form {
+	border: solid 1px $gray-light;
+	@include breakpoint( '<480px' ) {
+		background: #fff;
+		padding: 30px 30px 15px;
+	}
+}
+
+.field-container {
+	margin-bottom: 15px;
+}
+
+.header {
+	background: $blue-background;
+	color: $white;
+	font-size: 1.4rem;
+	padding: 20px;
+}
+
+.header-title {
+	font-size: 1.6rem;
+}
+
+.button {
+	width: 100%;
+}
+
+.cancel {
+	font-size: 1.4rem;
+	margin-top: 15px;
+	text-align: center;
+	text-decoration: underline;
+
+	a {
+		color: $gray;
+	}
+}

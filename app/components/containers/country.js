@@ -20,7 +20,7 @@ class QueryCountries extends React.Component {
 	}
 
 	render() {
-		return <Country disabled={ this.isDataLoading() } { ...this.props }/>;
+		return <Country disabled={ this.isDataLoading() } { ...this.props } />;
 	}
 }
 

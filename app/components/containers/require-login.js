@@ -23,7 +23,7 @@ export default WrappedComponent => {
 			return null;
 		}
 
-		return <WrappedComponent {...props} />;
+		return <WrappedComponent { ...props } />;
 	}
 
 	LoginEnforcer.propTypes = {

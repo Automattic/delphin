@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import omit from 'lodash/omit';
@@ -20,5 +20,9 @@ const CompactFormToggle = ( props ) => (
 		{ this.props.children }
 	</Toggle>
 );
+
+CompactFormToggle.propTypes = {
+	className: PropTypes.string.isRequired
+};
 
 export default withStyles( styles )( CompactFormToggle );

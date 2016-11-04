@@ -52,7 +52,7 @@ class SelectNewBlogHost extends Component {
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( "Let's create a new blog!" ) }</h1>
 					<h2>
-						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog. " +
+						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog." +
 							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",
 							{
 								args: { domainName },

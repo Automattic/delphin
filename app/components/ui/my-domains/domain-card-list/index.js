@@ -20,7 +20,7 @@ const DomainCardList = ( { domains, areDetailsVisible, toggleDomainDetails } ) =
 					detailsVisible={ areDetailsVisible( name ) }
 					toggleDetails={ toggleDetails( name ) } />
 			) }
-			<NewDomainCard/>
+			<NewDomainCard />
 		</div>
 	);
 };

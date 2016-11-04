@@ -9,7 +9,7 @@ const scrollToTop = WrappedComponent => class Scroller extends React.Component {
 	}
 
 	render() {
-		return <WrappedComponent {...this.props} />;
+		return <WrappedComponent { ...this.props } />;
 	}
 };
 

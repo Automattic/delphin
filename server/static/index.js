@@ -1,4 +1,4 @@
-var express = require( 'express' ),
+let express = require( 'express' ),
 	serveStatic = require( 'serve-static' ),
 	path = require( 'path' ),
 	publicDir = path.resolve( __dirname, '../../public' ),
@@ -11,6 +11,8 @@ app.get( '*', function( req, res ) {
 } );
 
 app.listen( 1337, function( error ) {
-	if ( error ) throw error;
+	if ( error ) {
+		throw error;
+	}
 	console.log( 'Static server started on http://localhost:' + 1337 );
 } );

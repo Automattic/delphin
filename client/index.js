@@ -106,7 +106,7 @@ function init() {
 }
 
 function render() {
-	var containerElement = document.getElementById( 'content' );
+	let containerElement = document.getElementById( 'content' );
 	ReactDOM.render(
 		<Provider store={ store }>
 			<Stylizer onInsertCss={ insertCss }>

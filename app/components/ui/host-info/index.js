@@ -11,7 +11,7 @@ import { hosts } from 'lib/hosts';
 import styles from './styles.scss';
 
 function getCost( cost ) {
-	return `${cost.start} - ${cost.end} ${cost.currency}/month`;
+	return `${ cost.start } - ${ cost.end } ${ cost.currency }/month`;
 }
 
 class HostInfo extends React.Component {

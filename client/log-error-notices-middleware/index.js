@@ -11,7 +11,7 @@ export const logErrorNoticesMiddleware = store => next => action => {
 		case NOTICE_ADD:
 			if ( notice.status === 'error' ) {
 				const location = store.getState().routing.locationBeforeTransitions;
-				const url = `${location.pathname}${location.search}`;
+				const url = `${ location.pathname }${ location.search }`;
 				store.dispatch( recordTracksEvent( 'delphin_error_message_show', {
 					error_message: notice.message,
 					path: url

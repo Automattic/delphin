@@ -29,7 +29,7 @@ class ConnectExistingBlog extends Component {
 			} )
 			.catch( noop );
 
-		redirect( 'connectingExistingBlog', { pathParams: { domainName, hostName } } );
+		redirect( 'connectingExistingBlog', { pathParams: { domainName, hostName, service } } );
 	}
 
 	render() {

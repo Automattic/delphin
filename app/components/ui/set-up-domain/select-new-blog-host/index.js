@@ -15,6 +15,7 @@ import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import { imageUrl } from 'lib/assets';
+import withPageView from 'lib/analytics/with-page-view';
 
 class SelectNewBlogHost extends Component {
 	componentWillMount() {
@@ -179,4 +180,4 @@ SelectNewBlogHost.propTypes = {
 	updateDomain: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( SelectNewBlogHost ) );
+export default withStyles( styles )( withPageView( bindHandlers( SelectNewBlogHost ), 'Select New Blog Host' ) );

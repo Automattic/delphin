@@ -15,6 +15,7 @@ import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import { getServiceName } from 'lib/services';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
@@ -139,4 +140,4 @@ ConfirmConnectBlog.propTypes = {
 	service: PropTypes.string.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( ConfirmConnectBlog ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConfirmConnectBlog ), 'Confirm Connect Blog' ) );

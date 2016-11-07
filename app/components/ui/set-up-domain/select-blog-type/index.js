@@ -13,6 +13,7 @@ import Form from 'components/ui/form';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class SelectBlogType extends Component {
 	handleSubmit( values ) {
@@ -116,4 +117,4 @@ SelectBlogType.propTypes = {
 	submitting: PropTypes.bool.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( SelectBlogType ) );
+export default withStyles( styles )( withPageView( bindHandlers( SelectBlogType ), 'Select Blog Type' ) );

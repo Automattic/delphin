@@ -13,6 +13,7 @@ import Form from 'components/ui/form';
 import noop from 'lodash/noop';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
@@ -79,4 +80,4 @@ ConnectExistingBlog.propTypes = {
 	updateDomain: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( ConnectExistingBlog ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConnectExistingBlog ), 'Connect Existing Blog' ) );

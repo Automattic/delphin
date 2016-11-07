@@ -12,6 +12,7 @@ import Form from 'components/ui/form';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
 import ValidationError from 'components/ui/form/validation-error';
+import withPageView from 'lib/analytics/with-page-view';
 
 class UpdateNameservers extends Component {
 	componentWillMount() {
@@ -129,4 +130,4 @@ UpdateNameservers.propTypes = {
 	updateNameservers: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( UpdateNameservers ) );
+export default withStyles( styles )( withPageView( bindHandlers( UpdateNameservers ), 'Update Nameservers' ) );

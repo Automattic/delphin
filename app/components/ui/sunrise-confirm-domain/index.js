@@ -168,9 +168,9 @@ class SunriseConfirmDomain extends React.Component {
 						{ i18n.translate( 'Apply now' ) }
 					</h1>
 					<h2>
-						{ i18n.translate( 'Applications are open until November 9. ' +
-							'If others apply for the same domain, ' +
-							'you will be able to bid for it in an auction.' ) }
+						{ i18n.translate( 'We\'ll try to register your domain ' +
+							'when .blog goes live on November 21st. ' +
+							'Applying does not guarantee the domain will be yours.' ) }
 					</h2>
 				</SunriseStep.Header>
 

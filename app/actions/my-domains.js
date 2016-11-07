@@ -52,7 +52,7 @@ export const updateDomain = ( domain, serviceSlug ) => ( {
 		serviceSlug
 	} ),
 	loading: DOMAIN_UPDATE_POST,
-	success: results => dispatch => dispatch( {
+	success: results => ( {
 		type: DOMAIN_UPDATE_COMPLETE,
 		results
 	} ),
@@ -66,5 +66,7 @@ export const updateDomain = ( domain, serviceSlug ) => ( {
 			message: error.message,
 			status: 'error'
 		} ) );
+
+		return Promise.reject( error );
 	}
 } );

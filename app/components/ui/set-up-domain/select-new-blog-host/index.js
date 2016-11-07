@@ -2,6 +2,7 @@
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
+import noop from 'lodash/noop';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -31,9 +32,11 @@ class SelectNewBlogHost extends Component {
 		if ( service === 'wpcom' || service === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
 
-			updateDomain( domainName, service ).then( () => {
-				redirect( 'confirmConnectNewBlog', { pathParams: { domainName } } );
-			} );
+			updateDomain( domainName, service )
+				.then( () => {
+					redirect( 'confirmConnectNewBlog', { pathParams: { domainName, service } } );
+				} )
+				.catch( noop );
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';
 		}

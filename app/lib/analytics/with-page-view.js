@@ -27,22 +27,29 @@ export default ( WrappedComponent, title ) => {
 		}
 
 		render() {
-			const props = omit( this.props, [ 'recordPageView', 'recordTracksEvent' ] );
+			let newProps = omit( this.props, [ 'needsRecordTracksEvent', 'recordPageView' ] );
+
+			if ( ! this.props.needsRecordTracksEvent ) {
+				newProps = omit( newProps, 'recordTracksEvent' );
+			}
 
 			return (
-				<WrappedComponent { ...props } />
+				<WrappedComponent { ...newProps } />
 			);
 		}
 	}
 
 	WithPageView.propTypes = {
 		location: PropTypes.object.isRequired,
+		needsRecordTracksEvent: PropTypes.bool.isRequired,
 		recordPageView: PropTypes.func.isRequired,
 		recordTracksEvent: PropTypes.func.isRequired
 	};
 
 	return connect(
-		undefined,
+		( state, ownProps ) => ( {
+			needsRecordTracksEvent: !! ownProps.recordTracksEvent
+		} ),
 		dispatch => bindActionCreators( {
 			recordPageView,
 			recordTracksEvent

@@ -19,7 +19,9 @@ class ConnectExistingBlog extends Component {
 
 		const { domainName, hostName, redirect, service, updateDomain } = this.props;
 
-		updateDomain( domainName, service );
+		updateDomain( domainName, service ).then( () => {
+			redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName } } );
+		} );
 
 		redirect( 'connectingExistingBlog', { pathParams: { domainName, hostName } } );
 	}

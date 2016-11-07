@@ -31,7 +31,9 @@ class SelectNewBlogHost extends Component {
 		if ( service === 'wpcom' || service === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
 
-			updateDomain( domainName, 'wpcom' );
+			updateDomain( domainName, service ).then( () => {
+				redirect( 'confirmConnectNewBlog', { pathParams: { domainName } } );
+			} );
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';
 		}

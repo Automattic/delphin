@@ -5,7 +5,6 @@ import { reducer as form } from 'redux-form';
 import { checkout } from './checkout';
 import { contactInformation } from './contact-information';
 import { contactSupport } from './contact-support';
-import { domain } from './domain';
 import territories from './territories';
 import { domainSearch } from './domain-search';
 import nameservers from './nameservers';
@@ -19,7 +18,6 @@ export default {
 	contactInformation,
 	contactSupport,
 	domainSearch,
-	domain,
 	form,
 	nameservers,
 	notices,

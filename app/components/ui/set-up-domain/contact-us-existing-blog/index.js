@@ -12,6 +12,7 @@ import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { removeInvalidInputProps } from 'lib/form';
 import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ContactUsExistingBlog extends Component {
 	constructor( props ) {
@@ -124,4 +125,4 @@ ContactUsExistingBlog.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( ContactUsExistingBlog );
+export default withStyles( styles )( withPageView( ContactUsExistingBlog, 'Contact Us Existing Blog' ) );

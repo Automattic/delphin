@@ -16,6 +16,7 @@ import ProgressBar from 'components/ui/progress-bar';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class FindExistingBlog extends Component {
 	componentWillMount() {
@@ -130,4 +131,4 @@ FindExistingBlog.propTypes = {
 	submitting: PropTypes.bool.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( FindExistingBlog ) );
+export default withStyles( styles )( withPageView( bindHandlers( FindExistingBlog ), 'Find Existing Blog' ) );

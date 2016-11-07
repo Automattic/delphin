@@ -14,6 +14,7 @@ import { getPath } from 'routes';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConnectNewBlogToOther extends Component {
 	handleSubmit( { providerText } ) {
@@ -117,4 +118,4 @@ ConnectNewBlogToOther.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( ConnectNewBlogToOther ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConnectNewBlogToOther ), 'Connect New Blog To Other' ) );

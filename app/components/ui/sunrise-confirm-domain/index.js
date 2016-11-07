@@ -56,7 +56,7 @@ class SunriseConfirmDomain extends React.Component {
 	}
 
 	renderDomainInformation() {
-		const { domain, domainCost, applicationCost, hasSelectedDomain } = this.props;
+		const { domain, hasSelectedDomain } = this.props;
 
 		if ( ! hasSelectedDomain ) {
 			return (
@@ -78,19 +78,7 @@ class SunriseConfirmDomain extends React.Component {
 					<span className="_price-with-currency-code">
 						{ totalCost } { currencyCode }
 					</span>
-					{ ' ' }
-					{ i18n.translate( 'Early Application' ) }
 				</div>
-				{ applicationCost && (
-					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
-							args: {
-								applicationCost,
-								domainCost
-							}
-						} ) }
-					</div>
-				) }
 			</div>
 		);
 	}
@@ -207,9 +195,7 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
-	applicationCost: PropTypes.string,
 	domain: PropTypes.object,
-	domainCost: PropTypes.string,
 	fetchDomainPrice: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,

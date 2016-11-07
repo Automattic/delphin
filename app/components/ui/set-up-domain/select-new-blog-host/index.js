@@ -78,7 +78,7 @@ class SelectNewBlogHost extends Component {
 								checked={ service.value === 'wpcom' }
 							/>
 							<h3 className={ styles.labelHost }>
-								{ i18n.translate( 'WordPress.com' ) }
+								WordPress.com
 							</h3>
 							<p className={ styles.labelDescription }>
 								{
@@ -101,7 +101,7 @@ class SelectNewBlogHost extends Component {
 								checked={ service.value === 'pressable' }
 							/>
 							<h3 className={ styles.labelHost }>
-								{ i18n.translate( 'Pressable' ) }
+								Pressable
 							</h3>
 							<p className={ styles.labelDescription }>
 								{

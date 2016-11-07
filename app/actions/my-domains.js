@@ -9,6 +9,7 @@ import {
 	DOMAIN_UPDATE_POST,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import { snakeifyKeys } from 'lib/formatters';
 
 /**
  * Fetches the user domains.
@@ -40,16 +41,16 @@ export const fetchMyDomains = () => ( {
 	}
 } );
 
-export const updateDomain = ( domain, service ) => ( {
+export const updateDomain = ( domain, serviceSlug ) => ( {
 	type: WPCOM_REQUEST,
 	method: 'post',
 	params: {
 		apiNamespace: 'wpcom/v2',
 		path: '/delphin/domain/' + domain
 	},
-	payload: {
-		service_slug: service
-	},
+	payload: snakeifyKeys( {
+		serviceSlug
+	} ),
 	loading: DOMAIN_UPDATE_POST,
 	success: results => dispatch => dispatch( {
 		type: DOMAIN_UPDATE_COMPLETE,

@@ -7,6 +7,7 @@ import get from 'lodash/get';
 import ConnectExistingBlog from 'components/ui/set-up-domain/connect-existing-blog';
 import { extractHostName } from 'lib/domains';
 import { redirect } from 'actions/routes';
+import { getService } from 'reducers/service/selectors';
 
 /**
  * Retrieves the host name from the url entered at the previous step.
@@ -23,7 +24,8 @@ const getHostName = ( state ) => {
 export default connect(
 	( state, ownProps ) => ( {
 		hostName: getHostName( state ),
-		domainName: ownProps.params.domainName
+		domainName: ownProps.params.domainName,
+		service: getService( state ),
 	} ),
 	dispatch => bindActionCreators( {
 		redirect

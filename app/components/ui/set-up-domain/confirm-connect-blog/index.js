@@ -13,28 +13,49 @@ import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import { getServiceName } from 'lib/services';
 
 class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { blogType, domainName, hostName } = this.props;
+		const { blogType, domainName, hostName, service } = this.props;
 
 		let destination;
+		if ( service === 'pressable' ) {
+			if ( blogType === 'new' ) {
+				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=true';
+			}
 
-		if ( blogType === 'new' ) {
-			destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+			if ( blogType === 'existing' ) {
+				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=false';
+			}
+
+			window.open( destination, '_blank' );
+
+			return;
 		}
 
-		if ( blogType === 'existing' ) {
-			destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+		if ( service === 'wpcom' ) {
+			if ( blogType === 'new' ) {
+				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
+			}
+
+			if ( blogType === 'existing' ) {
+				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			}
+
+			this.props.logInToWpcom( destination );
+
+			return;
 		}
 
-		this.props.logInToWpcom( destination );
+		throw new Error( 'This service is not supported' );
 	}
 
 	render() {
-		const { blogType, domainName, hostName } = this.props;
+		const { blogType, domainName, hostName, service } = this.props;
+		const serviceName = getServiceName( service );
 
 		return (
 			<SunriseStep>
@@ -50,10 +71,10 @@ class ConfirmConnectBlog extends Component {
 					{ blogType === 'existing' && (
 						<Form.FieldArea>
 							<p>
-								{ preventWidows( i18n.translate( "You're all set! We just made some changes for you so %(domainName)s will point to %(hostName)s.", {
+								{ i18n.translate( "You're all set! We just made some changes for you so %(domainName)s will point to %(hostName)s.", {
 									args: { hostName, domainName },
 									components: { strong: <strong /> }
-								} ), 2 ) }
+								} ) }
 							</p>
 
 							<p>
@@ -61,7 +82,10 @@ class ConfirmConnectBlog extends Component {
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Go to my WordPress.com blog' ) }
+								{ i18n.translate( 'Go to my %(serviceName)s blog', {
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+								} ) }
 							</Button>
 						</Form.FieldArea>
 					) }
@@ -69,15 +93,24 @@ class ConfirmConnectBlog extends Component {
 					{ blogType === 'new' && (
 						<Form.FieldArea>
 							<p>
-								{ preventWidows( i18n.translate( "You're all set! Just sign up at WordPress.com and create your new blog." ), 2 ) }
+								{ preventWidows( i18n.translate( "You're all set! Just sign up at %(serviceName)s and create your new blog.", {
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+								} ), 2 ) }
 							</p>
 
 							<p>
-								{ preventWidows( i18n.translate( 'To get started, sign up at WordPress.com and create a new blog. Your domain will connect automatically.' ), 2 ) }
+								{ preventWidows( i18n.translate( 'To get started, sign up at %(serviceName)s and create a new blog. Your domain will connect automatically.', {
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+								} ), 2 ) }
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Sign up at WordPress.com' ) }
+								{ i18n.translate( 'Sign up at %(serviceName)s', {
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+								} ) }
 							</Button>
 						</Form.FieldArea>
 					) }
@@ -98,6 +131,7 @@ ConfirmConnectBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
 	logInToWpcom: PropTypes.func.isRequired,
+	service: PropTypes.string.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( ConfirmConnectBlog ) );

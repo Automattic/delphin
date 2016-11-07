@@ -11,12 +11,13 @@ export default connect(
 	( state, ownProps ) => ( {
 		blogType: getBlogType( state ),
 		domainName: ownProps.params.domainName,
+		service: ownProps.params.service
 	} ),
 	( dispatch, ownProps ) => bindActionCreators( {
 		redirectToConfirmConnectBlog: () => {
-			const { domainName } = ownProps.params;
+			const { domainName, service } = ownProps.params;
 
-			return redirect( 'confirmConnectNewBlog', { pathParams: { domainName } } );
+			return redirect( 'confirmConnectNewBlog', { pathParams: { domainName, service } } );
 		}
 	}, dispatch )
 )( ConnectingBlog );

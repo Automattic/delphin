@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import ConnectingBlog from 'components/ui/set-up-domain/connecting-blog';
 import { getBlogType } from 'reducers/form/selectors';
-import { getService } from 'reducers/service/selectors';
 
 export default connect(
-	( state, ownProps ) => ( {
+	( state, { params: { domainName, hostName, service } } ) => ( {
 		blogType: getBlogType( state ),
-		domainName: ownProps.params.domainName,
-		hostName: ownProps.params.hostName,
-		service: getService( state )
+		domainName,
+		hostName,
+		service
 	} ),
 )( ConnectingBlog );

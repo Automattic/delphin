@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import RequireLogin from 'components/containers/require-login';
-import ConnectNewBlogToOther from 'components/ui/set-up-domain/connect-new-blog/other';
+import ConnectNewBlogToOther from 'components/ui/set-up-domain/connect-new-blog-to-other';
 import { redirect } from 'actions/routes';
 import { contactSupport } from 'actions/contact-support';
 import { getBlogNeedSelected } from 'reducers/form/selectors';

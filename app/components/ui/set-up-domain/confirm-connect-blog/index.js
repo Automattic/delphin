@@ -13,6 +13,7 @@ import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
+import { getServiceName } from 'lib/services';
 
 class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
@@ -54,15 +55,7 @@ class ConfirmConnectBlog extends Component {
 
 	render() {
 		const { blogType, domainName, hostName, service } = this.props;
-
-		let serviceName;
-		if ( service === 'wpcom' ) {
-			serviceName = 'WordPress.com';
-		}
-
-		if ( service === 'pressable' ) {
-			serviceName = 'Pressable';
-		}
+		const serviceName = getServiceName( service );
 
 		return (
 			<SunriseStep>

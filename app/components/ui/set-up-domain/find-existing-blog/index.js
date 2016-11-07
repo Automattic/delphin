@@ -30,7 +30,11 @@ class FindExistingBlog extends Component {
 	handleSubmit( values ) {
 		const hostName = extractHostName( values.url );
 
-		this.props.fetchService( hostName ).then( result => {
+		const { fetchService, recordTracksEvent, redirect } = this.props;
+
+		recordTracksEvent( 'delphin_existing_site_submit', { host: hostName } );
+
+		fetchService( hostName ).then( result => {
 			let slug;
 
 			if ( canConnectToService( result.service ) ) {
@@ -39,7 +43,7 @@ class FindExistingBlog extends Component {
 				slug = 'contactUsExistingBlog';
 			}
 
-			this.props.redirect( slug, { pathParams: {
+			redirect( slug, { pathParams: {
 				domainName: this.props.domainName,
 				hostName,
 				service: result.service
@@ -127,6 +131,7 @@ FindExistingBlog.propTypes = {
 	invalid: PropTypes.bool.isRequired,
 	isRequestingService: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired
 };

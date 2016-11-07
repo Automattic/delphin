@@ -83,7 +83,8 @@ class ConfirmConnectBlog extends Component {
 
 							<Button className={ styles.button }>
 								{ i18n.translate( 'Go to my %(serviceName)s blog', {
-									args: { serviceName }
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ) }
 							</Button>
 						</Form.FieldArea>
@@ -93,19 +94,22 @@ class ConfirmConnectBlog extends Component {
 						<Form.FieldArea>
 							<p>
 								{ preventWidows( i18n.translate( "You're all set! Just sign up at %(serviceName)s and create your new blog.", {
-									args: { serviceName }
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ), 2 ) }
 							</p>
 
 							<p>
 								{ preventWidows( i18n.translate( 'To get started, sign up at %(serviceName)s and create a new blog. Your domain will connect automatically.', {
-									args: { serviceName }
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ), 2 ) }
 							</p>
 
 							<Button className={ styles.button }>
 								{ i18n.translate( 'Sign up at %(serviceName)s', {
-									args: { serviceName }
+									args: { serviceName },
+									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ) }
 							</Button>
 						</Form.FieldArea>

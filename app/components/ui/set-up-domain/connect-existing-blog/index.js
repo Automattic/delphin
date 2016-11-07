@@ -62,7 +62,8 @@ class ConnectExistingBlog extends Component {
 ConnectExistingBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string.isRequired,
-	redirect: PropTypes.func.isRequired
+	redirect: PropTypes.func.isRequired,
+	service: PropTypes.string.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( ConnectExistingBlog ) );

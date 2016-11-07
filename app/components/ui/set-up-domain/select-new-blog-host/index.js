@@ -24,25 +24,24 @@ class SelectNewBlogHost extends Component {
 		}
 	}
 
-	handleSubmit( { wordpressOrOther } ) {
+	handleSubmit( { service } ) {
 		const { redirect, domainName } = this.props;
 
 		let nextPageSlug = '';
-
-		if ( wordpressOrOther === 'wordpress' ) {
+		if ( service === 'wpcom' || service === 'pressable' ) {
 			nextPageSlug = 'connectingNewBlog';
 		} else {
 			nextPageSlug = 'connectNewBlogToOther';
 		}
 
-		redirect( nextPageSlug, { pathParams: { domainName } } );
+		redirect( nextPageSlug, { pathParams: { domainName, service } } );
 	}
 
 	render() {
 		const {
 			domainName,
 			handleSubmit,
-			fields: { wordpressOrOther },
+			fields: { service },
 		} = this.props;
 
 		return (
@@ -70,16 +69,16 @@ class SelectNewBlogHost extends Component {
 						<strong className={ styles.preLabel }>
 							{ i18n.translate( 'I want simple and quick:' ) }
 						</strong>
-						<label className={ styles.label } htmlFor="wordpress">
+						<label className={ styles.label } htmlFor="wpcom">
 							<Radio
 								className={ styles.radio }
-								{ ...wordpressOrOther }
-								id="wordpress"
-								value="wordpress"
-								checked={ wordpressOrOther.value === 'wordpress' }
+								{ ...service }
+								id="wpcom"
+								value="wpcom"
+								checked={ service.value === 'wpcom' }
 							/>
 							<h3 className={ styles.labelHost }>
-								{ i18n.translate( 'WordPress.com' ) }
+								WordPress.com
 							</h3>
 							<p className={ styles.labelDescription }>
 								{
@@ -96,13 +95,13 @@ class SelectNewBlogHost extends Component {
 						<label className={ styles.label } htmlFor="pressable">
 							<Radio
 								className={ styles.radio }
-								{ ...wordpressOrOther }
+								{ ...service }
 								id="pressable"
 								value="pressable"
-								checked={ wordpressOrOther.value === 'pressable' }
+								checked={ service.value === 'pressable' }
 							/>
 							<h3 className={ styles.labelHost }>
-								{ i18n.translate( 'Pressable' ) }
+								Pressable
 							</h3>
 							<p className={ styles.labelDescription }>
 								{

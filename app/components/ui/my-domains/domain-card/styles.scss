@@ -1,5 +1,6 @@
 @import 'app/styles/breakpoints';
 @import 'app/styles/colors';
+@import 'app/styles/assets';
 
 .domain-card {
 	background: $white;
@@ -84,7 +85,7 @@
 
 	.domain-details {
 		align-items: center;
-		background: url( '/images/mydomains-notsetup.svg' ) no-repeat center calc( 50% - 40px );
+		background: url( #{$image-assets-url}mydomains-notsetup.svg ) no-repeat center calc( 50% - 40px );
 		color: $gray;
 		justify-content: center;
 		text-align: center;
@@ -97,7 +98,7 @@
 
 .connected-concierge {
 	.domain-details {
-		background: url( '/images/mydomains-concierge.svg' ) no-repeat right 15px;
+		background: url( #{$image-assets-url}mydomains-concierge.svg ) no-repeat right 15px;
 		padding-right: 130px;
 
 		.small-text {

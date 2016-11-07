@@ -4,9 +4,9 @@ import {
 	MY_DOMAINS_FETCH,
 	MY_DOMAINS_FETCH_COMPLETE,
 	MY_DOMAINS_FETCH_FAIL,
-	UPDATE_DOMAIN_COMPLETE,
-	UPDATE_DOMAIN_FAIL,
-	UPDATE_DOMAIN_POST,
+	DOMAIN_UPDATE_COMPLETE,
+	DOMAIN_UPDATE_FAIL,
+	DOMAIN_UPDATE_POST,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 
@@ -50,14 +50,14 @@ export const updateDomain = ( domain, service ) => ( {
 	payload: {
 		service_slug: service
 	},
-	loading: UPDATE_DOMAIN_POST,
+	loading: DOMAIN_UPDATE_POST,
 	success: results => dispatch => dispatch( {
-		type: UPDATE_DOMAIN_COMPLETE,
+		type: DOMAIN_UPDATE_COMPLETE,
 		results
 	} ),
 	fail: error => dispatch => {
 		dispatch( {
-			type: UPDATE_DOMAIN_FAIL,
+			type: DOMAIN_UPDATE_FAIL,
 			error
 		} );
 

@@ -9,12 +9,6 @@ import SunriseStep from 'components/ui/sunrise-step';
 import { getServiceName } from 'lib/services';
 
 class ConnectingBlog extends Component {
-	componentDidMount() {
-		setTimeout( () => {
-			this.props.redirectToConfirmConnectBlog();
-		}, 1500 );
-	}
-
 	render() {
 		const { blogType, domainName, hostName, service } = this.props;
 		const serviceName = getServiceName( service );
@@ -51,8 +45,7 @@ ConnectingBlog.propTypes = {
 	blogType: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
-	redirectToConfirmConnectBlog: PropTypes.func.isRequired,
-	service: PropTypes.string.isRequired,
+	service: PropTypes.string.isRequired
 };
 
 export default ConnectingBlog;

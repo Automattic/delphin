@@ -4,8 +4,12 @@ import {
 	MY_DOMAINS_FETCH,
 	MY_DOMAINS_FETCH_COMPLETE,
 	MY_DOMAINS_FETCH_FAIL,
+	DOMAIN_UPDATE_COMPLETE,
+	DOMAIN_UPDATE_FAIL,
+	DOMAIN_UPDATE_POST,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
+import { snakeifyKeys } from 'lib/formatters';
 
 /**
  * Fetches the user domains.
@@ -34,5 +38,35 @@ export const fetchMyDomains = () => ( {
 			message: error.message,
 			status: 'error'
 		} ) );
+	}
+} );
+
+export const updateDomain = ( domain, serviceSlug ) => ( {
+	type: WPCOM_REQUEST,
+	method: 'post',
+	params: {
+		apiNamespace: 'wpcom/v2',
+		path: '/delphin/domain/' + domain
+	},
+	payload: snakeifyKeys( {
+		serviceSlug
+	} ),
+	loading: DOMAIN_UPDATE_POST,
+	success: results => ( {
+		type: DOMAIN_UPDATE_COMPLETE,
+		results
+	} ),
+	fail: error => dispatch => {
+		dispatch( {
+			type: DOMAIN_UPDATE_FAIL,
+			error
+		} );
+
+		dispatch( addNotice( {
+			message: error.message,
+			status: 'error'
+		} ) );
+
+		return Promise.reject( error );
 	}
 } );

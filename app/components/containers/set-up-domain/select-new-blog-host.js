@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import RequireLogin from 'components/containers/require-login';
 import SelectNewBlogHost from 'components/ui/set-up-domain/select-new-blog-host';
 import { redirect } from 'actions/routes';
+import { updateDomain } from 'actions/my-domains';
 
 export default reduxForm(
 	{
@@ -18,6 +19,7 @@ export default reduxForm(
 		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect
+		redirect,
+		updateDomain
 	}, dispatch )
 )( RequireLogin( SelectNewBlogHost ) );

@@ -19,7 +19,9 @@ class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { domainName, hostName, redirect, service, updateDomain } = this.props;
+		const { domainName, hostName, recordTracksEvent, redirect, service, updateDomain } = this.props;
+
+		recordTracksEvent( 'delphin_existing_site_connect', { host: hostName } );
 
 		updateDomain( domainName, service, hostName )
 			.then( () => {
@@ -75,6 +77,7 @@ class ConnectExistingBlog extends Component {
 ConnectExistingBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	service: PropTypes.string.isRequired,
 	updateDomain: PropTypes.func.isRequired

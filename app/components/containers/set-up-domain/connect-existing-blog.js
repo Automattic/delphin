@@ -8,6 +8,7 @@ import ConnectExistingBlog from 'components/ui/set-up-domain/connect-existing-bl
 import { extractHostName } from 'lib/domains';
 import { redirect } from 'actions/routes';
 import { getService } from 'reducers/service/selectors';
+import { recordTracksEvent } from 'actions/analytics';
 import { updateDomain } from 'actions/my-domains';
 
 /**
@@ -29,6 +30,7 @@ export default connect(
 		service: getService( state ),
 	} ),
 	dispatch => bindActionCreators( {
+		recordTracksEvent,
 		redirect,
 		updateDomain
 	}, dispatch )

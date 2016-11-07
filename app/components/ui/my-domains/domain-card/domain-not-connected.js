@@ -16,7 +16,7 @@ const DomainNotConnected = ( { domainName } ) => {
 				<h3>{ domainName }</h3>
 				<TrackingButton
 					href={ getPath( 'selectBlogType', { domainName } ) }
-					eventName="delphin_set_up_domain_click"
+					eventName="delphin_setup_domain_click"
 				>
 					{ i18n.translate( 'Set up' ) }
 				</TrackingButton>

@@ -6,3 +6,13 @@ const SUPPORTED_SERVICES = [ 'wpcom', 'pressable' ];
  * @return {bool} Whether the given service can be automatically connected.
  */
 export const canConnectToService = service => SUPPORTED_SERVICES.indexOf( service ) > -1;
+
+/**
+ * @param {string} service - A service
+ *
+ * @return {string} A name for the given service (e.g. 'WordPress.com' if 'wpcom' is given).
+ */
+export const getServiceName = service => ( {
+	wpcom: 'WordPress.com',
+	pressable: 'Pressable',
+}[ service ] );

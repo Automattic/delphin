@@ -111,3 +111,11 @@
 	font-size: 1.6rem;
 	padding: 15px;
 }
+
+.reset-settings {
+	margin-left: auto;
+
+	&:hover {
+		color: $alert-red;
+	}
+}

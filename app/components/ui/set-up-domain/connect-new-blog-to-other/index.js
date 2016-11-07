@@ -68,6 +68,7 @@ class ConnectNewBlogToOther extends Component {
 						<ProgressBar progress={ 90 } />
 					</div>
 				</div>
+
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<div className={ styles.paragraph }>

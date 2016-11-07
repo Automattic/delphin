@@ -59,7 +59,7 @@ ConnectingBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
 	redirectToConfirmConnectBlog: PropTypes.func.isRequired,
-	service: PropTypes.string
+	service: PropTypes.string.isRequired,
 };
 
 export default ConnectingBlog;

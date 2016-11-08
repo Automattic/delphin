@@ -97,7 +97,7 @@ class SunriseConfirmDomain extends React.Component {
 				<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
 				<p className={ styles.happyCircle }>
 					{ i18n.translate(
-						'We will try to get %(domainName)s for as soon as ' +
+						'We will try to get %(domainName)s for you as soon as ' +
 						'.blog becomes widely available, on November 21st. ', {
 							args: { domainName }
 						} ) }
@@ -110,7 +110,7 @@ class SunriseConfirmDomain extends React.Component {
 				</p>
 				<p>
 					{ i18n.translate(
-						'If we can\'t get your domain for you, we\'ll give you a full refund.'
+						'If we can\'t get this domain for you, we\'ll give you a full refund.'
 						) }
 				</p>
 			</div>

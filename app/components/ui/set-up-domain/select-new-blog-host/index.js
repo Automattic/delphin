@@ -44,6 +44,12 @@ class SelectNewBlogHost extends Component {
 		redirect( nextPageSlug, { pathParams: { domainName, service } } );
 	}
 
+	isSubmitButtonDisabled() {
+		const { invalid, pristine, submitting } = this.props;
+
+		return invalid || pristine || submitting;
+	}
+
 	renderWpcom() {
 		const {
 			fields: { service },
@@ -133,7 +139,7 @@ class SelectNewBlogHost extends Component {
 						{ needs === 'control' && this.renderPressable() }
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Button>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -162,8 +168,11 @@ SelectNewBlogHost.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
+	invalid: PropTypes.bool.isRequired,
 	needs: PropTypes.string.isRequired,
+	pristine: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
 	updateDomain: PropTypes.func.isRequired
 };
 

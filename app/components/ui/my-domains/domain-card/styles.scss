@@ -37,6 +37,10 @@
 			font-size: 1.6rem;
 		}
 	}
+
+	@include breakpoint( '<480px' ) {
+		min-height: 0;
+	}
 }
 
 .domain-heading {
@@ -108,7 +112,10 @@
 		text-align: center;
 
 		@include breakpoint( '<480px' ) {
+			background-position: center 15px;
 			font-size: 1.6rem;
+			justify-content: flex-start;
+			padding-top: 70px;
 		}
 	}
 }
@@ -165,6 +172,11 @@
 
 		.small-text {
 			font-size: 1.6rem;
+		}
+
+		@include breakpoint( '<480px' ) {
+			background-size: 90px auto;
+			padding-right: 100px;
 		}
 	}
 }

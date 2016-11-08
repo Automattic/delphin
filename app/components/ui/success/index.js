@@ -51,7 +51,7 @@ class Success extends React.Component {
 								'Your appllication will be submitted automatically when ' +
 								'.blog becomes widely available, on November 21st. ' +
 								'We\'ll email you at {{strong}}%(email)s{{/strong}} with ' +
-								' the results. ',
+								'the results. ',
 								{
 									args: { email },
 									components: { strong: <strong /> }

@@ -1,3 +1,19 @@
 @import 'app/components/ui/set-up-domain/styles';
 
+.label {
+	&[for=wpcom] {
+		.label-host {
+			background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-blue.svg );
+		}
+	}
 
+	&[for=pressable] {
+		.label-host {
+			background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/pressable-color.svg );
+		}
+	}
+}
+
+.label-host {
+	padding-left: 66px;
+}

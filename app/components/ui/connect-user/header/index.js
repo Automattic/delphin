@@ -12,7 +12,7 @@ const Header = ( { intention } ) => {
 
 	if ( intention === 'signup' ) {
 		heading = i18n.translate( 'Your domain awaits' );
-		text = i18n.translate( 'Enter your email address to claim your domain.' );
+		text = i18n.translate( 'Enter your email address to start your application.' );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
 

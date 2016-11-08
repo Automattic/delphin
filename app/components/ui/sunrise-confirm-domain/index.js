@@ -96,39 +96,23 @@ class SunriseConfirmDomain extends React.Component {
 			<div className={ styles.feeNotice }>
 				<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
 				<p className={ styles.happyCircle }>
-					{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure %(domainName)s before everyone else.', {
+					{ i18n.translate( 
+						'We will try to get %(domainName)s for as soon as ' +
+						'.blog becomes widely available, on November 21st. ', {
 						args: { domainName }
 					} ) }
 				</p>
 				<p>
-					{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
+					{ i18n.translate(
+						'Your application may fail if someone else manages to register' +
+						' the same domain before we do.'
+						) }
 				</p>
-				{ ! isMoreInformationVisible && (
-					<p>
-						<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
-							{ i18n.translate( 'More about the application process' ) }
-						</a>
-					</p>
-				) }
-				{ isMoreInformationVisible && (
-					<div>
-						<p>
-							{ i18n.translate(
-								'If others apply for %(domainName)s, it will go to an auction, with no price limit. ' +
-								'If %(domainName)s contains a trademark, the owners may register it in a separate process, ' +
-								'cancelling out your application.', {
-									args: { domainName }
-								}
-							) }
-						</p>
-						<p>
-							{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
-						</p>
-						<p>
-							{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
-						</p>
-					</div>
-				) }
+				<p>
+					{ i18n.translate(
+						'If we can\'t get your domain for you, we\'ll give you a full refund.'
+						) }
+				</p>
 			</div>
 		);
 	}
@@ -156,9 +140,8 @@ class SunriseConfirmDomain extends React.Component {
 						{ i18n.translate( 'Apply now' ) }
 					</h1>
 					<h2>
-						{ i18n.translate( 'We\'ll try to register your domain ' +
-							'when .blog goes live on November 21st. ' +
-							'Applying does not guarantee the domain will be yours.' ) }
+						{ i18n.translate( 'Apply for a chance to own a .blog domain ' +
+							'on launch day. ' ) }
 					</h2>
 				</SunriseStep.Header>
 

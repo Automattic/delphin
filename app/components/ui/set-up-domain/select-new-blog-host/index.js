@@ -44,11 +44,67 @@ class SelectNewBlogHost extends Component {
 		redirect( nextPageSlug, { pathParams: { domainName, service } } );
 	}
 
+	renderWpcom() {
+		const {
+			fields: { service },
+		} = this.props;
+
+		return (
+			<label className={ styles.label } htmlFor="wpcom">
+				<Radio
+					className={ styles.radio }
+					{ ...service }
+					id="wpcom"
+					value="wpcom"
+					checked={ service.value === 'wpcom' }
+				/>
+				<h3 className={ styles.labelHost }>
+					WordPress.com
+				</h3>
+				<p className={ styles.labelDescription }>
+					{
+						i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
+							' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+							'Free hosting and support.' )
+					}
+				</p>
+			</label>
+		);
+	}
+
+	renderPressable() {
+		const {
+			fields: { service },
+		} = this.props;
+
+		return (
+			<label className={ styles.label } htmlFor="pressable">
+				<Radio
+					className={ styles.radio }
+					{ ...service }
+					id="pressable"
+					value="pressable"
+					checked={ service.value === 'pressable' }
+				/>
+				<h3 className={ styles.labelHost }>
+					Pressable
+				</h3>
+				<p className={ styles.labelDescription }>
+					{
+						i18n.translate( 'Create a website or easily build a blog.' +
+							' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+							'Upload your own themes and plugins.' )
+					}
+				</p>
+			</label>
+		);
+	}
+
 	render() {
 		const {
 			domainName,
 			handleSubmit,
-			fields: { service },
+			needs,
 		} = this.props;
 
 		return (
@@ -72,56 +128,9 @@ class SelectNewBlogHost extends Component {
 						<p>
 							{ i18n.translate( 'Where would you like to create your new blog?' ) }
 						</p>
+						{ needs === 'simple' && this.renderWpcom() }
 
-						<strong className={ styles.preLabel }>
-							{ i18n.translate( 'I want simple and quick:' ) }
-						</strong>
-						<div className={ styles.hostButton }>
-							<Radio
-								className={ styles.radio }
-								{ ...service }
-								id="wpcom"
-								value="wpcom"
-								checked={ service.value === 'wpcom' }
-							/>
-							<label className={ styles.label } htmlFor="wpcom">
-								<h3 className={ styles.labelHost }>
-									WordPress.com
-								</h3>
-								<p className={ styles.labelDescription }>
-									{
-										i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
-											' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-											'Free hosting and support.' )
-									}
-								</p>
-							</label>
-						</div>
-
-						<strong className={ styles.preLabel }>
-							{ i18n.translate( 'I want more control and power:' ) }
-						</strong>
-						<div className={ styles.hostButton }>
-							<Radio
-								className={ styles.radio }
-								{ ...service }
-								id="pressable"
-								value="pressable"
-								checked={ service.value === 'pressable' }
-							/>
-							<label className={ styles.label } htmlFor="pressable">
-								<h3 className={ styles.labelHost }>
-									Pressable
-								</h3>
-								<p className={ styles.labelDescription }>
-									{
-										i18n.translate( 'Create a website or easily build a blog.' +
-											' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-											'Upload your own themes and plugins.' )
-									}
-								</p>
-							</label>
-						</div>
+						{ needs === 'control' && this.renderPressable() }
 					</Form.FieldArea>
 					<Form.SubmitArea>
 						<Button>
@@ -153,6 +162,7 @@ SelectNewBlogHost.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
+	needs: PropTypes.string.isRequired,
 	redirect: PropTypes.func.isRequired,
 	updateDomain: PropTypes.func.isRequired
 };

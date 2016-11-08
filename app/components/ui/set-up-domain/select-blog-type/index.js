@@ -19,7 +19,7 @@ class SelectBlogType extends Component {
 		const { redirect, domainName } = this.props;
 
 		if ( values.newOrExisting === 'new' ) {
-			redirect( 'selectNewBlogHost', { pathParams: { domainName } } );
+			redirect( 'selectNewBlogNeeds', { pathParams: { domainName } } );
 		}
 
 		if ( values.newOrExisting === 'existing' ) {

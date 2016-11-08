@@ -4,23 +4,20 @@ import { bindActionCreators } from 'redux';
 
 // Internal dependencies
 import RequireLogin from 'components/containers/require-login';
-import SelectNewBlogHost from 'components/ui/set-up-domain/select-new-blog-host';
+import selectNewBlogNeeds from 'components/ui/set-up-domain/select-new-blog-needs';
 import { redirect } from 'actions/routes';
-import { updateDomain } from 'actions/my-domains';
 
 export default reduxForm(
 	{
-		form: 'selectNewBlogHost',
-		fields: [ 'service' ],
+		form: 'selectNewBlogNeeds',
+		fields: [ 'needs' ],
 		destroyOnUnmount: false
 	},
 	( state, ownProps ) => ( {
 		domainName: ownProps.params.domainName,
-		needs: ownProps.params.needs,
 		hasAnsweredPreviousQuestion: !! getValues( state.form.selectBlogType ),
 	} ),
 	dispatch => bindActionCreators( {
-		redirect,
-		updateDomain
+		redirect
 	}, dispatch )
-)( RequireLogin( SelectNewBlogHost ) );
+)( RequireLogin( selectNewBlogNeeds ) );

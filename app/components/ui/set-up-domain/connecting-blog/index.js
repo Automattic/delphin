@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
 import { preventWidows } from 'lib/formatters';
+import ProgressBar from 'components/ui/progress-bar';
 import SunriseStep from 'components/ui/sunrise-step';
 import { getServiceName } from 'lib/services';
 
@@ -19,7 +20,7 @@ class ConnectingBlog extends Component {
 
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Connecting your domain' ) }</h1>
-
+					<ProgressBar progress={ 80 } />
 					<h2>
 						{ blogType === 'existing' && (
 							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {

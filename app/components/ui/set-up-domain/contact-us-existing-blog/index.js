@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
+import ProgressBar from 'components/ui/progress-bar';
 import SunriseStep from 'components/ui/sunrise-step';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -61,7 +62,7 @@ class ContactUsExistingBlog extends Component {
 			<SunriseStep>
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Submit Your Request' ) }</h1>
-
+					<ProgressBar progress={ 90 } />
 					<h2>
 						{ i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, however, ' +
 							"at this time we aren't able to automatically connect your blog (we're working on it though!).",

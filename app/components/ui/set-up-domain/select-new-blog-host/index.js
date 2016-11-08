@@ -12,6 +12,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
+import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -125,6 +126,7 @@ class SelectNewBlogHost extends Component {
 							}
 						} ) }
 					</h1>
+					<ProgressBar progress={ 60 } />
 					<h2 className={ styles.subHeader }>
 						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog." +
 							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",

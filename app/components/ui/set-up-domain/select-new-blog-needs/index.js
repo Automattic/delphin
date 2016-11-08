@@ -31,13 +31,12 @@ class SelectNewBlogNeeds extends Component {
 	}
 
 	isSubmitButtonDisabled() {
-		// TODO: Implement disable check
-		return false;
+		const { invalid, pristine, submitting } = this.props;
+
+		return invalid || pristine || submitting;
 	}
 
 	render() {
-		console.log( 'render' );
-		console.log( this.props );
 		const {
 			domainName,
 			handleSubmit,
@@ -128,7 +127,10 @@ SelectNewBlogNeeds.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
+	invalid: PropTypes.bool.isRequired,
+	pristine: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( SelectNewBlogNeeds ) );

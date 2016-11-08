@@ -118,8 +118,14 @@ class SelectNewBlogHost extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>{ i18n.translate( "Let's create a new blog!" ) }</h1>
-					<h2>
+					<h1 className={ styles.header }>
+						{ i18n.translate( 'Setup: {{strong}}Create a new blog{{/strong}}', {
+							components: {
+								strong: <strong />
+							}
+						} ) }
+					</h1>
+					<h2 className={ styles.subHeader }>
 						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog." +
 							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",
 							{

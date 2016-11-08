@@ -48,8 +48,14 @@ class SelectNewBlogNeeds extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Setup: Tell us what you want' ) }</h1>
-					<h2>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
+					<h1 className={ styles.header }>
+						{ i18n.translate( 'Setup: {{strong}}Tell us what you want{{/strong}}', {
+							components: {
+								strong: <strong />
+							}
+						} ) }
+					</h1>
+					<h2 className={ styles.subHeader }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
 				</SunriseStep.Header>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

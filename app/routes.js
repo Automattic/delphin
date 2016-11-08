@@ -124,6 +124,12 @@ let publicRoutes = [
 			},
 			{
 				path: 'set-up-domain/:domainName/new-blog',
+				slug: 'selectNewBlogNeeds',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'selectNewBlogNeeds' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/:needs',
 				slug: 'selectNewBlogHost',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'selectNewBlogHost' )

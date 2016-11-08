@@ -45,7 +45,13 @@ class SelectBlogType extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
+					<h1 className={ styles.header }>
+						{ i18n.translate( 'Setup: {{strong}}Tell us about your blog{{/strong}}', {
+							components: {
+								strong: <strong />
+							}
+						} ) }
+					</h1>
 				</SunriseStep.Header>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>

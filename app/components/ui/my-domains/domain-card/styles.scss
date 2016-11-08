@@ -176,7 +176,7 @@
 }
 
 .nameservers-loading {
-	background: url( /images/mydomains-servers.svg ) no-repeat center top;
+	background: url( #{$image-assets-url}mydomains-servers.svg ) no-repeat center top;
 	background-size: 97px 45px;
 	padding-top: 60px;
 	position: relative;
@@ -184,7 +184,7 @@
 
 	&::after {
 		animation: spin 1s infinite ease-in-out;
-		background: url( /images/mydomains-servers-gear.svg ) no-repeat;
+		background: url( #{$image-assets-url}mydomains-servers-gear.svg ) no-repeat;
 		background-size: 35px;
 		content: '';
 		display: block;

@@ -84,7 +84,7 @@ class SunriseConfirmDomain extends React.Component {
 	}
 
 	renderFreeNotice() {
-		const { domain, hasSelectedDomain, isMoreInformationVisible } = this.props;
+		const { domain, hasSelectedDomain } = this.props;
 
 		if ( ! hasSelectedDomain ) {
 			return null;
@@ -96,11 +96,11 @@ class SunriseConfirmDomain extends React.Component {
 			<div className={ styles.feeNotice }>
 				<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
 				<p className={ styles.happyCircle }>
-					{ i18n.translate( 
+					{ i18n.translate(
 						'We will try to get %(domainName)s for as soon as ' +
 						'.blog becomes widely available, on November 21st. ', {
-						args: { domainName }
-					} ) }
+							args: { domainName }
+						} ) }
 				</p>
 				<p>
 					{ i18n.translate(

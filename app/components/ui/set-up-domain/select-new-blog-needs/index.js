@@ -12,7 +12,7 @@ import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
 import Radio from 'components/ui/form/radio';
-import styles from './styles.scss';
+import styles from '../styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectNewBlogNeeds extends Component {
@@ -94,7 +94,7 @@ class SelectNewBlogNeeds extends Component {
 							/>
 							<label className={ styles.label } htmlFor="control">
 								<h3 className={ styles.labelHost }>
-									Control
+									{ i18n.translate( 'More control & power' ) }
 								</h3>
 								<p className={ styles.labelDescription }>
 									{

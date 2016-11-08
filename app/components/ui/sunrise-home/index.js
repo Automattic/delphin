@@ -36,7 +36,7 @@ const SunriseHome = React.createClass( {
 				components: { em: <em className="emphasis" /> }
 			} ),
 			pageContent = i18n.translate(
-				'Millions of short, easy to remember site addresses will be available when .blog goes live November 21st. '
+				'Millions of short, easy to remember site addresses will be available when .blog goes live on November 21st. '
 			) + i18n.translate(
 				'Apply now to secure the perfect domain for your blog.'
 			);

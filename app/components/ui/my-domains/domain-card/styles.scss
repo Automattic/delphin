@@ -107,10 +107,45 @@
 	}
 }
 
-.nameservers-list {
+.nameservers {
 	background: $gray-xlight;
 	font-size: 1.6rem;
 	padding: 15px;
+}
+
+.nameservers-loading {
+	background: url( /images/mydomains-servers.svg ) no-repeat center top;
+	background-size: 97px 45px;
+	padding-top: 60px;
+	position: relative;
+	text-align: center;
+
+	&::after {
+		animation: spin 1s infinite ease-in-out;
+		background: url( /images/mydomains-servers-gear.svg ) no-repeat;
+		background-size: 35px;
+		content: '';
+		display: block;
+		height: 35px;
+		left: calc( 50% + 30px );
+		position: absolute;
+		top: 18px;
+		width: 35px;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate( 0 );
+	}
+
+	100% {
+		transform: rotate( 180deg );
+	}
+}
+
+.nameservers-list {
+	display: none;
 }
 
 .reset-settings {

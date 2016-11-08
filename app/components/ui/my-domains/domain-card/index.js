@@ -61,17 +61,22 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 					<h3>{ name }</h3>
 				</div>
 				<div className={ styles.domainDetails }>
-					<p>{ i18n.translate( 'This domain has custom nameservers:' ) }</p>
-					<ul className={ styles.nameserversList }>
-						<li>ns1.example.com</li>
-						<li>ns2.example.com</li>
-						<li>ns3.example.com</li>
-						<li>ns4.example.com</li>
-					</ul>
+					<p>{ i18n.translate( 'This domain has custom name servers:' ) }</p>
+					<div className={ styles.nameservers }>
+						<div className={ styles.nameserversLoading }>
+							{ i18n.translate( 'Fetching name servers…' ) }
+						</div>
+						<ul className={ styles.nameserversList }>
+							<li>ns1.example.com</li>
+							<li>ns2.example.com</li>
+							<li>ns3.example.com</li>
+							<li>ns4.example.com</li>
+						</ul>
+					</div>
 				</div>
 				<div className={ styles.domainCardFooter }>
-					<a href="#">{ i18n.translate( 'Change nameservers' ) }</a>
-					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Use get.blog nameservers' ) }</a>
+					<a href="#">{ i18n.translate( 'Change name servers' ) }</a>
+					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Revert to default name servers' ) }</a>
 				</div>
 			</div>
 		);

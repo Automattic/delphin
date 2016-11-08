@@ -29,7 +29,7 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 					<h3>{ name }</h3>
 				</div>
 				<div className={ styles.domainDetails }>
-					<p>{ i18n.translate( 'This domain was automatically set up to a WordPress.com site.' ) }</p>
+					<p>{ i18n.translate( 'This domain was automatically set up for your WordPress.com site.' ) }</p>
 				</div>
 				<div className={ styles.domainCardFooter }>
 					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Reset to default settings' ) }</a>

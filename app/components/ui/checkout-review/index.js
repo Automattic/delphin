@@ -104,8 +104,10 @@ class CheckoutReview extends React.Component {
 					{ i18n.translate( 'Review your application' ) }
 				</h1>
 				<h2>
-					{ i18n.translate( 'Applying does not guarantee you get the domain. ' +
-					'If others apply for it, you will be able to bid for it in an auction.' ) }
+					{ i18n.translate(
+						'Your application will be sumitted automatically when .blog ' +
+						'becomes widely available on November 21st.'
+						) }
 				</h2>
 			</SunriseStep.Header>
 
@@ -115,10 +117,9 @@ class CheckoutReview extends React.Component {
 					<p className={ styles.applicationFee }>
 						{ applicationCost && [
 							applicationCost,
-							i18n.translate( 'Early Application' )
+							i18n.translate( 'Recurring yearly fee' )
 						].join( ' ' ) }
 					</p>
-					<p className={ styles.renewFee }>{ i18n.translate( 'renews at %(renewCost)s per year', { args: { renewCost: this.props.renewCost } } ) }</p>
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }

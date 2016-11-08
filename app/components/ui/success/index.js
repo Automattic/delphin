@@ -48,27 +48,29 @@ class Success extends React.Component {
 					<div className={ styles.text }>
 						<p>
 							{ i18n.translate(
-								'We will hold on to your appllication and submit it ' +
-								'automatically when .blog becomes widely available, on ' +
-								'November 21st.'
-								) }
-						</p>
-
-						<p>
-							{ i18n.translate( "We'll email you at {{strong}}%(email)s{{/strong}} with the results of your application.",
+								'Your appllication will be submitted automatically when ' +
+								'.blog becomes widely available, on November 21st. ' +
+								'We\'ll email you at {{strong}}%(email)s{{/strong}} with ' +
+								' the results. ',
 								{
 									args: { email },
 									components: { strong: <strong /> }
 								}
-							) }
+								) }
 						</p>
 
 						<p>
 							{ i18n.translate(
-								'Your application will be sumitted as soon as possible.' +
-								'But we can\'t guarantee that no one else will be able to grab ' +
-								'the domain you want even sooner. If your application fails, for ' +
-								'any reason, we\'ll refund your payment in full.'
+								'We can\'t guarantee the domain will be yours. ' +
+								'Your application will be sumitted as soon as possible, ' +
+								'but someone else may grab the same domain even sooner. '
+								) }
+						</p>
+
+						<p>
+							{ i18n.translate(
+								'If your application fails, for any reason, we\'ll refund ' +
+								'your payment in full.'
 								) }
 						</p>
 					</div>

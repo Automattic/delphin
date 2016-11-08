@@ -148,7 +148,7 @@ class SelectNewBlogHost extends Component {
 				</Form>
 
 				<SunriseStep.Footer>
-					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
+					<Link to={ getPath( 'selectNewBlogNeeds', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
 				</SunriseStep.Footer>

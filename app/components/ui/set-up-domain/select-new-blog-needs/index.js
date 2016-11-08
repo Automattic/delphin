@@ -30,6 +30,11 @@ class SelectNewBlogNeeds extends Component {
 		redirect( 'selectNewBlogHost', { pathParams: { domainName, needs } } );
 	}
 
+	isSubmitButtonDisabled() {
+		// TODO: Implement disable check
+		return false;
+	}
+
 	render() {
 		console.log( 'render' );
 		console.log( this.props );
@@ -102,7 +107,7 @@ class SelectNewBlogNeeds extends Component {
 						</div>
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Button>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>

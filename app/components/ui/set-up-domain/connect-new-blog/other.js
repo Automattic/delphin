@@ -49,6 +49,7 @@ class ConnectNewBlogToOther extends Component {
 			handleSubmit,
 			isContactingSupport,
 			fields: { providerText },
+			needs,
 		} = this.props;
 
 		return (
@@ -91,7 +92,7 @@ class ConnectNewBlogToOther extends Component {
 				</Form>
 
 				<SunriseStep.Footer>
-					<Link to={ getPath( 'selectNewBlogHost', { domainName } ) }>
+					<Link to={ getPath( 'selectNewBlogHost', { domainName, needs } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
 				</SunriseStep.Footer>
@@ -107,6 +108,7 @@ ConnectNewBlogToOther.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
+	needs: PropTypes.string.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

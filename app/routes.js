@@ -247,13 +247,11 @@ export const getPath = ( slug, values = {}, overrides = {} ) => {
 	}
 
 	const path = pathMap[ slug ];
-
 	if ( ! path ) {
 		return null;
 	}
 
 	const formattedPath = formatPattern( path, values );
-
 	let locale = i18n.getLocaleSlug();
 
 	if ( overrides.locale ) {

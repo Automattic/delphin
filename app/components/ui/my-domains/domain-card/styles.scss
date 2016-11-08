@@ -113,6 +113,51 @@
 	}
 }
 
+.connected-auto .domain-details {
+	background: url( #{$image-assets-url}mydomains-browser.svg ) no-repeat right top;
+	background-origin: content-box;
+
+	@include breakpoint( '<480px' ) {
+		background-size: 75px auto;
+	}
+
+	p {
+		padding-right: 120px;
+		position: relative;
+
+		@include breakpoint( '<480px' ) {
+			padding-right: 90px;
+		}
+
+		&::after {
+			content: '';
+			display: block;
+			height: 40px;
+			position: absolute;
+			right: 30px;
+			top: 30px;
+			width: 40px;
+
+			@include breakpoint( '<480px' ) {
+				height: 30px;
+				right: 22px;
+				top: 22px;
+				width: 30px;
+			}
+		}
+
+		&.domain-setup-wpcom::after {
+			background: url( #{$image-assets-url}hosts/wordpress-blue.svg ) no-repeat center;
+			background-size: contain;
+		}
+
+		&.domain-setup-pressable::after {
+			background: url( #{$image-assets-url}hosts/pressable-color.svg ) no-repeat center;
+			background-size: contain;
+		}
+	}
+}
+
 .connected-concierge {
 	.domain-details {
 		background: url( #{$image-assets-url}mydomains-concierge.svg ) no-repeat right 15px;

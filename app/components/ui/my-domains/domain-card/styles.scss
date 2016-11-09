@@ -60,10 +60,10 @@
 
 .domain-details {
 	display: flex;
+	flex-basis: 100%;
 	flex-direction: column;
 	font-size: 1.8rem;
-	height: 100%;
-	padding: 10px 20px;
+	padding: 20px;
 
 	p {
 		margin-bottom: 0.8em;
@@ -76,14 +76,16 @@
 	border-top: 1px solid $gray-light;
 	box-sizing: border-box;
 	display: flex;
+	flex-shrink: 0;
+	flex-wrap: wrap;
 	font-size: 1.4rem;
 	justify-content: space-between;
-	padding: 10px 20px;
+	padding: 5px 20px;
 	width: 100%;
 
 	a {
 		display: inline-block;
-		padding: 10px 0;
+		padding: 5px 0;
 	}
 
 	@include breakpoint( '<480px' ) {
@@ -92,7 +94,7 @@
 		justify-content: flex-start;
 
 		a {
-			padding: 5px 0;
+			padding: 10px 0;
 		}
 	}
 }
@@ -152,17 +154,21 @@
 				width: 30px;
 			}
 		}
-
-		&.domain-setup-wpcom::after {
-			background: url( #{$image-assets-url}hosts/wordpress-blue.svg ) no-repeat center;
-			background-size: contain;
-		}
-
-		&.domain-setup-pressable::after {
-			background: url( #{$image-assets-url}hosts/pressable-color.svg ) no-repeat center;
-			background-size: contain;
-		}
 	}
+}
+
+.connected-auto .domain-card-footer {
+	justify-content: flex-end;
+}
+
+.domain-setup-wpcom::after {
+	background: url( #{$image-assets-url}hosts/wordpress-blue.svg ) no-repeat center;
+	background-size: contain;
+}
+
+.domain-setup-pressable::after {
+	background: url( #{$image-assets-url}hosts/pressable-color.svg ) no-repeat center;
+	background-size: contain;
 }
 
 .connected-concierge {
@@ -223,8 +229,6 @@
 }
 
 .reset-settings {
-	margin-left: auto;
-
 	&:hover {
 		color: $alert-red;
 	}

@@ -9,6 +9,8 @@ import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import withPageView from 'lib/analytics/with-page-view';
 import scrollToTop from 'components/containers/scroll-to-top';
+import Button from 'components/ui/button';
+import { getPath } from 'routes';
 
 class Success extends React.Component {
 	componentWillMount() {
@@ -72,6 +74,12 @@ class Success extends React.Component {
 								'If your application fails, for any reason, we\'ll refund ' +
 								'your payment in full.'
 								) }
+						</p>
+
+						<p>
+							<Button href={ getPath( 'home' ) } className={ styles.successCta }>
+								{ i18n.translate( 'Add another domain' ) }
+							</Button>
 						</p>
 					</div>
 				</div>

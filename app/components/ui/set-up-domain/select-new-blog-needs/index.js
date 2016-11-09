@@ -68,7 +68,7 @@ class SelectNewBlogNeeds extends Component {
 						<strong className={ styles.preLabel }>
 							{ i18n.translate( 'Simple & quick' ) }
 						</strong>
-						<div className={ styles.hostButton }>
+						<label className={ styles.label } htmlFor="simple">
 							<Radio
 								className={ styles.radio }
 								{ ...needs }
@@ -76,23 +76,21 @@ class SelectNewBlogNeeds extends Component {
 								value="simple"
 								checked={ needs.value === 'simple' }
 							/>
-							<label className={ styles.label } htmlFor="simple">
-								<h3 className={ styles.labelHost }>
-									Simple
-								</h3>
-								<p className={ styles.labelDescription }>
-									{
-										preventWidows( i18n.translate( 'Having a simple tool (with no coding) is more ' +
-											'important than full control over the layout and look.' ), 2 )
-									}
-								</p>
-							</label>
-						</div>
+							<h3 className={ styles.labelHost }>
+								Simple
+							</h3>
+							<p className={ styles.labelDescription }>
+								{
+									preventWidows( i18n.translate( 'Having a simple tool (with no coding) is more ' +
+										'important than full control over the layout and look.' ), 2 )
+								}
+							</p>
+						</label>
 
 						<strong className={ styles.preLabel }>
 							{ i18n.translate( 'I want more control and power:' ) }
 						</strong>
-						<div className={ styles.hostButton }>
+						<label className={ styles.label } htmlFor="control">
 							<Radio
 								className={ styles.radio }
 								{ ...needs }
@@ -100,18 +98,16 @@ class SelectNewBlogNeeds extends Component {
 								value="control"
 								checked={ needs.value === 'control' }
 							/>
-							<label className={ styles.label } htmlFor="control">
-								<h3 className={ styles.labelHost }>
-									{ i18n.translate( 'More control & power' ) }
-								</h3>
-								<p className={ styles.labelDescription }>
-									{
-										preventWidows( i18n.translate( 'I want full control over the look and feel ' +
-											"and I don't mind getting my hands dirty with code as needed." ), 2 )
-									}
-								</p>
-							</label>
-						</div>
+							<h3 className={ styles.labelHost }>
+								{ i18n.translate( 'More control & power' ) }
+							</h3>
+							<p className={ styles.labelDescription }>
+								{
+									preventWidows( i18n.translate( 'I want full control over the look and feel ' +
+										"and I don't mind getting my hands dirty with code as needed." ), 2 )
+								}
+							</p>
+						</label>
 					</Form.FieldArea>
 					<Form.SubmitArea>
 						<Button disabled={ this.isSubmitButtonDisabled() }>

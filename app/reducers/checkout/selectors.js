@@ -18,12 +18,6 @@ export const getSelectedDomainCost = state => {
 	return domainCostDetail ? domainCostDetail.cost : null;
 };
 
-export const getSelectedDomainApplicationCost = state => {
-	const applicationCostDetail = getSelectedDomainDetails( state ).find( detail => detail.productSlug === 'delphin-domain-app' );
-
-	return applicationCostDetail ? applicationCostDetail.cost : null;
-};
-
 export const hasSelectedDomain = state => every( getSelectedDomain( state ), value => value !== null );
 
 /**

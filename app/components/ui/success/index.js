@@ -7,11 +7,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
-import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 import scrollToTop from 'components/containers/scroll-to-top';
-
-const auctionPartnerName = 'Sedo';
 
 class Success extends React.Component {
 	componentWillMount() {
@@ -47,50 +44,35 @@ class Success extends React.Component {
 				</SunriseStep.Header>
 
 				<div className={ styles.content }>
-					<div className={ styles.highlight }>
-						<h3>
-							{ i18n.translate( 'What happens now?' ) }
-						</h3>
 
+					<div className={ styles.text }>
 						<p>
-							{ i18n.translate( "Your application will be reviewed by November 9. We'll email you at {{strong}}%(email)s{{/strong}} with more details.",
+							{ i18n.translate(
+								'Your application will be submitted automatically when ' +
+								'.blog becomes widely available, on November 21st. ' +
+								'We\'ll email you at {{strong}}%(email)s{{/strong}} with ' +
+								'the results. ',
 								{
 									args: { email },
 									components: { strong: <strong /> }
 								}
-							) }
-						</p>
-					</div>
-
-					<div className={ styles.text }>
-						<p>
-							{ i18n.translate( 'If no other requests are received for this domain, you will be granted the domain shortly after November 9.' ) }
+								) }
 						</p>
 
 						<p>
-							{ i18n.translate( 'If multiple requests are received for this domain, you will be able to bid for it in an auction, between November 14 and November 17.' ) }&nbsp;
-							{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+							{ i18n.translate(
+								'We can\'t guarantee the domain will be yours. ' +
+								'Your application will be sumitted as soon as possible, ' +
+								'but someone else may grab the same domain even sooner. '
+								) }
 						</p>
 
 						<p>
-							{ i18n.translate( 'Please set up an account with our auction partner, %(auctionPartnerName)s, so you will be ready in case your domain goes to auction.', {
-								args: {
-									auctionPartnerName
-								}
-							} ) }
+							{ i18n.translate(
+								'If your application fails, for any reason, we\'ll refund ' +
+								'your payment in full.'
+								) }
 						</p>
-
-						<TrackingLink
-							className={ styles.button }
-							to="https://sedo.com/member/register.php#1"
-							eventName="delphin_thank_you_click"
-							target="_blank">
-							{ i18n.translate( 'Sign up at %(auctionPartnerName)s', {
-								args: {
-									auctionPartnerName
-								}
-							} ) }
-						</TrackingLink>
 					</div>
 				</div>
 			</SunriseStep>

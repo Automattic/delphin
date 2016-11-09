@@ -198,7 +198,7 @@ class ContactInformation extends React.Component {
 						</h2>
 
 						<h3 className={ styles.text }>
-							{ i18n.translate( 'Your details are needed to claim {{strong}}%(domain)s{{/strong}}.',
+							{ i18n.translate( 'Your details are needed to apply for {{strong}}%(domain)s{{/strong}}.',
 								{
 									args: { domain: this.props.domain.domainName },
 									components: { strong: <strong /> }
@@ -243,7 +243,7 @@ class ContactInformation extends React.Component {
 
 								{ ! this.organizationInputIsVisible() && (
 									<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
-										{ i18n.translate( 'Registering for a company? Add Organization name' ) }
+										{ i18n.translate( 'Applying for a company? Add Organization name' ) }
 									</a>
 								) }
 

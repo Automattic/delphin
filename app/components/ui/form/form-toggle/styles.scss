@@ -93,6 +93,12 @@
 			opacity: 0.25;
 		}
 	}
+
+	&:focus {
+		+ .label .switch {
+			box-shadow: 0 0 0 2px $blue-medium;
+		}
+	}
 }
 
 // Classes for toggle state before action is complete (updating plugin or something)

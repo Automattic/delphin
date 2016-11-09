@@ -31,7 +31,6 @@ const Checkout = React.createClass( {
 	propTypes: {
 		checkout: PropTypes.object.isRequired,
 		domain: PropTypes.object,
-		domainApplicationCost: PropTypes.string,
 		domainCost: PropTypes.string.isRequired,
 		errors: PropTypes.object,
 		fields: PropTypes.object.isRequired,
@@ -137,7 +136,7 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ errors, fields, handleSubmit, domainCost, domainApplicationCost } = this.props;
+			{ errors, fields, handleSubmit, domainCost } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -248,10 +247,6 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
-							{ domainApplicationCost && <div className={ styles.orderItem }>
-								<span className={ styles.itemDescription }>{ i18n.translate( 'Application' ) } { i18n.translate( '(one-time fee)' ) }</span>
-								<span>{ domainApplicationCost }</span>
-							</div> }
 							<div className={ styles.orderItem }>
 								<span className={ styles.itemDescription }>{ i18n.translate( 'Domain Registration' ) } { i18n.translate( '(recurring yearly fee)' ) }</span>
 								<span>{ domainCost }</span>
@@ -295,7 +290,7 @@ const Checkout = React.createClass( {
 						<div className={ styles.refundNotice }>
 							<p>
 								<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
-								{ i18n.translate( 'Your payment will be refunded if your domain goes to auction and you don\'t win.' ) }
+								{ i18n.translate( 'If someone grabs this domain before we get a chance to register it for you, we\'ll give you a full refund.' ) }
 							</p>
 						</div>
 

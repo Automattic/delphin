@@ -76,7 +76,7 @@ class SelectNewBlogNeeds extends Component {
 								value="simple"
 								checked={ needs.value === 'simple' }
 							/>
-							<h3 className={ styles.labelHost }>
+							<h3 className={ styles.labelHeader }>
 								Simple
 							</h3>
 							<p className={ styles.labelDescription }>
@@ -98,7 +98,7 @@ class SelectNewBlogNeeds extends Component {
 								value="control"
 								checked={ needs.value === 'control' }
 							/>
-							<h3 className={ styles.labelHost }>
+							<h3 className={ styles.labelHeader }>
 								{ i18n.translate( 'More control & power' ) }
 							</h3>
 							<p className={ styles.labelDescription }>

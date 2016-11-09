@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import { fetchDomainPrice } from 'actions/domain-price';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
-import { getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost, hasSelectedDomain } from 'reducers/checkout/selectors';
+import { getSelectedDomain, getSelectedDomainCost, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { isLoggedIn } from 'reducers/user/selectors';
 import { redirect } from 'actions/routes';
 import { selectDomain, unselectDomain } from 'actions/domain-search';
@@ -15,7 +15,6 @@ import { getToggle } from 'reducers/ui/toggle/selectors';
 
 export default connect(
 	( state, ownProps ) => ( {
-		applicationCost: getSelectedDomainApplicationCost( state ),
 		domain: getSelectedDomain( state ),
 		domainCost: getSelectedDomainCost( state ),
 		hasSelectedDomain: hasSelectedDomain( state ),

@@ -1,19 +1,16 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import Button from 'components/ui/button';
 import DomainInput from 'components/ui/form/domain-input';
 import Email from 'components/ui/form/email';
-import PartialUnderline from 'components/ui/partial-underline';
 import { subscribeUser } from 'actions/learn-more';
 import ValidationError from 'components/ui/form/validation-error';
 import { withTld } from 'lib/domains';
@@ -89,57 +86,6 @@ class LearnMore extends React.Component {
 					</form>
 				</div>
 
-				<div className={ styles.content }>
-					<PartialUnderline centered>
-						<h2>{ i18n.translate( 'When can I get my .blog domain?' ) }</h2>
-					</PartialUnderline>
-
-					<div className={ styles.threeBoxes }>
-						<div>
-							<h3 className={ styles.boxTitle }>
-								{ i18n.translate( 'Trademark application' ) }
-							</h3>
-							<div className={ styles.boxTitleNotice }>
-								{ i18n.translate( '* Not offered on get.blog' ) }
-							</div>
-							<div className={ styles.boxContent }>
-								{ i18n.translate( 'Trademark holders can apply for .blog domains associated with their brands in a special process called {{link}}Sunrise{{/link}}.',
-									{
-										components: { link: <a href="http://www.trademark-clearinghouse.com/content/sunrise-services" target="_blank" /> }
-									}
-								) }
-							</div>
-						</div>
-
-						<div>
-							<h3 className={ styles.boxTitle }>
-								{ i18n.translate( 'Early application' ) }
-							</h3>
-							<div className={ styles.boxTitleNotice }>
-								{ i18n.translate( 'Closes November 9th' ) }
-							</div>
-							<div className={ styles.boxContent }>
-								{ i18n.translate( '{{link}}Apply now{{/link}} to secure the perfect domain for your blog and get a new .blog domain before the official launch.',
-									{
-										components: { link: <Link to={ getPath( 'home' ) } /> }
-									}
-								) }
-							</div>
-						</div>
-
-						<div>
-							<h3 className={ styles.boxTitle }>
-								{ i18n.translate( 'Registration' ) }
-							</h3>
-							<div className={ styles.boxTitleNotice }>
-								{ i18n.translate( 'Opens November 21st' ) }
-							</div>
-							<div className={ styles.boxContent }>
-								{ i18n.translate( 'Domains that are still not taken when .blog launches will be available starting at $30 a year.' ) }
-							</div>
-						</div>
-					</div>
-				</div>
 			</SunriseStep>
 		);
 	}

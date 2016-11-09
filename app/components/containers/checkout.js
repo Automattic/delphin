@@ -9,7 +9,7 @@ import { validateCheckoutForm } from 'lib/checkout';
 import { getAsyncValidateFunction } from 'lib/form';
 import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
-import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
+import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
 import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
@@ -51,7 +51,6 @@ export default reduxForm(
 		hasSelectedDomain: hasSelectedDomain( state ),
 		domain: getSelectedDomain( state ),
 		domainCost: getSelectedDomainCost( state ),
-		domainApplicationCost: getSelectedDomainApplicationCost( state ),
 		isPurchasing: isPurchasing( state ),
 		initialValues: {
 			name: getFullName( state ),

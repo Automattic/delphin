@@ -25,7 +25,7 @@
 	font-family: $body-font;
 	font-size: 1.6rem;
 	margin: -40px auto 25px;
-	max-width: 800px;
+	max-width: 440px;
 
 	@include breakpoint( '<660px' ) {
 		flex-direction: column;
@@ -38,7 +38,7 @@
 
 	p {
 		font-size: 1.7rem;
-		font-weight: 300;
+		font-weight: 400;
 		line-height: 1.4em;
 
 		&:not(:first-child) {
@@ -78,10 +78,6 @@
 .text {
 	background-color: $white;
 	text-align: left;
-
-	@include breakpoint( '>660px' ) {
-		flex-basis: 60%;
-	}
 
 	.button {
 		color: $white;

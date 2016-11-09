@@ -56,7 +56,7 @@ class SunriseConfirmDomain extends React.Component {
 	}
 
 	renderDomainInformation() {
-		const { domain, domainCost, applicationCost, hasSelectedDomain } = this.props;
+		const { domain, hasSelectedDomain } = this.props;
 
 		if ( ! hasSelectedDomain ) {
 			return (
@@ -78,25 +78,13 @@ class SunriseConfirmDomain extends React.Component {
 					<span className="_price-with-currency-code">
 						{ totalCost } { currencyCode }
 					</span>
-					{ ' ' }
-					{ i18n.translate( 'Early Application' ) }
 				</div>
-				{ applicationCost && (
-					<div className={ styles.renewalInfo }>
-						{ i18n.translate( '%(domainCost)s registration + %(applicationCost)s application fee', {
-							args: {
-								applicationCost,
-								domainCost
-							}
-						} ) }
-					</div>
-				) }
 			</div>
 		);
 	}
 
 	renderFreeNotice() {
-		const { domain, hasSelectedDomain, isMoreInformationVisible } = this.props;
+		const { domain, hasSelectedDomain } = this.props;
 
 		if ( ! hasSelectedDomain ) {
 			return null;
@@ -108,39 +96,23 @@ class SunriseConfirmDomain extends React.Component {
 			<div className={ styles.feeNotice }>
 				<h3 className={ styles.headline }>{ i18n.translate( 'Get your domain, or get your money back' ) }</h3>
 				<p className={ styles.happyCircle }>
-					{ i18n.translate( 'Apply now for a chance to own the domain you want. It\'s the best way to secure %(domainName)s before everyone else.', {
-						args: { domainName }
-					} ) }
+					{ i18n.translate(
+						'We will try to get %(domainName)s for you as soon as ' +
+						'.blog becomes widely available, on November 21st. ', {
+							args: { domainName }
+						} ) }
 				</p>
 				<p>
-					{ i18n.translate( 'It\'s also risk-free: We can\'t guarantee you\'ll get the domain, but if you don’t get it, we\'ll refund your payment in full.' ) }
+					{ i18n.translate(
+						'Your application may fail if someone else manages to register' +
+						' the same domain before we do.'
+						) }
 				</p>
-				{ ! isMoreInformationVisible && (
-					<p>
-						<a href="#" className={ styles.more } onClick={ this.handleClickMoreInformationLink }>
-							{ i18n.translate( 'More about the application process' ) }
-						</a>
-					</p>
-				) }
-				{ isMoreInformationVisible && (
-					<div>
-						<p>
-							{ i18n.translate(
-								'If others apply for %(domainName)s, it will go to an auction, with no price limit. ' +
-								'If %(domainName)s contains a trademark, the owners may register it in a separate process, ' +
-								'cancelling out your application.', {
-									args: { domainName }
-								}
-							) }
-						</p>
-						<p>
-							{ i18n.translate( 'Either way, if you don’t get your domain, your payment will be refunded.' ) }
-						</p>
-						<p>
-							{ i18n.translate( 'Starting November 21, any remaining domains that did not get registered will be available starting at $30 a year.' ) }
-						</p>
-					</div>
-				) }
+				<p>
+					{ i18n.translate(
+						'If we can\'t get this domain for you, we\'ll give you a full refund.'
+						) }
+				</p>
 			</div>
 		);
 	}
@@ -168,9 +140,8 @@ class SunriseConfirmDomain extends React.Component {
 						{ i18n.translate( 'Apply now' ) }
 					</h1>
 					<h2>
-						{ i18n.translate( 'Applications are open until November 9. ' +
-							'If others apply for the same domain, ' +
-							'you will be able to bid for it in an auction.' ) }
+						{ i18n.translate( 'Apply for a chance to own a .blog domain ' +
+							'on launch day. ' ) }
 					</h2>
 				</SunriseStep.Header>
 
@@ -207,9 +178,7 @@ class SunriseConfirmDomain extends React.Component {
 }
 
 SunriseConfirmDomain.propTypes = {
-	applicationCost: PropTypes.string,
 	domain: PropTypes.object,
-	domainCost: PropTypes.string,
 	fetchDomainPrice: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,

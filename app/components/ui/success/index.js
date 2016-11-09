@@ -48,7 +48,7 @@ class Success extends React.Component {
 					<div className={ styles.text }>
 						<p>
 							{ i18n.translate(
-								'Your appllication will be submitted automatically when ' +
+								'Your application will be submitted automatically when ' +
 								'.blog becomes widely available, on November 21st. ' +
 								'We\'ll email you at {{strong}}%(email)s{{/strong}} with ' +
 								'the results. ',

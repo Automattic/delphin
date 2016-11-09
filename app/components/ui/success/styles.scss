@@ -6,15 +6,23 @@
 
 .header {
 	background-image: url( #{$image-assets-url}smiley-blog-dark.svg );
-	background-position: center 70px;
+	background-position: center 30px;
 	background-repeat: no-repeat;
 
-	@include breakpoint( '<660px' ) {
-		background-position: center 30px;
+	@include breakpoint( '>660px' ) {
+		background-position: center 70px;
 	}
 
 	body & { // Needed for overriding
 		padding-top: 140px;
+
+		h1 {
+			margin-top: 0;
+
+			@include breakpoint( '>660px' ) {
+				margin-top: 40px;
+			}
+		}
 	}
 }
 
@@ -69,10 +77,7 @@
 
 		&:not(:first-child) {
 			color: $gray-dark;
-
-			@include breakpoint( '<660px' ) {
-				margin-top: 5px;
-			}
+			margin-top: 5px;
 		}
 	}
 }

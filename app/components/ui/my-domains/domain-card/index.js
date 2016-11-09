@@ -1,5 +1,5 @@
 // External dependencies
-import classNames from 'classnames';
+import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -8,50 +8,96 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import { getPath } from 'routes';
 import styles from './styles.scss';
-import WordPressIcon from 'assets/svg/wordpress.svg';
 
-const DomainCard = ( { name, isSetup, detailsVisible, toggleDetails } ) => {
-	const domainCardClassNames = classNames( {
+const DomainCard = ( { name, isSetup, detailsVisible } ) => {
+	// TODO - remove, only for testing styles
+	// values: 'auto', 'he', 'ns'
+	const	setupType = '';
+
+	const domainCardClassNames = classnames( {
 		[ styles.domainCard ]: true,
-		[ styles.notConnected ]: ! isSetup,
+		[ styles.notConnected ]: ! isSetup && ! setupType,
+		[ styles.connectedAuto ]: setupType === 'auto', // WPCOM/Pressable guided setup
+		[ styles.connectedConcierge ]: setupType === 'he', // concierge/HE setup
+		[ styles.connectedNameservers ]: setupType === 'ns', // custom nameservers
 		[ styles.showDetails ]: isSetup && detailsVisible
 	} );
 
-	if ( ! isSetup ) {
+	if ( setupType === 'auto' ) {
 		return (
 			<div className={ domainCardClassNames }>
-				<div className={ styles.domainSetup }>
+				<div className={ styles.domainHeading }>
 					<h3>{ name }</h3>
-					<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set Up Now' ) }</Button>
+				</div>
+				<div className={ styles.domainDetails }>
+					<p className={ styles.domainSetupWpcom }>
+						{ i18n.translate( 'This domain was automatically set up for your WordPress.com site.' ) }
+					</p>
+				</div>
+				<div className={ styles.domainCardFooter }>
+					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Reset to default settings' ) }</a>
 				</div>
 			</div>
 		);
 	}
 
-	return (
-		<div className={ domainCardClassNames } onClick={ toggleDetails }>
-			<div className={ styles.domainScreenshot }>
-				<img src={ 'https://s0.wp.com/mshots/v1/http://' + name + '/?w=500' } />
-			</div>
-			<div className={ styles.domainInfo }>
-				<h3>{ name }</h3>
+	if ( setupType === 'he' ) {
+		return (
+			<div className={ domainCardClassNames }>
+				<div className={ styles.domainHeading }>
+					<h3>{ name }</h3>
+				</div>
 				<div className={ styles.domainDetails }>
-					<span className={ styles.icon }>
-						<WordPressIcon />
-						<span>
-							{ i18n.translate( 'Connected to a WordPress.com site' ) }
-							<br />
-							<span className={ styles.siteName }>{ name }</span>
-							<br />
-							<a href="#" className={ styles.disconnect }>
-								{ i18n.translate( 'Disconnect' ) }
-							</a>
-						</span>
-					</span>
+					<p>{ i18n.translate( 'This domain is being managed by your domain concierge.' ) }</p>
+					<p className={ styles.smallText }>
+						<a>{ i18n.translate( 'Contact your domain concierge.' ) }</a>
+					</p>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
+
+	if ( setupType === 'ns' ) {
+		return (
+			<div className={ domainCardClassNames }>
+				<div className={ styles.domainHeading }>
+					<h3>{ name }</h3>
+				</div>
+				<div className={ styles.domainDetails }>
+					<p>{ i18n.translate( 'This domain has custom name servers:' ) }</p>
+					<div className={ styles.nameservers }>
+						<div className={ styles.nameserversLoading }>
+							{ i18n.translate( 'Fetching name servers…' ) }
+						</div>
+						<ul className={ styles.nameserversList }>
+							<li>ns1.example.com</li>
+							<li>ns2.example.com</li>
+							<li>ns3.example.com</li>
+							<li>ns4.example.com</li>
+						</ul>
+					</div>
+				</div>
+				<div className={ styles.domainCardFooter }>
+					<a href="#">{ i18n.translate( 'Change name servers' ) }</a>
+					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Revert to default name servers' ) }</a>
+				</div>
+			</div>
+		);
+	}
+
+	if ( ! isSetup ) {
+		return (
+			<div className={ domainCardClassNames }>
+				<div className={ styles.domainHeading }>
+					<h3>{ name }</h3>
+					<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set up' ) }</Button>
+				</div>
+				<div className={ styles.domainDetails }>
+					<p>{ i18n.translate( "You haven't set up this domain yet." ) }</p>
+				</div>
+			</div>
+		);
+	}
 };
 
 DomainCard.propTypes = {

@@ -57,7 +57,7 @@ class SelectNewBlogHost extends Component {
 		} = this.props;
 
 		return (
-			<label className={ styles.label } htmlFor="wpcom">
+			<div>
 				<Radio
 					className={ styles.radio }
 					{ ...service }
@@ -65,17 +65,19 @@ class SelectNewBlogHost extends Component {
 					value="wpcom"
 					checked={ service.value === 'wpcom' }
 				/>
-				<h3 className={ styles.labelHeader }>
-					WordPress.com
-				</h3>
-				<p className={ styles.labelDescription }>
-					{
-						i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
-							' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-							'Free hosting and support.' )
-					}
-				</p>
-			</label>
+				<label className={ styles.label } htmlFor="wpcom">
+					<h3 className={ styles.labelHeader }>
+						WordPress.com
+					</h3>
+					<p className={ styles.labelDescription }>
+						{
+							i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
+								' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+								'Free hosting and support.' )
+						}
+					</p>
+				</label>
+			</div>
 		);
 	}
 
@@ -85,7 +87,7 @@ class SelectNewBlogHost extends Component {
 		} = this.props;
 
 		return (
-			<label className={ styles.label } htmlFor="pressable">
+			<div>
 				<Radio
 					className={ styles.radio }
 					{ ...service }
@@ -93,17 +95,19 @@ class SelectNewBlogHost extends Component {
 					value="pressable"
 					checked={ service.value === 'pressable' }
 				/>
-				<h3 className={ styles.labelHeader }>
-					Pressable
-				</h3>
-				<p className={ styles.labelDescription }>
-					{
-						i18n.translate( 'Create a website or easily build a blog.' +
-							' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-							'Upload your own themes and plugins.' )
-					}
-				</p>
-			</label>
+				<label className={ styles.label } htmlFor="pressable">
+					<h3 className={ styles.labelHeader }>
+						Pressable
+					</h3>
+					<p className={ styles.labelDescription }>
+						{
+							i18n.translate( 'Create a website or easily build a blog.' +
+								' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+								'Upload your own themes and plugins.' )
+						}
+					</p>
+				</label>
+			</div>
 		);
 	}
 

@@ -13,7 +13,7 @@ import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
-import styles from '../styles.scss';
+import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectNewBlogNeeds extends Component {
@@ -65,14 +65,14 @@ class SelectNewBlogNeeds extends Component {
 							{ i18n.translate( 'What best fits your needs & preferences for your new blog?' ) }
 						</p>
 
+						<Radio
+							className={ styles.radio }
+							{ ...needs }
+							id="simple"
+							value="simple"
+							checked={ needs.value === 'simple' }
+						/>
 						<label className={ styles.label } htmlFor="simple">
-							<Radio
-								className={ styles.radio }
-								{ ...needs }
-								id="simple"
-								value="simple"
-								checked={ needs.value === 'simple' }
-							/>
 							<h3 className={ styles.labelHeader }>
 								{ i18n.translate( 'Simple & quick' ) }
 							</h3>
@@ -84,14 +84,14 @@ class SelectNewBlogNeeds extends Component {
 							</p>
 						</label>
 
+						<Radio
+							className={ styles.radio }
+							{ ...needs }
+							id="control"
+							value="control"
+							checked={ needs.value === 'control' }
+						/>
 						<label className={ styles.label } htmlFor="control">
-							<Radio
-								className={ styles.radio }
-								{ ...needs }
-								id="control"
-								value="control"
-								checked={ needs.value === 'control' }
-							/>
 							<h3 className={ styles.labelHeader }>
 								{ i18n.translate( 'More control & power' ) }
 							</h3>

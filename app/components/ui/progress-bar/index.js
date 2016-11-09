@@ -10,7 +10,7 @@ const ProgressBar = ( { progress } ) => {
 
 	return (
 		<div className={ styles.progressWrapper }>
-			<div className={ styles.progress } style={ inlineStyles } ></div>
+			<div className={ styles.progress } style={ inlineStyles }></div>
 		</div>
 	);
 };

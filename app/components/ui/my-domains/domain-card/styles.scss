@@ -11,6 +11,7 @@
 	display: flex;
 	flex-basis: 32%;
 	flex-direction: column;
+	justify-content: space-between;
 	margin-bottom: 20px;
 	min-height: 250px;
 	overflow: hidden;
@@ -59,9 +60,9 @@
 }
 
 .domain-details {
-	display: flex;
 	flex-basis: 100%;
 	flex-direction: column;
+	flex-grow: 1;
 	font-size: 1.8rem;
 	padding: 20px;
 
@@ -110,14 +111,14 @@
 		align-items: center;
 		background: url( #{$image-assets-url}mydomains-notsetup.svg ) no-repeat center calc( 50% - 50px );
 		color: $gray;
+		display: flex;
 		justify-content: center;
 		text-align: center;
 
 		@include breakpoint( '<480px' ) {
 			background-position: center 15px;
 			font-size: 1.6rem;
-			justify-content: flex-start;
-			padding-top: 70px;
+			padding-top: 80px;
 		}
 	}
 }

@@ -6,8 +6,4 @@
 	justify-content: space-between;
 	margin: 0 auto;
 	max-width: 1200px;
-
-	@include breakpoint( '<480px' ) {
-		flex-direction: column;
-	}
 }

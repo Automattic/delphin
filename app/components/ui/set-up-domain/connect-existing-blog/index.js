@@ -11,6 +11,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import noop from 'lodash/noop';
+import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 
@@ -40,6 +41,7 @@ class ConnectExistingBlog extends Component {
 					<h1>{ i18n.translate( 'Good news, we found %(hostName)s!', {
 						args: { hostName }
 					} ) }</h1>
+					<ProgressBar progress={ 60 } />
 				</SunriseStep.Header>
 
 				<Form onSubmit={ this.handleSubmit }>

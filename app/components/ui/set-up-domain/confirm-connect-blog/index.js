@@ -11,6 +11,7 @@ import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
+import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { getServiceName } from 'lib/services';
@@ -65,6 +66,7 @@ class ConfirmConnectBlog extends Component {
 					<h1 className={ styles.setupCompleteHeader }>
 						{ i18n.translate( 'Setup Complete!' ) }
 					</h1>
+					<ProgressBar progress={ 100 } />
 				</SunriseStep.Header>
 
 				<Form onSubmit={ this.handleSubmit }>

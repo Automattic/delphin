@@ -12,6 +12,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
+import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -44,11 +45,77 @@ class SelectNewBlogHost extends Component {
 		redirect( nextPageSlug, { pathParams: { domainName, service } } );
 	}
 
+	isSubmitButtonDisabled() {
+		const { invalid, pristine, submitting } = this.props;
+
+		return invalid || pristine || submitting;
+	}
+
+	renderWpcom() {
+		const {
+			fields: { service },
+		} = this.props;
+
+		return (
+			<div>
+				<Radio
+					className={ styles.radio }
+					{ ...service }
+					id="wpcom"
+					value="wpcom"
+					checked={ service.value === 'wpcom' }
+				/>
+				<label className={ styles.label } htmlFor="wpcom">
+					<h3 className={ styles.labelHeader }>
+						WordPress.com
+					</h3>
+					<p className={ styles.labelDescription }>
+						{
+							i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
+								' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+								'Free hosting and support.' )
+						}
+					</p>
+				</label>
+			</div>
+		);
+	}
+
+	renderPressable() {
+		const {
+			fields: { service },
+		} = this.props;
+
+		return (
+			<div>
+				<Radio
+					className={ styles.radio }
+					{ ...service }
+					id="pressable"
+					value="pressable"
+					checked={ service.value === 'pressable' }
+				/>
+				<label className={ styles.label } htmlFor="pressable">
+					<h3 className={ styles.labelHeader }>
+						Pressable
+					</h3>
+					<p className={ styles.labelDescription }>
+						{
+							i18n.translate( 'Create a website or easily build a blog.' +
+								' Hundreds of free, customizable, mobile-ready designs and themes. ' +
+								'Upload your own themes and plugins.' )
+						}
+					</p>
+				</label>
+			</div>
+		);
+	}
+
 	render() {
 		const {
 			domainName,
 			handleSubmit,
-			fields: { service },
+			needs,
 		} = this.props;
 
 		return (
@@ -56,8 +123,15 @@ class SelectNewBlogHost extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>{ i18n.translate( "Let's create a new blog!" ) }</h1>
-					<h2>
+					<h1 className={ styles.header }>
+						{ i18n.translate( 'Setup: {{strong}}Create a new blog{{/strong}}', {
+							components: {
+								strong: <strong />
+							}
+						} ) }
+					</h1>
+					<ProgressBar progress={ 60 } />
+					<h2 className={ styles.subHeader }>
 						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog." +
 							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",
 							{
@@ -72,59 +146,12 @@ class SelectNewBlogHost extends Component {
 						<p>
 							{ i18n.translate( 'Where would you like to create your new blog?' ) }
 						</p>
+						{ needs === 'simple' && this.renderWpcom() }
 
-						<strong className={ styles.preLabel }>
-							{ i18n.translate( 'I want simple and quick:' ) }
-						</strong>
-						<div className={ styles.hostButton }>
-							<Radio
-								className={ styles.radio }
-								{ ...service }
-								id="wpcom"
-								value="wpcom"
-								checked={ service.value === 'wpcom' }
-							/>
-							<label className={ styles.label } htmlFor="wpcom">
-								<h3 className={ styles.labelHost }>
-									WordPress.com
-								</h3>
-								<p className={ styles.labelDescription }>
-									{
-										i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
-											' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-											'Free hosting and support.' )
-									}
-								</p>
-							</label>
-						</div>
-
-						<strong className={ styles.preLabel }>
-							{ i18n.translate( 'I want more control and power:' ) }
-						</strong>
-						<div className={ styles.hostButton }>
-							<Radio
-								className={ styles.radio }
-								{ ...service }
-								id="pressable"
-								value="pressable"
-								checked={ service.value === 'pressable' }
-							/>
-							<label className={ styles.label } htmlFor="pressable">
-								<h3 className={ styles.labelHost }>
-									Pressable
-								</h3>
-								<p className={ styles.labelDescription }>
-									{
-										i18n.translate( 'Create a website or easily build a blog.' +
-											' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-											'Upload your own themes and plugins.' )
-									}
-								</p>
-							</label>
-						</div>
+						{ needs === 'control' && this.renderPressable() }
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Button>
+						<Button disabled={ this.isSubmitButtonDisabled() }>
 							{ i18n.translate( 'Next' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -139,7 +166,7 @@ class SelectNewBlogHost extends Component {
 				</Form>
 
 				<SunriseStep.Footer>
-					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
+					<Link to={ getPath( 'selectNewBlogNeeds', { domainName, needs } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
 				</SunriseStep.Footer>
@@ -153,7 +180,11 @@ SelectNewBlogHost.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasAnsweredPreviousQuestion: PropTypes.bool.isRequired,
+	invalid: PropTypes.bool.isRequired,
+	needs: PropTypes.string.isRequired,
+	pristine: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
 	updateDomain: PropTypes.func.isRequired
 };
 

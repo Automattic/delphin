@@ -11,6 +11,7 @@ import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
+import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
@@ -48,6 +49,7 @@ class ConnectNewBlogToOther extends Component {
 			handleSubmit,
 			isContactingSupport,
 			fields: { providerText },
+			needs,
 		} = this.props;
 
 		return (
@@ -56,6 +58,7 @@ class ConnectNewBlogToOther extends Component {
 
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
+					<ProgressBar progress={ 90 } />
 					<h2>
 						{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
 							{
@@ -89,7 +92,7 @@ class ConnectNewBlogToOther extends Component {
 				</Form>
 
 				<SunriseStep.Footer>
-					<Link to={ getPath( 'selectNewBlogHost', { domainName } ) }>
+					<Link to={ getPath( 'selectNewBlogHost', { domainName, needs } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
 				</SunriseStep.Footer>
@@ -105,6 +108,7 @@ ConnectNewBlogToOther.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
+	needs: PropTypes.string.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

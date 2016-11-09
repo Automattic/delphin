@@ -10,6 +10,7 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
+import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -19,7 +20,7 @@ class SelectBlogType extends Component {
 		const { redirect, domainName } = this.props;
 
 		if ( values.newOrExisting === 'new' ) {
-			redirect( 'selectNewBlogHost', { pathParams: { domainName } } );
+			redirect( 'selectNewBlogNeeds', { pathParams: { domainName } } );
 		}
 
 		if ( values.newOrExisting === 'existing' ) {
@@ -45,7 +46,14 @@ class SelectBlogType extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Tell us about your blog' ) }</h1>
+					<h1 className={ styles.header }>
+						{ i18n.translate( 'Setup: {{strong}}Tell us about your blog{{/strong}}', {
+							components: {
+								strong: <strong />
+							}
+						} ) }
+					</h1>
+					<ProgressBar progress={ 10 } />
 				</SunriseStep.Header>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>

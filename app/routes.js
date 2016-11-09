@@ -124,6 +124,12 @@ let publicRoutes = [
 			},
 			{
 				path: 'set-up-domain/:domainName/new-blog',
+				slug: 'selectNewBlogNeeds',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'selectNewBlogNeeds' )
+			},
+			{
+				path: 'set-up-domain/:domainName/new-blog/:needs',
 				slug: 'selectNewBlogHost',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'selectNewBlogHost' )
@@ -241,13 +247,11 @@ export const getPath = ( slug, values = {}, overrides = {} ) => {
 	}
 
 	const path = pathMap[ slug ];
-
 	if ( ! path ) {
 		return null;
 	}
 
 	const formattedPath = formatPattern( path, values );
-
 	let locale = i18n.getLocaleSlug();
 
 	if ( overrides.locale ) {

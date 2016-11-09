@@ -11,6 +11,7 @@ import { extractHostName } from 'lib/domains';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
+import ProgressBar from 'components/ui/progress-bar';
 import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
@@ -63,6 +64,7 @@ class FindExistingBlog extends Component {
 
 				<SunriseStep.Header>
 					<h1>{ i18n.translate( 'Connect to your blog' ) }</h1>
+					<ProgressBar progress={ 30 } />
 				</SunriseStep.Header>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>

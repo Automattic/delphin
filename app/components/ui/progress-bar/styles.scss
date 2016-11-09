@@ -1,0 +1,15 @@
+@import 'app/styles/colors';
+
+$height: 14px;
+
+.progress-wrapper {
+	background: $gray-medium;
+	border-radius: $height / 2;
+	margin-top: 20px;
+}
+
+.progress {
+	background: $green;
+	border-radius: $height / 2;
+	height: $height;
+}

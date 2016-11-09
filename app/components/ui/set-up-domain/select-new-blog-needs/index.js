@@ -65,9 +65,6 @@ class SelectNewBlogNeeds extends Component {
 							{ i18n.translate( 'What best fits your needs & preferences for your new blog?' ) }
 						</p>
 
-						<strong className={ styles.preLabel }>
-							{ i18n.translate( 'Simple & quick' ) }
-						</strong>
 						<label className={ styles.label } htmlFor="simple">
 							<Radio
 								className={ styles.radio }
@@ -77,7 +74,7 @@ class SelectNewBlogNeeds extends Component {
 								checked={ needs.value === 'simple' }
 							/>
 							<h3 className={ styles.labelHeader }>
-								Simple
+								{ i18n.translate( 'Simple & quick' ) }
 							</h3>
 							<p className={ styles.labelDescription }>
 								{
@@ -87,9 +84,6 @@ class SelectNewBlogNeeds extends Component {
 							</p>
 						</label>
 
-						<strong className={ styles.preLabel }>
-							{ i18n.translate( 'I want more control and power:' ) }
-						</strong>
 						<label className={ styles.label } htmlFor="control">
 							<Radio
 								className={ styles.radio }

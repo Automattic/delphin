@@ -8,14 +8,13 @@ import { push } from 'react-router-redux';
 import CheckoutReview from 'components/ui/checkout-review';
 import { purchaseDomain } from 'actions/checkout';
 import { getPath } from 'routes';
-import { isPurchasing, getSelectedDomain, getSelectedDomainCost, getSelectedDomainApplicationCost } from 'reducers/checkout/selectors';
+import { isPurchasing, getSelectedDomain, getSelectedDomainCost } from 'reducers/checkout/selectors';
 import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default connect(
 	state => ( {
 		renewCost: getSelectedDomainCost( state ),
-		applicationCost: getSelectedDomainApplicationCost( state ),
 		isPurchasing: isPurchasing( state ),
 		checkout: getValues( state.form.checkout ),
 		contactInformation: getValues( state.form.contactInformation ),

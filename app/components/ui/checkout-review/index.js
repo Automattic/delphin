@@ -95,8 +95,6 @@ class CheckoutReview extends React.Component {
 	}
 
 	render() {
-		const { applicationCost } = this.props;
-
 		return ( <SunriseStep>
 			<DocumentTitle title={ i18n.translate( 'Review your application' ) } />
 			<SunriseStep.Header>
@@ -114,12 +112,6 @@ class CheckoutReview extends React.Component {
 			<SunriseStep.Form className={ styles.checkoutReview } onSubmit={ this.handleSubmission }>
 				<section className={ styles.summary }>
 					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
-					<p className={ styles.applicationFee }>
-						{ applicationCost && [
-							applicationCost,
-							i18n.translate( 'Recurring yearly fee' )
-						].join( ' ' ) }
-					</p>
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }
@@ -138,7 +130,6 @@ class CheckoutReview extends React.Component {
 }
 
 CheckoutReview.propTypes = {
-	applicationCost: PropTypes.string,
 	checkout: PropTypes.shape( {
 		number: PropTypes.string.isRequired
 	} ).isRequired,

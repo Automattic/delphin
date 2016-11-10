@@ -67,12 +67,22 @@ const Checkout = React.createClass( {
 		this.props.resetCheckout();
 	},
 
+	handleClickResetCheckoutAndRedirectToHome( event ) {
+		event.preventDefault();
+
+		this.props.resetCheckout();
+		this.props.redirectToHome();
+	},
+
 	renderCheckoutError() {
 		let errorMessage = i18n.translate( "We weren't able to process your payment." );
 
 		const { transaction } = this.props.checkout;
 
-		if ( transaction.error && transaction.error.code === 'duplicate_purchase' ) {
+		if ( transaction.error &&
+			( transaction.error.code === 'duplicate_purchase' ||
+				transaction.error.code === 'domain_lookup' // domain availability error
+			) ) {
 			errorMessage = transaction.error.message;
 		}
 
@@ -81,6 +91,7 @@ const Checkout = React.createClass( {
 				<div className={ styles.icon }></div>
 				<p>
 					{ errorMessage }
+					{ ! errorMessage && ( // show only if the domain not taken
 					<span>
 						{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
 							{
@@ -88,6 +99,17 @@ const Checkout = React.createClass( {
 							}
 						) }
 					</span>
+					) }
+
+					{ errorMessage && ( // show only if the domain not taken
+						<span>
+						{ i18n.translate( 'You can {{link}}try a different domain{{/link}}.',
+							{
+								components: { link: <a onClick={ this.handleClickResetCheckoutAndRedirectToHome } href="#" /> }
+							}
+						) }
+					</span>
+					) }
 				</p>
 			</div>
 		);

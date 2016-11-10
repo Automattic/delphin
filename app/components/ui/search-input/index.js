@@ -44,6 +44,8 @@ class SearchInput extends React.Component {
 			<form className={ styles.searchWrapper } onSubmit={ this.handleSubmit }>
 				<KeywordsContainer />
 				<input
+					autoCapitalize="off"
+					autoComplete="off"
 					autoFocus
 					ref="searchInput"
 					type="text"

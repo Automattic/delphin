@@ -76,11 +76,16 @@ const Checkout = React.createClass( {
 
 	renderCheckoutError() {
 		let errorMessage = i18n.translate( "We weren't able to process your payment." );
+		let showTryDifferentDomain = false;
 
 		const { transaction: error } = this.props.checkout;
 
 		if ( error && [ 'duplicate_purchase', 'domain_lookup' ].includes( error.code ) ) {
 			errorMessage = error.message;
+
+			if ( error.code === 'domain_lookup' ) {
+				showTryDifferentDomain = true;
+			}
 		}
 
 		return (
@@ -88,25 +93,21 @@ const Checkout = React.createClass( {
 				<div className={ styles.icon }></div>
 				<p>
 					{ errorMessage }
-					{ ! errorMessage && ( // show only if the domain not taken
-					<span>
-						{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
-							{
-								components: { link: <a onClick={ this.handleClickResetCheckout } href="#" /> }
-							}
-						) }
-					</span>
-					) }
 
-					{ errorMessage && ( // show only if the domain not taken
-						<span>
-						{ i18n.translate( 'You can {{link}}try a different domain{{/link}}.',
-							{
-								components: { link: <a onClick={ this.handleClickResetCheckoutAndRedirectToHome } href="#" /> }
-							}
-						) }
+					<span>
+						{ showTryDifferentDomain
+							? i18n.translate( 'You can {{link}}try a different domain{{/link}}.', {
+								components: {
+									link: <a onClick={ this.handleClickResetCheckoutAndRedirectToHome } href="#" />
+								}
+							} )
+							: i18n.translate( "Don't worry! You can {{link}}try again{{/link}}.", {
+								components: {
+									link: <a onClick={ this.handleClickResetCheckout } href="#" />
+								}
+							} )
+						}
 					</span>
-					) }
 				</p>
 			</div>
 		);

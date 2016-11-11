@@ -3,6 +3,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -62,9 +63,11 @@ class FindExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.header }>
-					<h1 className={ styles.headerText }>{ i18n.translate( 'Connect to your blog' ) }</h1>
-					<ProgressBar progress={ 30 } />
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Connect to your blog' ) }</h1>
+						<ProgressBar progress={ 30 } />
+					</div>
 				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
@@ -118,4 +121,4 @@ FindExistingBlog.propTypes = {
 	submitting: PropTypes.bool.isRequired
 };
 
-export default bindHandlers( FindExistingBlog ) ;
+export default withStyles( styles )( bindHandlers( FindExistingBlog ) );

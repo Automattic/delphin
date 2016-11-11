@@ -59,20 +59,22 @@ class ContactUsExistingBlog extends Component {
 
 		return (
 			<div className={ styles.domainSetup }>
-				<div className={ styles.header }>
-					<h1 className={ styles.headerText }>{ i18n.translate( 'Submit Your Request' ) }</h1>
-					<ProgressBar progress={ 90 } />
-					<h2 className={ styles.subHeaderText }>
-						{ i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, however, ' +
-							"at this time we aren't able to automatically connect your blog (we're working on it though!).",
-							{
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						) }
-						{ ' ' }
-						{ i18n.translate( 'Our Happiness Engineers will assist you in connecting to your existing blog.' ) }
-					</h2>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Submit Your Request' ) }</h1>
+						<ProgressBar progress={ 90 } />
+						<h2 className={ styles.subHeaderText }>
+							{ i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, however, ' +
+								"at this time we aren't able to automatically connect your blog (we're working on it though!).",
+								{
+									args: { domainName },
+									components: { strong: <strong /> }
+								}
+							) }
+							{ ' ' }
+							{ i18n.translate( 'Our Happiness Engineers will assist you in connecting to your existing blog.' ) }
+						</h2>
+					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>

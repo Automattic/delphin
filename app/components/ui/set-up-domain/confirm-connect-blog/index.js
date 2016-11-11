@@ -62,11 +62,13 @@ class ConfirmConnectBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.header }>
-					<h1 className={ classnames( styles.headerText, styles.setupCompleteHeader ) }>
-						{ i18n.translate( 'Setup Complete!' ) }
-					</h1>
-					<ProgressBar progress={ 100 } />
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ classnames( styles.headerText, styles.setupCompleteHeader ) }>
+							{ i18n.translate( 'Setup Complete!' ) }
+						</h1>
+						<ProgressBar progress={ 100 } />
+					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>

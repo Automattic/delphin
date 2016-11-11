@@ -19,9 +19,9 @@ class ConnectingBlog extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<div className={ styles.header }>
-					<h1>{ i18n.translate( 'Connecting your domain' ) }</h1>
+					<h1 className={ styles.headerText }>{ i18n.translate( 'Connecting your domain' ) }</h1>
 					<ProgressBar progress={ 80 } />
-					<h2>
+					<h2 className={ styles.subHeaderText }>
 						{ blogType === 'existing' && (
 							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {
 								args: { domainName, hostName, serviceName },

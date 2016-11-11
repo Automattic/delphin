@@ -46,12 +46,11 @@ class SelectBlogType extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<SunriseStep.Header>
-					<h1 className={ styles.header }>
-						{ i18n.translate( 'Setup: {{strong}}Tell us about your blog{{/strong}}', {
-							components: {
-								strong: <strong />
-							}
-						} ) }
+					<h1 className={ styles.setUpHeader }>
+						<span className={ styles.setUpLabel }>
+							{ i18n.translate( 'Setup: ' ) }
+						</span>
+						{ i18n.translate( 'Tell us about your blog' ) }
 					</h1>
 					<ProgressBar progress={ 10 } />
 				</SunriseStep.Header>

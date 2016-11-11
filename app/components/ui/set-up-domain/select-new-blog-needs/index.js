@@ -50,11 +50,11 @@ class SelectNewBlogNeeds extends Component {
 
 				<SunriseStep.Header>
 					<h1 className={ styles.header }>
-						{ i18n.translate( 'Setup: {{strong}}Tell us what you want{{/strong}}', {
-							components: {
-								strong: <strong />
-							}
-						} ) }
+						<span className={ styles.setUpLabel }>
+							{ i18n.translate( 'Setup: ' ) }
+						</span>
+
+						{ i18n.translate( 'Tell us what you want' ) }
 					</h1>
 					<ProgressBar progress={ 30 } />
 					<h2 className={ styles.subHeader }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>

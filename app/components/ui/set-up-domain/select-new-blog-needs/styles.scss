@@ -1,1 +1,13 @@
 @import 'app/components/ui/set-up-domain/styles';
+
+.label-header {
+	border-bottom: 0;
+	font-weight: bold;
+	line-height: 2.1rem;
+	padding: 15px 0 0 20px;
+}
+
+label.label {
+	margin-bottom: 0;
+	margin-top: 20px;
+}

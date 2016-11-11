@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { Component, PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
@@ -49,4 +50,4 @@ ConnectingBlog.propTypes = {
 	service: PropTypes.string.isRequired
 };
 
-export default ConnectingBlog;
+export default withStyles( styles )( ConnectingBlog );

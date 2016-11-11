@@ -124,16 +124,15 @@ class SelectNewBlogHost extends Component {
 
 				<SunriseStep.Header>
 					<h1 className={ styles.header }>
-						{ i18n.translate( 'Setup: {{strong}}Create a new blog{{/strong}}', {
-							components: {
-								strong: <strong />
-							}
-						} ) }
+						<span className={ styles.setUpLabel }>
+							{ i18n.translate( 'Setup: ' ) }
+						</span>
+
+						{ i18n.translate( 'Create a new blog' ) }
 					</h1>
 					<ProgressBar progress={ 60 } />
 					<h2 className={ styles.subHeader }>
-						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog." +
-							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",
+						{ preventWidows( i18n.translate( "We'll get your domain ready to be connected to the service of your choice.",
 							{
 								args: { domainName },
 								components: { strong: <strong /> }

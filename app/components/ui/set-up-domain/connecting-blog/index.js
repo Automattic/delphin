@@ -4,10 +4,10 @@ import React, { Component, PropTypes } from 'react';
 
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
+import { getServiceName } from 'lib/services';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
-import SunriseStep from 'components/ui/sunrise-step';
-import { getServiceName } from 'lib/services';
+import styles from './styles.scss';
 
 class ConnectingBlog extends Component {
 	render() {
@@ -15,10 +15,10 @@ class ConnectingBlog extends Component {
 		const serviceName = getServiceName( service );
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
+				<div className={ styles.header }>
 					<h1>{ i18n.translate( 'Connecting your domain' ) }</h1>
 					<ProgressBar progress={ 80 } />
 					<h2>
@@ -36,8 +36,8 @@ class ConnectingBlog extends Component {
 							} ), 2 )
 						) }
 					</h2>
-				</SunriseStep.Header>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

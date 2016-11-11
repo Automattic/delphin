@@ -13,7 +13,6 @@ import Form from 'components/ui/form';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectBlogType extends Component {
 	handleSubmit( values ) {
@@ -42,18 +41,18 @@ class SelectBlogType extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1 className={ styles.setUpHeader }>
+				<div className={ styles.header }>
+					<h1 className={ styles.headerText }>
 						<span className={ styles.setUpLabel }>
 							{ i18n.translate( 'Setup: ' ) }
 						</span>
 						{ i18n.translate( 'Tell us about your blog' ) }
 					</h1>
 					<ProgressBar progress={ 10 } />
-				</SunriseStep.Header>
+				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
@@ -93,7 +92,7 @@ class SelectBlogType extends Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						<p className={ styles.subHeader }>{ i18n.translate( 'Looking to edit your nameservers yourself?' ) }</p>
+						<p className={ styles.formFooter }>{ i18n.translate( 'Looking to edit your nameservers yourself?' ) }</p>
 						<p>
 							{ i18n.translate( "There is copy here about {{Link}}editing nameservers{{/Link}}. I'm not sure what to say here Ran.", {
 								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
@@ -102,12 +101,12 @@ class SelectBlogType extends Component {
 					</Form.Footer>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'myDomains' ) }>
 						{ i18n.translate( 'I\'ll set up my domain later' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

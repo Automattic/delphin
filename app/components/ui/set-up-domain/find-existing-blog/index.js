@@ -12,9 +12,9 @@ import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
 import ProgressBar from 'components/ui/progress-bar';
-import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
+import styles from './styles.scss';
 
 class FindExistingBlog extends Component {
 	componentWillMount() {
@@ -59,13 +59,13 @@ class FindExistingBlog extends Component {
 		const { domainName, fields, handleSubmit } = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Connect to your blog' ) }</h1>
+				<div className={ styles.header }>
+					<h1 className={ styles.headerText }>{ i18n.translate( 'Connect to your blog' ) }</h1>
 					<ProgressBar progress={ 30 } />
-				</SunriseStep.Header>
+				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
@@ -94,12 +94,12 @@ class FindExistingBlog extends Component {
 					</Form.Footer>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

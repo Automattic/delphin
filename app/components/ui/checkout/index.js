@@ -77,13 +77,10 @@ const Checkout = React.createClass( {
 	renderCheckoutError() {
 		let errorMessage = i18n.translate( "We weren't able to process your payment." );
 
-		const { transaction } = this.props.checkout;
+		const { transaction: error } = this.props.checkout;
 
-		if ( transaction.error &&
-			( transaction.error.code === 'duplicate_purchase' ||
-				transaction.error.code === 'domain_lookup' // domain availability error
-			) ) {
-			errorMessage = transaction.error.message;
+		if ( error && [ 'duplicate_purchase', 'domain_lookup' ].includes( error.code ) ) {
+			errorMessage = error.message;
 		}
 
 		return (
@@ -116,8 +113,7 @@ const Checkout = React.createClass( {
 	},
 
 	hasError() {
-		const { checkout } = this.props;
-		const { paygateConfiguration, paygateToken, transaction } = checkout;
+		const { checkout: { paygateConfiguration, paygateToken, transaction } } = this.props;
 
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},

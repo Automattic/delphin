@@ -14,7 +14,6 @@ import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectNewBlogNeeds extends Component {
 	componentWillMount() {
@@ -45,11 +44,11 @@ class SelectNewBlogNeeds extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1 className={ styles.header }>
+				<div className={ styles.header }>
+					<h1 className={ styles.headerText }>
 						<span className={ styles.setUpLabel }>
 							{ i18n.translate( 'Setup: ' ) }
 						</span>
@@ -57,8 +56,9 @@ class SelectNewBlogNeeds extends Component {
 						{ i18n.translate( 'Tell us what you want' ) }
 					</h1>
 					<ProgressBar progress={ 30 } />
-					<h2 className={ styles.subHeader }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
-				</SunriseStep.Header>
+					<h2 className={ styles.subHeaderText }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
+				</div>
+
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<p>
@@ -110,12 +110,12 @@ class SelectNewBlogNeeds extends Component {
 					</Form.SubmitArea>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

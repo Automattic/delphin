@@ -1,5 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
+import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
@@ -13,7 +14,6 @@ import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 import { getServiceName } from 'lib/services';
 
 class ConfirmConnectBlog extends Component {
@@ -59,15 +59,15 @@ class ConfirmConnectBlog extends Component {
 		const serviceName = getServiceName( service );
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1 className={ styles.setupCompleteHeader }>
+				<div className={ styles.header }>
+					<h1 className={ classnames( styles.headerText, styles.setupCompleteHeader ) }>
 						{ i18n.translate( 'Setup Complete!' ) }
 					</h1>
 					<ProgressBar progress={ 100 } />
-				</SunriseStep.Header>
+				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					{ blogType === 'existing' && (
@@ -118,12 +118,13 @@ class ConfirmConnectBlog extends Component {
 					) }
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'myDomains' ) }>
 						{ i18n.translate( 'Back to My Domains' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+
+			</div>
 		);
 	}
 }

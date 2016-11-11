@@ -72,15 +72,15 @@ class ConfirmConnectBlog extends Component {
 				<Form onSubmit={ this.handleSubmit }>
 					{ blogType === 'existing' && (
 						<Form.FieldArea>
+							<h3>
+								{ i18n.translate( 'Your domain is all set!' ) }
+							</h3>
+
 							<p>
-								{ i18n.translate( "You're all set! We just made some changes for you so %(domainName)s will point to %(hostName)s.", {
+								{ i18n.translate( 'We just made some changes for you so %(domainName)s will point to %(hostName)s.', {
 									args: { hostName, domainName },
 									components: { strong: <strong /> }
 								} ) }
-							</p>
-
-							<p>
-								{ preventWidows( i18n.translate( "Just a reminder you won't see the changes right away. It can take up to 72 hours for settings to be updated across the web." ), 2 ) }
 							</p>
 
 							<Button className={ styles.button }>
@@ -94,35 +94,35 @@ class ConfirmConnectBlog extends Component {
 
 					{ blogType === 'new' && (
 						<Form.FieldArea>
-							<p>
-								{ preventWidows( i18n.translate( "You're all set! Just sign up at %(serviceName)s and create your new blog.", {
+							<h3>
+								{ i18n.translate( 'Your domain is ready for %(serviceName)s!', {
 									args: { serviceName },
 									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
-								} ), 2 ) }
-							</p>
+								} ) }
+							</h3>
 
 							<p>
-								{ preventWidows( i18n.translate( 'To get started, sign up at %(serviceName)s and create a new blog. Your domain will connect automatically.', {
-									args: { serviceName },
+								{ preventWidows( i18n.translate( 'Continue to %(serviceName)s to start building your new blog. After you create your blog with %(serviceName)s it will be available at %(domainName)s', {
+									args: { serviceName, domainName },
 									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ), 2 ) }
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Sign up at %(serviceName)s', {
+								{ i18n.translate( 'Create my %(serviceName)s blog', {
 									args: { serviceName },
 									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ) }
 							</Button>
 						</Form.FieldArea>
 					) }
-
-					<Form.SubmitArea>
-						<Link to={ getPath( 'myDomains' ) }>
-							{ i18n.translate( 'Back to My Domains' ) }
-						</Link>
-					</Form.SubmitArea>
 				</Form>
+
+				<SunriseStep.Footer>
+					<Link to={ getPath( 'myDomains' ) }>
+						{ i18n.translate( 'Back to My Domains' ) }
+					</Link>
+				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

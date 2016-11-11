@@ -1,5 +1,6 @@
 @import 'app/styles/breakpoints';
 @import 'app/styles/colors';
+@import 'app/styles/assets';
 
 .terms {
 	color: $gray-dark;
@@ -15,7 +16,7 @@
 	position: relative;
 
 	&::after {
-		background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-blue.svg ) no-repeat;
+		background: url( #{$image-assets-url}/hosts/wordpress-blue.svg ) no-repeat;
 		background-size: contain;
 		bottom: 0;
 		content: '';

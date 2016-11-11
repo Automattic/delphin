@@ -55,17 +55,19 @@ class ConnectNewBlogToOther extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.header }>
-					<h1 className={ styles.headerText }>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
-					<ProgressBar progress={ 90 } />
-					<h2 className={ styles.subHeaderText }>
-						{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
-							{
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						), 2 ) }
-					</h2>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
+						<ProgressBar progress={ 90 } />
+						<h2 className={ styles.subHeaderText }>
+							{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
+								{
+									args: { domainName },
+									components: { strong: <strong /> }
+								}
+							), 2 ) }
+						</h2>
+					</div>
 				</div>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

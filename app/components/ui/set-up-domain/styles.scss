@@ -1,6 +1,10 @@
 @import 'app/styles/colors';
 @import 'app/components/ui/set-up-domain/headers';
 
+.header-container {
+	background-color: #f3f6f8;
+}
+
 .domain-setup {
 	font-size: 1.4rem;
 	font-weight: 300;

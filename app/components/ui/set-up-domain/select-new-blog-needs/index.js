@@ -47,16 +47,18 @@ class SelectNewBlogNeeds extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.header }>
-					<h1 className={ styles.headerText }>
-						<span className={ styles.setUpLabel }>
-							{ i18n.translate( 'Setup: ' ) }
-						</span>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
 
-						{ i18n.translate( 'Tell us what you want' ) }
-					</h1>
-					<ProgressBar progress={ 30 } />
-					<h2 className={ styles.subHeaderText }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
+							{ i18n.translate( 'Tell us what you want' ) }
+						</h1>
+						<ProgressBar progress={ 30 } />
+						<h2 className={ styles.subHeaderText }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
+					</div>
 				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>

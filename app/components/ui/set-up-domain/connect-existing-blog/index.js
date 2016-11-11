@@ -36,11 +36,13 @@ class ConnectExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.header }>
-					<h1 className={ styles.headerText }>{ i18n.translate( 'Good news, we found %(hostName)s!', {
-						args: { hostName }
-					} ) }</h1>
-					<ProgressBar progress={ 60 } />
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Good news, we found %(hostName)s!', {
+							args: { hostName }
+						} ) }</h1>
+						<ProgressBar progress={ 60 } />
+					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>

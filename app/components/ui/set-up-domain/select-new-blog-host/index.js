@@ -121,24 +121,27 @@ class SelectNewBlogHost extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.header }>
-					<h1 className={ styles.headerText }>
-						<span className={ styles.setUpLabel }>
-							{ i18n.translate( 'Setup: ' ) }
-						</span>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
 
-						{ i18n.translate( 'Create a new blog' ) }
-					</h1>
-					<ProgressBar progress={ 60 } />
-					<h2 className={ styles.subHeaderText }>
-						{ preventWidows( i18n.translate( "We'll get your domain ready to be connected to the service of your choice.",
-							{
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						), 2 ) }
-					</h2>
+							{ i18n.translate( 'Create a new blog' ) }
+						</h1>
+						<ProgressBar progress={ 60 } />
+						<h2 className={ styles.subHeaderText }>
+							{ preventWidows( i18n.translate( "We'll get your domain ready to be connected to the service of your choice.",
+								{
+									args: { domainName },
+									components: { strong: <strong /> }
+								}
+							), 2 ) }
+						</h2>
+					</div>
 				</div>
+
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<p>

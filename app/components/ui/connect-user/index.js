@@ -100,9 +100,12 @@ const ConnectUser = React.createClass( {
 								{ i18n.translate( 'Next' ) }
 							</Button>
 						</Form.SubmitArea>
+						<div className={ styles.poweredBy }>
+							<h3 className={ styles.headline }>Proudly powered by WordPress.com</h3>
+							<p>Your get.blog domain can easily be connected to WordPress.</p>
+						</div>
 					</Form>
 
-					<Footer />
 				</div>
 			</DocumentTitle>
 		);

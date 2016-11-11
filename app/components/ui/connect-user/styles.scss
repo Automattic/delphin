@@ -1,8 +1,45 @@
+@import 'app/styles/breakpoints';
 @import 'app/styles/colors';
 
 .terms {
 	color: $gray-dark;
 	font-size: 1.3rem;
-	font-weight: 300;
-	margin: 20px 0 0;
+	font-weight: 400;
+	margin: 10px 0 0;
+}
+
+.powered-by {
+	background: $gray-xlight;
+	margin: 20px -30px;
+    padding: 25px 105px 25px 30px;
+    position: relative;
+
+    &::after {
+    	background: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-blue.svg ) no-repeat;
+   		background-size: contain;
+	    bottom: 0;
+    	content:"";
+    	display: block;
+    	height: 40px;
+	    margin: auto;
+	    position: absolute;
+	    right: 35px;
+	    top: 0;
+    	width: 40px;
+    }
+
+    .headline {
+    	color: $blue-dark;
+    	font-size: 1.6rem;
+    	font-weight: bold;
+    	margin-bottom: 10px;
+    }
+
+    p {
+    	font-size: 1.6rem;
+    }
+
+    @include breakpoint( '>480px' ) {
+    	margin: 0;
+    }
 }

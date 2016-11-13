@@ -80,10 +80,10 @@ const Checkout = React.createClass( {
 
 		const { transaction: error } = this.props.checkout;
 
-		if ( error && [ 'duplicate_purchase', 'domain_lookup' ].includes( error.code ) ) {
+		if ( error && [ 'duplicate_purchase', 'domain_availability_error', 'domain_availability_check_error' ].includes( error.code ) ) {
 			errorMessage = error.message;
 
-			if ( error.code === 'domain_lookup' ) {
+			if ( error.code === 'domain_availability_error' ) {
 				showTryDifferentDomain = true;
 			}
 		}

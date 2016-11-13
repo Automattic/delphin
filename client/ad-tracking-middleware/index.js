@@ -12,7 +12,8 @@ export const adTrackingMiddleware = () => next => action => {
 
 	switch ( type ) {
 		case TRANSACTION_CREATE_COMPLETE:
-			if ( isEnabled( 'ad_tracking' ) ) {
+			// users might block google_trackConversion, we must not fail because of it
+			if ( isEnabled( 'ad_tracking' ) && typeof window.google_trackConversion === 'function' ) {
 				window.google_trackConversion( {
 					google_conversion_id: config( 'google_conversion_id' ),
 					google_conversion_format: 3,

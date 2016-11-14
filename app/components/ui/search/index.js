@@ -12,6 +12,7 @@ import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomai
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
+import Button from 'components/ui/button';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
@@ -199,9 +200,9 @@ const Search = React.createClass( {
 
 					{ showAdditionalResultsLink && (
 						<div className={ styles.additionalResultsLinkContainer }>
-							<a onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
+							<Button onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
 								{ i18n.translate( 'Show me more' ) }
-							</a>
+							</Button>
 						</div>
 					) }
 

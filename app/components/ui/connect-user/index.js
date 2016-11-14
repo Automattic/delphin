@@ -7,7 +7,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
-import Footer from 'components/ui/connect-user/footer';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
 import Input from 'components/ui/form/input';
@@ -100,9 +99,12 @@ const ConnectUser = React.createClass( {
 								{ i18n.translate( 'Next' ) }
 							</Button>
 						</Form.SubmitArea>
+						<div className={ styles.poweredBy }>
+							<h3 className={ styles.headline }>Proudly powered by WordPress.com</h3>
+							<p>Your get.blog domain can easily be connected to WordPress.</p>
+						</div>
 					</Form>
 
-					<Footer />
 				</div>
 			</DocumentTitle>
 		);

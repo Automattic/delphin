@@ -91,9 +91,11 @@ class FindExistingBlog extends Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						{ i18n.translate( 'We\'ll scan your blog and find the right settings to connect it to %(domainName)s.', {
-							args: { domainName }
-						} ) }
+						<p>
+							{ i18n.translate( 'We\'ll scan your blog and find the right settings to connect it to %(domainName)s.', {
+								args: { domainName }
+							} ) }
+						</p>
 					</Form.Footer>
 				</Form>
 

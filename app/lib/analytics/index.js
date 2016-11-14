@@ -79,7 +79,7 @@ const analytics = {
 	user: null,
 
 	superProps: {
-		launch_period: 'landrush pre-reg' // Future options will be landrush and ga
+		launch_period: 'ga pre-reg'
 	},
 
 	mc: {

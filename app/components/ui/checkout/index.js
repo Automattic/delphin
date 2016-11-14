@@ -68,9 +68,7 @@ const Checkout = React.createClass( {
 	},
 
 	handleClickResetCheckoutAndRedirectToHome( event ) {
-		event.preventDefault();
-
-		this.props.resetCheckout();
+		this.handleClickResetCheckout( event );
 		this.props.redirectToHome();
 	},
 
@@ -78,7 +76,7 @@ const Checkout = React.createClass( {
 		let errorMessage = i18n.translate( "We weren't able to process your payment." );
 		let showTryDifferentDomain = false;
 
-		const { transaction: error } = this.props.checkout;
+		const { transaction: { error } } = this.props.checkout;
 
 		if ( error && [ 'duplicate_purchase', 'domain_availability_error', 'domain_availability_check_error' ].includes( error.code ) ) {
 			errorMessage = error.message;
@@ -114,7 +112,7 @@ const Checkout = React.createClass( {
 	},
 
 	hasError() {
-		const { checkout: { paygateConfiguration, paygateToken, transaction } } = this.props;
+		const { paygateConfiguration, paygateToken, transaction } = this.props.checkout;
 
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},

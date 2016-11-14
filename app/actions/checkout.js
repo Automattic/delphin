@@ -109,7 +109,6 @@ export function createTransaction() {
 			privacy: privacyProtection,
 			payment_key: paygateToken,
 			payment_method: 'paygate',
-			locale: 'en',
 			contact_information: snakeifyKeys( contactInformationForm )
 		};
 

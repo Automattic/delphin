@@ -4,7 +4,9 @@
 .form {
 	background-color: $white;
 	border: 1px solid $gray-light;
-	border-radius: 3px;
+	border-radius: 0 0 3px 3px;
+	border-top: 0;
+	box-shadow: 0 -3px $blue;
 	color: $blue-dark;
 	display: block;
 	font-size: 1.4rem;

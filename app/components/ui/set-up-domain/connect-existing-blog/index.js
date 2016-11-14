@@ -47,11 +47,11 @@ class ConnectExistingBlog extends Component {
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
-						<label>
+						<p>
 							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
 								args: { hostName, domainName }
 							} ) }
-						</label>
+						</p>
 
 						<Button className={ styles.button }>
 							{ i18n.translate( 'Yes, Connect Now' ) }

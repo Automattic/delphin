@@ -132,8 +132,6 @@
 		border: 1px solid $gray-medium;
 		border-bottom-width: 2px;
 		color: $blue-dark;
-		display: flex;
-		justify-content: center;
 		margin: 0 auto;
 		padding: 10px 20px;
 		transition: border-color 200ms;
@@ -149,6 +147,7 @@
 		& > svg {
 			fill: $gray;
 			margin-left: 10px;
+			vertical-align: middle;
 		}
 
 		@include breakpoint( '>480px' ) {

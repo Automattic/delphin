@@ -97,12 +97,13 @@ const Search = React.createClass( {
 		);
 	},
 
-	showAdditionalResults() {
+	showAdditionalResults( { currentTarget } ) {
 		this.props.showAdditionalResults(
 			this.props.query,
 			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' ),
 			this.props.sort
 		);
+		currentTarget.blur();
 	},
 
 	sortChange( event ) {

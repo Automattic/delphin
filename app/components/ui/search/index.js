@@ -3,6 +3,7 @@ import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import config from 'config';
@@ -12,6 +13,7 @@ import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomai
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
+import Button from 'components/ui/button';
 import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
@@ -95,12 +97,13 @@ const Search = React.createClass( {
 		);
 	},
 
-	showAdditionalResults() {
+	showAdditionalResults( { currentTarget } ) {
 		this.props.showAdditionalResults(
 			this.props.query,
 			this.props.numberOfResultsToDisplay + config( 'initial_number_of_search_results' ),
 			this.props.sort
 		);
+		currentTarget.blur();
 	},
 
 	sortChange( event ) {
@@ -199,9 +202,14 @@ const Search = React.createClass( {
 
 					{ showAdditionalResultsLink && (
 						<div className={ styles.additionalResultsLinkContainer }>
-							<a onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
+							<Button onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
 								{ i18n.translate( 'Show me more' ) }
-							</a>
+								<Gridicon
+									className={ styles.gridicon }
+									icon="ellipsis"
+									size={ 20 }
+								/>
+							</Button>
 						</div>
 					) }
 

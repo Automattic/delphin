@@ -50,7 +50,7 @@ class SelectBlogType extends Component {
 							<span className={ styles.setUpLabel }>
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
-							{ i18n.translate( 'Tell us about your blog' ) }
+							{ i18n.translate( 'Tell us about your blog.' ) }
 						</h1>
 						<ProgressBar progress={ 10 } />
 					</div>
@@ -72,7 +72,7 @@ class SelectBlogType extends Component {
 								value="existing"
 								checked={ newOrExisting.value === 'existing' }
 							/>
-							{ i18n.translate( 'Use it for a blog I already started' ) }
+							{ i18n.translate( 'Use it for a blog I already started.' ) }
 						</label>
 
 						<label className={ styles.label } htmlFor="new">
@@ -83,7 +83,7 @@ class SelectBlogType extends Component {
 								value="new"
 								checked={ newOrExisting.value === 'new' }
 							/>
-							{ i18n.translate( 'Start building a new blog now' ) }
+							{ i18n.translate( 'Start building a new blog now.' ) }
 						</label>
 					</Form.FieldArea>
 
@@ -105,7 +105,7 @@ class SelectBlogType extends Component {
 
 				<div className={ styles.footer }>
 					<Link to={ getPath( 'myDomains' ) }>
-						{ i18n.translate( 'I\'ll set up my domain later' ) }
+						{ i18n.translate( 'I\'ll set up my domain later.' ) }
 					</Link>
 				</div>
 			</div>

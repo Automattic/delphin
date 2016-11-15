@@ -65,7 +65,12 @@ class FindExistingBlog extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Connect to your blog' ) }</h1>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+							{ i18n.translate( 'Connect to your blog' ) }
+						</h1>
 						<ProgressBar progress={ 30 } />
 					</div>
 				</div>

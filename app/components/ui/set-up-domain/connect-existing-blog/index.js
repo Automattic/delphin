@@ -38,15 +38,24 @@ class ConnectExistingBlog extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Good news, we found %(hostName)s!', {
-							args: { hostName }
-						} ) }</h1>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Connect to your blog' ) }
+						</h1>
 						<ProgressBar progress={ 60 } />
 					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
+						<p>
+							{ i18n.translate( 'Good news, we found %(hostName)s!', {
+								args: { hostName }
+							} ) }
+						</p>
 						<p>
 							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
 								args: { hostName, domainName }

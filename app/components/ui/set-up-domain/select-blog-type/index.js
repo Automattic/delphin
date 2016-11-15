@@ -94,9 +94,8 @@ class SelectBlogType extends Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						<p className={ styles.formFooter }>{ i18n.translate( 'Looking to edit your nameservers yourself?' ) }</p>
 						<p>
-							{ i18n.translate( "There is copy here about {{Link}}editing nameservers{{/Link}}. I'm not sure what to say here Ran.", {
+							{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
 								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
 							} ) }
 						</p>

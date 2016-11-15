@@ -8,7 +8,6 @@ import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import ProgressBar from 'components/ui/progress-bar';
-import SunriseStep from 'components/ui/sunrise-step';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { removeInvalidInputProps } from 'lib/form';
@@ -59,22 +58,24 @@ class ContactUsExistingBlog extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Submit Your Request' ) }</h1>
-					<ProgressBar progress={ 90 } />
-					<h2>
-						{ i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, however, ' +
-							"at this time we aren't able to automatically connect your blog (we're working on it though!).",
-							{
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						) }
-						{ ' ' }
-						{ i18n.translate( 'Our Happiness Engineers will assist you in connecting to your existing blog.' ) }
-					</h2>
-				</SunriseStep.Header>
+			<div className={ styles.domainSetup }>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Submit Your Request' ) }</h1>
+						<ProgressBar progress={ 90 } />
+						<h2 className={ styles.subHeaderText }>
+							{ i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, however, ' +
+								"at this time we aren't able to automatically connect your blog (we're working on it though!).",
+								{
+									args: { domainName },
+									components: { strong: <strong /> }
+								}
+							) }
+							{ ' ' }
+							{ i18n.translate( 'Our Happiness Engineers will assist you in connecting to your existing blog.' ) }
+						</h2>
+					</div>
+				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
@@ -109,7 +110,7 @@ class ContactUsExistingBlog extends Component {
 					</Form.SubmitArea>
 				</Form>
 
-			</SunriseStep>
+			</div>
 		);
 	}
 }

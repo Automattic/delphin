@@ -1,13 +1,14 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { Component, PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
+import { getServiceName } from 'lib/services';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
-import SunriseStep from 'components/ui/sunrise-step';
-import { getServiceName } from 'lib/services';
+import styles from './styles.scss';
 
 class ConnectingBlog extends Component {
 	render() {
@@ -15,29 +16,31 @@ class ConnectingBlog extends Component {
 		const serviceName = getServiceName( service );
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Connecting your domain' ) }</h1>
-					<ProgressBar progress={ 80 } />
-					<h2>
-						{ blogType === 'existing' && (
-							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {
-								args: { domainName, hostName, serviceName },
-								components: { strong: <strong /> }
-							} ), 2 )
-						) }
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Connecting your domain' ) }</h1>
+						<ProgressBar progress={ 80 } />
+						<h2 className={ styles.subHeaderText }>
+							{ blogType === 'existing' && (
+								preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {
+									args: { domainName, hostName, serviceName },
+									components: { strong: <strong /> }
+								} ), 2 )
+							) }
 
-						{ blogType === 'new' && (
-							preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with %(serviceName)s.', {
-								args: { domainName, serviceName },
-								components: { strong: <strong /> }
-							} ), 2 )
-						) }
-					</h2>
-				</SunriseStep.Header>
-			</SunriseStep>
+							{ blogType === 'new' && (
+								preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with %(serviceName)s.', {
+									args: { domainName, serviceName },
+									components: { strong: <strong /> }
+								} ), 2 )
+							) }
+						</h2>
+					</div>
+				</div>
+			</div>
 		);
 	}
 }
@@ -49,4 +52,4 @@ ConnectingBlog.propTypes = {
 	service: PropTypes.string.isRequired
 };
 
-export default ConnectingBlog;
+export default withStyles( styles )( ConnectingBlog );

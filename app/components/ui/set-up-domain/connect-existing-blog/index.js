@@ -13,7 +13,6 @@ import Form from 'components/ui/form';
 import noop from 'lodash/noop';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 
 class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
@@ -34,23 +33,25 @@ class ConnectExistingBlog extends Component {
 		const { domainName, hostName } = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Good news, we found %(hostName)s!', {
-						args: { hostName }
-					} ) }</h1>
-					<ProgressBar progress={ 60 } />
-				</SunriseStep.Header>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Good news, we found %(hostName)s!', {
+							args: { hostName }
+						} ) }</h1>
+						<ProgressBar progress={ 60 } />
+					</div>
+				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
-						<label>
+						<p>
 							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
 								args: { hostName, domainName }
 							} ) }
-						</label>
+						</p>
 
 						<Button className={ styles.button }>
 							{ i18n.translate( 'Yes, Connect Now' ) }
@@ -58,12 +59,12 @@ class ConnectExistingBlog extends Component {
 					</Form.FieldArea>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

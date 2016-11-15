@@ -13,7 +13,6 @@ import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 import { removeInvalidInputProps } from 'lib/form';
 
 class ConnectNewBlogToOther extends Component {
@@ -53,21 +52,23 @@ class ConnectNewBlogToOther extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
-					<ProgressBar progress={ 90 } />
-					<h2>
-						{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
-							{
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						), 2 ) }
-					</h2>
-				</SunriseStep.Header>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
+						<ProgressBar progress={ 90 } />
+						<h2 className={ styles.subHeaderText }>
+							{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
+								{
+									args: { domainName },
+									components: { strong: <strong /> }
+								}
+							), 2 ) }
+						</h2>
+					</div>
+				</div>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<label className={ styles.label } htmlFor="providerText">
@@ -91,12 +92,12 @@ class ConnectNewBlogToOther extends Component {
 					</Form.Footer>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'selectNewBlogHost', { domainName, needs } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

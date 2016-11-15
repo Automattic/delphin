@@ -8,8 +8,8 @@
 
 .header {
 	margin: 0 auto;
-	max-width: 500px;
-	padding: 50px 20px 80px;
+	max-width: 525px;
+	padding: 20px 20px 70px;
 	text-align: center;
 
 	@include breakpoint( '<480px' ) {
@@ -18,27 +18,27 @@
 
 	h1 {
 		color: $blue-dark;
-		font-family: $heading-font;
-		font-size: 3rem;
-		font-weight: 400;
+		font-family: $body-font;
+		font-size: 2.1rem;
+		font-weight: 600;
 		margin-top: 40px;
 
 		@include breakpoint( '<480px' ) {
-			font-size: 2.6rem;
+			font-size: 1.8rem;
 			margin-top: 0;
 		}
 	}
 
 	h2 {
-		color: $gray-dark;
+		color: $blue-dark;
 		font-family: $body-font;
-		font-size: 2rem;
-		font-weight: 300;
+		font-size: 1.8rem;
+		font-weight: 400;
 		line-height: 1.4;
 		margin-top: 10px;
 
 		@include breakpoint( '<480px' ) {
-			font-size: 1.8rem;
+			font-size: 1.6rem;
 			line-height: 1.35;
 		}
 	}

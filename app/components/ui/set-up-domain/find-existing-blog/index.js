@@ -3,6 +3,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -12,9 +13,9 @@ import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
 import ProgressBar from 'components/ui/progress-bar';
-import SunriseStep from 'components/ui/sunrise-step';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
+import styles from './styles.scss';
 
 class FindExistingBlog extends Component {
 	componentWillMount() {
@@ -59,13 +60,15 @@ class FindExistingBlog extends Component {
 		const { domainName, fields, handleSubmit } = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1>{ i18n.translate( 'Connect to your blog' ) }</h1>
-					<ProgressBar progress={ 30 } />
-				</SunriseStep.Header>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Connect to your blog' ) }</h1>
+						<ProgressBar progress={ 30 } />
+					</div>
+				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
@@ -88,18 +91,20 @@ class FindExistingBlog extends Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						{ i18n.translate( 'We\'ll scan your blog and find the right settings to connect it to %(domainName)s.', {
-							args: { domainName }
-						} ) }
+						<p>
+							{ i18n.translate( 'We\'ll scan your blog and find the right settings to connect it to %(domainName)s.', {
+								args: { domainName }
+							} ) }
+						</p>
 					</Form.Footer>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }
@@ -118,4 +123,4 @@ FindExistingBlog.propTypes = {
 	submitting: PropTypes.bool.isRequired
 };
 
-export default bindHandlers( FindExistingBlog ) ;
+export default withStyles( styles )( bindHandlers( FindExistingBlog ) );

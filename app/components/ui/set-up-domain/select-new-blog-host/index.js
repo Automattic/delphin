@@ -15,7 +15,6 @@ import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
-import SunriseStep from 'components/ui/sunrise-step';
 
 class SelectNewBlogHost extends Component {
 	componentWillMount() {
@@ -119,28 +118,30 @@ class SelectNewBlogHost extends Component {
 		} = this.props;
 
 		return (
-			<SunriseStep>
+			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<SunriseStep.Header>
-					<h1 className={ styles.header }>
-						{ i18n.translate( 'Setup: {{strong}}Create a new blog{{/strong}}', {
-							components: {
-								strong: <strong />
-							}
-						} ) }
-					</h1>
-					<ProgressBar progress={ 60 } />
-					<h2 className={ styles.subHeader }>
-						{ preventWidows( i18n.translate( "Choose where you'd like to create your new blog." +
-							" We'll connect {{strong}}%(domainName)s{{/strong}} for you and get you started creating your new blog.",
-							{
-								args: { domainName },
-								components: { strong: <strong /> }
-							}
-						), 2 ) }
-					</h2>
-				</SunriseStep.Header>
+				<div className={ styles.headerContainer }>
+					<div className={ styles.header }>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Create a new blog' ) }
+						</h1>
+						<ProgressBar progress={ 60 } />
+						<h2 className={ styles.subHeaderText }>
+							{ preventWidows( i18n.translate( "We'll get your domain ready to be connected to the service of your choice.",
+								{
+									args: { domainName },
+									components: { strong: <strong /> }
+								}
+							), 2 ) }
+						</h2>
+					</div>
+				</div>
+
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<p>
@@ -165,12 +166,12 @@ class SelectNewBlogHost extends Component {
 					</Form.Footer>
 				</Form>
 
-				<SunriseStep.Footer>
+				<div className={ styles.footer }>
 					<Link to={ getPath( 'selectNewBlogNeeds', { domainName, needs } ) }>
 						{ i18n.translate( 'Back' ) }
 					</Link>
-				</SunriseStep.Footer>
-			</SunriseStep>
+				</div>
+			</div>
 		);
 	}
 }

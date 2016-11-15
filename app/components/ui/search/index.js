@@ -3,6 +3,7 @@ import debounce from 'lodash/debounce';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import config from 'config';
@@ -202,6 +203,11 @@ const Search = React.createClass( {
 						<div className={ styles.additionalResultsLinkContainer }>
 							<Button onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
 								{ i18n.translate( 'Show me more' ) }
+								<Gridicon
+									className={ styles.gridicon }
+									icon="ellipsis"
+									size={ 20 }
+								/>
 							</Button>
 						</div>
 					) }

@@ -23,7 +23,12 @@ class ConnectingBlog extends Component {
 					<div className={ styles.header }>
 						<h1 className={ styles.headerText }>{ i18n.translate( 'Connecting your domain' ) }</h1>
 						<ProgressBar progress={ 80 } />
-						<h2 className={ styles.subHeaderText }>
+					</div>
+				</div>
+
+				<div className={ styles.contentContainer }>
+					<div className={ styles.statusContainer }>
+						<p className={ styles.statusMessage }>
 							{ blogType === 'existing' && (
 								preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {
 									args: { domainName, hostName, serviceName },
@@ -37,7 +42,7 @@ class ConnectingBlog extends Component {
 									components: { strong: <strong /> }
 								} ), 2 )
 							) }
-						</h2>
+						</p>
 					</div>
 				</div>
 			</div>

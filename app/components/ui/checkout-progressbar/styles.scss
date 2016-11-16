@@ -104,7 +104,7 @@ $inner-dot-color: $gray-xlight;
 }
 
 .progressbar-step-caption {
-	color: darken( $inactive-step-color, 10% );
+	color: $gray-dark;
 	font-size: 1.1rem;
 	text-align: center;
 	text-transform: uppercase;

@@ -4,7 +4,9 @@
 .form {
 	background-color: #fff;
 	border: 1px solid $gray-light;
-	border-radius: 3px;
+	border-radius: 0 0 3px 3px;
+	border-top: 0;
+	box-shadow: 0 -3px #009fd4;
 	box-sizing: border-box;
 	margin: -40px auto 0;
 	max-width: 440px;

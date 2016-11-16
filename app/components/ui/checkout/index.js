@@ -160,6 +160,11 @@ const Checkout = React.createClass( {
 				<div>
 					<div className={ styles.header }>
 						<CheckoutProgressbar currentStep={ 3 } />
+
+						<h2 className={ styles.heading }>
+							{ i18n.translate( 'Enter your payment information' ) }
+						</h2>
+
 					</div>
 
 					<Form
@@ -306,8 +311,15 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.refundNotice }>
 							<p>
-								<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
-								{ i18n.translate( 'If someone grabs this domain before we get a chance to register it for you, we\'ll give you a full refund.' ) }
+								{ i18n.translate( 'You can cancel your purchase for a full refund within five days.' ) }
+							</p>
+							<p>
+								{ i18n.translate( 'By submitting your application, you agree to our {{link}}domain name registration agreement{{/link}}. ' +
+									'If you win this domain, you authorize your payment method to be charged on a recurring basis until you cancel, which you can do at any time.',
+									{
+										components: { link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" /> }
+									}
+								) }
 							</p>
 						</div>
 

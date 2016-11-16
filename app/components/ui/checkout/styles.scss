@@ -45,12 +45,9 @@
 	padding: 0 0 25px;
 
 	p {
-		background: url( #{$image-assets-url}happy-surprise.svg ) no-repeat;
-		background-position: right 10px;
 		color: $gray-dark;
 		font-size: 1.4rem;
 		line-height: 1.8rem;
-		padding: 0 50px 0 0;
 	}
 
 	@include breakpoint( '<480px' ) {

@@ -19,6 +19,7 @@ const getNumberFromPrice = price => Number( price.replace( /[^0-9.]/g, '' ) );
 const Suggestions = React.createClass( {
 	propTypes: {
 		count: PropTypes.number,
+		exactMatchUnavailable: PropTypes.bool,
 		hasLoadedFromServer: PropTypes.bool.isRequired,
 		query: PropTypes.string,
 		results: PropTypes.array,
@@ -47,13 +48,18 @@ const Suggestions = React.createClass( {
 					return sortFunctions.recommended( a, b );
 				}
 			},
-			{ results, sort } = this.props;
+			{ exactMatchUnavailable, results, sort } = this.props;
+		let { count } = this.props;
+
+		if ( exactMatchUnavailable ) {
+			count -= 1;
+		}
 
 		// Because Array.prototype.sort is not guaranteed to be stable
 		// we create a shallow copy of the array via slice()
 		// sort that copy and return it without modifying the original results array
 		// on the next call we sort it again from the original, which makes the sort "stable"
-		return results.slice().sort( sortFunctions[ sort ] );
+		return results.slice().sort( sortFunctions[ sort ] ).slice( 0, count );
 	},
 
 	render() {
@@ -71,8 +77,8 @@ const Suggestions = React.createClass( {
 
 		return (
 			<ul className={ styles.suggestions }>
+				{ this.props.exactMatchUnavailable && <li className={ styles.suggestion }>{ this.props.query } - { i18n.translate( 'already taken' ) } </li> }
 				{ this.getSortedResults()
-					.slice( 0, this.props.count )
 					.map( ( suggestion ) => (
 					<Suggestion
 						isBestMatch={ omitTld( normalizeDomain( this.props.query.replace( /\s+/g, '' ) ) ) === omitTld( suggestion.domainName ) }

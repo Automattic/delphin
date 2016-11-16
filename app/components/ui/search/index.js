@@ -168,6 +168,7 @@ const Search = React.createClass( {
 		return (
 			<Suggestions
 				count={ this.props.numberOfResultsToDisplay }
+				exactMatchUnavailable={ this.isExactMatchUnavailable() }
 				hasLoadedFromServer={ this.props.hasLoadedFromServer }
 				results={ this.props.results }
 				selectDomain={ this.selectDomain }

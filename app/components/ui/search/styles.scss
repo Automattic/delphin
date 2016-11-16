@@ -102,6 +102,7 @@
 }
 
 .suggestion {
+	animation: fadein 500ms ease-in-out;
 	background: $white;
 	border: 1px solid $gray-light;
 	border-radius: 3px;
@@ -140,6 +141,18 @@
 
 	@include breakpoint( '>1040px' ) {
 		width: 31%;
+	}
+}
+
+@keyframes fadein {
+	0% {
+		opacity: 0;
+		transform: translateY( 10px );
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY( 0 );
 	}
 }
 

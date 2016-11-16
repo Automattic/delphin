@@ -197,7 +197,7 @@ class ContactInformation extends React.Component {
 						</h2>
 
 						<h3 className={ styles.text }>
-							{ i18n.translate( 'Your details are needed to apply for {{strong}}%(domain)s{{/strong}}.',
+							{ i18n.translate( 'Your details are needed to register {{strong}}%(domain)s{{/strong}}.',
 								{
 									args: { domain: this.props.domain.domainName },
 									components: { strong: <strong /> }
@@ -242,7 +242,7 @@ class ContactInformation extends React.Component {
 
 								{ ! this.organizationInputIsVisible() && (
 									<a className={ styles.showOrganizationLink } onClick={ this.props.showOrganizationInput }>
-										{ i18n.translate( 'Applying for a company? Add Organization name' ) }
+										{ i18n.translate( 'Registering for a company? Add Organization name.' ) }
 									</a>
 								) }
 
@@ -303,7 +303,7 @@ class ContactInformation extends React.Component {
 
 									{ ! this.address2InputIsVisible() && (
 										<a className={ styles.showAddressTwoLink } onClick={ this.props.showAddress2Input }>
-											{ i18n.translate( '+ Add Address Line 2' ) }
+											{ i18n.translate( 'Add second line for address.' ) }
 										</a>
 									) }
 								</fieldset>

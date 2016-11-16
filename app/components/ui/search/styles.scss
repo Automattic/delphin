@@ -64,7 +64,7 @@
 
 	hr {
 		border: 0;
-		border-top: 2px solid $blue-bright;
+		border-top: 2px solid $blue;
 		margin: 10px 0;
 		transition: width 200ms ease-in-out;
 		width: 50px;
@@ -223,7 +223,7 @@
 }
 
 .search-info {
-	background: $blue-light;
+	background: $gray-xlight;
 	box-sizing: border-box;
 	color: $blue-dark;
 	font-size: 2.1rem;

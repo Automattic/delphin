@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import PartialUnderline from 'components/ui/partial-underline';
 import styles from './styles.scss';
 
 const Suggestion = React.createClass( {
@@ -28,10 +29,9 @@ const Suggestion = React.createClass( {
 					{ this.props.isBestMatch && (
 						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
 					) }
-					<div className={ styles.suggestionTitle } title={ this.props.suggestion.domainName }>
+					<PartialUnderline className={ styles.suggestionTitle }>
 						{ this.props.suggestion.domainName }
-					</div>
-					<hr />
+					</PartialUnderline>
 					<div className={ styles.cost }>
 						{ i18n.translate( '%(cost)s per year', {
 							args: { cost }

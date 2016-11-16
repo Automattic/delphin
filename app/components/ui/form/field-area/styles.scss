@@ -1,5 +1,6 @@
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
+@import 'app/styles/fonts';
 
 .field-area {
 	background: $white;
@@ -34,6 +35,7 @@
 		box-shadow: none;
 		box-sizing: border-box;
 		display: block;
+		font-family: $body-font;
 		font-size: 1.6rem;
 		margin: 0;
 		padding: 10px 12px;

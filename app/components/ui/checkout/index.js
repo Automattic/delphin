@@ -325,7 +325,7 @@ const Checkout = React.createClass( {
 
 						<Form.SubmitArea className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Review application' ) }
+								{ i18n.translate( 'Register & pay now' ) }
 							</Button>
 						</Form.SubmitArea>
 

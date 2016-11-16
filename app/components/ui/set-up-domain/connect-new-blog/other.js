@@ -10,7 +10,6 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
-import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
@@ -57,39 +56,33 @@ class ConnectNewBlogToOther extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Where would you like to connect?' ) }</h1>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Contact our domain assistant' ) }</h1>
 						<ProgressBar progress={ 90 } />
-						<h2 className={ styles.subHeaderText }>
-							{ preventWidows( i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, but at this time we aren\'t able to automatically connect your blog (we\'re working on it though!)',
-								{
-									args: { domainName },
-									components: { strong: <strong /> }
-								}
-							), 2 ) }
-						</h2>
 					</div>
 				</div>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<label className={ styles.label } htmlFor="providerText">
-							{ i18n.translate( 'Let us know any additional information about your request we might need to know.' ) }
-						</label>
+						<p>
+							{ i18n.translate( 'How can we get %(domainName)s set up the way you want it?', {
+								args: { domainName }
+							} ) }
+						</p>
+						<div className={ styles.paragraph }>
+							{ i18n.translate( 'While we work on adding more ways to automatically connect, we can set it up for you personally. Let us know below what kind of blog you want.' ) }
+						</div>
+
 						<textarea
 							id="providerText"
 							name="providerText"
+							placeholder="Tell us what kind of blog you want."
 							className={ styles.otherProviderText }
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
 						<Button disabled={ ! providerText.value || isContactingSupport }>
-							{ i18n.translate( 'Submit my request' ) }
+							{ i18n.translate( 'Contact our domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
-					<Form.Footer>
-						<p>
-							{ i18n.translate( 'Once you submit your request our Happiness Engineers will get started connecting your blog. We will contact you once your request has been completed or if we have further questions.' ) }
-						</p>
-					</Form.Footer>
 				</Form>
 
 				<div className={ styles.footer }>

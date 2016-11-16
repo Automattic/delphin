@@ -61,55 +61,43 @@ class ContactUsExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Submit Your Request' ) }</h1>
+						<h1 className={ styles.headerText }>{ i18n.translate( 'Contact our domain assistant' ) }</h1>
 						<ProgressBar progress={ 90 } />
-						<h2 className={ styles.subHeaderText }>
-							{ i18n.translate( 'We found {{strong}}%(domainName)s{{/strong}}, however, ' +
-								"at this time we aren't able to automatically connect your blog (we're working on it though!).",
-								{
-									args: { domainName },
-									components: { strong: <strong /> }
-								}
-							) }
-							{ ' ' }
-							{ i18n.translate( 'Our Happiness Engineers will assist you in connecting to your existing blog.' ) }
-						</h2>
 					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
-						<strong>
-							{ i18n.translate( 'Connect %(domainName)s to %(hostName)s.', {
-								args: { domainName, hostName }
+						<p>
+							{ i18n.translate( 'How can we get %(domainName)s set up the way you want it?', {
+								args: { domainName }
 							} ) }
-						</strong>
-						<p className={ styles.paragraph }>
-							{ i18n.translate( 'Let us know any additional information about your request that we might need to know.' ) }
 						</p>
+						<div className={ styles.paragraph }>
+							{ i18n.translate( 'We found %(hostName)s and we think it will be fastest and easiest if we set it up for you personally. Let us know below how you want your domain to work.', {
+								args: { hostName }
+							} ) }
+						</div>
 
 						<textarea
 							className={ styles.message }
+							placeholder="Tell us what you want to do with your domain."
 							{ ...removeInvalidInputProps( message ) }
 						/>
-
-						<p className={ styles.paragraph }>
-							{ i18n.translate( 'Once you submit your request to our Happiness Engineers, we will get started connecting your blog.' ) }
-							{ ' ' }
-							{ i18n.translate( 'We will contact you once your request has been completed or if we have further questions.' ) }
-						</p>
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
-							{ i18n.translate( 'Back' ) }
-						</Link>
 						<Button disabled={ ! message.value || isContactingSupport }>
-							{ i18n.translate( 'Submit Request' ) }
+							{ i18n.translate( 'Contact our domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
 				</Form>
 
+				<div className={ styles.footer }>
+					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
+						{ i18n.translate( 'Back' ) }
+					</Link>
+				</div>
 			</div>
 		);
 	}

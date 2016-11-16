@@ -7,6 +7,7 @@
 }
 
 .suggestions {
+	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -168,7 +169,7 @@
 }
 
 .sort {
-	color: $gray;
+	color: $blue-dark;
 	cursor: pointer;
 	font-size: 1.6rem;
 	padding: 10px 20px;
@@ -196,7 +197,7 @@
 	border: 0;
 	border-bottom: 1px solid $gray-medium;
 	border-radius: 0;
-	color: $gray;
+	color: $blue-dark;
 	font-size: 1.6rem;
 	height: 30px;
 	outline: none;
@@ -222,11 +223,22 @@
 
 .search-info {
 	background: $blue-light;
-	color: #016f94;
-	font-size: 1.7rem;
+	box-sizing: border-box;
+	color: $blue-dark;
+	font-size: 2.1rem;
 	font-weight: 600;
-	padding: 20px 0 0;
-	text-align: center;
+	margin: auto auto -25px;
+	max-width: 1200px;
+	padding: 20px 10px 0;
+	text-align: left;
+
+	@include breakpoint( '>480px' ) {
+		padding: 40px 20px 0;
+	}
+
+	@include breakpoint( '>660px' ) {
+		padding: 50px 23px 0;
+	}
 }
 
 .logo {
@@ -238,7 +250,7 @@
 }
 
 .no-results-message {
-	color: $white;
+	color: $blue-dark;
 	font-size: 1.8rem;
 	margin-top: 50px;
 	text-align: center;

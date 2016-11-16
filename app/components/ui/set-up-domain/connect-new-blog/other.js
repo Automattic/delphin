@@ -74,7 +74,7 @@ class ConnectNewBlogToOther extends Component {
 						<textarea
 							id="providerText"
 							name="providerText"
-							placeholder="Tell us what kind of blog you want."
+							placeholder={ i18n.translate( 'Tell us what kind of blog you want.' ) }
 							rows="4"
 							className={ styles.otherProviderText }
 							{ ...removeInvalidInputProps( providerText ) } />

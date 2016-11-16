@@ -81,7 +81,7 @@ class ContactUsExistingBlog extends Component {
 
 						<textarea
 							className={ styles.message }
-							placeholder="Tell us what you want to do with your domain."
+							placeholder={ i18n.translate( 'Tell us what you want to do with your domain.' ) }
 							rows="4"
 							{ ...removeInvalidInputProps( message ) }
 						/>

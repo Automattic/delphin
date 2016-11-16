@@ -10,14 +10,12 @@ h5,
 h6 {
 	-webkit-font-smoothing: antialiased;
 	color: $white;
-	font-weight: 400;
 }
 
 .layout {
 	display: flex;
 	flex-direction: column;
 	font-family: $body-font;
-	font-weight: 400;
 	min-height: 100vh;
 }
 

@@ -87,7 +87,7 @@ const Search = React.createClass( {
 
 		return (
 			<div className={ styles.searchInfo }>
-				{ i18n.translate( 'Darn, {{em}}%(query)s{{/em}} has already been snatched up!', {
+				{ i18n.translate( '{{em}}%(query)s{{/em}} is not available, try these suggestions instead.', {
 					args: { query },
 					components: {
 						em: <em />
@@ -163,27 +163,16 @@ const Search = React.createClass( {
 						{ ... { query } }
 						onQueryChange={ this.debouncedRedirectToSearch } />
 
-					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
-
 					<div className={ styles.sort }>
-						{ exactMatchUnavailable && (
-							i18n.translate( "Don't fret, check out these {{sortOption/}} domains:", {
-								components: {
-									sortOption: this.renderSortOptions()
-								},
-								comment: 'sortOption will be one of "recommended", "unique" or "short"'
-							} )
-						) }
-						{ ! exactMatchUnavailable && (
-							i18n.translate( 'Show me {{sortOption/}} domains:', {
-								components: {
-									sortOption: this.renderSortOptions()
-								},
-								comment: 'sortOption will be one of "recommended", "unique" or "short"'
-							} )
-						) }
-
+						{ i18n.translate( 'Show me {{sortOption/}} domains:', {
+							components: {
+								sortOption: this.renderSortOptions()
+							},
+							comment: 'sortOption will be one of "recommended", "unique" or "short"'
+						} ) }
 					</div>
+
+					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
 					{ query && ! containsAlphanumericCharacters( query ) && (
 						<div className={ styles.noResultsMessage }>

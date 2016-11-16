@@ -47,7 +47,7 @@
 		}
 
 		&:disabled {
-			background: $blue-light;
+			background: $gray-xlight;
 			color: darken( $gray-medium, 10% );
 			cursor: not-allowed;
 

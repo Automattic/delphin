@@ -85,7 +85,8 @@ $inner-dot-color: $gray-xlight;
 	}
 
 	.progressbar-step-caption {
-		color: $active-step-color;
+		color: $blue-dark;
+		font-weight: 700;
 	}
 }
 
@@ -105,9 +106,8 @@ $inner-dot-color: $gray-xlight;
 
 .progressbar-step-caption {
 	color: $gray-dark;
-	font-size: 1.1rem;
+	font-size: 1.6rem;
 	text-align: center;
-	text-transform: uppercase;
 }
 
 .progressbar-step-dot {

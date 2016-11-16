@@ -33,6 +33,7 @@
 
 	@include breakpoint( '<660px' ) {
 		flex-direction: column;
+		order: 2;
 	}
 }
 

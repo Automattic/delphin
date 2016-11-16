@@ -37,10 +37,14 @@
 .loading-telescope {
 	display: block;
 	fill: transparent;
-	margin: 40px -76px 10px 0;
+	margin: 110px -76px 10px 0;
 	stroke: $blue-dark;
 	stroke-linecap: round;
 	stroke-width: 2;
+
+	@include breakpoint( '>480px' ) {
+		margin-top: 40px;
+	}
 }
 
 .telescope-body {

@@ -7,7 +7,6 @@ import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
 import Button from 'components/ui/button';
-import PartialUnderline from 'components/ui/partial-underline';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -111,7 +110,7 @@ class CheckoutReview extends React.Component {
 
 			<SunriseStep.Form className={ styles.checkoutReview } onSubmit={ this.handleSubmission }>
 				<section className={ styles.summary }>
-					<PartialUnderline className={ styles.domain }>{ this.props.selectedDomain.domainName }</PartialUnderline>
+					<h3 className={ styles.domain }>{ this.props.selectedDomain.domainName }</h3>
 				</section>
 				{ this.renderPaymentReview() }
 				{ this.renderContactInformationReview() }

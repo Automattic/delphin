@@ -39,7 +39,7 @@ const Suggestion = React.createClass( {
 					</div>
 				</div>
 				<div className={ styles.buyButton }>
-					{ i18n.translate( 'Apply now' ) }
+					{ i18n.translate( 'Register' ) }
 				</div>
 			</li>
 		);

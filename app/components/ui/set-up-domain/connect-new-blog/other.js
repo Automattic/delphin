@@ -75,6 +75,7 @@ class ConnectNewBlogToOther extends Component {
 							id="providerText"
 							name="providerText"
 							placeholder="Tell us what kind of blog you want."
+							rows="4"
 							className={ styles.otherProviderText }
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>

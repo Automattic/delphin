@@ -227,13 +227,13 @@
 	color: $blue-dark;
 	font-size: 2.1rem;
 	font-weight: 600;
-	margin: auto auto -15px;
+	margin: auto auto -25px;
 	max-width: 1200px;
-	padding: 50px 10px 0;
+	padding: 20px 10px 0;
 	text-align: left;
 
 	@include breakpoint( '>480px' ) {
-		padding: 50px 20px 0;
+		padding: 40px 20px 0;
 	}
 
 	@include breakpoint( '>660px' ) {

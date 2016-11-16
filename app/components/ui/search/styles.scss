@@ -94,10 +94,11 @@
 }
 
 .buy-button {
-	background: $gray-light;
+	background: #fff;
 	border-top: 1px solid darken( $gray-light, 5% );
 	color: $blue;
-	font-size: 1.6rem;
+	font-size: 1.8rem;
+	font-weight: 600;
 	padding: 15px;
 	position: relative;
 	text-align: center;

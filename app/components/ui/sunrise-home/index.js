@@ -34,7 +34,12 @@ const SunriseHome = React.createClass( {
 			queryField = this.props.fields.q,
 			pageHeading = i18n.translate( 'Every .blog is a story. Tell yours.', {
 				components: { em: <em className="emphasis" /> }
-			} );
+			} ),
+			pageContent = i18n.translate(
+				'Millions of short, easy to remember site addresses will be available when .blog goes live on November 21st. '
+			) + i18n.translate(
+				'Apply now to secure the perfect domain for your blog.'
+			);
 
 		return (
 			<div className={ styles.homeContainer }>
@@ -70,6 +75,12 @@ const SunriseHome = React.createClass( {
 						<Button className={ styles.button }>
 							{ i18n.translate( 'Get started' ) }
 						</Button>
+					</div>
+
+					<div className={ styles.secondaryHeadingContainer }>
+						<h3 className={ styles.secondaryHeading }>
+							{ preventWidows( pageContent, 3 ) }
+						</h3>
 					</div>
 
 				</form>

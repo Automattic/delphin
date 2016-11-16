@@ -1,4 +1,91 @@
+@import 'app/styles/fonts';
+@import 'app/styles/colors';
+@import 'app/styles/breakpoints';
+
 .my-domains {
 	margin-top: 10px;
 	padding: 15px 15px 50px;
+}
+
+.domains-loading {
+	align-items: center;
+	color: $blue-dark;
+	display: flex;
+	flex-direction: column;
+	font-size: 2rem;
+	text-align: center;
+
+	@include breakpoint( '>480px' ) {
+		font-size: 2.4rem;
+	}
+}
+
+.satellite {
+	display: block;
+	fill: transparent;
+	margin: 40px -15px 10px 0;
+	stroke: $blue-dark;
+	stroke-linecap: round;
+	stroke-width: 2;
+}
+
+.satellite-dish {
+	fill: $gray-medium;
+}
+
+.satellite-point {
+	animation: pulse 1s ease-in-out infinite;
+	fill: $blue-dark;
+}
+
+.signal-1,
+.signal-2,
+.signal-3 {
+	animation: showhide 1s ease-in-out infinite;
+	stroke: $green;
+}
+
+.signal-2 {
+	animation-delay: 0.1s;
+}
+
+.signal-3 {
+	animation-delay: 0.2s;
+}
+
+@keyframes showhide {
+	0% {
+		opacity: 0;
+	}
+
+	20% {
+		opacity: 1;
+	}
+
+	40% {
+		opacity: 1;
+	}
+
+	60% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes pulse {
+	0% {
+		fill: $blue-dark;
+	}
+
+	50% {
+		fill: $blue;
+		stroke: $blue;
+	}
+
+	100% {
+		fill: $blue-dark;
+	}
 }

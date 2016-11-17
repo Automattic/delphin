@@ -63,7 +63,7 @@ class SelectNewBlogNeeds extends Component {
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
+						<p className={ styles.actionLabel }>
 							{ i18n.translate( 'What best fits your needs & preferences for your new blog?' ) }
 						</p>
 

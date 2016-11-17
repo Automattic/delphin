@@ -56,7 +56,7 @@ class ConnectExistingBlog extends Component {
 								args: { hostName }
 							} ) }
 						</p>
-						<p>
+						<p className={ styles.actionLabel }>
 							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
 								args: { hostName, domainName }
 							} ) }

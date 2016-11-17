@@ -68,7 +68,7 @@ class ContactUsExistingBlog extends Component {
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
-						<p>
+						<p className={ styles.actionLabel }>
 							{ i18n.translate( 'How can we get %(domainName)s set up the way you want it?', {
 								args: { domainName }
 							} ) }

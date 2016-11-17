@@ -29,7 +29,7 @@
 }
 
 .back-notice {
-	color: $gray;
+	color: $gray-dark;
 	font-size: 1.3rem;
 	margin: 25px 0 20px;
 	text-align: center;
@@ -37,12 +37,11 @@
 }
 
 .premium-flag {
-	background: $blue-bright;
+	background: $blue;
 	border-radius: 3px;
 	color: $white;
 	float: right;
 	font-size: 1rem;
-	font-weight: 400;
 	padding: 6px 12px;
 	text-transform: uppercase;
 }
@@ -54,7 +53,6 @@
 
 	p {
 		color: $gray-dark;
-		font-weight: 400;
 		margin: 0 0 15px;
 
 		&:last-child {

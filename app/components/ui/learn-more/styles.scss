@@ -16,7 +16,6 @@
 .text {
 	color: $gray-dark;
 	font-size: 2rem;
-	font-weight: 300;
 	line-height: 1.4;
 	margin-top: 10px;
 
@@ -26,8 +25,8 @@
 }
 
 .form-container {
-	background-color: lighten( $blue-background, 5% );
-	border-top: 1px solid lighten( $blue-background, 10% );
+	background-color: lighten( $blue-dark, 5% );
+	border-top: 1px solid lighten( $blue-dark, 10% );
 	padding: 30px 0;
 
 	@include breakpoint( '<660px' ) {
@@ -92,7 +91,6 @@
 
 	h2 {
 		font-size: 2.5rem;
-		font-weight: 300;
 		margin-top: 30px;
 		padding: 20px 0;
 	}
@@ -134,7 +132,6 @@
 		color: $gray;
 		font-size: 1.6rem;
 		font-style: italic;
-		font-weight: 300;
 		text-align: center;
 	}
 

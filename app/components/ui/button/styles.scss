@@ -2,6 +2,7 @@
 @import 'app/styles/breakpoints';
 
 .button {
+	-webkit-font-smoothing: antialiased;
 	background: $green;
 	border: 0;
 	border-bottom: 2px solid $green-dark;
@@ -10,7 +11,7 @@
 	cursor: pointer;
 	display: inline-block;
 	font-size: 1.6rem;
-	font-weight: 400;
+	font-weight: 700;
 	padding: 18px 30px;
 	text-align: center;
 	text-transform: none;

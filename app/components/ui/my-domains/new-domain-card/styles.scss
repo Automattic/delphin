@@ -1,9 +1,10 @@
 @import 'app/styles/breakpoints';
+@import 'app/styles/colors';
 
 .new-domain-card {
 	align-items: center;
-	border: 2px dashed #c8d7e1;
-	color: #87a6bc;
+	border: 2px dashed $gray-medium;
+	color: $gray-dark;
 	cursor: pointer;
 	display: flex;
 	flex-basis: 32%;
@@ -29,6 +30,6 @@
 
 .gridicon {
 	display: block;
-	fill: #87a6bc;
+	fill: $gray-dark;
 	margin: 0 auto 10px;
 }

@@ -59,7 +59,7 @@ class SelectBlogType extends Component {
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<p>
-							{ i18n.translate( 'What do you want to do with %(domainName)s?', {
+							{ i18n.translate( 'What do you want on your new domain?', {
 								args: { domainName }
 							} ) }
 						</p>
@@ -72,7 +72,7 @@ class SelectBlogType extends Component {
 								value="existing"
 								checked={ newOrExisting.value === 'existing' }
 							/>
-							{ i18n.translate( 'Use it for a blog I already started.' ) }
+							{ i18n.translate( 'An existing blog I already started.' ) }
 						</label>
 
 						<label className={ styles.label } htmlFor="new">
@@ -83,7 +83,7 @@ class SelectBlogType extends Component {
 								value="new"
 								checked={ newOrExisting.value === 'new' }
 							/>
-							{ i18n.translate( 'Start building a new blog now.' ) }
+							{ i18n.translate( 'A new blog now I\'ll start now.' ) }
 						</label>
 					</Form.FieldArea>
 

@@ -79,7 +79,7 @@ class ConfirmConnectBlog extends Component {
 							</h3>
 
 							<p>
-								{ i18n.translate( 'We just made some changes for you so %(domainName)s will point to %(hostName)s.', {
+								{ i18n.translate( '%(domainName)s now points to %(hostName)s.', {
 									args: { hostName, domainName },
 									components: { strong: <strong /> }
 								} ) }

@@ -152,7 +152,7 @@ const Search = React.createClass( {
 	},
 
 	renderResults() {
-		if ( ! this.props.hasLoadedFromServer ) {
+		if ( this.props.isRequesting ) {
 			return (
 				<LoadingPlaceholder />
 			);
@@ -217,7 +217,7 @@ const Search = React.createClass( {
 						</div>
 					) }
 
-					{ this.props.hasLoadedFromServer && (
+					{ ! this.props.isRequesting && (
 						<div className={ styles.emailSignup }>
 							{ i18n.translate( 'Not ready to apply? {{link}}Sign up{{/link}} to get .blog updates in your email.', {
 								components: {

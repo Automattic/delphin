@@ -6,13 +6,15 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const Header = ( { intention } ) => {
+const Header = ( { intention, domainName } ) => {
 	let heading = '';
 	let text = '';
 
 	if ( intention === 'signup' ) {
 		heading = i18n.translate( 'Your domain awaits' );
-		text = i18n.translate( 'Enter your email address to register this domain.' );
+		text = i18n.translate( 'Enter your email address to register %(domainName)s.', {
+			args: { domainName }
+		} );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
 
@@ -40,6 +42,7 @@ const Header = ( { intention } ) => {
 };
 
 Header.propTypes = {
+	domainName: PropTypes.string,
 	intention: PropTypes.string.isRequired
 };
 

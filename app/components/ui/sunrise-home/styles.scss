@@ -4,6 +4,7 @@
 @import 'app/styles/breakpoints';
 
 .home-container {
+	border-bottom: 2px solid $blue-dark;
 	display: flex;
 	flex-direction: column;
 }
@@ -14,23 +15,16 @@
 }
 
 .whats-your-story {
-	background: url( #{$image-assets-url}tell-your-story-dark.svg ) no-repeat bottom center;
+	background: url( '/images/homepage-scene.svg' ) no-repeat center bottom -2px;
 	background-size: contain;
-	height: 30vmin;
-	margin: 6vmin auto 0;
-	max-width: 480px;
+	height: 38vmin;
+	margin-top: -2px;
 	width: 100%;
-
-	@include breakpoint( '<660px' ) {
-		height: 34vmin;
-		margin-top: 10px;
-	}
 }
 
 .heading {
 	color: $blue-dark;
-	font-family: $heading-font;
-	font-size: 3.4rem;
+	font: 700 3.6rem $heading-font;
 	margin-bottom: 10px;
 
 	.emphasis {

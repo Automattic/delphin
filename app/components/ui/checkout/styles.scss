@@ -50,16 +50,15 @@
 
 .order-summary {
 	background-color: $gray-xlight;
-	border-top: 1px solid $blue-bright;
+	border-top: 1px solid $blue;
 	font-size: 1.4rem;
-	font-weight: 300;
 	margin-bottom: 30px;
 	padding: 30px;
 
 	h2 {
 		color: $blue-dark;
 		font-size: 1.3rem;
-		font-weight: 600;
+		font-weight: 700;
 		margin: 5px 0 20px;
 		text-transform: uppercase;
 	}
@@ -83,7 +82,7 @@
 }
 
 .order-total {
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .privacy-protection-price {
@@ -114,7 +113,6 @@
 	background: rgba( $white, 0.95 );
 	display: flex;
 	flex-direction: column;
-	font-weight: 300;
 	height: 100%;
 	justify-content: center;
 	left: 0;

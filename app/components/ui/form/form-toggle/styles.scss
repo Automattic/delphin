@@ -38,7 +38,7 @@
 	}
 
 	.accessible-focus &:focus {
-		box-shadow: 0 0 0 2px $blue-medium;
+		box-shadow: 0 0 0 2px $blue;
 	}
 }
 
@@ -53,11 +53,11 @@
 .form-toggle {
 	.accessible-focus &:focus {
 		+ .label .switch {
-			box-shadow: 0 0 0 2px $blue-medium;
+			box-shadow: 0 0 0 2px $blue;
 		}
 
 		&:checked + .label .switch {
-			box-shadow: 0 0 0 2px $blue-light;
+			box-shadow: 0 0 0 2px $gray-xlight;
 		}
 	}
 
@@ -96,7 +96,7 @@
 
 	&:focus {
 		+ .label .switch {
-			box-shadow: 0 0 0 2px $blue-medium;
+			box-shadow: 0 0 0 2px $blue;
 		}
 	}
 }
@@ -104,7 +104,7 @@
 // Classes for toggle state before action is complete (updating plugin or something)
 .form-toggle.is-toggling {
 	+ .label .switch {
-		background: $blue-medium;
+		background: $blue;
 	}
 
 	&:checked {

@@ -25,9 +25,8 @@
 }
 
 .text {
-	color: $gray-dark;
+	color: $blue-dark;
 	font-size: 2rem;
-	font-weight: 300;
 	line-height: 1.4;
 	margin-top: 10px;
 
@@ -104,8 +103,8 @@
 
 .show-organization-link,
 .show-address-two-link {
-	color: $gray;
+	color: $gray-dark;
 	display: inline-block;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	margin-top: 5px;
 }

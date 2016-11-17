@@ -28,10 +28,10 @@ function Progressbar( props ) {
 	const currentStepIndex = props.currentStep;
 
 	const steps = [
-		i18n.translate( 'search' ),
-		i18n.translate( 'sign in' ),
-		i18n.translate( 'profile' ),
-		i18n.translate( 'checkout' )
+		i18n.translate( 'Search' ),
+		i18n.translate( 'Log in' ),
+		i18n.translate( 'Profile' ),
+		i18n.translate( 'Checkout' )
 	];
 
 	return <ol className={ props.className + ' ' + styles.progressbar }>

@@ -75,12 +75,12 @@ const ConnectUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, intention, submitFailed } = this.props;
+		const { fields, handleSubmit, intention, submitFailed, domain: { domainName } } = this.props;
 
 		return (
 			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Log In' ) : i18n.translate( 'Sign Up' ) }>
 				<div>
-					<Header intention={ intention } />
+					<Header intention={ intention } domainName={ domainName } />
 
 					<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 						<Form.FieldArea>

@@ -26,7 +26,7 @@ class ConnectingBlog extends Component {
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
 
-							{ i18n.translate( 'Connecting your domain' ) }
+							{ i18n.translate( 'Connecting your domain.' ) }
 						</h1>
 						<ProgressBar progress={ 80 } />
 					</div>

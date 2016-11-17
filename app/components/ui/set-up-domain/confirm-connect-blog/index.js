@@ -104,7 +104,7 @@ class ConfirmConnectBlog extends Component {
 							</h3>
 
 							<p>
-								{ preventWidows( i18n.translate( 'Continue to %(serviceName)s to start building your new blog. After you create your blog with %(serviceName)s it will be available at %(domainName)s', {
+								{ preventWidows( i18n.translate( 'Continue to %(serviceName)s to start building your new blog. It will be available at %(domainName)s.', {
 									args: { serviceName, domainName },
 									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ), 2 ) }

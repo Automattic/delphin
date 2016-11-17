@@ -59,7 +59,7 @@ class SelectBlogType extends Component {
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<p>
-							{ i18n.translate( 'What do you want on your new domain?', {
+							{ i18n.translate( 'What do you want on %(domainName)s?', {
 								args: { domainName }
 							} ) }
 						</p>

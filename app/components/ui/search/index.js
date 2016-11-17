@@ -10,6 +10,7 @@ import config from 'config';
 import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
+import LoadingPlaceholder from './loading-placeholder';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
@@ -150,6 +151,25 @@ const Search = React.createClass( {
 		);
 	},
 
+	renderResults() {
+		if ( this.props.isRequesting ) {
+			return (
+				<LoadingPlaceholder />
+			);
+		}
+
+		return (
+			<Suggestions
+				count={ this.props.numberOfResultsToDisplay }
+				hasLoadedFromServer={ this.props.hasLoadedFromServer }
+				results={ this.props.results }
+				selectDomain={ this.selectDomain }
+				sort={ this.props.sort }
+				query={ this.props.query }
+			/>
+		);
+	},
+
 	render() {
 		const query = this.props.query,
 			exactMatchUnavailable = this.isExactMatchUnavailable(),
@@ -163,14 +183,16 @@ const Search = React.createClass( {
 						{ ... { query } }
 						onQueryChange={ this.debouncedRedirectToSearch } />
 
-					<div className={ styles.sort }>
-						{ i18n.translate( 'Show me {{sortOption/}} domains:', {
-							components: {
-								sortOption: this.renderSortOptions()
-							},
-							comment: 'sortOption will be one of "recommended", "unique" or "short"'
-						} ) }
-					</div>
+					{ this.props.hasLoadedFromServer && (
+						<div className={ styles.sort }>
+							{ i18n.translate( 'Show me {{sortOption/}} domains:', {
+								components: {
+									sortOption: this.renderSortOptions()
+								},
+								comment: 'sortOption will be one of "recommended", "unique" or "short"'
+							} ) }
+						</div>
+					) }
 
 					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
@@ -180,16 +202,9 @@ const Search = React.createClass( {
 						</div>
 					) }
 
-					<Suggestions
-						count={ this.props.numberOfResultsToDisplay }
-						hasLoadedFromServer={ this.props.hasLoadedFromServer }
-						results={ this.props.results }
-						selectDomain={ this.selectDomain }
-						sort={ this.props.sort }
-						query={ this.props.query }
-					/>
+					{ this.renderResults() }
 
-					{ showAdditionalResultsLink && (
+					{ this.props.hasLoadedFromServer && showAdditionalResultsLink && (
 						<div className={ styles.additionalResultsLinkContainer }>
 							<Button onClick={ this.showAdditionalResults } className={ styles.additionalResultsLink }>
 								{ i18n.translate( 'Show me more' ) }
@@ -202,13 +217,15 @@ const Search = React.createClass( {
 						</div>
 					) }
 
-					<div className={ styles.emailSignup }>
-						{ i18n.translate( 'Not ready to apply? {{link}}Sign up{{/link}} to get .blog updates in your email.', {
-							components: {
-								link: <TrackingLink eventName="delphin_search_email_signup_click" to={ getPath( 'learnMore' ) } />
-							}
-						} ) }
-					</div>
+					{ ! this.props.isRequesting && (
+						<div className={ styles.emailSignup }>
+							{ i18n.translate( 'Not ready to apply? {{link}}Sign up{{/link}} to get .blog updates in your email.', {
+								components: {
+									link: <TrackingLink eventName="delphin_search_email_signup_click" to={ getPath( 'learnMore' ) } />
+								}
+							} ) }
+						</div>
+					) }
 				</div>
 			</DocumentTitle>
 		);

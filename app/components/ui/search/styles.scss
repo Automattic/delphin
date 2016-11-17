@@ -21,6 +21,80 @@
 	font-size: 1.6rem;
 }
 
+.search-loading {
+	align-items: center;
+	color: $blue-dark;
+	display: flex;
+	flex-direction: column;
+	font-size: 2rem;
+	text-align: center;
+
+	@include breakpoint( '>480px' ) {
+		font-size: 2.4rem;
+	}
+}
+
+.loading-telescope {
+	display: block;
+	fill: transparent;
+	margin: 110px -76px 10px 0;
+	stroke: $blue-dark;
+	stroke-linecap: round;
+	stroke-width: 2;
+
+	@include breakpoint( '>480px' ) {
+		margin-top: 40px;
+	}
+}
+
+.telescope-body {
+	fill: $gray-medium;
+}
+
+.telescope-tripod-pivot {
+	fill: $gray-xlight;
+}
+
+.telescope-stars {
+	stroke: $gray;
+
+	> g {
+		animation-duration: 500ms;
+		animation-iteration-count: infinite;
+		animation-name: starblink;
+	}
+}
+
+.telescope-star-2 {
+	animation-delay: 100ms;
+}
+
+.telescope-star-3 {
+	animation-delay: 400ms;
+}
+
+.telescope-star-4 {
+	animation-delay: 200ms;
+}
+
+.telescope-star-5 {
+	animation-delay: 300ms;
+}
+
+@keyframes starblink {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
 .suggestions {
 	box-sizing: border-box;
 	display: flex;
@@ -32,6 +106,7 @@
 }
 
 .suggestion {
+	animation: fadein 500ms ease-in-out;
 	background: $white;
 	border: 1px solid $gray-light;
 	border-radius: 3px;
@@ -70,6 +145,18 @@
 
 	@include breakpoint( '>1040px' ) {
 		width: 31%;
+	}
+}
+
+@keyframes fadein {
+	0% {
+		opacity: 0;
+		transform: translateY( 10px );
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY( 0 );
 	}
 }
 

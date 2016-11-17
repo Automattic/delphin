@@ -69,7 +69,7 @@ class FindExistingBlog extends Component {
 							<span className={ styles.setUpLabel }>
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
-							{ i18n.translate( 'Connect to your blog' ) }
+							{ i18n.translate( 'Find your blog.' ) }
 						</h1>
 						<ProgressBar progress={ 30 } />
 					</div>
@@ -77,13 +77,13 @@ class FindExistingBlog extends Component {
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<label>{ i18n.translate( 'Enter your blog\'s address:' ) }</label>
+						<label>{ i18n.translate( 'Enter your existing blog\'s address.' ) }</label>
 
 						<Input
 							prefix={ 'http://' }
 							autoFocus
 							field={ fields.url }
-							placeholder={ i18n.translate( 'e.g. www.yourblog.com' ) }
+							placeholder={ i18n.translate( 'e.g. www.example.com' ) }
 							type="text" />
 
 						<ValidationError field={ fields.url } />
@@ -97,7 +97,7 @@ class FindExistingBlog extends Component {
 
 					<Form.Footer>
 						<p>
-							{ i18n.translate( 'We\'ll scan your blog and find the right settings to connect it to %(domainName)s.', {
+							{ i18n.translate( 'We\'ll scan your blog and find the right settings to make it work with %(domainName)s.', {
 								args: { domainName }
 							} ) }
 						</p>

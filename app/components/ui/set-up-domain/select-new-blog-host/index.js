@@ -56,7 +56,7 @@ class SelectNewBlogHost extends Component {
 		} = this.props;
 
 		return (
-			<div>
+			<div className={ styles.serviceOption }>
 				<Radio
 					className={ styles.radio }
 					{ ...service }
@@ -144,7 +144,7 @@ class SelectNewBlogHost extends Component {
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
+						<p className={ styles.actionLabel }>
 							{ i18n.translate( 'Where would you like to create your new blog?' ) }
 						</p>
 						{ needs === 'simple' && this.renderWpcom() }

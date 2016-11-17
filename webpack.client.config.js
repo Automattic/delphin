@@ -91,7 +91,7 @@ if ( NODE_ENV === 'development' ) {
 			loaders: [
 				{
 					test: /\.jsx?$/,
-					loaders: [ 'react-hot' ]
+					loaders: [ 'react-hot-loader' ]
 				}
 			]
 		},
@@ -110,9 +110,9 @@ if ( NODE_ENV === 'production' ) {
 					test: /\.scss$/,
 					loader: ExtractTextPlugin.extract( {
 						loader: [
-							'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes',
-							'postcss',
-							'sass'
+							'css-loader?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes',
+							'postcss-loader',
+							'sass-loader'
 						]
 					} )
 				}

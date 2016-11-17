@@ -97,7 +97,7 @@
     "react-router": "^2.6.0",
     "react-router-redux": "^4.0.5",
     "react-router-sitemap": "^1.0.7",
-    "react-tap-event-plugin": "^1.0.0",
+    "react-tap-event-plugin": "^2.0.0",
     "redux": "^3.3.1",
     "redux-form": "^5.3.1",
     "redux-logger": "^2.6.1",

@@ -11,7 +11,6 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';

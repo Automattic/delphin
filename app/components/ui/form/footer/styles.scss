@@ -15,8 +15,8 @@
 	}
 
 	@include breakpoint( '<480px' ) {
-		background: 0;
 		border-top: 1px solid $gray-light;
-		padding: 20px 0;
+		margin: 20px;
+		padding: 20px;
 	}
 }

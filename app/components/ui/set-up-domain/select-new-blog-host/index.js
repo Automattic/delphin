@@ -14,6 +14,7 @@ import Form from 'components/ui/form';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
+import { imageUrl } from 'lib/assets';
 
 class SelectNewBlogHost extends Component {
 	componentWillMount() {
@@ -65,7 +66,7 @@ class SelectNewBlogHost extends Component {
 				/>
 				<label className={ styles.label } htmlFor="wpcom">
 					<h3 className={ styles.labelHeader }>
-						WordPress.com
+						<img src={ imageUrl( 'hosts/wordpress-horizontal.svg' ) } alt="WordPress.com" height="50" />
 					</h3>
 					<p className={ styles.labelDescription }>
 						{
@@ -94,7 +95,7 @@ class SelectNewBlogHost extends Component {
 				/>
 				<label className={ styles.label } htmlFor="pressable">
 					<h3 className={ styles.labelHeader }>
-						Pressable
+						<img src={ imageUrl( 'hosts/pressable-logo-horz.svg' ) } alt="Pressable" height="50" />
 					</h3>
 					<p className={ styles.labelDescription }>
 						{

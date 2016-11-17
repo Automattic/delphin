@@ -54,17 +54,16 @@ class SelectNewBlogNeeds extends Component {
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
 
-							{ i18n.translate( 'Tell us what you want' ) }
+							{ i18n.translate( 'Tell us about your needs.' ) }
 						</h1>
 						<ProgressBar progress={ 30 } />
-						<h2 className={ styles.subHeaderText }>{ i18n.translate( "Based on your needs we'll show you the best options for creating your new blog." ) }</h2>
 					</div>
 				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<p className={ styles.actionLabel }>
-							{ i18n.translate( 'What best fits your needs & preferences for your new blog?' ) }
+							{ i18n.translate( 'How do you want to build your new blog?' ) }
 						</p>
 
 						<Radio
@@ -80,8 +79,8 @@ class SelectNewBlogNeeds extends Component {
 							</h3>
 							<p className={ styles.labelDescription }>
 								{
-									preventWidows( i18n.translate( 'Having a simple tool (with no coding) is more ' +
-										'important than full control over the layout and look.' ), 2 )
+									preventWidows( i18n.translate( 'I want easy-to-use tools ' +
+										'and require fast, high quality results.' ), 2 )
 								}
 							</p>
 						</label>
@@ -99,8 +98,8 @@ class SelectNewBlogNeeds extends Component {
 							</h3>
 							<p className={ styles.labelDescription }>
 								{
-									preventWidows( i18n.translate( 'I want full control over the look and feel ' +
-										"and I don't mind getting my hands dirty with code as needed." ), 2 )
+									preventWidows( i18n.translate( 'I want to customize my blog\'s code ' +
+										'and require total control over all features.' ), 2 )
 								}
 							</p>
 						</label>

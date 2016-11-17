@@ -66,7 +66,7 @@ class SelectNewBlogHost extends Component {
 				/>
 				<label className={ styles.label } htmlFor="wpcom">
 					<h3 className={ styles.labelHeader }>
-						<img src={ imageUrl( 'hosts/wordpress-horizontal.svg' ) } alt="WordPress.com" height="50" />
+						<img src={ imageUrl( 'hosts/wordpress-horizontal-blue.svg' ) } alt="WordPress.com" height="30" />
 					</h3>
 					<p className={ styles.labelDescription }>
 						{
@@ -95,7 +95,7 @@ class SelectNewBlogHost extends Component {
 				/>
 				<label className={ styles.label } htmlFor="pressable">
 					<h3 className={ styles.labelHeader }>
-						<img src={ imageUrl( 'hosts/pressable-logo-horz.svg' ) } alt="Pressable" height="50" />
+						<img src={ imageUrl( 'hosts/pressable-logo-horz.svg' ) } alt="Pressable" height="30" />
 					</h3>
 					<p className={ styles.labelDescription }>
 						{

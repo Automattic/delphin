@@ -64,7 +64,7 @@ class Success extends React.Component {
 						<p>
 							{ i18n.translate(
 								'We can\'t guarantee the domain will be yours. ' +
-								'Your application will be sumitted as soon as possible, ' +
+								'Your application will be submitted as soon as possible, ' +
 								'but someone else may grab the same domain even sooner. '
 								) }
 						</p>

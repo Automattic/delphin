@@ -103,7 +103,7 @@ class CheckoutReview extends React.Component {
 				</h1>
 				<h2>
 					{ i18n.translate(
-						'Your application will be sumitted automatically when .blog ' +
+						'Your application will be submitted automatically when .blog ' +
 						'becomes widely available on November 21st.'
 						) }
 				</h2>

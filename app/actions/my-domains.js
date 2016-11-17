@@ -41,7 +41,7 @@ export const fetchMyDomains = () => ( {
 	}
 } );
 
-export const updateDomain = ( domain, serviceSlug ) => ( {
+export const updateDomain = ( domain, serviceSlug, hostName = '' ) => ( {
 	type: WPCOM_REQUEST,
 	method: 'post',
 	params: {
@@ -49,7 +49,8 @@ export const updateDomain = ( domain, serviceSlug ) => ( {
 		path: '/delphin/domain/' + domain
 	},
 	payload: snakeifyKeys( {
-		serviceSlug
+		serviceSlug,
+		hostName,
 	} ),
 	loading: DOMAIN_UPDATE_POST,
 	success: results => ( {

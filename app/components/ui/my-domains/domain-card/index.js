@@ -7,31 +7,32 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import Button from 'components/ui/button';
 import { getPath } from 'routes';
+import { getServiceName } from 'lib/services';
 import styles from './styles.scss';
 
-const DomainCard = ( { name, isSetup, detailsVisible } ) => {
-	// TODO - remove, only for testing styles
-	// values: 'auto', 'he', 'ns'
-	const	setupType = '';
-
+const DomainCard = ( { name, detailsVisible, hostName, service } ) => {
+	const isSetup = service !== 'default';
 	const domainCardClassNames = classnames( {
 		[ styles.domainCard ]: true,
-		[ styles.notConnected ]: ! isSetup && ! setupType,
-		[ styles.connectedAuto ]: setupType === 'auto', // WPCOM/Pressable guided setup
-		[ styles.connectedConcierge ]: setupType === 'he', // concierge/HE setup
-		[ styles.connectedNameservers ]: setupType === 'ns', // custom nameservers
+		[ styles.notConnected ]: ! isSetup,
+		[ styles.connectedAuto ]: service === 'wpcom' || service === 'pressable',
+		[ styles.connectedConcierge ]: service === 'custom' && hostName,
+		[ styles.connectedNameservers ]: service === 'custom' && ! hostName,
 		[ styles.showDetails ]: isSetup && detailsVisible
 	} );
 
-	if ( setupType === 'auto' ) {
+	if ( service === 'pressable' ) {
 		return (
 			<div className={ domainCardClassNames }>
 				<div className={ styles.domainHeading }>
 					<h3>{ name }</h3>
 				</div>
 				<div className={ styles.domainDetails }>
-					<p className={ styles.domainSetupWpcom }>
-						{ i18n.translate( 'This domain was automatically set up for your WordPress.com site.' ) }
+					<p className={ styles.domainSetupPressable }>
+						{ i18n.translate( 'This domain was automatically set up for your %(serviceName)s site.', {
+							args: { serviceName: getServiceName( service ) },
+							comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+						} ) }
 					</p>
 				</div>
 				<div className={ styles.domainCardFooter }>
@@ -41,7 +42,28 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 		);
 	}
 
-	if ( setupType === 'he' ) {
+	if ( service === 'wpcom' ) {
+		return (
+			<div className={ domainCardClassNames }>
+				<div className={ styles.domainHeading }>
+					<h3>{ name }</h3>
+				</div>
+				<div className={ styles.domainDetails }>
+					<p className={ styles.domainSetupWpcom }>
+						{ i18n.translate( 'This domain was automatically set up for your %(serviceName)s site.', {
+							args: { serviceName: getServiceName( service ) },
+							comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+						} ) }
+					</p>
+				</div>
+				<div className={ styles.domainCardFooter }>
+					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Reset to default settings' ) }</a>
+				</div>
+			</div>
+		);
+	}
+
+	if ( service === 'custom' && hostName ) {
 		return (
 			<div className={ domainCardClassNames }>
 				<div className={ styles.domainHeading }>
@@ -57,7 +79,7 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 		);
 	}
 
-	if ( setupType === 'ns' ) {
+	if ( service === 'custom' && ! hostName ) {
 		return (
 			<div className={ domainCardClassNames }>
 				<div className={ styles.domainHeading }>
@@ -85,25 +107,24 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 		);
 	}
 
-	if ( ! isSetup ) {
-		return (
-			<div className={ domainCardClassNames }>
-				<div className={ styles.domainHeading }>
-					<h3>{ name }</h3>
-					<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set up' ) }</Button>
-				</div>
-				<div className={ styles.domainDetails }>
-					<p>{ i18n.translate( "You haven't set up this domain yet." ) }</p>
-				</div>
+	return (
+		<div className={ domainCardClassNames }>
+			<div className={ styles.domainHeading }>
+				<h3>{ name }</h3>
+				<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set up' ) }</Button>
 			</div>
-		);
-	}
+			<div className={ styles.domainDetails }>
+				<p>{ i18n.translate( "You haven't set up this domain yet." ) }</p>
+			</div>
+		</div>
+	);
 };
 
 DomainCard.propTypes = {
 	detailsVisible: PropTypes.bool.isRequired,
-	isSetup: PropTypes.bool.isRequired,
+	hostName: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
+	service: PropTypes.string.isRequired,
 	toggleDetails: PropTypes.func.isRequired
 };
 

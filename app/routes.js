@@ -19,12 +19,6 @@ import { getComponent } from 'sections';
 let publicRoutes = [
 	{
 		component: DefaultDarkLayout,
-		indexRoute: {
-			component: SunriseHomeContainer
-		},
-		path: '/',
-		slug: 'home',
-		static: true,
 		childRoutes: [
 			{
 				path: 'my-domains',
@@ -60,6 +54,12 @@ let publicRoutes = [
 	},
 	{
 		component: DefaultLightLayout,
+		indexRoute: {
+			component: SunriseHomeContainer
+		},
+		path: '/',
+		slug: 'home',
+		static: true,
 		childRoutes: [
 			{
 				path: 'learn-more',

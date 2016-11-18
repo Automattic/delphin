@@ -78,12 +78,10 @@ class UpdateNameservers extends Component {
 					<h1 className={ styles.headerTitle }>{ i18n.translate( 'Edit name servers' ) }</h1>
 				</div>
 
-				<p>{ i18n.translate( 'Use custom name servers to manage your domain outside of get.blog, or to point it to a provider that get.blog doesnt\'support.' ) }</p>
-
-				<p>{ i18n.translate( 'Note that a wrong setting here can make your domain stop working. You can reset back to the default name servers at any time under My Domains.' ) }</p>
-
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
+						<p className={ styles.instructions }>{ i18n.translate( 'Use custom name servers to manage your domain outside of get.blog, or to point it to a provider that get.blog doesn\'t support.' ) }</p>
+
 						{ Object.keys( this.props.fields ).map( ( fieldName, index ) => (
 							<div className={ styles.fieldContainer } key={ fieldName }>
 								<label htmlFor={ fieldName }>
@@ -98,11 +96,17 @@ class UpdateNameservers extends Component {
 								<ValidationError field={ this.props.fields[ fieldName ] } />
 							</div>
 						) ) }
+					</Form.FieldArea>
 
+					<Form.SubmitArea>
 						<Button className={ styles.button } disabled={ isRequestingNameservers }>
 							{ i18n.translate( 'Set name servers' ) }
 						</Button>
-					</Form.FieldArea>
+					</Form.SubmitArea>
+
+					<Form.Footer>
+						<p>{ i18n.translate( 'Note that a wrong setting here can make your domain stop working. You can reset back to the default name servers at any time under My Domains.' ) }</p>
+					</Form.Footer>
 				</form>
 
 				<div className={ styles.cancel }>

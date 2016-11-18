@@ -1,5 +1,4 @@
 // External dependencies
-import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import isEmpty from 'lodash/isEmpty';
 import React, { PropTypes } from 'react';
@@ -277,7 +276,7 @@ class ContactInformation extends React.Component {
 									</fieldset>
 								) }
 
-								<fieldset className={ classNames( { [ styles.addressTwoIsVisible ]: this.address2InputIsVisible() } ) }>
+								<fieldset>
 									<label>{ i18n.translate( 'Address' ) }</label>
 
 									<Input

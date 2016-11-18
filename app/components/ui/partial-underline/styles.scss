@@ -1,25 +1,19 @@
 @import 'app/styles/colors';
 
 .partial-underline {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 	position: relative;
 
-	&::before {
-		$underline-height: 2px;
-		$line-margin: 3px;
-
-		background-color: $blue;
-		bottom: -( $underline-height + 10px );
-		content: ' ';
-		height: $underline-height;
-		position: absolute;
-		width: 25%;
-	}
-
 	&::after {
-		content: ' ';
-		display: block;
-		margin-bottom: 1rem;
+		background-color: $blue;
+		bottom: 0;
+		content: '';
+		height: 2px;
+		left: 0;
+		position: absolute;
+		transition: width 200ms ease-in-out;
+		width: 50px;
 	}
 }
 

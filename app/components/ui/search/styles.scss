@@ -124,7 +124,7 @@
 	width: 100%;
 
 	&:hover {
-		.suggestion-info hr {
+		.suggestion-title::after {
 			width: 70px;
 		}
 
@@ -163,14 +163,6 @@
 .suggestion-info {
 	padding: 20px;
 	position: relative;
-
-	hr {
-		border: 0;
-		border-top: 2px solid $blue;
-		margin: 10px 0;
-		transition: width 200ms ease-in-out;
-		width: 50px;
-	}
 }
 
 .suggestion-title {

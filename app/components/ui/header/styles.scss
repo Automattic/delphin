@@ -16,6 +16,7 @@
 .search-header {
 	@extend %header;
 
+	border-bottom: 1px solid $gray-light;
 	height: 66px;
 	left: 0;
 	position: fixed;

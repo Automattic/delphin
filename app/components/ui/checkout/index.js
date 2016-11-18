@@ -315,9 +315,6 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.refundNotice }>
 							<p>
-								{ i18n.translate( 'You can cancel your purchase for a full refund within five days.' ) }
-							</p>
-							<p>
 								{ i18n.translate( 'By submitting your application, you agree to our {{link}}domain name registration agreement{{/link}}. ' +
 									'If you win this domain, you authorize your payment method to be charged on a recurring basis until you cancel, which you can do at any time.',
 									{
@@ -332,6 +329,12 @@ const Checkout = React.createClass( {
 								{ i18n.translate( 'Register & pay now' ) }
 							</Button>
 						</Form.SubmitArea>
+
+						<Form.Footer>
+							<p>
+								{ i18n.translate( 'You can cancel your purchase for a full refund within five days.' ) }
+							</p>
+						</Form.Footer>
 
 						{ this.hasError() && this.renderCheckoutError() }
 					</Form>

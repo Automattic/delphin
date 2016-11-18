@@ -29,8 +29,12 @@
 		height: 36vh;
 	}
 
-	@include breakpoint( '>960px' ) {
+	@include breakpoint( '>660px' ) {
 		height: 42vh;
+	}
+
+	@include breakpoint( '>960px' ) {
+		height: 46vh;
 	}
 
 	&::before,

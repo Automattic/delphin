@@ -36,20 +36,24 @@
 }
 
 .instructions {
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 }
 
 .button {
 	width: 100%;
 }
 
+.nameserver-footer {
+	background: #fff;
+	border-top: 1px solid $gray-medium;
+}
+
 .cancel {
 	font-size: 1.4rem;
 	margin-top: 15px;
 	text-align: center;
-	text-decoration: underline;
 
 	a {
-		color: $gray;
+		color: $blue;
 	}
 }

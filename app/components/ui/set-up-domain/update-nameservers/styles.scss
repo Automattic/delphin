@@ -12,6 +12,7 @@
 }
 
 .form {
+	background: #fff;
 	border: solid 1px $gray-light;
 	@include breakpoint( '<480px' ) {
 		background: #fff;
@@ -32,6 +33,10 @@
 
 .header-title {
 	font-size: 1.6rem;
+}
+
+.instructions {
+	margin-bottom: 20px;
 }
 
 .button {

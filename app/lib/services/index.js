@@ -1,3 +1,6 @@
+// External dependencies
+
+
 const SUPPORTED_SERVICES = [ 'wpcom', 'pressable' ];
 
 /**
@@ -16,3 +19,24 @@ export const getServiceName = service => ( {
 	wpcom: 'WordPress.com',
 	pressable: 'Pressable',
 }[ service ] );
+
+/**
+ * @param {string} service - A service
+ *
+ * @return {bool} True when service is auto connected.
+ */
+export const isAutoConnected = service => [ 'pressable', 'wpcom' ].includes( service );
+
+/**
+ * @param {string} service - A service
+ *
+ * @return {bool} True when service is connected with nameservers.
+ */
+export const isConnectedWithNameservers = service => service === 'custom';
+
+/**
+ * @param {string} service - A service
+ *
+ * @return {bool} True when service is managed by concierge.
+ */
+export const isManagedByConcierge = service => service === 'concierge';

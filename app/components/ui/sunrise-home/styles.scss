@@ -6,8 +6,12 @@
 .home-container {
 	display: flex;
 	flex-direction: column;
-	height: 80vmin;
+	height: 80vmax;
 	justify-content: center;
+
+	@include breakpoint( '>660px' ) {
+		height: 80vh;
+	}
 }
 
 .form {
@@ -16,11 +20,30 @@
 }
 
 .whats-your-story {
-	background: url( '/images/homepage-scene.svg' ) no-repeat center bottom -2px;
 	border-bottom: 2px solid $blue-dark;
 	height: 46vmin;
-	margin-top: -2px;
+	position: relative;
 	width: 100%;
+
+	&::before,
+	&::after {
+		content: '';
+		display: block;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		width: 100%;
+	}
+
+	&::before {
+		background: url( '/images/homepage-scene-rope.svg' ) no-repeat center top;
+		top: 0;
+	}
+
+	&::after {
+		background: url( '/images/homepage-scene.svg' ) no-repeat center bottom;
+		bottom: 0;
+	}
 }
 
 .heading {
@@ -81,12 +104,13 @@
 
 .input {
 	background-color: $white;
-	border: 1px solid $gray-medium;
+	border: 1px solid $gray;
 	border-radius: 3px;
 	box-sizing: border-box;
 	color: $blue-dark;
 	font-family: $body-font;
 	font-size: 1.6rem;
+	margin: 0;
 	padding: 18px 75px 18px 16px;
 	transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 	width: 100%;

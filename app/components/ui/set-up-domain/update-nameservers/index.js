@@ -75,15 +75,19 @@ class UpdateNameservers extends Component {
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
 				<div className={ styles.header }>
-					<h1 className={ styles.headerTitle }>{ i18n.translate( 'Edit Nameservers' ) }</h1>
+					<h1 className={ styles.headerTitle }>{ i18n.translate( 'Edit name servers' ) }</h1>
 				</div>
+
+				<p>{ i18n.translate( 'Use custom name servers to manage your domain outside of get.blog, or to point it to a provider that get.blog doesnt\'support.' ) }</p>
+
+				<p>{ i18n.translate( 'Note that a wrong setting here can make your domain stop working. You can reset back to the default name servers at any time under My Domains.' ) }</p>
 
 				<form className={ styles.form } onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						{ Object.keys( this.props.fields ).map( ( fieldName, index ) => (
 							<div className={ styles.fieldContainer } key={ fieldName }>
 								<label htmlFor={ fieldName }>
-									{ i18n.translate( 'Nameserver %(number)d', { args: { number: index + 1 } } ) }
+									{ i18n.translate( 'Name server %(number)d', { args: { number: index + 1 } } ) }
 								</label>
 
 								<input
@@ -96,7 +100,7 @@ class UpdateNameservers extends Component {
 						) ) }
 
 						<Button className={ styles.button } disabled={ isRequestingNameservers }>
-							{ i18n.translate( 'Set nameservers' ) }
+							{ i18n.translate( 'Set name servers' ) }
 						</Button>
 					</Form.FieldArea>
 				</form>

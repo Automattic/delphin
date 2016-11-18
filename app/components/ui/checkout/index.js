@@ -72,9 +72,7 @@ const Checkout = React.createClass( {
 		this.props.redirectToHome();
 	},
 
-	handleSubmission( submitEvent ) {
-		submitEvent.preventDefault();
-
+	handleSubmission() {
 		this.props.purchaseDomain()
 			.then( () => this.props.redirect( 'success' ) )
 			.catch( () => this.props.redirect( 'checkout' ) );

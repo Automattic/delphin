@@ -9,7 +9,7 @@ var config = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				loaders: [ 'babel' ],
+				loaders: [ 'babel-loader' ],
 				include: [
 					path.resolve( __dirname, 'client' ),
 					path.resolve( __dirname, 'app' ),
@@ -20,20 +20,20 @@ var config = {
 			},
 			{
 				test: /\.json$/,
-				loader: 'json'
+				loader: 'json-loader'
 			},
 			{
 				test: /\.scss$/,
 				loaders: [
-					'isomorphic-style',
-					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
-					'postcss',
-					'sass?sourceMap'
+					'isomorphic-style-loader',
+					'css-loader?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'postcss-loader',
+					'sass-loader?sourceMap'
 				]
 			},
 			{
 				test: /\.svg$/,
-				loader: 'babel!svg-react'
+				loader: 'babel-loader!svg-react'
 			}
 		]
 	},
@@ -49,7 +49,7 @@ var config = {
 	},
 
 	// Enables source maps both for the client and server.
-	devtool: 'source-map',
+	devtool: 'source-map-loader',
 
 	plugins: [
 		new webpack.LoaderOptionsPlugin( {

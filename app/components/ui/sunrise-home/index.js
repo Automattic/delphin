@@ -71,7 +71,15 @@ const SunriseHome = React.createClass( {
 							{ i18n.translate( 'Get started' ) }
 						</Button>
 					</div>
+
+					<div className={ styles.secondaryHeadingContainer }>
+						<h3 className={ styles.secondaryHeading }>
+							{ preventWidows( pageContent, 3 ) }
+						</h3>
+					</div>
 				</form>
+
+				<div className={ styles.whatsYourStory } />
 			</div>
 		);
 	}

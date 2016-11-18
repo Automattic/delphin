@@ -4,9 +4,10 @@
 @import 'app/styles/breakpoints';
 
 .home-container {
-	border-bottom: 2px solid $blue-dark;
 	display: flex;
 	flex-direction: column;
+	height: 80vmin;
+	justify-content: center;
 }
 
 .form {
@@ -16,8 +17,8 @@
 
 .whats-your-story {
 	background: url( '/images/homepage-scene.svg' ) no-repeat center bottom -2px;
-	background-size: contain;
-	height: 38vmin;
+	border-bottom: 2px solid $blue-dark;
+	height: 46vmin;
 	margin-top: -2px;
 	width: 100%;
 }

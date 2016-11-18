@@ -69,7 +69,8 @@ const Checkout = React.createClass( {
 
 	handleClickResetCheckoutAndRedirectToHome( event ) {
 		this.handleClickResetCheckout( event );
-		this.props.redirectToHome();
+
+		this.props.redirect( 'home' );
 	},
 
 	handleSubmission() {

@@ -92,7 +92,7 @@ class ContactUsExistingBlog extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Button disabled={ ! message.value || isContactingSupport }>
+						<Button disabled={ isContactingSupport }>
 							{ i18n.translate( 'Contact domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>

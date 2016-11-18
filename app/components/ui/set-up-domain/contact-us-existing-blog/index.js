@@ -79,6 +79,9 @@ class ContactUsExistingBlog extends Component {
 								args: { hostName }
 							} ) }
 						</div>
+						<div className={ styles.paragraph }>
+							{ i18n.translate( 'Let us know what you want from your new domain, and we\'ll get back to you soon.' ) }
+						</div>
 
 						<textarea
 							className={ styles.message }

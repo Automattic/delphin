@@ -67,13 +67,23 @@ const Checkout = React.createClass( {
 		this.props.resetCheckout();
 	},
 
+	handleClickResetCheckoutAndRedirectToHome( event ) {
+		this.handleClickResetCheckout( event );
+		this.props.redirectToHome();
+	},
+
 	renderCheckoutError() {
 		let errorMessage = i18n.translate( "We weren't able to process your payment." );
+		let showTryDifferentDomain = false;
 
-		const { transaction } = this.props.checkout;
+		const { transaction: { error } } = this.props.checkout;
 
-		if ( transaction.error && transaction.error.code === 'duplicate_purchase' ) {
-			errorMessage = transaction.error.message;
+		if ( error && [ 'duplicate_purchase', 'domain_availability_error', 'domain_availability_check_error' ].includes( error.code ) ) {
+			errorMessage = error.message;
+
+			if ( [ 'duplicate_purchase', 'domain_availability_error' ].includes( error.code ) ) {
+				showTryDifferentDomain = true;
+			}
 		}
 
 		return (
@@ -81,12 +91,20 @@ const Checkout = React.createClass( {
 				<div className={ styles.icon }></div>
 				<p>
 					{ errorMessage }
+
 					<span>
-						{ i18n.translate( 'Don\'t worry! You can {{link}}try again{{/link}}.',
-							{
-								components: { link: <a onClick={ this.handleClickResetCheckout } href="#" /> }
-							}
-						) }
+						{ showTryDifferentDomain
+							? i18n.translate( 'You can {{link}}try a different domain{{/link}}.', {
+								components: {
+									link: <a onClick={ this.handleClickResetCheckoutAndRedirectToHome } href="#" />
+								}
+							} )
+							: i18n.translate( "Don't worry! You can {{link}}try again{{/link}}.", {
+								components: {
+									link: <a onClick={ this.handleClickResetCheckout } href="#" />
+								}
+							} )
+						}
 					</span>
 				</p>
 			</div>
@@ -94,8 +112,7 @@ const Checkout = React.createClass( {
 	},
 
 	hasError() {
-		const { checkout } = this.props;
-		const { paygateConfiguration, paygateToken, transaction } = checkout;
+		const { paygateConfiguration, paygateToken, transaction } = this.props.checkout;
 
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},

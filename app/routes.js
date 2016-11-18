@@ -98,12 +98,6 @@ let publicRoutes = [
 				getComponent: getComponent( 'checkout', 'checkout' )
 			},
 			{
-				path: 'checkout-review',
-				slug: 'checkoutReview',
-				static: false,
-				getComponent: getComponent( 'checkout', 'checkoutReview' )
-			},
-			{
 				path: 'success',
 				slug: 'success',
 				static: false,

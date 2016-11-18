@@ -43,10 +43,8 @@
 	z-index: 1;
 }
 
-.address-two-is-visible {
-	.address2 input {
-		border-top-width: 0;
-	}
+.address2 {
+	margin-top: -1px;
 }
 
 .row {

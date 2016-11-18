@@ -237,7 +237,8 @@ $card-type-width: 32px;
 	p {
 		font-size: 2rem;
 		margin: 20px auto;
-		max-width: 260px;
+		max-width: 100%;
+		width: 260px;
 	}
 }
 

@@ -78,7 +78,7 @@ class FindExistingBlog extends Component {
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<label className={ styles.actionLabel }>
-							{ i18n.translate( 'Enter your existing blog\'s address.' ) }
+							{ i18n.translate( 'Enter your existing blog\'s address:' ) }
 						</label>
 
 						<Input

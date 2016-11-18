@@ -72,8 +72,12 @@ const Checkout = React.createClass( {
 		this.props.redirectToHome();
 	},
 
-	handleSubmission() {
-		this.props.purchaseDomain().then( this.props.redirect( 'success' ) );
+	handleSubmission( submitEvent ) {
+		submitEvent.preventDefault();
+
+		this.props.purchaseDomain()
+			.then( () => this.props.redirect( 'success' ) )
+			.catch( () => this.props.redirect( 'checkout' ) );
 	},
 
 	renderCheckoutError() {
@@ -339,9 +343,20 @@ const Checkout = React.createClass( {
 						</Form.Footer>
 
 						{ this.hasError() && this.renderCheckoutError() }
+
+						{ this.props.isPurchasing && this.renderProcessing() }
 					</Form>
 				</div>
 			</DocumentTitle>
+		);
+	},
+
+	renderProcessing() {
+		return (
+			<div className={ styles.processingPayment }>
+				<div className={ styles.icon }></div>
+				<p>{ i18n.translate( 'Processing…' ) }</p>
+			</div>
 		);
 	},
 

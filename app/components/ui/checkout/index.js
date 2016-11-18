@@ -274,8 +274,10 @@ const Checkout = React.createClass( {
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
 							<div className={ styles.orderItem }>
-								<span className={ styles.itemDescription }>{ i18n.translate( 'Domain Registration' ) } { i18n.translate( '(recurring yearly fee)' ) }</span>
-								<span>{ domainCost }</span>
+								<span className={ styles.itemDescription }>
+									{ this.props.domain.domainName }
+								</span>
+								<span>{ domainCost } { i18n.translate( ' per year' ) }</span>
 							</div>
 							<div className={ styles.orderItem }>
 								<label>

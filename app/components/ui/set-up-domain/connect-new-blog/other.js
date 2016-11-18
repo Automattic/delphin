@@ -86,7 +86,7 @@ class ConnectNewBlogToOther extends Component {
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Button disabled={ ! providerText.value || isContactingSupport }>
+						<Button disabled={ isContactingSupport }>
 							{ i18n.translate( 'Contact domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>

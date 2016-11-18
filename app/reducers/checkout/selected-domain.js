@@ -1,7 +1,6 @@
 // Internal dependencies
 import {
 	DOMAIN_SELECT,
-	DOMAIN_UNSELECT
 } from 'reducers/action-types';
 
 export const initialState = {
@@ -19,9 +18,6 @@ export const selectedDomain = ( state = initialState, action ) => {
 	switch ( type ) {
 		case DOMAIN_SELECT:
 			return action.value;
-
-		case DOMAIN_UNSELECT:
-			return initialState;
 
 		default:
 			return state;

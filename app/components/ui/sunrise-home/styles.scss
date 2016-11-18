@@ -6,7 +6,7 @@
 .home-container {
 	display: flex;
 	flex-direction: column;
-	height: 80vmax;
+	height: 70vh;
 	justify-content: center;
 
 	@include breakpoint( '>660px' ) {
@@ -21,9 +21,17 @@
 
 .whats-your-story {
 	border-bottom: 2px solid $blue-dark;
-	height: 46vmin;
+	height: 39vh;
 	position: relative;
 	width: 100%;
+
+	@include breakpoint( '>480px' ) {
+		height: 36vh;
+	}
+
+	@include breakpoint( '>960px' ) {
+		height: 42vh;
+	}
 
 	&::before,
 	&::after {
@@ -37,12 +45,23 @@
 
 	&::before {
 		background: url( '/images/homepage-scene-rope.svg' ) no-repeat center top;
+		display: none;
 		top: 0;
+
+		@include breakpoint( '>480px' ) {
+			display: block;
+		}
 	}
 
 	&::after {
-		background: url( '/images/homepage-scene.svg' ) no-repeat center bottom;
+		background: url( '/images/homepage-scene-480.svg' ) no-repeat center bottom;
+		background-size: 170% auto;
 		bottom: 0;
+
+		@include breakpoint( '>480px' ) {
+			background: url( '/images/homepage-scene.svg' ) no-repeat center bottom;
+			background-size: auto;
+		}
 	}
 }
 

@@ -1,5 +1,10 @@
 // Internal dependencies
-import { canConnectToService } from '../index';
+import {
+	canConnectToService,
+	isAutoConnected,
+	isConnectedWithNameservers,
+	isManagedByConcierge
+} from '../index';
 
 describe( 'lib/services', () => {
 	it( 'should return `false` when unknown service name is provided', () => {
@@ -18,5 +23,53 @@ describe( 'lib/services', () => {
 		const result = canConnectToService( 'pressable' );
 
 		expect( result ).toBe( true );
+	} );
+
+	describe( '#isAutoConnected', () => {
+		it( 'should return false when invalid service name is provided', () => {
+			const result = isAutoConnected( 'sawbuck' );
+
+			expect( result ).toBe( false );
+		} );
+
+		it( 'should return true when `pressable` service name is provided', () => {
+			const result = isAutoConnected( 'pressable' );
+
+			expect( result ).toBe( true );
+		} );
+
+		it( 'should return true when `wpcom` service name is provided', () => {
+			const result = isAutoConnected( 'wpcom' );
+
+			expect( result ).toBe( true );
+		} );
+	} );
+
+	describe( '#isConnectedWithNameservers', () => {
+		it( 'should return false when invalid service name is provided', () => {
+			const result = isConnectedWithNameservers( 'sawbuck' );
+
+			expect( result ).toBe( false );
+		} );
+
+		it( 'should return true when `custom` service name is provided', () => {
+			const result = isConnectedWithNameservers( 'custom' );
+
+			expect( result ).toBe( true );
+		} );
+	} );
+
+	describe( '#isManagedByConcierge', () => {
+		it( 'should return false when invalid service name is provided', () => {
+			const result = isManagedByConcierge( 'sawbuck' );
+
+			expect( result ).toBe( false );
+		} );
+
+		it( 'should return true when `concierge` service name is provided', () => {
+			const result = isManagedByConcierge( 'concierge' );
+
+			expect( result ).toBe( true );
+		} );
 	} );
 } );

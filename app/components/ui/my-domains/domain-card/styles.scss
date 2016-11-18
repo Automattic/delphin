@@ -162,14 +162,16 @@
 	justify-content: flex-end;
 }
 
-.domain-setup-wpcom::after {
-	background: url( #{$image-assets-url}hosts/wordpress-blue.svg ) no-repeat center;
-	background-size: contain;
-}
+.domain-setup-auto {
+	&.pressable:after {
+		background: url(#{$image-assets-url}hosts/pressable-color.svg) no-repeat center;
+		background-size: contain;
+	}
 
-.domain-setup-pressable::after {
-	background: url( #{$image-assets-url}hosts/pressable-color.svg ) no-repeat center;
-	background-size: contain;
+	&.wpcom:after {
+		background: url(#{$image-assets-url}hosts/wordpress-blue.svg) no-repeat center;
+		background-size: contain;
+	}
 }
 
 .connected-concierge {

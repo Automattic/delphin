@@ -24,8 +24,6 @@ class Success extends React.Component {
 	}
 
 	render() {
-		const { domain, email } = this.props;
-
 		return (
 			<SunriseStep className={ styles.step }>
 				<DocumentTitle title={ i18n.translate( 'Success' ) } />
@@ -34,15 +32,6 @@ class Success extends React.Component {
 					<h1>
 						{ i18n.translate( "That's a happy blog!" ) }
 					</h1>
-
-					<h2>
-						{ i18n.translate( 'Your application for {{strong}}%(domain)s{{/strong}} is being processed.',
-							{
-								args: { domain },
-								components: { strong: <strong /> }
-							}
-						) }
-					</h2>
 				</SunriseStep.Header>
 
 				<div className={ styles.content }>
@@ -50,35 +39,13 @@ class Success extends React.Component {
 					<div className={ styles.text }>
 						<p>
 							{ i18n.translate(
-								'Your application will be submitted automatically when ' +
-								'.blog becomes widely available, on November 21st. ' +
-								'We\'ll email you at {{strong}}%(email)s{{/strong}} with ' +
-								'the results. ',
-								{
-									args: { email },
-									components: { strong: <strong /> }
-								}
+								'Your new domain is almost ready. Connect your existing blog or a start a new one now.'
 								) }
 						</p>
 
 						<p>
-							{ i18n.translate(
-								'We can\'t guarantee the domain will be yours. ' +
-								'Your application will be submitted as soon as possible, ' +
-								'but someone else may grab the same domain even sooner. '
-								) }
-						</p>
-
-						<p>
-							{ i18n.translate(
-								'If your application fails, for any reason, we\'ll refund ' +
-								'your payment in full.'
-								) }
-						</p>
-
-						<p>
-							<Button href={ getPath( 'home' ) } className={ styles.successCta }>
-								{ i18n.translate( 'Add another domain' ) }
+							<Button href={ getPath( 'selectBlogType', { domainName: name } ) } className={ styles.successCta }>
+								{ i18n.translate( 'Start setup now' ) }
 							</Button>
 						</p>
 					</div>

@@ -163,12 +163,12 @@
 }
 
 .domain-setup-auto {
-	&.pressable:after {
+	&.pressable::after {
 		background: url(#{$image-assets-url}hosts/pressable-color.svg) no-repeat center;
 		background-size: contain;
 	}
 
-	&.wpcom:after {
+	&.wpcom::after {
 		background: url(#{$image-assets-url}hosts/wordpress-blue.svg) no-repeat center;
 		background-size: contain;
 	}

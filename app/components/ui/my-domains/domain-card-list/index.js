@@ -10,10 +10,11 @@ import NewDomainCard from 'components/ui/my-domains/new-domain-card';
 const DomainCardList = ( { domains } ) => {
 	return (
 		<div className={ styles.domainCardList }>
-			{ domains.map( ( { id, name, service } ) =>
+			{ domains.map( ( { hostName, id, name, service } ) =>
 				<DomainCard
 					key={ id }
-					name={ name }
+					hostName={ hostName }
+					domainName={ name }
 					service={ service } />
 			) }
 			<NewDomainCard />

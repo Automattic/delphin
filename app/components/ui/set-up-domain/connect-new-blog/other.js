@@ -68,13 +68,13 @@ class ConnectNewBlogToOther extends Component {
 				</div>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p className={ styles.actionLabel }>
+						<div className={ styles.paragraph }>
 							{ i18n.translate( 'We can help you find the best place to start a blog and make it work with %(domainName)s.', {
 								args: { domainName }
 							} ) }
-						</p>
+						</div>
 						<div className={ styles.paragraph }>
-							{ i18n.translate( 'Let us know .' ) }
+							{ i18n.translate( 'Let us know what you want from your new blog, and we\'ll get back to you soon.' ) }
 						</div>
 
 						<textarea

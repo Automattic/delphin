@@ -39,8 +39,8 @@ const Checkout = React.createClass( {
 		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isPurchasing: PropTypes.bool.isRequired,
-		redirectToCheckoutReview: PropTypes.func.isRequired,
-		redirectToHome: PropTypes.func.isRequired,
+		purchaseDomain: PropTypes.func.isRequired,
+		redirect: PropTypes.func.isRequired,
 		resetCheckout: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		trackPrivacyToggle: PropTypes.func.isRequired,
@@ -49,7 +49,7 @@ const Checkout = React.createClass( {
 
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
-			this.props.redirectToHome();
+			this.props.redirect( 'home' );
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
@@ -70,6 +70,10 @@ const Checkout = React.createClass( {
 	handleClickResetCheckoutAndRedirectToHome( event ) {
 		this.handleClickResetCheckout( event );
 		this.props.redirectToHome();
+	},
+
+	handleSubmission() {
+		this.props.purchaseDomain().then( this.props.redirect( 'success' ) );
 	},
 
 	renderCheckoutError() {
@@ -169,7 +173,7 @@ const Checkout = React.createClass( {
 
 					<Form
 						className={ styles.form }
-						onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }
+						onSubmit={ handleSubmit( this.handleSubmission ) }
 						errors={ errors }
 						focusOnError
 						autoComplete="off"

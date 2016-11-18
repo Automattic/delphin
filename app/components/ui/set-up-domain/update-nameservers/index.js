@@ -104,7 +104,7 @@ class UpdateNameservers extends Component {
 						</Button>
 					</Form.SubmitArea>
 
-					<Form.Footer>
+					<Form.Footer className={ styles.nameserverFooter } >
 						<p>{ i18n.translate( 'Note that a wrong setting here can make your domain stop working. You can reset back to the default name servers at any time under My Domains.' ) }</p>
 					</Form.Footer>
 				</form>

@@ -29,8 +29,8 @@ class Success extends React.Component {
 				<DocumentTitle title={ i18n.translate( 'Success' ) } />
 
 				<SunriseStep.Header className={ styles.header }>
-					<h1>
-						{ i18n.translate( "That's a happy blog!" ) }
+					<h1 className={ styles.heading }>
+						{ i18n.translate( 'Your .blog is registered and ready to be setup!' ) }
 					</h1>
 				</SunriseStep.Header>
 
@@ -40,7 +40,7 @@ class Success extends React.Component {
 						<p>
 							{ i18n.translate(
 								'Your new domain is almost ready. Connect your existing blog or a start a new one now.'
-								) }
+							) }
 						</p>
 
 						<p>

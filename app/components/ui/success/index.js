@@ -47,7 +47,7 @@ class Success extends React.Component {
 						</p>
 
 						<p>
-							<Button href={ getPath( 'selectBlogType', { domainName: name } ) } className={ styles.successCta }>
+							<Button href={ getPath( 'selectBlogType', { domainName: domain } ) } className={ styles.successCta }>
 								{ i18n.translate( 'Start setup now' ) }
 							</Button>
 						</p>

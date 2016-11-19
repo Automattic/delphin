@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -24,6 +25,8 @@ class Success extends React.Component {
 	}
 
 	render() {
+		const { domain } = this.props;
+
 		return (
 			<SunriseStep className={ styles.step }>
 				<DocumentTitle title={ i18n.translate( 'Success' ) } />
@@ -50,6 +53,12 @@ class Success extends React.Component {
 						</p>
 					</div>
 				</div>
+
+				<SunriseStep.Footer>
+					<Link to={ getPath( 'myDomains' ) }>
+						{ i18n.translate( "I'll set it up later" ) }
+					</Link>
+				</SunriseStep.Footer>
 			</SunriseStep>
 		);
 	}

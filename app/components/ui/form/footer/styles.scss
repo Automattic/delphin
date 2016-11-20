@@ -4,17 +4,19 @@
 .footer {
 	background: $gray-xlight;
 	color: $gray-dark;
-	line-height: 1.4;
+	font-size: 1.6rem;
+	line-height: 1.2em;
 	padding: 20px 30px;
 
 	h3 {
-		color: $gray-dark;
-		font-weight: 600;
+		color: $blue-dark;
+		font-weight: 700;
+		margin-bottom: 10px;
 	}
 
 	@include breakpoint( '<480px' ) {
-		background: 0;
 		border-top: 1px solid $gray-light;
-		padding: 20px 0;
+		margin: 20px -20px;
+		padding: 20px;
 	}
 }

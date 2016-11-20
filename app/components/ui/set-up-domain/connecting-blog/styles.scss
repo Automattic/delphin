@@ -1,1 +1,42 @@
 @import 'app/components/ui/set-up-domain/styles';
+
+.content-container {
+	background-color: $white;
+	border: 1px solid $gray-light;
+	border-radius: 0 0 3px 3px;
+	border-top: 0;
+	box-shadow: 0 -3px $blue;
+	box-sizing: border-box;
+	color: $blue-dark;
+	display: block;
+	font-size: 1.4rem;
+	margin: -40px auto 25px;
+	max-width: 440px;
+	padding: 30px;
+
+	@include breakpoint( '<480px' ) {
+		border: 0;
+		border-radius: 0;
+		margin-bottom: 0;
+		margin-left: 0;
+		margin-right: 0;
+		max-width: 100%;
+		padding: 30px 20px 0;
+	}
+
+	input,
+	button {
+		font-family: inherit;
+	}
+}
+
+.status-container {
+	margin: 30px auto;
+	padding: 20px;
+}
+
+.status-message {
+	font-size: 1.8rem;
+	font-weight: 400;
+	text-align: center;
+}

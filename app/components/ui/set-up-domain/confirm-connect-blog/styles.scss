@@ -9,6 +9,8 @@
 .setup-complete-header {
 	background: url( #{$image-assets-url}party.svg ) no-repeat top right;
 	display: inline-block;
+	height: 36px;
+	line-height: 36px;
 	padding-right: 50px;
 }
 

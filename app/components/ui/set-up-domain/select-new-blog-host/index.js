@@ -11,10 +11,10 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
+import { imageUrl } from 'lib/assets';
 
 class SelectNewBlogHost extends Component {
 	componentWillMount() {
@@ -56,7 +56,7 @@ class SelectNewBlogHost extends Component {
 		} = this.props;
 
 		return (
-			<div>
+			<div className={ styles.serviceOption }>
 				<Radio
 					className={ styles.radio }
 					{ ...service }
@@ -66,13 +66,12 @@ class SelectNewBlogHost extends Component {
 				/>
 				<label className={ styles.label } htmlFor="wpcom">
 					<h3 className={ styles.labelHeader }>
-						WordPress.com
+						<img src={ imageUrl( 'hosts/wordpress-horizontal-blue.svg' ) } alt="WordPress.com" height="30" />
 					</h3>
 					<p className={ styles.labelDescription }>
 						{
-							i18n.translate( 'Create a free website or easily build a blog on WordPress.com.' +
-								' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-								'Free hosting and support.' )
+							i18n.translate( 'Easily build a blog on WordPress.com.' +
+								' Hundreds of customizable, mobile-ready designs and themes. ' )
 						}
 					</p>
 				</label>
@@ -96,13 +95,12 @@ class SelectNewBlogHost extends Component {
 				/>
 				<label className={ styles.label } htmlFor="pressable">
 					<h3 className={ styles.labelHeader }>
-						Pressable
+						<img src={ imageUrl( 'hosts/pressable-logo-horz.svg' ) } alt="Pressable" height="30" />
 					</h3>
 					<p className={ styles.labelDescription }>
 						{
-							i18n.translate( 'Create a website or easily build a blog.' +
-								' Hundreds of free, customizable, mobile-ready designs and themes. ' +
-								'Upload your own themes and plugins.' )
+							i18n.translate( 'Managed WordPress Hosting that delivers reliability, ' +
+								'security and speed backed by expert support.' )
 						}
 					</p>
 				</label>
@@ -128,24 +126,16 @@ class SelectNewBlogHost extends Component {
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
 
-							{ i18n.translate( 'Create a new blog' ) }
+							{ i18n.translate( 'Create a new blog.' ) }
 						</h1>
 						<ProgressBar progress={ 60 } />
-						<h2 className={ styles.subHeaderText }>
-							{ preventWidows( i18n.translate( "We'll get your domain ready to be connected to the service of your choice.",
-								{
-									args: { domainName },
-									components: { strong: <strong /> }
-								}
-							), 2 ) }
-						</h2>
 					</div>
 				</div>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
-							{ i18n.translate( 'Where would you like to create your new blog?' ) }
+						<p className={ styles.actionLabel }>
+							{ i18n.translate( 'Where would you like to start your new blog?' ) }
 						</p>
 						{ needs === 'simple' && this.renderWpcom() }
 
@@ -159,7 +149,7 @@ class SelectNewBlogHost extends Component {
 					<Form.Footer>
 						<h3>{ i18n.translate( 'Want a different blogging platform?' ) }</h3>
 						<p>
-							{ i18n.translate( 'We\'re adding more options soon, but in the meantime our Happiness Engineers can help you {{link}}create a new blog somewhere else{{/link}}.', {
+							{ i18n.translate( 'We\'ll be adding more options for automatic set up soon. In the meantime, our Domain Assistants can help you {{link}}find the best place to start your new blog{{/link}}.', {
 								components: { link: <Link to={ getPath( 'connectNewBlogToOther', { domainName } ) } /> }
 							} ) }
 						</p>

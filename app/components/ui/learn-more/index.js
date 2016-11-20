@@ -74,6 +74,12 @@ class LearnMore extends React.Component {
 					</form>
 				</div>
 
+				<div className={ styles.content }>
+					<div>
+						<h3>{ i18n.translate( 'What is ".blog"?' ) }</h3>
+						<p>{ i18n.translate( '".blog" is a new domain extension that is all about blogging.' ) }</p>
+					</div>
+				</div>
 			</SunriseStep>
 		);
 	}

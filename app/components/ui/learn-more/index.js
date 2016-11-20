@@ -76,8 +76,22 @@ class LearnMore extends React.Component {
 
 				<div className={ styles.content }>
 					<div>
-						<h3>{ i18n.translate( 'What is ".blog"?' ) }</h3>
-						<p>{ i18n.translate( '".blog" is a new domain extension that is all about blogging.' ) }</p>
+						<h3>{ i18n.translate( 'What is .blog?' ) }</h3>
+						<p>{ i18n.translate( '.blog is a new domain extension, available to the public since November 21st, 2016. Domains ending with .blog work just like any other domain, such as .com or .xyz.' ) }</p>
+					</div>
+					<div>
+						<h3>{ i18n.translate( 'Why are short domains not available?' ) }</h3>
+						<p>{ i18n.translate( 'All .blog domains with three characters or less are reserved by KKWT, the company that runs the .blog domain extension. Some short domains have been released (such as get.blog), but they are not available for public registration.' ) }</p>
+						<p>{ i18n.translate( 'KKWT may make short domains available in the future. For now, We can\'t register .blog domains with three characters or less.' ) }</p>
+					</div>
+					<div>
+						<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
+						<p>{ i18n.translate( 'The price for most .blog domains on get.blog is $30 USD. However, some .blog domains carry a premium yearly price, set by KKWT, the company that runs the .blog domain extension.' ) }</p>
+						<p>{ i18n.translate( 'Prices are based on a market analysis completed before .blog domains were first made available. They do not change based on subsequent interest or demand.' ) }</p>
+					</div>
+					<div>
+						<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
+						<p>{ i18n.translate( 'Domains you registered on get.blog can be canceled for a full refund within five days of purchase. Contact us at help@get.blog to request a refund.' ) }</p>
 					</div>
 				</div>
 			</SunriseStep>

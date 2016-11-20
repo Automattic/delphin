@@ -7,6 +7,7 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 
 // Internal dependencies
 import config from 'config';
+import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
 import LoadingPlaceholder from './loading-placeholder';
@@ -14,6 +15,7 @@ import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
 import Button from 'components/ui/button';
+import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 const Search = React.createClass( {
@@ -212,6 +214,16 @@ const Search = React.createClass( {
 									size={ 20 }
 								/>
 							</Button>
+						</div>
+					) }
+
+					{ ! this.props.isRequesting && (
+						<div className={ styles.emailSignup }>
+							{ i18n.translate( '{{link}}Sign up{{/link}} to get .blog updates in your email.', {
+								components: {
+									link: <TrackingLink eventName="delphin_search_email_signup_click" to={ getPath( 'learnMore' ) } />
+								}
+							} ) }
 						</div>
 					) }
 				</div>

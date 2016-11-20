@@ -8,6 +8,7 @@
 	flex-direction: column;
 	height: 70vh;
 	justify-content: center;
+	min-height: 435px;
 
 	@include breakpoint( '>660px' ) {
 		height: 80vh;
@@ -22,19 +23,23 @@
 .whats-your-story {
 	border-bottom: 2px solid $blue-dark;
 	height: 39vh;
+	min-height: 235px;
 	position: relative;
 	width: 100%;
 
 	@include breakpoint( '>480px' ) {
 		height: 36vh;
+		max-height: 300px;
 	}
 
 	@include breakpoint( '>660px' ) {
 		height: 42vh;
+		max-height: 400px;
 	}
 
 	@include breakpoint( '>960px' ) {
 		height: 46vh;
+		max-height: 450px;
 	}
 
 	&::before,
@@ -71,15 +76,18 @@
 
 .heading {
 	color: $blue-dark;
-	font: 700 3.6rem $heading-font;
+	font: 700 2.6rem $heading-font;
 	margin-bottom: 10px;
 
 	.emphasis {
 		color: $blue;
 	}
 
-	@include breakpoint( '<480px' ) {
-		font-size: 2.6rem;
+	@include breakpoint( '>480px' ) {
+		font-size: 3.2rem;
+	}
+	@include breakpoint( '>660px' ) {
+		font-size: 4rem;
 	}
 }
 
@@ -132,7 +140,7 @@
 	box-sizing: border-box;
 	color: $blue-dark;
 	font-family: $body-font;
-	font-size: 1.6rem;
+	font-size: 1.8rem;
 	margin: 0;
 	padding: 18px 75px 18px 16px;
 	transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
@@ -142,5 +150,25 @@
 		border-color: $green;
 		box-shadow: inset 0 0 0 2px $green-light;
 		outline: none;
+	}
+
+	&::-webkit-input-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
+	}
+
+	&::-moz-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
+	}
+
+	&:-ms-input-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
+	}
+
+	&:-moz-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
 	}
 }

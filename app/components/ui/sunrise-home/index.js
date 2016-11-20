@@ -82,6 +82,7 @@ const SunriseHome = React.createClass( {
 							{ preventWidows( pageContent, 3 ) }
 						</h3>
 					</div>
+
 				</form>
 			</div>
 		);

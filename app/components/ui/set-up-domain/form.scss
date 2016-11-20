@@ -16,7 +16,9 @@
 	transition: border 0.2s, box-shadow 0.2s;
 
 	p.label-description {
+		color: $gray-dark;
 		font-size: 1.6rem;
+		margin-top: 15px;
 		padding: 0 20px 20px;
 	}
 

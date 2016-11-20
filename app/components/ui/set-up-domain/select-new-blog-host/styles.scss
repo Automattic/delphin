@@ -1,20 +1,19 @@
 @import 'app/components/ui/set-up-domain/styles';
 @import 'app/components/ui/set-up-domain/form';
 
-.label {
-	&[for=wpcom] {
-		.label-header {
-			background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/wordpress-blue.svg );
-		}
-	}
+.service-option {
+	margin: 20px 0;
 
-	&[for=pressable] {
-		.label-header {
-			background-image: url( https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/hosts/pressable-color.svg );
+	&:last-child {
+		margin-bottom: 0;
+
+		.label {
+			margin-bottom: 0;
 		}
 	}
 }
 
 .label-header {
-	padding-left: 66px;
+	display: flex;
+	padding: 10px 20px;
 }

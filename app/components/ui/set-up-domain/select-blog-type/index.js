@@ -50,7 +50,7 @@ class SelectBlogType extends Component {
 							<span className={ styles.setUpLabel }>
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
-							{ i18n.translate( 'Tell us about your blog' ) }
+							{ i18n.translate( 'Tell us about your blog.' ) }
 						</h1>
 						<ProgressBar progress={ 10 } />
 					</div>
@@ -58,8 +58,8 @@ class SelectBlogType extends Component {
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
-							{ i18n.translate( 'What do you want to do with %(domainName)s?', {
+						<p className={ styles.actionLabel }>
+							{ i18n.translate( 'What do you want on %(domainName)s?', {
 								args: { domainName }
 							} ) }
 						</p>
@@ -72,7 +72,7 @@ class SelectBlogType extends Component {
 								value="existing"
 								checked={ newOrExisting.value === 'existing' }
 							/>
-							{ i18n.translate( 'Use it for a blog I already started' ) }
+							{ i18n.translate( 'An existing blog I already started.' ) }
 						</label>
 
 						<label className={ styles.label } htmlFor="new">
@@ -83,7 +83,7 @@ class SelectBlogType extends Component {
 								value="new"
 								checked={ newOrExisting.value === 'new' }
 							/>
-							{ i18n.translate( 'Start building a new blog now' ) }
+							{ i18n.translate( 'A new blog now I\'ll start now.' ) }
 						</label>
 					</Form.FieldArea>
 
@@ -94,9 +94,8 @@ class SelectBlogType extends Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						<p className={ styles.formFooter }>{ i18n.translate( 'Looking to edit your nameservers yourself?' ) }</p>
 						<p>
-							{ i18n.translate( "There is copy here about {{Link}}editing nameservers{{/Link}}. I'm not sure what to say here Ran.", {
+							{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
 								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
 							} ) }
 						</p>
@@ -105,7 +104,7 @@ class SelectBlogType extends Component {
 
 				<div className={ styles.footer }>
 					<Link to={ getPath( 'myDomains' ) }>
-						{ i18n.translate( 'I\'ll set up my domain later' ) }
+						{ i18n.translate( 'I\'ll set up my domain later.' ) }
 					</Link>
 				</div>
 			</div>

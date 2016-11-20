@@ -56,32 +56,38 @@ class ConnectNewBlogToOther extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Contact our domain assistant' ) }</h1>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Meet your domain assistant.' ) }
+						</h1>
 						<ProgressBar progress={ 90 } />
 					</div>
 				</div>
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
-						<p>
-							{ i18n.translate( 'How can we get %(domainName)s set up the way you want it?', {
+						<div className={ styles.paragraph }>
+							{ i18n.translate( 'We can help you find the best place to start a blog and make it work with %(domainName)s.', {
 								args: { domainName }
 							} ) }
-						</p>
+						</div>
 						<div className={ styles.paragraph }>
-							{ i18n.translate( 'While we work on adding more ways to automatically connect, we can set it up for you personally. Let us know below what kind of blog you want.' ) }
+							{ i18n.translate( 'Let us know what you want from your new blog, and we\'ll get back to you soon.' ) }
 						</div>
 
 						<textarea
 							id="providerText"
 							name="providerText"
-							placeholder={ i18n.translate( 'Tell us what kind of blog you want.' ) }
+							placeholder={ i18n.translate( 'What do you want in your blog?' ) }
 							rows="4"
 							className={ styles.otherProviderText }
 							{ ...removeInvalidInputProps( providerText ) } />
 					</Form.FieldArea>
 					<Form.SubmitArea>
-						<Button disabled={ ! providerText.value || isContactingSupport }>
-							{ i18n.translate( 'Contact our domain assistant' ) }
+						<Button disabled={ isContactingSupport }>
+							{ i18n.translate( 'Contact domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
 				</Form>

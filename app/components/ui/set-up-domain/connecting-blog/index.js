@@ -9,6 +9,7 @@ import { getServiceName } from 'lib/services';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
+import Satellite from 'components/ui/satellite';
 
 class ConnectingBlog extends Component {
 	render() {
@@ -21,9 +22,21 @@ class ConnectingBlog extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Connecting your domain' ) }</h1>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Connecting your domain.' ) }
+						</h1>
 						<ProgressBar progress={ 80 } />
-						<h2 className={ styles.subHeaderText }>
+					</div>
+				</div>
+
+				<div className={ styles.contentContainer }>
+					<div className={ styles.statusContainer }>
+						<Satellite width="78px" height="94px" />
+						<p className={ styles.statusMessage }>
 							{ blogType === 'existing' && (
 								preventWidows( i18n.translate( 'Just a moment while we set up {{strong}}%(domainName)s{{/strong}} to work with your %(serviceName)s blog at {{strong}}%(hostName)s{{/strong}}.', {
 									args: { domainName, hostName, serviceName },
@@ -37,7 +50,7 @@ class ConnectingBlog extends Component {
 									components: { strong: <strong /> }
 								} ), 2 )
 							) }
-						</h2>
+						</p>
 					</div>
 				</div>
 			</div>

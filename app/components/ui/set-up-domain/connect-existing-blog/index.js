@@ -30,7 +30,7 @@ class ConnectExistingBlog extends Component {
 	}
 
 	render() {
-		const { domainName, hostName } = this.props;
+		const { domainName } = this.props;
 
 		return (
 			<div className={ styles.domainSetup }>
@@ -38,9 +38,13 @@ class ConnectExistingBlog extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Good news, we found %(hostName)s!', {
-							args: { hostName }
-						} ) }</h1>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Connect to your blog.' ) }
+						</h1>
 						<ProgressBar progress={ 60 } />
 					</div>
 				</div>
@@ -48,13 +52,11 @@ class ConnectExistingBlog extends Component {
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
 						<p>
-							{ i18n.translate( 'Are you ready to connect %(domainName)s to %(hostName)s?', {
-								args: { hostName, domainName }
-							} ) }
+							{ i18n.translate( 'Great, we can automatically configure your new domain to work with your existing blog.' ) }
 						</p>
 
 						<Button className={ styles.button }>
-							{ i18n.translate( 'Yes, Connect Now' ) }
+							{ i18n.translate( 'Connect now' ) }
 						</Button>
 					</Form.FieldArea>
 				</Form>

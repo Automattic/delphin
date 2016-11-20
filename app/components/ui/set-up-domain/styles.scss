@@ -6,7 +6,7 @@
 }
 
 .domain-setup {
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 
 	p {
 		word-wrap: break-word;
@@ -25,9 +25,13 @@
 
 .footer {
 	color: $gray;
-	line-height: 1.4;
+	line-height: 1.4rem;
 	margin: 0 auto 70px;
 	max-width: 400px;
 	padding: 0 20px;
 	text-align: center;
+}
+
+.action-label {
+	font-weight: 700;
 }

@@ -5,7 +5,7 @@
 	-webkit-font-smoothing: antialiased;
 	background: $green;
 	border: 0;
-	border-bottom: 2px solid $green-dark;
+	border-bottom: 2px solid darken($green, 5%);
 	border-radius: 3px;
 	color: $white;
 	cursor: pointer;

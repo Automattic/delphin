@@ -61,35 +61,39 @@ class ContactUsExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>{ i18n.translate( 'Contact our domain assistant' ) }</h1>
+						<h1 className={ styles.headerText }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Meet your domain assistant.' ) }
+						</h1>
 						<ProgressBar progress={ 90 } />
 					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
-						<p>
-							{ i18n.translate( 'How can we get %(domainName)s set up the way you want it?', {
-								args: { domainName }
-							} ) }
-						</p>
 						<div className={ styles.paragraph }>
-							{ i18n.translate( 'We found %(hostName)s and we think it will be fastest and easiest if we set it up for you personally. Let us know below how you want your domain to work.', {
+							{ i18n.translate( 'We found %(hostName)s and we think it will be fastest and easiest if we set it up for you personally.', {
 								args: { hostName }
 							} ) }
+						</div>
+						<div className={ styles.paragraph }>
+							{ i18n.translate( 'Let us know what you want from your new domain, and we\'ll get back to you soon.' ) }
 						</div>
 
 						<textarea
 							className={ styles.message }
-							placeholder={ i18n.translate( 'Tell us what you want to do with your domain.' ) }
+							placeholder={ i18n.translate( 'How do you want to connect your new domain?' ) }
 							rows="4"
 							{ ...removeInvalidInputProps( message ) }
 						/>
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Button disabled={ ! message.value || isContactingSupport }>
-							{ i18n.translate( 'Contact our domain assistant' ) }
+						<Button disabled={ isContactingSupport }>
+							{ i18n.translate( 'Contact domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
 				</Form>

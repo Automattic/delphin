@@ -12,6 +12,7 @@
 }
 
 .form {
+	background: #fff;
 	border: solid 1px $gray-light;
 	@include breakpoint( '<480px' ) {
 		background: #fff;
@@ -34,17 +35,25 @@
 	font-size: 1.6rem;
 }
 
+.instructions {
+	margin-bottom: 25px;
+}
+
 .button {
 	width: 100%;
+}
+
+.nameserver-footer {
+	background: #fff;
+	border-top: 1px solid $gray-medium;
 }
 
 .cancel {
 	font-size: 1.4rem;
 	margin-top: 15px;
 	text-align: center;
-	text-decoration: underline;
 
 	a {
-		color: $gray;
+		color: $blue;
 	}
 }

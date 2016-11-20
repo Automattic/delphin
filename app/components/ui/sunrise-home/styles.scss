@@ -42,21 +42,6 @@
 	}
 }
 
-.secondary-heading {
-	color: $gray-dark;
-	font-size: 1.8rem;
-	line-height: 1.4;
-
-	@include breakpoint( '<480px' ) {
-		font-size: 1.6rem;
-	}
-}
-
-.secondary-heading-container {
-	margin: 0 auto;
-	max-width: 500px;
-}
-
 .domain-search {
 	align-items: flex-start;
 	display: flex;

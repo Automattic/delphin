@@ -100,8 +100,12 @@ const ConnectUser = React.createClass( {
 							</Button>
 						</Form.SubmitArea>
 						<div className={ styles.poweredBy }>
-							<h3 className={ styles.headline }>Proudly powered by WordPress.com</h3>
-							<p>Your get.blog domain can easily be connected to WordPress.</p>
+							<h3 className={ styles.headline }>
+								{ i18n.translate( 'Proudly powered by WordPress.com' ) }
+							</h3>
+							<p>
+								{ i18n.translate( 'Your get.blog domain can easily be connected to a WordPress.com blog.' ) }
+							</p>
 						</div>
 					</Form>
 

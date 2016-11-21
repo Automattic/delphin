@@ -1,6 +1,4 @@
 // External dependencies
-import classnames from 'classnames';
-import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -8,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DomainManagedByConcierge from './domain-managed-by-concierge';
 import DomainNotConnected from './domain-not-connected';
 import DomainAutoConnected from 'components/containers/domain-auto-connected';
+import DomainWithCustomNameservers from 'components/containers/domain-with-custom-nameservers';
 import {
 	canConnectToService,
 	isConnectedWithNameservers,
@@ -34,31 +33,10 @@ const DomainCard = ( { domainName, hostName, service } ) => {
 	}
 
 	if ( isConnectedWithNameservers( service ) ) {
-		const nameservers = [];
-
 		return (
-			<div className={ classnames( styles.domainCard, styles.connectedNameservers ) }>
-				<div className={ styles.domainHeading }>
-					<h3>{ domainName }</h3>
-				</div>
-				<div className={ styles.domainDetails }>
-					<p>{ i18n.translate( 'This domain has custom name servers:' ) }</p>
-					<div className={ styles.nameservers }>
-						<div className={ styles.nameserversLoading }>
-							{ i18n.translate( 'Fetching name servers…' ) }
-						</div>
-						<ul className={ styles.nameserversList }>
-							{ nameservers.map( nameserver => (
-								<li>{ nameserver }</li>
-							) ) }
-						</ul>
-					</div>
-				</div>
-				<div className={ styles.domainCardFooter }>
-					<a href="#">{ i18n.translate( 'Change name servers' ) }</a>
-					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Revert to default name servers' ) }</a>
-				</div>
-			</div>
+			<DomainWithCustomNameservers
+				domainName={ domainName }
+			/>
 		);
 	}
 

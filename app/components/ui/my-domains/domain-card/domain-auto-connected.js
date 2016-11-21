@@ -1,6 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -42,12 +42,12 @@ class DomainAutoConnected extends Component {
 		const { domainName, service } = this.props;
 
 		return (
-			<div className={ classnames( styles.domainCard, styles.connectedAuto ) }>
+			<div className={ classNames( styles.domainCard, styles.connectedAuto ) }>
 				<div className={ styles.domainHeading }>
 					<h3>{ domainName }</h3>
 				</div>
 				<div className={ styles.domainDetails }>
-					<p className={ classnames( styles.domainSetupAuto, styles[ service ] ) }>
+					<p className={ classNames( styles.domainSetupAuto, styles[ service ] ) }>
 						{ i18n.translate( 'This domain was automatically set up for your %(serviceName)s site.', {
 							args: { serviceName: getServiceName( service ) },
 							comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'

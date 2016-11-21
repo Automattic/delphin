@@ -320,11 +320,17 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.refundNotice }>
 							<p>
-								{ i18n.translate( 'By clicking Register & pay now you agree to our {{link1}}domain name registration agreement{{/link1}} and authorize your payment method to be charged on a recurring basis until you cancel, which you can do at any time by contacting {{link2}}help@get.blog{{/link2}}. You understand how automatic renewal works and how to cancel.',
+								{ i18n.translate( 'By clicking "Register & pay now" you agree to our {{link}}domain name registration agreement{{/link}}. You also authorize your payment method to be charged on a recurring basis, until you cancel.',
 									{
 										components: {
-											link1: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" />,
-											link2: <a href="mailto:help@get.blog" />,
+											link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" />
+										}
+									}
+								) }
+								{ i18n.translate( 'You can cancel at any time by contacting {{link}}help@get.blog{{/link}}. You confirm that you understand how automatic renewal works and how to cancel.',
+									{
+										components: {
+											link: <a href="mailto:help@get.blog" />
 										}
 									}
 								) }

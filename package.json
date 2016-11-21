@@ -16,7 +16,7 @@
     "hooks": "node hooks/manage",
     "lint": "eslint --max-warnings 0 app client server && sass-lint --config .sass-lint.yml --max-warnings 0 --verbose",
     "preinstall": "npm run-script clean",
-    "prod:static": "NODE_ENV=production yarn install --ignore-optional && NODE_ENV=production npm run generate",
+    "prod:static": "yarn install --ignore-optional && NODE_ENV=production npm run generate",
     "start": "yarn install && npm run build && node server/build/bundle",
     "start:static": "npm run prod:static && node server/static",
     "test": "NODE_PATH=.:app jest --maxWorkers=4",

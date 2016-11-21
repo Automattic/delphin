@@ -13,15 +13,9 @@ class DomainAutoConnected extends Component {
 	handleResetDomain( event ) {
 		event.preventDefault();
 
-		const {
-			domainName,
-			resetDomain,
-		} = this.props;
+		const { domainName, resetDomain } = this.props;
 
-		resetDomain(
-			domainName,
-			'sawbuck'
-		);
+		resetDomain( domainName, 'sawbuck' );
 	}
 
 	render() {

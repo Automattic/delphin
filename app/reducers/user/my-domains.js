@@ -5,6 +5,7 @@ import {
 	MY_DOMAINS_FETCH,
 	MY_DOMAINS_FETCH_COMPLETE,
 	MY_DOMAINS_FETCH_FAIL,
+	NAMESERVERS_UPDATE_COMPLETE,
 	DOMAIN_UPDATE_COMPLETE,
 	SUPPORT_CONTACT_COMPLETE,
 } from 'reducers/action-types';
@@ -17,6 +18,7 @@ export const myDomains = createRequestReducer( {
 	const { type } = action;
 
 	switch ( type ) {
+		case NAMESERVERS_UPDATE_COMPLETE:
 		case DOMAIN_UPDATE_COMPLETE:
 		case SUPPORT_CONTACT_COMPLETE:
 		case LOGOUT_USER:

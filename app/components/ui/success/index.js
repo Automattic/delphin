@@ -33,7 +33,12 @@ class Success extends React.Component {
 
 				<SunriseStep.Header className={ styles.header }>
 					<h1 className={ styles.heading }>
-						{ i18n.translate( '{{strong}}%(domain)s{{/strong}} is now yours!', { args: { domain }, components: { strong: <strong /> }	}	) }
+						{ i18n.translate( '{{strong}}%(domain)s{{/strong}} is now yours!', {
+							args: { domain },
+							components: {
+								strong: <strong />
+							}
+						} ) }
 					</h1>
 				</SunriseStep.Header>
 

@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 import { addNotice } from 'actions/notices';
 import ContactConcierge from 'app/components/ui/set-up-domain/contact-concierge/index.js';
 import { contactSupport } from 'actions/contact-support';
+import { isContactingSupport } from 'reducers/contact-support/selectors';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
@@ -15,6 +16,7 @@ export default reduxForm(
 	( state, { params: { domainName, hostName } } ) => ( {
 		domainName,
 		hostName,
+		isContactingSupport: isContactingSupport( state ),
 	} ),
 	{
 		addNotice,

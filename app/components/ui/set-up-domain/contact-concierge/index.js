@@ -48,6 +48,7 @@ class ContactConcierge extends Component {
 		const {
 			domainName,
 			hostName,
+			isContactingSupport,
 			fields: { message },
 		} = this.props;
 
@@ -81,7 +82,7 @@ class ContactConcierge extends Component {
 					</Form.FieldArea>
 
 					<Form.SubmitArea>
-						<Button disabled={ ! message.value }>
+						<Button disabled={ ! message.value || isContactingSupport }>
 							{ i18n.translate( 'Contact our domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
@@ -103,6 +104,7 @@ ContactConcierge.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
 	hostName: PropTypes.string,
+	isContactingSupport: PropTypes.bool.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

@@ -3,13 +3,12 @@ import i18n from 'i18n-calypso';
 import request from 'superagent';
 import jsonp from 'superagent-jsonp';
 
-export function subscribeUser( email, domainName ) {
+export function subscribeUser( email ) {
 	return new Promise( ( resolve, reject ) => {
 		const queryParams = {
 			u: '4471f40dba4ec0e34130a91a5',
 			id: '3358410f08',
-			MERGE0: email,
-			MERGE1: domainName
+			MERGE0: email
 		};
 
 		request.get( 'https://wordpress.us8.list-manage.com/subscribe/post-json?' )

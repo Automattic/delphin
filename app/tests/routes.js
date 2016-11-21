@@ -1,6 +1,5 @@
 // Until modules that import CSS can be imported with Jest, we need to manually mock them
 jest.mock( 'components/containers/checkout', () => {} );
-jest.mock( 'components/containers/checkout-review', () => {} );
 jest.mock( 'components/containers/connect-user/login', () => {} );
 jest.mock( 'components/containers/connect-user/signup', () => {} );
 jest.mock( 'components/containers/connect-user/verify', () => {} );
@@ -13,7 +12,6 @@ jest.mock( 'components/containers/notices', () => {} );
 jest.mock( 'components/containers/search', () => {} );
 jest.mock( 'components/containers/set-up-domain/select-blog-type', () => {} );
 jest.mock( 'components/containers/success', () => {} );
-jest.mock( 'components/containers/sunrise-confirm-domain', () => {} );
 jest.mock( 'components/containers/sunrise-home', () => {} );
 jest.mock( 'components/containers/verify-user-with-query-container-factory', () => ( {
 	verifyUserWithQueryContainerFactory: () => {}

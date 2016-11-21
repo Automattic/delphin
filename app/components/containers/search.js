@@ -52,14 +52,19 @@ export default connect(
 			} ) );
 		},
 
-		selectDomain( domainProduct ) {
+		selectDomain( domainProduct, isUserLoggedIn ) {
 			dispatch( recordTracksEvent( 'delphin_search_result_select', {
 				is_premium: domainProduct.isPremium,
 				relevance: domainProduct.relevance,
 				num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
 			} ) );
 			dispatch( selectDomain( domainProduct ) );
-			dispatch( redirect( 'confirmDomain', { queryParams: { domain: domainProduct.domainName } } ) );
+
+			if ( isUserLoggedIn ) {
+				dispatch( redirect( 'contactInformation' ) );
+			} else {
+				dispatch( redirect( 'signupUser' ) );
+			}
 		},
 
 		fetchDomainSuggestions( query ) {
@@ -87,6 +92,10 @@ export default connect(
 			}
 
 			dispatchProps.fetchDomainSuggestions( query );
+		},
+
+		selectDomain( domainProduct ) {
+			dispatchProps.selectDomain( domainProduct, stateProps.isLoggedIn );
 		}
 	} )
 )( Search );

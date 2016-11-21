@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 
 // Internal dependencies
 import Checkout from 'components/ui/checkout';
+import { purchaseDomain } from 'actions/checkout';
 import { validateCheckoutForm } from 'lib/checkout';
 import { getAsyncValidateFunction } from 'lib/form';
 import { resetCheckout } from 'actions/checkout';
@@ -61,12 +62,12 @@ export default reduxForm(
 		user: getUserSettings( state )
 	} ),
 	dispatch => bindActionCreators( {
-		resetCheckout,
-		redirectToCheckoutReview: withAnalytics(
-			recordTracksEvent( 'delphin_checkout_form_submit' ),
-			push( getPath( 'checkoutReview' ) )
+		purchaseDomain: withAnalytics(
+			recordTracksEvent( 'delphin_application_review_submit' ),
+			purchaseDomain
 		),
-		redirectToHome: () => push( getPath( 'home' ) ),
+		resetCheckout,
+		redirect: pathSlug => push( getPath( pathSlug ) ),
 		trackPrivacyToggle: ( newValue ) => recordTracksEvent( 'delphin_privacy_toggle', { toggled_to: newValue } )
 	}, dispatch )
 )( RequireLogin( Checkout ) );

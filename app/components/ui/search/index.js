@@ -219,7 +219,7 @@ const Search = React.createClass( {
 
 					{ ! this.props.isRequesting && (
 						<div className={ styles.emailSignup }>
-							{ i18n.translate( 'Not ready to apply? {{link}}Sign up{{/link}} to get .blog updates in your email.', {
+							{ i18n.translate( '{{link}}Sign up{{/link}} to get .blog updates in your email.', {
 								components: {
 									link: <TrackingLink eventName="delphin_search_email_signup_click" to={ getPath( 'learnMore' ) } />
 								}

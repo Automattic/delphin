@@ -48,7 +48,7 @@ const LoadingPlaceholder = () => (
 				</g>
 			</g>
 		</svg>
-		{ i18n.translate( 'Looking for your best matches…' ) }
+		{ i18n.translate( 'Finding your new domain…' ) }
 	</div>
 );
 

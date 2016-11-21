@@ -39,8 +39,8 @@ const Checkout = React.createClass( {
 		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isPurchasing: PropTypes.bool.isRequired,
-		redirectToCheckoutReview: PropTypes.func.isRequired,
-		redirectToHome: PropTypes.func.isRequired,
+		purchaseDomain: PropTypes.func.isRequired,
+		redirect: PropTypes.func.isRequired,
 		resetCheckout: PropTypes.func.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		trackPrivacyToggle: PropTypes.func.isRequired,
@@ -49,7 +49,7 @@ const Checkout = React.createClass( {
 
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
-			this.props.redirectToHome();
+			this.props.redirect( 'home' );
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
@@ -69,7 +69,14 @@ const Checkout = React.createClass( {
 
 	handleClickResetCheckoutAndRedirectToHome( event ) {
 		this.handleClickResetCheckout( event );
-		this.props.redirectToHome();
+
+		this.props.redirect( 'home' );
+	},
+
+	handleSubmission() {
+		this.props.purchaseDomain()
+			.then( () => this.props.redirect( 'success' ) )
+			.catch( () => this.props.redirect( 'checkout' ) );
 	},
 
 	renderCheckoutError() {
@@ -160,11 +167,16 @@ const Checkout = React.createClass( {
 				<div>
 					<div className={ styles.header }>
 						<CheckoutProgressbar currentStep={ 3 } />
+
+						<h2 className={ styles.heading }>
+							{ i18n.translate( 'Enter your payment information' ) }
+						</h2>
+
 					</div>
 
 					<Form
 						className={ styles.form }
-						onSubmit={ handleSubmit( this.props.redirectToCheckoutReview ) }
+						onSubmit={ handleSubmit( this.handleSubmission ) }
 						errors={ errors }
 						focusOnError
 						autoComplete="off"
@@ -265,8 +277,12 @@ const Checkout = React.createClass( {
 						<div className={ styles.orderSummary }>
 							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
 							<div className={ styles.orderItem }>
-								<span className={ styles.itemDescription }>{ i18n.translate( 'Domain Registration' ) } { i18n.translate( '(recurring yearly fee)' ) }</span>
-								<span>{ domainCost }</span>
+								<span className={ styles.itemDescription }>
+									{ this.props.domain.domainName }
+								</span>
+								<span>{ i18n.translate( '%(domainCost)s per year', {
+									args: { domainCost },
+								} ) }</span>
 							</div>
 							<div className={ styles.orderItem }>
 								<label>
@@ -306,21 +322,50 @@ const Checkout = React.createClass( {
 
 						<div className={ styles.refundNotice }>
 							<p>
-								<strong>{ i18n.translate( 'Apply risk free' ) }</strong>
-								{ i18n.translate( 'If someone grabs this domain before we get a chance to register it for you, we\'ll give you a full refund.' ) }
+								{ i18n.translate( 'By clicking "Register & pay now" you agree to our {{link}}domain name registration agreement{{/link}}. You also authorize your payment method to be charged on a recurring basis, until you cancel.',
+									{
+										components: {
+											link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" />
+										}
+									}
+								) }
+								{ i18n.translate( 'You can cancel at any time by contacting {{link}}help@get.blog{{/link}}. You confirm that you understand how automatic renewal works and how to cancel.',
+									{
+										components: {
+											link: <a href="mailto:help@get.blog" />
+										}
+									}
+								) }
 							</p>
 						</div>
 
 						<Form.SubmitArea className={ styles.submitArea }>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Review application' ) }
+								{ i18n.translate( 'Register & pay now' ) }
 							</Button>
 						</Form.SubmitArea>
 
+						<Form.Footer>
+							<p>
+								{ i18n.translate( 'You can cancel your purchase for a full refund within five days.' ) }
+							</p>
+						</Form.Footer>
+
 						{ this.hasError() && this.renderCheckoutError() }
+
+						{ this.props.isPurchasing && this.renderProcessing() }
 					</Form>
 				</div>
 			</DocumentTitle>
+		);
+	},
+
+	renderProcessing() {
+		return (
+			<div className={ styles.processingPayment }>
+				<div className={ styles.icon }></div>
+				<p>{ i18n.translate( 'Processing…' ) }</p>
+			</div>
 		);
 	},
 

@@ -101,12 +101,6 @@ class SelectBlogType extends Component {
 						</p>
 					</Form.Footer>
 				</Form>
-
-				<div className={ styles.footer }>
-					<Link to={ getPath( 'myDomains' ) }>
-						{ i18n.translate( 'I\'ll set up my domain later.' ) }
-					</Link>
-				</div>
 			</div>
 		);
 	}

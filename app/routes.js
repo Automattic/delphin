@@ -10,7 +10,6 @@ import LoginContainer from 'components/containers/connect-user/login';
 import NotFound from 'components/ui/not-found';
 import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
-import SunriseConfirmDomainContainer from 'components/containers/sunrise-confirm-domain';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
 import { buildPaths, getLocalizedRoutes } from 'lib/routes';
@@ -75,12 +74,6 @@ let publicRoutes = [
 				getComponent: getComponent( 'checkout', 'contactInformation' )
 			},
 			{
-				path: 'confirm-domain',
-				slug: 'confirmDomain',
-				static: true,
-				component: SunriseConfirmDomainContainer
-			},
-			{
 				path: 'signup',
 				slug: 'signupUser',
 				static: true,
@@ -103,12 +96,6 @@ let publicRoutes = [
 				slug: 'checkout',
 				static: false,
 				getComponent: getComponent( 'checkout', 'checkout' )
-			},
-			{
-				path: 'checkout-review',
-				slug: 'checkoutReview',
-				static: false,
-				getComponent: getComponent( 'checkout', 'checkoutReview' )
 			},
 			{
 				path: 'success',

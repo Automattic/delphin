@@ -9,14 +9,14 @@ import DomainManagedByConcierge from './domain-managed-by-concierge';
 import DomainNotConnected from './domain-not-connected';
 import {
 	getServiceName,
-	isAutoConnected,
+	canConnectToService,
 	isConnectedWithNameservers,
 	isManagedByConcierge
 } from 'lib/services';
 import styles from './styles.scss';
 
 const DomainCard = ( { domainName, hostName, service } ) => {
-	if ( isAutoConnected( service ) ) {
+	if ( canConnectToService( service ) ) {
 		return (
 			<div className={ classnames( styles.domainCard, styles.connectedAuto ) }>
 				<div className={ styles.domainHeading }>

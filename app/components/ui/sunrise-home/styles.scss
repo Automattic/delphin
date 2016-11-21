@@ -6,6 +6,13 @@
 .home-container {
 	display: flex;
 	flex-direction: column;
+	height: 70vh;
+	justify-content: center;
+	min-height: 435px;
+
+	@include breakpoint( '>660px' ) {
+		height: 80vh;
+	}
 }
 
 .form {
@@ -14,31 +21,73 @@
 }
 
 .whats-your-story {
-	background: url( #{$image-assets-url}tell-your-story-dark.svg ) no-repeat bottom center;
-	background-size: contain;
-	height: 30vmin;
-	margin: 6vmin auto 0;
-	max-width: 480px;
+	border-bottom: 2px solid $blue-dark;
+	height: 39vh;
+	min-height: 235px;
+	position: relative;
 	width: 100%;
 
-	@include breakpoint( '<660px' ) {
-		height: 34vmin;
-		margin-top: 10px;
+	@include breakpoint( '>480px' ) {
+		height: 36vh;
+		max-height: 300px;
+	}
+
+	@include breakpoint( '>660px' ) {
+		height: 42vh;
+		max-height: 400px;
+	}
+
+	@include breakpoint( '>960px' ) {
+		height: 46vh;
+		max-height: 450px;
+	}
+
+	&::before,
+	&::after {
+		content: '';
+		display: block;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		width: 100%;
+	}
+
+	&::before {
+		background: url( '/images/homepage-scene-rope.svg' ) no-repeat center top;
+		display: none;
+		top: 0;
+
+		@include breakpoint( '>480px' ) {
+			display: block;
+		}
+	}
+
+	&::after {
+		background: url( '/images/homepage-scene-480.svg' ) no-repeat center bottom;
+		background-size: 170% auto;
+		bottom: 0;
+
+		@include breakpoint( '>480px' ) {
+			background: url( '/images/homepage-scene.svg' ) no-repeat center bottom;
+			background-size: auto;
+		}
 	}
 }
 
 .heading {
 	color: $blue-dark;
-	font-family: $heading-font;
-	font-size: 3.4rem;
+	font: 700 2.6rem $heading-font;
 	margin-bottom: 10px;
 
 	.emphasis {
 		color: $blue;
 	}
 
-	@include breakpoint( '<480px' ) {
-		font-size: 2.6rem;
+	@include breakpoint( '>480px' ) {
+		font-size: 3.2rem;
+	}
+	@include breakpoint( '>660px' ) {
+		font-size: 4rem;
 	}
 }
 
@@ -46,8 +95,9 @@
 	align-items: flex-start;
 	display: flex;
 	font-size: 1.4rem;
-	margin: 35px auto;
-	max-width: 650px;
+	margin: 30px auto 0;
+	max-width: 850px;
+	position: relative;
 
 	@include breakpoint( '<480px' ) {
 		flex-direction: column;
@@ -55,11 +105,25 @@
 	}
 
 	.button {
-		flex-shrink: 0;
-		margin-left: 15px;
+		border-radius: 0 3px 3px 0;
+		height: 100%;
+		margin: 0;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		right: 0;
+		text-indent: 100%;
+		top: 0;
+		white-space: nowrap;
+		width: 60px;
 
-		@include breakpoint( '<480px' ) {
-			margin: 15px 0 0;
+		&::before {
+			background: url( '/images/search-icon.svg' ) no-repeat center;
+			content: '';
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
 			width: 100%;
 		}
 	}
@@ -71,13 +135,14 @@
 
 .input {
 	background-color: $white;
-	border: 1px solid $gray-medium;
+	border: 1px solid $gray;
 	border-radius: 3px;
 	box-sizing: border-box;
 	color: $blue-dark;
 	font-family: $body-font;
-	font-size: 1.6rem;
-	padding: 18px 16px;
+	font-size: 1.8rem;
+	margin: 0;
+	padding: 18px 75px 18px 16px;
 	transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 	width: 100%;
 
@@ -85,5 +150,25 @@
 		border-color: $green;
 		box-shadow: inset 0 0 0 2px $green-light;
 		outline: none;
+	}
+
+	&::-webkit-input-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
+	}
+
+	&::-moz-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
+	}
+
+	&:-ms-input-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
+	}
+
+	&:-moz-placeholder {
+		color: $gray-dark;
+		font-size: 1.6rem;
 	}
 }

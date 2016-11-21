@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import DomainManagedByConcierge from './domain-managed-by-concierge';
 import DomainNotConnected from './domain-not-connected';
-import DomainAutoConnected from './domain-auto-connected';
+import DomainAutoConnected from 'components/containers/domain-auto-connected';
 import {
 	canConnectToService,
 	isConnectedWithNameservers,

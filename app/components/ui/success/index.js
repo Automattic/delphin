@@ -56,7 +56,7 @@ class Success extends React.Component {
 
 				<SunriseStep.Footer>
 					<Link to={ getPath( 'myDomains' ) }>
-						{ i18n.translate( "I'll set it up my domain later." ) }
+						{ i18n.translate( "I'll set up my domain later." ) }
 					</Link>
 				</SunriseStep.Footer>
 			</SunriseStep>

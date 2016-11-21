@@ -419,7 +419,7 @@ babel-core@^6.0.0, babel-core@^6.11.4, babel-core@^6.16.0, babel-core@^6.7.4:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@^6.1.2:
+babel-eslint@6.1.2:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-6.1.2.tgz#5293419fe3672d66598d327da9694567ba6a5f2f"
   dependencies:
@@ -2563,7 +2563,7 @@ eslint@^2.7.0:
     text-table "~0.2.0"
     user-home "^2.0.0"
 
-eslint@^3.8.1:
+eslint@3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.8.1.tgz#7d02db44cd5aaf4fa7aa489e1f083baa454342ba"
   dependencies:

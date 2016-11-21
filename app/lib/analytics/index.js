@@ -79,7 +79,7 @@ const analytics = {
 	user: null,
 
 	superProps: {
-		launch_period: 'ga pre-reg'
+		launch_period: 'ga'
 	},
 
 	mc: {

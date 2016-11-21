@@ -14,28 +14,14 @@ class DomainAutoConnected extends Component {
 		event.preventDefault();
 
 		const {
-			addNotice,
 			domainName,
-			fetchMyDomains,
+			resetDomain,
 		} = this.props;
 
-		this.props.updateDomain(
+		resetDomain(
 			domainName,
 			'sawbuck'
-		)
-		.then( () => {
-			addNotice( {
-				status: 'success',
-				message: i18n.translate( 'Your domain has been reset to the default settings.' )
-			} );
-		} )
-		.then( fetchMyDomains )
-		.catch( () => {
-			addNotice( {
-				status: 'error',
-				message: i18n.translate( 'There was an error when resetting your domain.' )
-			} );
-		} );
+		);
 	}
 
 	render() {
@@ -67,11 +53,9 @@ class DomainAutoConnected extends Component {
 }
 
 DomainAutoConnected.propTypes = {
-	addNotice: PropTypes.func.isRequired,
 	domainName: PropTypes.string.isRequired,
-	fetchMyDomains: PropTypes.func.isRequired,
+	resetDomain: PropTypes.func.isRequired,
 	service: PropTypes.string.isRequired,
-	updateDomain: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( DomainAutoConnected ) );

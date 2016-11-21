@@ -20,13 +20,6 @@ export const getServiceName = service => ( {
 /**
  * @param {string} service - A service
  *
- * @return {bool} True when service is auto connected.
- */
-export const isAutoConnected = service => [ 'pressable', 'wpcom' ].includes( service );
-
-/**
- * @param {string} service - A service
- *
  * @return {bool} True when service is connected with nameservers.
  */
 export const isConnectedWithNameservers = service => service === 'custom';

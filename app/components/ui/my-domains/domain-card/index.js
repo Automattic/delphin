@@ -5,33 +5,29 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Button from 'components/ui/button';
-import { getPath } from 'routes';
+import DomainManagedByConcierge from './domain-managed-by-concierge';
+import DomainNotConnected from './domain-not-connected';
+import {
+	getServiceName,
+	canConnectToService,
+	isConnectedWithNameservers,
+	isManagedByConcierge
+} from 'lib/services';
 import styles from './styles.scss';
 
-const DomainCard = ( { name, isSetup, detailsVisible } ) => {
-	// TODO - remove, only for testing styles
-	// values: 'auto', 'he', 'ns'
-	const	setupType = '';
-
-	const domainCardClassNames = classnames( {
-		[ styles.domainCard ]: true,
-		[ styles.notConnected ]: ! isSetup && ! setupType,
-		[ styles.connectedAuto ]: setupType === 'auto', // WPCOM/Pressable guided setup
-		[ styles.connectedConcierge ]: setupType === 'he', // concierge/HE setup
-		[ styles.connectedNameservers ]: setupType === 'ns', // custom nameservers
-		[ styles.showDetails ]: isSetup && detailsVisible
-	} );
-
-	if ( setupType === 'auto' ) {
+const DomainCard = ( { domainName, hostName, service } ) => {
+	if ( canConnectToService( service ) ) {
 		return (
-			<div className={ domainCardClassNames }>
+			<div className={ classnames( styles.domainCard, styles.connectedAuto ) }>
 				<div className={ styles.domainHeading }>
-					<h3>{ name }</h3>
+					<h3>{ domainName }</h3>
 				</div>
 				<div className={ styles.domainDetails }>
-					<p className={ styles.domainSetupWpcom }>
-						{ i18n.translate( 'This domain was automatically set up for your WordPress.com site.' ) }
+					<p className={ classnames( styles.domainSetupAuto, styles[ service ] ) }>
+						{ i18n.translate( 'This domain was automatically set up for your %(serviceName)s site.', {
+							args: { serviceName: getServiceName( service ) },
+							comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+						} ) }
 					</p>
 				</div>
 				<div className={ styles.domainCardFooter }>
@@ -41,27 +37,21 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 		);
 	}
 
-	if ( setupType === 'he' ) {
+	if ( isManagedByConcierge( service ) ) {
 		return (
-			<div className={ domainCardClassNames }>
-				<div className={ styles.domainHeading }>
-					<h3>{ name }</h3>
-				</div>
-				<div className={ styles.domainDetails }>
-					<p>{ i18n.translate( 'This domain is being managed by your domain concierge.' ) }</p>
-					<p className={ styles.smallText }>
-						<a>{ i18n.translate( 'Contact your domain concierge.' ) }</a>
-					</p>
-				</div>
-			</div>
+			<DomainManagedByConcierge
+				domainName={ domainName }
+				hostName={ hostName } />
 		);
 	}
 
-	if ( setupType === 'ns' ) {
+	if ( isConnectedWithNameservers( service ) ) {
+		const nameservers = [];
+
 		return (
-			<div className={ domainCardClassNames }>
+			<div className={ classnames( styles.domainCard, styles.connectedNameservers ) }>
 				<div className={ styles.domainHeading }>
-					<h3>{ name }</h3>
+					<h3>{ domainName }</h3>
 				</div>
 				<div className={ styles.domainDetails }>
 					<p>{ i18n.translate( 'This domain has custom name servers:' ) }</p>
@@ -70,10 +60,9 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 							{ i18n.translate( 'Fetching name servers…' ) }
 						</div>
 						<ul className={ styles.nameserversList }>
-							<li>ns1.example.com</li>
-							<li>ns2.example.com</li>
-							<li>ns3.example.com</li>
-							<li>ns4.example.com</li>
+							{ nameservers.map( nameserver => (
+								<li>{ nameserver }</li>
+							) ) }
 						</ul>
 					</div>
 				</div>
@@ -85,26 +74,16 @@ const DomainCard = ( { name, isSetup, detailsVisible } ) => {
 		);
 	}
 
-	if ( ! isSetup ) {
-		return (
-			<div className={ domainCardClassNames }>
-				<div className={ styles.domainHeading }>
-					<h3>{ name }</h3>
-					<Button href={ getPath( 'selectBlogType', { domainName: name } ) }>{ i18n.translate( 'Set up' ) }</Button>
-				</div>
-				<div className={ styles.domainDetails }>
-					<p>{ i18n.translate( "You haven't set up this domain yet." ) }</p>
-				</div>
-			</div>
-		);
-	}
+	return (
+		<DomainNotConnected
+			domainName={ domainName } />
+	);
 };
 
 DomainCard.propTypes = {
-	detailsVisible: PropTypes.bool.isRequired,
-	isSetup: PropTypes.bool.isRequired,
-	name: PropTypes.string.isRequired,
-	toggleDetails: PropTypes.func.isRequired
+	domainName: PropTypes.string.isRequired,
+	hostName: PropTypes.string.isRequired,
+	service: PropTypes.string.isRequired
 };
 
 export default withStyles( styles )( DomainCard );

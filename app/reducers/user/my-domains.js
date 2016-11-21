@@ -4,7 +4,9 @@ import {
 	LOGOUT_USER,
 	MY_DOMAINS_FETCH,
 	MY_DOMAINS_FETCH_COMPLETE,
-	MY_DOMAINS_FETCH_FAIL
+	MY_DOMAINS_FETCH_FAIL,
+	DOMAIN_UPDATE_COMPLETE,
+	SUPPORT_CONTACT_COMPLETE,
 } from 'reducers/action-types';
 
 export const myDomains = createRequestReducer( {
@@ -15,6 +17,8 @@ export const myDomains = createRequestReducer( {
 	const { type } = action;
 
 	switch ( type ) {
+		case DOMAIN_UPDATE_COMPLETE:
+		case SUPPORT_CONTACT_COMPLETE:
 		case LOGOUT_USER:
 			return initialState;
 

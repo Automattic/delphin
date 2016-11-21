@@ -192,6 +192,7 @@
 
 .nameservers {
 	background: $gray-xlight;
+	display: none; // TODO: Remove this when implementing nameserver fetching
 	font-size: 1.6rem;
 	padding: 15px;
 }

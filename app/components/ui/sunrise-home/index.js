@@ -44,8 +44,6 @@ const SunriseHome = React.createClass( {
 				>
 					<DocumentTitle />
 
-					<div className={ styles.whatsYourStory } />
-
 					<h2 className={ styles.heading }>
 						{ preventWidows( pageHeading, 2 ) }
 					</h2>

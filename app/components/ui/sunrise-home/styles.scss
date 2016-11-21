@@ -53,7 +53,7 @@
 	}
 
 	&::before {
-		background: url( '/images/homepage-scene-rope.svg' ) no-repeat center top;
+		background: url( #{$image-assets-url}homepage-scene-rope.svg ) no-repeat center top;
 		display: none;
 		top: 0;
 
@@ -63,12 +63,12 @@
 	}
 
 	&::after {
-		background: url( '/images/homepage-scene-480.svg' ) no-repeat center bottom;
+		background: url( #{$image-assets-url}homepage-scene-480.svg ) no-repeat center bottom;
 		background-size: 170% auto;
 		bottom: 0;
 
 		@include breakpoint( '>480px' ) {
-			background: url( '/images/homepage-scene.svg' ) no-repeat center bottom;
+			background: url( #{$image-assets-url}homepage-scene.svg ) no-repeat center bottom;
 			background-size: auto;
 		}
 	}
@@ -118,7 +118,7 @@
 		width: 60px;
 
 		&::before {
-			background: url( '/images/search-icon.svg' ) no-repeat center;
+			background: url( #{$image-assets-url}search-icon.svg ) no-repeat center;
 			content: '';
 			height: 100%;
 			left: 0;

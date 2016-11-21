@@ -4,27 +4,28 @@
 @import 'app/styles/fonts';
 
 .four-oh-four {
-	margin: 12vmin 10px 0;
+	margin: 12vmin 10px;
 	text-align: center;
 
 	h1 {
-		background: url( #{$image-assets-url}404-browser-dark.svg ) no-repeat center top;
+		background: url( #{$image-assets-url}ui-illustrations/404.svg ) no-repeat center top;
+		background-size: auto 150px;
 		color: $blue-dark;
-		font: 300 3.4rem $heading-font;
+		font: 400 2.6rem $heading-font;
 		margin-bottom: 10px;
-		padding-top: 120px;
+		padding-top: 170px;
 
-		@include breakpoint( '<480px' ) {
-			font-size: 2.6rem;
+		@include breakpoint( '>480px' ) {
+			font-size: 3.4rem;
 		}
 	}
 
 	h2 {
-		color: $gray;
-		font: 300 2rem $body-font;
+		color: $gray-dark;
+		font: 1.8rem $body-font;
 
-		@include breakpoint( '<480px' ) {
-			font-size: 1.8rem;
+		@include breakpoint( '>480px' ) {
+			font-size: 2rem;
 		}
 	}
 }

@@ -2,6 +2,7 @@
 import {
 	CONTACT_INFORMATION_FETCH,
 	CONTACT_INFORMATION_FETCH_COMPLETE,
+	CONTACT_INFORMATION_FETCH_FAILED,
 	LOGOUT_USER
 } from 'reducers/action-types';
 
@@ -18,6 +19,7 @@ export const contactInformation = ( state = initialState, action ) => {
 		case CONTACT_INFORMATION_FETCH:
 			return Object.assign( {}, state, { isRequesting: true } );
 
+		case CONTACT_INFORMATION_FETCH_FAILED:
 		case CONTACT_INFORMATION_FETCH_COMPLETE:
 			return Object.assign( {}, state, {
 				isRequesting: false,

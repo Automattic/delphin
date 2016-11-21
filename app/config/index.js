@@ -22,7 +22,6 @@ let config = {
 		boom_analytics: productionOnly,
 		google_analytics: productionOnly,
 		mc_analytics: productionOnly,
-		m3: ! productionOnly,
 		sentry: productionOnly,
 		tracks: productionOnly
 	},

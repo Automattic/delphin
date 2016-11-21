@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import config, { isEnabled } from 'config';
+import config from 'config';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import TrackingLink from 'components/containers/tracking-link';
@@ -25,21 +25,13 @@ Link.propTypes = {
 const Menu = ( { isLoggedIn, logoutUser } ) => {
 	return (
 		<menu className={ styles.menu }>
-			<Link to={ getPath( 'learnMore' ) }>
-				{ i18n.translate( 'Learn More' ) }
-			</Link>
-
-			<Link to={ config( 'support_link' ) }>
-				{ i18n.translate( 'Support' ) }
-			</Link>
-
-			{ isEnabled( 'm3' ) && isLoggedIn && (
+			{ isLoggedIn && (
 				<Link to={ getPath( 'myDomains' ) }>
 					{ i18n.translate( 'My Domains' ) }
 				</Link>
 			) }
 
-			{ isEnabled( 'm3' ) && ! isLoggedIn && (
+			{ ! isLoggedIn && (
 				<Link to={ getPath( 'loginUser' ) }>
 					{ i18n.translate( 'Log In' ) }
 				</Link>
@@ -50,6 +42,13 @@ const Menu = ( { isLoggedIn, logoutUser } ) => {
 					{ i18n.translate( 'Log Out' ) }
 				</a>
 			) }
+			<Link to={ config( 'support_link' ) }>
+				{ i18n.translate( 'Support' ) }
+			</Link>
+
+			<Link to={ getPath( 'learnMore' ) }>
+				{ i18n.translate( 'Learn More' ) }
+			</Link>
 
 			<Link to="https://automattic.com/privacy/">
 				{ i18n.translate( 'Privacy Policy' ) }

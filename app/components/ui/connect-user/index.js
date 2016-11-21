@@ -65,7 +65,7 @@ const ConnectUser = React.createClass( {
 
 	renderTermsOfService() {
 		return <section className={ styles.terms }>
-			{ i18n.translate( 'By clicking “next”, you understand that you will get a WordPress.com account as a part of signing up for a .blog domain, and agree to these ' +
+			{ i18n.translate( 'By clicking Next, you understand that you will get a WordPress.com account as a part of signing up at get.blog, and agree to these ' +
 			'{{link}}Terms of Service{{/link}}.',
 				{
 					components: { link: <a href="https://wordpress.com/tos/" target="_blank" /> }
@@ -75,12 +75,12 @@ const ConnectUser = React.createClass( {
 	},
 
 	render() {
-		const { fields, handleSubmit, intention, submitFailed } = this.props;
+		const { fields, handleSubmit, intention, submitFailed, domain: { domainName } } = this.props;
 
 		return (
 			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Log In' ) : i18n.translate( 'Sign Up' ) }>
 				<div>
-					<Header intention={ intention } />
+					<Header intention={ intention } domainName={ domainName } />
 
 					<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 						<Form.FieldArea>
@@ -100,8 +100,12 @@ const ConnectUser = React.createClass( {
 							</Button>
 						</Form.SubmitArea>
 						<div className={ styles.poweredBy }>
-							<h3 className={ styles.headline }>Proudly powered by WordPress.com</h3>
-							<p>Your get.blog domain can easily be connected to WordPress.</p>
+							<h3 className={ styles.headline }>
+								{ i18n.translate( 'Proudly powered by WordPress.com' ) }
+							</h3>
+							<p>
+								{ i18n.translate( 'Your get.blog domain can easily be connected to a WordPress.com blog.' ) }
+							</p>
 						</div>
 					</Form>
 

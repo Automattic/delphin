@@ -2,10 +2,28 @@
 @import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
+@import 'app/styles/fonts';
 
 .header {
 	background: $gray-xlight;
 	padding: 30px 20px 80px;
+	text-align: center;
+
+	@include breakpoint( '<480px' ) {
+		padding-bottom: 70px;
+	}
+}
+
+.heading {
+	color: $blue-dark;
+	font-family: $heading-font;
+	font-size: 3rem;
+	margin-top: 40px;
+
+	@include breakpoint( '<480px' ) {
+		font-size: 2.6rem;
+		margin-top: 20px;
+	}
 }
 
 .expiration {
@@ -27,12 +45,9 @@
 	padding: 0 0 25px;
 
 	p {
-		background: url( #{$image-assets-url}happy-surprise.svg ) no-repeat;
-		background-position: right 10px;
 		color: $gray-dark;
 		font-size: 1.4rem;
 		line-height: 1.8rem;
-		padding: 0 50px 0 0;
 	}
 
 	@include breakpoint( '<480px' ) {
@@ -87,8 +102,7 @@
 
 .privacy-protection-price {
 	display: inline-block;
-	margin-left: 20px;
-	text-transform: uppercase;
+	margin-left: 10px;
 }
 
 .privacy-label {
@@ -310,5 +324,60 @@
 	100% {
 		opacity: 1;
 		transform: translateY( 0 );
+	}
+}
+
+.processing-payment {
+	align-content: center;
+	animation-duration: 0.5s;
+	animation-name: fadeIn;
+	background: rgba( $white, 0.95 );
+	display: flex;
+	flex-direction: column;
+	font-size: 2rem;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+
+	.icon {
+		background: url( #{$image-assets-url}card-blue.svg ) no-repeat;
+		height: 39px;
+		margin: 0 auto;
+		position: relative;
+		width: 58px;
+
+		&::after {
+			animation: moveLeft 0.5s infinite linear;
+			background-image: linear-gradient( -45deg, transparent 33%, rgba(255, 255, 255, 0.25) 33%, rgba(255, 255, 255, 0.25) 66%, transparent 66%);
+			background-size: 16px 9px, 100% 100%, 100% 100%;
+			content: '';
+			display: block;
+			height: 9px;
+			left: 2px;
+			position: absolute;
+			top: 5px;
+			width: 54px;
+		}
+	}
+
+	p {
+		font-size: 2rem;
+		margin: 20px auto;
+		max-width: 100%;
+		width: 260px;
+	}
+}
+
+@keyframes moveLeft {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 16px 0;
 	}
 }

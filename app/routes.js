@@ -18,41 +18,6 @@ import { getComponent } from 'sections';
 
 let publicRoutes = [
 	{
-		component: DefaultDarkLayout,
-		childRoutes: [
-			{
-				path: 'my-domains',
-				slug: 'myDomains',
-				static: false,
-				getComponent: getComponent( 'myDomains', 'myDomains' )
-			},
-			{
-				path: 'search',
-				slug: 'search',
-				static: true,
-				component: SearchContainer
-			},
-			{
-				path: 'sign-in-with-email',
-				slug: 'signInWithEmail',
-				static: true,
-				component: verifyUserWithQueryContainerFactory( 'login' )
-			},
-			{
-				path: 'sign-up-with-email',
-				slug: 'signUpWithEmail',
-				static: true,
-				component: verifyUserWithQueryContainerFactory( 'signup' )
-			},
-			{
-				path: 'set-up-domain/:domainName/update-nameservers',
-				slug: 'updateNameservers',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'updateNameservers' )
-			}
-		]
-	},
-	{
 		component: DefaultLightLayout,
 		indexRoute: {
 			component: SunriseHomeContainer
@@ -186,6 +151,41 @@ let publicRoutes = [
 				slug: 'hostInfo',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
+			}
+		]
+	},
+	{
+		component: DefaultDarkLayout,
+		childRoutes: [
+			{
+				path: 'my-domains',
+				slug: 'myDomains',
+				static: false,
+				getComponent: getComponent( 'myDomains', 'myDomains' )
+			},
+			{
+				path: 'search',
+				slug: 'search',
+				static: true,
+				component: SearchContainer
+			},
+			{
+				path: 'sign-in-with-email',
+				slug: 'signInWithEmail',
+				static: true,
+				component: verifyUserWithQueryContainerFactory( 'login' )
+			},
+			{
+				path: 'sign-up-with-email',
+				slug: 'signUpWithEmail',
+				static: true,
+				component: verifyUserWithQueryContainerFactory( 'signup' )
+			},
+			{
+				path: 'set-up-domain/:domainName/update-nameservers',
+				slug: 'updateNameservers',
+				static: false,
+				getComponent: getComponent( 'setUpDomain', 'updateNameservers' )
 			}
 		]
 	}

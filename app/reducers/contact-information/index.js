@@ -24,7 +24,7 @@ export const contactInformation = ( state = initialState, action ) => {
 			return Object.assign( {}, state, {
 				isRequesting: false,
 				hasLoadedFromServer: true,
-				data
+				data: ( data || {} ) // initialize to empty object if empty
 			} );
 
 		case LOGOUT_USER:

@@ -65,7 +65,7 @@ const ConnectUser = React.createClass( {
 
 	renderTermsOfService() {
 		return <section className={ styles.terms }>
-			{ i18n.translate( 'By clicking Next, you understand that you will get a WordPress.com account as a part of signing up on get.blog, and agree to these ' +
+			{ i18n.translate( 'By clicking Next, you understand that you will get a WordPress.com account as a part of signing up at get.blog, and agree to these ' +
 			'{{link}}Terms of Service{{/link}}.',
 				{
 					components: { link: <a href="https://wordpress.com/tos/" target="_blank" /> }

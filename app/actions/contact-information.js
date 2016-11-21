@@ -7,6 +7,7 @@ import { addNotice } from 'actions/notices';
 import {
 	CONTACT_INFORMATION_FETCH,
 	CONTACT_INFORMATION_FETCH_COMPLETE,
+	CONTACT_INFORMATION_FETCH_FAILED,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 import { snakeifyKeys } from 'lib/formatters';
@@ -19,7 +20,13 @@ export const fetchContactInformation = () => ( {
 	success: data => ( {
 		type: CONTACT_INFORMATION_FETCH_COMPLETE,
 		data
-	} )
+	} ),
+	fail: error => {
+		return dispatch => {
+			dispatch( { type: CONTACT_INFORMATION_FETCH_FAILED, error } );
+			return Promise.reject( error );
+		};
+	}
 } );
 
 /**

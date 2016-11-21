@@ -1,21 +1,20 @@
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
 @import 'app/styles/fonts';
+@import 'app/styles/assets';
 
 .container {
-	text-align: center;
-
-	img {
-		margin-bottom: 50px;
-		margin-top: 50px;
-	}
+	margin-top: 50px;
 }
 
 .heading {
-	color: $gray;
-	font: 300 3.4rem $heading-font;
+	background: url( #{$image-assets-url}ui-illustrations/lets-get-started.svg ) no-repeat center top;
+	background-size: auto 150px;
+	color: $blue-dark;
+	font: 400 2.6rem $body-font;
+	padding-top: 160px;
 
-	@include breakpoint( '<480px' ) {
-		font-size: 2.6rem;
+	@include breakpoint( '>480px' ) {
+		font-size: 2.4rem;
 	}
 }

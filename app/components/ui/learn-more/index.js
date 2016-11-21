@@ -12,13 +12,12 @@ import Button from 'components/ui/button';
 import Email from 'components/ui/form/email';
 import { subscribeUser } from 'actions/learn-more';
 import ValidationError from 'components/ui/form/validation-error';
-import { withTld } from 'lib/domains';
 
 class LearnMore extends React.Component {
 	handleSubscribeUser() {
-		const { addNotice, fields: { email, domain }, resetForm } = this.props;
+		const { addNotice, fields: { email }, resetForm } = this.props;
 
-		return subscribeUser( email.value, withTld( domain.value ) ).then( ( { result, msg } ) => {
+		return subscribeUser( email.value ).then( ( { result, msg } ) => {
 			addNotice( {
 				// Mailchimp error messages are prefixed with an integer to indicate which field has errored,
 				// let's just strip it

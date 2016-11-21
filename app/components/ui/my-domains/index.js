@@ -12,12 +12,10 @@ import Satellite from 'components/ui/satellite';
 
 const MyDomains = React.createClass( {
 	propTypes: {
-		areDomainDetailsVisible: PropTypes.func.isRequired,
 		domains: PropTypes.object.isRequired,
 		fetchMyDomains: PropTypes.func.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
-		redirectToHome: PropTypes.func.isRequired,
-		toggleDomainDetails: PropTypes.func.isRequired
+		redirectToHome: PropTypes.func.isRequired
 	},
 
 	componentWillMount() {
@@ -46,9 +44,7 @@ const MyDomains = React.createClass( {
 
 		return (
 			<DomainCardList
-				domains={ this.props.domains.data.results }
-				toggleDomainDetails={ this.props.toggleDomainDetails }
-				areDetailsVisible={ this.props.areDomainDetailsVisible } />
+				domains={ this.props.domains.data.results } />
 		);
 	},
 

@@ -1,3 +1,6 @@
+// External dependencies
+import i18n from 'i18n-calypso';
+
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import {
@@ -71,3 +74,21 @@ export const updateDomain = ( domain, serviceSlug, hostName = '' ) => ( {
 		return Promise.reject( error );
 	}
 } );
+
+export const resetDomain = domain => dispatch => (
+	dispatch( updateDomain( domain, 'sawbuck' ) )
+		.then( () => {
+			dispatch( addNotice( {
+				status: 'success',
+				message: i18n.translate( 'Your domain has been reset to the default settings.' )
+			} ) );
+
+			dispatch( fetchMyDomains() );
+		} )
+		.catch( () => (
+			dispatch( addNotice( {
+				status: 'error',
+				message: i18n.translate( 'There was an error when resetting your domain.' )
+			} ) )
+		) )
+);

@@ -1,4 +1,5 @@
 // External dependencies
+import { bindHandlers } from 'react-bind-handlers';
 import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
@@ -10,6 +11,14 @@ import { getPath } from 'routes';
 import styles from './styles.scss';
 
 class DomainWithCustomNameservers extends Component {
+	handleResetDomain( event ) {
+		event.preventDefault();
+
+		const { domainName, resetDomain } = this.props;
+
+		resetDomain( domainName, 'sawbuck' );
+	}
+
 	render() {
 		const {
 			domainName
@@ -38,7 +47,11 @@ class DomainWithCustomNameservers extends Component {
 					<Link
 						to={ getPath( 'updateNameservers', { domainName } ) }
 					>{ i18n.translate( 'Change name servers' ) }</Link>
-					<a href="#" className={ styles.resetSettings }>{ i18n.translate( 'Revert to default name servers' ) }</a>
+					<a
+						href="#"
+						className={ styles.resetSettings }
+						onClick={ this.handleResetDomain }
+					>{ i18n.translate( 'Revert to default name servers' ) }</a>
 				</div>
 			</div>
 		);
@@ -47,6 +60,7 @@ class DomainWithCustomNameservers extends Component {
 
 DomainWithCustomNameservers.propTypes = {
 	domainName: PropTypes.string.isRequired,
+	resetDomain: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( DomainWithCustomNameservers );
+export default withStyles( styles )( bindHandlers( DomainWithCustomNameservers ) );

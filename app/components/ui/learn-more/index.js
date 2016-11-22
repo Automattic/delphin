@@ -47,32 +47,7 @@ class LearnMore extends React.Component {
 
 		return (
 			<SunriseStep>
-				<DocumentTitle title={ i18n.translate( 'Get .blog updates in your email' ) } />
-				<div className={ styles.headerContainer }>
-					<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
-					<div className={ styles.text }>
-						{
-							i18n.translate( 'Sign up to receive updates about .blog.' )
-						}
-					</div>
-				</div>
-				<div className={ styles.formContainer }>
-					<form className={ styles.form } noValidate onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
-						<div className={ styles.inputContainer }>
-							<Email
-								inputClassName={ styles.input }
-								field={ fields.email }
-								gridIconSize={ 32 }
-								placeholder={ i18n.translate( 'Enter your email' ) }
-							/>
-							<ValidationError field={ fields.email } />
-						</div>
-
-						<div className={ styles.buttonContainer }>
-							<Button disabled={ this.isSubmitButtonDisabled() }>{ i18n.translate( 'Get updates' ) }</Button>
-						</div>
-					</form>
-				</div>
+				<DocumentTitle title={ i18n.translate( 'Get help with your .blog domain' ) } />
 
 				<div className={ styles.content }>
 					<div className={ styles.faqsHeader }>
@@ -116,6 +91,33 @@ class LearnMore extends React.Component {
 							<p>{ i18n.translate( 'KKWT may make short domains available in the future. For now, .blog domains with three characters or less will be unavailable to register.' ) }</p>
 						</div>
 					</div>
+				</div>
+
+				<div className={ styles.formContainer }>
+					<a name="newsletter"></a>
+					<div className={ styles.headerContainer }>
+						<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
+						<div className={ styles.text }>
+							{
+								i18n.translate( 'Sign up to receive updates about .blog.' )
+							}
+						</div>
+					</div>
+					<form className={ styles.form } noValidate onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
+						<div className={ styles.inputContainer }>
+							<Email
+								inputClassName={ styles.input }
+								field={ fields.email }
+								gridIconSize={ 32 }
+								placeholder={ i18n.translate( 'Enter your email' ) }
+							/>
+							<ValidationError field={ fields.email } />
+						</div>
+
+						<div className={ styles.buttonContainer }>
+							<Button disabled={ this.isSubmitButtonDisabled() }>{ i18n.translate( 'Get updates' ) }</Button>
+						</div>
+					</form>
 				</div>
 			</SunriseStep>
 		);

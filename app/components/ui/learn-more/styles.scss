@@ -120,6 +120,11 @@
 	padding: 20px;
 	text-align: center;
 
+	@include breakpoint( '<480px' ) {
+		margin: 0 -20px;
+		padding: 20px 0;
+	}
+
 	h3 {
 		border-bottom: 1px solid $gray-light;
 		font-size: 1.8rem;

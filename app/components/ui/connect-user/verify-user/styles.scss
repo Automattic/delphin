@@ -3,7 +3,7 @@
 @import 'app/styles/breakpoints';
 
 .check-email {
-	background: $white url( /images/ui-illustrations/check-email.svg ) no-repeat right 20px;
+	background: $white url( #{$image-assets-url}ui-illustrations/check-email.svg ) no-repeat right 20px;
 	background-size: auto 116px;
 
 	@include breakpoint( '>480px' ) {

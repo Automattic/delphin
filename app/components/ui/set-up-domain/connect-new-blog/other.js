@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
@@ -91,13 +92,7 @@ class ConnectNewBlogToOther extends Component {
 						</Button>
 					</Form.SubmitArea>
 
-					<Form.Footer>
-						<p>
-							{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
-								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
-							} ) }
-						</p>
-					</Form.Footer>
+					<CustomNameServersLink />
 				</Form>
 
 				<div className={ styles.footer }>

@@ -87,6 +87,12 @@ class ContactInformation extends React.Component {
 				}
 			}
 
+			// If we didn't got an email from the contactInformation above,
+			// lets set it to logged in user's email
+			if ( fieldName === 'email' && ! value ) {
+				value = props.user.data.email;
+			}
+
 			return Object.assign( result, { [ fieldName ]: value } );
 		}, {} );
 
@@ -134,12 +140,6 @@ class ContactInformation extends React.Component {
 		const { inputVisibility: { address2InputIsVisible }, fields: { address2 } } = this.props;
 
 		return address2InputIsVisible || address2.initialValue;
-	}
-
-	emailInputIsVisible() {
-		const { fields: { email } } = this.props;
-
-		return email.initialValue && email.initialValue.includes( '+' );
 	}
 
 	organizationInputIsVisible() {
@@ -261,20 +261,18 @@ class ContactInformation extends React.Component {
 									</fieldset>
 								) }
 
-								{ this.emailInputIsVisible() && (
-									<fieldset>
-										<label>{ i18n.translate( 'Email' ) }</label>
-										<Input
-											disabled={ this.isDataLoading() }
-											field={ fields.email }
-											placeholder={ i18n.translate( 'Email' ) }
-											untouch={ untouch }
-											type="email"
-											dir="ltr"
-										/>
-										<ValidationError field={ fields.email } />
-									</fieldset>
-								) }
+								<fieldset>
+									<label>{ i18n.translate( 'Email' ) }</label>
+									<Input
+										disabled={ this.isDataLoading() }
+										field={ fields.email }
+										placeholder={ i18n.translate( 'Email' ) }
+										untouch={ untouch }
+										type="email"
+										dir="ltr"
+									/>
+									<ValidationError field={ fields.email } />
+								</fieldset>
 
 								<fieldset>
 									<label>{ i18n.translate( 'Address' ) }</label>

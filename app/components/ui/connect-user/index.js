@@ -64,14 +64,31 @@ const ConnectUser = React.createClass( {
 	},
 
 	renderTermsOfService() {
-		return <section className={ styles.terms }>
-			{ i18n.translate( 'By clicking Next, you understand that you will get a WordPress.com account as a part of signing up at get.blog, and agree to these ' +
-			'{{link}}Terms of Service{{/link}}.',
-				{
-					components: { link: <a href="https://wordpress.com/tos/" target="_blank" /> }
-				}
-			) }
-		</section>;
+		const { intention } = this.props;
+		if ( intention === 'signup' ) {
+			return <section className={ styles.terms }>
+				{ i18n.translate( 'By clicking Next, you understand that you will get a WordPress.com account as a part of signing up at get.blog, and agree to these ' +
+				'{{link}}Terms of Service{{/link}}.',
+					{
+						components: { link: <a href="https://wordpress.com/tos/" target="_blank" /> }
+					}
+				) }
+			</section>;
+		}
+	},
+
+	renderPoweredBy() {
+		const { intention } = this.props;
+		if ( intention === 'signup' ) {
+			return <div className={ styles.poweredBy }>
+				<h3 className={ styles.headline }>
+					{ i18n.translate( 'Proudly powered by WordPress.com' ) }
+				</h3>
+				<p>
+					{ i18n.translate( 'Your get.blog domain can easily be connected to a WordPress.com blog.' ) }
+				</p>
+			</div>;
+		}
 	},
 
 	render() {
@@ -99,14 +116,7 @@ const ConnectUser = React.createClass( {
 								{ i18n.translate( 'Next' ) }
 							</Button>
 						</Form.SubmitArea>
-						<div className={ styles.poweredBy }>
-							<h3 className={ styles.headline }>
-								{ i18n.translate( 'Proudly powered by WordPress.com' ) }
-							</h3>
-							<p>
-								{ i18n.translate( 'Your get.blog domain can easily be connected to a WordPress.com blog.' ) }
-							</p>
-						</div>
+						{ this.renderPoweredBy() }
 					</Form>
 
 				</div>

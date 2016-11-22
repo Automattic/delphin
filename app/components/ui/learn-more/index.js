@@ -75,23 +75,46 @@ class LearnMore extends React.Component {
 				</div>
 
 				<div className={ styles.content }>
-					<div>
-						<h3>{ i18n.translate( 'What is .blog?' ) }</h3>
-						<p>{ i18n.translate( '.blog is a new domain extension, available to the public since November 21st, 2016. Domains ending with .blog work just like any other domain, such as .com or .xyz.' ) }</p>
+					<div className={ styles.faqsHeader }>
+						<h2>{ i18n.translate( 'Frequently Asked Questions' ) }</h2>
+						<p>
+							{ i18n.translate( 'Don\'t see your question here? {{link}}Contact get.blog support.{{/link}}', {
+								components: {
+									link: <a href="mailto:help@get.blog" />
+								}
+							} ) }
+						</p>
 					</div>
-					<div>
-						<h3>{ i18n.translate( 'Why are short domains not available?' ) }</h3>
-						<p>{ i18n.translate( 'All .blog domains with three characters or less are reserved by KKWT, the company that runs the .blog domain extension. Some short domains have been released (such as get.blog), but they are not available for public registration.' ) }</p>
-						<p>{ i18n.translate( 'KKWT may make short domains available in the future. For now, We can\'t register .blog domains with three characters or less.' ) }</p>
-					</div>
-					<div>
-						<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
-						<p>{ i18n.translate( 'The price for most .blog domains on get.blog is $30 USD. However, some .blog domains carry a premium yearly price, set by KKWT, the company that runs the .blog domain extension.' ) }</p>
-						<p>{ i18n.translate( 'Prices are based on a market analysis completed before .blog domains were first made available. They do not change based on subsequent interest or demand.' ) }</p>
-					</div>
-					<div>
-						<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
-						<p>{ i18n.translate( 'Domains you registered on get.blog can be canceled for a full refund within five days of purchase. Contact us at help@get.blog to request a refund.' ) }</p>
+					<div className={ styles.faqs }>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'What is .blog?' ) }</h3>
+							<p>{ i18n.translate( '.blog is a new domain extension, available to the public since November 21st, 2016. Domains ending with .blog work just like any other domain, such as .com or .xyz.' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
+							<p>{ i18n.translate( 'Domains you registered on get.blog can be canceled for a full refund within five days of purchase. Contact us at help@get.blog to request a refund.' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
+							<p>{ i18n.translate( 'The price for most .blog domains on get.blog is $30 USD. However, some .blog domains carry a premium yearly price, set by KKWT, the company that runs the .blog domain extension.' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'How can I set the nameservers for my .blog domain?' ) }</h3>
+							<p>{ i18n.translate( '[Needs copy]' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Can I transfer a .blog domain registered at get.blog to another registrar?' ) }</h3>
+							<p>{ i18n.translate( '[Needs copy]' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'What is sawbuck.com?' ) }</h3>
+							<p>{ i18n.translate( 'When you register a new domain, you may get a generic looking email requesting you to verify the domain. The subject line is VERIFICATION REQUIRED and it will come from help@wordpress.sawbuck.com. The links in this email must be clicked to retain the domain, and are not harmful in any way.' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Why are short domains not available?' ) }</h3>
+							<p>{ i18n.translate( 'All .blog domains with three characters or less are reserved by KKWT, the company that runs the .blog domain extension. Some short domains have been released (such as get.blog), but they are not available for public registration.' ) }</p>
+							<p>{ i18n.translate( 'KKWT may make short domains available in the future. For now, .blog domains with three characters or less will be unavailable to register.' ) }</p>
+						</div>
 					</div>
 				</div>
 			</SunriseStep>

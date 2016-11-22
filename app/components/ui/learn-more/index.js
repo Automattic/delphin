@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -132,7 +133,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'How do I connect my domain to my site?' ) }</h3>
 							<p>{ i18n.translate( 'Go to {{link}}My Domains{{/link}} to see all your domains and set them up. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
 								components: {
-									link: <a href="http://get.blog/my-domains" />
+									link: <a href={ getPath( 'myDomains' ) } />
 								}
 							} ) }</p>
 						</div>
@@ -142,7 +143,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'How do I set custom name servers?' ) }</h3>
 							<p>{ i18n.translate( 'To choose custom servers for your domain, start setting it up from {{link}}My Domains{{/link}}, and then choose “Configure manually” on the next screen. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
 								components: {
-									link: <a href="http://get.blog/my-domains" />
+									link: <a href={ getPath( 'myDomains' ) } />
 								}
 							} ) }</p>
 						</div>

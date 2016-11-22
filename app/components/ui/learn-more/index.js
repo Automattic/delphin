@@ -63,32 +63,56 @@ class LearnMore extends React.Component {
 					<div className={ styles.faqs }>
 						<div className={ styles.faq }>
 							<h3>{ i18n.translate( 'What is .blog?' ) }</h3>
-							<p>{ i18n.translate( '.blog is a new domain extension, available to the public since November 21st, 2016. Domains ending with .blog work just like any other domain, such as .com or .xyz.' ) }</p>
-						</div>
-						<div className={ styles.faq }>
-							<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
-							<p>{ i18n.translate( 'Domains you registered on get.blog can be canceled for a full refund within five days of purchase. Contact us at help@get.blog to request a refund.' ) }</p>
-						</div>
-						<div className={ styles.faq }>
-							<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
-							<p>{ i18n.translate( 'The price for most .blog domains on get.blog is $30 USD. However, some .blog domains carry a premium yearly price, set by KKWT, the company that runs the .blog domain extension.' ) }</p>
-						</div>
-						<div className={ styles.faq }>
-							<h3>{ i18n.translate( 'How can I set the nameservers for my .blog domain?' ) }</h3>
-							<p>{ i18n.translate( '[Needs copy]' ) }</p>
-						</div>
-						<div className={ styles.faq }>
-							<h3>{ i18n.translate( 'Can I transfer a .blog domain registered at get.blog to another registrar?' ) }</h3>
-							<p>{ i18n.translate( '[Needs copy]' ) }</p>
-						</div>
-						<div className={ styles.faq }>
-							<h3>{ i18n.translate( 'What is sawbuck.com?' ) }</h3>
-							<p>{ i18n.translate( 'When you register a new domain, you may get a generic looking email requesting you to verify the domain. The subject line is VERIFICATION REQUIRED and it will come from help@wordpress.sawbuck.com. The links in this email must be clicked to retain the domain, and are not harmful in any way.' ) }</p>
+							<p>{ i18n.translate( '.blog is a new domain extension, available to the public since November 21st, 2016. It is a standard and open domain extension, so .blog domains work just like any other domain, such as .com or .xyz. Domains ending with .blog can be registered with all major domain sellers, including get.blog.' ) }</p>
 						</div>
 						<div className={ styles.faq }>
 							<h3>{ i18n.translate( 'Why are short domains not available?' ) }</h3>
-							<p>{ i18n.translate( 'All .blog domains with three characters or less are reserved by KKWT, the company that runs the .blog domain extension. Some short domains have been released (such as get.blog), but they are not available for public registration.' ) }</p>
-							<p>{ i18n.translate( 'KKWT may make short domains available in the future. For now, .blog domains with three characters or less will be unavailable to register.' ) }</p>
+							<p>{ i18n.translate( 'All .blog domains with three characters or less are currently reserved by KKWT, the company managing the .blog domain extension. Some short domains have been released (such as get.blog), but none are currently available for public registration.' ) }</p>
+							<p>{ i18n.translate( 'KKWT may release some or all short domains in the future. You can follow along and get updates on {{link}}KKWT’s blog{{/link}}.', {
+								components: {
+									link: <a href="http://my.blog/blog/" target="_blank" />
+								}
+							} ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
+							<p>{ i18n.translate( 'Most .blog domains on get.blog are available for $30 USD / year. However, some .blog domains carry a premium yearly price. The base prices for all .blog domains are set by KKWT, the company managing the .blog domain extension.' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
+							<p>{ i18n.translate( 'Domains registered on get.blog can be canceled for a full refund, within five days of purchase. Contact us at {{link}}help@get.blog{{/link}} to request a refund.', {
+								components: {
+									link: <a href="mailto:help@get.blog" />
+								}
+							} ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'What is wordpress.sawbuck.com?' ) }</h3>
+							<p>{ i18n.translate( 'The domain sawbuck.com is used internally by get.blog. When registering a new domain, you may receive an email to verify your contact information. It is sent from help@wordpress.sawbuck.com, and contains a link to validate.sawbuck.com. This is a legitimate get.blog email, and the link is safe to click.' ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'How do I connect my domain to my site?' ) }</h3>
+							<p>{ i18n.translate( 'Go to {{link}}My Domains{{/link}} to see all your domains and set them up. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
+								components: {
+									link: <a href="http://get.blog/my-domains" />
+								}
+							} ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'How do I set custom name servers?' ) }</h3>
+							<p>{ i18n.translate( 'To choose custom servers for your domain, start setting it up from {{link}}My Domains{{/link}}, and then choose “Configure manually” on the next screen. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
+								components: {
+									link: <a href="http://get.blog/my-domains" />
+								}
+							} ) }</p>
+						</div>
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'Can I transfer my domain?' ) }</h3>
+							<p>{ i18n.translate( 'You can transfer your domain from get.blog to any other domain seller that supports it. However, new domains cannot be transferred for 60 days after they are registered. This “lock” period is standard for all domains. You can still start using your domain during this time, for example by setting custom name servers. Contact us at {{link}}help@get.blog{{/link}} for help with transferring your domain.', {
+								components: {
+									link: <a href="mailto:help@get.blog" />
+								}
+							} ) }</p>
 						</div>
 					</div>
 				</div>

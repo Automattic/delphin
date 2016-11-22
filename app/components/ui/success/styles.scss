@@ -5,12 +5,13 @@
 @import 'app/styles/breakpoints';
 
 .header {
-	background-image: url( #{$image-assets-url}smiley-blog-dark.svg );
+	background-image: url( #{$image-assets-url}ui-illustrations/checkout-success.svg );
 	background-position: center 30px;
 	background-repeat: no-repeat;
+	background-size: auto 100px;
 
 	@include breakpoint( '>660px' ) {
-		background-position: center 70px;
+		background-size: auto 130px;
 	}
 
 	body & { // Needed for overriding

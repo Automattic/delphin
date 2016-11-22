@@ -178,8 +178,9 @@ const VerifyUser = React.createClass( {
 					onSubmit={ handleSubmit( this.handleSubmit ) }
 					errors={ errors }
 					focusOnError
+					className={ styles.checkEmail }
 				>
-					<Form.FieldArea errors={ errors } focusOnError>
+					<Form.FieldArea errors={ errors } focusOnError className={ styles.confirmContent }>
 						<fieldset>
 							<div className={ styles.instructions }>
 								<p>{ i18n.translate( 'Using another device or the link doesn\'t work?' ) }</p>

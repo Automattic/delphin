@@ -96,6 +96,14 @@ class ContactUsExistingBlog extends Component {
 							{ i18n.translate( 'Contact domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
+
+					<Form.Footer>
+						<p>
+							{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
+								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
+							} ) }
+						</p>
+					</Form.Footer>
 				</Form>
 
 				<div className={ styles.footer }>

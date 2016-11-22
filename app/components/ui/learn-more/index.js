@@ -145,7 +145,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'Can I transfer my domain?' ) }</h3>
 							<p>{ i18n.translate( 'You can transfer your domain from get.blog to any other domain seller that supports it. However, new domains cannot be transferred for 60 days after they are registered. This “lock” period is standard for all domains. You can still start using your domain during this time, for example by setting custom name servers. Contact us at {{link}}help@get.blog{{/link}} for help with transferring your domain.', {
 								components: {
-									link: <a href="mailto:help@get.blog" />
+									link: <a href="mailto:help@get.blog">help@get.blog</a>
 								}
 							} ) }</p>
 						</div>

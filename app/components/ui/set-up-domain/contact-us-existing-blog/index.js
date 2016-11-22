@@ -11,6 +11,7 @@ import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { removeInvalidInputProps } from 'lib/form';
+import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
 
 class ContactUsExistingBlog extends Component {
 	constructor( props ) {
@@ -98,11 +99,7 @@ class ContactUsExistingBlog extends Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						<p>
-							{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
-								components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
-							} ) }
-						</p>
+						<CustomNameServersLink domainName={ domainName } />
 					</Form.Footer>
 				</Form>
 

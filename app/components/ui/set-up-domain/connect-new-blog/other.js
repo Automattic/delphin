@@ -91,8 +91,9 @@ class ConnectNewBlogToOther extends Component {
 							{ i18n.translate( 'Contact domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
-
-					<CustomNameServersLink />
+					<Form.Footer>
+						<CustomNameServersLink domainName={ domainName } />
+					</Form.Footer>
 				</Form>
 
 				<div className={ styles.footer }>

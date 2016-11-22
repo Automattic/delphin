@@ -122,7 +122,7 @@
 	text-align: center;
 
 	@include breakpoint( '<480px' ) {
-		margin: 0 -20px;
+		margin: 0;
 		padding: 20px 0;
 	}
 

@@ -333,6 +333,8 @@ const Checkout = React.createClass( {
 										}
 									}
 								) }
+							</p>
+							<p>
 								{ i18n.translate( 'You can cancel at any time by contacting {{link}}help@get.blog{{/link}}. You confirm that you understand how automatic renewal works and how to cancel.',
 									{
 										components: {

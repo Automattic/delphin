@@ -49,6 +49,33 @@ class LearnMore extends React.Component {
 			<SunriseStep>
 				<DocumentTitle title={ i18n.translate( 'Get help with your .blog domain' ) } />
 
+				<div className={ styles.formContainer }>
+					<a name="newsletter"></a>
+					<div className={ styles.headerContainer }>
+						<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
+						<div className={ styles.text }>
+							{
+								i18n.translate( 'Sign up to receive updates about .blog.' )
+							}
+						</div>
+					</div>
+					<form className={ styles.form } noValidate onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
+						<div className={ styles.inputContainer }>
+							<Email
+								inputClassName={ styles.input }
+								field={ fields.email }
+								gridIconSize={ 32 }
+								placeholder={ i18n.translate( 'Enter your email' ) }
+							/>
+							<ValidationError field={ fields.email } />
+						</div>
+
+						<div className={ styles.buttonContainer }>
+							<Button disabled={ this.isSubmitButtonDisabled() }>{ i18n.translate( 'Get updates' ) }</Button>
+						</div>
+					</form>
+				</div>
+
 				<div className={ styles.content }>
 					<div className={ styles.faqsHeader }>
 						<h2>{ i18n.translate( 'Frequently Asked Questions' ) }</h2>
@@ -115,33 +142,6 @@ class LearnMore extends React.Component {
 							} ) }</p>
 						</div>
 					</div>
-				</div>
-
-				<div className={ styles.formContainer }>
-					<a name="newsletter"></a>
-					<div className={ styles.headerContainer }>
-						<h1 className={ styles.heading }>{ i18n.translate( 'Get .blog updates in your email' ) }</h1>
-						<div className={ styles.text }>
-							{
-								i18n.translate( 'Sign up to receive updates about .blog.' )
-							}
-						</div>
-					</div>
-					<form className={ styles.form } noValidate onSubmit={ handleSubmit( this.handleSubscribeUser ) }>
-						<div className={ styles.inputContainer }>
-							<Email
-								inputClassName={ styles.input }
-								field={ fields.email }
-								gridIconSize={ 32 }
-								placeholder={ i18n.translate( 'Enter your email' ) }
-							/>
-							<ValidationError field={ fields.email } />
-						</div>
-
-						<div className={ styles.buttonContainer }>
-							<Button disabled={ this.isSubmitButtonDisabled() }>{ i18n.translate( 'Get updates' ) }</Button>
-						</div>
-					</form>
 				</div>
 			</SunriseStep>
 		);

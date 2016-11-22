@@ -93,6 +93,10 @@
 }
 
 .faqs-header {
+	background: url( /images/ui-illustrations/404.svg ) no-repeat center top;
+	background-size: 100px;
+	padding: 120px 0 0;
+
 	h2 {
 		font-family: $heading-font;
 		font-size: 3rem;
@@ -128,18 +132,16 @@
 .faq {
 	background: $white;
 	border-top: 3px solid $blue;
-	box-sizing: border-box;
-	margin: 0 0 20px 0;
+	cursor: pointer;
+	margin: 20px auto;
 	max-width: 650px;
 	text-align: left;
-	margin: 20px auto;
 
 	p {
 		color: $gray-dark;
+		display: none;
 		font-size: 1.7rem;
 		padding: 20px;
-
-		display: none;
 
 		+ p {
 			padding-top: 0;

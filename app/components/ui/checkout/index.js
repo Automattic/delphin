@@ -94,7 +94,7 @@ const Checkout = React.createClass( {
 		}
 
 		if ( error && error.code === 'registrar_error' ) {
-			errorMessage = i18n.translate( 'There was a problem trying to register your domain' );
+			errorMessage = i18n.translate( 'There was a problem trying to register your domain.' );
 		}
 
 		return (

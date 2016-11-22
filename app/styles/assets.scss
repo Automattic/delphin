@@ -1,2 +1,4 @@
-$image-assets-url: 'https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/';
-
+$image-assets-url: '/images/';
+@if $env == 'production' {
+	$image-assets-url: 'https://s0.wp.com/wp-content/themes/a8c/getdotblog/public/images/';
+}

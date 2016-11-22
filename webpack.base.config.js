@@ -57,6 +57,7 @@ var config = {
 			debug: ! process.env.NODE_ENV || process.env.NODE_ENV === 'development',
 			options: {
 				sassLoader: {
+					data: "$env: " + process.env.NODE_ENV + ";",
 					includePaths: [ path.resolve( __dirname, 'app' ) ]
 				},
 				context: __dirname,

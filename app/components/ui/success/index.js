@@ -46,8 +46,12 @@ class Success extends React.Component {
 
 					<div className={ styles.text }>
 						<p>
+							{ i18n.translate( 'Your domain should start working right away, but it may not be reliable for the first few hours.' ) }
+						</p>
+
+						<p>
 							{ i18n.translate(
-								'Your new domain is almost ready. Connect your existing blog or start a new one now.'
+								'Connect your existing blog or start a new one now.'
 							) }
 						</p>
 

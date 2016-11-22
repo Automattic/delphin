@@ -4,7 +4,6 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import config from 'config';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import TrackingLink from 'components/containers/tracking-link';
@@ -42,12 +41,9 @@ const Menu = ( { isLoggedIn, logoutUser } ) => {
 					{ i18n.translate( 'Log Out' ) }
 				</a>
 			) }
-			<Link to={ config( 'support_link' ) }>
-				{ i18n.translate( 'Support' ) }
-			</Link>
 
 			<Link to={ getPath( 'learnMore' ) }>
-				{ i18n.translate( 'Learn More' ) }
+				{ i18n.translate( 'Support' ) }
 			</Link>
 
 			<Link to="https://automattic.com/privacy/">

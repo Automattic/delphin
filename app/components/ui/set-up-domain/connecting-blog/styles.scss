@@ -1,4 +1,5 @@
 @import 'app/components/ui/set-up-domain/styles';
+@import 'app/styles/assets';
 
 .content-container {
 	background-color: $white;
@@ -31,8 +32,10 @@
 }
 
 .status-container {
-	margin: 30px auto;
-	padding: 20px;
+	background: url( #{$image-assets-url}ui-illustrations/setup-connecting.svg ) no-repeat center top;
+	background-size: auto 100px;
+	margin: 0 auto;
+	padding: 120px 20px 20px;
 }
 
 .status-message {

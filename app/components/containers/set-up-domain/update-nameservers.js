@@ -1,5 +1,6 @@
 // External dependencies
 import { reduxForm } from 'redux-form';
+import { goBack } from 'react-router-redux';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -30,5 +31,6 @@ export default reduxForm(
 		redirect,
 		updateNameservers,
 		fetchNameservers,
+		goBack
 	}
 )( UpdateNameservers );

@@ -4,7 +4,6 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import config from 'config';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 import TrackingLink from 'components/containers/tracking-link';

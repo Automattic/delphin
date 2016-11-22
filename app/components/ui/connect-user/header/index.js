@@ -15,6 +15,11 @@ const Header = ( { intention, domainName } ) => {
 		text = i18n.translate( 'Enter your email address to register %(domainName)s.', {
 			args: { domainName }
 		} );
+	} else if ( intention === 'login' ) {
+		heading = i18n.translate( 'Log in' );
+		text = i18n.translate( 'We\'ll send you a link to log in.', {
+			args: { domainName }
+		} );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
 

@@ -1,3 +1,4 @@
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
@@ -94,7 +95,7 @@
 }
 
 .faqs-header {
-	background: url( /images/ui-illustrations/404.svg ) no-repeat center top;
+	background: url( #{$image-assets-url}ui-illustrations/404.svg ) no-repeat center top;
 	background-size: 100px;
 	padding: 120px 0 0;
 	text-align: center;

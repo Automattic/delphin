@@ -5,6 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import config from 'config';
 import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
@@ -83,7 +84,7 @@ class LearnMore extends React.Component {
 						<p>
 							{ i18n.translate( 'Don\'t see your question here? {{link}}Contact get.blog support.{{/link}}', {
 								components: {
-									link: <a href="mailto:help@get.blog" />
+									link: <a href={ config( 'support_link' ) } />
 								}
 							} ) }
 						</p>
@@ -99,7 +100,7 @@ class LearnMore extends React.Component {
 							<p>{ i18n.translate( 'All .blog domains with three characters or less are currently reserved by KKWT, the company managing the .blog domain extension. Some short domains have been released (such as get.blog), but none are currently available for public registration.' ) }</p>
 							<p>{ i18n.translate( 'KKWT may release some or all short domains in the future. You can follow along and get updates on {{link}}KKWT’s blog{{/link}}.', {
 								components: {
-									link: <a href="http://my.blog/blog/" target="_blank" />
+									link: <a href="https://my.blog/blog/" target="_blank" rel="noopener noreferrer" />
 								}
 							} ) }</p>
 						</div>
@@ -113,7 +114,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
 							<p>{ i18n.translate( 'Domains registered on get.blog can be canceled for a full refund, within five days of purchase. Contact us at {{link}}help@get.blog{{/link}} to request a refund.', {
 								components: {
-									link: <a href="mailto:help@get.blog" />
+									link: <a href={ config( 'support_link' ) } />
 								}
 							} ) }</p>
 						</div>
@@ -145,7 +146,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'Can I transfer my domain?' ) }</h3>
 							<p>{ i18n.translate( 'You can transfer your domain from get.blog to any other domain seller that supports it. However, new domains cannot be transferred for 60 days after they are registered. This “lock” period is standard for all domains. You can still start using your domain during this time, for example by setting custom name servers. Contact us at {{link}}help@get.blog{{/link}} for help with transferring your domain.', {
 								components: {
-									link: <a href="mailto:help@get.blog">help@get.blog</a>
+									link: <a href={ config( 'support_link' ) } />
 								}
 							} ) }</p>
 						</div>

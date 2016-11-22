@@ -83,7 +83,7 @@ class SelectBlogType extends Component {
 								value="new"
 								checked={ newOrExisting.value === 'new' }
 							/>
-							{ i18n.translate( 'A new blog now I\'ll start now.' ) }
+							{ i18n.translate( 'A new blog I\'ll start now.' ) }
 						</label>
 					</Form.FieldArea>
 

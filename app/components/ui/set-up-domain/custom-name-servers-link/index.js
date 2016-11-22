@@ -5,18 +5,15 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
 const CustomNameServersLink = ( { domainName } ) => (
-	<Form.Footer>
-		<p>
-			{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
-				components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
-			} ) }
-		</p>
-	</Form.Footer>
+	<p>
+		{ i18n.translate( 'Have your own name servers? {{Link}}Configure manually{{/Link}}.', {
+			components: { Link: <Link to={ getPath( 'updateNameservers', { domainName } ) } /> }
+		} ) }
+	</p>
 );
 
 CustomNameServersLink.propTypes = {

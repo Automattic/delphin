@@ -1,19 +1,20 @@
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
 
 .header-container {
-	margin: 90px auto 60px;
+	margin: 0 auto 20px;
 	max-width: 600px;
 	text-align: center;
 }
 
 .heading {
-	color: $blue-dark;
+	color: $white;
 	font-family: $heading-font;
 	font-size: 3rem;
 	font-weight: 700;
-	margin-top: 40px;
+	margin-top: 0;
 
 	@include breakpoint( '<480px' ) {
 		font-size: 2.6rem;
@@ -22,7 +23,7 @@
 }
 
 .text {
-	color: $blue-dark;
+	color: $white;
 	font-size: 2rem;
 	line-height: 1.4;
 	margin-top: 10px;
@@ -81,12 +82,7 @@
 }
 
 .content {
-	color: $blue-dark;
-	line-height: 1.4;
-	margin: 30px auto 70px;
-	max-width: 1200px;
-	padding: 0 20px;
-	text-align: center;
+	margin: 30px auto;
 
 	h1,
 	h2,
@@ -96,55 +92,67 @@
 	h6 {
 		color: $blue-dark;
 	}
+}
+
+.faqs-header {
+	background: url( #{$image-assets-url}ui-illustrations/404.svg ) no-repeat center top;
+	background-size: 100px;
+	padding: 120px 0 0;
+	text-align: center;
 
 	h2 {
-		font-size: 2.5rem;
-		margin-top: 30px;
-		padding: 20px 0;
+		font-family: $heading-font;
+		font-size: 3rem;
+		font-weight: 700;
+		margin: 0;
+		padding-bottom: 10px;
+	}
+
+	p {
+		color: $gray-dark;
+		font-size: 1.8rem;
 	}
 }
 
-.three-boxes {
+.faqs {
 	color: $blue-dark;
-	display: flex;
+	line-height: 1.4;
+	margin: 0;
+	max-width: 1200px;
+	padding: 20px 0;
+	text-align: center;
 
-	@include breakpoint( '<960px' ) {
-		flex-direction: column;
-		margin-top: 40px;
+	@include breakpoint( '>480px' ) {
+		margin: 15px auto 0;
+		padding: 20px;
 	}
 
-	& > div {
-		border: 2px solid $gray-light;
-		border-radius: 3px;
-		flex-basis: 10px;
-		flex-grow: 1;
-		margin: 10px;
-		max-width: 400px;
-		padding: 30px 20px;
-		text-align: left;
+	h3 {
+		border-bottom: 1px solid $gray-light;
+		font-size: 1.8rem;
+		font-weight: 700;
+		line-height: 130%;
+		margin: 0;
+		padding: 12px 20px;
+	}
+}
 
-		@include breakpoint( '<960px' ) {
-			margin-left: auto;
-			margin-right: auto;
+.faq {
+	background: $white;
+	border-top: 3px solid $blue;
+	cursor: pointer;
+	margin: 20px auto;
+	max-width: 650px;
+	text-align: left;
+
+	p {
+		color: $gray-dark;
+		font-size: 1.7rem;
+		padding: 20px;
+
+		+ p {
+			padding-top: 0;
 		}
 	}
-
-	.box-title {
-		color: $blue-dark;
-		font-size: 1.8rem;
-		font-weight: 600;
-		text-align: center;
-	}
-
-	.box-title-notice {
-		color: $gray;
-		font-size: 1.6rem;
-		font-style: italic;
-		text-align: center;
-	}
-
-	.box-content {
-		font-size: 1.6rem;
-		margin-top: 20px;
-	}
 }
+

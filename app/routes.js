@@ -27,12 +27,6 @@ let publicRoutes = [
 		static: true,
 		childRoutes: [
 			{
-				path: 'learn-more',
-				slug: 'learnMore',
-				static: true,
-				component: LearnMoreContainer
-			},
-			{
 				path: 'contact-information',
 				slug: 'contactInformation',
 				static: false,
@@ -157,6 +151,12 @@ let publicRoutes = [
 	{
 		component: DefaultDarkLayout,
 		childRoutes: [
+			{
+				path: 'learn-more',
+				slug: 'learnMore',
+				static: true,
+				component: LearnMoreContainer
+			},
 			{
 				path: 'my-domains',
 				slug: 'myDomains',

@@ -12,8 +12,7 @@ export default ( WrappedComponent, title ) => {
 		componentDidMount() {
 			const { location: { query }, privateProps } = this.props;
 
-			if ( query && query.utm_source && query.utm_campaign ) {
-				// If these params are present, this is a landing page from a SEM campaign
+			if ( this.isLandingPageFromSemCampaign( query ) ) {
 				privateProps.recordTracksEvent( 'delphin_landing_page_view', {
 					pathname: window.location.pathname,
 					title,
@@ -23,6 +22,10 @@ export default ( WrappedComponent, title ) => {
 			}
 
 			privateProps.recordPageView( window.location.pathname, title );
+		}
+
+		isLandingPageFromSemCampaign( query ) {
+			return query && query.utm_source && query.utm_campaign;
 		}
 
 		render() {

@@ -3,7 +3,7 @@ import i18n from 'i18n-calypso';
 import React, { Component, PropTypes } from 'react';
 
 // Internal dependencies
-import BackLink from 'components/ui/set-up-domain/back-link';
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
@@ -109,7 +109,7 @@ class ContactUsExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<BackLink
+					<SetUpDomainBackLink
 						to={ getPath( 'findExistingBlog', { domainName } ) }
 						stepName="contactUsExistingBlog"
 					/>

@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 // Internal dependencies
 import TrackingLink from 'components/containers/tracking-link';
 
-const BackLink = ( { stepName, ...props } ) => (
+const SetUpDomainBackLink = ( { stepName, ...props } ) => (
 	<TrackingLink
 		eventName="delphin_setup_back_click"
 		eventParams={ { step_name: stepName } }
@@ -13,8 +13,8 @@ const BackLink = ( { stepName, ...props } ) => (
 	>{ i18n.translate( 'Back' ) }</TrackingLink>
 );
 
-BackLink.propTypes = {
+SetUpDomainBackLink.propTypes = {
 	stepName: PropTypes.string.isRequired,
 };
 
-export default BackLink;
+export default SetUpDomainBackLink;

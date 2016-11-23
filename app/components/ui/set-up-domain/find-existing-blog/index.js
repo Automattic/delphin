@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import BackLink from 'components/ui/set-up-domain/back-link';
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { extractHostName } from 'lib/domains';
@@ -112,7 +112,7 @@ class FindExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<BackLink
+					<SetUpDomainBackLink
 						stepName="findExistingBlog"
 						to={ getPath( 'selectBlogType', { domainName } ) }
 					/>

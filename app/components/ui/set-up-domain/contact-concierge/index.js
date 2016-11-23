@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import BackLink from 'components/ui/set-up-domain/back-link';
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
@@ -99,7 +99,7 @@ class ContactConcierge extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<BackLink
+					<SetUpDomainBackLink
 						stepName="contactConcierge"
 						to={ getPath( 'myDomains' ) }
 					/>

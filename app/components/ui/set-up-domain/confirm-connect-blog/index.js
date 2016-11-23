@@ -21,7 +21,9 @@ class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { blogType, domainName, hostName, service } = this.props;
+		const { blogType, recordTracksEvent, domainName, hostName, service } = this.props;
+
+		recordTracksEvent( 'delphin_connect_success_click', { host: service } );
 
 		let destination;
 		if ( service === 'pressable' ) {
@@ -137,6 +139,7 @@ ConfirmConnectBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
 	logInToWpcom: PropTypes.func.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	service: PropTypes.string.isRequired,
 };
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import ConfirmConnectBlog from 'components/ui/set-up-domain/confirm-connect-blog';
 import { getBlogType } from 'reducers/form/selectors';
+import { recordTracksEvent } from 'actions/analytics';
 import { logInToWpcom } from 'actions/wpcom-log-in';
 
 export default connect(
@@ -16,5 +17,6 @@ export default connect(
 	} ),
 	dispatch => bindActionCreators( {
 		logInToWpcom,
+		recordTracksEvent,
 	}, dispatch )
 )( ConfirmConnectBlog );

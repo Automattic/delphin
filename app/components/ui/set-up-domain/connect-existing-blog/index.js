@@ -25,7 +25,7 @@ class ConnectExistingBlog extends Component {
 
 		updateDomain( domainName, service, hostName )
 			.then( () => {
-				redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName } } );
+				redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName, service } } );
 			} )
 			.catch( noop );
 

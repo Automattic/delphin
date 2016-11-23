@@ -14,6 +14,9 @@ let config = {
 	production_cdn_prefix: 'https://s0.wp.com/wp-content/themes/a8c/getdotblog/public',
 	google_conversion_id: 881304566,
 	google_conversion_label: 'WLR1CIHt3WkQ9seepAM',
+	bing_tag_id: '5476898',
+	quantcast_account_id: 'p--q2ngEqybdRaX',
+	facebook_pixel_id: '275189776211205',
 	hostname: 'get.blog',
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
@@ -23,7 +26,11 @@ let config = {
 		google_analytics: productionOnly,
 		mc_analytics: productionOnly,
 		sentry: productionOnly,
-		tracks: productionOnly
+		tracks: productionOnly,
+		googleads: productionOnly,
+		bingads: productionOnly,
+		quantcast: productionOnly,
+		facebookads: productionOnly
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',

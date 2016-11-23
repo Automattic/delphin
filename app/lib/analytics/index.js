@@ -31,6 +31,49 @@ if ( process.env.BROWSER ) {
 
 		loadScript( '//www.google-analytics.com/analytics.js' );
 	}
+
+	if ( isEnabled( 'googleads' ) ) {
+		loadScript( '//www.googleadservices.com/pagead/conversion_async.js' );
+	}
+
+	if ( isEnabled( 'bingads' ) ) {
+		window.uetq = window.uetq || [];
+		loadScript( '//bat.bing.com/bat.js', () => {
+			if ( window.UET ) {
+				window.uetq = new window.UET( {
+					ti: config( 'bing_tag_id' ),
+					q: window.uetq
+				} );
+			}
+			window.uetq.push( 'pageLoad' );
+		} );
+	}
+
+	if ( isEnabled( 'quantcast' ) ) {
+		window._qevents = window._qevents || [];
+		loadScript( 'https://secure.quantserve.com/aquant.js?a=p--q2ngEqybdRaX', () => {
+			window._qevents.push( {
+				qacct: config( 'quantcast_account_id' )
+			} );
+		} );
+	}
+
+	if ( isEnabled( 'facebookads' ) ) {
+		window._fbq = window.fbq = function() {
+			if ( window.fbq.callMethod ) {
+				window.fbq.callMethod.apply( window.fbq, arguments );
+			} else {
+				window.fbq.queue.push( arguments );
+			}
+		};
+		window.fbq.push = window.fbq;
+		window.fbq.loaded = true;
+		window.fbq.version = '2.0';
+		window.fbq.queue = [];
+		loadScript( 'https://connect.facebook.net/en_US/fbevents.js', () => {
+			window.fbq( 'init', config( 'facebook_pixel_id' ) );
+		} );
+	}
 }
 
 function buildQuerystring( group, name ) {
@@ -105,6 +148,7 @@ const analytics = {
 			mostRecentUrlPath = urlPath;
 			analytics.tracks.recordPageView( urlPath );
 			analytics.ga.recordPageView( urlPath, pageTitle );
+			analytics.facebookads.recordPageView();
 		}
 	},
 
@@ -113,6 +157,19 @@ const analytics = {
 			const urlPath = mostRecentUrlPath || 'unknown';
 			analytics.ga.recordTiming( urlPath, eventType, duration, triggerName );
 			analytics.statsd.recordTiming( urlPath, eventType, duration, triggerName );
+		}
+	},
+
+	conversion: {
+		recordPurchase( orderId, revenue, currencyCode ) {
+			if ( ! isEnabled( 'ad_tracking' ) ) {
+				return;
+			}
+
+			analytics.googleads.recordPurchase( orderId, revenue, currencyCode );
+			analytics.bingads.recordPurchase( orderId, revenue, currencyCode );
+			analytics.quantcast.recordPurchase( orderId, revenue, currencyCode );
+			analytics.facebookads.recordPurchase( orderId, revenue, currencyCode );
 		}
 	},
 
@@ -273,6 +330,102 @@ const analytics = {
 			debug( 'Recording Timing ~ [URL: ' + urlPath + '] [Duration: ' + duration + ']' );
 
 			window.ga( 'send', 'timing', urlPath, eventType, duration, triggerName );
+		}
+	},
+
+	googleads: {
+		recordPurchase( orderId, revenue, currencyCode ) {
+			if ( ! isEnabled( 'googleads' ) || ! window.google_trackConversion ) {
+				return;
+			}
+
+			window.google_trackConversion( {
+				google_conversion_id: config( 'google_conversion_id' ),
+				google_conversion_format: 3,
+				google_conversion_label: config( 'google_conversion_label' ),
+				google_custom_params: {
+					orderid: orderId,
+					revenue: revenue,
+					currency: currencyCode
+				},
+			} );
+		}
+	},
+
+	bingads: {
+		recordPageView( urlPath, pageTitle ) {
+			analytics.bingads.recordEvent( {
+				ec: 'PageView',
+				ea: urlPath,
+				el: pageTitle
+			} );
+		},
+
+		recordEvent( event ) {
+			if ( ! isEnabled( 'bingads' ) || ! window.uetq ) {
+				return;
+			}
+
+			window.uetq.push( event );
+		},
+
+		recordPurchase( orderId, revenue, currencyCode ) {
+			analytics.bingads.recordEvent( {
+				ec: 'Transaction',
+				ea: 'Purchase Confirmation',
+				el: orderId,
+				ev: revenue,
+				gv: revenue,
+				gc: currencyCode
+			} );
+		},
+	},
+
+	quantcast: {
+		recordEvent( eventName, extra = {} ) {
+			if ( ! isEnabled( 'quantcast' ) || ! window._qevents ) {
+				return;
+			}
+
+			window._qevents.push(
+				Object.assign( {
+					qacct: config( 'quantcast_account_id' ),
+					labels: '_fp.event.' + eventName
+				}, extra )
+			);
+		},
+
+		recordPurchase( orderId, revenue, currencyCode ) {
+			analytics.quantcast.recordEvent( 'Purchase Confirmation', {
+				orderid: orderId,
+				currency: currencyCode,
+				revenue
+			} );
+		}
+	},
+
+	facebookads: {
+		recordPageView( urlPath, pageTitle ) {
+			analytics.facebookads.recordEvent( 'PageView', {
+				url_path: urlPath,
+				page_title: pageTitle
+			} );
+		},
+
+		recordEvent( eventName, eventValue = null ) {
+			if ( ! isEnabled( 'facebookads' ) || ! window.fbq ) {
+				return;
+			}
+
+			window.fbq( 'track', eventName, eventValue );
+		},
+
+		recordPurchase( orderId, revenue, currencyCode ) {
+			analytics.facebookads.recordEvent( 'Purchase Confirmation', {
+				orderid: orderId,
+				currency: currencyCode,
+				revenue
+			} );
 		}
 	}
 };

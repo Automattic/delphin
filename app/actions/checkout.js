@@ -121,13 +121,14 @@ export function createTransaction() {
 			},
 			payload,
 			loading: TRANSACTION_CREATE,
-			success: () => ( {
+			success: ( { receiptId } ) => ( {
 				type: TRANSACTION_CREATE_COMPLETE,
-				domain: domainName
+				domain: checkout.selectedDomain,
+				receiptId
 			} ),
 			fail: ( error ) => failThunkDispatch => {
 				failThunkDispatch( addNotice( {
-					message: error.message,
+					message: error.message || error.toString(),
 					status: 'error'
 				} ) );
 

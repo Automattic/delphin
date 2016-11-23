@@ -13,7 +13,9 @@ class DomainAutoConnected extends Component {
 	handleResetDomain( event ) {
 		event.preventDefault();
 
-		const { domainName, resetDomain } = this.props;
+		const { domainName, recordTracksEvent, resetDomain } = this.props;
+
+		recordTracksEvent( 'delphin_reset_settings_click', { domain_name: domainName } );
 
 		resetDomain( domainName, 'sawbuck' );
 	}
@@ -48,6 +50,7 @@ class DomainAutoConnected extends Component {
 
 DomainAutoConnected.propTypes = {
 	domainName: PropTypes.string.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	resetDomain: PropTypes.func.isRequired,
 	service: PropTypes.string.isRequired,
 };

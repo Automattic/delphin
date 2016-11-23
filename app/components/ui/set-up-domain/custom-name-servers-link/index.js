@@ -2,11 +2,9 @@
 import i18n from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getPath } from 'routes';
-import styles from './styles.scss';
 
 const CustomNameServersLink = ( { domainName } ) => (
 	<p>
@@ -20,4 +18,4 @@ CustomNameServersLink.propTypes = {
 	domainName: PropTypes.string.isRequired,
 };
 
-export default withStyles( styles )( CustomNameServersLink );
+export default CustomNameServersLink;

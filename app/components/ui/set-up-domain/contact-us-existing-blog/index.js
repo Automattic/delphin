@@ -25,13 +25,17 @@ class ContactUsExistingBlog extends Component {
 	handleSubmit() {
 		const {
 			addNotice,
+			contactSupport,
+			recordTracksEvent,
 			domainName,
 			hostName,
 			redirect,
 			fields: { message }
 		} = this.props;
 
-		this.props.contactSupport( {
+		recordTracksEvent( 'delphin_support_form_submit', { setup_type: 'existing' } );
+
+		contactSupport( {
 			blogType: 'existing',
 			domainName,
 			hostName,
@@ -123,6 +127,7 @@ ContactUsExistingBlog.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	hostName: PropTypes.string.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

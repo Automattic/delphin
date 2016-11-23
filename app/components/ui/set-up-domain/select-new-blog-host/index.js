@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import BackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
@@ -166,9 +167,10 @@ class SelectNewBlogHost extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'selectNewBlogNeeds', { domainName, needs } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<BackLink
+						stepName="selectNewBlogHost"
+						to={ getPath( 'selectNewBlogNeeds', { domainName, needs } ) }
+					/>
 				</div>
 			</div>
 		);

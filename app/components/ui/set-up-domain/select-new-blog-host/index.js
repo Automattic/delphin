@@ -51,6 +51,12 @@ class SelectNewBlogHost extends Component {
 		return invalid || pristine || submitting;
 	}
 
+	handleHostClick( event ) {
+		const host = event.target.value;
+
+		this.props.recordTracksEvent( 'delphin_new_site_host_selection', { host } );
+	}
+
 	renderWpcom() {
 		const {
 			fields: { service },
@@ -63,6 +69,7 @@ class SelectNewBlogHost extends Component {
 					{ ...service }
 					id="wpcom"
 					value="wpcom"
+					onClick={ this.handleHostClick }
 					checked={ service.value === 'wpcom' }
 				/>
 				<label className={ styles.label } htmlFor="wpcom">
@@ -92,6 +99,7 @@ class SelectNewBlogHost extends Component {
 					{ ...service }
 					id="pressable"
 					value="pressable"
+					onClick={ this.handleHostClick }
 					checked={ service.value === 'pressable' }
 				/>
 				<label className={ styles.label } htmlFor="pressable">
@@ -175,6 +183,7 @@ SelectNewBlogHost.propTypes = {
 	invalid: PropTypes.bool.isRequired,
 	needs: PropTypes.string.isRequired,
 	pristine: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired,
 	updateDomain: PropTypes.func.isRequired

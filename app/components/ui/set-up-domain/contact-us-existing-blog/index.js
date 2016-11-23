@@ -1,9 +1,9 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 
 // Internal dependencies
+import BackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
@@ -105,9 +105,10 @@ class ContactUsExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<BackLink
+						to={ getPath( 'findExistingBlog', { domainName } ) }
+						stepName="contactUsExistingBlog"
+					/>
 				</div>
 			</div>
 		);

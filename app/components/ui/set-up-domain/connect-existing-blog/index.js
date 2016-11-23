@@ -1,11 +1,11 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import BackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
@@ -65,9 +65,10 @@ class ConnectExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<BackLink
+						stepName="connectExistingBlog"
+						to={ getPath( 'findExistingBlog', { domainName } ) }
+					/>
 				</div>
 			</div>
 		);

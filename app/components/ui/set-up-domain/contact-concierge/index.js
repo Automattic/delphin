@@ -19,14 +19,20 @@ class ContactConcierge extends Component {
 
 		const {
 			addNotice,
+			contactSupport,
+			recordTracksEvent,
 			redirect,
 			domainName,
 			hostName,
 			fields: { message },
 		} = this.props;
 
-		this.props.contactSupport( {
-			blogType: hostName ? 'existing' : 'new',
+		const blogType = hostName ? 'existing' : 'new';
+
+		recordTracksEvent( 'delphin_support_form_submit', { setup_type: blogType } );
+
+		contactSupport( {
+			blogType,
 			domainName,
 			hostName,
 			message: message.value
@@ -110,6 +116,7 @@ ContactConcierge.propTypes = {
 	fields: PropTypes.object.isRequired,
 	hostName: PropTypes.string,
 	isContactingSupport: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

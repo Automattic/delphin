@@ -20,11 +20,15 @@ class ConnectNewBlogToOther extends Component {
 	handleSubmit( { providerText } ) {
 		const {
 			addNotice,
+			contactSupport,
+			recordTracksEvent,
 			domainName,
 			redirect,
 		} = this.props;
 
-		this.props.contactSupport( {
+		recordTracksEvent( 'delphin_support_form_submit', { setup_type: 'new' } );
+
+		contactSupport( {
 			blogType: 'new',
 			domainName,
 			message: providerText
@@ -117,6 +121,7 @@ ConnectNewBlogToOther.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
 	needs: PropTypes.string.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

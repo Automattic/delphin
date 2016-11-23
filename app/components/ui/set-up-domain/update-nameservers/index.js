@@ -2,14 +2,12 @@
 import { bindHandlers } from 'react-bind-handlers';
 import compact from 'lodash/compact';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
-import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
@@ -65,7 +63,6 @@ class UpdateNameservers extends Component {
 
 	render() {
 		const {
-			domainName,
 			handleSubmit,
 			isRequestingNameservers,
 		} = this.props;
@@ -110,9 +107,9 @@ class UpdateNameservers extends Component {
 				</form>
 
 				<div className={ styles.cancel }>
-					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
+					<a onClick={ this.props.goBack }>
 						{ i18n.translate( 'Cancel' ) }
-					</Link>
+					</a>
 				</div>
 			</div>
 		);
@@ -124,6 +121,7 @@ UpdateNameservers.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	fetchNameservers: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
+	goBack: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	initializeForm: PropTypes.func.isRequired,
 	isRequestingNameservers: PropTypes.bool.isRequired,

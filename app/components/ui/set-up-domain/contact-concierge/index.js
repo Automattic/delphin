@@ -11,6 +11,7 @@ import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
+import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
 
 class ContactConcierge extends Component {
 	handleSubmit( event ) {
@@ -86,6 +87,9 @@ class ContactConcierge extends Component {
 							{ i18n.translate( 'Contact our domain assistant' ) }
 						</Button>
 					</Form.SubmitArea>
+					<Form.Footer>
+						<CustomNameServersLink domainName={ domainName } />
+					</Form.Footer>
 				</Form>
 
 				<div className={ styles.footer }>

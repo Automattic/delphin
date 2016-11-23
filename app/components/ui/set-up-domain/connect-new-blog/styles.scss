@@ -1,6 +1,13 @@
 @import 'app/styles/assets';
 @import 'app/components/ui/set-up-domain/styles';
 
+.header-text {
+	background: url( #{$image-assets-url}ui-illustrations/domain-concierge.svg ) no-repeat center top;
+	background-size: 100px;
+	margin-top: 0;
+	padding-top: 115px;
+}
+
 .paragraph {
 	font-size: 1.6rem;
 	line-height: 1.3;

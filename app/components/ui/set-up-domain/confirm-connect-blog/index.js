@@ -30,25 +30,25 @@ class ConfirmConnectBlog extends Component {
 		if ( service === 'pressable' ) {
 			if ( blogType === 'new' ) {
 				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=true';
-			}
-
-			if ( blogType === 'existing' ) {
+			} else if ( blogType === 'existing' ) {
 				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=false';
+			} else {
+				throw new Error( "Unable to connect domain to Pressable because of missing destination for blog type '" + blogType + "'" );
 			}
 
 			window.open( destination, '_blank' );
 		} else if ( service === 'wpcom' ) {
 			if ( blogType === 'new' ) {
 				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
-			}
-
-			if ( blogType === 'existing' ) {
+			} else if ( blogType === 'existing' ) {
 				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			} else {
+				throw new Error( "Unable to connect domain to WordPress.com because of missing destination for blog type '" + blogType + "'" );
 			}
 
 			this.props.logInToWpcom( destination );
 		} else {
-			throw new Error( 'This service is not supported' );
+			throw new Error( "Unable to connect domain to host because of unsupported service '" + service + "'" );
 		}
 	}
 

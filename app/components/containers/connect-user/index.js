@@ -1,6 +1,5 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 import validator from 'validator';
 
@@ -9,9 +8,9 @@ import { addNotice } from 'actions/notices';
 import ConnectUser from 'components/ui/connect-user';
 import { getAsyncValidateFunction } from 'lib/form';
 import { getSelectedDomain } from 'reducers/checkout/selectors';
-import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
 import { clearConnectUser, connectUser } from 'actions/user';
+import { redirect } from 'actions/routes';
 import i18n from 'i18n-calypso';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
@@ -47,7 +46,9 @@ export default reduxForm(
 			recordTracksEvent( 'delphin_signup_submit' ),
 			( fields, domain ) => connectUser( fields.email, ownProps.intention, domain )
 		),
-		redirectToHome: () => push( getPath( 'home' ) ),
-		redirectToVerifyUser: () => push( getPath( 'verifyUser' ) )
+		redirectToHome: () => redirect( 'home' ),
+		redirectToVerifyUser: () => redirect( 'verifyUser', { queryParams: {
+			redirect_to: ownProps.location.query.redirect_to || ''
+		} } )
 	}, dispatch )
 )( ConnectUser );

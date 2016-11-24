@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
+import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
 import Satellite from 'components/ui/satellite';
@@ -57,4 +58,4 @@ const MyDomains = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( MyDomains, 'My Domains' ) );
+export default scrollToTop( withStyles( styles )( withPageView( MyDomains, 'My Domains' ) ) );

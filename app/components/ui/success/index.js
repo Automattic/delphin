@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import RequireLogin from 'components/containers/require-login';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -72,10 +71,7 @@ class Success extends React.Component {
 Success.propTypes = {
 	destroySetupForms: PropTypes.func.isRequired,
 	domain: PropTypes.string,
-	email: PropTypes.string,
-	fetchMyDomains: PropTypes.func.isRequired,
-	hasSelectedDomain: PropTypes.bool.isRequired,
-	redirect: PropTypes.func.isRequired,
+	fetchMyDomains: PropTypes.func.isRequired
 };
 
-export default RequireLogin( scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) ) );
+export default scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) );

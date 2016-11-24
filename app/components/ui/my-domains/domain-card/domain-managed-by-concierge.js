@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
 import { getPath } from 'routes';
 import styles from './styles.scss';
 
@@ -20,6 +21,9 @@ const DomainManagedByConcierge = ( { domainName, hostName } ) => {
 				<p className={ styles.smallText }>
 					<Link to={ getPath( 'contactConcierge', { domainName, hostName } ) }>{ i18n.translate( 'Contact your domain concierge.' ) }</Link>
 				</p>
+			</div>
+			<div className={ styles.customNameserversContainer }>
+				<CustomNameServersLink domainName={ domainName } />
 			</div>
 		</div>
 	);

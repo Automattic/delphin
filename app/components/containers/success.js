@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Internal dependencies
+import { destroySetupForms } from 'actions/setup';
 import { fetchMyDomains } from 'actions/my-domains';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
@@ -16,6 +17,7 @@ export default connect(
 		hasSelectedDomain: hasSelectedDomain( state ),
 	} ),
 	dispatch => bindActionCreators( {
+		destroySetupForms,
 		fetchMyDomains,
 		redirect
 	}, dispatch )

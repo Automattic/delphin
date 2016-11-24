@@ -12,6 +12,7 @@ import Satellite from 'components/ui/satellite';
 
 const MyDomains = React.createClass( {
 	propTypes: {
+		destroySetupForms: PropTypes.func.isRequired,
 		domains: PropTypes.object.isRequired,
 		fetchMyDomains: PropTypes.func.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
@@ -24,6 +25,13 @@ const MyDomains = React.createClass( {
 		} else if ( ! this.props.domains.hasLoadedFromServer && ! this.props.domains.isRequesting ) {
 			this.props.fetchMyDomains();
 		}
+	},
+
+	componentDidMount() {
+		// Only one domain's setup forms are stored in memory at a time. In
+		// order to prevent the user from seeing stale form data when they
+		// switch to set up another domain, we destroy them all here.
+		this.props.destroySetupForms();
 	},
 
 	componentWillReceiveProps( nextProps ) {

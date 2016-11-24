@@ -10,13 +10,26 @@ import styles from './styles.scss';
 
 const Suggestion = React.createClass( {
 	propTypes: {
+		checkDomainAvailability: PropTypes.func.isRequired,
 		isBestMatch: PropTypes.bool.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		suggestion: PropTypes.object.isRequired
 	},
 
 	selectDomain() {
-		this.props.selectDomain( this.props.suggestion );
+		// Do an availability check
+		this.props.checkDomainAvailability( this.props.suggestion );
+		// We'll need some analytics here
+		/*dispatch( recordTracksEvent( 'delphin_search_result_select', {
+			is_premium: domainProduct.isPremium,
+			relevance: domainProduct.relevance,
+			num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
+		} ) );*/
+
+		// If the domain is available then select it
+		//this.props.selectDomain( this.props.suggestion );
+
+		// Otherwise show a message to the user
 	},
 
 	render() {

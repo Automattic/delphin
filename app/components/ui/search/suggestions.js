@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import { omitTld } from 'lib/domains';
 import styles from './styles.scss';
-import Suggestion from './suggestion';
+import Suggestion from 'components/containers/suggestion';
 
 /**
  * Strips all non-digits/decimals from a string and casts it to a number.

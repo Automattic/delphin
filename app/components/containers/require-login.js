@@ -1,6 +1,6 @@
 // External dependencies
 import { connect } from 'react-redux';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
@@ -12,17 +12,30 @@ function getDisplayName( WrappedComponent ) {
 }
 
 export default WrappedComponent => {
-	function LoginEnforcer( props ) {
-		if ( ! props.isLoggedIn && ! props.isLoggedOut ) {
-			return i18n.translate( 'Loading account information…' );
+	class LoginEnforcer extends Component {
+		componentWillMount() {
+			if ( this.props.isLoggedOut ) {
+				this.props.redirectToLogin();
+			}
 		}
 
-		if ( props.isLoggedOut ) {
-			props.redirectToLogin();
-			return null;
+		componentWillReceiveProps( nextProps ) {
+			if ( ! this.props.isLoggedOut && nextProps.isLoggedOut ) {
+				this.props.redirectToLogin();
+			}
 		}
 
-		return <WrappedComponent { ...props } />;
+		render() {
+			if ( ! this.props.isLoggedIn && ! this.props.isLoggedOut ) {
+				return i18n.translate( 'Loading account information…' );
+			}
+
+			if ( this.props.isLoggedOut ) {
+				return null;
+			}
+
+			return <WrappedComponent { ...this.props } />;
+		}
 	}
 
 	LoginEnforcer.propTypes = {

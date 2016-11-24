@@ -1,6 +1,7 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
+import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -128,7 +129,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'How do I connect my domain to my site?' ) }</h3>
 							<p>{ i18n.translate( 'Go to {{link}}My Domains{{/link}} to see all your domains and set them up. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
 								components: {
-									link: <a href={ getPath( 'myDomains' ) } />
+									link: <Link to={ getPath( 'myDomains' ) } />
 								}
 							} ) }</p>
 						</div>
@@ -137,7 +138,7 @@ class LearnMore extends React.Component {
 							<h3>{ i18n.translate( 'How do I set custom name servers?' ) }</h3>
 							<p>{ i18n.translate( 'To choose custom servers for your domain, start setting it up from {{link}}My Domains{{/link}}, and then choose “Configure manually” on the next screen. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
 								components: {
-									link: <a href={ getPath( 'myDomains' ) } />
+									link: <Link to={ getPath( 'myDomains' ) } />
 								}
 							} ) }</p>
 						</div>

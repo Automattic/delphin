@@ -1,26 +1,22 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
 // Internal dependencies
 import { destroySetupForms } from 'actions/setup';
 import { fetchMyDomains } from 'actions/my-domains';
-import { getPath } from 'routes';
-import { isLoggedOut } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
+import RequireLogin from 'components/containers/require-login';
 
 export default connect(
 	state => ( {
 		domains: state.user.myDomains,
-		isRequesting: state.domainSearch.isRequesting,
-		isLoggedOut: isLoggedOut( state )
+		isRequesting: state.domainSearch.isRequesting
 	} ),
 	dispatch => (
 		bindActionCreators( {
 			destroySetupForms,
-			fetchMyDomains,
-			redirectToHome: () => push( getPath( 'home' ) ),
+			fetchMyDomains
 		}, dispatch )
 	)
-)( MyDomains );
+)( RequireLogin( MyDomains ) );

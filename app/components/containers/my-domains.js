@@ -1,24 +1,14 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { destroy } from 'redux-form';
 import { push } from 'react-router-redux';
 
 // Internal dependencies
+import { destroySetupForms } from 'actions/setup';
 import { fetchMyDomains } from 'actions/my-domains';
 import { getPath } from 'routes';
 import { isLoggedOut } from 'reducers/user/selectors';
 import MyDomains from 'components/ui/my-domains';
-
-const setupForms = [
-	'connectNewBlogToOther',
-	'contactConcierge',
-	'contactUsExistingBlog',
-	'findExistingBlog',
-	'selectBlogType',
-	'selectNewBlogHost',
-	'selectNewBlogNeeds',
-];
 
 export default connect(
 	state => ( {
@@ -27,11 +17,10 @@ export default connect(
 		isLoggedOut: isLoggedOut( state )
 	} ),
 	dispatch => (
-		Object.assign( {
-			destroySetupForms: () => setupForms.forEach( form => dispatch( destroy( form ) ) )
-		}, bindActionCreators( {
+		bindActionCreators( {
+			destroySetupForms,
 			fetchMyDomains,
 			redirectToHome: () => push( getPath( 'home' ) ),
-		}, dispatch ) )
+		}, dispatch )
 	)
 )( MyDomains );

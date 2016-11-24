@@ -26,7 +26,10 @@ class ConnectNewBlogToOther extends Component {
 			redirect,
 		} = this.props;
 
-		recordTracksEvent( 'delphin_support_form_submit', { setup_type: 'new' } );
+		recordTracksEvent( 'delphin_support_form_submit', {
+			source: 'setup',
+			setup_type: 'new'
+		} );
 
 		contactSupport( {
 			blogType: 'new',

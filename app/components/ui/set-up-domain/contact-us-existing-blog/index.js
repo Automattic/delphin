@@ -33,7 +33,10 @@ class ContactUsExistingBlog extends Component {
 			fields: { message }
 		} = this.props;
 
-		recordTracksEvent( 'delphin_support_form_submit', { setup_type: 'existing' } );
+		recordTracksEvent( 'delphin_support_form_submit', {
+			source: 'setup',
+			setup_type: 'existing'
+		} );
 
 		contactSupport( {
 			blogType: 'existing',

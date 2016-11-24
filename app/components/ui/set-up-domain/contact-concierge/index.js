@@ -29,7 +29,10 @@ class ContactConcierge extends Component {
 
 		const blogType = hostName ? 'existing' : 'new';
 
-		recordTracksEvent( 'delphin_support_form_submit', { setup_type: blogType } );
+		recordTracksEvent( 'delphin_support_form_submit', {
+			source: 'my-domains',
+			setup_type: blogType
+		} );
 
 		contactSupport( {
 			blogType,

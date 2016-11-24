@@ -50,6 +50,7 @@ if ( process.env.BROWSER ) {
 	}
 
 	if ( isEnabled( 'quantcast' ) ) {
+		window.ezt = window.ezt || [];
 		window._qevents = window._qevents || [];
 		loadScript( 'https://secure.quantserve.com/aquant.js?a=p--q2ngEqybdRaX', () => {
 			window._qevents.push( {

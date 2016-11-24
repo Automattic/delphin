@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import config from 'config';
 import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import { isLoggedIn } from 'reducers/user/selectors';
+import { getPath } from 'routes';
 import Search from 'components/ui/search';
 import { redirect } from 'actions/routes';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
@@ -63,7 +64,11 @@ export default connect(
 			if ( isUserLoggedIn ) {
 				dispatch( redirect( 'contactInformation' ) );
 			} else {
-				dispatch( redirect( 'signupUser' ) );
+				dispatch( redirect( 'signupUser', {
+					queryParams: {
+						redirect_to: getPath( 'contactInformation' )
+					}
+				} ) );
 			}
 		},
 

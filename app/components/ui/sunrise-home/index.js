@@ -42,7 +42,7 @@ const SunriseHome = React.createClass( {
 					method="get"
 					action={ getPath( 'search' ) }
 				>
-					<DocumentTitle />
+					<DocumentTitle title={ i18n.translate( 'Find a new .blog domain for your blog.' ) } />
 
 					<h2 className={ styles.heading }>
 						{ preventWidows( pageHeading, 2 ) }

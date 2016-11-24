@@ -11,17 +11,17 @@ function getDisplayName( WrappedComponent ) {
 	return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-export default WrappedComponent => {
-	class LoginEnforcer extends Component {
+export default ( WrappedComponent, redirectTo ) => {
+	class SignupEnforcer extends Component {
 		componentWillMount() {
 			if ( this.props.isLoggedOut ) {
-				this.props.redirectToLogin();
+				this.props.redirectToSignup();
 			}
 		}
 
 		componentWillReceiveProps( nextProps ) {
 			if ( ! this.props.isLoggedOut && nextProps.isLoggedOut ) {
-				this.props.redirectToLogin();
+				this.props.redirectToSignup();
 			}
 		}
 
@@ -38,13 +38,13 @@ export default WrappedComponent => {
 		}
 	}
 
-	LoginEnforcer.propTypes = {
+	SignupEnforcer.propTypes = {
 		isLoggedIn: PropTypes.bool.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
-		redirectToLogin: PropTypes.func.isRequired
+		redirectToSignup: PropTypes.func.isRequired
 	};
 
-	LoginEnforcer.displayName = `LoginEnforcer(${ getDisplayName( WrappedComponent ) })`;
+	SignupEnforcer.displayName = `SignupEnforcer(${ getDisplayName( WrappedComponent ) })`;
 
 	return connect(
 		state => ( {
@@ -52,9 +52,13 @@ export default WrappedComponent => {
 			isLoggedOut: isLoggedOut( state )
 		} ),
 		dispatch => ( {
-			redirectToLogin() {
-				dispatch( redirect( 'loginUser' ) );
+			redirectToSignup() {
+				dispatch( redirect( 'signupUser', {
+					queryParams: {
+						redirect_to: redirectTo
+					}
+				} ) );
 			}
 		} )
-	)( LoginEnforcer );
+	)( SignupEnforcer );
 };

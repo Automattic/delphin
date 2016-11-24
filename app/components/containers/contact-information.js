@@ -12,8 +12,9 @@ import { fetchLocation } from 'actions/location';
 import { getStates } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
-import { getUserLocation, getUserSettings, isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
+import { getUserLocation, getUserSettings } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
+import RequireSignup from 'components/containers/require-signup';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
 import { validateContactInformation } from 'actions/contact-information';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
@@ -40,8 +41,6 @@ export default reduxForm(
 		contactInformation: state.contactInformation,
 		domain: getSelectedDomain( state ),
 		hasSelectedDomain: hasSelectedDomain( state ),
-		isLoggedOut: isLoggedOut( state ),
-		isLoggedIn: isLoggedIn( state ),
 		inputVisibility: inputVisibility( state ),
 		location: getUserLocation( state ),
 		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),
@@ -59,9 +58,8 @@ export default reduxForm(
 				recordTracksEvent( 'delphin_contact_form_submit' ),
 				() => push( getPath( 'checkout' ) )
 			),
-			redirectToLogin: () => push( getPath( 'loginUser' ) ),
 			redirectToHome: () => push( getPath( 'home' ) ),
 			validateContactInformation: ( domainName, contactInformation ) => validateContactInformation( [ domainName ], contactInformation )
 		}, dispatch )
 	)
-)( ContactInformation );
+)( RequireSignup( ContactInformation, getPath( 'contactInformation' ) ) );

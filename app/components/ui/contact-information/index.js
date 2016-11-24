@@ -22,7 +22,7 @@ import scrollToTop from 'components/containers/scroll-to-top';
 
 class ContactInformation extends React.Component {
 	componentWillMount() {
-		if ( this.props.isLoggedOut || ! this.props.hasSelectedDomain ) {
+		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirectToHome();
 			return;
 		}
@@ -47,11 +47,6 @@ class ContactInformation extends React.Component {
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.isLoggedOut ) {
-			this.props.redirectToLogin();
-			return;
-		}
-
 		if ( this.isDataLoading() && ! this.isDataLoading( nextProps ) ) {
 			this.initializeContactInformation( nextProps );
 		}
@@ -398,12 +393,9 @@ ContactInformation.propTypes = {
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
-	isLoggedIn: PropTypes.bool.isRequired,
-	isLoggedOut: PropTypes.bool.isRequired,
 	location: PropTypes.object.isRequired,
 	redirectToCheckout: PropTypes.func.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
-	redirectToLogin: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,

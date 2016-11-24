@@ -26,6 +26,7 @@ class ConfirmConnectBlog extends Component {
 		recordTracksEvent( 'delphin_connect_success_click', { host: service } );
 
 		let destination;
+
 		if ( service === 'pressable' ) {
 			if ( blogType === 'new' ) {
 				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=true';
@@ -36,11 +37,7 @@ class ConfirmConnectBlog extends Component {
 			}
 
 			window.open( destination, '_blank' );
-
-			return;
-		}
-
-		if ( service === 'wpcom' ) {
+		} else if ( service === 'wpcom' ) {
 			if ( blogType === 'new' ) {
 				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
 			}
@@ -50,11 +47,9 @@ class ConfirmConnectBlog extends Component {
 			}
 
 			this.props.logInToWpcom( destination );
-
-			return;
+		} else {
+			throw new Error( 'This service is not supported' );
 		}
-
-		throw new Error( 'This service is not supported' );
 	}
 
 	render() {

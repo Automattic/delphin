@@ -133,12 +133,14 @@ export function checkDomainAvailability( { domainName } ) {
 		loading: () => ( { type: DOMAIN_AVAILABILITY_FETCH, domainName } ),
 		success: ( results ) => ( {
 			type: DOMAIN_AVAILABILITY_FETCH_COMPLETE,
+			domainName,
 			results
 		} ),
 		fail: ( error ) => {
 			return dispatch => {
 				dispatch( {
-					type: DOMAIN_AVAILABILITY_FETCH_FAIL
+					type: DOMAIN_AVAILABILITY_FETCH_FAIL,
+					domainName
 				} );
 				dispatch( addNotice( {
 					message: error.message,

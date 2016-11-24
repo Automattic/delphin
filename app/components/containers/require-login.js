@@ -1,11 +1,10 @@
 // External dependencies
-import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import React, { PropTypes } from 'react';
 import i18n from 'i18n-calypso';
 
 // Internal dependencies
-import { getPath } from 'routes';
+import { redirect } from 'actions/routes';
 import { isLoggedIn, isLoggedOut } from 'reducers/user/selectors';
 
 function getDisplayName( WrappedComponent ) {
@@ -41,7 +40,7 @@ export default WrappedComponent => {
 		} ),
 		dispatch => ( {
 			redirectToLogin() {
-				dispatch( push( getPath( 'loginUser' ) ) );
+				dispatch( redirect( 'loginUser' ) );
 			}
 		} )
 	)( LoginEnforcer );

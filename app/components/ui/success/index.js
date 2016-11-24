@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import RequireLogin from 'components/containers/require-login';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
@@ -14,12 +15,6 @@ import Button from 'components/ui/button';
 import { getPath } from 'routes';
 
 class Success extends React.Component {
-	componentWillMount() {
-		if ( ! this.props.hasSelectedDomain ) {
-			this.props.redirect( 'home' );
-		}
-	}
-
 	componentDidMount() {
 		this.props.fetchMyDomains();
 		this.props.destroySetupForms();
@@ -83,4 +78,4 @@ Success.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) );
+export default RequireLogin( scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) ) );

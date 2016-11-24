@@ -28,10 +28,12 @@ class ConfirmConnectBlog extends Component {
 		let destination;
 
 		if ( service === 'pressable' ) {
+			destination = 'https://my.pressable.com/signup/five-sites?domain=' + domainName + '&new_site=';
+
 			if ( blogType === 'new' ) {
-				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=true';
+				destination += 'true';
 			} else if ( blogType === 'existing' ) {
-				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=false';
+				destination += 'false';
 			} else {
 				throw new Error( "Unable to connect domain to Pressable because of missing destination for blog type '" + blogType + "'" );
 			}

@@ -1,11 +1,11 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
@@ -13,20 +13,23 @@ import Form from 'components/ui/form';
 import noop from 'lodash/noop';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConnectExistingBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { domainName, hostName, redirect, service, updateDomain } = this.props;
+		const { domainName, hostName, recordTracksEvent, redirect, service, updateDomain } = this.props;
+
+		recordTracksEvent( 'delphin_existing_site_connect', { host: hostName } );
 
 		updateDomain( domainName, service, hostName )
 			.then( () => {
-				redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName } } );
+				redirect( 'confirmConnectExistingBlog', { pathParams: { domainName, hostName, service } } );
 			} )
 			.catch( noop );
 
-		redirect( 'connectingExistingBlog', { pathParams: { domainName, hostName } } );
+		redirect( 'connectingExistingBlog', { pathParams: { domainName, hostName, service } } );
 	}
 
 	render() {
@@ -62,9 +65,10 @@ class ConnectExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<SetUpDomainBackLink
+						stepName="connectExistingBlog"
+						to={ getPath( 'findExistingBlog', { domainName } ) }
+					/>
 				</div>
 			</div>
 		);
@@ -74,9 +78,10 @@ class ConnectExistingBlog extends Component {
 ConnectExistingBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	service: PropTypes.string.isRequired,
 	updateDomain: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( ConnectExistingBlog ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConnectExistingBlog ), 'Connect Existing Blog' ) );

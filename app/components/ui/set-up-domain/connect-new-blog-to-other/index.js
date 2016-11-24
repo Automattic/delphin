@@ -1,11 +1,11 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
 import DocumentTitle from 'components/ui/document-title';
@@ -14,16 +14,24 @@ import { getPath } from 'routes';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConnectNewBlogToOther extends Component {
 	handleSubmit( { providerText } ) {
 		const {
 			addNotice,
+			contactSupport,
+			recordTracksEvent,
 			domainName,
 			redirect,
 		} = this.props;
 
-		this.props.contactSupport( {
+		recordTracksEvent( 'delphin_support_form_submit', {
+			source: 'setup',
+			setup_type: 'new'
+		} );
+
+		contactSupport( {
 			blogType: 'new',
 			domainName,
 			message: providerText
@@ -67,6 +75,7 @@ class ConnectNewBlogToOther extends Component {
 						<ProgressBar progress={ 90 } />
 					</div>
 				</div>
+
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>
 						<div className={ styles.paragraph }>
@@ -97,9 +106,10 @@ class ConnectNewBlogToOther extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'selectNewBlogHost', { domainName, needs } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<SetUpDomainBackLink
+						stepName="connectNewBlogToOther"
+						to={ getPath( 'selectNewBlogHost', { domainName, needs } ) }
+					/>
 				</div>
 			</div>
 		);
@@ -114,7 +124,8 @@ ConnectNewBlogToOther.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
 	needs: PropTypes.string.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( ConnectNewBlogToOther ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConnectNewBlogToOther ), 'Connect New Blog To Other' ) );

@@ -1,11 +1,11 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
@@ -19,14 +19,23 @@ class ContactConcierge extends Component {
 
 		const {
 			addNotice,
+			contactSupport,
+			recordTracksEvent,
 			redirect,
 			domainName,
 			hostName,
 			fields: { message },
 		} = this.props;
 
-		this.props.contactSupport( {
-			blogType: hostName ? 'existing' : 'new',
+		const blogType = hostName ? 'existing' : 'new';
+
+		recordTracksEvent( 'delphin_support_form_submit', {
+			source: 'my-domains',
+			setup_type: blogType
+		} );
+
+		contactSupport( {
+			blogType,
 			domainName,
 			hostName,
 			message: message.value
@@ -93,9 +102,10 @@ class ContactConcierge extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'myDomains' ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<SetUpDomainBackLink
+						stepName="contactConcierge"
+						to={ getPath( 'myDomains' ) }
+					/>
 				</div>
 			</div>
 		);
@@ -109,6 +119,7 @@ ContactConcierge.propTypes = {
 	fields: PropTypes.object.isRequired,
 	hostName: PropTypes.string,
 	isContactingSupport: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 

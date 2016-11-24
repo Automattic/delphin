@@ -6,6 +6,7 @@ import { addNotice } from 'actions/notices';
 import ContactConcierge from 'app/components/ui/set-up-domain/contact-concierge/index.js';
 import { contactSupport } from 'actions/contact-support';
 import { isContactingSupport } from 'reducers/contact-support/selectors';
+import { recordTracksEvent } from 'actions/analytics';
 import { redirect } from 'actions/routes';
 
 export default reduxForm(
@@ -22,5 +23,6 @@ export default reduxForm(
 		addNotice,
 		contactSupport,
 		redirect,
+		recordTracksEvent,
 	}
 )( ContactConcierge );

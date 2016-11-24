@@ -9,6 +9,7 @@ import { getServiceName } from 'lib/services';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConnectingBlog extends Component {
 	render() {
@@ -63,4 +64,4 @@ ConnectingBlog.propTypes = {
 	service: PropTypes.string.isRequired
 };
 
-export default withStyles( styles )( ConnectingBlog );
+export default withStyles( styles )( withPageView( ConnectingBlog, 'Connecting Blog' ) );

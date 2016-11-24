@@ -11,6 +11,7 @@ import FindExistingBlog from 'components/ui/set-up-domain/find-existing-blog';
 import { redirect } from 'actions/routes';
 import { fetchService } from 'actions/service';
 import { isRequestingService } from 'reducers/service/selectors';
+import { recordTracksEvent } from 'actions/analytics';
 
 const validate = values => {
 	const { url } = values;
@@ -42,6 +43,7 @@ export default reduxForm(
 	} ),
 	dispatch => bindActionCreators( {
 		fetchService,
+		recordTracksEvent,
 		redirect,
 	}, dispatch )
 )( RequireLogin( FindExistingBlog ) );

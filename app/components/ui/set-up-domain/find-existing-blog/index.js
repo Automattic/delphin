@@ -1,11 +1,11 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { extractHostName } from 'lib/domains';
@@ -16,6 +16,7 @@ import ProgressBar from 'components/ui/progress-bar';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class FindExistingBlog extends Component {
 	componentWillMount() {
@@ -29,7 +30,11 @@ class FindExistingBlog extends Component {
 	handleSubmit( values ) {
 		const hostName = extractHostName( values.url );
 
-		this.props.fetchService( hostName ).then( result => {
+		const { fetchService, recordTracksEvent, redirect } = this.props;
+
+		recordTracksEvent( 'delphin_existing_site_submit', { host: hostName } );
+
+		fetchService( hostName ).then( result => {
 			let slug;
 
 			if ( canConnectToService( result.service ) ) {
@@ -38,7 +43,7 @@ class FindExistingBlog extends Component {
 				slug = 'contactUsExistingBlog';
 			}
 
-			this.props.redirect( slug, { pathParams: {
+			redirect( slug, { pathParams: {
 				domainName: this.props.domainName,
 				hostName,
 				service: result.service
@@ -107,9 +112,10 @@ class FindExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'selectBlogType', { domainName } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<SetUpDomainBackLink
+						stepName="findExistingBlog"
+						to={ getPath( 'selectBlogType', { domainName } ) }
+					/>
 				</div>
 			</div>
 		);
@@ -126,8 +132,9 @@ FindExistingBlog.propTypes = {
 	invalid: PropTypes.bool.isRequired,
 	isRequestingService: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( FindExistingBlog ) );
+export default withStyles( styles )( withPageView( bindHandlers( FindExistingBlog ), 'Find Existing Blog' ) );

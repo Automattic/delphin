@@ -111,13 +111,13 @@ let publicRoutes = [
 				getComponent: getComponent( 'setUpDomain', 'connectExistingBlog' )
 			},
 			{
-				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName',
+				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName/:service',
 				slug: 'connectingExistingBlog',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'connectingExistingBlog' )
 			},
 			{
-				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName/success',
+				path: 'set-up-domain/:domainName/existing-blog/connect/:hostName/:service/success',
 				slug: 'confirmConnectExistingBlog',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'confirmConnectBlog' )

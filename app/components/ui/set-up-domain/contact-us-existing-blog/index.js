@@ -1,9 +1,9 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 
 // Internal dependencies
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
@@ -12,6 +12,7 @@ import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { removeInvalidInputProps } from 'lib/form';
 import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-servers-link';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ContactUsExistingBlog extends Component {
 	constructor( props ) {
@@ -24,13 +25,20 @@ class ContactUsExistingBlog extends Component {
 	handleSubmit() {
 		const {
 			addNotice,
+			contactSupport,
+			recordTracksEvent,
 			domainName,
 			hostName,
 			redirect,
 			fields: { message }
 		} = this.props;
 
-		this.props.contactSupport( {
+		recordTracksEvent( 'delphin_support_form_submit', {
+			source: 'setup',
+			setup_type: 'existing'
+		} );
+
+		contactSupport( {
 			blogType: 'existing',
 			domainName,
 			hostName,
@@ -104,9 +112,10 @@ class ContactUsExistingBlog extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'findExistingBlog', { domainName } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<SetUpDomainBackLink
+						to={ getPath( 'findExistingBlog', { domainName } ) }
+						stepName="contactUsExistingBlog"
+					/>
 				</div>
 			</div>
 		);
@@ -121,7 +130,8 @@ ContactUsExistingBlog.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	hostName: PropTypes.string.isRequired,
 	isContactingSupport: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 };
 
-export default withStyles( styles )( ContactUsExistingBlog );
+export default withStyles( styles )( withPageView( ContactUsExistingBlog, 'Contact Us Existing Blog' ) );

@@ -49,4 +49,3 @@ TrackingLink.propTypes = {
 };
 
 export default TrackingLink;
-

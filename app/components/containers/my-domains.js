@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // Internal dependencies
+import { destroySetupForms } from 'actions/setup';
 import { fetchMyDomains } from 'actions/my-domains';
 import { getPath } from 'routes';
 import { isLoggedOut } from 'reducers/user/selectors';
@@ -17,8 +18,9 @@ export default connect(
 	} ),
 	dispatch => (
 		bindActionCreators( {
+			destroySetupForms,
 			fetchMyDomains,
-			redirectToHome: () => push( getPath( 'home' ) )
+			redirectToHome: () => push( getPath( 'home' ) ),
 		}, dispatch )
 	)
 )( MyDomains );

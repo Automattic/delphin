@@ -13,17 +13,18 @@ import Form from 'components/ui/form';
 import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
+import withPageView from 'lib/analytics/with-page-view';
 
 class SelectBlogType extends Component {
 	handleSubmit( values ) {
-		const { redirect, domainName } = this.props;
+		const { newOrExisting } = values;
 
 		if ( values.newOrExisting === 'new' ) {
-			redirect( 'selectNewBlogNeeds', { pathParams: { domainName } } );
+			this.trackAndRedirect( 'selectNewBlogNeeds', newOrExisting );
 		}
 
-		if ( values.newOrExisting === 'existing' ) {
-			redirect( 'findExistingBlog', { pathParams: { domainName } } );
+		if ( newOrExisting === 'existing' ) {
+			this.trackAndRedirect( 'findExistingBlog', newOrExisting );
 		}
 	}
 
@@ -31,6 +32,14 @@ class SelectBlogType extends Component {
 		const { invalid, pristine, submitting } = this.props;
 
 		return invalid || pristine || submitting;
+	}
+
+	trackAndRedirect( pathSlug, newOrExisting ) {
+		const { domainName, recordTracksEvent, redirect } = this.props;
+
+		recordTracksEvent( 'delphin_setup_new_existing_submit', { setup_type: newOrExisting } );
+
+		redirect( pathSlug, { pathParams: { domainName } } );
 	}
 
 	render() {
@@ -112,8 +121,9 @@ SelectBlogType.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	pristine: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( SelectBlogType ) );
+export default withStyles( styles )( withPageView( bindHandlers( SelectBlogType ), 'Select Blog Type' ) );

@@ -10,12 +10,10 @@ import { recordPageView, recordTracksEvent } from 'actions/analytics';
 export default ( WrappedComponent, title ) => {
 	class WithPageView extends React.Component {
 		componentDidMount() {
-			const { location: { query } } = this.props;
+			const { location: { query }, privateProps } = this.props;
 
-			if ( query && query.utm_source && query.utm_campaign ) {
-				// If these params are present, this is a landing page from
-				// a SEM campaign
-				this.props.recordTracksEvent( 'delphin_landing_page_view', {
+			if ( this.isLandingPageFromSemCampaign( query ) ) {
+				privateProps.recordTracksEvent( 'delphin_landing_page_view', {
 					pathname: window.location.pathname,
 					title,
 					utm_source: query.utm_source,
@@ -23,22 +21,28 @@ export default ( WrappedComponent, title ) => {
 				} );
 			}
 
-			this.props.recordPageView( window.location.pathname, title );
+			privateProps.recordPageView( window.location.pathname, title );
+		}
+
+		isLandingPageFromSemCampaign( query ) {
+			return query && query.utm_source && query.utm_campaign;
 		}
 
 		render() {
-			const props = omit( this.props, [ 'recordPageView', 'recordTracksEvent' ] );
+			const newProps = omit( this.props, 'privateProps' );
 
 			return (
-				<WrappedComponent { ...props } />
+				<WrappedComponent { ...newProps } />
 			);
 		}
 	}
 
 	WithPageView.propTypes = {
 		location: PropTypes.object.isRequired,
-		recordPageView: PropTypes.func.isRequired,
-		recordTracksEvent: PropTypes.func.isRequired
+		privateProps: PropTypes.shape( {
+			recordPageView: PropTypes.func.isRequired,
+			recordTracksEvent: PropTypes.func.isRequired
+		} ).isRequired
 	};
 
 	return connect(
@@ -46,6 +50,9 @@ export default ( WrappedComponent, title ) => {
 		dispatch => bindActionCreators( {
 			recordPageView,
 			recordTracksEvent
-		}, dispatch )
+		}, dispatch ),
+		( stateProps, dispatchProps, ownProps ) => {
+			return Object.assign( {}, ownProps, stateProps, { privateProps: dispatchProps } );
+		}
 	)( WithPageView );
 };

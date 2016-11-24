@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
@@ -15,6 +16,7 @@ import ProgressBar from 'components/ui/progress-bar';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import { imageUrl } from 'lib/assets';
+import withPageView from 'lib/analytics/with-page-view';
 
 class SelectNewBlogHost extends Component {
 	componentWillMount() {
@@ -66,6 +68,12 @@ class SelectNewBlogHost extends Component {
 		return needsToServices[ this.props.needs ];
 	}
 
+	handleHostClick( event ) {
+		const host = event.target.value;
+
+		this.props.recordTracksEvent( 'delphin_new_site_host_selection', { host } );
+	}
+
 	renderWpcom() {
 		const {
 			fields: { service },
@@ -78,6 +86,7 @@ class SelectNewBlogHost extends Component {
 					{ ...service }
 					id="wpcom"
 					value="wpcom"
+					onClick={ this.handleHostClick }
 					checked={ service.value === 'wpcom' }
 				/>
 				<label className={ styles.label } htmlFor="wpcom">
@@ -107,6 +116,7 @@ class SelectNewBlogHost extends Component {
 					{ ...service }
 					id="pressable"
 					value="pressable"
+					onClick={ this.handleHostClick }
 					checked={ service.value === 'pressable' }
 				/>
 				<label className={ styles.label } htmlFor="pressable">
@@ -173,9 +183,10 @@ class SelectNewBlogHost extends Component {
 				</Form>
 
 				<div className={ styles.footer }>
-					<Link to={ getPath( 'selectNewBlogNeeds', { domainName, needs } ) }>
-						{ i18n.translate( 'Back' ) }
-					</Link>
+					<SetUpDomainBackLink
+						stepName="selectNewBlogHost"
+						to={ getPath( 'selectNewBlogNeeds', { domainName, needs } ) }
+					/>
 				</div>
 			</div>
 		);
@@ -190,9 +201,10 @@ SelectNewBlogHost.propTypes = {
 	invalid: PropTypes.bool.isRequired,
 	needs: PropTypes.string.isRequired,
 	pristine: PropTypes.bool.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired,
 	updateDomain: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( SelectNewBlogHost ) );
+export default withStyles( styles )( withPageView( bindHandlers( SelectNewBlogHost ), 'Select New Blog Host' ) );

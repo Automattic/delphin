@@ -15,12 +15,15 @@ import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 import { getServiceName } from 'lib/services';
+import withPageView from 'lib/analytics/with-page-view';
 
 class ConfirmConnectBlog extends Component {
 	handleSubmit( event ) {
 		event.preventDefault();
 
-		const { blogType, domainName, hostName, service } = this.props;
+		const { blogType, recordTracksEvent, domainName, hostName, service } = this.props;
+
+		recordTracksEvent( 'delphin_connect_success_click', { host: service } );
 
 		let destination;
 		if ( service === 'pressable' ) {
@@ -136,7 +139,8 @@ ConfirmConnectBlog.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string,
 	logInToWpcom: PropTypes.func.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	service: PropTypes.string.isRequired,
 };
 
-export default withStyles( styles )( bindHandlers( ConfirmConnectBlog ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConfirmConnectBlog ), 'Confirm Connect Blog' ) );

@@ -14,7 +14,13 @@ class DomainWithCustomNameservers extends Component {
 	handleResetDomain( event ) {
 		event.preventDefault();
 
-		const { domainName, resetDomain } = this.props;
+		const {
+			domainName,
+			resetDomain,
+			recordTracksEvent,
+		} = this.props;
+
+		recordTracksEvent( 'delphin_reset_name_servers_click', { domain_name: domainName } );
 
 		resetDomain( domainName, 'sawbuck' );
 	}
@@ -49,6 +55,7 @@ class DomainWithCustomNameservers extends Component {
 
 DomainWithCustomNameservers.propTypes = {
 	domainName: PropTypes.string.isRequired,
+	recordTracksEvent: PropTypes.func.isRequired,
 	resetDomain: PropTypes.func.isRequired,
 };
 

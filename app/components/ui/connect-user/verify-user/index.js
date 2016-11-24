@@ -78,7 +78,7 @@ const VerifyUser = React.createClass( {
 			if ( nextProps.query.redirect_to ) {
 				this.props.redirectToQueryParamUrl();
 			} else {
-				this.props.redirect( 'home' );
+				this.props.redirect( 'myDomains' );
 			}
 		}
 	},

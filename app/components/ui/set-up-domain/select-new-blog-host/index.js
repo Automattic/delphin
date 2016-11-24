@@ -45,9 +45,25 @@ class SelectNewBlogHost extends Component {
 	}
 
 	isSubmitButtonDisabled() {
-		const { invalid, pristine, submitting } = this.props;
+		const {
+			invalid,
+			pristine,
+			submitting,
+			fields: { service }
+		} = this.props;
 
-		return invalid || pristine || submitting;
+		const serviceMatchesNeeds = ! service.value || service.value === this.getServiceForNeeds();
+
+		return invalid || pristine || submitting || ! serviceMatchesNeeds;
+	}
+
+	getServiceForNeeds() {
+		const needsToServices = {
+			control: 'pressable',
+			simple: 'wpcom'
+		};
+
+		return needsToServices[ this.props.needs ];
 	}
 
 	renderWpcom() {

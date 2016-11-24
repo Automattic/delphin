@@ -22,6 +22,7 @@ class Success extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchMyDomains();
+		this.props.destroySetupForms();
 	}
 
 	render() {
@@ -74,6 +75,7 @@ class Success extends React.Component {
 }
 
 Success.propTypes = {
+	destroySetupForms: PropTypes.func.isRequired,
 	domain: PropTypes.string,
 	email: PropTypes.string,
 	fetchMyDomains: PropTypes.func.isRequired,

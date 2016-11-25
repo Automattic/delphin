@@ -1,3 +1,6 @@
+// External dependencies
+import deepFreeze from 'deep-freeze';
+
 // Internal dependencies
 import { domainAvailability } from '..';
 
@@ -17,7 +20,7 @@ describe( 'domain availability reducer', () => {
 	} );
 
 	it( 'should return original state when action is empty', () => {
-		const originalState = Object.freeze( {
+		const originalState = deepFreeze( {
 				'domain-name.blog': {
 					data: null,
 					error: null,
@@ -31,7 +34,7 @@ describe( 'domain availability reducer', () => {
 	} );
 
 	it( 'should return original state when action type is not supported', () => {
-		const originalState = Object.freeze( {
+		const originalState = deepFreeze( {
 				'domain-name.blog': {
 					data: null,
 					error: null,
@@ -45,7 +48,7 @@ describe( 'domain availability reducer', () => {
 	} );
 
 	it( 'should return original state when a domainName is not specified', () => {
-		const originalState = Object.freeze( {
+		const originalState = deepFreeze( {
 				'domain-name.blog': {
 					data: null,
 					error: null,
@@ -59,7 +62,7 @@ describe( 'domain availability reducer', () => {
 	} );
 
 	it( 'should add a new domain to the state when there is a domainName in the action', () => {
-		const originalState = Object.freeze( {
+		const originalState = deepFreeze( {
 				'domain-name.blog': {
 					data: null,
 					error: null,
@@ -68,7 +71,7 @@ describe( 'domain availability reducer', () => {
 				}
 			} ),
 			newState = domainAvailability( originalState, { type: 'DOMAIN_AVAILABILITY_FETCH', domainName: 'another-domain-name.blog' } ),
-			expectedState = Object.freeze( {
+			expectedState = {
 				'domain-name.blog': {
 					data: null,
 					error: null,
@@ -81,13 +84,13 @@ describe( 'domain availability reducer', () => {
 					isRequesting: true,
 					hasLoadedFromServer: false,
 				}
-			} );
+			};
 
 		expect( newState ).toEqual( expectedState );
 	} );
 
 	it( 'should NOT overwrite the domain in the state when it already exists', () => {
-		const originalState = Object.freeze( {
+		const originalState = deepFreeze( {
 				'domain-name.blog': {
 					data: null,
 					error: null,

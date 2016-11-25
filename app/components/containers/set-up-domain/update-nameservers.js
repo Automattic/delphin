@@ -10,6 +10,7 @@ import UpdateNameservers from 'components/ui/set-up-domain/update-nameservers';
 import { isRequestingNameservers } from 'reducers/nameservers/selectors';
 import { validateUpdateNameserversForm } from 'lib/domains/nameservers';
 import { fetchNameservers, updateNameservers } from 'actions/nameservers';
+import RequireLogin from 'components/containers/require-login';
 
 export default reduxForm(
 	{
@@ -33,4 +34,4 @@ export default reduxForm(
 		fetchNameservers,
 		goBack
 	}
-)( UpdateNameservers );
+)( RequireLogin( UpdateNameservers ) );

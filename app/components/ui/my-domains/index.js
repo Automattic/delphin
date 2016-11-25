@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import DocumentTitle from 'components/ui/document-title';
 import DomainCardList from 'components/ui/my-domains/domain-card-list';
+import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
 import Satellite from 'components/ui/satellite';
@@ -14,15 +15,11 @@ const MyDomains = React.createClass( {
 	propTypes: {
 		destroySetupForms: PropTypes.func.isRequired,
 		domains: PropTypes.object.isRequired,
-		fetchMyDomains: PropTypes.func.isRequired,
-		isLoggedOut: PropTypes.bool.isRequired,
-		redirectToHome: PropTypes.func.isRequired
+		fetchMyDomains: PropTypes.func.isRequired
 	},
 
 	componentWillMount() {
-		if ( this.props.isLoggedOut ) {
-			this.props.redirectToHome();
-		} else if ( ! this.props.domains.hasLoadedFromServer && ! this.props.domains.isRequesting ) {
+		if ( ! this.props.domains.hasLoadedFromServer && ! this.props.domains.isRequesting ) {
 			this.props.fetchMyDomains();
 		}
 	},
@@ -32,12 +29,6 @@ const MyDomains = React.createClass( {
 		// order to prevent the user from seeing stale form data when they
 		// switch to set up another domain, we destroy them all here.
 		this.props.destroySetupForms();
-	},
-
-	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.isLoggedOut ) {
-			this.props.redirectToHome();
-		}
 	},
 
 	renderDomains() {
@@ -67,4 +58,4 @@ const MyDomains = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( withPageView( MyDomains, 'My Domains' ) );
+export default scrollToTop( withStyles( styles )( withPageView( MyDomains, 'My Domains' ) ) );

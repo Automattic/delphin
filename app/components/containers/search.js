@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import config from 'config';
 import { clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
-import { isLoggedIn } from 'reducers/user/selectors';
 import Search from 'components/ui/search';
 import { redirect } from 'actions/routes';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
@@ -19,7 +18,6 @@ export default connect(
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
 		query: ownProps.location.query.q || '',
 		sort: ownProps.location.query.sort,
-		isLoggedIn: isLoggedIn( state ),
 		defaultTLD: config( 'default_tld' )
 	} ),
 	( dispatch, ownProps ) => ( {
@@ -52,7 +50,7 @@ export default connect(
 			} ) );
 		},
 
-		selectDomain( domainProduct, isUserLoggedIn ) {
+		selectDomain( domainProduct ) {
 			dispatch( recordTracksEvent( 'delphin_search_result_select', {
 				is_premium: domainProduct.isPremium,
 				relevance: domainProduct.relevance,
@@ -60,11 +58,7 @@ export default connect(
 			} ) );
 			dispatch( selectDomain( domainProduct ) );
 
-			if ( isUserLoggedIn ) {
-				dispatch( redirect( 'contactInformation' ) );
-			} else {
-				dispatch( redirect( 'signupUser' ) );
-			}
+			dispatch( redirect( 'contactInformation' ) );
 		},
 
 		fetchDomainSuggestions( query ) {
@@ -92,10 +86,6 @@ export default connect(
 			}
 
 			dispatchProps.fetchDomainSuggestions( query );
-		},
-
-		selectDomain( domainProduct ) {
-			dispatchProps.selectDomain( domainProduct, stateProps.isLoggedIn );
 		}
 	} )
 )( Search );

@@ -11,7 +11,6 @@ import { contactSupport } from 'actions/contact-support';
 import { getBlogNeedSelected } from 'reducers/form/selectors';
 import { isContactingSupport } from 'reducers/contact-support/selectors';
 import { recordTracksEvent } from 'actions/analytics';
-import scrollToTop from 'components/containers/scroll-to-top';
 
 export default reduxForm(
 	{
@@ -30,4 +29,4 @@ export default reduxForm(
 		redirect,
 		recordTracksEvent,
 	}, dispatch )
-)( scrollToTop( RequireLogin( ConnectNewBlogToOther ) ) );
+)( RequireLogin( ConnectNewBlogToOther ) );

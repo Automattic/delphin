@@ -8,6 +8,7 @@ import { contactSupport } from 'actions/contact-support';
 import { isContactingSupport } from 'reducers/contact-support/selectors';
 import { recordTracksEvent } from 'actions/analytics';
 import { redirect } from 'actions/routes';
+import RequireLogin from 'components/containers/require-login';
 
 export default reduxForm(
 	{
@@ -25,4 +26,4 @@ export default reduxForm(
 		redirect,
 		recordTracksEvent,
 	}
-)( ContactConcierge );
+)( RequireLogin( ContactConcierge ) );

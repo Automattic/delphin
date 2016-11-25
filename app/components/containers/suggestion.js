@@ -10,8 +10,8 @@ import Suggestion from 'components/ui/search/suggestion';
 export default connect(
 	( state, ownProps ) => ( {
 		isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName ),
-		isRequestingAvailability: getDomainAvailabilityHasLoaded( state, ownProps.suggestion.domainName ),
-		hasLoadedAvailability: getDomainAvailabilityIsRequesting( state, ownProps.suggestion.domainName )
+		isRequestingAvailability: getDomainAvailabilityIsRequesting( state, ownProps.suggestion.domainName ),
+		hasLoadedAvailability: getDomainAvailabilityHasLoaded( state, ownProps.suggestion.domainName )
 	} ),
 	( dispatch ) => ( {
 		checkDomainAvailability( domainProduct ) {

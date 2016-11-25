@@ -8,11 +8,9 @@ import { recordTracksEvent } from 'actions/analytics';
 import Suggestion from 'components/ui/search/suggestion';
 
 export default connect(
-	( state, ownProps ) => {
-		return ( {
-			isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName )
-		} );
-	},
+	( state, ownProps ) => ( {
+		isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName )
+	} ),
 	( dispatch ) => ( {
 		checkDomainAvailability( domainProduct ) {
 			dispatch( recordTracksEvent( 'delphin_domain_availability_check', {

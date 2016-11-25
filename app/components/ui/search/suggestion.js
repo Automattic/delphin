@@ -11,25 +11,20 @@ import styles from './styles.scss';
 const Suggestion = React.createClass( {
 	propTypes: {
 		checkDomainAvailability: PropTypes.func.isRequired,
+		isAvailable: PropTypes.bool.isRequired,
 		isBestMatch: PropTypes.bool.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		suggestion: PropTypes.object.isRequired
 	},
 
-	selectDomain() {
-		// Do an availability check
+	checkDomainAvailability() {
 		this.props.checkDomainAvailability( this.props.suggestion );
-		// We'll need some analytics here
-		/*dispatch( recordTracksEvent( 'delphin_search_result_select', {
-			is_premium: domainProduct.isPremium,
-			relevance: domainProduct.relevance,
-			num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
-		} ) );*/
+	},
 
-		// If the domain is available then select it
-		this.props.selectDomain( this.props.suggestion );
-
-		// Otherwise show a message to the user
+	componentWillReceiveProps() {
+		if ( this.props.isAvailable ) { // TODO - this is always false - I don't know why
+			this.props.selectDomain( this.props.suggestion );
+		}
 	},
 
 	render() {
@@ -37,7 +32,7 @@ const Suggestion = React.createClass( {
 		const { cost } = domainDetails;
 
 		return (
-			<li className={ styles.suggestion } onClick={ this.selectDomain }>
+			<li className={ styles.suggestion } onClick={ this.checkDomainAvailability }>
 				<div className={ styles.suggestionInfo }>
 					{ this.props.isBestMatch && (
 						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>

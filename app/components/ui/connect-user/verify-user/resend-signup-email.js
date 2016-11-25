@@ -34,7 +34,7 @@ const ResendSignupEmail = React.createClass( {
 
 	render() {
 		let text = i18n.translate(
-			"We sent the code to %(email)s. If you still can't find it, {{supportLink}}send us a message{{/supportLink}} or {{backLink}}try a different email{{/backLink}}.",
+			"We sent the code to %(email)s. If you still can't find it, {{backLink}}try a different address{{/backLink}} or {{supportLink}}contact support{{/supportLink}}.",
 			{
 				args: { email: this.props.email },
 				components: {

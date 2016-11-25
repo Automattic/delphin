@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import config from 'config';
 import { checkDomainAvailability } from 'actions/domain-availability';
-import Suggestion from 'components/ui/search/suggestion';
+import { getDomainAvailability } from 'reducers/domain-availability/selectors';
 import { redirect } from 'actions/routes';
 import { recordTracksEvent } from 'actions/analytics';
+import { selectDomain } from 'actions/domain-search';
+import Suggestion from 'components/ui/search/suggestion';
 
 export default connect(
 	( state, ownProps ) => {
-		console.log( state );
 		return ( {
-			//isAvailable: state.domainAvailability.data.results.isAvailable,
+			isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName )
 		} );
 	},
 	( dispatch, ownProps ) => ( {

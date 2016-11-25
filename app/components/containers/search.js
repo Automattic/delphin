@@ -86,10 +86,6 @@ export default connect(
 			}
 
 			dispatchProps.fetchDomainSuggestions( query );
-		},
-
-		selectDomain( domainProduct ) {
-			dispatchProps.selectDomain( domainProduct );
 		}
 	} )
 )( Search );

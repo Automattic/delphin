@@ -27,7 +27,7 @@ const Suggestion = React.createClass( {
 		} ) );*/
 
 		// If the domain is available then select it
-		//this.props.selectDomain( this.props.suggestion );
+		this.props.selectDomain( this.props.suggestion );
 
 		// Otherwise show a message to the user
 	},

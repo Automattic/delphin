@@ -11,7 +11,6 @@ import RequireLogin from 'components/containers/require-login';
 export default connect(
 	state => ( {
 		domains: state.user.myDomains,
-		isRequesting: state.domainSearch.isRequesting
 	} ),
 	dispatch => (
 		bindActionCreators( {

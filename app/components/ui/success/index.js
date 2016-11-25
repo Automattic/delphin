@@ -14,12 +14,6 @@ import Button from 'components/ui/button';
 import { getPath } from 'routes';
 
 class Success extends React.Component {
-	componentWillMount() {
-		if ( ! this.props.hasSelectedDomain ) {
-			this.props.redirect( 'home' );
-		}
-	}
-
 	componentDidMount() {
 		this.props.fetchMyDomains();
 		this.props.destroySetupForms();
@@ -77,10 +71,7 @@ class Success extends React.Component {
 Success.propTypes = {
 	destroySetupForms: PropTypes.func.isRequired,
 	domain: PropTypes.string,
-	email: PropTypes.string,
-	fetchMyDomains: PropTypes.func.isRequired,
-	hasSelectedDomain: PropTypes.bool.isRequired,
-	redirect: PropTypes.func.isRequired,
+	fetchMyDomains: PropTypes.func.isRequired
 };
 
 export default scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) );

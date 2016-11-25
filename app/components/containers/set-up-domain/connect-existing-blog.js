@@ -5,6 +5,7 @@ import get from 'lodash/get';
 
 // Internal dependencies
 import ConnectExistingBlog from 'components/ui/set-up-domain/connect-existing-blog';
+import RequireLogin from 'components/containers/require-login';
 import { extractHostName } from 'lib/domains';
 import { redirect } from 'actions/routes';
 import { getService } from 'reducers/service/selectors';
@@ -34,4 +35,4 @@ export default connect(
 		redirect,
 		updateDomain
 	}, dispatch )
-)( ConnectExistingBlog );
+)( RequireLogin( ConnectExistingBlog ) );

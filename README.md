@@ -26,4 +26,4 @@ You can execute tests with `npm test`.
 
 Code in `/lib` and `/reducers` should have unit tests. Moreover these tests should live in a `/test` directory inside the corresponding module. We use [Jest](https://facebook.github.io/jest/) for writing tests and encourage [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD).
 
-You can execute and individual test with `npm test --app/reducers/ui/domain-search/tests`
+You can execute an individual test with `npm test --app/reducers/ui/domain-search/tests`.

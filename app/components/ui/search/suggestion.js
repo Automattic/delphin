@@ -11,8 +11,10 @@ import styles from './styles.scss';
 const Suggestion = React.createClass( {
 	propTypes: {
 		checkDomainAvailability: PropTypes.func.isRequired,
+		hasLoadedAvailability: PropTypes.bool.isRequired,
 		isAvailable: PropTypes.bool.isRequired,
 		isBestMatch: PropTypes.bool.isRequired,
+		isRequestingAvailability: PropTypes.bool.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		suggestion: PropTypes.object.isRequired
 	},
@@ -22,9 +24,17 @@ const Suggestion = React.createClass( {
 	},
 
 	componentWillReceiveProps() {
-		if ( this.props.isAvailable ) { // TODO - this is always false - I don't know why
+		if ( this.props.hasLoadedAvailability && this.props.isAvailable ) {
 			this.props.selectDomain( this.props.suggestion );
 		}
+	},
+
+	buttonText() {
+		if ( this.props.isRequestingAvailability ) {
+			return i18n.translate( 'Adding to cart…' );
+		}
+
+		return i18n.translate( 'Select' );
 	},
 
 	render() {
@@ -47,7 +57,7 @@ const Suggestion = React.createClass( {
 					</div>
 				</div>
 				<div className={ styles.buyButton }>
-					{ i18n.translate( 'Select' ) }
+					{ this.buttonText() }
 				</div>
 			</li>
 		);

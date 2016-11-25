@@ -1,11 +1,26 @@
 /**
- * Gets the status of the availability of a given domain name from the state
+ * Gets the requesting status of the availability of a given domain name from the state
  *
  * @param {object} state - Global store
  * @param {string} domainName - The domain name to find out about
- * @return {bool} Whether or not the domain availability has been fetched
+ * @return {bool} Whether or not the domain availability is being fetched
  */
-export const getDomainAvailabilityLoading = ( state, domainName ) => {
+export const getDomainAvailabilityIsRequesting = ( state, domainName ) => {
+	if ( ! state.domainAvailability[ domainName ] ) {
+		return false;
+	}
+
+	return state.domainAvailability[ domainName ].isRequesting;
+};
+
+/**
+ * Gets the loaded status of the availability of a given domain name from the state
+ *
+ * @param {object} state - Global store
+ * @param {string} domainName - The domain name to find out about
+ * @return {bool} Whether or not the domain availability has been loaded
+ */
+export const getDomainAvailabilityHasLoaded = ( state, domainName ) => {
 	if ( ! state.domainAvailability[ domainName ] ) {
 		return false;
 	}

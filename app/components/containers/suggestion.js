@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import { checkDomainAvailability } from 'actions/domain-availability';
-import { getDomainAvailability } from 'reducers/domain-availability/selectors';
+import { getDomainAvailability, getDomainAvailabilityHasLoaded, getDomainAvailabilityIsRequesting } from 'reducers/domain-availability/selectors';
 import { recordTracksEvent } from 'actions/analytics';
 import Suggestion from 'components/ui/search/suggestion';
 
 export default connect(
 	( state, ownProps ) => ( {
-		isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName )
+		isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName ),
+		isRequestingAvailability: getDomainAvailabilityHasLoaded( state, ownProps.suggestion.domainName ),
+		hasLoadedAvailability: getDomainAvailabilityIsRequesting( state, ownProps.suggestion.domainName )
 	} ),
 	( dispatch ) => ( {
 		checkDomainAvailability( domainProduct ) {

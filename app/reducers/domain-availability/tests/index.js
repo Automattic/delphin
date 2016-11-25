@@ -30,7 +30,7 @@ describe( 'domain availability reducer', () => {
 			} ),
 			newState = domainAvailability( originalState, {} );
 
-		expect( newState ).toEqual( originalState );
+		expect( newState ).toBe( originalState );
 	} );
 
 	it( 'should return original state when action type is not supported', () => {
@@ -44,7 +44,7 @@ describe( 'domain availability reducer', () => {
 			} ),
 			newState = domainAvailability( originalState, { type: 'ORDER_CHEESE_BURGER' } );
 
-		expect( newState ).toEqual( originalState );
+		expect( newState ).toBe( originalState );
 	} );
 
 	it( 'should return original state when a domainName is not specified', () => {
@@ -58,7 +58,7 @@ describe( 'domain availability reducer', () => {
 			} ),
 			newState = domainAvailability( originalState, { type: 'DOMAIN_AVAILABILITY_FETCH' } );
 
-		expect( newState ).toEqual( originalState );
+		expect( newState ).toBe( originalState );
 	} );
 
 	it( 'should add a new domain to the state when there is a domainName in the action', () => {
@@ -106,6 +106,6 @@ describe( 'domain availability reducer', () => {
 			} ),
 			newState = domainAvailability( originalState, { type: 'DOMAIN_AVAILABILITY_FETCH', domainName: 'another-domain-name.blog' } );
 
-		expect( newState ).toEqual( originalState );
+		expect( newState ).toBe( originalState );
 	} );
 } );

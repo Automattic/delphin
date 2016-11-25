@@ -8,7 +8,7 @@ export const adTrackingMiddleware = () => next => action => {
 	switch ( type ) {
 		case TRANSACTION_CREATE_COMPLETE:
 			const domainCostDetail = action.domain.details.find( detail => detail.productSlug === 'delphin-domain' ),
-				domainCost = domainCostDetail ? domainCostDetail.cost.match( /\d+/ )[ 0 ] : null,
+				domainCost = domainCostDetail && domainCostDetail.costRaw,
 				domainCurrencyCode = action.domain.currencyCode;
 			analytics.conversion.recordPurchase( action.receiptId, domainCost, domainCurrencyCode );
 	}

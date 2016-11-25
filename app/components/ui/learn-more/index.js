@@ -114,7 +114,7 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="refunds">
 							<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
-							<p>{ i18n.translate( 'Domains registered on get.blog can be canceled for a full refund, within five days of purchase. Contact us at {{link}}help@get.blog{{/link}} to request a refund.', {
+							<p>{ i18n.translate( 'Domains registered on get.blog can be canceled for a full refund within five days of purchase. Contact us at {{link}}help@get.blog{{/link}} to request a refund.', {
 								components: {
 									link: <a href={ config( 'support_link' ) } />
 								}

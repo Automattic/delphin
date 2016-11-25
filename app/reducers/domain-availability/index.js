@@ -9,7 +9,7 @@ import {
 export const domainAvailability = ( state = {}, action ) => {
 	const { domainName } = action;
 
-	if ( domainName && state.domainName ) {
+	if ( domainName && state[ domainName ] ) {
 		return state;
 	}
 

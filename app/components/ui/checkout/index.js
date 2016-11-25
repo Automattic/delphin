@@ -284,8 +284,8 @@ const Checkout = React.createClass( {
 								<span className={ styles.itemDescription }>
 									{ this.props.domain.domainName }
 								</span>
-								<span>{ i18n.translate( '%(domainCost)s per year', {
-									args: { domainCost },
+								<span>{ i18n.translate( '%(cost)s per year', {
+									args: { cost: domainCost },
 								} ) }</span>
 							</div>
 							<div className={ styles.orderItem }>

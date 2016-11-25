@@ -1,3 +1,6 @@
+// External dependencies
+import isEqual from 'lodash/isEqual';
+
 // Internal dependencies
 import { createRequestReducer } from 'lib/create-request-reducer';
 import {
@@ -9,20 +12,19 @@ import {
 export const domainAvailability = ( state = {}, action ) => {
 	const { domainName } = action;
 
-	if ( domainName && state[ domainName ] ) {
-		return state;
-	}
-
 	if ( ! domainName ) {
 		return state;
 	}
 
-	const domainState = {};
-	domainState[ domainName ] = createRequestReducer( {
+	const domainState = createRequestReducer( {
 		loading: DOMAIN_AVAILABILITY_FETCH,
 		success: DOMAIN_AVAILABILITY_FETCH_COMPLETE,
 		fail: DOMAIN_AVAILABILITY_FETCH_FAIL
 	} )( state[ domainName ], action );
 
-	return Object.assign( {}, state, domainState );
+	if ( isEqual( state[ domainName ], domainState ) ) {
+		return state;
+	}
+
+	return { ...state, [ domainName ]: domainState };
 };

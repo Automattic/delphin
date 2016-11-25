@@ -20,7 +20,9 @@ const Suggestion = React.createClass( {
 	},
 
 	checkDomainAvailability() {
-		this.props.checkDomainAvailability( this.props.suggestion );
+		if ( ! this.props.isRequestingAvailability ) {
+			this.props.checkDomainAvailability( this.props.suggestion );
+		}
 	},
 
 	componentWillReceiveProps() {

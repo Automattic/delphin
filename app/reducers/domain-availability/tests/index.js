@@ -108,4 +108,37 @@ describe( 'domain availability reducer', () => {
 
 		expect( newState ).toBe( originalState );
 	} );
+
+	it( 'should update a domain state when there is the fetch complete action provided', () => {
+		const originalState = deepFreeze( {
+				'domain-name.blog': {
+					data: null,
+					error: null,
+					isRequesting: true,
+					hasLoadedFromServer: false,
+				}
+			} ),
+			newState = domainAvailability( originalState, {
+				type: 'DOMAIN_AVAILABILITY_FETCH_COMPLETE',
+				domainName: 'domain-name.blog',
+				results: {
+					isAvailable: true
+				}
+			} ),
+			expectedState = {
+				'domain-name.blog': {
+					data: {
+						domainName: 'domain-name.blog',
+						results: {
+							isAvailable: true
+						}
+					},
+					error: null,
+					isRequesting: false,
+					hasLoadedFromServer: true,
+				}
+			};
+
+		expect( newState ).toEqual( expectedState );
+	} );
 } );

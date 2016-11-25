@@ -127,6 +127,8 @@ export function createTransaction() {
 				receiptId
 			} ),
 			fail: ( error ) => failThunkDispatch => {
+				// we may catch an error thrown by an analytics client here,
+				// use error.toString in case a non-Error object is thrown
 				failThunkDispatch( addNotice( {
 					message: error.message || error.toString(),
 					status: 'error'

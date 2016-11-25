@@ -129,7 +129,7 @@ let publicRoutes = [
 				getComponent: getComponent( 'setUpDomain', 'contactUsExistingBlog' )
 			},
 			{
-				path: 'set-up-domain/:domainName/contact-concierge(/:hostName)',
+				path: 'set-up-domain/:domainName/contact-assistant(/:hostName)',
 				slug: 'contactConcierge',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'contactConcierge' )

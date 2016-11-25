@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
-import { checkDomainAvailability } from 'actions/domain-search';
+import { checkDomainAvailability } from 'actions/domain-availability';
 import Suggestion from 'components/ui/search/suggestion';
 import { redirect } from 'actions/routes';
 import { recordTracksEvent } from 'actions/analytics';

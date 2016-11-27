@@ -44,23 +44,29 @@ function addLocaleQueryParam( locale, query, apiNamespace ) {
 }
 
 /**
- * Adds arbitrary properties to the local storage `delphin:checkout` value to
- * checkout endpoint requests.
+ * Adds arbitrary properties from the local storage `delphin:checkout` value to checkout endpoint requests.
  *
  * @param {string} path - Endpoint path
  * @param {object} query - Query parameter object
  * @return {object} New query parameter object with additional properties
  */
 function addLocalStorageCheckoutPropertiesToQuery( path, query ) {
-	const checkoutPaths = [ '/me/paygate-configuration', '/delphin/domains', '/delphin/transactions' ];
+	const isCheckoutPath = [
+		'/me/paygate-configuration',
+		'/delphin/domain/',
+		'/delphin/domains',
+		'/delphin/transactions'
+	].some( checkoutPath => {
+		return path.startsWith( checkoutPath );
+	} );
 
-	const checkoutPropertiesString = localStorage.getItem( 'delphin:checkout' );
+	const checkoutProperties = localStorage.getItem( 'delphin:checkout' );
 
-	if ( checkoutPaths.indexOf( path ) === -1 || ! checkoutPropertiesString ) {
+	if ( ! isCheckoutPath || ! checkoutProperties ) {
 		return query;
 	}
 
-	const [ key, value ] = checkoutPropertiesString.split( ':' );
+	const [ key, value ] = checkoutProperties.split( ':' );
 
 	return Object.assign( {}, query, {
 		[ key ]: value

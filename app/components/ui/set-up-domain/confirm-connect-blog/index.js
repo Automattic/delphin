@@ -26,35 +26,32 @@ class ConfirmConnectBlog extends Component {
 		recordTracksEvent( 'delphin_connect_success_click', { host: service } );
 
 		let destination;
-		if ( service === 'pressable' ) {
-			if ( blogType === 'new' ) {
-				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=true';
-			}
 
-			if ( blogType === 'existing' ) {
-				destination = 'https://my.pressable.com?domain=' + domainName + '&new_site=false';
+		if ( service === 'pressable' ) {
+			destination = 'https://my.pressable.com/signup/five-sites?domain=' + domainName + '&new_site=';
+
+			if ( blogType === 'new' ) {
+				destination += 'true';
+			} else if ( blogType === 'existing' ) {
+				destination += 'false';
+			} else {
+				throw new Error( "Unable to connect domain to Pressable because of missing destination for blog type '" + blogType + "'" );
 			}
 
 			window.open( destination, '_blank' );
-
-			return;
-		}
-
-		if ( service === 'wpcom' ) {
+		} else if ( service === 'wpcom' ) {
 			if ( blogType === 'new' ) {
 				destination = 'https://wordpress.com/start/get-dot-blog?domain=' + domainName;
-			}
-
-			if ( blogType === 'existing' ) {
+			} else if ( blogType === 'existing' ) {
 				destination = 'https://wordpress.com/checkout/' + hostName + '/domain-mapping:' + domainName;
+			} else {
+				throw new Error( "Unable to connect domain to WordPress.com because of missing destination for blog type '" + blogType + "'" );
 			}
 
 			this.props.logInToWpcom( destination );
-
-			return;
+		} else {
+			throw new Error( "Unable to connect domain to host because of unsupported service '" + service + "'" );
 		}
-
-		throw new Error( 'This service is not supported' );
 	}
 
 	render() {

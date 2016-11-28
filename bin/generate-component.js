@@ -1,7 +1,10 @@
+const clear = require( 'clear' );
 const inquirer = require( 'inquirer' );
 const includes = require( 'lodash/includes' );
 
 const scaffolding = require( './lib/scaffolding' );
+
+clear(); // clear the terminal
 
 inquirer.prompt( [
 	{

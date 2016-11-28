@@ -5,21 +5,7 @@ const path = require( 'path' );
 const camelCase = require( 'lodash/camelcase' );
 const upperFirst = require( 'lodash/upperfirst' );
 const kebabCase = require( 'lodash/kebabCase' );
-
-const createModule = ( path, externalDependencies, internalDependencies, body ) => {
-	const module = [].concat(
-		'// External dependencies',
-		externalDependencies,
-		'',
-		'// Internal dependencies',
-		internalDependencies,
-		'',
-		body,
-		''
-	).join( '\n' );
-
-	fs.writeFileSync( path, module, 'utf8' );
-};
+const createModule = require( './lib/scaffolding' ).createModule;
 
 const name = process.argv[ 2 ];
 const directoryName = kebabCase( name );

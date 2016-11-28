@@ -37,6 +37,8 @@ inquirer.prompt( [
 		when: answers => includes( answers.options, 'subDirectory' )
 	},
 ] ).then( answers => {
+	console.log(); // pad the output
+
 	const rawName = answers.rawName,
 		isStateless = answers.stateless,
 		subDirectory = answers.subDirectory || '',

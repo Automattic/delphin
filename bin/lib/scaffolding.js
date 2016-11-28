@@ -15,8 +15,16 @@ const createDirectory = path => {
 
 		if ( ! fs.existsSync( current ) ) {
 			fs.mkdirSync( current );
+
+			console.log( `Created ${ current }` );
 		}
 	} );
+};
+
+const createFile = ( path, content ) => {
+	fs.writeFileSync( path, content, 'utf8' );
+
+	console.log( `Created ${ path }` );
 };
 
 const createModule = ( path, externalDependencies, internalDependencies, body, exports ) => {
@@ -35,7 +43,7 @@ const createModule = ( path, externalDependencies, internalDependencies, body, e
 		''
 	).join( '\n' );
 
-	fs.writeFileSync( path, module, 'utf8' );
+	createFile( path, module );
 };
 
 const getStatelessComponent = name => (

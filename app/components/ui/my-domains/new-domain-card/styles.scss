@@ -4,6 +4,7 @@
 .new-domain-card {
 	align-items: center;
 	border: 2px dashed $gray-medium;
+	box-sizing: border-box;
 	color: $gray-dark;
 	cursor: pointer;
 	display: flex;

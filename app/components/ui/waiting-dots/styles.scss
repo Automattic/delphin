@@ -2,6 +2,31 @@
 
 .waiting-dots {
 	margin: auto;
+
+	div {
+		animation-duration: 0.6s;
+		animation-iteration-count: infinite;
+		animation-name: waiting;
+		background: $gray;
+		border-radius: 50%;
+		display: inline-block;
+		height: 8px;
+		margin-left: 3px;
+		vertical-align: middle;
+		width: 8px;
+	}
+}
+
+.dot-1 {
+	animation-delay: 0.2s;
+}
+
+.dot-2 {
+	animation-delay: 0.3s;
+}
+
+.dot-3 {
+	animation-delay: 0.4s;
 }
 
 .text {
@@ -9,39 +34,16 @@
 	font-size: 0;
 }
 
-.dot {
-	animation: waiting 0.6s infinite;
-	background: $gray;
-	border-radius: 50%;
-	display: inline-block;
-	height: 8px;
-	margin-left: 3px;
-	width: 8px;
-	vertical-align: middle;
-
-	&:nth-child( 1 ) {
-		animation-delay: 0.2s;
-	}
-
-	&:nth-child( 2 ) {
-		animation-delay: 0.3s;
-	}
-
-	&:nth-child( 3 ){
-		animation-delay: 0.4s;
-	}
-}
-
 @keyframes waiting {
-	0%{
+	0% {
 		background: transparent;
 	}
 
-	50%{
+	50% {
 		background: $gray;
 	}
 
-	100%{
+	100% {
 		background: transparent;
 	}
 }

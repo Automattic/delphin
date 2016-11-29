@@ -21,14 +21,16 @@ const Suggestion = React.createClass( {
 		suggestion: PropTypes.object.isRequired
 	},
 
-	checkDomainAvailability() {
-		if ( ! this.props.isRequestingAvailability ) {
+	selectDomain() {
+		if ( this.props.hasLoadedAvailability && this.props.isAvailable ) {
+			this.props.selectDomain( this.props.suggestion );
+		} else if ( ! this.props.isRequestingAvailability ) {
 			this.props.checkDomainAvailability( this.props.suggestion );
 		}
 	},
 
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.hasLoadedAvailability && nextProps.isAvailable ) {
+		if ( ! this.props.hasLoadedAvailability && nextProps.hasLoadedAvailability && nextProps.isAvailable ) {
 			nextProps.selectDomain( nextProps.suggestion );
 		}
 	},
@@ -85,7 +87,7 @@ const Suggestion = React.createClass( {
 		} );
 
 		return (
-			<li className={ className } onClick={ this.checkDomainAvailability }>
+			<li className={ className } onClick={ this.selectDomain }>
 				<div className={ styles.suggestionInfo }>
 					{ this.renderBestMatch() }
 

@@ -25,9 +25,9 @@ const Suggestion = React.createClass( {
 		}
 	},
 
-	componentWillReceiveProps() {
-		if ( this.props.hasLoadedAvailability && this.props.isAvailable ) {
-			this.props.selectDomain( this.props.suggestion );
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.hasLoadedAvailability && nextProps.isAvailable ) {
+			nextProps.selectDomain( nextProps.suggestion );
 		}
 	},
 

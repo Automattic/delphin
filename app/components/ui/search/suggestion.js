@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
@@ -15,6 +16,7 @@ const Suggestion = React.createClass( {
 		isAvailable: PropTypes.bool.isRequired,
 		isBestMatch: PropTypes.bool.isRequired,
 		isRequestingAvailability: PropTypes.bool.isRequired,
+		isRequestingAvailabilityForOtherDomain: PropTypes.bool.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		suggestion: PropTypes.object.isRequired
 	},
@@ -42,9 +44,13 @@ const Suggestion = React.createClass( {
 	render() {
 		const domainDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } );
 		const { cost } = domainDetails;
+		const className = classNames( styles.suggestion, {
+			[ styles.isRequesting ]: this.props.isRequestingAvailability,
+			[ styles.isDisabled ]: this.props.isRequestingAvailabilityForOtherDomain
+		} );
 
 		return (
-			<li className={ styles.suggestion } onClick={ this.checkDomainAvailability }>
+			<li className={ className } onClick={ this.checkDomainAvailability }>
 				<div className={ styles.suggestionInfo }>
 					{ this.props.isBestMatch && (
 						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>

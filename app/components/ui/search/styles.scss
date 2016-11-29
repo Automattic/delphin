@@ -123,13 +123,20 @@
 	transition: background 150ms ease-in, border 150ms ease-in;
 	width: 100%;
 
-	&:hover {
+	&.is-disabled,
+	&.is-disabled .buy-button {
+		background: $gray-light;
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	&:hover,
+	&.is-requesting {
 		.suggestion-title::after {
 			width: 70px;
 		}
 
 		.buy-button {
-
 			&::before {
 				background: $gray;
 				opacity: 1;

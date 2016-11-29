@@ -122,7 +122,7 @@
 	padding: 0;
 	position: relative;
 	text-decoration: none;
-	transition: background 150ms ease-in, border 150ms ease-in;
+	transition: background 150ms ease-in, border 150ms ease-in, opacity 150ms ease-in;
 	width: 100%;
 
 	&.is-taken {
@@ -131,7 +131,6 @@
 
 	&.is-disabled,
 	&.is-disabled .buy-button {
-		background: $gray-light;
 		opacity: 0.5;
 		pointer-events: none;
 	}

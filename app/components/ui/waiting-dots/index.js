@@ -10,9 +10,9 @@ import styles from './styles.scss';
 const WaitingDots = ( { className } ) => (
 	<div className={ classNames( styles.waitingDots, className ) }>
 		<span className={ styles.text }>{ i18n.translate( 'Waiting…' ) }</span>
-		<div className={ styles.dot }></div>
-		<div className={ styles.dot }></div>
-		<div className={ styles.dot }></div>
+		<div className={ styles.dot1 }></div>
+		<div className={ styles.dot2 }></div>
+		<div className={ styles.dot3 }></div>
 	</div>
 );
 

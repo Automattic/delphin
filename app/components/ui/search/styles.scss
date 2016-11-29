@@ -1,6 +1,7 @@
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
+@import 'app/styles/assets';
 
 .search {
 	margin-bottom: 30px;
@@ -162,15 +163,21 @@
 
 .suggestion-taken-message-container {
 	background: $white-transparent;
+	display: flex;
+	flex-direction: column;
 	height: 100%;
+	justify-content: center;
 	position: absolute;
 	text-align: center;
 	width: 100%;
 }
 
 .suggestion-taken-message {
+	background: url( #{$image-assets-url}sad-blobby.svg ) no-repeat center top;
 	font-size: 1.6rem;
-	margin: 100px 15px 0;
+	line-height: 1.4;
+	margin: 0 20px;
+	padding-top: 70px;
 }
 
 @keyframes fadein {

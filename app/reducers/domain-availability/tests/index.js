@@ -47,20 +47,6 @@ describe( 'domain availability reducer', () => {
 		expect( newState ).toBe( originalState );
 	} );
 
-	it( 'should return original state when a domainName is not specified', () => {
-		const originalState = deepFreeze( {
-				'domain-name.blog': {
-					data: null,
-					error: null,
-					isRequesting: true,
-					hasLoadedFromServer: false,
-				}
-			} ),
-			newState = domainAvailability( originalState, { type: 'DOMAIN_AVAILABILITY_FETCH' } );
-
-		expect( newState ).toBe( originalState );
-	} );
-
 	it( 'should add a new domain to the state when there is a domainName in the action', () => {
 		const originalState = deepFreeze( {
 				'domain-name.blog': {

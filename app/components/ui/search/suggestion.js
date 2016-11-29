@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import PartialUnderline from 'components/ui/partial-underline';
+import WaitingDots from 'components/ui/waiting-dots';
 import styles from './styles.scss';
 
 const Suggestion = React.createClass( {
@@ -37,7 +38,7 @@ const Suggestion = React.createClass( {
 
 	buttonText() {
 		if ( this.props.isRequestingAvailability ) {
-			return i18n.translate( 'Adding to cart…' );
+			return <WaitingDots />;
 		}
 
 		return i18n.translate( 'Select' );

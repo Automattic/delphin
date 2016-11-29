@@ -41,10 +41,45 @@ const Suggestion = React.createClass( {
 		return i18n.translate( 'Select' );
 	},
 
+	isTaken() {
+		const { isAvailable, hasLoadedAvailability } = this.props;
+
+		return hasLoadedAvailability && ! isAvailable;
+	},
+
+	renderSuggestionTakenMessage() {
+		if ( ! this.isTaken() ) {
+			return null;
+		}
+
+		return (
+			<div className={ styles.suggestionTakenMessageContainer }>
+				<div className={ styles.suggestionTakenMessage }>
+					{ i18n.translate( 'Sorry, %(domainName)s has been purchased recently and is no longer available.', {
+						args: { domainName: this.props.suggestion.domainName }
+					} ) }
+				</div>
+			</div>
+		);
+	},
+
+	renderBestMatch() {
+		const { isBestMatch } = this.props;
+
+		if ( ! isBestMatch || this.isTaken() ) {
+			return null;
+		}
+
+		return (
+			<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
+		);
+	},
+
 	render() {
 		const domainDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } );
 		const { cost } = domainDetails;
 		const className = classNames( styles.suggestion, {
+			[ styles.isTaken ]: ! this.props.isAvailable && this.props.hasLoadedAvailability,
 			[ styles.isRequesting ]: this.props.isRequestingAvailability,
 			[ styles.isDisabled ]: this.props.isRequestingAvailabilityForOtherDomain
 		} );
@@ -52,9 +87,8 @@ const Suggestion = React.createClass( {
 		return (
 			<li className={ className } onClick={ this.checkDomainAvailability }>
 				<div className={ styles.suggestionInfo }>
-					{ this.props.isBestMatch && (
-						<div className={ styles.exactMatch }>{ i18n.translate( 'Best match' ) }</div>
-					) }
+					{ this.renderBestMatch() }
+
 					<PartialUnderline className={ styles.suggestionTitle }>
 						{ this.props.suggestion.domainName }
 					</PartialUnderline>
@@ -67,6 +101,8 @@ const Suggestion = React.createClass( {
 				<div className={ styles.buyButton }>
 					{ this.buttonText() }
 				</div>
+
+				{ this.renderSuggestionTakenMessage() }
 			</li>
 		);
 	}

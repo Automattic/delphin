@@ -5,7 +5,7 @@
  * @param {string} domainName - The domain name to find out about
  * @return {bool} Whether or not the domain availability is being fetched
  */
-export const getDomainAvailabilityIsRequesting = ( state, domainName ) => {
+export const isDomainAvailabilityRequesting = ( state, domainName ) => {
 	if ( ! state.domainAvailability[ domainName ] ) {
 		return false;
 	}
@@ -20,7 +20,7 @@ export const getDomainAvailabilityIsRequesting = ( state, domainName ) => {
  * @param {string} domainName - The domain name to find out about
  * @return {bool} Whether or not the domain availability has been loaded
  */
-export const getDomainAvailabilityHasLoaded = ( state, domainName ) => {
+export const hasDomainAvailabilityLoaded = ( state, domainName ) => {
 	if ( ! state.domainAvailability[ domainName ] ) {
 		return false;
 	}

@@ -119,9 +119,14 @@
 	margin-top: 15px;
 	max-width: 450px;
 	padding: 0;
+	position: relative;
 	text-decoration: none;
 	transition: background 150ms ease-in, border 150ms ease-in;
 	width: 100%;
+
+	&.is-taken {
+		pointer-events: none;
+	}
 
 	&.is-disabled,
 	&.is-disabled .buy-button {
@@ -153,6 +158,19 @@
 	@include breakpoint( '>1040px' ) {
 		width: 31%;
 	}
+}
+
+.suggestion-taken-message-container {
+	background: $white-transparent;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+
+.suggestion-taken-message {
+	font-size: 1.6rem;
+	margin: 100px 15px 0;
 }
 
 @keyframes fadein {

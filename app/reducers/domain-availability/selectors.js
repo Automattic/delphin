@@ -1,3 +1,6 @@
+// External dependencies
+import get from 'lodash/get';
+
 /**
  * Gets the requesting status of the availability of a given domain name from the state
  *
@@ -5,13 +8,8 @@
  * @param {string} domainName - The domain name to find out about
  * @return {bool} Whether or not the domain availability is being fetched
  */
-export const isDomainAvailabilityRequesting = ( state, domainName ) => {
-	if ( ! state.domainAvailability[ domainName ] ) {
-		return false;
-	}
-
-	return state.domainAvailability[ domainName ].isRequesting;
-};
+export const isDomainAvailabilityRequesting = ( state, domainName ) =>
+	get( state, [ 'domainAvailability', domainName, 'isRequesting' ], false );
 
 /**
  * Determines whether another domain is having its availability checked.
@@ -34,13 +32,8 @@ export const isDomainAvailabilityRequestingOtherDomain = ( state, domainName ) =
  * @param {string} domainName - The domain name to find out about
  * @return {bool} Whether or not the domain availability has been loaded
  */
-export const hasDomainAvailabilityLoaded = ( state, domainName ) => {
-	if ( ! state.domainAvailability[ domainName ] ) {
-		return false;
-	}
-
-	return state.domainAvailability[ domainName ].hasLoadedFromServer;
-};
+export const hasDomainAvailabilityLoaded = ( state, domainName ) =>
+	get( state, [ 'domainAvailability', domainName, 'hasLoadedFromServer' ], false );
 
 /**
  * Gets the availability of a given domain name from the state
@@ -49,10 +42,5 @@ export const hasDomainAvailabilityLoaded = ( state, domainName ) => {
  * @param {string} domainName - The domain name to find out about
  * @return {bool} Whether or not the domain is available
  */
-export const getDomainAvailability = ( state, domainName ) => {
-	if ( ! state.domainAvailability[ domainName ] || ! state.domainAvailability[ domainName ].data ) {
-		return false;
-	}
-
-	return state.domainAvailability[ domainName ].data.results.isAvailable;
-};
+export const getDomainAvailability = ( state, domainName ) =>
+	get( state, [ 'domainAvailability', domainName, 'data', 'results', 'isAvailable' ], false );

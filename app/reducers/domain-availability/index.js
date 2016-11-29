@@ -16,17 +16,20 @@ const requestReducer = createRequestReducer( {
 } );
 
 export const domainAvailability = ( state = {}, action ) => {
-	const { domainName } = action;
+	const { type, domainName } = action;
 
-	if ( ! domainName ) {
-		return state;
+	switch ( type ) {
+		case DOMAIN_AVAILABILITY_FETCH:
+		case DOMAIN_AVAILABILITY_FETCH_COMPLETE:
+		case DOMAIN_AVAILABILITY_FETCH_FAIL:
+			const domainState = requestReducer( state[ domainName ], action );
+
+			if ( isEqual( state[ domainName ], domainState ) ) {
+				return state;
+			}
+
+			return { ...state, [ domainName ]: domainState };
+		default:
+			return state;
 	}
-
-	const domainState = requestReducer( state[ domainName ], action );
-
-	if ( isEqual( state[ domainName ], domainState ) ) {
-		return state;
-	}
-
-	return { ...state, [ domainName ]: domainState };
 };

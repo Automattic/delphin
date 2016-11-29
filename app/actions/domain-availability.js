@@ -21,17 +21,17 @@ export function checkDomainAvailability( { domainName } ) {
 			domainName,
 			results
 		} ),
-		fail: ( error ) => {
-			return dispatch => {
-				dispatch( {
-					type: DOMAIN_AVAILABILITY_FETCH_FAIL,
-					domainName
-				} );
-				dispatch( addNotice( {
-					message: error.message,
-					status: 'error'
-				} ) );
-			};
+		fail: error => dispatch => {
+			dispatch( {
+				type: DOMAIN_AVAILABILITY_FETCH_FAIL,
+				domainName
+			} );
+			dispatch( addNotice( {
+				message: error.message,
+				status: 'error'
+			} ) );
+
+			return Promise.reject( error );
 		}
 	};
 }

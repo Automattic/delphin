@@ -9,6 +9,12 @@ import {
 	DOMAIN_AVAILABILITY_FETCH_FAIL,
 } from 'reducers/action-types';
 
+const requestReducer = createRequestReducer( {
+	loading: DOMAIN_AVAILABILITY_FETCH,
+	success: DOMAIN_AVAILABILITY_FETCH_COMPLETE,
+	fail: DOMAIN_AVAILABILITY_FETCH_FAIL
+} );
+
 export const domainAvailability = ( state = {}, action ) => {
 	const { domainName } = action;
 
@@ -16,11 +22,7 @@ export const domainAvailability = ( state = {}, action ) => {
 		return state;
 	}
 
-	const domainState = createRequestReducer( {
-		loading: DOMAIN_AVAILABILITY_FETCH,
-		success: DOMAIN_AVAILABILITY_FETCH_COMPLETE,
-		fail: DOMAIN_AVAILABILITY_FETCH_FAIL
-	} )( state[ domainName ], action );
+	const domainState = requestReducer( state[ domainName ], action );
 
 	if ( isEqual( state[ domainName ], domainState ) ) {
 		return state;

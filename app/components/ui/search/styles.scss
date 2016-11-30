@@ -33,6 +33,10 @@
 	@include breakpoint( '>480px' ) {
 		font-size: 2.4rem;
 	}
+
+	&.loading-static .telescope-stars {
+		display: none;
+	}
 }
 
 .loading-telescope {

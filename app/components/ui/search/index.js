@@ -98,6 +98,15 @@ const Search = React.createClass( {
 		);
 	},
 
+	renderEmptyQueryMessage() {
+		return (
+			<LoadingPlaceholder
+				isStatic
+				text={ i18n.translate( 'Nothing to find yet. Try entering a few words above like "pet travel blog".' ) }
+			/>
+		);
+	},
+
 	showAdditionalResults( { currentTarget } ) {
 		this.props.showAdditionalResults(
 			this.props.query,
@@ -195,6 +204,8 @@ const Search = React.createClass( {
 					) }
 
 					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
+
+					{ ! query && this.renderEmptyQueryMessage() }
 
 					{ query && ! containsAlphanumericCharacters( query ) && (
 						<div className={ styles.noResultsMessage }>

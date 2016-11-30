@@ -154,7 +154,7 @@ const Search = React.createClass( {
 	renderResults() {
 		if ( this.props.isRequesting ) {
 			return (
-				<LoadingPlaceholder />
+				<LoadingPlaceholder text={ i18n.translate( 'Finding your new domain…' ) } />
 			);
 		}
 

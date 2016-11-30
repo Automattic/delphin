@@ -7,7 +7,6 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 
 // Internal dependencies
 import config from 'config';
-import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults } from 'lib/domains';
 import LoadingPlaceholder from './loading-placeholder';
@@ -15,7 +14,6 @@ import styles from './styles.scss';
 import Suggestions from './suggestions';
 import SearchHeader from './header';
 import Button from 'components/ui/button';
-import TrackingLink from 'components/containers/tracking-link';
 import withPageView from 'lib/analytics/with-page-view';
 
 const Search = React.createClass( {
@@ -98,6 +96,15 @@ const Search = React.createClass( {
 		);
 	},
 
+	renderEmptyQueryMessage() {
+		return (
+			<LoadingPlaceholder
+				isStatic
+				text={ i18n.translate( 'Nothing found. Try entering a few words above, like "pet travel blog".' ) }
+			/>
+		);
+	},
+
 	showAdditionalResults( { currentTarget } ) {
 		this.props.showAdditionalResults(
 			this.props.query,
@@ -154,7 +161,7 @@ const Search = React.createClass( {
 	renderResults() {
 		if ( this.props.isRequesting ) {
 			return (
-				<LoadingPlaceholder />
+				<LoadingPlaceholder text={ i18n.translate( 'Finding your new domain…' ) } />
 			);
 		}
 
@@ -196,6 +203,8 @@ const Search = React.createClass( {
 
 					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
+					{ ! query && this.renderEmptyQueryMessage() }
+
 					{ query && ! containsAlphanumericCharacters( query ) && (
 						<div className={ styles.noResultsMessage }>
 							{ i18n.translate( "We couldn't find any domains. Try a different search." ) }
@@ -217,15 +226,6 @@ const Search = React.createClass( {
 						</div>
 					) }
 
-					{ ! this.props.isRequesting && (
-						<div className={ styles.emailSignup }>
-							{ i18n.translate( '{{link}}Sign up{{/link}} to get .blog updates in your email.', {
-								components: {
-									link: <TrackingLink eventName="delphin_search_email_signup_click" to={ getPath( 'learnMore' ) } />
-								}
-							} ) }
-						</div>
-					) }
 				</div>
 			</DocumentTitle>
 		);

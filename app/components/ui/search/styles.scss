@@ -1,6 +1,7 @@
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
+@import 'app/styles/assets';
 
 .search {
 	margin-bottom: 30px;
@@ -119,17 +120,28 @@
 	margin-top: 15px;
 	max-width: 450px;
 	padding: 0;
+	position: relative;
 	text-decoration: none;
-	transition: background 150ms ease-in, border 150ms ease-in;
+	transition: background 150ms ease-in, border 150ms ease-in, opacity 150ms ease-in;
 	width: 100%;
 
-	&:hover {
+	&.is-taken {
+		pointer-events: none;
+	}
+
+	&.is-disabled,
+	&.is-disabled .buy-button {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	&:hover,
+	&.is-requesting {
 		.suggestion-title::after {
 			width: 70px;
 		}
 
 		.buy-button {
-
 			&::before {
 				background: $gray;
 				opacity: 1;
@@ -146,6 +158,25 @@
 	@include breakpoint( '>1040px' ) {
 		width: 31%;
 	}
+}
+
+.suggestion-taken-message-container {
+	background: $white-transparent;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+
+.suggestion-taken-message {
+	background: url( #{$image-assets-url}sad-blobby.svg ) no-repeat center top;
+	font-size: 1.6rem;
+	line-height: 1.4;
+	margin: 0 20px;
+	padding-top: 70px;
 }
 
 @keyframes fadein {

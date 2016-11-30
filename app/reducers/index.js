@@ -6,6 +6,7 @@ import { checkout } from './checkout';
 import { contactInformation } from './contact-information';
 import { contactSupport } from './contact-support';
 import territories from './territories';
+import { domainAvailability } from './domain-availability';
 import { domainSearch } from './domain-search';
 import nameservers from './nameservers';
 import { notices } from './notices';
@@ -17,6 +18,7 @@ export default {
 	checkout,
 	contactInformation,
 	contactSupport,
+	domainAvailability,
 	domainSearch,
 	form,
 	nameservers,

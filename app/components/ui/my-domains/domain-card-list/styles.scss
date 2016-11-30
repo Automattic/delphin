@@ -6,4 +6,9 @@
 	justify-content: space-between;
 	margin: 0 auto;
 	max-width: 1200px;
+
+	&::after {
+		content: '';
+		flex: 0 1 32%;
+	}
 }

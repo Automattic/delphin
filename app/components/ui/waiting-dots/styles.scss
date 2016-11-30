@@ -1,0 +1,49 @@
+@import 'app/styles/colors';
+
+.waiting-dots {
+	margin: auto;
+
+	div {
+		animation-duration: 0.6s;
+		animation-iteration-count: infinite;
+		animation-name: waiting;
+		background: $gray;
+		border-radius: 50%;
+		display: inline-block;
+		height: 8px;
+		margin-left: 3px;
+		vertical-align: middle;
+		width: 8px;
+	}
+}
+
+.dot-1 {
+	animation-delay: 0.2s;
+}
+
+.dot-2 {
+	animation-delay: 0.3s;
+}
+
+.dot-3 {
+	animation-delay: 0.4s;
+}
+
+.text {
+	color: transparent;
+	font-size: 0;
+}
+
+@keyframes waiting {
+	0% {
+		background: transparent;
+	}
+
+	50% {
+		background: $gray;
+	}
+
+	100% {
+		background: transparent;
+	}
+}

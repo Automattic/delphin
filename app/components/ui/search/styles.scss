@@ -28,6 +28,7 @@
 	display: flex;
 	flex-direction: column;
 	font-size: 2rem;
+	padding: 0 1rem;
 	text-align: center;
 
 	@include breakpoint( '>480px' ) {
@@ -279,17 +280,6 @@
 		@include breakpoint( '>480px' ) {
 			width: auto;
 		}
-	}
-}
-
-.email-signup {
-	color: lighten( $blue-dark, 20% );
-	font-size: 1.4rem;
-	margin: 40px 10px 0;
-	text-align: center;
-
-	a {
-		text-decoration: underline;
 	}
 }
 

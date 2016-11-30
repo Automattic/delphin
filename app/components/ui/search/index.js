@@ -228,7 +228,7 @@ const Search = React.createClass( {
 						</div>
 					) }
 
-					{ ! this.props.isRequesting && (
+					{ ! this.props.isRequesting && query && (
 						<div className={ styles.emailSignup }>
 							{ i18n.translate( '{{link}}Sign up{{/link}} to get .blog updates in your email.', {
 								components: {

@@ -1,5 +1,4 @@
 // External dependencies
-import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -7,13 +6,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 const LoadingPlaceholder = ( { isStatic, text } ) => {
-	const cssClasses = classNames( {
-		[ styles.searchLoading ]: true,
-		[ styles.loadingStatic ]: !! isStatic
-	} );
-
 	return (
-		<div className={ cssClasses }>
+		<div className={ styles.searchLoading }>
 			<svg className={ styles.loadingTelescope } width="155px" height="135px" viewBox="-1 -1 156 136">
 				<g transform="translate(34, 87) rotate(-20) translate(-37, -87) translate(3, 73)">
 					<path d="M12.0262,9.4552 L11.9862,8.3002 C11.9722,6.8032 13.1852,5.5672 14.6822,5.5532 L58.1212,5.1382 L58.3452,22.5502 L14.9052,22.9652 C13.4092,22.9792 12.1722,21.7662 12.1582,20.2692 L12.1182,19.1142 L12.0262,9.4552 Z" className={ styles.telescopeBody }></path>
@@ -31,28 +25,30 @@ const LoadingPlaceholder = ( { isStatic, text } ) => {
 					<path d="M26.186,6.3232 C26.186,9.2922 23.779,11.6992 20.81,11.6992 C17.84,11.6992 15.433,9.2922 15.433,6.3232 C15.433,3.3542 17.84,0.9472 20.81,0.9472 C23.779,0.9472 26.186,3.3542 26.186,6.3232" className={ styles.telescopeTripodPivot }></path>
 					<path d="M26.186,6.3232 C26.186,9.2922 23.779,11.6992 20.81,11.6992 C17.84,11.6992 15.433,9.2922 15.433,6.3232 C15.433,3.3542 17.84,0.9472 20.81,0.9472 C23.779,0.9472 26.186,3.3542 26.186,6.3232 Z"></path>
 				</g>
-				<g className={ styles.telescopeStars }>
-					<g className={ styles.telescopeStar1 } transform="translate(114, 0)">
-						<path d="M5.9678,0.0004 L5.9678,10.4484"></path>
-						<path d="M0.7441,5.2242 L11.1921,5.2242"></path>
+				{ ! isStatic && (
+					<g className={ styles.telescopeStars }>
+						<g className={ styles.telescopeStar1 } transform="translate(114, 0)">
+							<path d="M5.9678,0.0004 L5.9678,10.4484"></path>
+							<path d="M0.7441,5.2242 L11.1921,5.2242"></path>
+						</g>
+						<g className={ styles.telescopeStar2 } transform="translate(98, 34)">
+							<path d="M5.3072,0.7591 L5.3072,11.2071"></path>
+							<path d="M0.0835,5.9828 L10.5315,5.9828"></path>
+						</g>
+						<g className={ styles.telescopeStar3 } transform="translate(142, 57)">
+							<path d="M5.4331,0.9878 L5.4331,11.4358"></path>
+							<path d="M0.2093,6.2116 L10.6573,6.2116"></path>
+						</g>
+						<g className={ styles.telescopeStar4 } transform="translate(71, 27)">
+							<path d="M0.9196,0.933 L6.0926,6.106"></path>
+							<path d="M0.9196,6.1064 L6.0926,0.9334"></path>
+						</g>
+						<g className={ styles.telescopeStar5 } transform="translate(103, 71)">
+							<path d="M0.0683,0.0442 L5.2413,5.2172"></path>
+							<path d="M0.0683,5.2176 L5.2413,0.0446"></path>
+						</g>
 					</g>
-					<g className={ styles.telescopeStar2 } transform="translate(98, 34)">
-						<path d="M5.3072,0.7591 L5.3072,11.2071"></path>
-						<path d="M0.0835,5.9828 L10.5315,5.9828"></path>
-					</g>
-					<g className={ styles.telescopeStar3 } transform="translate(142, 57)">
-						<path d="M5.4331,0.9878 L5.4331,11.4358"></path>
-						<path d="M0.2093,6.2116 L10.6573,6.2116"></path>
-					</g>
-					<g className={ styles.telescopeStar4 } transform="translate(71, 27)">
-						<path d="M0.9196,0.933 L6.0926,6.106"></path>
-						<path d="M0.9196,6.1064 L6.0926,0.9334"></path>
-					</g>
-					<g className={ styles.telescopeStar5 } transform="translate(103, 71)">
-						<path d="M0.0683,0.0442 L5.2413,5.2172"></path>
-						<path d="M0.0683,5.2176 L5.2413,0.0446"></path>
-					</g>
-				</g>
+				) }
 			</svg>
 
 			{ text }

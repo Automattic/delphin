@@ -1,5 +1,4 @@
 // Internal dependencies
-import { addNotice } from 'actions/notices';
 import {
 	WPCOM_REQUEST,
 	DOMAIN_AVAILABILITY_FETCH,
@@ -21,17 +20,9 @@ export function checkDomainAvailability( { domainName } ) {
 			domainName,
 			results
 		} ),
-		fail: error => dispatch => {
-			dispatch( {
-				type: DOMAIN_AVAILABILITY_FETCH_FAIL,
-				domainName
-			} );
-			dispatch( addNotice( {
-				message: error.message,
-				status: 'error'
-			} ) );
-
-			return Promise.reject( error );
+		fail: {
+			type: DOMAIN_AVAILABILITY_FETCH_FAIL,
+			domainName
 		}
 	};
 }

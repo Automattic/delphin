@@ -9,7 +9,7 @@ global.localStorage = {
 
 import i18n from 'i18n-calypso';
 import middleware from '..';
-import { WPCOM_REQUEST } from 'reducers/action-types.js';
+import { NOTICE_ADD, WPCOM_REQUEST } from 'reducers/action-types.js';
 import handler from 'wpcom-xhr-request';
 
 describe( 'wpcom-middleware', () => {

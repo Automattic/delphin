@@ -36,7 +36,11 @@ const MyDomains = React.createClass( {
 			return (
 				<div className={ styles.domainsLoading }>
 					<Satellite width="78px" height="94px" />
-					{ i18n.translate( 'Getting your domains…' ) }
+					{
+						i18n.translate( 'Getting your domains…', {
+							comment: 'Refers to a list of domains that the user has already purchased'
+						} )
+					}
 				</div>
 			);
 		}

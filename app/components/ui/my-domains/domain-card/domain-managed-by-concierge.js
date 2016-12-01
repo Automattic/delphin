@@ -17,9 +17,13 @@ const DomainManagedByConcierge = ( { domainName, hostName } ) => {
 				<h3>{ domainName }</h3>
 			</div>
 			<div className={ styles.domainDetails }>
-				<p>{ i18n.translate( 'This domain is being managed by your domain assistant.' ) }</p>
+				<p>{ i18n.translate( 'This domain is being managed by your domain assistant.', {
+					comment: 'The domain assistant is our customer support team'
+				} ) }</p>
 				<p className={ styles.smallText }>
-					<Link to={ getPath( 'contactConcierge', { domainName, hostName } ) }>{ i18n.translate( 'Contact your domain assistant.' ) }</Link>
+					<Link to={ getPath( 'contactConcierge', { domainName, hostName } ) }>{ i18n.translate( 'Contact your domain assistant.', {
+						comment: 'The domain assistant is our customer support team'
+					} ) }</Link>
 				</p>
 			</div>
 			<div className={ styles.customNameserversContainer }>

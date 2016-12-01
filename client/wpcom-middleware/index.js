@@ -6,6 +6,7 @@ import i18n from 'i18n-calypso';
 import handler from 'wpcom-xhr-request';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
 import { getUserConnect } from 'reducers/user/selectors';
 import {
@@ -154,7 +155,7 @@ function makeWpcomRequest( state, action ) {
  * Helper to get an action creator for action field, if supplied actionCreator
  * is already a function, nothing is done, it's simply returned, if it's a string,
  * action creator function is created.
- * @param {Function|String} actionCreator function, action string, or action object.
+ * @param {Function|String|Object} actionCreator function, action string, or action object.
  * @param {String} type actionCreator's type: success|fail
  * @returns {Function} action creator
  */
@@ -167,7 +168,7 @@ function getActionCreator( actionCreator, type ) {
 	// Default action creator will be a thunk
 	return param => dispatch => {
 		if ( typeof actionCreator === 'string' ) {
-			dispatch( { type: actionCreator } );
+			actionCreator = { type: actionCreator };
 		}
 
 		if ( typeof actionCreator === 'object' ) {
@@ -175,6 +176,11 @@ function getActionCreator( actionCreator, type ) {
 		}
 
 		if ( type === 'fail' ) {
+			dispatch( addNotice( {
+				message: param.message,
+				status: 'error'
+			} ) );
+
 			return Promise.reject( param );
 		}
 

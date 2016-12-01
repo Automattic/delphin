@@ -4,7 +4,6 @@ module.exports = [
 	{ value: 438, langSlug: 'pt-br', name: 'Português do Brasil', popular: 3, isRtl: false },
 	{ value: 15, langSlug: 'de', name: 'Deutsch', popular: 4, isRtl: false },
 	{ value: 24, langSlug: 'fr', name: 'Français', popular: 5, isRtl: false },
-	{ value: 29, langSlug: 'he', name: 'עברית', popular: 6, isRtl: true },
 	{ value: 35, langSlug: 'it', name: 'Italiano', popular: 8, isRtl: false },
 	{ value: 36, langSlug: 'ja', name: '日本語', popular: 7, isRtl: false },
 	{ value: 49, langSlug: 'nl', name: 'Nederlands', popular: 9, isRtl: false },
@@ -15,5 +14,4 @@ module.exports = [
 	{ value: 452, langSlug: 'zh-tw', name: '中文(繁體)', popular: 14, isRtl: false },
 	{ value: 40, langSlug: 'ko', name: '한국어', popular: 15, isRtl: false },
 	{ value: 68, langSlug: 'sv', name: 'Svenska', isRtl: false },
-	{ value: 3, langSlug: 'ar', name: 'العربية', isRtl: true },
 ];

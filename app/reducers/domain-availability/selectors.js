@@ -44,3 +44,13 @@ export const hasDomainAvailabilityLoaded = ( state, domainName ) =>
  */
 export const getDomainAvailability = ( state, domainName ) =>
 	get( state, [ 'domainAvailability', domainName, 'data', 'results', 'isAvailable' ], false );
+
+/**
+ * Checks if there is trademark claim for a given domain name from the state
+ *
+ * @param {object} state - Global store
+ * @param {string} domainName - The domain name to find out about
+ * @return {bool} Whether or not the domain has trademark claim
+ */
+export const hasDomainTrademarkClaim = ( state, domainName ) =>
+	get( state, [ 'domainAvailability', domainName, 'data', 'results', 'hasClaim' ], false );

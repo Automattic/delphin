@@ -58,7 +58,12 @@ export default connect(
 			} ) );
 			dispatch( selectDomain( domainProduct ) );
 
-			dispatch( redirect( 'contactInformation' ) );
+			// TODO: Figure out how to get from state
+			if ( true ) {
+				dispatch( redirect( 'confirmTrademark' ) );
+			} else {
+				dispatch( redirect( 'contactInformation' ) );
+			}
 		},
 
 		fetchDomainSuggestions( query ) {

@@ -57,13 +57,6 @@ export default connect(
 				num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
 			} ) );
 			dispatch( selectDomain( domainProduct ) );
-
-			// TODO: Figure out how to get from state
-			if ( true ) {
-				dispatch( redirect( 'confirmTrademark' ) );
-			} else {
-				dispatch( redirect( 'contactInformation' ) );
-			}
 		},
 
 		fetchDomainSuggestions( query ) {

@@ -1,9 +1,7 @@
-import cloneDeep from 'lodash/cloneDeep';
-import each from 'lodash/each';
+// External dependencies
 import fromPairs from 'lodash/fromPairs';
-import get from 'lodash/get';
 import map from 'lodash/map';
-import set from 'lodash/set';
+import startsWith from 'lodash/startsWith';
 
 /**
  * Parses a simple query string into an object
@@ -28,25 +26,25 @@ export function getQueryParams( queryString = '' ) {
 /**
  * Applies some modifications to a config object with a given
  * query string such as the one provided by `window.location.search`.
- * Eg. `?features.m3&default_tld=live`
+ * Eg. `?features.m3&features.ad_tracking=false`
  *
- * @param {Object} config - A config object (plain JS object with properties and values)
+ * @param {Object} features - A features object (plain JS object with properties and values)
  * @param {String} queryString - A query string / search string (with or without the leading ? character)
  * @returns {Object} the modified config
  */
-export function applyQueryStringToConfig( config, queryString ) {
-	const configCopy = cloneDeep( config ),
-		queryParams = getQueryParams( queryString );
+export function applyQueryStringToFeatures( features, queryString ) {
+	const queryParams = getQueryParams( queryString ),
+		prefix = 'features.';
 
-	each( queryParams, ( value, parameter ) => {
-		if ( get( config, parameter ) !== undefined ) {
-			// convert values to numbers or boolean
-			// Assume boolean if no value is given
-			value = ! isNaN( parseFloat( value ) ) ? parseFloat( value ) : value;
-			value = ( value === 'false' || value === 'true' ) ? value === 'true' : value;
-			set( configCopy, parameter, value );
+	const newFeatures = Object.keys( queryParams ).reduce( ( currentFeatures, value ) => {
+		if ( ! startsWith( value, prefix ) || value === prefix ) {
+			return currentFeatures;
 		}
-	} );
 
-	return configCopy;
+		currentFeatures[ value.replace( prefix, '' ) ] = queryParams[ value ] !== 'false'; // ensure 'false' becomes a boolean
+
+		return currentFeatures;
+	}, {} );
+
+	return Object.assign( {}, features, newFeatures );
 }

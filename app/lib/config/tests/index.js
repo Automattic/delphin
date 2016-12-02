@@ -1,7 +1,7 @@
 jest.disableAutomock();
 
 // Internal dependencies
-import { getQueryParams, applyQueryStringToConfig } from '../index';
+import { getQueryParams, applyQueryStringToFeatures } from '../index';
 
 describe( 'lib/config', () => {
 	describe( '#getQueryParams', () => {
@@ -35,29 +35,33 @@ describe( 'lib/config', () => {
 		} );
 	} );
 
-	describe( '#applyQueryStringToConfig', () => {
-		it( 'should return the same config object is no query string is given', () => {
-			const config = {
+	describe( '#applyQueryStringToFeatures', () => {
+		it( 'should return the same features object is no query string is given', () => {
+			const features = {
 				foo: true,
 				hello: 'world'
 			};
-			const result = applyQueryStringToConfig( config );
+			const result = applyQueryStringToFeatures( features );
 
-			expect( result ).toEqual( config );
+			expect( result ).toEqual( features );
 		} );
 
-		it( 'should modify the config using the query string content', () => {
+		it( 'should modify the `features` of `config` using the query string content', () => {
 			const config = {
-				foo: false,
+				features: {
+					foo: false,
+					bar: false,
+					baz: true,
+				},
 				hello: 'world',
 				x: 54
 			};
-			const result = applyQueryStringToConfig( config, '?foo=baz&x=56' );
+			const result = applyQueryStringToFeatures( config.features, '?features.foo&features.bar=true&features.baz=false' );
 
 			expect( result ).toEqual( {
-				foo: 'baz',
-				hello: 'world',
-				x: 56
+				foo: true,
+				bar: true,
+				baz: false,
 			} );
 		} );
 	} );

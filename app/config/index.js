@@ -1,11 +1,11 @@
 // Internal dependencies
 import languages from './languages';
-import { applyQueryStringToConfig } from 'lib/config';
+import { applyQueryStringToFeatures } from 'lib/config';
 
 const NODE_ENV = process.env.NODE_ENV,
 	productionOnly = NODE_ENV === 'production';
 
-let config = {
+const config = {
 	available_tlds: [ 'blog' ],
 	default_tld: 'blog',
 	default_search_sort: 'recommended',
@@ -44,7 +44,8 @@ let config = {
 };
 
 if ( typeof window !== 'undefined' && window.location && window.location.search ) {
-	config = applyQueryStringToConfig( config, window.location.search );
+	// allow us to update `config.features` with the query string only in development
+	config.features = applyQueryStringToFeatures( config.features, window.location.search );
 }
 
 export default function( key ) {

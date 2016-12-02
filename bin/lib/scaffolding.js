@@ -76,7 +76,9 @@ const createUiComponent = ( name, options ) => {
 	const path = join( getUiComponentPath( name, options.subDirectory ), 'index.js' );
 
 	const externalDependencies = [
-		"import React, { Component, PropTypes } from 'react';",
+		options.isStateless
+			? "import React from 'react';"
+			: "import React, { Component, PropTypes } from 'react';",
 		options.withStylesheet ? "import withStyles from 'isomorphic-style-loader/lib/withStyles';" : false
 	].filter( x => x );
 
@@ -105,8 +107,7 @@ const createContainer = ( name, options ) => {
 	createModule(
 		path,
 		"import { connect } from 'react-redux';",
-		`import { ${ componentCase( name ) } } from '${ getUiComponentPath( name, options.subDirectory ) }';`,
-		'',
+		`import ${ componentCase( name ) } from '${ getUiComponentPath( name, options.subDirectory ) }';`,
 		`export default connect()( ${ componentCase( name ) } );`
 	);
 };

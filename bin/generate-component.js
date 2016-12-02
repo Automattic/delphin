@@ -18,10 +18,10 @@ inquirer.prompt( [
 		name: 'stateless',
 		message: 'Stateless or stateful?',
 		choices: [
-			{ value: 'stateless', name: 'stateless' },
-			{ value: 'stateful', name: 'stateful' },
+			{ value: true, name: 'stateless' },
+			{ value: false, name: 'stateful' },
 		],
-		default: 'stateless',
+		default: true
 	},
 	{
 		type: 'checkbox',

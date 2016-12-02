@@ -71,7 +71,9 @@ class ConnectNewBlogToOther extends Component {
 								{ i18n.translate( 'Setup: ' ) }
 							</span>
 
-							{ i18n.translate( 'Meet your domain assistant.' ) }
+							{ i18n.translate( 'Meet your domain assistant.', {
+								comment: 'The domain assistant is our customer support team'
+							} ) }
 						</h1>
 						<ProgressBar progress={ 90 } />
 					</div>
@@ -98,7 +100,9 @@ class ConnectNewBlogToOther extends Component {
 					</Form.FieldArea>
 					<Form.SubmitArea>
 						<Button disabled={ isContactingSupport }>
-							{ i18n.translate( 'Contact domain assistant' ) }
+							{ i18n.translate( 'Contact domain assistant', {
+								comment: 'The domain assistant is our customer support team'
+							} ) }
 						</Button>
 					</Form.SubmitArea>
 					<Form.Footer>

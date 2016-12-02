@@ -6,11 +6,11 @@ import i18n from 'i18n-calypso';
 import handler from 'wpcom-xhr-request';
 
 // Internal dependencies
-import { addNotice } from 'actions/notices';
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
 import { getUserConnect } from 'reducers/user/selectors';
 import {
-	WPCOM_REQUEST
+	WPCOM_REQUEST,
+	WPCOM_REQUEST_FAIL,
 } from 'reducers/action-types';
 import { camelizeKeys } from 'lib/formatters';
 
@@ -176,11 +176,6 @@ function getActionCreator( actionCreator, type ) {
 		}
 
 		if ( type === 'fail' ) {
-			dispatch( addNotice( {
-				message: param.message,
-				status: 'error'
-			} ) );
-
 			return Promise.reject( param );
 		}
 
@@ -207,6 +202,13 @@ const wpcomMiddleware = store => next => action => {
 			return store.dispatch( getActionCreator( action.success, 'success' )( result.data, result.requestArguments, result.requestToken ) );
 		} ).catch( ( error ) => {
 			debug( 'request failed', action, error );
+
+			store.dispatch( {
+				type: WPCOM_REQUEST_FAIL,
+				error,
+				originalAction: action
+			} );
+
 			// The result from here will be returned to the original dispatch:
 			return store.dispatch( getActionCreator( action.fail, 'fail' )( error ) );
 		} );

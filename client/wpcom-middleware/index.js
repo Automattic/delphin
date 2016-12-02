@@ -9,7 +9,8 @@ import handler from 'wpcom-xhr-request';
 import { getTokenFromBearerCookie } from 'client/bearer-cookie';
 import { getUserConnect } from 'reducers/user/selectors';
 import {
-	WPCOM_REQUEST
+	WPCOM_REQUEST,
+	WPCOM_REQUEST_FAIL,
 } from 'reducers/action-types';
 import { camelizeKeys } from 'lib/formatters';
 
@@ -154,7 +155,7 @@ function makeWpcomRequest( state, action ) {
  * Helper to get an action creator for action field, if supplied actionCreator
  * is already a function, nothing is done, it's simply returned, if it's a string,
  * action creator function is created.
- * @param {Function|String} actionCreator function, action string, or action object.
+ * @param {Function|String|Object} actionCreator function, action string, or action object.
  * @param {String} type actionCreator's type: success|fail
  * @returns {Function} action creator
  */
@@ -167,7 +168,7 @@ function getActionCreator( actionCreator, type ) {
 	// Default action creator will be a thunk
 	return param => dispatch => {
 		if ( typeof actionCreator === 'string' ) {
-			dispatch( { type: actionCreator } );
+			actionCreator = { type: actionCreator };
 		}
 
 		if ( typeof actionCreator === 'object' ) {
@@ -201,6 +202,13 @@ const wpcomMiddleware = store => next => action => {
 			return store.dispatch( getActionCreator( action.success, 'success' )( result.data, result.requestArguments, result.requestToken ) );
 		} ).catch( ( error ) => {
 			debug( 'request failed', action, error );
+
+			store.dispatch( {
+				type: WPCOM_REQUEST_FAIL,
+				error,
+				originalAction: action
+			} );
+
 			// The result from here will be returned to the original dispatch:
 			return store.dispatch( getActionCreator( action.fail, 'fail' )( error ) );
 		} );

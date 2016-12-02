@@ -1,6 +1,7 @@
 const fs = require( 'fs' );
 const camelCase = require( 'lodash/camelCase' );
 const upperFirst = require( 'lodash/upperFirst' );
+const identity = require( 'lodash/identity' );
 const kebabCase = require( 'lodash/kebabCase' );
 const join = require( 'path' ).join;
 const times = require( 'lodash/times' );
@@ -8,7 +9,7 @@ const times = require( 'lodash/times' );
 const componentCase = name => upperFirst( camelCase( name ) );
 
 const createDirectory = path => {
-	const directories = path.split( '/' ).filter( x => x );
+	const directories = path.split( '/' ).filter( identity );
 
 	times( directories.length, n => {
 		const current = directories.slice( 0, n + 1 ).join( '/' );
@@ -46,27 +47,35 @@ const createModule = ( path, externalDependencies, internalDependencies, body, e
 	createFile( path, module );
 };
 
-const getStatelessComponent = name => (
-[
-	`const ${ componentCase( name ) } = () => (`,
-	'	<div>Hello world</div>',
-	');'
-].join( '\n' )
-);
+const getPropTypes = ( name, props ) => {
+	return [].concat(
+		`${ componentCase( name ) }.propTypes = {`,
+		props.sort().map( propName => `	${ propName }: PropTypes.any.isRequired,` ),
+		'};'
+	).join( '\n' );
+};
 
-const getStatefulComponent = name => (
-[
-	`class ${ componentCase( name ) } extends Component {`,
-	'	render() {',
-	'		return (',
-	'			<div>Hello world</div>',
-	'		);',
-	'	}',
-	'}',
-	'',
-	`${ componentCase( name ) }.propTypes = {};`,
-].join( '\n' )
-);
+const getStatelessComponent = ( name, props ) => {
+	return [
+		`const ${ componentCase( name ) } = () => (`,
+		'	<div>Hello world</div>',
+		');',
+		'',
+	].concat( getPropTypes( name, props ) ).join( '\n' );
+};
+
+const getStatefulComponent = ( name, props ) => {
+	return [
+		`class ${ componentCase( name ) } extends Component {`,
+		'	render() {',
+		'		return (',
+		'			<div>Hello world</div>',
+		'		);',
+		'	}',
+		'}',
+		'',
+	].concat( getPropTypes( name, props ) ).join( '\n' );
+};
 
 const getUiComponentPath = ( name, subDirectory ) => join( 'app', 'components', 'ui', subDirectory || '', kebabCase( name ) );
 
@@ -75,12 +84,14 @@ const createUiComponent = ( name, options ) => {
 
 	const path = join( getUiComponentPath( name, options.subDirectory ), 'index.js' );
 
+	const reactVariables = [
+		options.isStateless ? false : 'Component',
+		'PropTypes'
+	].filter( identity ).join( ', ' );
 	const externalDependencies = [
-		options.isStateless
-			? "import React from 'react';"
-			: "import React, { Component, PropTypes } from 'react';",
+		`import React, { ${ reactVariables } } from 'react';`,
 		options.withStylesheet ? "import withStyles from 'isomorphic-style-loader/lib/withStyles';" : false
-	].filter( x => x );
+	].filter( identity );
 
 	createModule(
 		path,
@@ -88,7 +99,7 @@ const createUiComponent = ( name, options ) => {
 		options.withStylesheet
 			? "import styles from './styles.scss';"
 			: '',
-		options.isStateless ? getStatelessComponent( name ) : getStatefulComponent( name ),
+		options.isStateless ? getStatelessComponent( name, options.props ) : getStatefulComponent( name, options.props ),
 		options.withStylesheet
 			? `export default withStyles( styles )( ${ componentCase( name ) } );`
 			: `export default ${ componentCase( name ) };`

@@ -30,8 +30,17 @@ inquirer.prompt( [
 		choices: [
 			{ value: 'container', name: 'a container' },
 			{ value: 'stylesheet', name: 'a stylesheet' },
+			{ value: 'props', name: 'the props' },
 			{ value: 'subDirectory', name: 'to be added to a specific directory' },
 		]
+	},
+	{
+		type: 'input',
+		name: 'props',
+		message: 'Which props component should have? Use `,` as a delimiter.',
+		when: answers => includes( answers.options, 'props' ),
+		filter: value => value.split( ',' ).filter( x => x ),
+		validate: value => value.length === 0 ? 'Props not listed!' : true
 	},
 	{
 		type: 'input',
@@ -44,12 +53,14 @@ inquirer.prompt( [
 
 	const rawName = answers.rawName,
 		isStateless = answers.stateless,
+		props = answers.props || [],
 		subDirectory = answers.subDirectory || '',
 		options = answers.options;
 
 	scaffolding.createUiComponent( rawName, {
 		subDirectory,
 		isStateless,
+		props,
 		withStylesheet: includes( options, 'stylesheet' )
 	} );
 

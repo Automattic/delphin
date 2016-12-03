@@ -12,6 +12,7 @@ import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
 import Input from 'components/ui/form/input';
+import { normalizeDomain } from 'lib/domains';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
@@ -24,7 +25,7 @@ const SunriseHome = React.createClass( {
 	},
 
 	handleSubmit() {
-		const query = this.props.values.q;
+		const query = normalizeDomain( this.props.values.q );
 
 		this.props.redirectToSearch( query );
 	},

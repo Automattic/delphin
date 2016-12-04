@@ -30,8 +30,6 @@ export default connect(
 			} ),
 			checkDomainAvailability
 		),
-		redirect: pathSlug => dispatch => {
-			dispatch( redirect( pathSlug ) );
-		}
+		redirect: redirect
 	}
 )( Suggestion );

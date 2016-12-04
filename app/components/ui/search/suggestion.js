@@ -28,7 +28,7 @@ const Suggestion = React.createClass( {
 		this.props.selectDomain( suggestion );
 
 		if ( hasTrademarkClaim ) {
-			this.props.redirect( 'confirmTrademark' );
+			this.props.redirect( 'confirmTrademark', { pathParams: { domainName: suggestion.domainName } } );
 		} else {
 			this.props.redirect( 'contactInformation' );
 		}

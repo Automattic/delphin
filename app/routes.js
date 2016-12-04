@@ -27,7 +27,7 @@ let publicRoutes = [
 		static: true,
 		childRoutes: [
 			{
-				path: 'confirm-trademark',
+				path: 'confirm-trademark/:domainName',
 				slug: 'confirmTrademark',
 				static: false,
 				getComponent: getComponent( 'checkout', 'confirmTrademark' )

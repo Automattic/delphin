@@ -37,6 +37,8 @@ export function isDomain( value ) {
  * @returns {string|null} the corresponding host name, or null if not found
  */
 export function extractHostName( url ) {
+	url = url.trim();
+
 	// Prepares the url for parsing by removing or converting invalid characters
 	if ( url ) {
 		url = url.replace( /\\/g, '/' );

@@ -1,7 +1,9 @@
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
+@import 'app/styles/assets';
 
 %header {
+	align-items: center;
 	background: $white;
 	border-top: 4px solid $blue-dark;
 	display: flex;
@@ -51,20 +53,57 @@
 }
 
 .links {
-	margin: 20px;
+	align-items: center;
+	display: flex;
+	margin: 15px;
 	order: 2;
 }
 
 .my-domains-link {
 	color: $black;
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 	padding: 10px;
+
+	&::before {
+		background: url( #{$image-assets-url}my-domains.svg ) no-repeat center;
+		background-size: contain;
+		content: '';
+		display: inline-block;
+		height: 25px;
+		margin-right: 8px;
+		vertical-align: middle;
+		width: 30px;
+	}
+}
+
+.settings {
+	&::before {
+		background: url( #{$image-assets-url}cog.svg ) no-repeat center;
+		background-size: contain;
+		content: '';
+		cursor: pointer;
+		display: block;
+		height: 25px;
+		vertical-align: middle;
+		width: 25px;
+	}
+}
+
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
 }
 
 .menu-container {
 	border-left: solid 1px $black;
 	cursor: pointer;
-	padding: 10px;
+	padding: 5px 0 5px 10px;
 	position: relative;
 
 	.menu {
@@ -80,11 +119,24 @@
 	background: $white;
 	border: solid 1px $gray-medium;
 	border-radius: 3px;
-	padding: 5px;
+	min-width: 100px;
+	padding: 10px;
 	position: absolute;
 	right: -5px;
-	width: 150px;
 	top: 30px;
+
+	&::before {
+		background: #fff;
+		border-left: 1px solid $gray-medium;
+		border-top: 1px solid $gray-medium;
+		content: '';
+		height: 7px;
+		position: absolute;
+		right: 15px;
+		top: -5px;
+		transform: rotate(45deg);
+		width: 7px;
+	}
 }
 
 .log-out-link {

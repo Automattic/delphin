@@ -185,6 +185,7 @@ describe( 'lib/domains', () => {
 	describe( 'extractHostName', () => {
 		it( 'should return a host name for a valid url', () => {
 			expect( extractHostName( 'hello.com' ) ).toBe( 'hello.com' );
+			expect( extractHostName( '  hello.com  ' ) ).toBe( 'hello.com' );
 			expect( extractHostName( 'hello.com/blah_blah' ) ).toBe( 'hello.com' );
 			expect( extractHostName( 'http://hello-world.com' ) ).toBe( 'hello-world.com' );
 			expect( extractHostName( 'https://hello.world.com' ) ).toBe( 'hello.world.com' );
@@ -197,8 +198,6 @@ describe( 'lib/domains', () => {
 		} );
 
 		it( 'should return null for an invalid url', () => {
-			expect( extractHostName() ).toBe( null );
-			expect( extractHostName( null ) ).toBe( null );
 			expect( extractHostName( 'helloworld' ) ).toBe( null );
 			expect( extractHostName( '.com' ) ).toBe( null );
 			expect( extractHostName( 'hello.whatever' ) ).toBe( null );

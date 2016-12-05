@@ -152,6 +152,15 @@ class LearnMore extends React.Component {
 								}
 							} ) }</p>
 						</div>
+
+						<div className={ styles.faq } id="contact-information">
+							<h3>{ i18n.translate( 'How do I update the contact information for my domain?' ) }</h3>
+							<p>{ i18n.translate( 'Domain owners are required to provide current and valid contact information. If the information you provided when you first registered your domain is no longer accurate, you can update it by emailing us at {{link}}help@get.blog{{/link}}.', {
+								components: {
+									link: <a href={ config( 'support_link' ) } />
+								}
+							} ) }</p>
+						</div>
 					</div>
 				</div>
 			</SunriseStep>

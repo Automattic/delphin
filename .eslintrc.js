@@ -13,6 +13,7 @@ module.exports = {
 		// REST API objects include underscores
 		'camelcase': 0,
 		// Custom PropTypes checks
+		'react/jsx-no-target-blank': 1,
 		'react/prop-types': 2,
 		'react/sort-prop-types': 2,
 
@@ -20,7 +21,6 @@ module.exports = {
 		'max-len': 0,
 		'no-console': 0,
 		'prefer-const': 0,
-		'react/jsx-no-target-blank': 0,
 		'react/prefer-es6-class': 0,
 		'quote-props': 0,
 		'wpcalypso/import-docblock': 0,

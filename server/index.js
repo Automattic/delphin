@@ -86,7 +86,7 @@ function renderPage( props, localeData, isRtl = false ) {
 		isRtl,
 		title,
 		bodyClassName,
-		localeData: localeData ? serializeJavascript( localeData ) : null,
+		localeData: localeData ? serializeJavascript( localeData, { isJSON: true } ) : null,
 		ogDescription: i18n.translate( 'Every .blog is a story – tell yours. Millions of great .blog domains are still available. Search and register .blog domains at get.blog.' ),
 		ogTitle: i18n.translate( 'Find a new .blog domain for your blog.' ),
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),

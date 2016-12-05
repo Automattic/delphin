@@ -14,7 +14,7 @@ import SunriseStep from 'components/ui/sunrise-step';
 import TrackingLink from 'components/containers/tracking-link';
 
 class ConfirmTrademark extends React.Component {
-	componentWillMount() {
+	componentDidMount() {
 		const {
 			hasLoadedAvailability,
 			hasTrademarkClaim,

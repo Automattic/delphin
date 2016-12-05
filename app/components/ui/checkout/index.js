@@ -329,7 +329,7 @@ const Checkout = React.createClass( {
 								{ i18n.translate( 'By clicking "Register & pay now" you agree to our {{link}}domain name registration agreement{{/link}}. You also authorize your payment method to be charged on a recurring basis, until you cancel.',
 									{
 										components: {
-											link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" />
+											link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/" target="_blank" rel="noopener noreferrer" />
 										}
 									}
 								) }

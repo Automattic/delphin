@@ -2,7 +2,6 @@
 @import 'app/styles/breakpoints';
 
 %header {
-	align-items: center;
 	background: $white;
 	border-top: 4px solid $blue-dark;
 	display: flex;
@@ -28,16 +27,10 @@
 		flex-wrap: wrap;
 		height: auto;
 	}
-
-	@include breakpoint( '<660px' ) {
-		//position: static;
-	}
 }
 
 %logo {
-	flex-basis: 100%;
 	padding: 15px;
-	text-align: center;
 
 	img {
 		width: 70px;
@@ -55,6 +48,17 @@
 
 .logo {
 	@extend %logo;
+}
+
+.links {
+	order: 2;
+	margin: 20px;
+}
+
+.my-domains-link {
+	color: $black;
+	font-size: 1.4rem;
+	padding: 10px;
 }
 
 .search-logo {

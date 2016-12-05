@@ -4,13 +4,13 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import LanguagePicker from 'components/containers/language-picker';
-import MenuContainer from 'components/containers/menu';
+import Menu from 'components/ui/menu';
 import styles from './styles.scss';
 
 const Footer = () => {
 	return (
 		<div className={ styles.footer }>
-			<MenuContainer />
+			<Menu />
 
 			<LanguagePicker />
 		</div>

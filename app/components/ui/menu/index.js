@@ -21,27 +21,9 @@ Link.propTypes = {
 	to: PropTypes.string.isRequired
 };
 
-const Menu = ( { isLoggedIn, logoutUser } ) => {
+const Menu = () => {
 	return (
 		<menu className={ styles.menu }>
-			{ isLoggedIn && (
-				<Link to={ getPath( 'myDomains' ) }>
-					{ i18n.translate( 'My Domains' ) }
-				</Link>
-			) }
-
-			{ ! isLoggedIn && (
-				<Link to={ getPath( 'loginUser' ) }>
-					{ i18n.translate( 'Log In' ) }
-				</Link>
-			) }
-
-			{ isLoggedIn && (
-				<a className={ styles.link } onClick={ logoutUser }>
-					{ i18n.translate( 'Log Out' ) }
-				</a>
-			) }
-
 			<Link to={ getPath( 'learnMore' ) }>
 				{ i18n.translate( 'Support' ) }
 			</Link>
@@ -55,11 +37,6 @@ const Menu = ( { isLoggedIn, logoutUser } ) => {
 			</Link>
 		</menu>
 	);
-};
-
-Menu.propTypes = {
-	isLoggedIn: PropTypes.bool.isRequired,
-	logoutUser: PropTypes.func.isRequired
 };
 
 export default withStyles( styles )( Menu );

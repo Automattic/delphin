@@ -17,6 +17,7 @@ import rtlcss from 'rtlcss';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import thunk from 'redux-thunk';
+import serializeJavascript from 'serialize-javascript';
 
 // Internal dependencies
 import api from './wpcom-rest-api-proxy';
@@ -83,9 +84,9 @@ function renderPage( props, localeData, isRtl = false ) {
 		content,
 		isEnabled,
 		isRtl,
-		localeData,
 		title,
 		bodyClassName,
+		localeData: localeData ? serializeJavascript( localeData, { isJSON: true } ) : null,
 		ogDescription: i18n.translate( 'Every .blog is a story – tell yours. Millions of great .blog domains are still available. Search and register .blog domains at get.blog.' ),
 		ogTitle: i18n.translate( 'Find a new .blog domain for your blog.' ),
 		css: process.env.BUILD_STATIC ? '' : css.join( '' ),

@@ -177,7 +177,7 @@ const init = () => {
 
 	app.use( api() );
 
-	app.get( '/*', ( request, response ) => {
+	app.get( '/*', ( request, response, next ) => {
 		match( { routes, location: request.url }, ( error, redirectLocation, props ) => {
 			const localeSlug = getLocaleSlug( request.url ),
 				localeData = i18nCache.get( localeSlug );
@@ -192,7 +192,13 @@ const init = () => {
 				response.status( 404 );
 			}
 
-			response.send( renderPage( props, localeData, language.isRtl ) );
+			try {
+				const pageMarkup = renderPage( props, localeData, language.isRtl );
+				response.send( pageMarkup );
+			} catch ( renderError ) {
+				// pass to default express error handler
+				next( renderError );
+			}
 		} );
 	} );
 

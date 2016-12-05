@@ -18,7 +18,9 @@ class Header extends Component {
 	}
 
 	render() {
-		const { isLoggedIn } = this.props;
+		const {
+			isLoggedIn,
+		} = this.props;
 
 		return (
 			<header className={ styles.header }>
@@ -31,7 +33,7 @@ class Header extends Component {
 					</Link>
 					{ isLoggedIn && (
 						<span className={ styles.menuContainer }>
-							C
+							<span className={ styles.settings }><span className={ styles.visuallyHidden }>Settings</span></span>
 							<div className={ styles.menu }>
 								<a
 									className={ styles.logOutLink }

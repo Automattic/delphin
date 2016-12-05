@@ -69,10 +69,19 @@
 		background-size: contain;
 		content: '';
 		display: inline-block;
-		height: 25px;
-		margin-right: 8px;
+		height: 18px;
+		margin-right: 4px;
 		vertical-align: middle;
-		width: 30px;
+		width: 29px;
+	}
+
+	@include breakpoint( '>480px' ) {
+		font-size: 1.4rem;
+		
+		&::before {
+			height: 23px;
+			margin-right: 8px;
+		}
 	}
 }
 
@@ -83,9 +92,13 @@
 		content: '';
 		cursor: pointer;
 		display: block;
-		height: 25px;
+		height: 20px;
 		vertical-align: middle;
 		width: 25px;
+
+		@include breakpoint( '>480px' ) {
+			height: 25px;
+		}
 	}
 }
 
@@ -103,8 +116,12 @@
 .menu-container {
 	border-left: solid 1px $black;
 	cursor: pointer;
-	padding: 5px 0 5px 10px;
+	padding: 5px 0 5px 5px;
 	position: relative;
+
+	@include breakpoint( '>480px' ) {
+		padding-right: 5px;
+	}
 
 	.menu {
 		display: none;

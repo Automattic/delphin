@@ -39,7 +39,9 @@ class ConfirmTrademark extends React.Component {
 		}
 	}
 
-	handleSubmit() {
+	handleSubmit( event ) {
+		event.preventDefault();
+
 		const { redirect } = this.props;
 
 		redirect( 'contactInformation' );

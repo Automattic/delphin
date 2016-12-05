@@ -30,6 +30,6 @@ export default connect(
 			} ),
 			checkDomainAvailability
 		),
-		redirect: redirect
+		redirect
 	}
 )( Suggestion );

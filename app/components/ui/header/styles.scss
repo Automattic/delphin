@@ -120,7 +120,7 @@
 	position: relative;
 
 	@include breakpoint( '>480px' ) {
-		padding-right: 5px;
+		padding-right: 10px;
 	}
 
 	.menu {
@@ -140,10 +140,10 @@
 	padding: 10px;
 	position: absolute;
 	right: -5px;
-	top: 30px;
+	top: 40px;
 
 	&::before {
-		background: #fff;
+		background: $white;
 		border-left: 1px solid $gray-medium;
 		border-top: 1px solid $gray-medium;
 		content: '';

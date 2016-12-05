@@ -51,14 +51,45 @@
 }
 
 .links {
-	order: 2;
 	margin: 20px;
+	order: 2;
 }
 
 .my-domains-link {
 	color: $black;
 	font-size: 1.4rem;
 	padding: 10px;
+}
+
+.menu-container {
+	border-left: solid 1px $black;
+	cursor: pointer;
+	padding: 10px;
+	position: relative;
+
+	.menu {
+		display: none;
+	}
+
+	&:hover .menu {
+		display: block;
+	}
+}
+
+.menu {
+	background: $white;
+	border: solid 1px $gray-medium;
+	border-radius: 3px;
+	padding: 5px;
+	position: absolute;
+	right: -5px;
+	width: 150px;
+	top: 30px;
+}
+
+.log-out-link {
+	color: $black;
+	font-size: 1.3rem;
 }
 
 .search-logo {

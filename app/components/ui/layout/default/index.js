@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Header from 'components/ui/header';
+import HeaderContainer from 'components/containers/header';
 import styles from './styles.scss';
 
 const DefaultLayout = ( { children, style } ) => {
@@ -13,7 +13,7 @@ const DefaultLayout = ( { children, style } ) => {
 			<BodyClassName className={ style } />
 
 			<div className={ styles.content }>
-				<Header />
+				<HeaderContainer />
 
 				{ children }
 			</div>

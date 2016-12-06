@@ -1,4 +1,5 @@
 @import 'app/styles/colors';
+@import 'app/styles/breakpoints';
 
 .trademark-warning {
 	background-color: $alert-yellow;
@@ -6,7 +7,11 @@
 	font-weight: bold;
 	margin: -40px auto 0;
 	max-width: 380px;
-	padding: 30px;
+	padding: 30px 20px;
+
+	@include breakpoint( '>480px' ) {
+		padding: 30px;
+	}
 }
 
 body .form { // specificity needed to override `SunriseStep.Form` styles

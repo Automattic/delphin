@@ -10,13 +10,35 @@
 
 .trademark-warning {
 	background-color: $alert-yellow;
+	font-weight: bold;
+	margin: -40px auto 0;
+	max-width: 380px;
+	padding: 30px;
 }
 
 .trademark-notice {
 	font-size: 1.4rem;
+	line-height: 2.1rem;
 	margin-bottom: 1.5rem;
 
 	p {
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
 	}
+}
+
+body .form { // specificity needed to override `SunriseStep.Form` styles
+	box-shadow: none;
+	margin-top: 0;
+}
+
+.refund-message {
+	font-style: italic;
+	margin-top: 15px;
+}
+
+.back-link {
+	color: $gray;
+	display: inline-block;
+	margin-top: 15px;
+	text-decoration: underline;
 }

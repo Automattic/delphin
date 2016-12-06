@@ -86,19 +86,17 @@
 }
 
 .settings {
-	&::before {
-		background: url( #{$image-assets-url}cog.svg ) no-repeat center;
-		background-size: contain;
-		content: '';
-		cursor: pointer;
-		display: block;
-		height: 20px;
-		vertical-align: middle;
-		width: 25px;
+	background: url( #{$image-assets-url}cog.svg ) no-repeat center;
+	background-size: contain;
+	content: '';
+	cursor: pointer;
+	display: block;
+	height: 20px;
+	vertical-align: middle;
+	width: 25px;
 
-		@include breakpoint( '>480px' ) {
-			height: 25px;
-		}
+	@include breakpoint( '>480px' ) {
+		height: 25px;
 	}
 }
 
@@ -116,19 +114,11 @@
 .menu-container {
 	border-left: solid 1px $black;
 	cursor: pointer;
-	padding: 5px 0 5px 5px;
+	padding: 5px 0 5px 10px;
 	position: relative;
 
 	@include breakpoint( '>480px' ) {
 		padding-right: 10px;
-	}
-
-	.menu {
-		display: none;
-	}
-
-	&:hover .menu {
-		display: block;
 	}
 }
 
@@ -136,10 +126,11 @@
 	background: $white;
 	border: solid 1px $gray-medium;
 	border-radius: 3px;
+	display: none;
 	min-width: 100px;
 	padding: 10px;
 	position: absolute;
-	right: -5px;
+	right: 3px;
 	top: 40px;
 
 	&::before {
@@ -154,6 +145,10 @@
 		transform: rotate(45deg);
 		width: 7px;
 	}
+}
+
+.menu.is-visible {
+	display: block;
 }
 
 .log-out-link {

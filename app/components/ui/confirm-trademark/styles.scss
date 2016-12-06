@@ -1,28 +1,16 @@
 @import 'app/styles/colors';
-
-.back-notice {
-	color: $gray-dark;
-	font-size: 1.3rem;
-	margin: 25px 0 20px;
-	text-align: center;
-	width: 100%;
-}
+@import 'app/styles/breakpoints';
 
 .trademark-warning {
 	background-color: $alert-yellow;
+	font-size: 1.8rem;
 	font-weight: bold;
 	margin: -40px auto 0;
 	max-width: 380px;
-	padding: 30px;
-}
+	padding: 30px 20px;
 
-.trademark-notice {
-	font-size: 1.4rem;
-	line-height: 2.1rem;
-	margin-bottom: 1.5rem;
-
-	p {
-		margin-bottom: 1.5rem;
+	@include breakpoint( '>480px' ) {
+		padding: 30px;
 	}
 }
 
@@ -31,14 +19,7 @@ body .form { // specificity needed to override `SunriseStep.Form` styles
 	margin-top: 0;
 }
 
-.refund-message {
-	font-style: italic;
-	margin-top: 15px;
-}
-
 .back-link {
-	color: $gray;
-	display: inline-block;
-	margin-top: 15px;
+	color: $gray-dark;
 	text-decoration: underline;
 }

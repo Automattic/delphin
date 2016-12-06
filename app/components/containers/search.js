@@ -57,8 +57,6 @@ export default connect(
 				num_results_shown: Number( ownProps.location.query.r ) || config( 'initial_number_of_search_results' )
 			} ) );
 			dispatch( selectDomain( domainProduct ) );
-
-			dispatch( redirect( 'contactInformation' ) );
 		},
 
 		fetchDomainSuggestions( query ) {

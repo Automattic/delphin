@@ -80,46 +80,50 @@ class ConfirmTrademark extends React.Component {
 			);
 		}
 
-		return ( <SunriseStep>
-			<DocumentTitle title={ i18n.translate( 'Trademark claim' ) } />
+		return (
+			<SunriseStep>
+				<DocumentTitle title={ i18n.translate( 'Trademark claim' ) } />
 
-			<SunriseStep.Header>
-				<h1>
-					{ i18n.translate( 'Trademark claim' ) }
-				</h1>
-			</SunriseStep.Header>
+				<SunriseStep.Header>
+					<h1>
+						{ i18n.translate( 'Trademark claim' ) }
+					</h1>
+				</SunriseStep.Header>
 
-			<SunriseStep.Form onSubmit={ this.handleSubmit }>
 				<div className={ styles.trademarkWarning }>
 					<p>{ i18n.translate( '%(domainName)s matches a known trademark.', {
 						args: { domainName }
 					} ) }</p>
 				</div>
 
-				<div className={ styles.trademarkNotice }>
-					<p>
-						{ i18n.translate( 'You can register this domain, but you will have to confirm that your registration will not infringe on the trademark rights. The trademark holder will be notified, and they may choose to dispute your registration.' ) }
-					</p>
-					<p>
-						{ i18n.translate( "We'll send you an email with further instructions after you submit your order. You will have to review the terms and agree to them within 48 hours, or your registration will be canceled." ) }
-					</p>
-				</div>
+				<SunriseStep.Form className={ styles.form } onSubmit={ this.handleSubmit }>
+					<div className={ styles.trademarkNotice }>
+						<p>
+							{ i18n.translate( 'You can register this domain, but you will have to confirm that your registration will not infringe on the trademark rights. The trademark holder will be notified, and they may choose to dispute your registration.' ) }
+						</p>
+						<p>
+							{ i18n.translate( "We'll send you an email with further instructions after you submit your order. You will have to review the terms and agree to them within 48 hours, or your registration will be canceled." ) }
+						</p>
+					</div>
 
-				<Button>
-					{ i18n.translate( 'Continue with trademark registration' ) }
-				</Button>
-			</SunriseStep.Form>
+					<Button>
+						{ i18n.translate( 'Continue with trademark registration' ) }
+					</Button>
 
-			<SunriseStep.Footer>
-				<p>{ i18n.translate( "You'll get an automatic refund if you reject the terms or if you don't agree to them on time." ) }</p>
-			</SunriseStep.Footer>
+					<p className={ styles.refundMessage }>{ i18n.translate( "You'll get an automatic refund if you reject the terms or if you don't agree to them on time." ) }</p>
+				</SunriseStep.Form>
 
-			<div className={ styles.backNotice }>
-				<TrackingLink eventName="delphin_start_over_click" to={ getPath( 'home' ) }>
-					{ i18n.translate( 'Find a different domain' ) }
-				</TrackingLink>
-			</div>
-		</SunriseStep> );
+				<SunriseStep.Footer>
+					<TrackingLink
+						className={ styles.backLink }
+						eventName="delphin_start_over_click"
+						to={ getPath( 'home' ) }
+					>
+						{ i18n.translate( 'Find a different domain' ) }
+					</TrackingLink>
+				</SunriseStep.Footer>
+			</SunriseStep>
+		);
 	}
 }
 

@@ -13,5 +13,5 @@ export default combineReducers( {
 	domainSearch,
 	isSectionLoading,
 	languagePicker,
-	toggle,
+	toggle
 } );

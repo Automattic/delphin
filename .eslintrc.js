@@ -13,7 +13,6 @@ module.exports = {
 		// REST API objects include underscores
 		'camelcase': 0,
 		// Custom PropTypes checks
-		'react/jsx-no-target-blank': 1,
 		'react/prop-types': 2,
 		'react/sort-prop-types': 2,
 

@@ -10,6 +10,7 @@ import { getPath } from 'routes';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import SunriseStep from 'components/ui/sunrise-step';
+import Form from 'components/ui/form';
 import TrackingLink from 'components/containers/tracking-link';
 
 class ConfirmTrademark extends React.Component {
@@ -96,22 +97,26 @@ class ConfirmTrademark extends React.Component {
 					} ) }</p>
 				</div>
 
-				<SunriseStep.Form className={ styles.form } onSubmit={ this.handleSubmit }>
-					<div className={ styles.trademarkNotice }>
+				<Form className={ styles.form } onSubmit={ this.handleSubmit }>
+					<Form.FieldArea>
 						<p>
 							{ i18n.translate( 'You can register this domain, but you will have to confirm that your registration will not infringe on the trademark rights. The trademark holder will be notified, and they may choose to dispute your registration.' ) }
 						</p>
 						<p>
 							{ i18n.translate( "We'll send you an email with further instructions after you submit your order. You will have to review the terms and agree to them within 48 hours, or your registration will be canceled." ) }
 						</p>
-					</div>
+					</Form.FieldArea>
 
-					<Button>
-						{ i18n.translate( 'Continue with trademark registration' ) }
-					</Button>
+					<Form.SubmitArea>
+						<Button>
+							{ i18n.translate( 'Continue with trademark registration' ) }
+						</Button>
+					</Form.SubmitArea>
 
-					<p className={ styles.refundMessage }>{ i18n.translate( "You'll get an automatic refund if you reject the terms or if you don't agree to them on time." ) }</p>
-				</SunriseStep.Form>
+					<Form.Footer>
+						<p>{ i18n.translate( "You'll get an automatic refund if you reject the terms or if you don't agree to them on time." ) }</p>
+					</Form.Footer>
+				</Form>
 
 				<SunriseStep.Footer>
 					<TrackingLink

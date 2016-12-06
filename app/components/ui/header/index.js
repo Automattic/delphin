@@ -32,6 +32,7 @@ class Header extends Component {
 			hideToggle,
 			redirect,
 			location,
+			addNotice,
 		} = this.props;
 
 		// TODO: We should use route slugs instead of paths here once we have a
@@ -49,7 +50,13 @@ class Header extends Component {
 		}
 
 		hideToggle();
+
 		logoutUser();
+
+		addNotice( {
+			status: 'success',
+			message: translate( 'You have been logged out.' )
+		} );
 	}
 
 	render() {
@@ -90,6 +97,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+	addNotice: PropTypes.func.isRequired,
 	hideToggle: PropTypes.func.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isMenuVisible: PropTypes.bool.isRequired,

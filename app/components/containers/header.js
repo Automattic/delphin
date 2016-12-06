@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Internal dependencies
+import { addNotice } from 'actions/notices';
 import { getToggle } from 'reducers/ui/toggle/selectors';
 import { hideToggle, showToggle } from 'actions/ui/toggle';
 import { isLoggedIn } from 'reducers/user/selectors';
@@ -24,5 +25,6 @@ export default connect(
 		hideToggle,
 		showToggle,
 		redirect,
+		addNotice,
 	}, dispatch )
 )( Header );

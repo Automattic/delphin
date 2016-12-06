@@ -14,17 +14,29 @@ const Suggestion = React.createClass( {
 	propTypes: {
 		checkDomainAvailability: PropTypes.func.isRequired,
 		hasLoadedAvailability: PropTypes.bool.isRequired,
+		hasTrademarkClaim: PropTypes.bool.isRequired,
 		isAvailable: PropTypes.bool.isRequired,
 		isBestMatch: PropTypes.bool.isRequired,
 		isRequestingAvailability: PropTypes.bool.isRequired,
 		isRequestingAvailabilityForOtherDomain: PropTypes.bool.isRequired,
+		redirect: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		suggestion: PropTypes.object.isRequired
 	},
 
+	goToNextPage( { hasTrademarkClaim, suggestion } ) {
+		this.props.selectDomain( suggestion );
+
+		if ( hasTrademarkClaim ) {
+			this.props.redirect( 'confirmTrademark', { pathParams: { domainName: suggestion.domainName } } );
+		} else {
+			this.props.redirect( 'contactInformation' );
+		}
+	},
+
 	selectDomain() {
 		if ( this.props.hasLoadedAvailability && this.props.isAvailable ) {
-			this.props.selectDomain( this.props.suggestion );
+			this.goToNextPage( this.props );
 		} else if ( ! this.props.isRequestingAvailability ) {
 			this.props.checkDomainAvailability( this.props.suggestion );
 		}
@@ -32,7 +44,7 @@ const Suggestion = React.createClass( {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( ! this.props.hasLoadedAvailability && nextProps.hasLoadedAvailability && nextProps.isAvailable ) {
-			nextProps.selectDomain( nextProps.suggestion );
+			this.goToNextPage( nextProps );
 		}
 	},
 

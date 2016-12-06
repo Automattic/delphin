@@ -6,18 +6,21 @@ import { checkDomainAvailability } from 'actions/domain-availability';
 import {
 	getDomainAvailability,
 	hasDomainAvailabilityLoaded,
+	hasDomainTrademarkClaim,
 	isDomainAvailabilityRequesting,
 	isDomainAvailabilityRequestingOtherDomain,
 } from 'reducers/domain-availability/selectors';
 import { recordTracksEvent, withAnalytics } from 'actions/analytics';
+import { redirect } from 'actions/routes';
 import Suggestion from 'components/ui/search/suggestion';
 
 export default connect(
-	( state, ownProps ) => ( {
-		isAvailable: getDomainAvailability( state, ownProps.suggestion.domainName ),
-		isRequestingAvailability: isDomainAvailabilityRequesting( state, ownProps.suggestion.domainName ),
-		isRequestingAvailabilityForOtherDomain: isDomainAvailabilityRequestingOtherDomain( state, ownProps.suggestion.domainName ),
-		hasLoadedAvailability: hasDomainAvailabilityLoaded( state, ownProps.suggestion.domainName )
+	( state, { suggestion: { domainName } } ) => ( {
+		hasTrademarkClaim: hasDomainTrademarkClaim( state, domainName ),
+		isAvailable: getDomainAvailability( state, domainName ),
+		isRequestingAvailability: isDomainAvailabilityRequesting( state, domainName ),
+		isRequestingAvailabilityForOtherDomain: isDomainAvailabilityRequestingOtherDomain( state, domainName ),
+		hasLoadedAvailability: hasDomainAvailabilityLoaded( state, domainName )
 	} ),
 	{
 		checkDomainAvailability: withAnalytics(
@@ -26,6 +29,7 @@ export default connect(
 				relevance
 			} ),
 			checkDomainAvailability
-		)
+		),
+		redirect
 	}
 )( Suggestion );

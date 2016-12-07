@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import PartialUnderline from 'components/ui/partial-underline';
 import WaitingDots from 'components/ui/waiting-dots';
+import Tag from 'components/ui/tag';
 import styles from './styles.scss';
 
 const Suggestion = React.createClass( {
@@ -90,6 +91,20 @@ const Suggestion = React.createClass( {
 		);
 	},
 
+	renderPremiumTag() {
+		const isPremium = this.props.suggestion.isPremium;
+
+		if ( ! isPremium ) {
+			return;
+		}
+
+		return (
+			<Tag className={ styles.premiumTag }>
+				{ i18n.translate( 'Premium' ) }
+			</Tag>
+		);
+	},
+
 	render() {
 		const domainDetails = find( this.props.suggestion.details, { productSlug: 'delphin-domain' } );
 		const { cost } = domainDetails;
@@ -106,6 +121,7 @@ const Suggestion = React.createClass( {
 
 					<PartialUnderline className={ styles.suggestionTitle }>
 						{ this.props.suggestion.domainName }
+						{ this.renderPremiumTag() }
 					</PartialUnderline>
 					<div className={ styles.cost }>
 						{ i18n.translate( '%(cost)s per year', {

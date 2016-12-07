@@ -1,4 +1,5 @@
 // External dependencies
+import find from 'lodash/find';
 import { formatPattern } from 'react-router';
 import i18n from 'i18n-calypso';
 
@@ -262,4 +263,30 @@ export const getPath = ( slug, values = {}, overrides = {} ) => {
 	}
 
 	return `/${ locale }${ formattedPath }`;
+};
+
+/**
+ * Gets the route slug for a given path.
+ *
+ * @param {string} path A path string
+ * @param {object} overrideRoutes Optional override for routes.
+ * @return {string|null} The route slug for the given path.
+ */
+export const getRouteSlug = ( path, overrideRoutes ) => {
+	let pathMap = paths;
+
+	if ( overrideRoutes ) {
+		pathMap = buildPaths( overrideRoutes );
+	}
+
+	return find( Object.keys( pathMap ), slug => {
+		const currentPath = pathMap[ slug ];
+		const regexString = currentPath
+			.replace( /\(\/\:[A-z]+\)/g, '(\/[^/]+)?' ) // replace optional params like `(/:optionalParam)`
+			.replace( /\:[A-z]+/g, '[^/]+' ); // replace required params like `/:param`
+
+		const regexForPath = new RegExp( '^' + regexString + '$' );
+
+		return path.match( regexForPath );
+	} );
 };

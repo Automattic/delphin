@@ -27,7 +27,10 @@ jest.mock( 'components/ui/not-found', () => {} );
 
 jest.unmock( 'routes' );
 
-import { getPath } from 'routes';
+import {
+	getPath,
+	getRouteSlug,
+} from 'routes';
 
 const routes = {
 	path: '/',
@@ -38,17 +41,29 @@ const routes = {
 			slug: 'foo',
 			childRoutes: [
 				{
-					path: 'bar/(:optional)',
+					path: 'bar(/:optional)',
 					slug: 'bar'
 				}
 			]
 		},
 		{
-			path: 'receipt/(:id)',
-			slug: 'receipt'
+			path: 'receipt/:id',
+			slug: 'receipt',
+			childRoutes: [
+				{
+					path: 'delete',
+					slug: 'deleteReceipt',
+					childRoutes: [
+						{
+							path: ':baz',
+							slug: 'baz'
+						}
+					]
+				}
+			]
 		},
 		{
-			path: 'post/:id/(:filter)',
+			path: 'post/:id(/:filter)',
 			slug: 'post'
 		},
 		{
@@ -98,6 +113,24 @@ describe( 'routes', () => {
 
 		it( 'should return null for a missing slug', () => {
 			expect( getPath( 'asdf', {}, { routes } ) ).toBe( null );
+		} );
+	} );
+
+	describe( 'getRouteSlug', () => {
+		it( 'should return the route slug for routes without params', () => {
+			expect( getRouteSlug( '/', routes ) ).toBe( 'home' );
+			expect( getRouteSlug( '/foo', routes ) ).toBe( 'foo' );
+		} );
+
+		it( 'should return the route slug for routes with required params', () => {
+			expect( getRouteSlug( '/receipt/100', routes ) ).toBe( 'receipt' );
+			expect( getRouteSlug( '/receipt/100/delete', routes ) ).toBe( 'deleteReceipt' );
+			expect( getRouteSlug( '/receipt/100/delete/second-param', routes ) ).toBe( 'baz' );
+		} );
+
+		it( 'should return the route slug for routes with optional params', () => {
+			expect( getRouteSlug( '/foo/bar/optional-param', routes ) ).toBe( 'bar' );
+			expect( getRouteSlug( '/post/1/optional-param', routes ) ).toBe( 'post' );
 		} );
 	} );
 } );

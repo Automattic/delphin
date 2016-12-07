@@ -30,28 +30,12 @@ class Header extends Component {
 		const {
 			logoutUser,
 			hideToggle,
-			redirect,
-			location,
 			addNotice,
 		} = this.props;
 
-		// TODO: We should use route slugs instead of paths here once we have a
-		// function that can get the current route slug from the path.
-		const loggedOutPaths = [
-			'/',
-			'/learn-more',
-			'/search',
-		];
-
-		if ( loggedOutPaths.indexOf( location.pathname ) === -1 ) {
-			// if users are on a page that requires login, redirect them to
-			// home so they aren't automatically redirected back to the log in page
-			redirect( 'home' );
-		}
+		logoutUser();
 
 		hideToggle();
-
-		logoutUser();
 
 		addNotice( {
 			status: 'success',
@@ -101,9 +85,7 @@ Header.propTypes = {
 	hideToggle: PropTypes.func.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isMenuVisible: PropTypes.bool.isRequired,
-	location: PropTypes.object.isRequired,
 	logoutUser: PropTypes.func.isRequired,
-	redirect: PropTypes.func.isRequired,
 	showToggle: PropTypes.func.isRequired,
 };
 

@@ -10,7 +10,6 @@ import { isLoggedIn } from 'reducers/user/selectors';
 import Header from 'components/ui/header';
 import { logoutUser } from 'actions/user';
 import { recordTracksEvent, withAnalytics } from 'actions/analytics';
-import { redirect } from 'actions/routes';
 
 export default connect(
 	state => ( {
@@ -18,13 +17,12 @@ export default connect(
 		isMenuVisible: getToggle( state, 'headerMenu' ),
 	} ),
 	dispatch => bindActionCreators( {
+		addNotice,
+		hideToggle,
 		logoutUser: withAnalytics(
 			recordTracksEvent( 'delphin_header_link_click', { link_clicked: 'logout' } ),
 			logoutUser
 		),
-		hideToggle,
 		showToggle,
-		redirect,
-		addNotice,
 	}, dispatch )
 )( Header );

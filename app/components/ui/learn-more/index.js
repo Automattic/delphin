@@ -40,6 +40,18 @@ class LearnMore extends React.Component {
 		} );
 	}
 
+	componentDidMount() {
+		const {
+			hasLoadedPricesFromServer,
+			isRequestingPricesFromServer,
+			fetchPrices,
+		} = this.props;
+
+		if ( ! hasLoadedPricesFromServer && ! isRequestingPricesFromServer ) {
+			fetchPrices();
+		}
+	}
+
 	isSubmitButtonDisabled() {
 		const { asyncValidating, invalid, submitting } = this.props;
 
@@ -47,7 +59,13 @@ class LearnMore extends React.Component {
 	}
 
 	render() {
-		const { fields, handleSubmit } = this.props;
+		const {
+			fields,
+			handleSubmit,
+			hasLoadedPricesFromServer,
+			isRequestingPricesFromServer,
+			prices
+		} = this.props;
 
 		return (
 			<SunriseStep>
@@ -109,7 +127,26 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="prices">
 							<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
-							<p>{ i18n.translate( 'Most .blog domains on get.blog are available for $30 USD / year. However, some .blog domains carry a premium yearly price. The base prices for all .blog domains are set by KKWT, the company managing the .blog domain extension.' ) }</p>
+							<p>
+								{ isRequestingPricesFromServer && (
+									i18n.translate( 'Loading answer…' )
+								) }
+
+								{ hasLoadedPricesFromServer && (
+									i18n.translate(
+										'Most .blog domains on get.blog are available for %(price)s %(currency)s / year. ' +
+										'However, some .blog domains carry a premium yearly price. The base prices for ' +
+										'all .blog domains are set by KKWT, the company managing the .blog domain extension.',
+										{
+											args: {
+												price: prices.domain.price,
+												currency: prices.currency
+											},
+											comment: 'price is a price formatted like "$30", currency is a currency formatted like "USD".'
+										}
+									)
+								) }
+							</p>
 						</div>
 
 						<div className={ styles.faq } id="refunds">
@@ -171,9 +208,13 @@ class LearnMore extends React.Component {
 LearnMore.propTypes = {
 	addNotice: PropTypes.func.isRequired,
 	asyncValidating: PropTypes.bool.isRequired,
+	fetchPrices: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hasLoadedPricesFromServer: PropTypes.bool.isRequired,
 	invalid: PropTypes.bool.isRequired,
+	isRequestingPricesFromServer: PropTypes.bool.isRequired,
+	prices: PropTypes.object,
 	resetForm: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired
 };

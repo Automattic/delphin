@@ -30,7 +30,7 @@ const VerifyUser = React.createClass( {
 		query: PropTypes.object,
 		recordPageView: PropTypes.func.isRequired,
 		redirect: PropTypes.func.isRequired,
-		redirectToQueryParamUrl: PropTypes.func.isRequired,
+		redirectLoggedIn: PropTypes.func.isRequired,
 		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
 		selectDomain: PropTypes.func.isRequired,
 		showToggle: PropTypes.func.isRequired,
@@ -75,11 +75,7 @@ const VerifyUser = React.createClass( {
 
 	componentWillReceiveProps( nextProps ) {
 		if ( nextProps.isLoggedIn ) {
-			if ( nextProps.query.redirect_to ) {
-				this.props.redirectToQueryParamUrl();
-			} else {
-				this.props.redirect( 'myDomains' );
-			}
+			nextProps.redirectLoggedIn();
 		}
 	},
 

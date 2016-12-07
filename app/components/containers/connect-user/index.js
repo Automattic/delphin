@@ -47,13 +47,6 @@ export default reduxForm(
 			( fields, domain ) => connectUser( fields.email, ownProps.intention, domain )
 		),
 		redirectToHome: () => redirect( 'home' ),
-		redirectToVerifyUser: () => {
-			const { location: { query } } = ownProps,
-				// omit the query params entirely if empty to prevent an empty
-				// `?redirect_to=` at the end of the URL
-				queryParams = query.redirect_to ? { redirect_to: query.redirect_to } : undefined;
-
-			return redirect( 'verifyUser', { queryParams } );
-		}
+		redirectToVerifyUser: () => redirect( 'verifyUser', { noHistory: true, state: ownProps.location.state } )
 	}, dispatch )
 )( ConnectUser );

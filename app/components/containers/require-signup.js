@@ -11,7 +11,7 @@ function getDisplayName( WrappedComponent ) {
 	return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-export default ( WrappedComponent, redirectTo ) => {
+export default ( WrappedComponent ) => {
 	class SignupEnforcer extends Component {
 		componentWillMount() {
 			if ( this.props.isLoggedOut ) {
@@ -51,11 +51,12 @@ export default ( WrappedComponent, redirectTo ) => {
 			isLoggedIn: isLoggedIn( state ),
 			isLoggedOut: isLoggedOut( state )
 		} ),
-		dispatch => ( {
+		( dispatch, ownProps ) => ( {
 			redirectToSignup() {
 				dispatch( redirect( 'signupUser', {
-					queryParams: {
-						redirect_to: redirectTo
+					noHistory: true,
+					state: {
+						returnTo: ownProps.location.pathname
 					}
 				} ) );
 			}

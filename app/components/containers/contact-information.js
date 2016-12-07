@@ -42,9 +42,9 @@ export default reduxForm(
 		domain: getSelectedDomain( state ),
 		hasSelectedDomain: hasSelectedDomain( state ),
 		inputVisibility: inputVisibility( state ),
-		location: getUserLocation( state ),
 		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),
-		user: getUserSettings( state )
+		user: getUserSettings( state ),
+		userLocation: getUserLocation( state )
 	} ),
 	dispatch => (
 		bindActionCreators( {
@@ -62,4 +62,4 @@ export default reduxForm(
 			validateContactInformation: ( domainName, contactInformation ) => validateContactInformation( [ domainName ], contactInformation )
 		}, dispatch )
 	)
-)( RequireSignup( ContactInformation, getPath( 'contactInformation' ) ) );
+)( RequireSignup( ContactInformation ) );

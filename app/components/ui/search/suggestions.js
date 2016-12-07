@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { omitTld } from 'lib/domains';
+import { normalizeDomain, omitTld } from 'lib/domains';
 import styles from './styles.scss';
 import Suggestion from 'components/containers/suggestion';
 
@@ -75,7 +75,7 @@ const Suggestions = React.createClass( {
 					.slice( 0, this.props.count )
 					.map( ( suggestion ) => (
 					<Suggestion
-						isBestMatch={ omitTld( this.props.query.replace( /\s+/g, '' ) ) === omitTld( suggestion.domainName ) }
+						isBestMatch={ omitTld( normalizeDomain( this.props.query.replace( /\s+/g, '' ) ) ) === omitTld( suggestion.domainName ) }
 						key={ suggestion.domainName }
 						selectDomain={ this.props.selectDomain }
 						suggestion={ suggestion }

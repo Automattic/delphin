@@ -10,6 +10,7 @@ import { domainAvailability } from './domain-availability';
 import { domainSearch } from './domain-search';
 import nameservers from './nameservers';
 import { notices } from './notices';
+import { prices } from './prices';
 import { service } from './service';
 import ui from './ui';
 import { user } from './user';
@@ -23,6 +24,7 @@ export default {
 	form,
 	nameservers,
 	notices,
+	prices,
 	service,
 	territories,
 	ui,

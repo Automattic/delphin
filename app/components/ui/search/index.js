@@ -62,7 +62,7 @@ const Search = React.createClass( {
 	},
 
 	redirectToSearch( query ) {
-		this.props.redirectToSearch( normalizeDomain( query ), this.props.numberOfResultsToDisplay, this.props.sort );
+		this.props.redirectToSearch( query, this.props.numberOfResultsToDisplay, this.props.sort );
 	},
 
 	selectDomain( suggestion ) {
@@ -74,7 +74,7 @@ const Search = React.createClass( {
 
 		return ! isRequesting &&
 			isDomainSearch( query ) &&
-			results && ! queryIsInResults( results, query );
+			results && ! queryIsInResults( results, normalizeDomain( query ) );
 	},
 
 	renderDomainUnavailableMessage() {

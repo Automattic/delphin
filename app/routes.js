@@ -13,7 +13,7 @@ import SearchContainer from 'components/containers/search';
 import SignupContainer from 'components/containers/connect-user/signup';
 import SunriseHomeContainer from 'components/containers/sunrise-home';
 import VerifyUserContainer from 'components/containers/connect-user/verify';
-import { buildPaths, getLocalizedRoutes } from 'lib/routes';
+import { buildPaths, getLocalizedRoutes, stripLocaleSlug } from 'lib/routes';
 import { verifyUserWithQueryContainerFactory } from 'components/containers/verify-user-with-query-container-factory';
 import { getComponent } from 'sections';
 
@@ -279,6 +279,8 @@ export const getRouteSlug = ( path, overrideRoutes ) => {
 		pathMap = buildPaths( overrideRoutes );
 	}
 
+	const pathWithoutLocaleSlug = stripLocaleSlug( path );
+
 	return find( Object.keys( pathMap ), slug => {
 		const currentPath = pathMap[ slug ];
 		const regexString = currentPath
@@ -287,6 +289,6 @@ export const getRouteSlug = ( path, overrideRoutes ) => {
 
 		const regexForPath = new RegExp( '^' + regexString + '$' );
 
-		return path.match( regexForPath );
+		return pathWithoutLocaleSlug.match( regexForPath );
 	} );
 };

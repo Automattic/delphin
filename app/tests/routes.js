@@ -132,5 +132,10 @@ describe( 'routes', () => {
 			expect( getRouteSlug( '/foo/bar/optional-param', routes ) ).toBe( 'bar' );
 			expect( getRouteSlug( '/post/1/optional-param', routes ) ).toBe( 'post' );
 		} );
+
+		it( 'should ignore the locale slug in a given path', () => {
+			expect( getRouteSlug( '/ja/foo/bar/optional-param', routes ) ).toBe( 'bar' );
+			expect( getRouteSlug( '/fr/post/1/optional-param', routes ) ).toBe( 'post' );
+		} );
 	} );
 } );

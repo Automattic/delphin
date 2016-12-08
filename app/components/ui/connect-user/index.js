@@ -125,7 +125,7 @@ const ConnectUser = React.createClass( {
 						<Form.FieldArea>
 							<div>
 								<fieldset>
-									<label>{ i18n.translate( 'Email address:' ) }</label>
+									<label className={ styles.emailLabel }>{ i18n.translate( 'Enter your email address to continue:' ) }</label>
 									<Input field={ fields.email } autoFocus type="email" dir="ltr" />
 									<ValidationError field={ fields.email } submitFailed={ submitFailed } />
 								</fieldset>
@@ -135,7 +135,7 @@ const ConnectUser = React.createClass( {
 
 						<Form.SubmitArea>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Next' ) }
+								{ i18n.translate( 'Log in' ) }
 							</Button>
 						</Form.SubmitArea>
 						{ this.renderPoweredBy() }

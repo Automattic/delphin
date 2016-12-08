@@ -5,6 +5,12 @@ import { reduxForm, reset } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
+import {
+	getPrices,
+	isRequestingPricesFromServer,
+	hasLoadedPricesFromServer
+} from 'reducers/prices/selectors';
+import { fetchPrices } from 'actions/prices';
 import { getAsyncValidateFunction } from 'lib/form';
 import { validateEmail } from 'lib/form';
 import LearnMore from 'components/ui/learn-more';
@@ -19,9 +25,14 @@ export default reduxForm(
 		fields: [ 'email' ],
 		asyncValidate: getAsyncValidateFunction( validate )
 	},
-	undefined,
+	state => ( {
+		prices: getPrices( state ),
+		hasLoadedPricesFromServer: hasLoadedPricesFromServer( state ),
+		isRequestingPricesFromServer: isRequestingPricesFromServer( state ),
+	} ),
 	{
 		addNotice,
+		fetchPrices,
 		resetForm: dispatch => dispatch( reset( 'learnMore' ) )
 	}
 )( LearnMore );

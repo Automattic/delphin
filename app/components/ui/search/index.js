@@ -180,7 +180,6 @@ const Search = React.createClass( {
 
 	render() {
 		const query = this.props.query,
-			exactMatchUnavailable = this.isExactMatchUnavailable(),
 			showAdditionalResultsLink = this.props.results &&
 				this.props.results.length > this.props.numberOfResultsToDisplay;
 
@@ -201,8 +200,6 @@ const Search = React.createClass( {
 							} ) }
 						</div>
 					) }
-
-					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
 					{ ! query && this.renderEmptyQueryMessage() }
 

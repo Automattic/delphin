@@ -26,22 +26,30 @@ class Success extends React.Component {
 	}
 
 	renderTrademarkedDomain() {
+		const { email } = this.props;
+
 		return (
 			<div>
 				<div className={ styles.content }>
 					<div className={ styles.text }>
 						<p>
 							{ i18n.translate(
-								'You will get an email soon to review the Trademark Notice on this domain. ' +
-								'You must verify with Trademark Clearinghouse that your registration of this domain ' +
-								'will not infringe on the trademark.'
+								'We sent you an email to %(email)s with instructions for reviewing the trademark claim on this domain.', {
+									args: { email },
+								}
 							) }
 						</p>
 
 						<p>
 							{ i18n.translate(
-								'If you do not review and respond to this request within 48 hours ' +
-								'your registration will be cancelled.'
+								'To complete the registration, please review the terms and agree to them within 48 hours.'
+							) }
+						</p>
+
+						<p>
+							{ i18n.translate(
+								'If you reject the terms, or if you don’t agree to them on time, ' +
+								'your order will be canceled and you will be refunded automatically.'
 							) }
 						</p>
 					</div>
@@ -143,6 +151,7 @@ Success.propTypes = {
 	checkDomainAvailability: PropTypes.func.isRequired,
 	destroySetupForms: PropTypes.func.isRequired,
 	domain: PropTypes.string,
+	email: PropTypes.string,
 	fetchMyDomains: PropTypes.func.isRequired,
 	hasDomainAvailabilityLoaded: PropTypes.bool.isRequired,
 	hasTrademarkClaim: PropTypes.bool.isRequired

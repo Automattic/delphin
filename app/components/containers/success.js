@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { checkDomainAvailability } from 'actions/domain-availability';
 import { destroySetupForms } from 'actions/setup';
 import { fetchMyDomains } from 'actions/my-domains';
+import { getContactInformationEmail } from 'reducers/form/selectors';
 import { getSelectedDomain } from 'reducers/checkout/selectors';
 import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors';
 import { hasDomainAvailabilityLoaded } from 'reducers/domain-availability/selectors';
@@ -14,10 +15,12 @@ import Success from 'components/ui/success';
 
 export default connect(
 	state => {
-		const domainName = getSelectedDomain( state ).domainName;
+		const domainName = getSelectedDomain( state ).domainName,
+			email = getContactInformationEmail( state );
 
 		return {
 			domain: domainName,
+			email: email,
 			hasTrademarkClaim: hasDomainTrademarkClaim( state, domainName ),
 			hasDomainAvailabilityLoaded: hasDomainAvailabilityLoaded( state, domainName ),
 		};

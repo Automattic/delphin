@@ -20,3 +20,13 @@ export const getBlogType = ( state ) => {
 export const getBlogNeedSelected = ( state ) => {
 	return get( state, 'form.selectNewBlogNeeds.needs.value' );
 };
+
+/**
+ * Retrieves the email address the user entered in the contact information form
+ *
+ * @param {object} state - global state tree
+ * @returns {string|null} - the email address from the contact information form
+ */
+export const getContactInformationEmail = ( state ) => {
+	return get( state, 'form.contactInformation.email.value' );
+};

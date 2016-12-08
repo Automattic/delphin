@@ -130,6 +130,16 @@
 		pointer-events: none;
 	}
 
+	&.is-unavailable {
+		.suggestion-title {
+			color: $gray-dark;
+		}
+
+		.suggestion-title::after {
+			background-color: $gray-medium;
+		}
+	}
+
 	&.is-disabled,
 	&.is-disabled .buy-button {
 		opacity: 0.5;

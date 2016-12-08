@@ -26,22 +26,9 @@ class Success extends React.Component {
 	}
 
 	renderTrademarkedDomain() {
-		const { domain } = this.props;
 		return (
 			<div>
-				<SunriseStep.Header className={ styles.header }>
-					<h1 className={ styles.heading }>
-						{ i18n.translate( '{{strong}}%(domain)s{{/strong}} is almost yours!', {
-							args: { domain },
-							components: {
-								strong: <strong />
-							}
-						} ) }
-					</h1>
-				</SunriseStep.Header>
-
 				<div className={ styles.content }>
-
 					<div className={ styles.text }>
 						<p>
 							{ i18n.translate(
@@ -74,19 +61,7 @@ class Success extends React.Component {
 
 		return (
 			<div>
-				<SunriseStep.Header className={ styles.header }>
-					<h1 className={ styles.heading }>
-						{ i18n.translate( '{{strong}}%(domain)s{{/strong}} is now yours!', {
-							args: { domain },
-							components: {
-								strong: <strong />
-							}
-						} ) }
-					</h1>
-				</SunriseStep.Header>
-
 				<div className={ styles.content }>
-
 					<div className={ styles.text }>
 						<p>
 							{ i18n.translate( 'Your domain should start working right away, but it may not be reliable for the first few hours.' ) }
@@ -115,28 +90,50 @@ class Success extends React.Component {
 		);
 	}
 
-	render() {
+	renderHeading() {
+		const { domain, hasDomainAvailabilityLoaded, hasTrademarkClaim } = this.props;
+
+		if ( ! hasDomainAvailabilityLoaded ) {
+			return i18n.translate( 'Loading…' );
+		}
+
+		if ( hasTrademarkClaim ) {
+			return i18n.translate( '{{strong}}%(domain)s{{/strong}} is almost yours!', {
+				args: { domain },
+				components: {
+					strong: <strong />
+				}
+			} );
+		}
+
+		return i18n.translate( '{{strong}}%(domain)s{{/strong}} is now yours!', {
+			args: { domain },
+			components: {
+				strong: <strong />
+			}
+		} );
+	}
+
+	renderContent() {
 		const { hasDomainAvailabilityLoaded, hasTrademarkClaim } = this.props;
 
 		if ( ! hasDomainAvailabilityLoaded ) {
-			return (
-				<SunriseStep className={ styles.step }>
-					<DocumentTitle title={ i18n.translate( 'Success' ) } />
-
-					<SunriseStep.Header className={ styles.header }>
-						<h1 className={ styles.heading }>
-							{ i18n.translate( 'Loading…' ) }
-						</h1>
-					</SunriseStep.Header>
-				</SunriseStep>
-			);
+			return null;
 		}
 
+		return ( hasTrademarkClaim ? this.renderTrademarkedDomain() : this.renderDefaultDomain() );
+	}
+
+	render() {
 		return (
 			<SunriseStep className={ styles.step }>
 				<DocumentTitle title={ i18n.translate( 'Success' ) } />
-
-				{ hasTrademarkClaim ? this.renderTrademarkedDomain() : this.renderDefaultDomain() }
+				<SunriseStep.Header className={ styles.header }>
+					<h1 className={ styles.heading }>
+						{ this.renderHeading() }
+					</h1>
+				</SunriseStep.Header>
+				{ this.renderContent() }
 			</SunriseStep>
 		);
 	}

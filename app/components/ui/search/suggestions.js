@@ -70,7 +70,7 @@ const Suggestions = React.createClass( {
 		}
 
 		return (
-			<li className={ classNames( styles.suggestion, styles.isTaken ) }>
+			<li className={ classNames( styles.suggestion, styles.isTaken, styles.isUnavailable ) }>
 				<div className={ styles.suggestionInfo }>
 					<PartialUnderline className={ styles.suggestionTitle }>
 						{ this.props.query }

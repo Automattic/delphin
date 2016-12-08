@@ -76,7 +76,7 @@ const Suggestions = React.createClass( {
 						{ this.props.query }
 					</PartialUnderline>
 					<div className={ styles.cost }>
-						{ i18n.translate( 'This domain is not available, try these suggestions instead.' ) }
+						{ i18n.translate( 'This domain is not available. Try some of the other suggestions, or change your search.' ) }
 					</div>
 				</div>
 			</li>

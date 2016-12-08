@@ -1,11 +1,13 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { normalizeDomain, omitTld } from 'lib/domains';
 import styles from './styles.scss';
+import PartialUnderline from 'components/ui/partial-underline';
 import Suggestion from 'components/containers/suggestion';
 
 /**
@@ -62,6 +64,25 @@ const Suggestions = React.createClass( {
 		return results.slice().sort( sortFunctions[ sort ] ).slice( 0, count );
 	},
 
+	renderExactMatchTaken() {
+		if ( ! this.props.exactMatchUnavailable ) {
+			return;
+		}
+
+		return (
+			<li className={ classNames( styles.suggestion, styles.isTaken ) }>
+				<div className={ styles.suggestionInfo }>
+					<PartialUnderline className={ styles.suggestionTitle }>
+						{ this.props.query }
+					</PartialUnderline>
+					<div className={ styles.cost }>
+						{ i18n.translate( 'This domain is not available, try these suggestions instead.' ) }
+					</div>
+				</div>
+			</li>
+		);
+	},
+
 	render() {
 		if ( ! this.props.hasLoadedFromServer ) {
 			return null;
@@ -77,7 +98,7 @@ const Suggestions = React.createClass( {
 
 		return (
 			<ul className={ styles.suggestions }>
-				{ this.props.exactMatchUnavailable && <li className={ styles.suggestion }>{ this.props.query } - { i18n.translate( 'already taken' ) } </li> }
+				{ this.props.exactMatchUnavailable && this.renderExactMatchTaken() }
 				{ this.getSortedResults()
 					.map( ( suggestion ) => (
 					<Suggestion

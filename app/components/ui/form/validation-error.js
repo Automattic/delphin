@@ -22,7 +22,7 @@ const isVisible = ( fields, errors, submitFailed ) => {
 		return false;
 	}
 
-	if ( ! fields.some( field => field.touched ) ) {
+	if ( ! fields.some( field => field.touched ) && ! submitFailed ) {
 		return false;
 	}
 
@@ -47,7 +47,7 @@ const ValidationError = ( { field, fields, submitFailed } ) => {
 	}
 
 	let errors = allFields.reduce( ( result, currentField ) => {
-		if ( ! currentField.touched ) {
+		if ( ! currentField.touched && ! submitFailed ) {
 			return result;
 		}
 

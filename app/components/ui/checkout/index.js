@@ -116,7 +116,16 @@ const Checkout = React.createClass( {
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
 	},
 
-	renderForm() {
+	renderProcessing() {
+		return (
+			<div className={ styles.processingPayment }>
+				<div className={ styles.icon }></div>
+				<p>{ i18n.translate( 'Processing…' ) }</p>
+			</div>
+		);
+	},
+
+	render() {
 		const { domain, domainCost, errors, fields, handleSubmit, isPurchasing, trackPrivacyToggle } = this.props;
 
 		return (
@@ -185,23 +194,6 @@ const Checkout = React.createClass( {
 					</Form>
 				</div>
 			</DocumentTitle>
-		);
-	},
-
-	renderProcessing() {
-		return (
-			<div className={ styles.processingPayment }>
-				<div className={ styles.icon }></div>
-				<p>{ i18n.translate( 'Processing…' ) }</p>
-			</div>
-		);
-	},
-
-	render() {
-		return (
-			<div>
-				{ this.renderForm() }
-			</div>
 		);
 	}
 } );

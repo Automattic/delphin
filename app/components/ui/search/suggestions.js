@@ -53,7 +53,7 @@ const Suggestions = React.createClass( {
 			{ exactMatchUnavailable, results, sort } = this.props;
 		let { count } = this.props;
 
-		if ( exactMatchUnavailable ) {
+		if ( exactMatchUnavailable && count < results.length ) {
 			count -= 1;
 		}
 

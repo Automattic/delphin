@@ -38,7 +38,7 @@ const OrderSummary = ( { domain, domainCost, fields, hasTrademarkClaim, trackPri
 
 						<Tooltip
 							text={
-								<div>
+								<div className={ styles.privacyTooltip }>
 									<p>{ i18n.translate( 'Some providers charge a fee to keep personal information out of the domain\'s public records.' ) }</p>
 									<p>{ i18n.translate( 'We keep your details hidden for free, to protect your identity and prevent spam.' ) }</p>
 								</div>

@@ -10,7 +10,7 @@ import FormToggle from 'components/ui/form/form-toggle';
 import styles from './styles.scss';
 import Tooltip from 'components/ui/tooltip';
 
-const OrderSummary = ( { domain, domainCost, fields, trackPrivacyToggle } ) => {
+const OrderSummary = ( { domain, domainCost, fields, hasTrademarkClaim, trackPrivacyToggle } ) => {
 	return (
 		<div className={ styles.orderSummary }>
 			<h2>{ i18n.translate( 'Order Summary' ) }</h2>
@@ -18,6 +18,10 @@ const OrderSummary = ( { domain, domainCost, fields, trackPrivacyToggle } ) => {
 			<div className={ styles.orderItem }>
 				<span className={ styles.itemDescription }>
 					{ domain.domainName }
+
+					{ hasTrademarkClaim && (
+						<span className={ styles.trademark }>TM</span>
+					) }
 				</span>
 
 				<span>
@@ -25,39 +29,41 @@ const OrderSummary = ( { domain, domainCost, fields, trackPrivacyToggle } ) => {
 				</span>
 			</div>
 
-			<div className={ styles.orderItem }>
-				<label>
-					<span className={ styles.privacyLabel }>
-						{ i18n.translate( 'Privacy Protection' ) }
-					</span>
+			{ ! hasTrademarkClaim && (
+				<div className={ styles.orderItem }>
+					<label>
+						<span className={ styles.privacyLabel }>
+							{ i18n.translate( 'Privacy Protection' ) }
+						</span>
 
-					<Tooltip
-						text={
-							<div>
-								<p>{ i18n.translate( 'Some providers charge a fee to keep personal information out of the domain\'s public records.' ) }</p>
-								<p>{ i18n.translate( 'We keep your details hidden for free, to protect your identity and prevent spam.' ) }</p>
-							</div>
-						}>
-						<Gridicon
-							className={ styles.gridicon }
-							icon="help-outline"
-							size={ 16 }
+						<Tooltip
+							text={
+								<div>
+									<p>{ i18n.translate( 'Some providers charge a fee to keep personal information out of the domain\'s public records.' ) }</p>
+									<p>{ i18n.translate( 'We keep your details hidden for free, to protect your identity and prevent spam.' ) }</p>
+								</div>
+							}>
+							<Gridicon
+								className={ styles.gridicon }
+								icon="help-outline"
+								size={ 16 }
+							/>
+						</Tooltip>
+					</label>
+
+					<span>
+						<FormToggle
+							name="privacy-protection"
+							{ ...fields.privacyProtection }
+							trackChange={ trackPrivacyToggle }
 						/>
-					</Tooltip>
-				</label>
 
-				<span>
-					<FormToggle
-						name="privacy-protection"
-						{ ...fields.privacyProtection }
-						trackChange={ trackPrivacyToggle }
-					/>
-
-					<span className={ styles.privacyProtectionPrice }>
-						{ i18n.translate( 'Free' ) }
+						<span className={ styles.privacyProtectionPrice }>
+							{ i18n.translate( 'Free' ) }
+						</span>
 					</span>
-				</span>
-			</div>
+				</div>
+			) }
 
 			<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
 				<span>
@@ -76,6 +82,7 @@ OrderSummary.propTypes = {
 	domain: PropTypes.object,
 	domainCost: PropTypes.string.isRequired,
 	fields: PropTypes.object.isRequired,
+	hasTrademarkClaim: PropTypes.bool.isRequired,
 	trackPrivacyToggle: PropTypes.func.isRequired
 };
 

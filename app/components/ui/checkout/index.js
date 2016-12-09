@@ -1,13 +1,11 @@
 // External dependencies
 import { card } from 'creditcards';
-import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
 import range from 'lodash/range';
 import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import Button from 'components/ui/button';
@@ -15,11 +13,10 @@ import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import Country from 'components/containers/country';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
-import FormToggle from 'components/ui/form/form-toggle';
 import Input from 'components/ui/form/input';
+import OrderSummary from './order-summary';
 import Select from 'components/ui/form/select';
 import styles from './styles.scss';
-import Tooltip from 'components/ui/tooltip';
 import capitalize from 'lodash/capitalize';
 import { removeInvalidInputProps } from 'lib/form';
 import scrollToTop from 'components/containers/scroll-to-top';
@@ -164,7 +161,7 @@ const Checkout = React.createClass( {
 
 	renderForm() {
 		const months = i18n.moment.months(),
-			{ errors, fields, handleSubmit, domainCost } = this.props;
+			{ domain, domainCost, errors, fields, handleSubmit, isPurchasing, trackPrivacyToggle } = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -278,51 +275,11 @@ const Checkout = React.createClass( {
 							</fieldset>
 						</Form.FieldArea>
 
-						<div className={ styles.orderSummary }>
-							<h2>{ i18n.translate( 'Order Summary' ) }</h2>
-							<div className={ styles.orderItem }>
-								<span className={ styles.itemDescription }>
-									{ this.props.domain.domainName }
-								</span>
-								<span>{ i18n.translate( '%(cost)s per year', {
-									args: { cost: domainCost },
-								} ) }</span>
-							</div>
-							<div className={ styles.orderItem }>
-								<label>
-									<span className={ styles.privacyLabel }>
-										{ i18n.translate( 'Privacy Protection' ) }
-									</span>
-									<Tooltip
-										text={
-											<div>
-												<p>{ i18n.translate( 'Some providers charge a fee to keep personal information out of the domain\'s public records.' ) }</p>
-												<p>{ i18n.translate( 'We keep your details hidden for free, to protect your identity and prevent spam.' ) }</p>
-											</div>
-										}>
-										<Gridicon
-											className={ styles.gridicon }
-											icon="help-outline"
-											size={ 16 }
-										/>
-									</Tooltip>
-								</label>
-								<span>
-									<FormToggle
-										name="privacy-protection"
-										{ ...fields.privacyProtection }
-										trackChange={ this.props.trackPrivacyToggle }
-									/>
-									<span className={ styles.privacyProtectionPrice }>
-										{ i18n.translate( 'Free' ) }
-									</span>
-								</span>
-							</div>
-							<div className={ classnames( styles.orderItem, styles.orderTotal ) }>
-								<span>{ i18n.translate( 'Total cost' ) }</span>
-								<span className="_price-with-currency-code">{ this.props.domain.totalCost } { this.props.domain.currencyCode }</span>
-							</div>
-						</div>
+						<OrderSummary
+							domain={ domain }
+							domainCost={ domainCost }
+							fields={ fields }
+							trackPrivacyToggle={ trackPrivacyToggle } />
 
 						<div className={ styles.refundNotice }>
 							<p>
@@ -359,7 +316,7 @@ const Checkout = React.createClass( {
 
 						{ this.hasError() && this.renderCheckoutError() }
 
-						{ this.props.isPurchasing && this.renderProcessing() }
+						{ isPurchasing && this.renderProcessing() }
 					</Form>
 				</div>
 			</DocumentTitle>

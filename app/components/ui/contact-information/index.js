@@ -370,6 +370,12 @@ class ContactInformation extends React.Component {
 								{ this.getSubmitButtonText() }
 							</Button>
 						</Form.SubmitArea>
+
+						<Form.Footer>
+							<p>
+								{ i18n.translate( 'To protect your identity and prevent spam, we keep your personal details hidden from the public.' ) }
+							</p>
+						</Form.Footer>
 					</Form>
 				</div>
 			</DocumentTitle>

@@ -175,6 +175,7 @@ const Checkout = React.createClass( {
 									}
 								) }
 							</p>
+
 							<p>
 								{ i18n.translate( 'You can cancel at any time by contacting {{link}}help@get.blog{{/link}}. You confirm that you understand how automatic renewal works and how to cancel.',
 									{
@@ -184,6 +185,12 @@ const Checkout = React.createClass( {
 									}
 								) }
 							</p>
+
+							{ hasTrademarkClaim && (
+								<p>
+									{ i18n.translate( 'Your will have to agree to the trademark terms within 48 hours to finalize the registration.' ) }
+								</p>
+							) }
 						</div>
 
 						<Form.SubmitArea className={ styles.submitArea }>

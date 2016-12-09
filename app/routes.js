@@ -140,18 +140,6 @@ let publicRoutes = [
 				slug: 'contactConcierge',
 				static: false,
 				getComponent: getComponent( 'setUpDomain', 'contactConcierge' )
-			},
-			{
-				path: 'set-up-domain/:domainName/hosts',
-				slug: 'hosts',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'hosts' )
-			},
-			{
-				path: 'set-up-domain/:domainName/hosts/:slug',
-				slug: 'hostInfo',
-				static: false,
-				getComponent: getComponent( 'setUpDomain', 'hostInfo' )
 			}
 		]
 	},

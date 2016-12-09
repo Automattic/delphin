@@ -7,8 +7,6 @@ import connectNewBlogToOther from 'components/containers/set-up-domain/connect-n
 import contactConcierge from 'components/containers/set-up-domain/contact-concierge';
 import contactUsExistingBlog from 'components/containers/set-up-domain/contact-us-existing-blog';
 import findExistingBlog from 'components/containers/set-up-domain/find-existing-blog';
-import hostInfo from 'components/containers/host-info';
-import hosts from 'components/containers/hosts';
 import selectBlogType from 'components/containers/set-up-domain/select-blog-type';
 import selectNewBlogHost from 'components/containers/set-up-domain/select-new-blog-host';
 import selectNewBlogNeeds from 'components/containers/set-up-domain/select-new-blog-needs';
@@ -16,15 +14,13 @@ import updateNameservers from 'components/containers/set-up-domain/update-namese
 
 export default {
 	confirmConnectBlog,
-	contactConcierge,
 	connectExistingBlog,
 	connectingExistingBlog,
 	connectingNewBlog,
 	connectNewBlogToOther,
+	contactConcierge,
 	contactUsExistingBlog,
 	findExistingBlog,
-	hostInfo,
-	hosts,
 	selectBlogType,
 	selectNewBlogHost,
 	selectNewBlogNeeds,

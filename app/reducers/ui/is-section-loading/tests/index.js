@@ -20,10 +20,10 @@ describe( 'state.ui.isSectionLoading', () => {
 		expect( isSectionLoading( {
 			myDomains: true,
 			checkout: false,
-		}, { type: SECTION_FETCH, section: 'hosts' } ) ).toEqual( {
+		}, { type: SECTION_FETCH, section: 'setUpDomain' } ) ).toEqual( {
 			myDomains: true,
 			checkout: false,
-			hosts: true,
+			setUpDomain: true,
 		} );
 	} );
 

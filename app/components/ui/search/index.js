@@ -8,7 +8,7 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 // Internal dependencies
 import config from 'config';
 import DocumentTitle from 'components/ui/document-title';
-import { containsAlphanumericCharacters, isDomainSearch, isValidSecondLevelDomain, queryIsInResults, normalizeDomain } from 'lib/domains';
+import { containsAlphanumericCharacters, isValidSecondLevelDomain, queryIsInResults, normalizeDomain } from 'lib/domains';
 import LoadingPlaceholder from './loading-placeholder';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
@@ -73,7 +73,7 @@ const Search = React.createClass( {
 		const { query, isRequesting, results } = this.props;
 
 		return ! isRequesting &&
-			isDomainSearch( query ) &&
+			isValidSecondLevelDomain( query ) &&
 			results && ! queryIsInResults( results, normalizeDomain( query ) );
 	},
 
@@ -168,6 +168,7 @@ const Search = React.createClass( {
 		return (
 			<Suggestions
 				count={ this.props.numberOfResultsToDisplay }
+				exactMatchUnavailable={ this.isExactMatchUnavailable() }
 				hasLoadedFromServer={ this.props.hasLoadedFromServer }
 				results={ this.props.results }
 				selectDomain={ this.selectDomain }
@@ -179,7 +180,6 @@ const Search = React.createClass( {
 
 	render() {
 		const query = this.props.query,
-			exactMatchUnavailable = this.isExactMatchUnavailable(),
 			showAdditionalResultsLink = this.props.results &&
 				this.props.results.length > this.props.numberOfResultsToDisplay;
 
@@ -200,8 +200,6 @@ const Search = React.createClass( {
 							} ) }
 						</div>
 					) }
-
-					{ exactMatchUnavailable && this.renderDomainUnavailableMessage() }
 
 					{ ! query && this.renderEmptyQueryMessage() }
 

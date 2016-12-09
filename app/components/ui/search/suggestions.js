@@ -1,11 +1,13 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { normalizeDomain, omitTld } from 'lib/domains';
+import { normalizeDomain, omitTld, withTld } from 'lib/domains';
 import styles from './styles.scss';
+import PartialUnderline from 'components/ui/partial-underline';
 import Suggestion from 'components/containers/suggestion';
 
 /**
@@ -19,6 +21,7 @@ const getNumberFromPrice = price => Number( price.replace( /[^0-9.]/g, '' ) );
 const Suggestions = React.createClass( {
 	propTypes: {
 		count: PropTypes.number,
+		exactMatchUnavailable: PropTypes.bool,
 		hasLoadedFromServer: PropTypes.bool.isRequired,
 		query: PropTypes.string,
 		results: PropTypes.array,
@@ -47,13 +50,37 @@ const Suggestions = React.createClass( {
 					return sortFunctions.recommended( a, b );
 				}
 			},
-			{ results, sort } = this.props;
+			{ exactMatchUnavailable, results, sort } = this.props;
+		let { count } = this.props;
+
+		if ( exactMatchUnavailable && count < results.length ) {
+			count -= 1;
+		}
 
 		// Because Array.prototype.sort is not guaranteed to be stable
 		// we create a shallow copy of the array via slice()
 		// sort that copy and return it without modifying the original results array
 		// on the next call we sort it again from the original, which makes the sort "stable"
-		return results.slice().sort( sortFunctions[ sort ] );
+		return results.slice().sort( sortFunctions[ sort ] ).slice( 0, count );
+	},
+
+	renderExactMatchTaken() {
+		if ( ! this.props.exactMatchUnavailable ) {
+			return;
+		}
+
+		return (
+			<li className={ classNames( styles.suggestion, styles.isTaken, styles.isUnavailable ) }>
+				<div className={ styles.suggestionInfo }>
+					<PartialUnderline className={ styles.suggestionTitle }>
+						{ withTld( this.props.query ) }
+					</PartialUnderline>
+					<div className={ styles.cost }>
+						{ i18n.translate( 'This domain is not available. Try some of the other suggestions, or change your search.' ) }
+					</div>
+				</div>
+			</li>
+		);
 	},
 
 	render() {
@@ -71,8 +98,8 @@ const Suggestions = React.createClass( {
 
 		return (
 			<ul className={ styles.suggestions }>
+				{ this.props.exactMatchUnavailable && this.renderExactMatchTaken() }
 				{ this.getSortedResults()
-					.slice( 0, this.props.count )
 					.map( ( suggestion ) => (
 					<Suggestion
 						isBestMatch={ omitTld( normalizeDomain( this.props.query.replace( /\s+/g, '' ) ) ) === omitTld( suggestion.domainName ) }

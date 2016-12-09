@@ -24,6 +24,7 @@ const Checkout = React.createClass( {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
+		hasTrademarkClaim: PropTypes.bool.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isPurchasing: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,
@@ -125,7 +126,16 @@ const Checkout = React.createClass( {
 	},
 
 	render() {
-		const { domain, domainCost, errors, fields, handleSubmit, isPurchasing, trackPrivacyToggle } = this.props;
+		const {
+			domain,
+			domainCost,
+			errors,
+			fields,
+			handleSubmit,
+			hasTrademarkClaim,
+			isPurchasing,
+			trackPrivacyToggle
+		} = this.props;
 
 		return (
 			<DocumentTitle title={ i18n.translate( 'Checkout' ) }>
@@ -152,6 +162,7 @@ const Checkout = React.createClass( {
 							domain={ domain }
 							domainCost={ domainCost }
 							fields={ fields }
+							hasTrademarkClaim={ hasTrademarkClaim }
 							trackPrivacyToggle={ trackPrivacyToggle } />
 
 						<div className={ styles.refundNotice }>

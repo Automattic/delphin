@@ -20,5 +20,4 @@ You can use the `-u` option to uninstall a specific Git hook:
 
 ```
 npm run hooks -- -u pre-commit
-npm run hooks -- -u pre-commit -i pre-push
 ```

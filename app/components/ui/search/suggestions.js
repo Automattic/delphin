@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { normalizeDomain, omitTld } from 'lib/domains';
+import { normalizeDomain, omitTld, withTld } from 'lib/domains';
 import styles from './styles.scss';
 import PartialUnderline from 'components/ui/partial-underline';
 import Suggestion from 'components/containers/suggestion';
@@ -73,7 +73,7 @@ const Suggestions = React.createClass( {
 			<li className={ classNames( styles.suggestion, styles.isTaken, styles.isUnavailable ) }>
 				<div className={ styles.suggestionInfo }>
 					<PartialUnderline className={ styles.suggestionTitle }>
-						{ this.props.query }
+						{ withTld( this.props.query ) }
 					</PartialUnderline>
 					<div className={ styles.cost }>
 						{ i18n.translate( 'This domain is not available. Try some of the other suggestions, or change your search.' ) }

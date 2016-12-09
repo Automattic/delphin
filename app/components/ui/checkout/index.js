@@ -24,7 +24,6 @@ const Checkout = React.createClass( {
 		fields: PropTypes.object.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
-		initializeForm: PropTypes.func.isRequired,
 		invalid: PropTypes.bool.isRequired,
 		isPurchasing: PropTypes.bool.isRequired,
 		purchaseDomain: PropTypes.func.isRequired,

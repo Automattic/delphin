@@ -10,7 +10,7 @@ $inner-dot-color: $gray-xlight;
 .progressbar {
 	display: flex;
 	margin: 0 auto;
-	max-width: 320px;
+	max-width: 400px;
 }
 
 @mixin step-line-style( $color, $width ) {
@@ -28,7 +28,7 @@ $inner-dot-color: $gray-xlight;
 	display: flex;
 	flex: 1;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 	position: relative;
 
 	&::after {

@@ -97,10 +97,12 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 
 export function createTransaction() {
 	return ( dispatch, getState ) => {
-		const checkout = getCheckout( getState() ),
+		const state = getState();
+
+		const checkout = getCheckout( state ),
 			{ domainName } = checkout.selectedDomain,
-			contactInformationForm = getValues( getState().form.contactInformation ),
-			checkoutForm = getValues( getState().form.checkout ),
+			contactInformationForm = getValues( state.form.contactInformation ),
+			checkoutForm = getValues( state.form.checkout ),
 			{ privacyProtection } = checkoutForm,
 			paygateToken = checkout.paygateToken.data.token;
 

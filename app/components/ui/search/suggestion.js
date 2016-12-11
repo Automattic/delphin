@@ -99,7 +99,7 @@ const Suggestion = React.createClass( {
 		}
 
 		return (
-			<Tag className={ styles.premiumTag }>
+			<Tag className={ styles.premiumTag } type="premium">
 				{ i18n.translate( 'Premium' ) }
 			</Tag>
 		);

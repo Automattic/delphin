@@ -8,6 +8,7 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 // Internal dependencies
 import FormToggle from 'components/ui/form/form-toggle';
 import styles from './styles.scss';
+import Tag from 'components/ui/tag';
 import Tooltip from 'components/ui/tooltip';
 
 const OrderSummary = ( { domain, domainCost, fields, hasTrademarkClaim, trackPrivacyToggle } ) => {
@@ -20,7 +21,9 @@ const OrderSummary = ( { domain, domainCost, fields, hasTrademarkClaim, trackPri
 					{ domain.domainName }
 
 					{ hasTrademarkClaim && (
-						<span className={ styles.trademark }>TM</span>
+						<Tag className={ styles.trademarkTag } type="trademark">
+							TM
+						</Tag>
 					) }
 				</span>
 

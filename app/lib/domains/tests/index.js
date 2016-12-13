@@ -2,7 +2,7 @@
 import {
 	extractHostName,
 	isDomain,
-	isDomainSearch,
+	isSearchForDomainWithAvailableTld,
 	isValidSecondLevelDomain,
 	secondLevelDomainOf,
 	omitTld,
@@ -107,24 +107,24 @@ describe( 'lib/domains', () => {
 		} );
 	} );
 
-	describe( 'isDomainSearch', () => {
+	describe( 'isSearchForDomainWithAvailableTld', () => {
 		it( 'should return true for valid .blog domains', () => {
-			expect( isDomainSearch( 'foo.blog' ) ).toBe( true );
-			expect( isDomainSearch( 'foo-bar.blog' ) ).toBe( true );
-			expect( isDomainSearch( 'foo0.blog' ) ).toBe( true );
+			expect( isSearchForDomainWithAvailableTld( 'foo.blog' ) ).toBe( true );
+			expect( isSearchForDomainWithAvailableTld( 'foo-bar.blog' ) ).toBe( true );
+			expect( isSearchForDomainWithAvailableTld( 'foo0.blog' ) ).toBe( true );
 		} );
 
 		it( 'should return false for invalid .blog domains', () => {
-			expect( isDomainSearch( 'foo-.blog' ) ).toBe( false );
-			expect( isDomainSearch( 'foo bar.blog' ) ).toBe( false );
+			expect( isSearchForDomainWithAvailableTld( 'foo-.blog' ) ).toBe( false );
+			expect( isSearchForDomainWithAvailableTld( 'foo bar.blog' ) ).toBe( false );
 		} );
 
 		it( 'should return false for non-.blog domains', () => {
-			expect( isDomainSearch( 'foo.com' ) ).toBe( false );
+			expect( isSearchForDomainWithAvailableTld( 'foo.com' ) ).toBe( false );
 		} );
 
 		it( 'should return false for strings without a TLD suffix', () => {
-			expect( isDomainSearch( 'foo' ) ).toBe( false );
+			expect( isSearchForDomainWithAvailableTld( 'foo' ) ).toBe( false );
 		} );
 	} );
 

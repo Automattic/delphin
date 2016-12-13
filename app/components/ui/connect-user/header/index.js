@@ -1,4 +1,5 @@
 // External dependencies
+import classNames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -26,7 +27,7 @@ const Header = ( { intention, domainName } ) => {
 
 	return (
 		<div className={ styles.container }>
-			<div className={ styles.header }>
+			<div className={ classNames( styles.header, { [ styles.logInHeader ]: intention === 'login' } ) }>
 				{ heading && (
 					<h2 className={ styles.heading }>
 						{ heading }

@@ -1,6 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -15,57 +15,38 @@ import scrollToTop from 'components/containers/scroll-to-top';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
 
-const Checkout = React.createClass( {
-	propTypes: {
-		checkout: PropTypes.object.isRequired,
-		domain: PropTypes.object,
-		domainCost: PropTypes.string.isRequired,
-		errors: PropTypes.object,
-		fields: PropTypes.object.isRequired,
-		handleSubmit: PropTypes.func.isRequired,
-		hasSelectedDomain: PropTypes.bool.isRequired,
-		hasTrademarkClaim: PropTypes.bool.isRequired,
-		invalid: PropTypes.bool.isRequired,
-		isPurchasing: PropTypes.bool.isRequired,
-		purchaseDomain: PropTypes.func.isRequired,
-		redirect: PropTypes.func.isRequired,
-		resetCheckout: PropTypes.func.isRequired,
-		submitting: PropTypes.bool.isRequired,
-		trackPrivacyToggle: PropTypes.func.isRequired,
-		user: PropTypes.object.isRequired
-	},
-
+class Checkout extends Component {
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
 		}
-	},
+	}
 
 	isSubmitButtonDisabled() {
 		const { isPurchasing, invalid, submitting } = this.props;
 
 		return invalid || submitting || isPurchasing;
-	},
+	}
 
 	handleClickResetCheckout( event ) {
 		event.preventDefault();
 
 		this.props.resetCheckout();
-	},
+	}
 
 	handleClickResetCheckoutAndRedirectToHome( event ) {
 		this.handleClickResetCheckout( event );
 
 		this.props.redirect( 'home' );
-	},
+	}
 
 	handleSubmission() {
 		this.props.purchaseDomain()
 			.then( () => this.props.redirect( 'success' ) )
 			.catch( () => this.props.redirect( 'checkout' ) );
-	},
+	}
 
 	renderCheckoutError() {
 		let errorMessage = i18n.translate( "We weren't able to process your payment." );
@@ -108,13 +89,13 @@ const Checkout = React.createClass( {
 				</p>
 			</div>
 		);
-	},
+	}
 
 	hasError() {
 		const { paygateConfiguration, paygateToken, transaction } = this.props.checkout;
 
 		return paygateConfiguration.error || paygateToken.error || transaction.error;
-	},
+	}
 
 	renderProcessing() {
 		return (
@@ -123,7 +104,7 @@ const Checkout = React.createClass( {
 				<p>{ i18n.translate( 'Processing…' ) }</p>
 			</div>
 		);
-	},
+	}
 
 	render() {
 		const {
@@ -188,7 +169,7 @@ const Checkout = React.createClass( {
 
 							{ hasTrademarkClaim && (
 								<p>
-									{ i18n.translate( 'Your will have to agree to the trademark terms within 48 hours to finalize the registration.' ) }
+									{ i18n.translate( 'You will have to agree to the trademark terms within 48 hours to finalize the registration.' ) }
 								</p>
 							) }
 						</div>
@@ -213,6 +194,25 @@ const Checkout = React.createClass( {
 			</DocumentTitle>
 		);
 	}
-} );
+}
+
+Checkout.propTypes = {
+	checkout: PropTypes.object.isRequired,
+	domain: PropTypes.object,
+	domainCost: PropTypes.string.isRequired,
+	errors: PropTypes.object,
+	fields: PropTypes.object.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+	hasSelectedDomain: PropTypes.bool.isRequired,
+	hasTrademarkClaim: PropTypes.bool.isRequired,
+	invalid: PropTypes.bool.isRequired,
+	isPurchasing: PropTypes.bool.isRequired,
+	purchaseDomain: PropTypes.func.isRequired,
+	redirect: PropTypes.func.isRequired,
+	resetCheckout: PropTypes.func.isRequired,
+	submitting: PropTypes.bool.isRequired,
+	trackPrivacyToggle: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired
+};
 
 export default scrollToTop( withStyles( styles )( withPageView( Checkout, 'Checkout' ) ) );

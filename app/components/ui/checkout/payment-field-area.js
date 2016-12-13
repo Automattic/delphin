@@ -1,5 +1,6 @@
 // External dependencies
 import { card } from 'creditcards';
+import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
 import range from 'lodash/range';
@@ -172,4 +173,4 @@ PaymentFieldArea.propTypes = {
 	fields: PropTypes.object.isRequired
 };
 
-export default withStyles( styles )( PaymentFieldArea );
+export default withStyles( styles )( bindHandlers( PaymentFieldArea ) );

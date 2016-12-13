@@ -100,10 +100,10 @@ class ConfirmTrademark extends React.Component {
 				<Form className={ styles.form } onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>
 						<p>
-							{ i18n.translate( 'You can register this domain, but you will have to confirm that your registration will not infringe on the trademark rights. The trademark holder will be notified, and they may choose to dispute your registration.' ) }
+							{ i18n.translate( 'To register this domain, you must agree to the terms of the trademark claim. The trademark holder will be notified, and they may choose to dispute your registration.' ) }
 						</p>
 						<p>
-							{ i18n.translate( "We'll send you an email with further instructions after you submit your order. You will have to review the terms and agree to them within 48 hours, or your registration will be canceled." ) }
+							{ i18n.translate( "We'll send you an email with further instructions after you submit your order." ) }
 						</p>
 					</Form.FieldArea>
 
@@ -114,7 +114,7 @@ class ConfirmTrademark extends React.Component {
 					</Form.SubmitArea>
 
 					<Form.Footer>
-						<p>{ i18n.translate( "You'll get an automatic refund if you reject the terms or if you don't agree to them on time." ) }</p>
+						<p>{ i18n.translate( "Please review the terms and agree to them within 48 hours. You'll get an automatic refund if you reject the terms or if you don't agree to them on time." ) }</p>
 					</Form.Footer>
 				</Form>
 

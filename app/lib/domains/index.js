@@ -101,7 +101,7 @@ export function secondLevelDomainOf( validDomain ) {
  * @param {string} value - the string to test
  * @returns {boolean}    - the result of the test
  */
-export function isDomainSearch( value ) {
+export function isSearchForDomainWithAvailableTld( value ) {
 	return isDomain( value ) && domainEndsInAvailableTldRegEx.test( value );
 }
 

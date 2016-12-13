@@ -4,7 +4,7 @@ import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
 import range from 'lodash/range';
 import omit from 'lodash/omit';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -17,18 +17,14 @@ import capitalize from 'lodash/capitalize';
 import { removeInvalidInputProps } from 'lib/form';
 import ValidationError from 'components/ui/form/validation-error';
 
-const PaymentFieldArea = React.createClass( {
-	propTypes: {
-		fields: PropTypes.object.isRequired
-	},
-
+class PaymentFieldArea extends Component {
 	handleCreditCardNumberChange( event ) {
 		const { value } = event.target;
 
 		const rawFieldValue = card.parse( value );
 
 		this.props.fields.number.onChange( card.format( rawFieldValue ) );
-	},
+	}
 
 	renderCreditCards() {
 		const supportedCards = [
@@ -55,7 +51,7 @@ const PaymentFieldArea = React.createClass( {
 				<div alt="American Express" className={ classes.amex } />
 			</div>
 		);
-	},
+	}
 
 	render() {
 		const months = i18n.moment.months(),
@@ -170,6 +166,10 @@ const PaymentFieldArea = React.createClass( {
 			</Form.FieldArea>
 		);
 	}
-} );
+}
+
+PaymentFieldArea.propTypes = {
+	fields: PropTypes.object.isRequired
+};
 
 export default withStyles( styles )( PaymentFieldArea );

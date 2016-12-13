@@ -17,7 +17,7 @@ import capitalize from 'lodash/capitalize';
 import { removeInvalidInputProps } from 'lib/form';
 import ValidationError from 'components/ui/form/validation-error';
 
-const PaymentForm = React.createClass( {
+const PaymentFieldArea = React.createClass( {
 	propTypes: {
 		fields: PropTypes.object.isRequired
 	},
@@ -172,4 +172,4 @@ const PaymentForm = React.createClass( {
 	}
 } );
 
-export default withStyles( styles )( PaymentForm );
+export default withStyles( styles )( PaymentFieldArea );

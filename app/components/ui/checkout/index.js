@@ -9,7 +9,7 @@ import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import OrderSummary from './order-summary';
-import PaymentForm from './payment-form';
+import PaymentFieldArea from './payment-field-area';
 import styles from './styles.scss';
 import scrollToTop from 'components/containers/scroll-to-top';
 import SiftScience from 'lib/sift-science';
@@ -156,7 +156,7 @@ const Checkout = React.createClass( {
 						focusOnError
 						autoComplete="off"
 					>
-						<PaymentForm fields={ fields } />
+						<PaymentFieldArea fields={ fields } />
 
 						<OrderSummary
 							domain={ domain }

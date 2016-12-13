@@ -1,4 +1,5 @@
 // External dependencies
+import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -215,4 +216,4 @@ Checkout.propTypes = {
 	user: PropTypes.object.isRequired
 };
 
-export default scrollToTop( withStyles( styles )( withPageView( Checkout, 'Checkout' ) ) );
+export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( Checkout ), 'Checkout' ) ) );

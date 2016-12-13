@@ -21,7 +21,11 @@ const OrderSummary = ( { domain, domainCost, fields, hasTrademarkClaim, trackPri
 					{ domain.domainName }
 
 					{ hasTrademarkClaim && (
-						<Tag className={ styles.trademarkTag } type="trademark">
+						<Tag
+							className={ styles.trademarkTag }
+							type="trademark"
+							title={ i18n.translate( 'This domain has a trademark claim' ) }
+						>
 							TM
 						</Tag>
 					) }

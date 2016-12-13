@@ -1,19 +1,17 @@
 @import 'app/styles/colors';
 
 .tag {
-	background: $blue;
 	border-radius: 3px;
 	color: $white;
 	display: inline-block;
 	font-size: 1.2rem;
 	padding: 3px 5px;
+}
 
-	&.is-warning {
-		background: $alert-yellow;
-		color: $black;
-	}
+.is-premium {
+	background-color: $blue;
+}
 
-	&.is-error {
-		background: $alert-red;
-	}
+.is-trademark {
+	background-color: $alert-yellow;
 }

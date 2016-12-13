@@ -48,6 +48,10 @@
 		color: $gray-dark;
 		font-size: 1.4rem;
 		line-height: 1.8rem;
+
+		&:not(:last-child) {
+			margin-bottom: 10px;
+		}
 	}
 
 	@include breakpoint( '<480px' ) {
@@ -107,6 +111,12 @@
 
 .privacy-label {
 	margin-right: 5px;
+}
+
+.privacy-tooltip {
+	p:not(:last-child) {
+		margin-bottom: 10px;
+	}
 }
 
 .gridicon {
@@ -370,6 +380,10 @@
 		max-width: 100%;
 		width: 260px;
 	}
+}
+
+.trademark-tag {
+	margin-left: 8px;
 }
 
 @keyframes moveLeft {

@@ -6,11 +6,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const Tag = ( { children, className, isWarning, isError, ...props } ) => {
-	const classes = classNames( {
-		[ styles.tag ]: true,
-		[ styles.isWarning ]: !! isWarning,
-		[ styles.isError ]: !! isError,
+const Tag = ( { children, className, type, ...props } ) => {
+	const classes = classNames( styles.tag, {
+		[ styles.isPremium ]: type === 'premium',
+		[ styles.isTrademark ]: type === 'trademark'
 	}, className );
 
 	return (
@@ -26,8 +25,7 @@ Tag.propTypes = {
 		PropTypes.node
 	] ).isRequired,
 	className: PropTypes.string,
-	isError: PropTypes.bool,
-	isWarning: PropTypes.bool,
+	type: PropTypes.string.isRequired
 };
 
 export default withStyles( styles )( Tag );

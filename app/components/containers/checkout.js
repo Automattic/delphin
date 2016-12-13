@@ -8,6 +8,7 @@ import Checkout from 'components/ui/checkout';
 import { purchaseDomain } from 'actions/checkout';
 import { validateCheckoutForm } from 'lib/checkout';
 import { getAsyncValidateFunction } from 'lib/form';
+import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors';
 import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost } from 'reducers/checkout/selectors';
@@ -50,6 +51,7 @@ export default reduxForm(
 	state => ( {
 		checkout: state.checkout,
 		hasSelectedDomain: hasSelectedDomain( state ),
+		hasTrademarkClaim: hasDomainTrademarkClaim( state, getSelectedDomain( state ).domainName ),
 		domain: getSelectedDomain( state ),
 		domainCost: getSelectedDomainCost( state ),
 		isPurchasing: isPurchasing( state ),

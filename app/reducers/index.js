@@ -15,13 +15,19 @@ import { service } from './service';
 import ui from './ui';
 import { user } from './user';
 
+import { formNormalizers as nameserversNormalizers } from 'components/containers/set-up-domain/update-nameservers';
+
+const formsNormalizersMap = {
+	nameservers: nameserversNormalizers
+};
+
 export default {
 	checkout,
 	contactInformation,
 	contactSupport,
 	domainAvailability,
 	domainSearch,
-	form,
+	form: form.normalize( formsNormalizersMap ),
 	nameservers,
 	notices,
 	prices,

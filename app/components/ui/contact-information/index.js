@@ -178,6 +178,16 @@ class ContactInformation extends React.Component {
 		return i18n.translate( 'Continue to checkout' );
 	}
 
+	getPrivacyNoticeText() {
+		const { hasTrademarkClaim } = this.props;
+
+		if ( hasTrademarkClaim ) {
+			return i18n.translate( 'As a requirement of a trademarked domain, your contact information will be included in a public database of domain owners, called "Whois".' );
+		}
+
+		return i18n.translate( 'To protect your identity and prevent spam, we keep your personal details hidden from the public.' );
+	}
+
 	render() {
 		const { fields, handleSubmit, untouch } = this.props;
 
@@ -373,7 +383,7 @@ class ContactInformation extends React.Component {
 
 						<Form.Footer>
 							<p>
-								{ i18n.translate( 'To protect your identity and prevent spam, we keep your personal details hidden from the public.' ) }
+								{ this.getPrivacyNoticeText() }
 							</p>
 						</Form.Footer>
 					</Form>
@@ -397,6 +407,7 @@ ContactInformation.propTypes = {
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
+	hasTrademarkClaim: PropTypes.bool.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	location: PropTypes.object.isRequired,

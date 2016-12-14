@@ -2,7 +2,7 @@ machine:
   pre:
     - mkdir ~/.yarn-cache
   node:
-    version: 6.1.0
+    version: 6.9.2
 
 dependencies:
   pre:

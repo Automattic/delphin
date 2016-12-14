@@ -65,7 +65,7 @@ export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
 			return nextPhoneNumber;
 		}
 
-		digits = nextPhoneNumber.replace( /[^0-9]/g, '' );
+		digits = nextPhoneNumber.replace( /[^0-9\.]/g, '' );
 	}
 
 	return `+${ digits }`;

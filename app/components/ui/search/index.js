@@ -100,7 +100,12 @@ const Search = React.createClass( {
 		return (
 			<LoadingPlaceholder
 				isStatic
-				text={ i18n.translate( 'Nothing found. Try entering a few words above, like "pet travel blog".' ) }
+				text={ i18n.translate( 'Nothing found. Try entering a few words above, like "%(keywords)s".', {
+					args: {
+						keywords: 'pet travel blog'
+					},
+					comment: "keywords are example keywords and shouldn't be translated"
+				} ) }
 			/>
 		);
 	},

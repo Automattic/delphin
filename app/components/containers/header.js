@@ -14,9 +14,9 @@ import { recordTracksEvent, withAnalytics } from 'actions/analytics';
 
 export default connect(
 	( state, { location } ) => ( {
+		isExcluded: getRouteSlug( location.pathname ) === 'search',
 		isLoggedIn: isLoggedIn( state ),
 		isMenuVisible: getToggle( state, 'headerMenu' ),
-		routeSlug: getRouteSlug( location.pathname ),
 	} ),
 	dispatch => bindActionCreators( {
 		addNotice,

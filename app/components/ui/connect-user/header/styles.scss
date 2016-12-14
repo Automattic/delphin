@@ -1,3 +1,4 @@
+@import 'app/styles/assets';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
 @import 'app/styles/breakpoints';
@@ -15,6 +16,11 @@
 	@include breakpoint( '<480px' ) {
 		padding-bottom: 70px;
 	}
+}
+
+.log-in-header {
+	background: url( #{$image-assets-url}ui-illustrations/login.svg ) no-repeat center 20px;
+	padding: 90px 0 60px;
 }
 
 .heading {

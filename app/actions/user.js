@@ -71,7 +71,11 @@ export function connectUser( email, intention, domain, callback ) {
 				callback && callback();
 			};
 		},
-		fail: CONNECT_USER_FAIL
+		fail: error => dispatch => {
+			dispatch( { type: CONNECT_USER_FAIL } );
+
+			return Promise.reject( { email: { data: error.message } } );
+		}
 	};
 }
 

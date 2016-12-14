@@ -1,10 +1,12 @@
 // External dependencies
+import { Link } from 'react-router';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Button from 'components/ui/button';
+import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import Form from 'components/ui/form';
@@ -59,8 +61,7 @@ const ConnectUser = React.createClass( {
 	},
 
 	handleSubmit() {
-		this.props.connectUser( this.props.values, this.props.domain.domainName )
-			.catch( () => this.props.displayError( i18n.translate( 'Something went wrong. Please try again.' ) ) );
+		return this.props.connectUser( this.props.values, this.props.domain.domainName );
 	},
 
 	renderTermsOfService() {
@@ -91,6 +92,27 @@ const ConnectUser = React.createClass( {
 		}
 	},
 
+	renderNoAccountMessage() {
+		const { intention } = this.props;
+
+		if ( intention !== 'login' ) {
+			return;
+		}
+
+		return (
+			<Form.Footer>
+				<h3 className={ styles.headline }>
+					{ i18n.translate( "Don't have an account yet?" ) }
+				</h3>
+				<p>
+					{ i18n.translate( 'Find a .blog you love to {{link}}get started now{{/link}}.', {
+						components: { link: <Link to={ getPath( 'search' ) } /> }
+					} ) }
+				</p>
+			</Form.Footer>
+		);
+	},
+
 	render() {
 		const { fields, handleSubmit, intention, submitFailed, domain: { domainName } } = this.props;
 
@@ -99,11 +121,11 @@ const ConnectUser = React.createClass( {
 				<div>
 					<Header intention={ intention } domainName={ domainName } />
 
-					<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+					<Form onSubmit={ handleSubmit( this.handleSubmit ) } className={ styles.loginForm }>
 						<Form.FieldArea>
 							<div>
 								<fieldset>
-									<label>{ i18n.translate( 'Email address:' ) }</label>
+									<label className={ styles.emailLabel }>{ i18n.translate( 'Enter your email address to continue:' ) }</label>
 									<Input field={ fields.email } autoFocus type="email" dir="ltr" />
 									<ValidationError field={ fields.email } submitFailed={ submitFailed } />
 								</fieldset>
@@ -113,10 +135,11 @@ const ConnectUser = React.createClass( {
 
 						<Form.SubmitArea>
 							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Next' ) }
+								{ i18n.translate( 'Log in' ) }
 							</Button>
 						</Form.SubmitArea>
 						{ this.renderPoweredBy() }
+						{ this.renderNoAccountMessage() }
 					</Form>
 
 				</div>

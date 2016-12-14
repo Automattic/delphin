@@ -1,5 +1,6 @@
 // External dependencies
 import classNames from 'classnames';
+import defer from 'lodash/defer';
 import { bindHandlers } from 'react-bind-handlers';
 import { translate } from 'i18n-calypso';
 import { Link } from 'react-router';
@@ -35,11 +36,16 @@ class Header extends Component {
 
 		logoutUser();
 
-		hideToggle();
+		hideToggle( 'headerMenu' );
 
-		addNotice( {
-			status: 'success',
-			message: translate( 'You have been logged out.' )
+		defer( () => {
+			// `defer` is needed so that the route change triggered by logout
+			// happens before the notice is displayed. Otherwise, the notice is
+			// immediately hidden.
+			addNotice( {
+				status: 'success',
+				message: translate( 'You have been logged out.' )
+			} );
 		} );
 	}
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import { addNotice } from 'actions/notices';
 import { getToggle } from 'reducers/ui/toggle/selectors';
+import { getRouteSlug } from 'app/routes';
 import { hideToggle, showToggle } from 'actions/ui/toggle';
 import { isLoggedIn } from 'reducers/user/selectors';
 import Header from 'components/ui/header';
@@ -12,9 +13,10 @@ import { logoutUser } from 'actions/user';
 import { recordTracksEvent, withAnalytics } from 'actions/analytics';
 
 export default connect(
-	state => ( {
+	( state, { location } ) => ( {
 		isLoggedIn: isLoggedIn( state ),
 		isMenuVisible: getToggle( state, 'headerMenu' ),
+		routeSlug: getRouteSlug( location.pathname ),
 	} ),
 	dispatch => bindActionCreators( {
 		addNotice,

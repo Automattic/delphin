@@ -43,11 +43,19 @@ class Header extends Component {
 		} );
 	}
 
+	isExcluded() {
+		return this.props.routeSlug === 'search';
+	}
+
 	render() {
 		const {
 			isLoggedIn,
 			isMenuVisible,
 		} = this.props;
+
+		if ( this.isExcluded() ) {
+			return null;
+		}
 
 		return (
 			<header className={ styles.header }>
@@ -86,6 +94,7 @@ Header.propTypes = {
 	isLoggedIn: PropTypes.bool.isRequired,
 	isMenuVisible: PropTypes.bool.isRequired,
 	logoutUser: PropTypes.func.isRequired,
+	routeSlug: PropTypes.string.isRequired,
 	showToggle: PropTypes.func.isRequired,
 };
 

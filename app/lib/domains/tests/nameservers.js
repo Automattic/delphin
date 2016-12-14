@@ -62,9 +62,9 @@ describe( 'lib/domain/nameservers', () => {
 		it( 'should return empty object when there are valid nameservers provided', () => {
 			const nameservers = {
 				nameserver1: 'ns1.example.com',
-				nameserver2: 'ns2.example.com',
-				nameserver3: 'ns3.example.com',
-				nameserver4: 'ns4.example.com',
+				nameserver2: 'ns2.example.com.',
+				nameserver3: 'NS3.EXAMPLE.COM',
+				nameserver4: '  ns4.example.com.  ',
 			};
 
 			const result = validateUpdateNameserversForm( nameservers );

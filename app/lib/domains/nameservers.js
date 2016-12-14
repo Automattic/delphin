@@ -1,5 +1,6 @@
 // External dependencies
 import compact from 'lodash/compact';
+import { normalizeDomain } from '.';
 import parseDomain from 'parse-domain';
 import { translate } from 'i18n-calypso';
 import values from 'lodash/values';
@@ -34,7 +35,7 @@ export const validateUpdateNameserversForm = fields => {
 			return;
 		}
 
-		if ( ! fields[ fieldName ] || ! isNameserverValid( fields[ fieldName ] ) ) {
+		if ( ! fields[ fieldName ] || ! isNameserverValid( normalizeDomain( fields[ fieldName ] ) ) ) {
 			errors[ fieldName ] = translate( 'Invalid value provided.' );
 		} else if ( values( fields ).filter( name => name === fields[ fieldName ] ).length > 1 ) {
 			errors[ fieldName ] = translate( 'This is a duplicate field.' );

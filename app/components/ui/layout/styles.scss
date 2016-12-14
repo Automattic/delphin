@@ -32,11 +32,3 @@ a {
 		color: lighten( $blue, 10% );
 	}
 }
-
-:global {
-	/* rtl:ignore */
-	._price-with-currency-code {
-		direction: ltr;
-		unicode-bidi: embed;
-	}
-}

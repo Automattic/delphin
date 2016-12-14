@@ -6,24 +6,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import { getPath } from 'routes';
 import styles from './styles.scss';
-import TrackingLink from 'components/containers/tracking-link';
+import Link from './link';
+import SessionLinks from 'components/containers/session-links';
 
-const Link = ( { children, to } ) => {
-	return (
-		<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ to }>
-			{ children }
-		</TrackingLink>
-	);
-};
-
-Link.propTypes = {
-	children: PropTypes.node.isRequired,
-	to: PropTypes.string.isRequired
-};
-
-const Menu = () => {
+const Menu = ( { location } ) => {
 	return (
 		<menu className={ styles.menu }>
+			<SessionLinks location={ location } />
+
 			<Link to={ getPath( 'learnMore' ) }>
 				{ i18n.translate( 'Support' ) }
 			</Link>
@@ -37,6 +27,10 @@ const Menu = () => {
 			</Link>
 		</menu>
 	);
+};
+
+Menu.propTypes = {
+	location: PropTypes.object.isRequired,
 };
 
 export default withStyles( styles )( Menu );

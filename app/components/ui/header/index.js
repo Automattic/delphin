@@ -43,17 +43,14 @@ class Header extends Component {
 		} );
 	}
 
-	isExcluded() {
-		return this.props.routeSlug === 'search';
-	}
-
 	render() {
 		const {
+			isExcluded,
 			isLoggedIn,
 			isMenuVisible,
 		} = this.props;
 
-		if ( this.isExcluded() ) {
+		if ( isExcluded ) {
 			return null;
 		}
 
@@ -91,10 +88,10 @@ class Header extends Component {
 Header.propTypes = {
 	addNotice: PropTypes.func.isRequired,
 	hideToggle: PropTypes.func.isRequired,
+	isExcluded: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isMenuVisible: PropTypes.bool.isRequired,
 	logoutUser: PropTypes.func.isRequired,
-	routeSlug: PropTypes.string.isRequired,
 	showToggle: PropTypes.func.isRequired,
 };
 

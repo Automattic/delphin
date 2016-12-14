@@ -96,6 +96,7 @@ class PaymentFieldArea extends Component {
 						<Select
 							{ ...removeInvalidInputProps( fields.expirationMonth ) }
 							className={ styles.expirationMonth }
+							required
 						>
 							<option value="">{ i18n.translate( 'Month' ) }</option>
 							{ months.map( ( monthName, monthIndex ) => {
@@ -112,6 +113,7 @@ class PaymentFieldArea extends Component {
 						<Select
 							{ ...removeInvalidInputProps( fields.expirationYear ) }
 							className={ styles.expirationYear }
+							required
 						>
 							<option value="">{ i18n.translate( 'Year' ) }</option>
 							{

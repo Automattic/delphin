@@ -12,6 +12,7 @@ import { fetchLocation } from 'actions/location';
 import { getStates } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
+import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors';
 import { getUserLocation, getUserSettings } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import RequireSignup from 'components/containers/require-signup';
@@ -41,6 +42,7 @@ export default reduxForm(
 		contactInformation: state.contactInformation,
 		domain: getSelectedDomain( state ),
 		hasSelectedDomain: hasSelectedDomain( state ),
+		hasTrademarkClaim: hasDomainTrademarkClaim( state, getSelectedDomain( state ).domainName ),
 		inputVisibility: inputVisibility( state ),
 		location: getUserLocation( state ),
 		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),

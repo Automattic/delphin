@@ -115,8 +115,7 @@ class Checkout extends Component {
 			fields,
 			handleSubmit,
 			hasTrademarkClaim,
-			isPurchasing,
-			trackPrivacyToggle
+			isPurchasing
 		} = this.props;
 
 		return (
@@ -143,9 +142,7 @@ class Checkout extends Component {
 						<OrderSummary
 							domain={ domain }
 							domainCost={ domainCost }
-							fields={ fields }
-							hasTrademarkClaim={ hasTrademarkClaim }
-							trackPrivacyToggle={ trackPrivacyToggle } />
+							hasTrademarkClaim={ hasTrademarkClaim } />
 
 						<div className={ styles.refundNotice }>
 							<p>
@@ -212,7 +209,6 @@ Checkout.propTypes = {
 	redirect: PropTypes.func.isRequired,
 	resetCheckout: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired,
-	trackPrivacyToggle: PropTypes.func.isRequired,
 	user: PropTypes.object.isRequired
 };
 

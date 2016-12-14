@@ -69,7 +69,6 @@ export default reduxForm(
 			purchaseDomain
 		),
 		resetCheckout,
-		redirect: pathSlug => push( getPath( pathSlug ) ),
-		trackPrivacyToggle: ( newValue ) => recordTracksEvent( 'delphin_privacy_toggle', { toggled_to: newValue } )
+		redirect: pathSlug => push( getPath( pathSlug ) )
 	}, dispatch )
 )( RequireLogin( Checkout ) );

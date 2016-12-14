@@ -13,6 +13,7 @@
 	color: $blue-dark;
 	font: 400 2.6rem $body-font;
 	padding-top: 160px;
+	text-align: center;
 
 	@include breakpoint( '>480px' ) {
 		font-size: 2.4rem;

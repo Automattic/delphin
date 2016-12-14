@@ -97,5 +97,16 @@
 			box-shadow: 0 0 0 2px lighten( $alert-red, 25 );
 		}
 	}
-}
 
+	&:required:invalid {
+		color: darken( $gray-medium, 10% );
+	}
+
+	option[value][disabled] {
+		display: none;
+	}
+
+	option {
+		color: $blue-dark;
+	}
+}

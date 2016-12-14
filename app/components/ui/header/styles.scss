@@ -19,10 +19,7 @@
 
 	border-bottom: 1px solid $gray-light;
 	height: 66px;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
+	position: relative;
 	z-index: 1;
 
 	@include breakpoint( '<660px' ) {
@@ -62,18 +59,8 @@
 .my-domains-link {
 	color: $black;
 	font-size: 1.4rem;
+	font-weight: 700;
 	padding: 10px;
-
-	&::before {
-		background: url( #{$image-assets-url}my-domains.svg ) no-repeat center;
-		background-size: contain;
-		content: '';
-		display: inline-block;
-		height: 18px;
-		margin-right: 4px;
-		vertical-align: middle;
-		width: 29px;
-	}
 
 	@include breakpoint( '>480px' ) {
 		font-size: 1.6rem;
@@ -132,6 +119,7 @@
 	position: absolute;
 	right: 3px;
 	top: 40px;
+	z-index: 1;
 
 	&::before {
 		background: $white;
@@ -158,7 +146,7 @@
 
 .search-logo {
 	@extend %logo;
-
+	margin: auto;
 	padding: 15px 10px 5px;
 
 	@include breakpoint( '>660px' ) {

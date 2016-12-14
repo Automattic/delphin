@@ -307,13 +307,8 @@
 		font-size: 1.6rem;
 	}
 
-	@include breakpoint( '<660px' ) {
-		margin-top: 81px;
-	}
-
 	@include breakpoint( '<480px' ) {
 		font-size: 1.4rem;
-		margin-top: 91px;
 		padding: 10px;
 	}
 }

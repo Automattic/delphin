@@ -60,9 +60,18 @@ class Header extends Component {
 					<img alt="get.blog" src={ imageUrl( 'get-dot-blog-logo-dark.svg' ) } />
 				</Link>
 				<div className={ styles.links }>
-					<Link className={ styles.myDomainsLink } to={ getPath( 'myDomains' ) }>
-						{ translate( 'My Domains' ) }
-					</Link>
+					{ isLoggedIn && (
+						<Link className={ styles.myDomainsLink } to={ getPath( 'myDomains' ) }>
+							{ translate( 'My Domains' ) }
+						</Link>
+					) }
+
+					{ ! isLoggedIn && (
+						<Link className={ styles.myDomainsLink } to={ getPath( 'loginUser' ) }>
+							{ translate( 'Log In' ) }
+						</Link>
+					) }
+
 					{ isLoggedIn && (
 						<span className={ styles.menuContainer }>
 							<a

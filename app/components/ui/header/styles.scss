@@ -116,8 +116,7 @@
 	display: none;
 	padding: 10px;
 	position: absolute;
-	right: 3px;
-	top: 40px;
+	top: 34px;
 	white-space: nowrap;
 	z-index: 1;
 
@@ -128,10 +127,19 @@
 		content: '';
 		height: 7px;
 		position: absolute;
-		right: 15px;
+		right: 7px;
 		top: -5px;
 		transform: rotate(45deg);
 		width: 7px;
+	}
+
+	@include breakpoint( '>480px' ) {
+		right: 3px;
+		top: 40px;
+
+		&::before {
+			right: 15px;
+		}
 	}
 }
 

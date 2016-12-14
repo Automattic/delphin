@@ -81,7 +81,8 @@ export function isValidSecondLevelDomain( value ) {
  * @returns {string} - the domain name normalized
  */
 export function normalizeDomain( domain ) {
-	return domain.trim().toLowerCase();
+	// trim space characters at the beginning and space + . characters at the end
+	return domain.replace( /^\s+|[\s|.]+$/g, '' ).toLowerCase();
 }
 
 /**

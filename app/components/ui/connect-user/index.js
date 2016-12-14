@@ -121,7 +121,7 @@ const ConnectUser = React.createClass( {
 				<div>
 					<Header intention={ intention } domainName={ domainName } />
 
-					<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
+					<Form onSubmit={ handleSubmit( this.handleSubmit ) } className={ styles.loginForm }>
 						<Form.FieldArea>
 							<div>
 								<fieldset>

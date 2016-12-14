@@ -44,8 +44,8 @@
     }
 }
 
-.email-label {
-	font-size: 1.8rem !important; // necessary to overwrite Form.FieldArea styles
-	font-weight: 700 !important;
+.login-form .email-label {
+	font-size: 1.8rem;
+	font-weight: 700;
 	padding-bottom: 8px;
 }

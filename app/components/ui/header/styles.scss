@@ -114,11 +114,11 @@
 	border: solid 1px $gray-medium;
 	border-radius: 3px;
 	display: none;
-	min-width: 100px;
 	padding: 10px;
 	position: absolute;
 	right: 3px;
 	top: 40px;
+	white-space: nowrap;
 	z-index: 1;
 
 	&::before {

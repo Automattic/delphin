@@ -4,16 +4,16 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Header from 'components/ui/header';
+import HeaderContainer from 'components/containers/header';
 import styles from './styles.scss';
 
-const DefaultLayout = ( { children, style } ) => {
+const DefaultLayout = ( { children, style, location } ) => {
 	return (
 		<div>
 			<BodyClassName className={ style } />
 
 			<div className={ styles.content }>
-				<Header />
+				<HeaderContainer location={ location } />
 
 				{ children }
 			</div>
@@ -23,7 +23,8 @@ const DefaultLayout = ( { children, style } ) => {
 
 DefaultLayout.propTypes = {
 	children: PropTypes.node.isRequired,
-	style: PropTypes.string.isRequired
+	location: PropTypes.object.isRequired,
+	style: PropTypes.string.isRequired,
 };
 
 const DefaultLayoutFactory = style => withStyles( styles )( props => DefaultLayout( { ...props, style } ) );

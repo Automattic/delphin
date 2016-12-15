@@ -8,7 +8,7 @@ import NoticesContainer from 'components/containers/notices';
 import PulsingDot from 'components/containers/pulsing-dot';
 import styles from './styles.scss';
 
-const Layout = ( { children } ) => {
+const Layout = ( { children, location } ) => {
 	return (
 		<div className={ styles.layout }>
 			<div className={ styles.content }>
@@ -19,13 +19,14 @@ const Layout = ( { children } ) => {
 
 			<NoticesContainer />
 
-			<Footer />
+			<Footer location={ location } />
 		</div>
 	);
 };
 
 Layout.propTypes = {
-	children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired,
+	location: PropTypes.object.isRequired,
 };
 
 export default withStyles( styles )( Layout );

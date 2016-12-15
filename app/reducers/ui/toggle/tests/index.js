@@ -1,3 +1,6 @@
+// External dependencies
+import { LOCATION_CHANGE } from 'react-router-redux';
+
 // Internal dependencies
 import {
 	TOGGLE_HIDE,
@@ -30,5 +33,9 @@ describe( 'state.ui.toggle reducer', () => {
 			foo: false,
 			bar: true,
 		} );
+	} );
+
+	it( 'should reset the toggle when the current page changes', () => {
+		expect( toggle( { foo: true }, { type: LOCATION_CHANGE } ) ).toEqual( {} );
 	} );
 } );

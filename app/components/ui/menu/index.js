@@ -6,41 +6,13 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import { getPath } from 'routes';
 import styles from './styles.scss';
-import TrackingLink from 'components/containers/tracking-link';
+import Link from './link';
+import SessionLinks from 'components/containers/session-links';
 
-const Link = ( { children, to } ) => {
-	return (
-		<TrackingLink eventName="delphin_footer_link_click" className={ styles.link } to={ to }>
-			{ children }
-		</TrackingLink>
-	);
-};
-
-Link.propTypes = {
-	children: PropTypes.node.isRequired,
-	to: PropTypes.string.isRequired
-};
-
-const Menu = ( { isLoggedIn, logoutUser } ) => {
+const Menu = ( { location } ) => {
 	return (
 		<menu className={ styles.menu }>
-			{ isLoggedIn && (
-				<Link to={ getPath( 'myDomains' ) }>
-					{ i18n.translate( 'My Domains' ) }
-				</Link>
-			) }
-
-			{ ! isLoggedIn && (
-				<Link to={ getPath( 'loginUser' ) }>
-					{ i18n.translate( 'Log In' ) }
-				</Link>
-			) }
-
-			{ isLoggedIn && (
-				<a className={ styles.link } onClick={ logoutUser }>
-					{ i18n.translate( 'Log Out' ) }
-				</a>
-			) }
+			<SessionLinks location={ location } />
 
 			<Link to={ getPath( 'learnMore' ) }>
 				{ i18n.translate( 'Support' ) }
@@ -58,8 +30,7 @@ const Menu = ( { isLoggedIn, logoutUser } ) => {
 };
 
 Menu.propTypes = {
-	isLoggedIn: PropTypes.bool.isRequired,
-	logoutUser: PropTypes.func.isRequired
+	location: PropTypes.object.isRequired,
 };
 
 export default withStyles( styles )( Menu );

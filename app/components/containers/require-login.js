@@ -14,14 +14,16 @@ function getDisplayName( WrappedComponent ) {
 export default WrappedComponent => {
 	class LoginEnforcer extends Component {
 		componentWillMount() {
+			// Redirect to login page when logged out user wants to access the current page
 			if ( this.props.isLoggedOut ) {
 				this.props.redirectToLogin();
 			}
 		}
 
 		componentWillReceiveProps( nextProps ) {
+			// Redirect to home page when user gets logged out from the current page
 			if ( ! this.props.isLoggedOut && nextProps.isLoggedOut ) {
-				this.props.redirectToLogin();
+				this.props.redirectToHome();
 			}
 		}
 
@@ -41,6 +43,7 @@ export default WrappedComponent => {
 	LoginEnforcer.propTypes = {
 		isLoggedIn: PropTypes.bool.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
+		redirectToHome: PropTypes.func.isRequired,
 		redirectToLogin: PropTypes.func.isRequired
 	};
 
@@ -52,6 +55,9 @@ export default WrappedComponent => {
 			isLoggedOut: isLoggedOut( state )
 		} ),
 		dispatch => ( {
+			redirectToHome() {
+				dispatch( redirect( 'home' ) );
+			},
 			redirectToLogin() {
 				dispatch( redirect( 'loginUser' ) );
 			}

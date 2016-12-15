@@ -3,13 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Internal dependencies
-import Menu from 'components/ui/menu';
+import { getRouteSlug } from 'app/routes';
+import SessionLinks from 'components/ui/menu/session-links';
 import { isLoggedIn } from 'reducers/user/selectors';
 import { logoutUser } from 'actions/user';
 import { recordTracksEvent, withAnalytics } from 'actions/analytics';
 
 export default connect(
-	state => ( {
+	( state, { location } ) => ( {
+		isExcluded: getRouteSlug( location.pathname ) !== 'search',
 		isLoggedIn: isLoggedIn( state )
 	} ),
 	dispatch => bindActionCreators( {
@@ -18,4 +20,4 @@ export default connect(
 			logoutUser
 		)
 	}, dispatch )
-)( Menu );
+)( SessionLinks );

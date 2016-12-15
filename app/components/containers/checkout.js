@@ -42,8 +42,7 @@ export default reduxForm(
 			'expirationMonth',
 			'expirationYear',
 			'countryCode',
-			'postalCode',
-			'privacyProtection'
+			'postalCode'
 		],
 		asyncValidate: getAsyncValidateFunction( validateCheckoutForm ),
 		destroyOnUnmount: false
@@ -58,8 +57,7 @@ export default reduxForm(
 		initialValues: {
 			name: getFullName( state ),
 			countryCode: state.contactInformation.data && state.contactInformation.data.countryCode,
-			postalCode: state.contactInformation.data && state.contactInformation.data.postalCode,
-			privacyProtection: true
+			postalCode: state.contactInformation.data && state.contactInformation.data.postalCode
 		},
 		user: getUserSettings( state )
 	} ),
@@ -69,7 +67,6 @@ export default reduxForm(
 			purchaseDomain
 		),
 		resetCheckout,
-		redirect: pathSlug => push( getPath( pathSlug ) ),
-		trackPrivacyToggle: ( newValue ) => recordTracksEvent( 'delphin_privacy_toggle', { toggled_to: newValue } )
+		redirect: pathSlug => push( getPath( pathSlug ) )
 	}, dispatch )
 )( RequireLogin( Checkout ) );

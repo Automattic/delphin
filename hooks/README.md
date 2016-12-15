@@ -8,8 +8,8 @@ The `manage.js` script is used to manage Git hooks, e.g. to lint code.
 You can pass hook names using the `-i` option to enable linting:
 
 ```
-npm run hooks -- -i pre-commit
-npm run hooks -- -i pre-commit -i pre-push
+yarn run hooks -- -i pre-commit
+yarn run hooks -- -i pre-commit -i pre-push
 ```
 
 
@@ -19,5 +19,5 @@ You can use the `-u` option to uninstall a specific Git hook:
 
 
 ```
-npm run hooks -- -u pre-commit
+yarn run hooks -- -u pre-commit
 ```

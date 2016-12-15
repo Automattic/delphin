@@ -18,7 +18,6 @@ import {
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 import { getCheckout } from 'reducers/checkout/selectors';
-import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors';
 import { snakeifyKeys } from 'lib/formatters';
 import paygateLoader from 'lib/paygate-loader';
 
@@ -105,15 +104,8 @@ export function createTransaction() {
 			contactInformationForm = getValues( state.form.contactInformation ),
 			paygateToken = checkout.paygateToken.data.token;
 
-		let { privacyProtection } = getValues( state.form.checkout );
-
-		if ( hasDomainTrademarkClaim( state, domainName ) ) {
-			privacyProtection = false;
-		}
-
 		const payload = {
 			domain: domainName,
-			privacy: privacyProtection,
 			payment_key: paygateToken,
 			payment_method: 'paygate',
 			contact_information: snakeifyKeys( contactInformationForm )

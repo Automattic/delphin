@@ -100,36 +100,6 @@
 	}
 }
 
-.order-total {
-	font-weight: 700;
-}
-
-.privacy-protection-price {
-	display: inline-block;
-	margin-left: 10px;
-}
-
-.privacy-label {
-	margin-right: 5px;
-}
-
-.privacy-tooltip {
-	p:not(:last-child) {
-		margin-bottom: 10px;
-	}
-}
-
-.gridicon {
-	fill: $gray;
-	position: relative;
-	right: 0;
-	top: 3px;
-
-	&:hover {
-		fill: $gray-dark;
-	}
-}
-
 .checkout-error {
 	align-content: center;
 	animation-duration: 0.5s;

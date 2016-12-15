@@ -44,7 +44,7 @@ export default reduxForm(
 		hasSelectedDomain: hasSelectedDomain( state ),
 		hasTrademarkClaim: hasDomainTrademarkClaim( state, getSelectedDomain( state ).domainName ),
 		inputVisibility: inputVisibility( state ),
-		location: getUserLocation( state ),
+		userLocation: getUserLocation( state ),
 		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),
 		user: getUserSettings( state )
 	} ),

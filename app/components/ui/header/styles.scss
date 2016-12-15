@@ -1,5 +1,6 @@
 @import 'app/styles/colors';
 @import 'app/styles/breakpoints';
+@import 'app/styles/assets';
 
 %header {
 	align-items: center;
@@ -18,26 +19,17 @@
 
 	border-bottom: 1px solid $gray-light;
 	height: 66px;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
+	position: relative;
 	z-index: 1;
 
 	@include breakpoint( '<660px' ) {
 		flex-wrap: wrap;
 		height: auto;
 	}
-
-	@include breakpoint( '<660px' ) {
-		//position: static;
-	}
 }
 
 %logo {
-	flex-basis: 100%;
 	padding: 15px;
-	text-align: center;
 
 	img {
 		width: 70px;
@@ -57,9 +49,113 @@
 	@extend %logo;
 }
 
+.links {
+	align-items: center;
+	display: flex;
+	margin: 15px;
+	order: 2;
+}
+
+.my-domains-link {
+	color: $black;
+	font-size: 1.4rem;
+	font-weight: 700;
+	padding: 10px;
+
+	@include breakpoint( '>480px' ) {
+		font-size: 1.6rem;
+
+		&::before {
+			height: 23px;
+			margin-right: 8px;
+		}
+	}
+}
+
+.settings {
+	background: url( #{$image-assets-url}cog.svg ) no-repeat center;
+	background-size: contain;
+	content: '';
+	cursor: pointer;
+	display: block;
+	height: 18px;
+	vertical-align: middle;
+	width: 23px;
+
+	@include breakpoint( '>480px' ) {
+		height: 22px;
+	}
+}
+
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.menu-container {
+	border-left: solid 1px $black;
+	cursor: pointer;
+	padding: 5px 0 5px 10px;
+	position: relative;
+
+	@include breakpoint( '>480px' ) {
+		padding-right: 10px;
+	}
+}
+
+.menu {
+	background: $white;
+	border: solid 1px $gray-medium;
+	border-radius: 3px;
+	display: none;
+	padding: 10px;
+	position: absolute;
+	right: 0;
+	top: 34px;
+	white-space: nowrap;
+	z-index: 1;
+
+	&::before {
+		background: $white;
+		border-left: 1px solid $gray-medium;
+		border-top: 1px solid $gray-medium;
+		content: '';
+		height: 7px;
+		position: absolute;
+		right: 7px;
+		top: -5px;
+		transform: rotate(45deg);
+		width: 7px;
+	}
+
+	@include breakpoint( '>480px' ) {
+		right: 3px;
+		top: 40px;
+
+		&::before {
+			right: 15px;
+		}
+	}
+}
+
+.menu.is-visible {
+	display: block;
+}
+
+.log-out-link {
+	color: $black;
+	font-size: 1.3rem;
+}
+
 .search-logo {
 	@extend %logo;
-
+	margin: auto;
 	padding: 15px 10px 5px;
 
 	@include breakpoint( '>660px' ) {

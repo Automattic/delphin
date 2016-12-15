@@ -14,14 +14,16 @@ function getDisplayName( WrappedComponent ) {
 export default ( WrappedComponent, redirectTo ) => {
 	class SignupEnforcer extends Component {
 		componentWillMount() {
+			// Redirect to signup page when logged out user wants to access the current page
 			if ( this.props.isLoggedOut ) {
 				this.props.redirectToSignup();
 			}
 		}
 
 		componentWillReceiveProps( nextProps ) {
+			// Redirect to home page when user gets logged out from the current page
 			if ( ! this.props.isLoggedOut && nextProps.isLoggedOut ) {
-				this.props.redirectToSignup();
+				this.props.redirectToHome();
 			}
 		}
 
@@ -41,6 +43,7 @@ export default ( WrappedComponent, redirectTo ) => {
 	SignupEnforcer.propTypes = {
 		isLoggedIn: PropTypes.bool.isRequired,
 		isLoggedOut: PropTypes.bool.isRequired,
+		redirectToHome: PropTypes.func.isRequired,
 		redirectToSignup: PropTypes.func.isRequired
 	};
 
@@ -52,6 +55,9 @@ export default ( WrappedComponent, redirectTo ) => {
 			isLoggedOut: isLoggedOut( state )
 		} ),
 		dispatch => ( {
+			redirectToHome() {
+				dispatch( redirect( 'home' ) );
+			},
 			redirectToSignup() {
 				dispatch( redirect( 'signupUser', {
 					queryParams: {

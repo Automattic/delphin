@@ -2,7 +2,7 @@
 import { bindActionCreators } from 'redux';
 import capitalize from 'lodash/capitalize';
 import { change, reduxForm } from 'redux-form';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -61,7 +61,13 @@ export default reduxForm(
 		} ),
 		recordPageView,
 		redirect,
-		redirectToQueryParamUrl: () => push( ownProps.location.query.redirect_to ),
+		redirectLoggedIn: () => {
+			if ( ownProps.location.state.returnTo ) {
+				return replace( ownProps.location.state.returnTo );
+			}
+
+			return redirect( 'myDomains' );
+		},
 		selectDomain,
 		showToggle,
 		updateCode: code => change( 'verifyUser', 'code', code ),

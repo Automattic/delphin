@@ -27,7 +27,7 @@ class ContactInformation extends React.Component {
 			return;
 		}
 
-		if ( ! this.props.location.isRequesting && ! this.props.location.hasLoadedFromServer ) {
+		if ( ! this.props.userLocation.isRequesting && ! this.props.userLocation.hasLoadedFromServer ) {
 			this.props.fetchLocation();
 		}
 
@@ -98,8 +98,8 @@ class ContactInformation extends React.Component {
 		let countryCode;
 
 		// Use the GEO location
-		if ( props.location.hasLoadedFromServer ) {
-			countryCode = props.location.data.countryCode;
+		if ( props.userLocation.hasLoadedFromServer ) {
+			countryCode = props.userLocation.data.countryCode;
 		}
 
 		if ( props.contactInformation.hasLoadedFromServer && props.contactInformation.data.countryCode ) {
@@ -114,7 +114,7 @@ class ContactInformation extends React.Component {
 
 	canUpdateCountryFromLocation( props = this.props ) {
 		return ! this.isDataLoading( props ) &&
-			( props.location.hasLoadedFromServer || props.location.hasFailedToLoad );
+			( props.userLocation.hasLoadedFromServer || props.userLocation.hasFailedToLoad );
 	}
 
 	shouldFetchStates( nextProps ) {
@@ -410,7 +410,6 @@ ContactInformation.propTypes = {
 	hasTrademarkClaim: PropTypes.bool.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
-	location: PropTypes.object.isRequired,
 	redirectToCheckout: PropTypes.func.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
@@ -420,6 +419,7 @@ ContactInformation.propTypes = {
 	submitting: PropTypes.bool.isRequired,
 	untouch: PropTypes.func.isRequired,
 	user: PropTypes.object.isRequired,
+	userLocation: PropTypes.object.isRequired,
 	validateContactInformation: PropTypes.func.isRequired
 };
 

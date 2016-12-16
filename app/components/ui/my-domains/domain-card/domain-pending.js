@@ -10,7 +10,7 @@ import styles from './styles.scss';
 
 const DomainPending = ( { domainName } ) => {
 	return (
-		<div className={ classnames( styles.domainCard ) }>
+		<div className={ classnames( styles.domainCard, styles.domainCardPending ) }>
 			<div className={ styles.domainHeading }>
 				<h3>
 					{ domainName }

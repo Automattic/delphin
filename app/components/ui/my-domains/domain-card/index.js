@@ -7,6 +7,7 @@ import DomainManagedByConcierge from './domain-managed-by-concierge';
 import DomainNotConnected from './domain-not-connected';
 import DomainAutoConnected from 'components/containers/domain-auto-connected';
 import DomainWithCustomNameservers from 'components/containers/domain-with-custom-nameservers';
+import DomainPending from './domain-pending';
 import {
 	canConnectToService,
 	isConnectedWithNameservers,
@@ -14,7 +15,15 @@ import {
 } from 'lib/services';
 import styles from './styles.scss';
 
-const DomainCard = ( { domainName, hostName, service } ) => {
+const DomainCard = ( { domainName, hostName, isPending, service } ) => {
+	if ( isPending ) {
+		return (
+			<DomainPending
+				domainName={ domainName }
+			/>
+		);
+	}
+
 	if ( canConnectToService( service ) ) {
 		return (
 			<DomainAutoConnected
@@ -49,6 +58,7 @@ const DomainCard = ( { domainName, hostName, service } ) => {
 DomainCard.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	hostName: PropTypes.string.isRequired,
+	isPending: PropTypes.bool.isRequired,
 	service: PropTypes.string.isRequired
 };
 

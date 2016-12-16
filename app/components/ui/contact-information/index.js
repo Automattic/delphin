@@ -182,10 +182,10 @@ class ContactInformation extends React.Component {
 		const { hasTrademarkClaim } = this.props;
 
 		if ( hasTrademarkClaim ) {
-			return i18n.translate( 'As a requirement of a trademarked domain, your contact information will be included in a public database of domain owners, called "Whois".' );
+			return i18n.translate( 'Your contact information will be available in a public database of domain owners, called "Whois".' );
 		}
 
-		return i18n.translate( 'To protect your identity and prevent spam, we keep your personal details hidden from the public.' );
+		return i18n.translate( "Domain owners are required to share contact information publicly. We keep your personal information out of your domain's public records, to protect your identity and prevent spam." );
 	}
 
 	render() {
@@ -221,14 +221,14 @@ class ContactInformation extends React.Component {
 								<fieldset>
 									<label>{ i18n.translate( 'First Name' ) }</label>
 									<Input
-											disabled={ this.isDataLoading() }
-											field={ fields.firstName }
-											autoFocus
-											untouch={ untouch }
-											className={ styles.firstName }
-											placeholder={ i18n.translate( 'First Name' ) }
-											dir="ltr"
-										/>
+										disabled={ this.isDataLoading() }
+										field={ fields.firstName }
+										autoFocus
+										untouch={ untouch }
+										className={ styles.firstName }
+										placeholder={ i18n.translate( 'First Name' ) }
+										dir="ltr"
+									/>
 									<ValidationError field={ fields.firstName } />
 								</fieldset>
 

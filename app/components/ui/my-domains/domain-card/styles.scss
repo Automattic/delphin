@@ -104,7 +104,8 @@
 	box-sizing: border-box;
 }
 
-.not-connected {
+.not-connected,
+.domain-card-pending {
 	box-shadow: 0 -3px $alert-yellow;
 
 	.domain-details {
@@ -229,6 +230,10 @@
 
 .domain-card-pending {
 	box-shadow: 0 -3px $alert-red;
+
+	.domain-details {
+		background: url( #{$image-assets-url}warning-red.svg ) no-repeat center 20px;
+	}
 }
 
 .trademark-tag {

@@ -19,6 +19,7 @@ import {
 } from 'reducers/action-types';
 import { getCheckout } from 'reducers/checkout/selectors';
 import { snakeifyKeys } from 'lib/formatters';
+import { normalizeContactInformation } from 'lib/checkout';
 import paygateLoader from 'lib/paygate-loader';
 
 export const resetCheckout = () => ( { type: CHECKOUT_REQUESTS_RESET } );
@@ -108,7 +109,7 @@ export function createTransaction() {
 			domain: domainName,
 			payment_key: paygateToken,
 			payment_method: 'paygate',
-			contact_information: snakeifyKeys( contactInformationForm )
+			contact_information: snakeifyKeys( normalizeContactInformation( contactInformationForm ) )
 		};
 
 		return dispatch( {

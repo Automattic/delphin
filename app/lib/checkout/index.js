@@ -43,3 +43,10 @@ export const validateCheckoutForm = values => {
 
 	return errors;
 };
+
+export const normalizeContactInformation = contactInformation => (
+	{
+		...contactInformation,
+		postalCode: contactInformation.postalCode ? contactInformation.postalCode.toUpperCase() : ''
+	}
+);

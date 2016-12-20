@@ -1,7 +1,6 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import parseDomain from 'parse-domain';
-import intersection from 'lodash/intersection';
 
 // Internal dependencies
 import config from 'config';
@@ -199,8 +198,3 @@ export const validateDomain = domain => {
 
 	return null;
 };
-
-// From https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en
-const problematicEPPStatuses = [ 'inactive', 'pendingCreate', 'pendingDelete', 'serverHold', 'clientHold' ];
-export const isDomainStatusIndicatesProblem = domainStatusArray =>
-	intersection( domainStatusArray, problematicEPPStatuses ).length > 0;

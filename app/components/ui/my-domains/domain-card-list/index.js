@@ -6,17 +6,18 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import DomainCard from 'components/ui/my-domains/domain-card';
 import NewDomainCard from 'components/ui/my-domains/new-domain-card';
+import { isDomainStatusIndicatesProblem } from 'lib/domains';
 
 const DomainCardList = ( { domains } ) => {
 	return (
 		<div className={ styles.domainCardList }>
-			{ domains.map( ( { hostName, id, hasZone, name, service } ) =>
+			{ domains.map( ( { hostName, id, domainStatus, name, service } ) =>
 				<DomainCard
 					key={ id }
 					hostName={ hostName }
 					domainName={ name }
 					service={ service }
-					isPending={ ! hasZone } />
+					isPending={ ! Array.isArray( domainStatus ) || isDomainStatusIndicatesProblem( domainStatus ) } />
 			) }
 			<NewDomainCard />
 		</div>

@@ -401,8 +401,8 @@ const analytics = {
 			analytics.quantcast.recordEvent( 'Purchase Confirmation', {
 				orderid: orderId,
 				currency: currencyCode,
-				// revenue needs to be a string for quantcast client
-				revenue: ( revenue || 0 ).toString(),
+				// revenue needs to be a string for the quantcast client
+				revenue: String( revenue )
 			} );
 		}
 	},

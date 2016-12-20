@@ -147,7 +147,5 @@ export function createTransaction() {
 }
 
 export const purchaseDomain = () => dispatch =>
-	dispatch( () => dispatch( fetchPaygateConfiguration() ) )
-		.then( () => dispatch( createPaygateToken() ) )
+	dispatch( () => dispatch( createPaygateToken() ) )
 		.then( () => dispatch( createTransaction() ) );
-

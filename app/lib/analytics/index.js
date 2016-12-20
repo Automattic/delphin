@@ -391,7 +391,8 @@ const analytics = {
 			window._qevents.push(
 				Object.assign( {
 					qacct: config( 'quantcast_account_id' ),
-					labels: '_fp.event.' + eventName
+					labels: '_fp.event.' + eventName,
+					event: 'refresh'
 				}, extra )
 			);
 		},

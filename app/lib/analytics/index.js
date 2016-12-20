@@ -49,6 +49,16 @@ if ( process.env.BROWSER ) {
 		} );
 	}
 
+	if ( isEnabled( 'quantcast' ) ) {
+		window.ezt = window.ezt || [];
+		window._qevents = window._qevents || [];
+		loadScript( 'https://secure.quantserve.com/aquant.js?a=p--q2ngEqybdRaX', () => {
+			window._qevents.push( {
+				qacct: config( 'quantcast_account_id' )
+			} );
+		} );
+	}
+
 	if ( isEnabled( 'facebookads' ) ) {
 		window._fbq = window.fbq = function() {
 			if ( window.fbq.callMethod ) {
@@ -159,6 +169,7 @@ const analytics = {
 
 			analytics.googleads.recordPurchase( orderId, revenue, currencyCode );
 			analytics.bingads.recordPurchase( orderId, revenue, currencyCode );
+			analytics.quantcast.recordPurchase( orderId, revenue, currencyCode );
 			analytics.facebookads.recordPurchase( orderId, revenue, currencyCode );
 		}
 	},
@@ -369,6 +380,31 @@ const analytics = {
 				gc: currencyCode
 			} );
 		},
+	},
+
+	quantcast: {
+		recordEvent( eventName, extra = {} ) {
+			if ( ! isEnabled( 'quantcast' ) || ! window._qevents ) {
+				return;
+			}
+
+			window._qevents.push(
+				Object.assign( {
+					qacct: config( 'quantcast_account_id' ),
+					labels: '_fp.event.' + eventName,
+					event: 'refresh'
+				}, extra )
+			);
+		},
+
+		recordPurchase( orderId, revenue, currencyCode ) {
+			analytics.quantcast.recordEvent( 'Purchase Confirmation', {
+				orderid: orderId,
+				currency: currencyCode,
+				// revenue needs to be a string for the quantcast client
+				revenue: String( revenue )
+			} );
+		}
 	},
 
 	facebookads: {

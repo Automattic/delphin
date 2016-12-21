@@ -16,6 +16,8 @@ import scrollToTop from 'components/containers/scroll-to-top';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
 
+let fetchPaygateConfigurationIntervalId;
+
 class Checkout extends Component {
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
@@ -25,6 +27,13 @@ class Checkout extends Component {
 		}
 
 		this.props.fetchPaygateConfiguration();
+
+		// fetch the paygate configuration every ten minutes in case it changes
+		fetchPaygateConfigurationIntervalId = setInterval( this.props.fetchPaygateConfiguration.bind( this ), 10 * 60 * 1000 );
+	}
+
+	componentWillUnmount() {
+		clearInterval( fetchPaygateConfigurationIntervalId );
 	}
 
 	componentWillReceiveProps( nextProps ) {
@@ -236,6 +245,7 @@ Checkout.propTypes = {
 	hideProcessingMessage: PropTypes.func.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	isPurchasing: PropTypes.bool.isRequired,
+	location: PropTypes.object.isRequired,
 	purchaseDomain: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	resetCheckout: PropTypes.func.isRequired,

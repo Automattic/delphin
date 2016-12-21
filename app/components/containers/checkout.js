@@ -54,7 +54,7 @@ export default reduxForm(
 			recordTracksEvent( 'delphin_application_review_submit' ),
 			purchaseDomain
 		),
-		showProcessingMessage: () => showToggle( 'isCheckoutProcessing' ),
+		showProcessingMessage: () => showToggle( 'isCheckoutProcessing', { persistent: true } ),
 		hideProcessingMessage: () => hideToggle( 'isCheckoutProcessing' ),
 		resetCheckout,
 		redirect: pathSlug => push( getPath( pathSlug ) )

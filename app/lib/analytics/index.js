@@ -53,7 +53,7 @@ if ( process.env.BROWSER ) {
 		window.ezt = window.ezt || [];
 		window._qevents = window._qevents || [];
 		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }`, () => {
-			window._qevents.push( {
+			window.ezt.push( {
 				qacct: config( 'quantcast_account_id' )
 			} );
 		} );

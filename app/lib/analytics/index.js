@@ -399,7 +399,7 @@ const analytics = {
 
 		recordPurchase( orderId, revenue, currencyCode ) {
 			analytics.quantcast.recordEvent( 'Purchase Confirmation', {
-				orderid: orderId,
+				orderid: String( orderId ),
 				currency: currencyCode,
 				// revenue needs to be a string for the quantcast client
 				revenue: String( revenue )

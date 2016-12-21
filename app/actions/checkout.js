@@ -145,6 +145,11 @@ export function createTransaction() {
 					error: error
 				} );
 
+				if ( error.code === 'invalid_token' ) {
+					// Refetch the token if it changed
+					failThunkDispatch( fetchPaygateConfiguration() );
+				}
+
 				// we don't want swallow the error
 				return Promise.reject( error );
 			}

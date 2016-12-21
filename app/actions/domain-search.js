@@ -2,6 +2,7 @@
 import { addNotice } from 'actions/notices';
 import {
 	WPCOM_REQUEST,
+	DOMAIN_SEARCH_CLEAR,
 	DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT,
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
@@ -12,7 +13,6 @@ import {
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SELECT,
-	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL,
@@ -20,19 +20,19 @@ import {
 import { containsAlphanumericCharacters, omitTld } from 'lib/domains';
 
 /**
- * Returns an action object to be used in signalling that domain suggestions have been cleared.
+ * Returns an action object to be used in signalling that domain search have been cleared.
  *
  * @returns {Object} the corresponding action object
  */
-export function clearDomainSuggestions() {
+export function clearDomainSearch() {
 	return {
-		type: DOMAIN_SUGGESTIONS_CLEAR
+		type: DOMAIN_SEARCH_CLEAR
 	};
 }
 
 export function fetchDomainSuggestions( domainQuery = '' ) {
 	if ( ! containsAlphanumericCharacters( domainQuery ) ) {
-		return clearDomainSuggestions();
+		return clearDomainSearch();
 	}
 
 	const queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );

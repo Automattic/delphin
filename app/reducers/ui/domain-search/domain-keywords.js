@@ -7,6 +7,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
 import {
+	DOMAIN_SEARCH_CLEAR,
 	DOMAIN_SEARCH_INPUT_CHANGE,
 	DOMAIN_SEARCH_INPUT_FOCUS,
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
@@ -176,6 +177,9 @@ export default function domainKeywords( state = initialState, action ) {
 			return Object.assign( {}, state, {
 				keywords: state.keywords.map( keyword => Object.assign( {}, keyword, { isSelected: false } ) )
 			} );
+
+		case DOMAIN_SEARCH_CLEAR:
+			return initialState;
 
 		default:
 			return state;

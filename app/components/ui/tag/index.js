@@ -9,7 +9,8 @@ import styles from './styles.scss';
 const Tag = ( { children, className, type, ...props } ) => {
 	const classes = classNames( styles.tag, {
 		[ styles.isPremium ]: type === 'premium',
-		[ styles.isTrademark ]: type === 'trademark'
+		[ styles.isTrademark ]: type === 'trademark',
+		[ styles.dark ]: type === 'trademark' || type === 'premium'
 	}, className );
 
 	return (

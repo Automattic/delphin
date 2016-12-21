@@ -45,39 +45,44 @@ export const fetchPaygateConfiguration = () => ( {
 		request_type: 'new_payment',
 		client_app: 'delphin'
 	},
-	success: configuration => ( {
-		type: PAYGATE_CONFIGURATION_FETCH_COMPLETE,
-		configuration
-	} ),
+	success: configuration => dispatch => {
+		return new Promise( ( resolve, reject ) => {
+			paygateLoader.ready( configuration.jsUrl, ( error, Paygate ) => {
+				if ( error ) {
+					return reject( error );
+				}
+
+				Paygate.setProcessor( configuration.processor );
+				Paygate.setApiUrl( configuration.apiUrl );
+				Paygate.setPublicKey( configuration.publicKey );
+				Paygate.setEnvironment( configuration.environment );
+
+				dispatch( {
+					type: PAYGATE_CONFIGURATION_FETCH_COMPLETE,
+					configuration
+				} );
+
+				return resolve( configuration );
+			} );
+		} );
+	},
 	fail: error => ( {
 		type: PAYGATE_CONFIGURATION_FETCH_FAIL,
 		error
 	} )
 } );
 
-function requestPaygateToken( configuration, cardDetails ) {
+const requestPaygateToken = cardDetails => {
 	return new Promise( ( resolve, reject ) => {
-		paygateLoader.ready( configuration.jsUrl, function( error, Paygate ) {
-			if ( error ) {
-				return reject( error );
-			}
-
-			Paygate.setProcessor( configuration.processor );
-			Paygate.setApiUrl( configuration.apiUrl );
-			Paygate.setPublicKey( configuration.publicKey );
-			Paygate.setEnvironment( configuration.environment );
-
-			Paygate.createToken( getPaygateParameters( cardDetails ), data => data.is_error
-					? reject( new Error( 'Paygate Response Error: ' + data.error_msg ) )
-					: resolve( data.token ),
-				() => reject( new Error( 'Paygate Request Error' ) ) );
-		} );
+		window.Paygate.createToken( getPaygateParameters( cardDetails ), data => data.is_error
+				? reject( new Error( 'Paygate Response Error: ' + data.error_msg ) )
+				: resolve( data.token ),
+			() => reject( new Error( 'Paygate Request Error' ) ) );
 	} );
-}
+};
 
 export const createPaygateToken = () => ( dispatch, getState ) => {
-	const { configuration } = getCheckout( getState() ).paygateConfiguration.data,
-		checkoutForm = getValues( getState().form.checkout ),
+	const checkoutForm = getValues( getState().form.checkout ),
 		cardDetails = {
 			name: checkoutForm.name,
 			number: card.parse( checkoutForm.number ),
@@ -88,7 +93,8 @@ export const createPaygateToken = () => ( dispatch, getState ) => {
 		};
 
 	dispatch( { type: PAYGATE_TOKEN_CREATE } );
-	return requestPaygateToken( configuration, cardDetails )
+
+	return requestPaygateToken( cardDetails )
 		.then( token => dispatch( { type: PAYGATE_TOKEN_CREATE_COMPLETE, token } ) )
 		.catch( error => {
 			dispatch( { type: PAYGATE_TOKEN_CREATE_FAIL, error } );

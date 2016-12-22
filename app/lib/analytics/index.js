@@ -52,7 +52,10 @@ if ( process.env.BROWSER ) {
 	if ( isEnabled( 'quantcast' ) ) {
 		window.ezt = window.ezt || [];
 		window._qevents = window._qevents || [];
-		loadScript( 'https://secure.quantserve.com/aquant.js?a=p--q2ngEqybdRaX', () => {
+		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }`, () => {
+			window.ezt.push( {
+				qacct: config( 'quantcast_account_id' )
+			} );
 			window._qevents.push( {
 				qacct: config( 'quantcast_account_id' )
 			} );
@@ -399,7 +402,7 @@ const analytics = {
 
 		recordPurchase( orderId, revenue, currencyCode ) {
 			analytics.quantcast.recordEvent( 'Purchase Confirmation', {
-				orderid: orderId,
+				orderid: String( orderId ),
 				currency: currencyCode,
 				// revenue needs to be a string for the quantcast client
 				revenue: String( revenue )

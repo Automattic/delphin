@@ -3,6 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
 import {
+	DOMAIN_SEARCH_CLEAR,
 	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SEARCH_INPUT_CHANGE,
 	DOMAIN_SEARCH_INPUT_FOCUS,
@@ -206,6 +207,23 @@ describe( 'ui.domainSearch reducer', () => {
 				{ value: 'baz', id: 4, isSelected: false },
 				{ value: 'foobar', id: 102, isSelected: false },
 			]
+		} );
+	} );
+
+	it( 'should be possible to clear all keywords', () => {
+		const initialState = {
+			inputValue: '',
+			keywords: [
+				{ value: 'foobar', id: 0, isSelected: false },
+				{ value: 'barbaz', id: 1, isSelected: false }
+			]
+		};
+
+		expect( domainKeywords( initialState, {
+			type: DOMAIN_SEARCH_CLEAR
+		} ) ).toEqual( {
+			inputValue: '',
+			keywords: []
 		} );
 	} );
 } );

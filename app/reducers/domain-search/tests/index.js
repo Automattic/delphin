@@ -1,6 +1,6 @@
 // Internal dependencies
 import {
-	DOMAIN_SUGGESTIONS_CLEAR,
+	DOMAIN_SEARCH_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE
 } from 'reducers/action-types';
@@ -51,10 +51,10 @@ describe( 'domain search reducer', () => {
 	} );
 } );
 
-describe( 'domain search reducer for domain suggestions clear action', () => {
+describe( 'domain search reducer for domain search clear action', () => {
 	it( 'should return initial state when state is undefined', () => {
 		const newState = domainSearch( undefined, {
-			type: DOMAIN_SUGGESTIONS_CLEAR
+			type: DOMAIN_SEARCH_CLEAR
 		} );
 
 		expect( newState ).toEqual( {
@@ -73,7 +73,7 @@ describe( 'domain search reducer for domain suggestions clear action', () => {
 				query: 'example'
 			} ),
 			newState = domainSearch( originalState, {
-				type: DOMAIN_SUGGESTIONS_CLEAR
+				type: DOMAIN_SEARCH_CLEAR
 			} );
 
 		expect( newState ).toEqual( {

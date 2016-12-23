@@ -28,7 +28,6 @@ function Keywords( props ) {
 Keywords.propTypes = {
 	keywords: PropTypes.arrayOf( PropTypes.shape( {
 		value: PropTypes.string.isRequired,
-		isSelected: PropTypes.bool.isRequired
 	} ) ).isRequired
 };
 

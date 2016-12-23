@@ -20,7 +20,6 @@ import { getTokenFromBearerCookie } from './bearer-cookie';
 import i18n from 'i18n-calypso';
 import { logErrorNoticesMiddleware } from './log-error-notices-middleware';
 import reducers from 'reducers';
-import { relatedWordsMiddleware } from './related-words-middleware';
 import { setLocaleCookie } from './locale-cookie';
 import Stylizer, { insertCss } from 'lib/stylizer';
 import switchLocale from './switch-locale';
@@ -49,7 +48,6 @@ const middlewares = [
 	wpcomMiddleware,
 	wpcomLoginMiddleware,
 	wpcomNoticesMiddleware,
-	relatedWordsMiddleware,
 	switchLocaleMiddleware,
 	userMiddleware
 ];

@@ -5,11 +5,7 @@ import {
 	DOMAIN_SEARCH_CLEAR,
 	DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT,
 	DOMAIN_SEARCH_KEYWORD_REMOVE,
-	DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
-	DOMAIN_SEARCH_KEYWORD_SELECT,
-	DOMAIN_SEARCH_KEYWORD_DESELECT,
 	DOMAIN_SEARCH_INPUT_CHANGE,
-	DOMAIN_SEARCH_INPUT_FOCUS,
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SELECT,
@@ -75,17 +71,6 @@ export function selectDomain( domainProduct ) {
 	};
 }
 
-export function selectKeyword( keyword ) {
-	return {
-		type: DOMAIN_SEARCH_KEYWORD_SELECT,
-		keyword
-	};
-}
-
-export function deselectKeyword() {
-	return { type: DOMAIN_SEARCH_KEYWORD_DESELECT };
-}
-
 export function domainSearchInputChange( value ) {
 	return {
 		type: DOMAIN_SEARCH_INPUT_CHANGE,
@@ -108,13 +93,4 @@ export function domainSearchKeywordRemove( keyword ) {
 	};
 }
 
-export function domainSearchKeywordReplaceSelected( value ) {
-	return {
-		type: DOMAIN_SEARCH_KEYWORD_REPLACE_SELECTED,
-		value
-	};
-}
-
 export const submitEmptySearch = () => ( { type: DOMAIN_SEARCH_EMPTY_SEARCH_SUBMIT } );
-
-export const domainSearchInputFocus = () => ( { type: DOMAIN_SEARCH_INPUT_FOCUS } );

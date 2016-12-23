@@ -18,6 +18,8 @@ import withPageView from 'lib/analytics/with-page-view';
 
 class Checkout extends Component {
 	componentDidMount() {
+		this.props.resetCheckout();
+
 		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );
 		} else {

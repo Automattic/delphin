@@ -120,9 +120,11 @@
 	width: 30px;
 }
 
-.keyword-delete {
-	background-image: url( #{$image-assets-url}trash.svg );
-	background-size: 12px;
+.keyword-delete-icon {
+	fill: #fff;
+	position: absolute;
+	right: 5px;
+	top: calc( 50% - 9px );
 }
 
 .keyword-is-domain {

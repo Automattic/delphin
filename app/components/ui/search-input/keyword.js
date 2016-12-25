@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
+const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import { isDomain } from 'lib/domains';
@@ -29,6 +30,12 @@ class Keyword extends React.Component {
 				{ keyword.value }
 				<span
 					className={ styles.keywordAction + ' ' + styles.keywordDelete } />
+
+				{ ( ! keywordIsDomain && <Gridicon
+					className={ styles.keywordDeleteIcon }
+					icon="cross"
+					size={ 20 }
+				/> ) }
 			</li>
 		);
 	}

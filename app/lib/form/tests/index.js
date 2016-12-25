@@ -1,5 +1,5 @@
 // Internal dependencies
-import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone, validateEmail } from '..';
+import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone, validateEmail, formatPhoneWithInternationalDot } from '..';
 
 describe( 'getAsyncValidateFunction', () => {
 	pit( 'should resolve with no arguments if the validation returns no errors', () => {
@@ -82,14 +82,6 @@ describe( 'maskPhone', () => {
 		expect( maskPhone( '' ) ).toBe( '+' );
 	} );
 
-	it( 'should return an empty string when deleting a single plus sign', () => {
-		expect( maskPhone( '', '+' ) ).toBe( '' );
-	} );
-
-	it( 'should return a plus sign when deleting a single digit', () => {
-		expect( maskPhone( '', '1' ) ).toBe( '+' );
-	} );
-
 	it( 'should return a plus sign when number only contains invisible characters', () => {
 		expect( maskPhone( ' 	' ) ).toBe( '+' );
 	} );
@@ -116,6 +108,32 @@ describe( 'maskPhone', () => {
 
 	it( 'should remove any duplicate plus sign', () => {
 		expect( maskPhone( '++1234567890' ) ).toBe( '+1234567890' );
+	} );
+} );
+
+describe( 'formatPhoneWithInternationalDot', () => {
+	it( 'should return undefined without parameters', () => {
+		expect( formatPhoneWithInternationalDot( ) ).toBe( undefined );
+	} );
+
+	it( "should leave country code as it is if it doesn't have number", () => {
+		expect( formatPhoneWithInternationalDot( '+972', 'IL' ) ).toBe( '+972' );
+	} );
+
+	it( 'should leave country code as it is if it does not match calling code', () => {
+		expect( formatPhoneWithInternationalDot( '+123456', 'IL' ) ).toBe( '+123456' );
+	} );
+
+	it( 'should add a dot if the code matches the country', () => {
+		expect( formatPhoneWithInternationalDot( '+972123456', 'IL' ) ).toBe( '+972.123456' );
+	} );
+
+	it( 'should pass through the phone number if the country code is missing', () => {
+		expect( formatPhoneWithInternationalDot( '+972123456' ) ).toBe( '+972123456' );
+	} );
+
+	it( 'should pass through the phone number if the leading plus sign is missing', () => {
+		expect( formatPhoneWithInternationalDot( '972123456' ) ).toBe( '972123456' );
 	} );
 } );
 

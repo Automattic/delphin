@@ -53,22 +53,41 @@ export const isCallingCode = number => {
  * Masks the specified number to only allow numbers and the plus sign.
  *
  * @param {string} nextPhoneNumber - new phone number
- * @param {string} currentPhoneNumber - previous phone number
  * @returns {string} - the new phone number with only allowed characters
  */
-export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
+export const maskPhone = ( nextPhoneNumber ) => {
 	let digits = '';
 
 	if ( isString( nextPhoneNumber ) ) {
-		// Allows the removal of a single plus sign
-		if ( nextPhoneNumber === '' && currentPhoneNumber === '+' ) {
-			return nextPhoneNumber;
-		}
-
 		digits = nextPhoneNumber.replace( /[^0-9\.]/g, '' );
 	}
 
 	return `+${ digits }`;
+};
+
+/***
+ * Formats a phone number with a dot after country's calling code
+ *
+ * @param {String} phoneNumber phone number string starting with a '+'
+ * @param {String} countryCode country code, such as 'US' or 'IL
+ * @returns {String} a number formmated with a dot
+ */
+export const formatPhoneWithInternationalDot = ( phoneNumber, countryCode ) => {
+	if ( ! countryCode ) {
+		return phoneNumber;
+	}
+
+	const callingCode = getCallingCode( countryCode );
+	const phonePrefix = `+${ callingCode }`;
+	const hasCallingCode = phoneNumber.indexOf( phonePrefix ) === 0;
+	const phoneNumberIsNotJustPrefix = hasCallingCode && phoneNumber.length > phonePrefix.length;
+	const hasDot = phoneNumberIsNotJustPrefix && phoneNumber[ phonePrefix.length ] === '.';
+
+	if ( hasCallingCode && phoneNumberIsNotJustPrefix && ! hasDot ) {
+		return phonePrefix + '.' + phoneNumber.substring( phonePrefix.length );
+	}
+
+	return phoneNumber;
 };
 
 /**

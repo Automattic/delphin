@@ -44,8 +44,7 @@ export default reduxForm(
 			'countryCode',
 			'postalCode'
 		],
-		asyncValidate: getAsyncValidateFunction( validateCheckoutForm ),
-		destroyOnUnmount: false
+		asyncValidate: getAsyncValidateFunction( validateCheckoutForm )
 	},
 	state => ( {
 		checkout: state.checkout,

@@ -56,9 +56,6 @@ if ( process.env.BROWSER ) {
 			window.ezt.push( {
 				qacct: config( 'quantcast_account_id' )
 			} );
-			window._qevents.push( {
-				qacct: config( 'quantcast_account_id' )
-			} );
 		} );
 	}
 

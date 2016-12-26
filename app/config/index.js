@@ -22,7 +22,7 @@ const config = {
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
 	features: {
-		ad_tracking: productionOnly,
+		ad_tracking: true || productionOnly,
 		boom_analytics: productionOnly,
 		google_analytics: productionOnly,
 		mc_analytics: productionOnly,
@@ -32,7 +32,7 @@ const config = {
 		bingads: productionOnly,
 		quantcast: productionOnly,
 		facebookads: productionOnly,
-		atlas: productionOnly,
+		atlas: true || productionOnly, // remove commit before merge
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',

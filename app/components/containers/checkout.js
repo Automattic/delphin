@@ -12,6 +12,7 @@ import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors'
 import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost } from 'reducers/checkout/selectors';
+import { getCountryCode, getPostalCode } from 'reducers/contact-information/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
 import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
@@ -55,8 +56,8 @@ export default reduxForm(
 		isPurchasing: isPurchasing( state ),
 		initialValues: {
 			name: getFullName( state ),
-			countryCode: state.contactInformation.data && state.contactInformation.data.countryCode,
-			postalCode: state.contactInformation.data && state.contactInformation.data.postalCode
+			countryCode: getCountryCode( state ),
+			postalCode: getPostalCode( state )
 		},
 		user: getUserSettings( state )
 	} ),

@@ -10,7 +10,7 @@ import findExistingBlog from 'components/containers/set-up-domain/find-existing-
 import selectBlogType from 'components/containers/set-up-domain/select-blog-type';
 import selectNewBlogHost from 'components/containers/set-up-domain/select-new-blog-host';
 import selectNewBlogNeeds from 'components/containers/set-up-domain/select-new-blog-needs';
-import updateNameservers from 'components/containers/set-up-domain/update-nameservers';
+import { UpdateNameservers as updateNameservers } from 'components/containers/set-up-domain/update-nameservers';
 
 export default {
 	confirmConnectBlog,

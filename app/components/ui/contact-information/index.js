@@ -362,7 +362,7 @@ class ContactInformation extends React.Component {
 								</fieldset>
 
 								<fieldset>
-									<label>{ i18n.translate( 'Phone (e.g.: +1.5417543010)' ) }</label>
+									<label>{ i18n.translate( 'Phone' ) }</label>
 									<Phone
 										countryCode={ fields.countryCode.value }
 										disabled={ this.isDataLoading() }

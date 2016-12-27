@@ -31,25 +31,28 @@ class Phone extends React.Component {
 	componentWillReceiveProps( nextProps ) {
 		const {
 			countryCode: currentCountryCode,
-			field: {
-				onChange: updatePhone
-			},
-			field
+			field: previousField
 		} = this.props;
 		const {
-			countryCode: nextCountryCode
+			countryCode: nextCountryCode,
+			field: nextField,
+			field: {
+				onChange: updatePhone
+			}
 		} = nextProps;
+
+		const currentPhoneNumber = previousField.dirty ? previousField.value : previousField.initialValue;
 
 		// The value will be held in either `value` or `initialValue` depending
 		// on whether the form was just initialized
-		const currentPhoneNumber = field.dirty ? field.value : field.initialValue;
+		const nextPhoneNumber = nextField.dirty ? nextField.value : nextField.initialValue;
 
-		const currentFormattedNumber = getFormattedPhone( currentPhoneNumber, currentCountryCode );
+		const nextFormattedNumber = getFormattedPhone( nextPhoneNumber, currentCountryCode );
 
 		// If the current number don't match a formatted number,
 		// lets replace it with the formatted version
-		if ( currentPhoneNumber && currentFormattedNumber !== currentPhoneNumber ) {
-			updatePhone( currentFormattedNumber );
+		if ( nextPhoneNumber && nextFormattedNumber !== nextFormattedNumber ) {
+			updatePhone( nextFormattedNumber );
 			return;
 		}
 
@@ -58,7 +61,7 @@ class Phone extends React.Component {
 		if ( currentCountryCode !== nextCountryCode && nextCountryCode ) {
 			const currentCallingCode = getFormattedPhone( getCallingCode( currentCountryCode ), currentCountryCode );
 
-			if ( ! currentPhoneNumber || // no value at all
+			if ( ! nextPhoneNumber || // no value at all
 				currentPhoneNumber === currentCallingCode ) { // set to a prev. country code
 				const nextCallingCode = getCallingCode( nextCountryCode );
 
@@ -75,6 +78,11 @@ class Phone extends React.Component {
 		// we allow user to delete a single character
 		// or reset the field
 		if ( nextPhone.length === 0 || isSingleCharacterMissing( currentPhone, nextPhone ) ) {
+			// if user deletes the '+' sign, we skip it and delete the next number instead
+			if ( nextPhone.length > 0 && nextPhone[ 0 ] !== '+' ) {
+				return this.props.field.onChange( '+' + nextPhone.substring( 1 ) );
+			}
+
 			return this.props.field.onChange( nextPhone );
 		}
 
@@ -88,6 +96,7 @@ class Phone extends React.Component {
 
 		return (
 			<Input
+				manageCaret={ true }
 				className={ className }
 				disabled={ disabled }
 				field={ field }

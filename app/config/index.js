@@ -17,6 +17,7 @@ const config = {
 	bing_tag_id: '5476898',
 	quantcast_account_id: 'p--q2ngEqybdRaX',
 	facebook_pixel_id: '275189776211205',
+	atlas_tag_id: '11187200881977',
 	hostname: 'get.blog',
 	i18n_default_locale_slug: 'en',
 	initial_number_of_search_results: 6,
@@ -30,7 +31,8 @@ const config = {
 		googleads: productionOnly,
 		bingads: productionOnly,
 		quantcast: productionOnly,
-		facebookads: productionOnly
+		facebookads: productionOnly,
+		atlas: productionOnly,
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',

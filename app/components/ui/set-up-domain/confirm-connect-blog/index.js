@@ -2,7 +2,6 @@
 import { bindHandlers } from 'react-bind-handlers';
 import classnames from 'classnames';
 import i18n from 'i18n-calypso';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -10,7 +9,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
-import { getPath } from 'routes';
 import { preventWidows } from 'lib/formatters';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
@@ -55,7 +53,7 @@ class ConfirmConnectBlog extends Component {
 	}
 
 	render() {
-		const { blogType, domainName, hostName, service } = this.props;
+		const { blogType, domainName, service } = this.props;
 		const serviceName = getServiceName( service );
 
 		return (
@@ -64,29 +62,31 @@ class ConfirmConnectBlog extends Component {
 
 				<div className={ styles.headerContainer }>
 					<div className={ styles.header }>
-						<h1 className={ classnames( styles.headerText, styles.setupCompleteHeader ) }>
-							{ i18n.translate( 'Setup Complete!' ) }
+						<h1 className={ classnames( styles.headerText ) }>
+							<span className={ styles.setUpLabel }>
+								{ i18n.translate( 'Setup: ' ) }
+							</span>
+
+							{ i18n.translate( 'Proceed to %(serviceName)s.', {
+								args: { serviceName },
+								comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+							} ) }
 						</h1>
-						<ProgressBar progress={ 100 } />
+						<ProgressBar progress={ 90 } />
 					</div>
 				</div>
 
 				<Form onSubmit={ this.handleSubmit }>
 					{ blogType === 'existing' && (
 						<Form.FieldArea>
-							<h3>
-								{ i18n.translate( 'Your domain is all set!' ) }
-							</h3>
-
 							<p>
-								{ i18n.translate( '%(domainName)s now points to %(hostName)s.', {
-									args: { hostName, domainName },
-									components: { strong: <strong /> }
+								{ i18n.translate( "Your domain is almost ready, now it's time to set up your blog so it is available at %(domainName)s.", {
+									args: { domainName }
 								} ) }
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Go to my %(serviceName)s blog', {
+								{ i18n.translate( 'Set up my %(serviceName)s blog', {
 									args: { serviceName },
 									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ) }
@@ -96,22 +96,14 @@ class ConfirmConnectBlog extends Component {
 
 					{ blogType === 'new' && (
 						<Form.FieldArea>
-							<h3>
-								{ i18n.translate( 'Your domain is ready for %(serviceName)s!', {
-									args: { serviceName },
-									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
-								} ) }
-							</h3>
-
 							<p>
-								{ preventWidows( i18n.translate( 'Continue to %(serviceName)s to start building your new blog. It will be available at %(domainName)s.', {
-									args: { serviceName, domainName },
-									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+								{ preventWidows( i18n.translate( "Your domain is almost ready, now it's time to start building your new blog. It will be available at %(domainName)s.", {
+									args: { domainName }
 								} ), 2 ) }
 							</p>
 
 							<Button className={ styles.button }>
-								{ i18n.translate( 'Create my %(serviceName)s blog', {
+								{ i18n.translate( 'Start my %(serviceName)s blog', {
 									args: { serviceName },
 									comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 								} ) }
@@ -119,13 +111,6 @@ class ConfirmConnectBlog extends Component {
 						</Form.FieldArea>
 					) }
 				</Form>
-
-				<div className={ styles.footer }>
-					<Link to={ getPath( 'myDomains' ) }>
-						{ i18n.translate( 'Back to My Domains' ) }
-					</Link>
-				</div>
-
 			</div>
 		);
 	}

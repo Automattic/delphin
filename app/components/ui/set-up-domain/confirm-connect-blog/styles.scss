@@ -1,19 +1,7 @@
 @import 'app/styles/assets';
 @import 'app/components/ui/set-up-domain/styles';
 
-.header {
-	background: url( #{$image-assets-url}ui-illustrations/setup-complete.svg ) no-repeat center 5px;
-	background-size: auto 134px;
-	padding-top: 150px;
-}
-
 .button {
 	margin-top: 20px;
 	width: 100%;
-}
-
-.setup-complete-header {
-	height: 36px;
-	line-height: 36px;
-	margin-top: 0;
 }

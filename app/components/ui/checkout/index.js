@@ -25,6 +25,10 @@ class Checkout extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.props.resetCheckout();
+	}
+
 	isSubmitButtonDisabled() {
 		const { isPurchasing, invalid, submitting } = this.props;
 

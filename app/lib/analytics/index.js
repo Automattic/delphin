@@ -56,9 +56,6 @@ if ( process.env.BROWSER ) {
 			window.ezt.push( {
 				qacct: config( 'quantcast_account_id' )
 			} );
-			window._qevents.push( {
-				qacct: config( 'quantcast_account_id' )
-			} );
 		} );
 	}
 
@@ -174,6 +171,7 @@ const analytics = {
 			analytics.bingads.recordPurchase( orderId, revenue, currencyCode );
 			analytics.quantcast.recordPurchase( orderId, revenue, currencyCode );
 			analytics.facebookads.recordPurchase( orderId, revenue, currencyCode );
+			analytics.atlas.recordPurchase( orderId, revenue, currencyCode );
 		}
 	},
 
@@ -428,6 +426,32 @@ const analytics = {
 
 		recordPurchase( orderId, revenue, currencyCode ) {
 			analytics.facebookads.recordEvent( 'Purchase Confirmation', {
+				orderid: orderId,
+				currency: currencyCode,
+				revenue
+			} );
+		}
+	},
+
+	atlas: {
+		recordEvent( eventName, eventValue = null ) {
+			if ( ! isEnabled( 'atlas' ) ) {
+				return;
+			}
+
+			const params = Object.assign( {}, eventValue, {
+				event: eventName
+			} );
+
+			const urlParams = Object.keys( params ).map( function( key ) {
+				return encodeURIComponent( key ) + '=' + encodeURIComponent( params[ key ] );
+			} ).join( '&' );
+
+			loadScript( `https://ad.atdmt.com/m/a.js;m=${ config( 'atlas_tag_id' ) };cache=${ Math.random() }?${ urlParams }` );
+		},
+
+		recordPurchase( orderId, revenue, currencyCode ) {
+			analytics.atlas.recordEvent( 'Purchase Confirmation', {
 				orderid: orderId,
 				currency: currencyCode,
 				revenue

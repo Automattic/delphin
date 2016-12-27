@@ -98,7 +98,8 @@ const Suggestions = React.createClass( {
 
 		return (
 			<ul className={ styles.suggestions }>
-				{ this.props.exactMatchUnavailable && this.renderExactMatchTaken() }
+				{ this.renderExactMatchTaken() }
+
 				{ this.getSortedResults()
 					.map( ( suggestion ) => (
 					<Suggestion

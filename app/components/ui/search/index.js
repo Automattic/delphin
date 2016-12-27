@@ -79,25 +79,6 @@ const Search = React.createClass( {
 			results && ! queryIsInResults( results, normalizeDomain( query ) );
 	},
 
-	renderDomainUnavailableMessage() {
-		let { query } = this.props;
-
-		if ( isValidSecondLevelDomain( query ) ) {
-			query = `${ query }.${ this.props.defaultTLD }`;
-		}
-
-		return (
-			<div className={ styles.searchInfo }>
-				{ i18n.translate( '{{em}}%(query)s{{/em}} is not available, try these suggestions instead.', {
-					args: { query },
-					components: {
-						em: <em />
-					}
-				} ) }
-			</div>
-		);
-	},
-
 	renderEmptyQueryMessage() {
 		return (
 			<LoadingPlaceholder

@@ -24,11 +24,7 @@ class Input extends React.Component {
 			}
 		};
 
-		this.saveRef = ( element ) => {
-			if ( element !== null ) {
-				this.element = element;
-			}
-		};
+		this.saveRef = ( element ) => this.element = element;
 
 		// Before React completes the client side render and makes the switch, we'll capture
 		// the server side rendered element and get it's value
@@ -44,6 +40,32 @@ class Input extends React.Component {
 		}
 	}
 
+	// When we set the value of react rendered input from elsewhere, it resets the caret position
+	// to mitigate that issue the following code is used, more info can be found here:
+	// https://github.com/facebook/react/issues/955
+	// http://jsbin.com/dunutajuqo/edit?js,output
+	componentDidUpdate() {
+		// bail out if we don't manage the caret
+		if ( ! this.props.manageCaret ) {
+			return;
+		}
+
+		// bail out if we don't have input's ref
+		if ( ! this.element ) {
+			return;
+		}
+
+		const oldValue = this.element.value || '';
+		const oldLength = oldValue.length;
+		const oldIdx = this.element.selectionStart;
+		const newValue = ( this.props.field.dirty || this.props.field.touched ? this.props.field.value : this.props.field.initialValue ) || '';
+		const newValueLength = newValue.length;
+
+		this.element.value = newValue;
+		const newIdx = Math.max( 0, newValueLength - oldLength + oldIdx );
+		this.element.selectionStart = this.element.selectionEnd = newIdx;
+	}
+
 	render() {
 		const { field } = this.props,
 			gridIconSize = this.props.gridIconSize ? this.props.gridIconSize : 16,
@@ -53,7 +75,15 @@ class Input extends React.Component {
 				[ styles.hasError ]: isInvalid,
 				[ styles.errorLtr ]: this.props.dir === 'ltr'
 			} ),
-			newProps = omit( this.props, [ 'className', 'field', 'untouch', 'gridIconSize', 'inputClassName' ] );
+			newProps = omit( this.props, [ 'className', 'field', 'untouch', 'gridIconSize', 'inputClassName', 'manageCaret' ] );
+
+		let propsFromField = removeInvalidInputProps( field );
+
+		// if we manage the caret position, don't pass the value to the input
+		// we'll set it in componentDidUpdate after we calculate caret's new position
+		if ( this.props.manageCaret ) {
+			delete propsFromField.value;
+		}
 
 		return (
 			<div className={ className }>
@@ -65,7 +95,7 @@ class Input extends React.Component {
 				<input
 					id={ field.name }
 					className={ inputClassName }
-					{ ...removeInvalidInputProps( field ) }
+					{ ...propsFromField }
 					{ ...newProps }
 					dir={ this.props.dir }
 					ref={ this.saveRef }
@@ -89,6 +119,7 @@ Input.propTypes = {
 	field: PropTypes.object.isRequired,
 	gridIconSize: PropTypes.number,
 	inputClassName: PropTypes.string,
+	manageCaret: PropTypes.bool,
 	prefix: PropTypes.string,
 	untouch: PropTypes.func
 };

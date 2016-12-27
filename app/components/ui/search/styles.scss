@@ -345,26 +345,6 @@
 	}
 }
 
-.search-info {
-	background: $gray-xlight;
-	box-sizing: border-box;
-	color: $blue-dark;
-	font-size: 2.1rem;
-	font-weight: 600;
-	margin: auto auto -25px;
-	max-width: 1200px;
-	padding: 20px 10px 0;
-	text-align: left;
-
-	@include breakpoint( '>480px' ) {
-		padding: 40px 20px 0;
-	}
-
-	@include breakpoint( '>660px' ) {
-		padding: 50px 23px 0;
-	}
-}
-
 .logo {
 	padding: 30px 30px 30px 10px;
 

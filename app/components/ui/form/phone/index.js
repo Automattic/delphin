@@ -51,7 +51,7 @@ class Phone extends React.Component {
 
 		// If the current number don't match a formatted number,
 		// lets replace it with the formatted version
-		if ( nextPhoneNumber && nextFormattedNumber !== nextFormattedNumber ) {
+		if ( nextPhoneNumber && nextFormattedNumber !== nextPhoneNumber ) {
 			updatePhone( nextFormattedNumber );
 			return;
 		}

@@ -9,7 +9,6 @@ var baseConfig = require( './webpack.base.config' ),
 	NODE_ENV = process.env.NODE_ENV || 'development';
 
 const vendorModules = [
-	'badwords',
 	'cookie-dough',
 	'creditcards',
 	'classnames',

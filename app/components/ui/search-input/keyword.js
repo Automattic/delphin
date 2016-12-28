@@ -1,8 +1,9 @@
 // External dependencies
-import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
+import i18n from 'i18n-calypso';
+import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
@@ -18,7 +19,10 @@ class Keyword extends React.Component {
 		const { keyword } = this.props;
 
 		return (
-			<li className={ styles.keyword } onClick={ this.handleRemoveClick }>
+			<li className={ styles.keyword }
+				onClick={ this.handleRemoveClick }
+				title={ i18n.translate( 'Remove this keyword from your search' ) }>
+
 				{ keyword.value }
 
 				<span className={ styles.keywordAction } />

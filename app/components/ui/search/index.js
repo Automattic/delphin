@@ -8,7 +8,7 @@ const Gridicon = require( '@automattic/dops-components/client/components/gridico
 // Internal dependencies
 import config from 'config';
 import DocumentTitle from 'components/ui/document-title';
-import { containsAlphanumericCharacters, isSearchForDomainWithAvailableTld, isValidSecondLevelDomain, queryIsInResults, normalizeDomain } from 'lib/domains';
+import { containsAlphanumericCharacters } from 'lib/domains';
 import LoadingPlaceholder from './loading-placeholder';
 import styles from './styles.scss';
 import Suggestions from './suggestions';
@@ -69,14 +69,6 @@ const Search = React.createClass( {
 
 	selectDomain( suggestion ) {
 		this.props.selectDomain( suggestion );
-	},
-
-	isExactMatchUnavailable() {
-		const { query, isRequesting, results } = this.props;
-
-		return ! isRequesting &&
-			( isValidSecondLevelDomain( query ) || isSearchForDomainWithAvailableTld( query ) ) &&
-			results && ! queryIsInResults( results, normalizeDomain( query ) );
 	},
 
 	renderEmptyQueryMessage() {
@@ -156,7 +148,6 @@ const Search = React.createClass( {
 		return (
 			<Suggestions
 				count={ this.props.numberOfResultsToDisplay }
-				exactMatchUnavailable={ this.isExactMatchUnavailable() }
 				hasLoadedFromServer={ this.props.hasLoadedFromServer }
 				results={ this.props.results }
 				selectDomain={ this.selectDomain }

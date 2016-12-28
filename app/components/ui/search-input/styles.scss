@@ -98,13 +98,6 @@
 			opacity: 1;
 		}
 	}
-
-	&.keyword-is-domain {
-		&::after,
-		&::before {
-			display: none;
-		}
-	}
 }
 
 .keyword-action {
@@ -125,12 +118,4 @@
 	position: absolute;
 	right: 5px;
 	top: calc( 50% - 9px );
-}
-
-.keyword-is-domain {
-	padding-right: 10px;
-
-	&.keyword-is-selected {
-		padding-right: 34px;
-	}
 }

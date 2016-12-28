@@ -1,12 +1,10 @@
 // External dependencies
-import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
-import { isDomain } from 'lib/domains';
 import styles from './styles.scss';
 
 class Keyword extends React.Component {
@@ -17,25 +15,21 @@ class Keyword extends React.Component {
 	}
 
 	render() {
-		const { keyword } = this.props,
-			keywordIsDomain = isDomain( keyword.value ),
-			keywordClassName = classNames( styles.keyword, {
-				[ styles.keywordIsDomain ]: keywordIsDomain
-			} );
+		const { keyword } = this.props;
 
 		return (
 			<li
-				className={ keywordClassName }
+				className={ styles.keyword }
 				onClick={ this.handleRemoveClick }>
 				{ keyword.value }
 				<span
 					className={ styles.keywordAction + ' ' + styles.keywordDelete } />
 
-				{ ( ! keywordIsDomain && <Gridicon
+				<Gridicon
 					className={ styles.keywordDeleteIcon }
 					icon="cross"
 					size={ 20 }
-				/> ) }
+				/>
 			</li>
 		);
 	}

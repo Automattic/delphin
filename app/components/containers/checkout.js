@@ -12,25 +12,10 @@ import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors'
 import { resetCheckout } from 'actions/checkout';
 import { getPath } from 'routes';
 import { hasSelectedDomain, isPurchasing, getSelectedDomain, getSelectedDomainCost } from 'reducers/checkout/selectors';
+import { getCountryCode, getFullName, getPostalCode } from 'reducers/contact-information/selectors';
 import { getUserSettings } from 'reducers/user/selectors';
 import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
-
-/**
- * Retrieves the full name of the user from the contact information entered.
- *
- * @param {object} state - state tree
- * @returns {string} - the full name
- */
-export const getFullName = state => {
-	if ( ! state.form.contactInformation ) {
-		return '';
-	}
-
-	const { firstName: { value: firstName }, lastName: { value: lastName } } = state.form.contactInformation;
-
-	return `${ firstName } ${ lastName }`;
-};
 
 export default reduxForm(
 	{
@@ -55,8 +40,8 @@ export default reduxForm(
 		isPurchasing: isPurchasing( state ),
 		initialValues: {
 			name: getFullName( state ),
-			countryCode: state.contactInformation.data && state.contactInformation.data.countryCode,
-			postalCode: state.contactInformation.data && state.contactInformation.data.postalCode
+			countryCode: getCountryCode( state ),
+			postalCode: getPostalCode( state )
 		},
 		user: getUserSettings( state )
 	} ),

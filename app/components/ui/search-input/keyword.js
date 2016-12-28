@@ -18,18 +18,15 @@ class Keyword extends React.Component {
 		const { keyword } = this.props;
 
 		return (
-			<li
-				className={ styles.keyword }
-				onClick={ this.handleRemoveClick }>
+			<li className={ styles.keyword } onClick={ this.handleRemoveClick }>
 				{ keyword.value }
-				<span
-					className={ styles.keywordAction + ' ' + styles.keywordDelete } />
+
+				<span className={ styles.keywordAction } />
 
 				<Gridicon
 					className={ styles.keywordDeleteIcon }
 					icon="cross"
-					size={ 20 }
-				/>
+					size={ 20 } />
 			</li>
 		);
 	}

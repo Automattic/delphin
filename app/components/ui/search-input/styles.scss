@@ -91,13 +91,6 @@
 		margin: 1px 0 0 1px;
 		transition: opacity 0.1s ease-in-out;
 	}
-
-	&.keyword-is-selected {
-		&::after,
-		&::before {
-			opacity: 1;
-		}
-	}
 }
 
 .keyword-action {

@@ -3,6 +3,9 @@ import { push } from 'react-router-redux';
 
 // Internal dependencies
 import { getPath } from 'app/routes';
+import {
+	SET_CURRENT_ROUTES
+} from 'reducers/action-types';
 
 /***
  * Creates a redirect push action
@@ -24,3 +27,11 @@ export const redirect = ( pathSlug, options = {} ) => {
 
 	return push( locationDescriptor );
 };
+
+export const setCurrentRoutes = ( routes ) => {
+	return {
+		type: SET_CURRENT_ROUTES,
+		routes
+	};
+};
+

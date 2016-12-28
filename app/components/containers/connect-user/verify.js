@@ -20,6 +20,7 @@ import VerifyUser from 'components/ui/connect-user/verify-user';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 import { showToggle } from 'actions/ui/toggle';
 import { getToggle } from 'reducers/ui/toggle/selectors';
+import { getLastLocationBeforeAuth } from 'reducers/history/selectors';
 
 const validate = values => {
 	const errors = {};
@@ -48,7 +49,8 @@ export default reduxForm(
 		isConfirmationCodeVisible: getToggle( state, 'isConfirmationCodeVisible' ),
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state ),
-		query: ownProps.location.query
+		query: ownProps.location.query,
+		lastLocationBeforeAuth: getLastLocationBeforeAuth( state )
 	} ),
 	( dispatch, ownProps ) => bindActionCreators( {
 		addNotice,
@@ -62,6 +64,7 @@ export default reduxForm(
 		recordPageView,
 		redirect,
 		redirectToQueryParamUrl: () => push( ownProps.location.query.redirect_to ),
+		redirectToLastLocationBeforeAuth: () => push( ownProps.lastLocationBeforeAuth ),
 		selectDomain,
 		showToggle,
 		updateCode: code => change( 'verifyUser', 'code', code ),

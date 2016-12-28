@@ -5,6 +5,7 @@ import { reducer as form } from 'redux-form';
 import { checkout } from './checkout';
 import { contactInformation } from './contact-information';
 import { contactSupport } from './contact-support';
+import history from './history';
 import territories from './territories';
 import { domainAvailability } from './domain-availability';
 import { domainSearch } from './domain-search';
@@ -22,6 +23,7 @@ export default {
 	domainAvailability,
 	domainSearch,
 	form,
+	history,
 	nameservers,
 	notices,
 	prices,

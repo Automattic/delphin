@@ -113,13 +113,15 @@ const Suggestions = React.createClass( {
 			);
 		}
 
+		const query = this.normalizeQuery( this.props.query );
+
 		return (
 			<ul className={ styles.suggestions }>
 				{ this.renderExactMatchTaken() }
 
 				{ this.getSortedResults().map( ( suggestion ) => (
 					<Suggestion
-						isBestMatch={ this.normalizeQuery( this.props.query ) === omitTld( suggestion.domainName ) }
+						isBestMatch={ query === omitTld( suggestion.domainName ) }
 						key={ suggestion.domainName }
 						selectDomain={ this.props.selectDomain }
 						suggestion={ suggestion } />

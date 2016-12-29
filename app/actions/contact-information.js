@@ -1,6 +1,6 @@
 // External dependencies
 import camelCase from 'lodash/camelCase';
-import { startAsyncValidation, stopAsyncValidation } from 'redux-form';
+import first from 'lodash/first';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -46,38 +46,28 @@ export function validateContactInformation( domainNames, contactInformation ) {
 			domainNames,
 			contactInformation: normalizeContactInformation( contactInformation )
 		} ),
-		loading: () => {
-			return dispatch => {
-				dispatch( startAsyncValidation( 'contactInformation' ) );
-			};
+		success: data => () => { // that's for "dispatching" and returning the promise
+			const { success, messages } = data;
+
+			if ( ! success ) {
+				const errors = Object.assign.apply(
+					Object,
+					Object.keys( messages )
+						.map( fieldName => (
+							// maybe join() is more appropriate here instead of taking the first
+							{ [ camelCase( fieldName ) ]: first( messages[ fieldName ] ) }
+							)
+						)
+				);
+
+				const rejectionReason = new Error( 'Validation error' );
+				rejectionReason.validationErrors = errors;
+
+				return Promise.reject( rejectionReason );
+			}
+
+			return true;
 		},
-		success: data => {
-			return dispatch => {
-				const { success, messages } = data;
-				let errors;
-
-				if ( ! success ) {
-					errors = Object.keys( messages ).reduce( ( result, fieldName ) => {
-						// redux-form only allows objects or strings as error values, so we nest the array of errors
-						// under an arbitrary `data` property.
-						result[ camelCase( fieldName ) ] = { data: messages[ fieldName ] };
-
-						return result;
-					}, {} );
-				}
-
-				return dispatch( stopAsyncValidation( 'contactInformation', errors ) );
-			};
-		},
-		fail: ( error ) => {
-			return dispatch => {
-				dispatch( addNotice( {
-					message: error.message,
-					status: 'error'
-				} ) );
-
-				return Promise.reject( error );
-			};
-		}
+		fail: error => () => Promise.reject( error ) // custom handler to prevent notice dispatching
 	};
 }

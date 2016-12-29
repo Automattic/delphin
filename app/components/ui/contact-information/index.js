@@ -255,6 +255,7 @@ class ContactInformation extends React.Component {
 									<fieldset>
 										<label>{ i18n.translate( 'Organization' ) }</label>
 										<Input
+											autoFocus
 											field={ fields.organization }
 											untouch={ untouch }
 											className={ styles.organization }
@@ -293,6 +294,7 @@ class ContactInformation extends React.Component {
 
 									{ this.address2InputIsVisible() && (
 										<Input
+											autoFocus
 											field={ fields.address2 }
 											untouch={ untouch }
 											className={ styles.address2 }

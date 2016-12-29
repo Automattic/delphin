@@ -54,7 +54,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 					Object,
 					Object.keys( messages )
 						.map( fieldName => (
-							// maybe join() is more appropriate here instead of taking the first
+							// maybe join() is more appropriate here instead of taking only the first error
 							{ [ camelCase( fieldName ) ]: first( messages[ fieldName ] ) }
 							)
 						)
@@ -68,6 +68,15 @@ export function validateContactInformation( domainNames, contactInformation ) {
 
 			return true;
 		},
-		fail: error => () => Promise.reject( error ) // custom handler to prevent notice dispatching
+		fail: error => dispatch => {
+			if ( error.message !== 'Validation error' ) {
+				dispatch( addNotice( {
+					message: error.message,
+					status: 'error'
+				} ) );
+			}
+
+			return Promise.reject( error );
+		}
 	};
 }

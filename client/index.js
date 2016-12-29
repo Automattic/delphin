@@ -26,6 +26,7 @@ import switchLocale from './switch-locale';
 import { switchLocaleMiddleware } from './switch-locale-middleware';
 import { userMiddleware } from './user-middleware';
 import { provideStore, sections } from 'sections';
+import { scrollToTopMiddleware } from './scroll-to-top-middleware';
 import { wpcomLoginMiddleware } from './wpcom-login-middleware';
 import { wpcomNoticesMiddleware } from './wpcom-notices-middleware';
 
@@ -45,6 +46,7 @@ const middlewares = [
 	adTrackingMiddleware,
 	analyticsMiddleware,
 	logErrorNoticesMiddleware,
+	scrollToTopMiddleware,
 	wpcomMiddleware,
 	wpcomLoginMiddleware,
 	wpcomNoticesMiddleware,

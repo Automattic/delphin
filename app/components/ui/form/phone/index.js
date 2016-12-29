@@ -26,7 +26,7 @@ class Phone extends React.Component {
 		if ( currentCountryCode !== nextCountryCode ) {
 			const currentCallingCode = getCallingCode( currentCountryCode );
 
-			if ( ! nextPhoneNumber || nextPhoneNumber === maskPhone( currentCallingCode ) ) {
+			if ( ! nextPhoneNumber || nextPhoneNumber === '+' || nextPhoneNumber === maskPhone( currentCallingCode ) ) {
 				const nextCallingCode = getCallingCode( nextCountryCode );
 
 				updatePhone( maskPhone( nextCallingCode ) );

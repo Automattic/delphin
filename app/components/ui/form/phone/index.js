@@ -14,12 +14,11 @@ class Phone extends React.Component {
 				onChange: updatePhone
 			}
 		} = this.props;
-		const { field } = this.props;
-		// The value will be held in either `value` or `initialValue` depending
-		// on whether the form was just initialized
-		const currentPhoneNumber = field.value || field.initialValue;
 		const {
-			countryCode: nextCountryCode
+			countryCode: nextCountryCode,
+			field: {
+				value: nextPhoneNumber
+			}
 		} = nextProps;
 
 		// Adds a calling code to the phone field - upon country change - only if it is empty or if it contains the one
@@ -27,7 +26,7 @@ class Phone extends React.Component {
 		if ( currentCountryCode !== nextCountryCode ) {
 			const currentCallingCode = getCallingCode( currentCountryCode );
 
-			if ( ! currentPhoneNumber || currentPhoneNumber === maskPhone( currentCallingCode ) ) {
+			if ( ! nextPhoneNumber || nextPhoneNumber === '+' || nextPhoneNumber === maskPhone( currentCallingCode ) ) {
 				const nextCallingCode = getCallingCode( nextCountryCode );
 
 				updatePhone( maskPhone( nextCallingCode ) );

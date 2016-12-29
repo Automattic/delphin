@@ -12,7 +12,6 @@ import Form from 'components/ui/form';
 import OrderSummary from './order-summary';
 import PaymentFieldArea from './payment-field-area';
 import styles from './styles.scss';
-import scrollToTop from 'components/containers/scroll-to-top';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
 
@@ -254,4 +253,4 @@ Checkout.propTypes = {
 	user: PropTypes.object.isRequired
 };
 
-export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( Checkout ), 'Checkout' ) ) );
+export default withStyles( styles )( withPageView( bindHandlers( Checkout ), 'Checkout' ) );

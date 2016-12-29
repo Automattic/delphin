@@ -18,7 +18,6 @@ import State from 'components/ui/form/state';
 import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
-import scrollToTop from 'components/containers/scroll-to-top';
 
 class ContactInformation extends React.Component {
 	componentWillMount() {
@@ -423,4 +422,4 @@ ContactInformation.propTypes = {
 	validateContactInformation: PropTypes.func.isRequired
 };
 
-export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'Contact Information' ) ) );
+export default withStyles( styles )( withPageView( bindHandlers( ContactInformation ), 'Contact Information' ) );

@@ -9,7 +9,6 @@ import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import withPageView from 'lib/analytics/with-page-view';
-import scrollToTop from 'components/containers/scroll-to-top';
 import Button from 'components/ui/button';
 import { getPath } from 'routes';
 
@@ -157,4 +156,4 @@ Success.propTypes = {
 	hasTrademarkClaim: PropTypes.bool.isRequired
 };
 
-export default scrollToTop( withStyles( styles )( withPageView( Success, 'Success' ) ) );
+export default withStyles( styles )( withPageView( Success, 'Success' ) );

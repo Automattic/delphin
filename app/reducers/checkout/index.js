@@ -22,7 +22,6 @@ const paygateConfiguration = createRequestReducer( {
 	loading: PAYGATE_CONFIGURATION_FETCH,
 	success: PAYGATE_CONFIGURATION_FETCH_COMPLETE,
 	fail: PAYGATE_CONFIGURATION_FETCH_FAIL,
-	reset: CHECKOUT_REQUESTS_RESET,
 } );
 
 const paygateToken = createRequestReducer( {

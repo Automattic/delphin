@@ -16,12 +16,34 @@ import scrollToTop from 'components/containers/scroll-to-top';
 import SiftScience from 'lib/sift-science';
 import withPageView from 'lib/analytics/with-page-view';
 
+let fetchPaygateConfigurationIntervalId;
+
 class Checkout extends Component {
 	componentDidMount() {
 		if ( ! this.props.hasSelectedDomain ) {
 			this.props.redirect( 'home' );
 		} else {
 			SiftScience.recordUser( this.props.user.data.id );
+		}
+
+		this.props.fetchPaygateConfiguration();
+
+		// fetch the paygate configuration every ten minutes in case it changes
+		fetchPaygateConfigurationIntervalId = setInterval( this.props.fetchPaygateConfiguration.bind( this ), 10 * 60 * 1000 );
+	}
+
+	componentWillUnmount() {
+		clearInterval( fetchPaygateConfigurationIntervalId );
+	}
+
+	componentWillReceiveProps( nextProps ) {
+		if ( this.props.isPurchasing &&
+			! this.props.hasLoadedPaygateConfigurationFromServer &&
+			nextProps.hasLoadedPaygateConfigurationFromServer ) {
+			// On the off chance that the user has not finished loading paygate
+			// configuration once they submit the form, submit the purchase
+			// once it has loaded
+			this.purchaseDomainAndRedirectToSuccess();
 		}
 	}
 
@@ -48,9 +70,20 @@ class Checkout extends Component {
 	}
 
 	handleSubmission() {
+		this.props.showProcessingMessage();
+
+		if ( this.props.hasLoadedPaygateConfigurationFromServer ) {
+			this.purchaseDomainAndRedirectToSuccess();
+		}
+	}
+
+	purchaseDomainAndRedirectToSuccess() {
 		this.props.purchaseDomain()
 			.then( () => this.props.redirect( 'success' ) )
-			.catch( () => this.props.redirect( 'checkout' ) );
+			.catch( () => {
+				this.props.hideProcessingMessage();
+				this.props.redirect( 'checkout' );
+			} );
 	}
 
 	renderCheckoutError() {
@@ -203,15 +236,20 @@ Checkout.propTypes = {
 	domain: PropTypes.object,
 	domainCost: PropTypes.string.isRequired,
 	errors: PropTypes.object,
+	fetchPaygateConfiguration: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hasLoadedPaygateConfigurationFromServer: PropTypes.bool.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	hasTrademarkClaim: PropTypes.bool.isRequired,
+	hideProcessingMessage: PropTypes.func.isRequired,
 	invalid: PropTypes.bool.isRequired,
 	isPurchasing: PropTypes.bool.isRequired,
+	location: PropTypes.object.isRequired,
 	purchaseDomain: PropTypes.func.isRequired,
 	redirect: PropTypes.func.isRequired,
 	resetCheckout: PropTypes.func.isRequired,
+	showProcessingMessage: PropTypes.func.isRequired,
 	submitting: PropTypes.bool.isRequired,
 	user: PropTypes.object.isRequired
 };

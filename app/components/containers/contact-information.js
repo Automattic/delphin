@@ -46,7 +46,7 @@ export default reduxForm(
 		inputVisibility: inputVisibility( state ),
 		userLocation: getUserLocation( state ),
 		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),
-		user: getUserSettings( state )
+		initialEmail: get( getUserSettings( state ), 'data.email' )
 	} ),
 	dispatch => (
 		bindActionCreators( {

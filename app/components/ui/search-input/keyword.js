@@ -25,10 +25,8 @@ class Keyword extends React.Component {
 
 				{ keyword.value }
 
-				<span className={ styles.keywordAction } />
-
 				<Gridicon
-					className={ styles.keywordDeleteIcon }
+					className={ styles.keywordIcon }
 					icon="cross"
 					size={ 20 } />
 			</li>

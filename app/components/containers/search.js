@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
-import { clearDomainSearch, clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
+import { clearDomainSuggestions, fetchDomainSuggestions } from 'actions/domain-suggestions';
+import { clearDomainSearch, selectDomain } from 'actions/domain-search';
 import Search from 'components/ui/search';
 import { redirect } from 'actions/routes';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
 export default connect(
 	( state, ownProps ) => ( {
-		lastQuery: state.domainSearch.query,
-		results: state.domainSearch.results,
-		hasLoadedFromServer: state.domainSearch.hasLoadedFromServer,
-		isRequesting: state.domainSearch.isRequesting,
+		lastQuery: state.domainSuggestions.query,
+		results: state.domainSuggestions.results,
+		hasLoadedFromServer: state.domainSuggestions.hasLoadedFromServer,
+		isRequesting: state.domainSuggestions.isRequesting,
 		initialValues: { query: ownProps.location.query.q },
 		numberOfResultsToDisplay: Number( ownProps.location.query.r ) || undefined,
 		query: ownProps.location.query.q || '',

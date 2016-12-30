@@ -7,7 +7,7 @@ import { contactInformation } from './contact-information';
 import { contactSupport } from './contact-support';
 import territories from './territories';
 import { domainAvailability } from './domain-availability';
-import { domainSearch } from './domain-search';
+import { domainSuggestions } from './domain-suggestions';
 import nameservers from './nameservers';
 import { notices } from './notices';
 import { prices } from './prices';
@@ -20,7 +20,7 @@ export default {
 	contactInformation,
 	contactSupport,
 	domainAvailability,
-	domainSearch,
+	domainSuggestions,
 	form,
 	nameservers,
 	notices,

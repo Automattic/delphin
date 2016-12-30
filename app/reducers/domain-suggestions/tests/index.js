@@ -4,21 +4,21 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE
 } from 'reducers/action-types';
-import { domainSearch } from '..';
+import { domainSuggestions } from '..';
 
 describe( 'domain search reducer', () => {
 	it( 'should throw an error when state and action are undefined', () => {
-		expect( domainSearch ).toThrowError( TypeError );
+		expect( domainSuggestions ).toThrowError( TypeError );
 	} );
 
 	it( 'should throw an error when action is undefined', () => {
 		expect( () => {
-			return domainSearch( {} );
+			return domainSuggestions( {} );
 		} ).toThrowError( TypeError );
 	} );
 
 	it( 'should return initial state when state is undefined and action is empty', () => {
-		expect( domainSearch( undefined, {} ) ).toEqual( {
+		expect( domainSuggestions( undefined, {} ) ).toEqual( {
 			hasLoadedFromServer: false,
 			isRequesting: false,
 			results: null,
@@ -33,7 +33,7 @@ describe( 'domain search reducer', () => {
 				results: [ 'example1.com', 'example2.com' ],
 				query: 'example'
 			} ),
-			newState = domainSearch( originalState, {} );
+			newState = domainSuggestions( originalState, {} );
 
 		expect( newState ).toEqual( originalState );
 	} );
@@ -45,7 +45,7 @@ describe( 'domain search reducer', () => {
 				results: [ 'example1.com', 'example2.com' ],
 				query: 'example'
 			} ),
-			newState = domainSearch( originalState, { type: 'ORDER_CHEESE_BURGER' } );
+			newState = domainSuggestions( originalState, { type: 'ORDER_CHEESE_BURGER' } );
 
 		expect( newState ).toEqual( originalState );
 	} );
@@ -53,7 +53,7 @@ describe( 'domain search reducer', () => {
 
 describe( 'domain search reducer for domain search clear action', () => {
 	it( 'should return initial state when state is undefined', () => {
-		const newState = domainSearch( undefined, {
+		const newState = domainSuggestions( undefined, {
 			type: DOMAIN_SUGGESTIONS_CLEAR
 		} );
 
@@ -72,7 +72,7 @@ describe( 'domain search reducer for domain search clear action', () => {
 				results: [ 'example1.com', 'example2.com' ],
 				query: 'example'
 			} ),
-			newState = domainSearch( originalState, {
+			newState = domainSuggestions( originalState, {
 				type: DOMAIN_SUGGESTIONS_CLEAR
 			} );
 
@@ -87,7 +87,7 @@ describe( 'domain search reducer for domain search clear action', () => {
 
 describe( 'domain search reducer for domain suggestions fetch action', () => {
 	it( 'should return initial state with fetching enabled when state is undefined', () => {
-		const newState = domainSearch( undefined, {
+		const newState = domainSuggestions( undefined, {
 			type: DOMAIN_SUGGESTIONS_FETCH,
 			query: 'foobar'
 		} );
@@ -106,7 +106,7 @@ describe( 'domain search reducer for domain suggestions fetch action', () => {
 				results: [ 'example1.com', 'example2.com' ],
 				query: 'example'
 			} ),
-			newState = domainSearch( originalState, {
+			newState = domainSuggestions( originalState, {
 				type: DOMAIN_SUGGESTIONS_FETCH,
 				query: 'foobar'
 			} );
@@ -122,7 +122,7 @@ describe( 'domain search reducer for domain suggestions fetch action', () => {
 
 describe( 'domain search reducer for domain suggestions fetch completed action', () => {
 	it( 'should return initial state with fetching disabled when the given query matches state.query', () => {
-		const newState = domainSearch( {
+		const newState = domainSuggestions( {
 			results: null,
 			hasLoadedFromServer: false,
 			isRequesting: true,
@@ -148,7 +148,7 @@ describe( 'domain search reducer for domain suggestions fetch completed action',
 				results: [ 'example1.com', 'example2.com' ],
 				query: 'example'
 			} ),
-			newState = domainSearch( originalState, {
+			newState = domainSuggestions( originalState, {
 				results: [ 'foobar.com' ],
 				type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 				query: 'foobar'

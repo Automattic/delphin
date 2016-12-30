@@ -12,7 +12,6 @@ import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
 import ProgressBar from 'components/ui/progress-bar';
-import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
 import withPageView from 'lib/analytics/with-page-view';
@@ -133,4 +132,4 @@ ConnectNewBlogToOther.propTypes = {
 	redirect: PropTypes.func.isRequired,
 };
 
-export default scrollToTop( withStyles( styles )( withPageView( bindHandlers( ConnectNewBlogToOther ), 'Connect New Blog To Other' ) ) );
+export default withStyles( styles )( withPageView( bindHandlers( ConnectNewBlogToOther ), 'Connect New Blog To Other' ) );

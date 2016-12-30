@@ -1,6 +1,6 @@
 // Internal dependencies
 import {
-	DOMAIN_SEARCH_CLEAR,
+	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL
@@ -17,7 +17,7 @@ export function domainSearch( state = initialState, action ) {
 	const { results, query, type } = action;
 
 	switch ( type ) {
-		case DOMAIN_SEARCH_CLEAR:
+		case DOMAIN_SUGGESTIONS_CLEAR:
 			return initialState;
 
 		case DOMAIN_SUGGESTIONS_FETCH:

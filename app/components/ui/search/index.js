@@ -18,7 +18,6 @@ import withPageView from 'lib/analytics/with-page-view';
 
 const Search = React.createClass( {
 	propTypes: {
-		clearDomainSearch: PropTypes.func.isRequired,
 		defaultTLD: PropTypes.string.isRequired,
 		fetchDomainSuggestions: PropTypes.func.isRequired,
 		hasLoadedFromServer: PropTypes.bool.isRequired,
@@ -26,6 +25,7 @@ const Search = React.createClass( {
 		numberOfResultsToDisplay: PropTypes.number,
 		query: PropTypes.string.isRequired,
 		redirectToSearch: PropTypes.func.isRequired,
+		resetSearch: PropTypes.func.isRequired,
 		results: PropTypes.array,
 		selectDomain: PropTypes.func.isRequired,
 		showAdditionalResults: PropTypes.func.isRequired,
@@ -46,7 +46,7 @@ const Search = React.createClass( {
 		const trimmedQuery = this.props.query.trim();
 
 		if ( ! trimmedQuery ) {
-			this.props.clearDomainSearch();
+			this.props.resetSearch();
 			return;
 		}
 

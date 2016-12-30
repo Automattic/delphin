@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { omitTld, queryIsInResults, withTld } from 'lib/domains';
 import styles from './styles.scss';
+import { omitTld, withTld } from 'lib/domains';
 import PartialUnderline from 'components/ui/partial-underline';
 import Suggestion from 'components/containers/suggestion';
 
@@ -28,68 +28,66 @@ const Suggestions = React.createClass( {
 		sort: PropTypes.string.isRequired
 	},
 
-	getSortedResults() {
-		const sortFunctions = {
-				recommended: ( a, b ) => b.relevance - a.relevance,
-				unique: ( a, b ) => a.relevance - b.relevance,
-				short: ( a, b ) => a.domainName.length - b.domainName.length,
-				affordable: ( a, b ) => {
-					const costA = getNumberFromPrice( a.totalCost ),
-						costB = getNumberFromPrice( b.totalCost );
+	isDomainNameInSuggestions( domainName, suggestions ) {
+		return suggestions.some( ( suggestion ) => {
+			return domainName === suggestion.domainName;
+		} );
+	},
 
-					if ( costA > costB ) {
+	sortSuggestions( suggestions ) {
+		const { query, sort } = this.props;
+
+		const terms = query.split( ' ' );
+
+		const sortFunctions = {
+			affordable: ( a, b ) => {
+				const costA = getNumberFromPrice( a.totalCost );
+				const costB = getNumberFromPrice( b.totalCost );
+
+				if ( costA > costB ) {
+					return 1;
+				}
+
+				if ( costB > costA ) {
+					return -1;
+				}
+
+				// Uses relevance as a tie breaker if the prices are the same
+				return sortFunctions.recommended( a, b );
+			},
+			recommended: ( a, b ) => {
+				// Makes sure exact matches are always shown first
+				for ( const term of terms ) {
+					if ( term === a.domainName ) {
+						return -1;
+					} else if ( term === b.domainName ) {
 						return 1;
 					}
-
-					if ( costB > costA ) {
-						return -1;
-					}
-
-					// if the prices are the same, use relevance as a tie breaker
-					return sortFunctions.recommended( a, b );
 				}
+
+				return b.relevance - a.relevance;
 			},
-			{ results, sort } = this.props;
-
-		let { count } = this.props;
-
-		if ( this.isExactMatchUnavailable() && count < results.length ) {
-			count -= 1;
-		}
+			unique: ( a, b ) => {
+				return a.relevance - b.relevance;
+			},
+			short: ( a, b ) => {
+				return a.domainName.length - b.domainName.length;
+			}
+		};
 
 		// Because Array.prototype.sort is not guaranteed to be stable
 		// we create a shallow copy of the array via slice()
 		// sort that copy and return it without modifying the original results array
 		// on the next call we sort it again from the original, which makes the sort "stable"
-		return results.slice().sort( sortFunctions[ sort ] ).slice( 0, count );
+		return suggestions.slice().sort( sortFunctions[ sort ] );
 	},
 
-	isExactMatchUnavailable() {
-		const { query, results } = this.props;
-
-		return results && ! queryIsInResults( results, this.normalizeQuery( query ) );
-	},
-
-	normalizeQuery() {
-		const { query } = this.props;
-
-		// Removes any tld from the end of keywords
-		const queryWithoutTlds = query.replace( /\.[^\s]*/g, '' );
-
-		// Removes all spaces to retrieve the best match
-		return queryWithoutTlds.replace( /\s+/g, '' );
-	},
-
-	renderExactMatchTaken() {
-		if ( ! this.isExactMatchUnavailable() ) {
-			return;
-		}
-
+	renderDomainUnavailable( domainName ) {
 		return (
-			<li className={ classNames( styles.suggestion, styles.isTaken, styles.isUnavailable ) }>
+			<li className={ classNames( styles.suggestion, styles.isTaken, styles.isUnavailable ) } key={ domainName }>
 				<div className={ styles.suggestionInfo }>
 					<PartialUnderline className={ styles.suggestionTitle }>
-						{ withTld( this.normalizeQuery( this.props.query ) ) }
+						{ domainName }
 					</PartialUnderline>
 
 					<div className={ styles.cost }>
@@ -101,11 +99,13 @@ const Suggestions = React.createClass( {
 	},
 
 	render() {
-		if ( ! this.props.hasLoadedFromServer ) {
+		const { hasLoadedFromServer, query, results, selectDomain } = this.props;
+
+		if ( ! hasLoadedFromServer ) {
 			return null;
 		}
 
-		if ( this.props.hasLoadedFromServer && ! this.props.results.length ) {
+		if ( hasLoadedFromServer && ! results.length ) {
 			return (
 				<div className={ styles.noResultsMessage }>
 					{ i18n.translate( "We couldn't find any domains. Try a different search." ) }
@@ -113,17 +113,55 @@ const Suggestions = React.createClass( {
 			);
 		}
 
-		const query = this.normalizeQuery( this.props.query );
+		let suggestions = this.sortSuggestions( results );
+
+		const unavailableDomains = new Set();
+
+		const terms = query.split( ' ' );
+
+		let isDomainNameIncludedInTerms = false;
+
+		for ( const term of terms ) {
+			if ( term.includes( '.' ) ) {
+				// Converts any tld entered by the user to .blog
+				const domainName = withTld( term );
+
+				if ( ! this.isDomainNameInSuggestions( domainName, suggestions ) ) {
+					unavailableDomains.add( domainName );
+				}
+
+				isDomainNameIncludedInTerms = true;
+			}
+		}
+
+		if ( ! isDomainNameIncludedInTerms || ( terms.length === 1 ) ) {
+			// Concatenates all terms (stripping out tlds) to make up for the exact match suggestion
+			const domainName = withTld( terms.map( omitTld ).join( '' ) );
+
+			if ( this.isDomainNameInSuggestions( domainName, suggestions ) ) {
+				suggestions = suggestions.map( ( suggestion ) => {
+					if ( domainName === suggestion.domainName ) {
+						return { ...suggestion, isBestMatch: true };
+					}
+
+					return suggestion;
+				} );
+			} else {
+				unavailableDomains.add( domainName );
+			}
+		}
+
+		suggestions = suggestions.slice( 0, this.props.count - unavailableDomains.size );
 
 		return (
 			<ul className={ styles.suggestions }>
-				{ this.renderExactMatchTaken() }
+				{ Array.from( unavailableDomains ).map( ( domainName ) => this.renderDomainUnavailable( domainName ) ) }
 
-				{ this.getSortedResults().map( ( suggestion ) => (
+				{ suggestions.map( ( suggestion ) => (
 					<Suggestion
-						isBestMatch={ query === omitTld( suggestion.domainName ) }
+						isBestMatch={ suggestion.isBestMatch }
 						key={ suggestion.domainName }
-						selectDomain={ this.props.selectDomain }
+						selectDomain={ selectDomain }
 						suggestion={ suggestion } />
 				) ) }
 			</ul>

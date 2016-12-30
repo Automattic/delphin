@@ -17,7 +17,7 @@ const Suggestion = React.createClass( {
 		hasLoadedAvailability: PropTypes.bool.isRequired,
 		hasTrademarkClaim: PropTypes.bool.isRequired,
 		isAvailable: PropTypes.bool.isRequired,
-		isBestMatch: PropTypes.bool.isRequired,
+		isBestMatch: PropTypes.bool,
 		isRequestingAvailability: PropTypes.bool.isRequired,
 		isRequestingAvailabilityForOtherDomain: PropTypes.bool.isRequired,
 		redirect: PropTypes.func.isRequired,

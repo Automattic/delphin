@@ -9,6 +9,7 @@ import {
 	DOMAIN_SEARCH_LAST_KEYWORD_REMOVE,
 	DOMAIN_SEARCH_SUBMIT,
 	DOMAIN_SELECT,
+	DOMAIN_SUGGESTIONS_CLEAR,
 	DOMAIN_SUGGESTIONS_FETCH,
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL,
@@ -26,9 +27,16 @@ export function clearDomainSearch() {
 	};
 }
 
+/**
+ * Action creator for the action that clears domain suggestions.
+ *
+ * @returns {Object} the corresponding action object
+ */
+export const clearDomainSuggestions = () => ( { type: DOMAIN_SUGGESTIONS_CLEAR } );
+
 export function fetchDomainSuggestions( domainQuery = '' ) {
 	if ( ! containsAlphanumericCharacters( domainQuery ) ) {
-		return clearDomainSearch();
+		return clearDomainSuggestions();
 	}
 
 	const queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );

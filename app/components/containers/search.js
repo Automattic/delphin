@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import config from 'config';
-import { clearDomainSearch, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
+import { clearDomainSearch, clearDomainSuggestions, fetchDomainSuggestions, selectDomain } from 'actions/domain-search';
 import Search from 'components/ui/search';
 import { redirect } from 'actions/routes';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
@@ -21,8 +21,9 @@ export default connect(
 		defaultTLD: config( 'default_tld' )
 	} ),
 	( dispatch, ownProps ) => ( {
-		clearDomainSearch( query ) {
+		resetSearch( query ) {
 			dispatch( clearDomainSearch( query ) );
+			dispatch( clearDomainSuggestions() );
 		},
 
 		// TODO: remove duplicate in search-form.js

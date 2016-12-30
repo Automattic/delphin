@@ -9,7 +9,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import config from 'config';
 import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
-import scrollToTop from 'components/containers/scroll-to-top';
 import styles from './styles.scss';
 import SunriseStep from 'components/ui/sunrise-step';
 import Button from 'components/ui/button';
@@ -219,4 +218,4 @@ LearnMore.propTypes = {
 	submitting: PropTypes.bool.isRequired
 };
 
-export default scrollToTop( withStyles( styles )( bindHandlers( LearnMore ) ) );
+export default withStyles( styles )( bindHandlers( LearnMore ) );

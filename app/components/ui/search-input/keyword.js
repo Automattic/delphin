@@ -1,12 +1,11 @@
 // External dependencies
-import classNames from 'classnames';
-import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
+import i18n from 'i18n-calypso';
+import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { isDomain } from 'lib/domains';
 import styles from './styles.scss';
 
 class Keyword extends React.Component {
@@ -17,25 +16,19 @@ class Keyword extends React.Component {
 	}
 
 	render() {
-		const { keyword } = this.props,
-			keywordIsDomain = isDomain( keyword.value ),
-			keywordClassName = classNames( styles.keyword, {
-				[ styles.keywordIsDomain ]: keywordIsDomain
-			} );
+		const { keyword } = this.props;
 
 		return (
-			<li
-				className={ keywordClassName }
-				onClick={ this.handleRemoveClick }>
-				{ keyword.value }
-				<span
-					className={ styles.keywordAction + ' ' + styles.keywordDelete } />
+			<li className={ styles.keyword }
+				onClick={ this.handleRemoveClick }
+				title={ i18n.translate( 'Remove this keyword from your search' ) }>
 
-				{ ( ! keywordIsDomain && <Gridicon
-					className={ styles.keywordDeleteIcon }
+				{ keyword.value }
+
+				<Gridicon
+					className={ styles.keywordIcon }
 					icon="cross"
-					size={ 20 }
-				/> ) }
+					size={ 20 } />
 			</li>
 		);
 	}

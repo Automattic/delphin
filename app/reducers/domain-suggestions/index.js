@@ -13,7 +13,7 @@ const initialState = {
 	query: null
 };
 
-export function domainSearch( state = initialState, action ) {
+export const domainSuggestions = ( state = initialState, action ) => {
 	const { results, query, type } = action;
 
 	switch ( type ) {
@@ -48,4 +48,4 @@ export function domainSearch( state = initialState, action ) {
 		default:
 			return state;
 	}
-}
+};

@@ -3,7 +3,8 @@ import { push } from 'react-router-redux';
 import { reduxForm, change } from 'redux-form';
 
 // Internal dependencies
-import { fetchDomainSuggestions, selectDomain, submitEmptySearch } from 'actions/domain-search';
+import { fetchDomainSuggestions } from 'actions/domain-suggestions';
+import { selectDomain, submitEmptySearch } from 'actions/domain-search';
 import { getPath } from 'routes';
 import Home from 'components/ui/home';
 import { isLoggedIn } from 'reducers/user/selectors';
@@ -14,7 +15,7 @@ export default reduxForm(
 		fields: [ 'query' ]
 	},
 	state => ( {
-		domainSearch: state.domainSearch,
+		domainSearch: state.domainSuggestions,
 		showEmptySearchNotice: state.ui.domainSearch.showEmptySearchNotice,
 		isLoggedIn: isLoggedIn( state )
 	} ),

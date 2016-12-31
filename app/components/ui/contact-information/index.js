@@ -5,7 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
-import ContactInformationFormFactory from 'components/containers/contact-information-form';
+import ContactInformationFormFactory from 'components/containers/contact-information-form-factory';
 import CheckoutProgressbar from 'components/ui/checkout-progressbar';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';

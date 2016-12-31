@@ -158,7 +158,7 @@ class ContactInformationForm extends React.Component {
 
 		return (
 			<Form
-				onSubmit={ handleSubmit( this.props.onContactInformationSubmit ) }
+				onSubmit={ handleSubmit( this.props.onFormSubmit ) }
 				errors={ this.props.errors }
 				focusOnError
 			>
@@ -355,7 +355,7 @@ ContactInformationForm.propTypes = {
 	initialEmail: PropTypes.string.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
-	onContactInformationSubmit: PropTypes.func.isRequired,
+	onFormSubmit: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,

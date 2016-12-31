@@ -30,7 +30,7 @@ export default formName => reduxForm(
 			'phone'
 		],
 		destroyOnUnmount: false,
-		asyncValidate: ( values, dispatch, props ) => props.contactInformationValidationFunction( values )
+		asyncValidate: ( values, dispatch, props ) => props.onValidate( values )
 				.then( result => result ? undefined : 'Validation error' ) // redux-form expects undefined if no error
 				.catch( error => error.message === 'Validation error' // redux-form expects the errors to be the rejections reason
 					? Promise.reject( error.validationErrors )

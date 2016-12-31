@@ -9,7 +9,7 @@ import { fetchContactInformation } from 'actions/contact-information';
 import { fetchStates } from 'actions/territories';
 import { fetchLocation } from 'actions/location';
 import { getStates } from 'reducers/territories/selectors';
-import { getUserLocation } from 'reducers/user/selectors';
+import { getUserLocation, getUserSettings } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
 
@@ -41,7 +41,8 @@ export default formName => reduxForm(
 		contactInformation: state.contactInformation,
 		inputVisibility: inputVisibility( state ),
 		userLocation: getUserLocation( state ),
-		states: getStates( state, get( state, `form.${ formName }.countryCode.value` ) )
+		states: getStates( state, get( state, `form.${ formName }.countryCode.value` ) ),
+		initialEmail: getUserSettings( state ).data.email
 	} ),
 	dispatch => (
 		bindActionCreators( {

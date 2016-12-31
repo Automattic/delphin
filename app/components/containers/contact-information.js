@@ -13,7 +13,7 @@ import { getStates } from 'reducers/territories/selectors';
 import { getPath } from 'routes';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { hasDomainTrademarkClaim } from 'reducers/domain-availability/selectors';
-import { getUserLocation, getUserSettings } from 'reducers/user/selectors';
+import { getUserLocation } from 'reducers/user/selectors';
 import { inputVisibility } from 'reducers/ui/contact-information/selectors';
 import RequireSignup from 'components/containers/require-signup';
 import { showAddress2Input, showOrganizationInput, resetInputVisibility } from 'actions/ui/contact-information';
@@ -46,7 +46,6 @@ export default reduxForm(
 		inputVisibility: inputVisibility( state ),
 		userLocation: getUserLocation( state ),
 		states: getStates( state, get( state, 'form.contactInformation.countryCode.value' ) ),
-		initialEmail: get( getUserSettings( state ), 'data.email' )
 	} ),
 	dispatch => (
 		bindActionCreators( {

@@ -65,8 +65,8 @@ class ContactInformation extends React.Component {
 					</div>
 
 					<ContactInformationForm
-						contactInformationValidationFunction={ this.handleFormValidation }
-						onContactInformationSubmit={ this.handleFormSubmission }
+						onValidate={ this.handleFormValidation }
+						onFormSubmit={ this.handleFormSubmission }
 						ctaLabel={ i18n.translate( 'Continue to checkout' ) }
 						ctaSubmittingLabel={ i18n.translate( 'Taking you to checkout…' ) }
 						footerContent={ this.getPrivacyNoticeText() }

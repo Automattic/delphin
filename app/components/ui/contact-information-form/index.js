@@ -329,7 +329,7 @@ class ContactInformationForm extends React.Component {
 
 				<Form.Footer>
 					<p>
-						{ typeof this.props.getFooterContents === 'function' && this.props.getFooterContents() }
+						{ this.props.footerContent }
 					</p>
 				</Form.Footer>
 			</Form>
@@ -350,7 +350,7 @@ ContactInformationForm.propTypes = {
 	fetchLocation: PropTypes.func.isRequired,
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
-	getFooterContents: PropTypes.func,
+	footerContent: PropTypes.string.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	initialEmail: PropTypes.string.isRequired,
 	inputVisibility: PropTypes.object.isRequired,

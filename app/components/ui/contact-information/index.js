@@ -21,7 +21,7 @@ class ContactInformation extends React.Component {
 		}
 	}
 
-	handlePrivacyNoticeText() {
+	getPrivacyNoticeText() {
 		const { hasTrademarkClaim } = this.props;
 
 		if ( hasTrademarkClaim ) {
@@ -69,7 +69,7 @@ class ContactInformation extends React.Component {
 						onContactInformationSubmit={ this.handleFormSubmission }
 						ctaLabel={ i18n.translate( 'Continue to checkout' ) }
 						ctaSubmittingLabel={ i18n.translate( 'Taking you to checkout…' ) }
-						getFooterContents={ this.handlePrivacyNoticeText }
+						footerContent={ this.getPrivacyNoticeText() }
 					/>
 				</div>
 			</DocumentTitle>

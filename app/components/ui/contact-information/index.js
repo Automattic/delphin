@@ -78,19 +78,12 @@ class ContactInformation extends React.Component {
 }
 
 ContactInformation.propTypes = {
-	asyncValidating: PropTypes.oneOfType( [
-		PropTypes.bool,
-		PropTypes.string,
-	] ),
 	contactInformation: PropTypes.object.isRequired,
 	domain: PropTypes.object,
-	errors: PropTypes.object,
-	handleSubmit: PropTypes.func.isRequired,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	hasTrademarkClaim: PropTypes.bool.isRequired,
 	redirectToCheckout: PropTypes.func.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
-	userLocation: PropTypes.object.isRequired,
 	validateContactInformation: PropTypes.func.isRequired
 };
 

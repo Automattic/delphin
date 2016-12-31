@@ -78,7 +78,6 @@ class ContactInformation extends React.Component {
 }
 
 ContactInformation.propTypes = {
-	contactInformation: PropTypes.object.isRequired,
 	domain: PropTypes.object,
 	hasSelectedDomain: PropTypes.bool.isRequired,
 	hasTrademarkClaim: PropTypes.bool.isRequired,

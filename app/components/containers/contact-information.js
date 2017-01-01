@@ -1,6 +1,6 @@
 // External dependencies
 import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 // Internal dependencies
@@ -12,24 +12,7 @@ import RequireSignup from 'components/containers/require-signup';
 import { validateContactInformation } from 'actions/contact-information';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 
-export default reduxForm(
-	{
-		form: 'contactInformation',
-		fields: [
-			'email',
-			'firstName',
-			'lastName',
-			'organization',
-			'address1',
-			'address2',
-			'city',
-			'state',
-			'countryCode',
-			'postalCode',
-			'phone'
-		],
-		destroyOnUnmount: false
-	},
+export default connect(
 	state => ( {
 		domain: getSelectedDomain( state ),
 		hasSelectedDomain: hasSelectedDomain( state ),
@@ -42,7 +25,8 @@ export default reduxForm(
 				() => push( getPath( 'checkout' ) )
 			),
 			redirectToHome: () => push( getPath( 'home' ) ),
-			validateContactInformation: ( domainName, contactInformation ) => validateContactInformation( [ domainName ], contactInformation )
+			validateContactInformation: ( domainName, contactInformation ) =>
+				validateContactInformation( [ domainName ], contactInformation )
 		}, dispatch )
 	)
 )( RequireSignup( ContactInformation, getPath( 'contactInformation' ) ) );

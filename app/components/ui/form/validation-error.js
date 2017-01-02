@@ -55,10 +55,6 @@ const ValidationError = ( { field, fields, submitFailed } ) => {
 			return result.concat( currentField.error );
 		}
 
-		if ( typeof currentField.error === 'object' ) {
-			return result.concat( currentField.error.data );
-		}
-
 		return result;
 	}, [] );
 

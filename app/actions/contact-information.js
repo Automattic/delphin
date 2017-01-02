@@ -1,6 +1,5 @@
 // External dependencies
 import camelCase from 'lodash/camelCase';
-import first from 'lodash/first';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -68,8 +67,8 @@ export function validateContactInformation( domainNames, contactInformation ) {
 					Object,
 					Object.keys( messages )
 						.map( fieldName => (
-								// maybe join() is more appropriate here instead of taking only the first error
-								{ [ camelCase( fieldName ) ]: first( messages[ fieldName ] ) }
+								// Some fields, like `phone` field can have multiple errors
+								{ [ camelCase( fieldName ) ]: messages[ fieldName ].join( ' ' ) }
 							)
 						)
 				);

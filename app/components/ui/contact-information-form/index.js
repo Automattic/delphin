@@ -133,12 +133,6 @@ class ContactInformationForm extends React.Component {
 		return organizationInputIsVisible || organization.initialValue;
 	}
 
-	getContactInformation() {
-		return Object.keys( this.props.fields ).reduce( ( result, fieldName ) => {
-			return Object.assign( result, { [ fieldName ]: this.props.fields[ fieldName ].value } );
-		}, {} );
-	}
-
 	getSubmitButtonText() {
 		const { asyncValidating, submitting, submitButtonLabel, submitButtonSubmittingLabel } = this.props;
 

@@ -47,7 +47,7 @@ class Phone extends React.Component {
 				disabled={ disabled }
 				field={ field }
 				onChange={ this.handleChange }
-				type="tel"
+				type="text"
 				untouch={ untouch }
 				dir="ltr"
 			/>

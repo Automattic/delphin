@@ -66,7 +66,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 				return Promise.reject( rejectionReason );
 			}
 
-			return true;
+			return Promise.resolve( true );
 		},
 		fail: error => dispatch => {
 			if ( error.message !== 'Validation error' ) {

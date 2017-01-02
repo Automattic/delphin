@@ -140,17 +140,17 @@ class ContactInformationForm extends React.Component {
 	}
 
 	getSubmitButtonText() {
-		const { asyncValidating, submitting, ctaLabel, ctaSubmittingLabel } = this.props;
+		const { asyncValidating, submitting, submitButtonLabel, submitButtonSubmittingLabel } = this.props;
 
 		if ( asyncValidating ) {
 			return i18n.translate( 'Checking your details…' );
 		}
 
 		if ( submitting ) {
-			return ctaSubmittingLabel;
+			return submitButtonSubmittingLabel;
 		}
 
-		return ctaLabel;
+		return submitButtonLabel;
 	}
 
 	render() {
@@ -345,8 +345,6 @@ ContactInformationForm.propTypes = {
 		PropTypes.string,
 	] ),
 	contactInformation: PropTypes.object.isRequired,
-	ctaLabel: PropTypes.string.isRequired,
-	ctaSubmittingLabel: PropTypes.string.isRequired,
 	errors: PropTypes.object,
 	fetchContactInformation: PropTypes.func.isRequired,
 	fetchLocation: PropTypes.func.isRequired,
@@ -362,6 +360,8 @@ ContactInformationForm.propTypes = {
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,
 	states: PropTypes.object.isRequired,
+	submitButtonLabel: PropTypes.string.isRequired,
+	submitButtonSubmittingLabel: PropTypes.string.isRequired,
 	submitting: PropTypes.bool.isRequired,
 	untouch: PropTypes.func.isRequired,
 	userLocation: PropTypes.object.isRequired,

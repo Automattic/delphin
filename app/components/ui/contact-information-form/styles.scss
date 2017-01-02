@@ -1,0 +1,71 @@
+@import 'app/styles/breakpoints';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+
+.address1 input:focus {
+	z-index: 1;
+}
+
+.address2 {
+	margin-top: -1px;
+}
+
+.row {
+	align-items: flex-start;
+	display: flex;
+
+	.state {
+		width: 100%;
+
+		select {
+			border-right-width: 0;
+		}
+	}
+
+	@include breakpoint( '<480px' ) {
+		flex-wrap: wrap;
+
+		.first-name,
+		.last-name {
+			flex-basis: 100%;
+			flex-shrink: 0;
+		}
+
+		.state {
+			margin-bottom: 10px;
+
+			select {
+				border-right-width: 1px;
+			}
+		}
+
+		.zip {
+			width: 100%;
+		}
+	}
+
+	@include breakpoint( '>480px' ) {
+		.first-name input {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+		}
+
+		.last-name input {
+			border-bottom-left-radius: 0;
+			border-left: 0;
+			border-top-left-radius: 0;
+		}
+	}
+}
+
+.country-code {
+	margin-top: 10px;
+}
+
+.show-organization-link,
+.show-address-two-link {
+	color: $blue;
+	display: inline-block;
+	font-size: 1.4rem;
+	margin-top: 5px;
+}

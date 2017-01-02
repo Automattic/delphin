@@ -8,6 +8,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import Button from 'components/ui/button';
 import Country from 'components/containers/country';
 import Form from 'components/ui/form';
+import HowdyMessage from './howdy-message';
 import Input from 'components/ui/form/input';
 import { isCallingCode } from 'lib/form';
 import Phone from 'components/ui/form/phone';
@@ -16,6 +17,12 @@ import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 
 class ContactInformationForm extends React.Component {
+	constructor( props ) {
+		super( props );
+
+		this.state = {};
+	}
+
 	componentWillMount() {
 		if ( ! this.props.userLocation.isRequesting && ! this.props.userLocation.hasLoadedFromServer ) {
 			this.props.fetchLocation();
@@ -82,6 +89,8 @@ class ContactInformationForm extends React.Component {
 		}, {} );
 
 		props.initializeForm( form );
+
+		this.handleFirstNameBlur();
 	}
 
 	setCountryCode( props = this.props ) {
@@ -147,6 +156,16 @@ class ContactInformationForm extends React.Component {
 		return submitButtonLabel;
 	}
 
+	handleFirstNameBlur() {
+		this.setState( { firstName: this.props.fields.firstName.value } );
+	}
+
+	handleFirstNameChange( event ) {
+		this.setState( { firstName: null } );
+
+		this.props.fields.firstName.onChange( event.target.value );
+	}
+
 	render() {
 		const { fields, handleSubmit, untouch } = this.props;
 
@@ -159,7 +178,10 @@ class ContactInformationForm extends React.Component {
 				<Form.FieldArea>
 					<div>
 						<fieldset>
+							<HowdyMessage firstName={ this.state.firstName } email={ fields.email.value } />
+
 							<label>{ i18n.translate( 'First Name' ) }</label>
+
 							<Input
 								disabled={ this.isDataLoading() }
 								field={ fields.firstName }
@@ -168,6 +190,8 @@ class ContactInformationForm extends React.Component {
 								className={ styles.firstName }
 								placeholder={ i18n.translate( 'First Name' ) }
 								dir="ltr"
+								onBlur={ this.handleFirstNameBlur }
+								onChange={ this.handleFirstNameChange }
 							/>
 							<ValidationError field={ fields.firstName } />
 						</fieldset>

@@ -1,6 +1,5 @@
 // External dependencies
 import camelCase from 'lodash/camelCase';
-import { startAsyncValidation, stopAsyncValidation } from 'redux-form';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -46,38 +45,41 @@ export function validateContactInformation( domainNames, contactInformation ) {
 			domainNames,
 			contactInformation: normalizeContactInformation( contactInformation )
 		} ),
-		loading: () => {
-			return dispatch => {
-				dispatch( startAsyncValidation( 'contactInformation' ) );
-			};
-		},
-		success: data => {
-			return dispatch => {
-				const { success, messages } = data;
-				let errors;
-
-				if ( ! success ) {
-					errors = Object.keys( messages ).reduce( ( result, fieldName ) => {
-						// redux-form only allows objects or strings as error values, so we nest the array of errors
-						// under an arbitrary `data` property.
-						result[ camelCase( fieldName ) ] = { data: messages[ fieldName ] };
-
-						return result;
-					}, {} );
-				}
-
-				return dispatch( stopAsyncValidation( 'contactInformation', errors ) );
-			};
-		},
-		fail: ( error ) => {
-			return dispatch => {
+		fail: error => dispatch => {
+			if ( error.message !== 'Validation error' ) {
 				dispatch( addNotice( {
 					message: error.message,
 					status: 'error'
 				} ) );
+			}
 
-				return Promise.reject( error );
-			};
+			return Promise.reject( error );
+		},
+		// We're returning a thunk here so we'll be able to return a promise as a side effect,
+		// while dispatching something else ( in that case nothing ).
+		// If we just return a promise ( an object without `type` prop, and therefore not an action )
+		// we'll get an error from redux it doesn't know how to handle that object as it's not an action
+		success: data => () => {
+			const { success, messages } = data;
+
+			if ( ! success ) {
+				const errors = Object.assign.apply(
+					Object,
+					Object.keys( messages )
+						.map( fieldName => (
+								// Some fields, like `phone` field can have multiple errors
+								{ [ camelCase( fieldName ) ]: messages[ fieldName ].join( ' ' ) }
+							)
+						)
+				);
+
+				const rejectionReason = new Error( 'Validation error' );
+				rejectionReason.validationErrors = errors;
+
+				return Promise.reject( rejectionReason );
+			}
+
+			return Promise.resolve( true );
 		}
 	};
 }

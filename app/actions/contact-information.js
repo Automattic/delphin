@@ -46,7 +46,21 @@ export function validateContactInformation( domainNames, contactInformation ) {
 			domainNames,
 			contactInformation: normalizeContactInformation( contactInformation )
 		} ),
-		success: data => () => { // that's for "dispatching" and returning the promise
+		fail: error => dispatch => {
+			if ( error.message !== 'Validation error' ) {
+				dispatch( addNotice( {
+					message: error.message,
+					status: 'error'
+				} ) );
+			}
+
+			return Promise.reject( error );
+		},
+		// We're returning a thunk here so we'll be able to return a promise as a side effect,
+		// while dispatching something else ( in that case nothing ).
+		// If we just return a promise ( an object without `type` prop, and therefore not an action )
+		// we'll get an error from redux it doesn't know how to handle that object as it's not an action
+		success: data => () => {
 			const { success, messages } = data;
 
 			if ( ! success ) {
@@ -54,8 +68,8 @@ export function validateContactInformation( domainNames, contactInformation ) {
 					Object,
 					Object.keys( messages )
 						.map( fieldName => (
-							// maybe join() is more appropriate here instead of taking only the first error
-							{ [ camelCase( fieldName ) ]: first( messages[ fieldName ] ) }
+								// maybe join() is more appropriate here instead of taking only the first error
+								{ [ camelCase( fieldName ) ]: first( messages[ fieldName ] ) }
 							)
 						)
 				);
@@ -67,16 +81,6 @@ export function validateContactInformation( domainNames, contactInformation ) {
 			}
 
 			return Promise.resolve( true );
-		},
-		fail: error => dispatch => {
-			if ( error.message !== 'Validation error' ) {
-				dispatch( addNotice( {
-					message: error.message,
-					status: 'error'
-				} ) );
-			}
-
-			return Promise.reject( error );
 		}
 	};
 }

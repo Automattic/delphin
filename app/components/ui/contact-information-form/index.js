@@ -119,9 +119,9 @@ class ContactInformationForm extends React.Component {
 	}
 
 	isSubmitButtonDisabled() {
-		const { asyncValidating, invalid, submitting } = this.props;
+		const { asyncValidating, invalid, submitting, submitDisabled } = this.props;
 
-		return asyncValidating || invalid || submitting || this.isDataLoading();
+		return submitDisabled || asyncValidating || invalid || submitting || this.isDataLoading();
 	}
 
 	address2InputIsVisible() {
@@ -343,6 +343,8 @@ class ContactInformationForm extends React.Component {
 							/>
 							<ValidationError field={ fields.phone } />
 						</fieldset>
+
+						{ this.props.preSubmitContent }
 					</div>
 				</Form.FieldArea>
 
@@ -373,7 +375,7 @@ ContactInformationForm.propTypes = {
 	fetchLocation: PropTypes.func.isRequired,
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
-	footerContent: PropTypes.string.isRequired,
+	footerContent: PropTypes.node.isRequired,
 	handleStartEditingFirstName: PropTypes.func.isRequired,
 	handleStopEditingFirstName: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
@@ -382,12 +384,14 @@ ContactInformationForm.propTypes = {
 	invalid: PropTypes.bool.isRequired,
 	isUpdatingFirstName: PropTypes.bool.isRequired,
 	onFormSubmit: PropTypes.func.isRequired,
+	preSubmitContent: PropTypes.node.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,
 	showOrganizationInput: PropTypes.func.isRequired,
 	states: PropTypes.object.isRequired,
 	submitButtonLabel: PropTypes.string.isRequired,
 	submitButtonSubmittingLabel: PropTypes.string.isRequired,
+	submitDisabled: PropTypes.bool,
 	submitting: PropTypes.bool.isRequired,
 	untouch: PropTypes.func.isRequired,
 	userLocation: PropTypes.object.isRequired,

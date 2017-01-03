@@ -5,6 +5,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import { translate } from 'i18n-calypso';
 import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -13,6 +14,26 @@ import { imageUrl } from 'lib/assets';
 import styles from './styles.scss';
 
 class Header extends Component {
+	componentWillMount() {
+		if ( process.env.BROWSER ) {
+			window.document.addEventListener( 'click', this.handleDocumentClick, false );
+		}
+	}
+
+	componentWillUnmount() {
+		if ( process.env.BROWSER ) {
+			window.document.removeEventListener( 'click', this.handleDocumentClick, false );
+		}
+	}
+
+	handleDocumentClick( event ) {
+		const { hideToggle, isMenuVisible } = this.props;
+
+		if ( isMenuVisible && ! ReactDOM.findDOMNode( this ).contains( event.target ) ) {
+			hideToggle( 'headerMenu' );
+		}
+	}
+
 	handleClickSettingsIcon( event ) {
 		event.preventDefault();
 

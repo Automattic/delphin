@@ -105,25 +105,32 @@ export const guessCallingCode = ( phoneNumber, countryCode = '' ) => {
 };
 
 /**
- * Masks the specified number to only allow numbers and the plus sign.
+ * Masks the specified number to only allow numbers, a plus sign and a single dot.
  *
  * @param {string} nextPhoneNumber - new phone number
  * @param {string} currentPhoneNumber - previous phone number
  * @returns {string} - the new phone number with only allowed characters
  */
 export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
-	let digits = '';
+	let newPhoneNumber = '';
 
 	if ( isString( nextPhoneNumber ) ) {
-		// Allows the removal of a single plus sign
+		// Allows the user to removes the plus sign and clears the country calling code field
 		if ( nextPhoneNumber === '' && currentPhoneNumber === '+' ) {
 			return nextPhoneNumber;
 		}
 
-		digits = nextPhoneNumber.replace( /[^0-9\.]/g, '' );
+		newPhoneNumber = nextPhoneNumber.replace( /[^0-9\.]/g, '' );
+
+		// Removes all dots except the first one
+		const [ countryCallingCode, ...phoneNumber ] = newPhoneNumber.split( '.' );
+
+		if ( phoneNumber.length > 0 ) {
+			newPhoneNumber = countryCallingCode + '.' + phoneNumber.join( '' );
+		}
 	}
 
-	return `+${ digits }`;
+	return `+${ newPhoneNumber }`;
 };
 
 /**

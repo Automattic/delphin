@@ -105,12 +105,15 @@ describe( 'guessCallingCode', () => {
 		expect( guessCallingCode( '33324313532', 'FR' ) ).toBe( '' );
 	} );
 
-	it( 'should return an empty string when the calling code is unknown', () => {
+	it( 'should return a calling code when the calling code is found with the country supplied', () => {
 		expect( guessCallingCode( '+33324313532', 'FR' ) ).toBe( '33' );
+		expect( guessCallingCode( '+13607715877', 'US' ) ).toBe( '1' );
+		expect( guessCallingCode( '+443069990193', 'US' ) ).toBe( '44' );
 	} );
 
-	it( 'should return an empty string when the calling code is unknown', () => {
+	it( 'should return a calling code when the calling code is found without the country supplied', () => {
 		expect( guessCallingCode( '+33324313532' ) ).toBe( '33' );
+		expect( guessCallingCode( '+13607715877' ) ).toBe( '1' );
 	} );
 } );
 

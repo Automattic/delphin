@@ -1,10 +1,13 @@
 // External dependencies
+import classNames from 'classnames';
 import { bindHandlers } from 'react-bind-handlers';
 import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { getCallingCode, maskPhone } from 'lib/form';
 import Input from 'components/ui/form/input';
+import styles from './styles.scss';
 
 class Phone extends React.Component {
 	componentWillReceiveProps( nextProps ) {
@@ -34,23 +37,64 @@ class Phone extends React.Component {
 		}
 	}
 
-	handleChange( event ) {
-		return this.props.field.onChange( maskPhone( event.target.value, this.props.field.value ) );
+	getCountryCallingCode() {
+		return this.props.field.value.split( '.' )[ 0 ] || '';
+	}
+
+	getPhoneNumber() {
+		return this.props.field.value.split( '.' )[ 1 ] || '';
+	}
+
+	handleChange( countryCallingCode, phoneNumber ) {
+		let newPhoneNumber = countryCallingCode;
+
+		if ( phoneNumber ) {
+			newPhoneNumber += '.' + phoneNumber;
+		}
+
+		return this.props.field.onChange( maskPhone( newPhoneNumber, this.props.field.value ) );
+	}
+
+	handleCountryCallingCodeChange( event ) {
+		return this.handleChange( event.target.value, this.getPhoneNumber() );
+	}
+
+	handlePhoneNumberChange( event ) {
+		return this.handleChange( this.getCountryCallingCode(), event.target.value );
+	}
+
+	handleBlur() {
+		return this.props.field.onBlur( this.props.field.value );
 	}
 
 	render() {
 		const { className, disabled, field, untouch } = this.props;
 
 		return (
-			<Input
-				className={ className }
-				disabled={ disabled }
-				field={ field }
-				onChange={ this.handleChange }
-				type="text"
-				untouch={ untouch }
-				dir="ltr"
-			/>
+			<div className={ styles.phoneContainer }>
+				<Input
+					field={ {
+						...field,
+						value: this.getCountryCallingCode(),
+						onBlur: this.handleBlur
+					} }
+					className={ styles.callingCode }
+					onChange={ this.handleCountryCallingCodeChange }
+				/>
+				<Input
+					className={ classNames( className, styles.phoneNumber ) }
+					disabled={ disabled }
+					field={ {
+						...field,
+						value: this.getPhoneNumber(),
+						onBlur: this.handleBlur
+					} }
+					onChange={ this.handlePhoneNumberChange }
+					type="text"
+					untouch={ untouch }
+					dir="ltr"
+				/>
+			</div>
 		);
 	}
 }
@@ -63,4 +107,4 @@ Phone.propTypes = {
 	untouch: PropTypes.func.isRequired
 };
 
-export default bindHandlers( Phone );
+export default withStyles( styles )( bindHandlers( Phone ) );

@@ -44,10 +44,6 @@ describe( 'getCallingCode', () => {
 		expect( getCallingCode() ).toBe( '' );
 	} );
 
-	it( 'should return an empty string when country code is null', () => {
-		expect( getCallingCode( null ) ).toBe( '' );
-	} );
-
 	it( 'should return an empty string when country code is empty', () => {
 		expect( getCallingCode( '' ) ).toBe( '' );
 	} );
@@ -79,10 +75,6 @@ describe( 'getCountryFromCallingCode', () => {
 		expect( getCountryFromCallingCode() ).toBe( '' );
 	} );
 
-	it( 'should return an empty string when the calling code is null', () => {
-		expect( getCountryFromCallingCode( null ) ).toBe( '' );
-	} );
-
 	it( 'should return an empty string when the calling code is empty', () => {
 		expect( getCountryFromCallingCode( '' ) ).toBe( '' );
 	} );
@@ -100,7 +92,6 @@ describe( 'getCountryFromCallingCode', () => {
 describe( 'guessCallingCode', () => {
 	it( 'should return an empty string when no phone number is provided', () => {
 		expect( guessCallingCode() ).toBe( '' );
-		expect( guessCallingCode( null ) ).toBe( '' );
 		expect( guessCallingCode( '' ) ).toBe( '' );
 	} );
 
@@ -126,10 +117,6 @@ describe( 'guessCallingCode', () => {
 describe( 'maskPhone', () => {
 	it( 'should return a plus sign when no number provided', () => {
 		expect( maskPhone() ).toBe( '+' );
-	} );
-
-	it( 'should return a plus sign when number is null', () => {
-		expect( maskPhone( null ) ).toBe( '+' );
 	} );
 
 	it( 'should return a plus sign when number is empty', () => {

@@ -67,9 +67,7 @@ export const getCountryFromCallingCode = callingCode => countryCodes[ callingCod
  * @param {string} countryCode - a country code to help the guess
  * @returns {string} - the calling code found
  */
-export const guessCallingCode = ( phoneNumber, countryCode = '' ) => {
-	phoneNumber = phoneNumber || '';
-
+export const guessCallingCode = ( phoneNumber = '', countryCode = '' ) => {
 	if ( phoneNumber.includes( '.' ) ) {
 		const matches = /^\+?(\d+)\./.exec( phoneNumber );
 		return matches && matches[ 1 ];

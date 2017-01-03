@@ -7,27 +7,21 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const HowdyMessage = ( { email, firstName } ) => {
-	if ( ! firstName ) {
-		return null;
-	}
+const HowdyMessage = ( { email, firstName } ) => (
+	<div className={ styles.howdyMessage }>
+		{ email && (
+			<img src={ 'https://www.gravatar.com/avatar/' + md5( email.toLowerCase() ) + '?s=20&d=blank' } />
+		) }
 
-	return (
-		<div className={ styles.howdyMessage }>
-			{ email && (
-				<img src={ 'https://www.gravatar.com/avatar/' + md5( email.toLowerCase() ) + '?s=20&d=blank' } />
-			) }
-
-			{ i18n.translate( 'Howdy %(firstName)s!', {
-				args: { firstName }
-			} ) }
-		</div>
-	);
-};
+		{ i18n.translate( 'Howdy %(firstName)s!', {
+			args: { firstName }
+		} ) }
+	</div>
+);
 
 HowdyMessage.propTypes = {
-	email: PropTypes.string,
-	firstName: PropTypes.string
+	email: PropTypes.string.isRequired,
+	firstName: PropTypes.string.isRequired,
 };
 
 export default withStyles( styles )( HowdyMessage );

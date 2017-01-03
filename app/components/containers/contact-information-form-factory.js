@@ -4,6 +4,8 @@ import get from 'lodash/get';
 import { reduxForm } from 'redux-form';
 
 // Internal dependencies
+import { showToggle, hideToggle } from 'actions/ui/toggle';
+import { getToggle } from 'reducers/ui/toggle/selectors';
 import ContactInformationForm from 'components/ui/contact-information-form';
 import { fetchContactInformation } from 'actions/contact-information';
 import { fetchStates } from 'actions/territories';
@@ -42,7 +44,8 @@ export default formName => reduxForm(
 		inputVisibility: inputVisibility( state ),
 		userLocation: getUserLocation( state ),
 		states: getStates( state, get( state, `form.${ formName }.countryCode.value` ) ),
-		initialEmail: getUserSettings( state ).data.email
+		initialEmail: getUserSettings( state ).data.email,
+		isUpdatingFirstName: getToggle( state, 'isUpdatingFirstName' ),
 	} ),
 	dispatch => (
 		bindActionCreators( {
@@ -51,6 +54,8 @@ export default formName => reduxForm(
 			fetchStates,
 			showAddress2Input,
 			showOrganizationInput,
+			handleStartEditingFirstName: () => showToggle( 'isUpdatingFirstName' ),
+			handleStopEditingFirstName: () => hideToggle( 'isUpdatingFirstName' ),
 			resetInputVisibility
 		}, dispatch )
 	)

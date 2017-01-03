@@ -45,7 +45,7 @@ class Phone extends React.Component {
 			if ( ! normalizedNextPhoneNumber || normalizedNextPhoneNumber === countryCallingCode ) {
 				const nextCountryCallingCode = getCallingCode( nextCountryCode );
 
-				updatePhone( maskPhone( nextCountryCallingCode ) );
+				updatePhone( maskPhone( nextCountryCallingCode + '.' ) );
 			}
 		}
 	}
@@ -93,7 +93,7 @@ class Phone extends React.Component {
 					} }
 					className={ styles.callingCode }
 					onChange={ this.handleCountryCallingCodeChange }
-					maxLength={ 7 }
+					maxLength={ 8 }
 				/>
 				<Input
 					className={ classNames( className, styles.phoneNumber ) }

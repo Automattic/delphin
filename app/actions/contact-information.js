@@ -8,6 +8,9 @@ import {
 	CONTACT_INFORMATION_FETCH,
 	CONTACT_INFORMATION_FETCH_COMPLETE,
 	CONTACT_INFORMATION_FETCH_FAILED,
+	CONTACT_INFORMATION_UPDATE,
+	CONTACT_INFORMATION_UPDATE_COMPLETE,
+	CONTACT_INFORMATION_UPDATE_FAIL,
 	WPCOM_REQUEST
 } from 'reducers/action-types';
 import { snakeifyKeys } from 'lib/formatters';
@@ -93,5 +96,30 @@ export function validateContactInformation( domainNames, contactInformation ) {
 
 			return Promise.resolve( true );
 		}
+	};
+}
+
+/**
+ * Updates contact information for the specified domains
+ *
+ * @param {array} domainNames - list of domain names to which update the contact information
+ * @param {object} contactInformation - user's contact information
+ * @returns {object} - the corresponding action object
+ */
+export function updateContactInformation( domainNames, contactInformation ) {
+	return {
+		type: WPCOM_REQUEST,
+		method: 'post',
+		params: {
+			apiNamespace: 'wpcom/v2',
+			path: '/delphin/domains/contactInformation'
+		},
+		payload: {
+			domainNames,
+			contactInformation
+		},
+		loading: CONTACT_INFORMATION_UPDATE,
+		success: CONTACT_INFORMATION_UPDATE_COMPLETE,
+		fail: CONTACT_INFORMATION_UPDATE_FAIL
 	};
 }

@@ -111,12 +111,15 @@ class LearnMore extends React.Component {
 					<div className={ styles.faqs }>
 						<div className={ styles.faq } id="what-is-dot-blog">
 							<h3>{ i18n.translate( 'What is .blog?' ) }</h3>
+
 							<p>{ i18n.translate( '.blog is a new domain extension, available to the public since November 21st, 2016. It is a standard and open domain extension, so .blog domains work just like any other domain, such as .com or .xyz. Domains ending with .blog can be registered with all major domain sellers, including get.blog.' ) }</p>
 						</div>
 
 						<div className={ styles.faq } id="short-domains">
 							<h3>{ i18n.translate( 'Why are short domains not available?' ) }</h3>
+
 							<p>{ i18n.translate( 'All .blog domains with three characters or less are currently reserved by KKWT, the company managing the .blog domain extension. Some short domains have been released (such as get.blog), but none are currently available for public registration.' ) }</p>
+
 							<p>{ i18n.translate( 'KKWT may release some or all short domains in the future. You can follow along and get updates on {{link}}KKWT’s blog{{/link}}.', {
 								components: {
 									link: <a href="https://my.blog/blog/" target="_blank" rel="noopener noreferrer" />
@@ -126,6 +129,7 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="prices">
 							<h3>{ i18n.translate( 'Why are some .blog domains so expensive?' ) }</h3>
+
 							<p>
 								{ isRequestingPricesFromServer && (
 									i18n.translate( 'Loading answer…' )
@@ -150,6 +154,7 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="refunds">
 							<h3>{ i18n.translate( 'Do you offer refunds?' ) }</h3>
+
 							<p>{ i18n.translate( 'Domains registered on get.blog can be canceled for a full refund within five days of purchase. Contact us at {{link}}help@get.blog{{/link}} to request a refund.', {
 								components: {
 									link: <a href={ config( 'support_link' ) } />
@@ -159,11 +164,13 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="sawbuck">
 							<h3>{ i18n.translate( 'What is wordpress.sawbuck.com?' ) }</h3>
+
 							<p>{ i18n.translate( 'The domain sawbuck.com is used internally by get.blog. When registering a new domain, you may receive an email to verify your contact information. It is sent from help@wordpress.sawbuck.com, and contains a link to validate.sawbuck.com. This is a legitimate get.blog email, and the link is safe to click.' ) }</p>
 						</div>
 
 						<div className={ styles.faq } id="connect-domain">
 							<h3>{ i18n.translate( 'How do I connect my domain to my site?' ) }</h3>
+
 							<p>{ i18n.translate( 'Go to {{link}}My Domains{{/link}} to see all your domains and set them up. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
 								components: {
 									link: <Link to={ getPath( 'myDomains' ) } />
@@ -173,6 +180,7 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="nameservers">
 							<h3>{ i18n.translate( 'How do I set custom name servers?' ) }</h3>
+
 							<p>{ i18n.translate( 'To choose custom servers for your domain, start setting it up from {{link}}My Domains{{/link}}, and then choose “Configure manually” on the next screen. If your domain is already connected, you may have to reset it to the default settings before you can start the set up again.', {
 								components: {
 									link: <Link to={ getPath( 'myDomains' ) } />
@@ -182,6 +190,7 @@ class LearnMore extends React.Component {
 
 						<div className={ styles.faq } id="transfer">
 							<h3>{ i18n.translate( 'Can I transfer my domain?' ) }</h3>
+
 							<p>{ i18n.translate( 'You can transfer your domain from get.blog to any other domain seller that supports it. However, new domains cannot be transferred for 60 days after they are registered. This “lock” period is standard for all domains. You can still start using your domain during this time, for example by setting custom name servers. Contact us at {{link}}help@get.blog{{/link}} for help with transferring your domain.', {
 								components: {
 									link: <a href={ config( 'support_link' ) } />
@@ -190,8 +199,21 @@ class LearnMore extends React.Component {
 						</div>
 
 						<div className={ styles.faq } id="contact-information">
-							<h3>{ i18n.translate( 'How do I update the contact information for my domain?' ) }</h3>
-							<p>{ i18n.translate( 'Domain owners are required to provide current and valid contact information. If the information you provided when you first registered your domain is no longer accurate, you can update it by emailing us at {{link}}help@get.blog{{/link}}.', {
+							<h3>{ i18n.translate( 'Why do you need my contact information?' ) }</h3>
+
+							<p>{ i18n.translate( 'Domain owners are required to share contact information in a public database called "whois". Our Privacy Protection feature protects your identity and prevents spam by using a forwarding service, keeping your personal details hidden.' ) }</p>
+
+							<p>{ i18n.translate( 'Privacy Protection is enabled by default for all new domains. If you prefer to have your contact information publicly associated with your domain, contact us at {{link}}help@get.blog{{/link}} to disable Privacy Protection.', {
+								components: {
+									link: <a href={ config( 'support_link' ) } />
+								}
+							} ) }</p>
+						</div>
+
+						<div className={ styles.faq }>
+							<h3>{ i18n.translate( 'How can I update the contact information for my domain?' ) }</h3>
+
+							<p>{ i18n.translate( 'Your contact information has to be kept current and correct, regardless of the Privacy Protection feature. If your information changed since you first registered your domain, please contact us at {{link}}help@get.blog{{/link}} to update it.', {
 								components: {
 									link: <a href={ config( 'support_link' ) } />
 								}

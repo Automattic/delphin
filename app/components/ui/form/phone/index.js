@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getCallingCode, maskPhone } from 'lib/form';
+import { getCallingCode, guessCallingCode, maskPhone } from 'lib/form';
 import Input from 'components/ui/form/input';
 import styles from './styles.scss';
 
@@ -14,6 +14,7 @@ class Phone extends React.Component {
 		const {
 			countryCode: currentCountryCode,
 			field: {
+				value: currentPhoneNumber,
 				onChange: updatePhone
 			}
 		} = this.props;
@@ -24,16 +25,27 @@ class Phone extends React.Component {
 			}
 		} = nextProps;
 
-		// Adds a calling code to the phone field - upon country change - only if it is empty or if it contains the one
-		// from the previous selected country
-		if ( currentCountryCode !== nextCountryCode ) {
-			const currentCallingCode = getCallingCode( currentCountryCode );
-			const normalizedNextPhoneNumber = nextPhoneNumber.replace( '+', '' ).replace( '.', '' );
+		const normalizedNextPhoneNumber = nextPhoneNumber.replace( '+', '' ).replace( '.', '' );
 
-			if ( ! normalizedNextPhoneNumber || normalizedNextPhoneNumber === currentCallingCode ) {
-				const nextCallingCode = getCallingCode( nextCountryCode );
+		if ( ! currentPhoneNumber && nextPhoneNumber ) {
+			// If the new phone number given does not contain a . after the country code, let's try to add it.
+			// Also, adds a + prefix if . is present but + is missing
 
-				updatePhone( maskPhone( nextCallingCode ) );
+			const callingCode = guessCallingCode( nextPhoneNumber, nextCountryCode );
+			const numberPart = callingCode
+					? nextPhoneNumber.replace( new RegExp( '\\+?' + callingCode + '\\.?' ), '' )
+					: normalizedNextPhoneNumber;
+			updatePhone( maskPhone( callingCode + '.' + numberPart ) );
+		} else if ( currentCountryCode !== nextCountryCode ) {
+			// Adds a calling code to the phone field - upon country change - only
+			// if it is empty or if it contains the one from the previous selected country
+
+			const countryCallingCode = getCallingCode( currentCountryCode );
+
+			if ( ! normalizedNextPhoneNumber || normalizedNextPhoneNumber === countryCallingCode ) {
+				const nextCountryCallingCode = getCallingCode( nextCountryCode );
+
+				updatePhone( maskPhone( nextCountryCallingCode ) );
 			}
 		}
 	}
@@ -81,6 +93,7 @@ class Phone extends React.Component {
 					} }
 					className={ styles.callingCode }
 					onChange={ this.handleCountryCallingCodeChange }
+					maxLength={ 7 }
 				/>
 				<Input
 					className={ classNames( className, styles.phoneNumber ) }

@@ -104,7 +104,7 @@ class Phone extends React.Component {
 						onBlur: this.handleBlur
 					} }
 					onChange={ this.handlePhoneNumberChange }
-					type="text"
+					type="tel"
 					untouch={ untouch }
 					dir="ltr"
 				/>

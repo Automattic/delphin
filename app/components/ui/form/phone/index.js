@@ -9,7 +9,22 @@ import { getCallingCode, guessCallingCode, maskPhone } from 'lib/form';
 import Input from 'components/ui/form/input';
 import styles from './styles.scss';
 
+const normalizePhoneNumber = phoneNumber => phoneNumber.replace( '+', '' ).replace( '.', '' );
+
 class Phone extends React.Component {
+	componentWillMount() {
+		const {
+			countryCode,
+			field: {
+				value: phoneNumber
+			},
+		} = this.props;
+
+		if ( phoneNumber ) {
+			this.updatePhoneNumberWithCountryCallingCode( phoneNumber, countryCode );
+		}
+	}
+
 	componentWillReceiveProps( nextProps ) {
 		const {
 			countryCode: currentCountryCode,
@@ -25,22 +40,15 @@ class Phone extends React.Component {
 			}
 		} = nextProps;
 
-		const normalizedNextPhoneNumber = nextPhoneNumber.replace( '+', '' ).replace( '.', '' );
-
 		if ( ! currentPhoneNumber && nextPhoneNumber ) {
-			// If the new phone number given does not contain a . after the country code, let's try to add it.
-			// Also, adds a + prefix if . is present but + is missing
-
-			const callingCode = guessCallingCode( nextPhoneNumber, nextCountryCode );
-			const numberPart = callingCode
-					? nextPhoneNumber.replace( new RegExp( '\\+?' + callingCode + '\\.?' ), '' )
-					: normalizedNextPhoneNumber;
-			updatePhone( maskPhone( callingCode + '.' + numberPart ) );
+			this.updatePhoneNumberWithCountryCallingCode( nextPhoneNumber, nextCountryCode );
 		} else if ( currentCountryCode !== nextCountryCode ) {
-			// Adds a calling code to the phone field - upon country change - only
-			// if it is empty or if it contains the one from the previous selected country
+			// Updates the country calling code in the phone field upon country
+			// change if it is empty or if it contains the one from the
+			// previous selected country
 
 			const countryCallingCode = getCallingCode( currentCountryCode );
+			const normalizedNextPhoneNumber = normalizePhoneNumber( nextPhoneNumber );
 
 			if ( ! normalizedNextPhoneNumber || normalizedNextPhoneNumber === countryCallingCode ) {
 				const nextCountryCallingCode = getCallingCode( nextCountryCode );
@@ -48,6 +56,29 @@ class Phone extends React.Component {
 				updatePhone( maskPhone( nextCountryCallingCode + '.' ) );
 			}
 		}
+	}
+
+	/**
+	 * Ensures that the initial phone number contains a period after the
+	 * country calling code if none is present. This is necessary because we
+	 * used to store phone numbers without a period separating the country
+	 * calling code from the rest of the number.
+	 *
+	 * @param {string} phoneNumber - phone number
+	 * @param {string} countryCode - country code (e.g. FR)
+	 */
+	updatePhoneNumberWithCountryCallingCode( phoneNumber, countryCode ) {
+		const countryCallingCode = guessCallingCode( phoneNumber, countryCode );
+
+		let localNumberSection;
+
+		if ( countryCallingCode ) {
+			localNumberSection = phoneNumber.replace( new RegExp( '\\+?' + countryCallingCode + '\\.?' ), '' );
+		} else {
+			localNumberSection = normalizePhoneNumber( phoneNumber );
+		}
+
+		this.props.field.onChange( maskPhone( countryCallingCode + '.' + localNumberSection ) );
 	}
 
 	getCountryCallingCode() {

@@ -8,6 +8,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import Button from 'components/ui/button';
 import Country from 'components/containers/country';
 import Form from 'components/ui/form';
+import HowdyMessage from './howdy-message';
 import Input from 'components/ui/form/input';
 import { isCallingCode } from 'lib/form';
 import Phone from 'components/ui/form/phone';
@@ -82,6 +83,8 @@ class ContactInformationForm extends React.Component {
 		}, {} );
 
 		props.initializeForm( form );
+
+		this.handleFirstNameBlur();
 	}
 
 	setCountryCode( props = this.props ) {
@@ -147,6 +150,27 @@ class ContactInformationForm extends React.Component {
 		return submitButtonLabel;
 	}
 
+	handleFirstNameBlur() {
+		this.props.handleStopEditingFirstName();
+
+		this.props.fields.firstName.onBlur( event.target.value );
+	}
+
+	handleFirstNameChange( event ) {
+		this.props.handleStartEditingFirstName();
+
+		this.props.fields.firstName.onChange( event.target.value );
+	}
+
+	isHowdyMessageVisible() {
+		const {
+			isUpdatingFirstName,
+			fields: { firstName }
+		} = this.props;
+
+		return firstName.value && ! isUpdatingFirstName;
+	}
+
 	render() {
 		const { fields, handleSubmit, untouch } = this.props;
 
@@ -159,7 +183,10 @@ class ContactInformationForm extends React.Component {
 				<Form.FieldArea>
 					<div>
 						<fieldset>
+							{ this.isHowdyMessageVisible() && ( <HowdyMessage firstName={ fields.firstName.value } email={ fields.email.value } /> ) }
+
 							<label>{ i18n.translate( 'First Name' ) }</label>
+
 							<Input
 								disabled={ this.isDataLoading() }
 								field={ fields.firstName }
@@ -168,6 +195,8 @@ class ContactInformationForm extends React.Component {
 								className={ styles.firstName }
 								placeholder={ i18n.translate( 'First Name' ) }
 								dir="ltr"
+								onBlur={ this.handleFirstNameBlur }
+								onChange={ this.handleFirstNameChange }
 							/>
 							<ValidationError field={ fields.firstName } />
 						</fieldset>
@@ -345,10 +374,13 @@ ContactInformationForm.propTypes = {
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	footerContent: PropTypes.string.isRequired,
+	handleStartEditingFirstName: PropTypes.func.isRequired,
+	handleStopEditingFirstName: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	initialEmail: PropTypes.string.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
+	isUpdatingFirstName: PropTypes.bool.isRequired,
 	onFormSubmit: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,

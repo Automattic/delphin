@@ -69,3 +69,36 @@
 	font-size: 1.4rem;
 	margin-top: 5px;
 }
+
+.howdy-message {
+	animation: fadein 400ms ease-in-out;
+	color: $blue;
+	float: right;
+	font-weight: bold;
+
+	img {
+		border-radius: 50%;
+		margin-right: 5px;
+		vertical-align: sub;
+	}
+}
+
+@keyframes fadein {
+	0% {
+		opacity: 0;
+		transform: scale( 0 );
+	}
+
+	60% {
+		opacity: 1;
+		transform: scale( 1.05 );
+	}
+
+	80% {
+		transform: scale( 0.95 );
+	}
+
+	100% {
+		transform: scale( 1 );
+	}
+}

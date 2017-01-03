@@ -28,8 +28,9 @@ class Phone extends React.Component {
 		// from the previous selected country
 		if ( currentCountryCode !== nextCountryCode ) {
 			const currentCallingCode = getCallingCode( currentCountryCode );
+			const normalizedNextPhoneNumber = nextPhoneNumber.replace( '+', '' ).replace( '.', '' );
 
-			if ( ! nextPhoneNumber || nextPhoneNumber === '+' || nextPhoneNumber === maskPhone( currentCallingCode ) ) {
+			if ( ! normalizedNextPhoneNumber || normalizedNextPhoneNumber === currentCallingCode ) {
 				const nextCallingCode = getCallingCode( nextCountryCode );
 
 				updatePhone( maskPhone( nextCallingCode ) );

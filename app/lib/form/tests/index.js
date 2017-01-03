@@ -1,5 +1,13 @@
 // Internal dependencies
-import { getAsyncValidateFunction, getCallingCode, isCallingCode, maskPhone, validateEmail } from '..';
+import {
+	getAsyncValidateFunction,
+	getCallingCode,
+	isCallingCode,
+	getCountryFromCallingCode,
+	guessCallingCode,
+	maskPhone,
+	validateEmail
+} from '..';
 
 describe( 'getAsyncValidateFunction', () => {
 	pit( 'should resolve with no arguments if the validation returns no errors', () => {
@@ -48,11 +56,8 @@ describe( 'getCallingCode', () => {
 		expect( getCallingCode( 'BURGER' ) ).toBe( '' );
 	} );
 
-	it( 'should return an empty string when country code is unknown', () => {
+	it( 'should return the corresponding calling code to a valid known country code', () => {
 		expect( getCallingCode( 'FR' ) ).toBe( '33' );
-	} );
-
-	it( 'should return an empty string when country code is unknown', () => {
 		expect( getCallingCode( 'UK' ) ).toBe( '44' );
 	} );
 } );
@@ -66,6 +71,55 @@ describe( 'isCallingCode', () => {
 	it( 'should return false for a number that is not a calling code', () => {
 		expect( isCallingCode( 1337 ) ).toBeFalsy();
 		expect( isCallingCode( 3141591337 ) ).toBeFalsy();
+	} );
+} );
+
+describe( 'getCountryFromCallingCode', () => {
+	it( 'should return an empty string when no calling code is provided', () => {
+		expect( getCountryFromCallingCode() ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when the calling code is null', () => {
+		expect( getCountryFromCallingCode( null ) ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when the calling code is empty', () => {
+		expect( getCountryFromCallingCode( '' ) ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when the calling code is unknown', () => {
+		expect( getCountryFromCallingCode( '000' ) ).toBe( '' );
+	} );
+
+	it( 'should return the corresponding country code to a valid known calling code', () => {
+		expect( getCountryFromCallingCode( '33' ) ).toBe( 'FR' );
+		expect( getCountryFromCallingCode( '44' ) ).toBe( 'UK' );
+	} );
+} );
+
+describe( 'guessCallingCode', () => {
+	it( 'should return an empty string when no phone number is provided', () => {
+		expect( guessCallingCode() ).toBe( '' );
+		expect( guessCallingCode( null ) ).toBe( '' );
+		expect( guessCallingCode( '' ) ).toBe( '' );
+	} );
+
+	it( 'should use the . to determine the calling code if the phone number has a dot', () => {
+		expect( guessCallingCode( '+33.324313532' ) ).toBe( '33' );
+		expect( guessCallingCode( '1684.4325426' ) ).toBe( '1684' );
+	} );
+
+	it( 'should return an empty string when the calling code is unknown', () => {
+		expect( guessCallingCode( '33324313532' ) ).toBe( '' );
+		expect( guessCallingCode( '33324313532', 'FR' ) ).toBe( '' );
+	} );
+
+	it( 'should return an empty string when the calling code is unknown', () => {
+		expect( guessCallingCode( '+33324313532', 'FR' ) ).toBe( '33' );
+	} );
+
+	it( 'should return an empty string when the calling code is unknown', () => {
+		expect( guessCallingCode( '+33324313532' ) ).toBe( '33' );
 	} );
 } );
 

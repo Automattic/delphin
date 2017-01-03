@@ -17,12 +17,6 @@ import styles from './styles.scss';
 import ValidationError from 'components/ui/form/validation-error';
 
 class ContactInformationForm extends React.Component {
-	constructor( props ) {
-		super( props );
-
-		this.state = {};
-	}
-
 	componentWillMount() {
 		if ( ! this.props.userLocation.isRequesting && ! this.props.userLocation.hasLoadedFromServer ) {
 			this.props.fetchLocation();
@@ -157,13 +151,24 @@ class ContactInformationForm extends React.Component {
 	}
 
 	handleFirstNameBlur() {
-		this.setState( { firstName: this.props.fields.firstName.value } );
+		this.props.handleStopEditingFirstName();
+
+		this.props.fields.firstName.onBlur( event.target.value );
 	}
 
 	handleFirstNameChange( event ) {
-		this.setState( { firstName: null } );
+		this.props.handleStartEditingFirstName();
 
 		this.props.fields.firstName.onChange( event.target.value );
+	}
+
+	isHowdyMessageVisible() {
+		const {
+			isUpdatingFirstName,
+			fields: { firstName }
+		} = this.props;
+
+		return firstName.value && ! isUpdatingFirstName;
 	}
 
 	render() {
@@ -178,7 +183,7 @@ class ContactInformationForm extends React.Component {
 				<Form.FieldArea>
 					<div>
 						<fieldset>
-							<HowdyMessage firstName={ this.state.firstName } email={ fields.email.value } />
+							{ this.isHowdyMessageVisible() && ( <HowdyMessage firstName={ fields.firstName.value } email={ fields.email.value } /> ) }
 
 							<label>{ i18n.translate( 'First Name' ) }</label>
 
@@ -369,10 +374,13 @@ ContactInformationForm.propTypes = {
 	fetchStates: PropTypes.func.isRequired,
 	fields: PropTypes.object.isRequired,
 	footerContent: PropTypes.string.isRequired,
+	handleStartEditingFirstName: PropTypes.func.isRequired,
+	handleStopEditingFirstName: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
 	initialEmail: PropTypes.string.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,
+	isUpdatingFirstName: PropTypes.bool.isRequired,
 	onFormSubmit: PropTypes.func.isRequired,
 	resetInputVisibility: PropTypes.func.isRequired,
 	showAddress2Input: PropTypes.func.isRequired,

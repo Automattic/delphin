@@ -160,8 +160,8 @@ describe( 'maskPhone', () => {
 		expect( maskPhone( ' +1 234 567 890   ' ) ).toBe( '+1234567890' );
 	} );
 
-	it( 'should not remove periods', () => {
-		expect( maskPhone( '12.34.56.78.90' ) ).toBe( '+12.34.56.78.90' );
+	it( 'should remove periods except the first one', () => {
+		expect( maskPhone( '12.34.56.78.90' ) ).toBe( '+12.34567890' );
 	} );
 
 	it( 'should remove any invalid character', () => {

@@ -31,10 +31,6 @@ class Checkout extends Component {
 		fetchPaygateConfigurationIntervalId = setInterval( this.props.fetchPaygateConfiguration.bind( this ), 10 * 60 * 1000 );
 	}
 
-	componentWillUnmount() {
-		clearInterval( fetchPaygateConfigurationIntervalId );
-	}
-
 	componentWillReceiveProps( nextProps ) {
 		if ( this.props.isPurchasing &&
 			! this.props.hasLoadedPaygateConfigurationFromServer &&
@@ -47,7 +43,9 @@ class Checkout extends Component {
 	}
 
 	componentWillUnmount() {
+		this.props.hideProcessingMessage();
 		this.props.resetCheckout();
+		clearInterval( fetchPaygateConfigurationIntervalId );
 	}
 
 	isSubmitButtonDisabled() {
@@ -56,16 +54,16 @@ class Checkout extends Component {
 		return invalid || submitting || isPurchasing;
 	}
 
+	handleClickRedirectToHome( event ) {
+		event.preventDefault();
+
+		this.props.redirect( 'home' );
+	}
+
 	handleClickResetCheckout( event ) {
 		event.preventDefault();
 
 		this.props.resetCheckout();
-	}
-
-	handleClickResetCheckoutAndRedirectToHome( event ) {
-		this.handleClickResetCheckout( event );
-
-		this.props.redirect( 'home' );
 	}
 
 	handleSubmission() {
@@ -79,10 +77,7 @@ class Checkout extends Component {
 	purchaseDomainAndRedirectToSuccess() {
 		this.props.purchaseDomain()
 			.then( () => this.props.redirect( 'success' ) )
-			.catch( () => {
-				this.props.hideProcessingMessage();
-				this.props.redirect( 'checkout' );
-			} );
+			.catch( () => this.props.hideProcessingMessage() );
 	}
 
 	renderCheckoutError() {
@@ -113,7 +108,7 @@ class Checkout extends Component {
 						{ showTryDifferentDomain
 							? i18n.translate( 'You can {{link}}try a different domain{{/link}}.', {
 								components: {
-									link: <a onClick={ this.handleClickResetCheckoutAndRedirectToHome } href="#" />
+									link: <a onClick={ this.handleClickRedirectToHome } href="#" />
 								}
 							} )
 							: i18n.translate( "Don't worry! You can {{link}}try again{{/link}}.", {

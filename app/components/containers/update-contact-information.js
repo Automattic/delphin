@@ -8,7 +8,7 @@ import UpdateContactInformation from 'components/ui/update-contact-information';
 import { getPath } from 'routes';
 import RequireLogin from 'components/containers/require-login';
 import { validateContactInformation, updateContactInformation } from 'actions/contact-information';
-import { withAnalytics, recordTracksEvent } from 'actions/analytics';
+import { addNotice } from 'actions/notices';
 import { fetchMyDomains } from 'actions/my-domains';
 
 export default connect(
@@ -17,12 +17,9 @@ export default connect(
 	} ),
 	dispatch => (
 		bindActionCreators( {
-			// redirectToCheckout: withAnalytics(
-			// 	recordTracksEvent( 'delphin_contact_form_submit' ),
-			// 	() => push( getPath( 'checkout' ) )
-			// ),
+			addNotice,
 			updateContactInformation,
-			redirectToHome: () => push( getPath( 'home' ) ),
+			redirectToMyDomains: () => push( getPath( 'myDomains' ) ),
 			validateContactInformation,
 			fetchMyDomains,
 		}, dispatch )

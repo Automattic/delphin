@@ -24,14 +24,34 @@ class UpdateContactInformation extends React.Component {
 	}
 
 	handleFormValidation( values ) {
-		const domains = this.props.domains.data.results;
+		const domains = this.props.domains.data.results.map( domain => domain.name );
 		return this.props.validateContactInformation( domains, values );
 	}
 
 	handleFormSubmission( values ) {
-		const domains = this.props.domains.data.results;
+		const domains = this.props.domains.data.results.map( domain => domain.name );
 		return this.props.updateContactInformation( domains, values )
-			.then( () => this.props.redirectToHome() );
+			.then( () => {
+				const { redirectToMyDomains, addNotice } = this.props;
+				redirectToMyDomains();
+				addNotice( {
+					message: i18n.translate( "We've updated your domains contact information!" ),
+					status: 'success'
+				} );
+			} )
+			.catch( error => {
+				const { addNotice } = this.props;
+
+				addNotice( {
+					message: i18n.translate( 'Failed to update contact information: %(errorMessage)s', {
+						args: {
+							errorMessage: error.message
+						}
+					} ),
+					status: 'error'
+				} );
+				return Promise.reject( error );
+			} );
 	}
 
 	getWhoisPrivacyNotice() {
@@ -88,9 +108,10 @@ class UpdateContactInformation extends React.Component {
 }
 
 UpdateContactInformation.propTypes = {
+	addNotice: PropTypes.func.isRequired,
 	domains: PropTypes.object.isRequired,
 	fetchMyDomains: PropTypes.func.isRequired,
-	redirectToHome: PropTypes.func.isRequired,
+	redirectToMyDomains: PropTypes.func.isRequired,
 	updateContactInformation: PropTypes.func.isRequired,
 	validateContactInformation: PropTypes.func.isRequired
 };

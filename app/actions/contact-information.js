@@ -112,12 +112,12 @@ export function updateContactInformation( domainNames, contactInformation ) {
 		method: 'post',
 		params: {
 			apiNamespace: 'wpcom/v2',
-			path: '/delphin/domains/contactInformation'
+			path: '/delphin/domains/contact-information'
 		},
-		payload: {
+		payload: snakeifyKeys( {
 			domainNames,
-			contactInformation
-		},
+			contactInformation: normalizeContactInformation( contactInformation )
+		} ),
 		loading: CONTACT_INFORMATION_UPDATE,
 		success: CONTACT_INFORMATION_UPDATE_COMPLETE,
 		fail: CONTACT_INFORMATION_UPDATE_FAIL

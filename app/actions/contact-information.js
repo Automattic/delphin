@@ -1,5 +1,6 @@
 // External dependencies
 import camelCase from 'lodash/camelCase';
+import { translate } from 'i18n-calypso';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -72,6 +73,17 @@ export function validateContactInformation( domainNames, contactInformation ) {
 							)
 						)
 				);
+
+				if ( errors.phone ) {
+					// TODO: The API returns an error message for invalid phone
+					// numbers that indicates that it requires a period
+					// delimiter between the country and phone number, even
+					// though we hide this requirement in our UI. Eventually,
+					// the API should accept phone numbers in a more
+					// human-friendly format.  Until then, we rewrite the error
+					// message here.
+					errors.phone = translate( "That's too short. Enter a full phone number." );
+				}
 
 				const rejectionReason = new Error( 'Validation error' );
 				rejectionReason.validationErrors = errors;

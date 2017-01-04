@@ -40,7 +40,8 @@ class Phone extends React.Component {
 			}
 		} = nextProps;
 
-		if ( ! currentPhoneNumber && nextPhoneNumber ) {
+		if ( ! currentPhoneNumber && nextPhoneNumber.length > 3 ) {
+			// The user likely either pasted a phone number or it just loaded from the server
 			this.updatePhoneNumberWithCountryCallingCode( nextPhoneNumber, nextCountryCode );
 		} else if ( currentCountryCode !== nextCountryCode ) {
 			// Updates the country calling code in the phone field upon country
@@ -124,7 +125,6 @@ class Phone extends React.Component {
 					} }
 					className={ styles.callingCode }
 					onChange={ this.handleCountryCallingCodeChange }
-					maxLength={ 8 }
 				/>
 				<Input
 					className={ classNames( className, styles.phoneNumber ) }

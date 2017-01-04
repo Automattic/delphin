@@ -3,6 +3,7 @@
  */
 import assign from 'lodash/assign';
 import debugFactory from 'debug';
+import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import startsWith from 'lodash/startsWith';
 import isUndefined from 'lodash/isUndefined';
@@ -50,13 +51,19 @@ if ( process.env.BROWSER ) {
 	}
 
 	if ( isEnabled( 'quantcast' ) ) {
-		window.ezt = window.ezt || [];
 		window._qevents = window._qevents || [];
-		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }`, () => {
-			window.ezt.push( {
-				qacct: config( 'quantcast_account_id' )
-			} );
+		window.ezt = window.ezt || [];
+
+		// these arrays must be populated before `aquant.js` loads, otherwise they fail silently
+		window.ezt.push( {
+			qacct: config( 'quantcast_account_id' )
 		} );
+
+		window._qevents.push( {
+			qacct: config( 'quantcast_account_id' )
+		} );
+
+		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }`, noop );
 	}
 
 	if ( isEnabled( 'facebookads' ) ) {
@@ -150,6 +157,7 @@ const analytics = {
 			analytics.tracks.recordPageView( urlPath );
 			analytics.ga.recordPageView( urlPath, pageTitle );
 			analytics.facebookads.recordPageView();
+			analytics.quantcast.recordPageView();
 		}
 	},
 
@@ -384,6 +392,13 @@ const analytics = {
 	},
 
 	quantcast: {
+		recordPageView( urlPath, pageTitle ) {
+			if ( pageTitle !== 'Success' ) {
+				// The Quantcast folks want the EZT event to fire on all non-conversion pages
+				window.ezt.push( { qacct: config( 'quantcast_account_id' ) } );
+			}
+		},
+
 		recordEvent( eventName, extra = {} ) {
 			if ( ! isEnabled( 'quantcast' ) || ! window._qevents ) {
 				return;

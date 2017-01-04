@@ -2,11 +2,14 @@
 
 // External dependencies
 import i18n from 'i18n-calypso';
+import invert from 'lodash/invert';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
 // Internal dependencies
 import phone from './phone.json';
+
+const countryCodes = invert( phone );
 
 /**
  * Creates a new validate function that returns a promise.
@@ -50,25 +53,82 @@ export const isCallingCode = number => {
 };
 
 /**
- * Masks the specified number to only allow numbers and the plus sign.
+ * Retrieves the country code for the specified calling code.
+ *
+ * @param {string} callingCode - the calling code of a phone number
+ * @returns {string} - the corresponding country code (ISO 3166-1 alpha-2 identifier)
+ */
+export const getCountryFromCallingCode = callingCode => countryCodes[ callingCode ] || '';
+
+/**
+ * Tries to find the calling code for a given phone number
+ *
+ * @param {string} phoneNumber - a phone number
+ * @param {string} countryCode - a country code to help the guess
+ * @returns {string} - the calling code found
+ */
+export const guessCallingCode = ( phoneNumber = '', countryCode = '' ) => {
+	if ( phoneNumber.includes( '.' ) ) {
+		const matches = /^\+?(\d+)\./.exec( phoneNumber );
+		return matches && matches[ 1 ];
+	}
+
+	// no . given, let's guess the country code
+
+	// if the number does not start with +, assumes the calling code is not part of it
+	if ( ! phoneNumber.startsWith( '+' ) ) {
+		return '';
+	}
+
+	// if a country code is given try to use it to extract the calling code
+	if ( countryCode ) {
+		const countryCallingCode = getCallingCode( countryCode );
+
+		// if it starts with the country code of the user's country,
+		// it's easy, we just extract it
+		if ( phoneNumber.startsWith( '+' + countryCallingCode ) ) {
+			return countryCallingCode;
+		}
+	}
+
+	let phonePrefix = '';
+	for ( let i = 2; i <= phoneNumber.length; i++ ) {
+		phonePrefix = phoneNumber.substring( 1, i );
+		if ( getCountryFromCallingCode( phonePrefix ) ) {
+			return phonePrefix;
+		}
+	}
+
+	return '';
+};
+
+/**
+ * Masks the specified number to only allow numbers, a plus sign and a single dot.
  *
  * @param {string} nextPhoneNumber - new phone number
  * @param {string} currentPhoneNumber - previous phone number
  * @returns {string} - the new phone number with only allowed characters
  */
 export const maskPhone = ( nextPhoneNumber, currentPhoneNumber ) => {
-	let digits = '';
+	let newPhoneNumber = '';
 
 	if ( isString( nextPhoneNumber ) ) {
-		// Allows the removal of a single plus sign
+		// Allows the user to removes the plus sign and clears the country calling code field
 		if ( nextPhoneNumber === '' && currentPhoneNumber === '+' ) {
 			return nextPhoneNumber;
 		}
 
-		digits = nextPhoneNumber.replace( /[^0-9\.]/g, '' );
+		newPhoneNumber = nextPhoneNumber.replace( /[^0-9\.]/g, '' );
+
+		// Removes all dots except the first one
+		const [ countryCallingCode, ...phoneNumber ] = newPhoneNumber.split( '.' );
+
+		if ( phoneNumber.length > 0 ) {
+			newPhoneNumber = countryCallingCode + '.' + phoneNumber.join( '' );
+		}
 	}
 
-	return `+${ digits }`;
+	return `+${ newPhoneNumber }`;
 };
 
 /**

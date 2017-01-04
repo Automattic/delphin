@@ -19,6 +19,6 @@ export const fetchLocation = () => ( {
 	} ),
 	success: data => ( {
 		type: USER_LOCATION_FETCH_COMPLETE,
-		countryCode: data.country_short
+		countryCode: data.countryShort
 	} )
 } );

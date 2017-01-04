@@ -3,7 +3,6 @@
  */
 import assign from 'lodash/assign';
 import debugFactory from 'debug';
-import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import startsWith from 'lodash/startsWith';
 import isUndefined from 'lodash/isUndefined';
@@ -63,7 +62,7 @@ if ( process.env.BROWSER ) {
 			qacct: config( 'quantcast_account_id' )
 		} );
 
-		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }`, noop );
+		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }` );
 	}
 
 	if ( isEnabled( 'facebookads' ) ) {
@@ -392,7 +391,19 @@ const analytics = {
 	},
 
 	quantcast: {
+		// A bug in the Quantcast script causes it to fail silently if
+		// `window.ezt` is populated for the first time after the script is
+		// loaded, so we handle the initial page view when `aquant.js` is
+		// laoded above. In order to prevent duplicate events for the initial
+		// page view, we skip it here.
+		hasSkippedInitialPageView: false,
+
 		recordPageView( urlPath, pageTitle ) {
+			if ( ! analytics.quantcast.hasSkippedInitialPageView ) {
+				analytics.quantcast.hasSkippedInitialPageView = true;
+				return;
+			}
+
 			if ( pageTitle !== 'Success' ) {
 				// The Quantcast folks want the EZT event to fire on all non-conversion pages
 				window.ezt.push( { qacct: config( 'quantcast_account_id' ) } );

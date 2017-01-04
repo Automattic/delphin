@@ -55,8 +55,9 @@ class UpdateContactInformation extends React.Component {
 	}
 
 	getWhoisPrivacyNotice() {
-		return i18n.translate( 'Your contact information will be available in a public' +
-			' database of domain owners, called "Whois".' );
+		return i18n.translate( 'Domain owners are required to share contact information publicly. ' +
+			"We keep your personal information out of your domain's public records," +
+			' to protect your identity and prevent spam.' );
 	}
 
 	getAffectedDomainsNotice() {

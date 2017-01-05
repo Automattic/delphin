@@ -1,5 +1,4 @@
 // External dependencies
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
@@ -15,13 +14,11 @@ export default connect(
 	state => ( {
 		domains: state.user.myDomains,
 	} ),
-	dispatch => (
-		bindActionCreators( {
-			addNotice,
-			updateContactInformation,
-			redirectToMyDomains: () => push( getPath( 'myDomains' ) ),
-			validateContactInformation,
-			fetchMyDomains,
-		}, dispatch )
-	)
-)( RequireLogin( UpdateContactInformation, getPath( 'contactInformation' ) ) );
+	{
+		addNotice,
+		updateContactInformation,
+		redirectToMyDomains: () => push( getPath( 'myDomains' ) ),
+		validateContactInformation,
+		fetchMyDomains,
+	}
+)( RequireLogin( UpdateContactInformation ) );

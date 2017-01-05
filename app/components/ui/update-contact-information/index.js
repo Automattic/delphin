@@ -19,7 +19,7 @@ class UpdateContactInformation extends React.Component {
 		}
 	}
 
-	isDomainsReady() {
+	areDomainsReady() {
 		return this.props.domains.isRequesting || ! this.props.domains.hasLoadedFromServer;
 	}
 
@@ -63,7 +63,7 @@ class UpdateContactInformation extends React.Component {
 	getAffectedDomainsNotice() {
 		return <div>
 			<h4 className={ styles.text }>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
-			{ this.isDomainsReady()
+			{ this.areDomainsReady()
 				? i18n.translate( 'Loading your domains…' )
 				: <ul>
 				{
@@ -100,7 +100,7 @@ class UpdateContactInformation extends React.Component {
 						submitButtonSubmittingLabel={ i18n.translate( 'Updating WHOIS data…' ) }
 						preSubmitContent={ this.getAffectedDomainsNotice() }
 						footerContent={ this.getWhoisPrivacyNotice() }
-						submitDisabled={ this.isDomainsReady() }
+						submitDisabled={ this.areDomainsReady() }
 					/>
 				</div>
 			</DocumentTitle>

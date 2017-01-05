@@ -50,13 +50,19 @@ if ( process.env.BROWSER ) {
 	}
 
 	if ( isEnabled( 'quantcast' ) ) {
-		window.ezt = window.ezt || [];
 		window._qevents = window._qevents || [];
-		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }`, () => {
-			window.ezt.push( {
-				qacct: config( 'quantcast_account_id' )
-			} );
+		window.ezt = window.ezt || [];
+
+		// these arrays must be populated before `aquant.js` loads, otherwise they fail silently
+		window.ezt.push( {
+			qacct: config( 'quantcast_account_id' )
 		} );
+
+		window._qevents.push( {
+			qacct: config( 'quantcast_account_id' )
+		} );
+
+		loadScript( `https://secure.quantserve.com/aquant.js?a=${ config( 'quantcast_account_id' ) }` );
 	}
 
 	if ( isEnabled( 'facebookads' ) ) {
@@ -150,6 +156,7 @@ const analytics = {
 			analytics.tracks.recordPageView( urlPath );
 			analytics.ga.recordPageView( urlPath, pageTitle );
 			analytics.facebookads.recordPageView();
+			analytics.quantcast.recordPageView();
 		}
 	},
 
@@ -384,6 +391,25 @@ const analytics = {
 	},
 
 	quantcast: {
+		// A bug in the Quantcast script causes it to fail silently if
+		// `window.ezt` is populated for the first time after the script is
+		// loaded, so we handle the initial page view when `aquant.js` is
+		// laoded above. In order to prevent duplicate events for the initial
+		// page view, we skip it here.
+		hasSkippedInitialPageView: false,
+
+		recordPageView( urlPath, pageTitle ) {
+			if ( ! analytics.quantcast.hasSkippedInitialPageView ) {
+				analytics.quantcast.hasSkippedInitialPageView = true;
+				return;
+			}
+
+			if ( pageTitle !== 'Success' ) {
+				// The Quantcast folks want the EZT event to fire on all non-conversion pages
+				window.ezt.push( { qacct: config( 'quantcast_account_id' ) } );
+			}
+		},
+
 		recordEvent( eventName, extra = {} ) {
 			if ( ! isEnabled( 'quantcast' ) || ! window._qevents ) {
 				return;

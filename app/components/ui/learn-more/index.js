@@ -15,6 +15,7 @@ import Button from 'components/ui/button';
 import Email from 'components/ui/form/email';
 import { subscribeUser } from 'actions/learn-more';
 import ValidationError from 'components/ui/form/validation-error';
+import withPageView from 'lib/analytics/with-page-view';
 
 class LearnMore extends React.Component {
 	handleSubscribeUser() {
@@ -240,4 +241,4 @@ LearnMore.propTypes = {
 	submitting: PropTypes.bool.isRequired
 };
 
-export default withStyles( styles )( bindHandlers( LearnMore ) );
+export default withStyles( styles )( withPageView( bindHandlers( LearnMore ), 'Learn More' ) );

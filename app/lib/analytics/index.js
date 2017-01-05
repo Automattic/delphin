@@ -394,13 +394,18 @@ const analytics = {
 		// A bug in the Quantcast script causes it to fail silently if
 		// `window.ezt` is populated for the first time after the script is
 		// loaded, so we handle the initial page view when `aquant.js` is
-		// laoded above. In order to prevent duplicate events for the initial
+		// loaded above. In order to prevent duplicate events for the initial
 		// page view, we skip it here.
 		hasSkippedInitialPageView: false,
 
 		recordPageView( urlPath, pageTitle ) {
+			if ( ! isEnabled( 'quantcast' ) ) {
+				return;
+			}
+
 			if ( ! analytics.quantcast.hasSkippedInitialPageView ) {
 				analytics.quantcast.hasSkippedInitialPageView = true;
+
 				return;
 			}
 

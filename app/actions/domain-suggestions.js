@@ -7,7 +7,7 @@ import {
 	DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 	DOMAIN_SUGGESTIONS_FETCH_FAIL,
 } from 'reducers/action-types';
-import { containsAlphanumericCharacters, omitTld } from 'lib/domains';
+import { containsAlphanumericCharacters } from 'lib/domains';
 
 /**
  * Action creator for the action that clears domain suggestions.
@@ -21,8 +21,6 @@ export const fetchDomainSuggestions = ( domainQuery = '' ) => {
 		return clearDomainSuggestions();
 	}
 
-	const queryWithoutTlds = domainQuery.split( ' ' ).map( omitTld ).join( ' ' );
-
 	return {
 		type: WPCOM_REQUEST,
 		method: 'get',
@@ -31,10 +29,13 @@ export const fetchDomainSuggestions = ( domainQuery = '' ) => {
 			path: '/delphin/domains/suggestions'
 		},
 		query: {
-			query: queryWithoutTlds,
+			query: domainQuery,
 			quantity: 36
 		},
-		loading: () => ( { type: DOMAIN_SUGGESTIONS_FETCH, query: domainQuery } ),
+		loading: () => ( {
+			type: DOMAIN_SUGGESTIONS_FETCH,
+			query: domainQuery
+		} ),
 		success: ( results ) => ( {
 			type: DOMAIN_SUGGESTIONS_FETCH_COMPLETE,
 			results,

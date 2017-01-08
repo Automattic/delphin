@@ -3,8 +3,8 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Internal dependencies
 import {
-	TOGGLE_HIDE,
-	TOGGLE_SHOW,
+	FLAG_ENABLE,
+	FLAG_DISABLE,
 } from 'reducers/action-types';
 
 const initialState = {};
@@ -21,9 +21,9 @@ const reducer = ( state = initialState, action ) => {
 
 				return newState;
 			}, {} );
-		case TOGGLE_HIDE:
+		case FLAG_DISABLE:
 			return { ...state, [ name ]: { value: false, persistent: !! persistent } };
-		case TOGGLE_SHOW:
+		case FLAG_ENABLE:
 			return { ...state, [ name ]: { value: true, persistent: !! persistent } };
 		default:
 			return state;

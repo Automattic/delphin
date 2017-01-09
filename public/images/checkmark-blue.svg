@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="15px" viewBox="0 0 20 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>gridicons-checkmark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="gridicons-checkmark" transform="translate(-2.000000, -5.000000)">
+            <rect id="Rectangle-path" x="0" y="0" width="24" height="24"></rect>
+            <polyline id="Shape" fill="#009FD4" points="9 19.414 2.293 12.707 3.707 11.293 9 16.586 20.293 5.293 21.707 6.707"></polyline>
+        </g>
+    </g>
+</svg>

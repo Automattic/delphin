@@ -1,6 +1,7 @@
 @import 'app/styles/breakpoints';
 @import 'app/styles/colors';
 @import 'app/styles/fonts';
+@import 'app/styles/assets';
 
 .header {
 	background: $gray-xlight;
@@ -21,6 +22,32 @@
 	@include breakpoint( '<480px' ) {
 		font-size: 2.6rem;
 		margin-top: 20px;
+	}
+}
+
+.domain-list {
+	font-size: 1.6rem;
+	margin: 20px 0;
+
+	h4 {
+		color: $blue-dark;
+		font-size: 1.8rem;
+		font-weight: 700;
+		margin-bottom: 15px;
+	}
+
+	li {
+		background: url( #{$image-assets-url}checkmark-blue.svg ) no-repeat left center;
+		background-size: 12px;
+		padding: 1px 0 4px 20px;
+	}
+
+	.update-instructions {
+		font-size: 1.6rem;
+	}
+
+	@include breakpoint( '>480px' ) {
+		margin: 30px 0 0;
 	}
 }
 

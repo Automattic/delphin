@@ -65,8 +65,8 @@ class UpdateContactInformation extends React.Component {
 	}
 
 	getAffectedDomainsNotice() {
-		return <div>
-			<h4 className={ styles.text }>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
+		return <div className={ styles.domainList }>
+			<h4>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
 			{ this.isDataLoading()
 				? i18n.translate( 'Loading your domains…' )
 				: <ul>
@@ -74,8 +74,9 @@ class UpdateContactInformation extends React.Component {
 					this.props.domains.data.results.map( domain => <li key={ domain.id }>{ domain.name }</li> )
 				}
 			</ul> }
-			{ i18n.translate( 'You may be asked to approve these changes for each domain separately. ' +
-				"We'll email you with instructions." ) }
+
+			<p className={ styles.updateInstructions }>{ i18n.translate( 'You may be asked to approve these changes for each domain separately. ' +
+				"We'll email you with instructions." ) }</p>
 		</div>;
 	}
 

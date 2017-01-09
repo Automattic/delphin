@@ -25,15 +25,19 @@ class UpdateContactInformation extends React.Component {
 
 	handleFormValidation( values ) {
 		const domains = this.props.domains.data.results.map( domain => domain.name );
+
 		return this.props.validateContactInformation( domains, values );
 	}
 
 	handleFormSubmission( values ) {
 		const domains = this.props.domains.data.results.map( domain => domain.name );
+
 		return this.props.updateContactInformation( domains, values )
 			.then( () => {
 				const { redirectToMyDomains, addNotice } = this.props;
+
 				redirectToMyDomains();
+
 				addNotice( {
 					message: i18n.translate( "We've updated your domains contact information!" ),
 					status: 'success'

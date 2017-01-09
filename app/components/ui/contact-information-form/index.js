@@ -165,10 +165,11 @@ class ContactInformationForm extends React.Component {
 	isHowdyMessageVisible() {
 		const {
 			isUpdatingFirstName,
-			fields: { firstName }
+			fields: { firstName },
+			hideHowdyMessage
 		} = this.props;
 
-		return firstName.value && ! isUpdatingFirstName;
+		return ! hideHowdyMessage && firstName.value && ! isUpdatingFirstName;
 	}
 
 	render() {
@@ -379,6 +380,7 @@ ContactInformationForm.propTypes = {
 	handleStartEditingFirstName: PropTypes.func.isRequired,
 	handleStopEditingFirstName: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,
+	hideHowdyMessage: PropTypes.bool,
 	initialEmail: PropTypes.string.isRequired,
 	inputVisibility: PropTypes.object.isRequired,
 	invalid: PropTypes.bool.isRequired,

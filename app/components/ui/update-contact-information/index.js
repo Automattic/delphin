@@ -96,6 +96,7 @@ class UpdateContactInformation extends React.Component {
 					<UpdateContactInformationForm
 						onValidate={ this.handleFormValidation }
 						onFormSubmit={ this.handleFormSubmission }
+						hideHowdyMessage={ true }
 						submitButtonLabel={ i18n.translate( 'Update contact information' ) }
 						submitButtonSubmittingLabel={ i18n.translate( 'Updating WHOIS data…' ) }
 						preSubmitContent={ this.getAffectedDomainsNotice() }

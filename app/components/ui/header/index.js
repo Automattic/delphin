@@ -109,15 +109,15 @@ class Header extends Component {
 								<span className={ styles.visuallyHidden }>Settings</span>
 							</a>
 							<div className={ classNames( styles.menu, { [ styles.isVisible ]: isMenuVisible } ) }>
-								<a
-									className={ styles.menuLink }
-									onClick={ this.handleClickLogOut }
-								>{ translate( 'Log Out' ) }</a>
 								<TrackingLink
 									eventName="delphin_click_update_contact_information"
 									className={ styles.menuLink }
 									to={ getPath( 'updateContactInformation' ) }
-								>{ translate( 'Update Contact Information' ) }</TrackingLink>
+								>{ translate( 'Settings' ) }</TrackingLink>
+								<a
+									className={ styles.menuLink }
+									onClick={ this.handleClickLogOut }
+								>{ translate( 'Log Out' ) }</a>
 							</div>
 						</span>
 					) }

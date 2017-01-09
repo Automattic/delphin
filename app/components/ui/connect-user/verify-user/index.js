@@ -43,18 +43,16 @@ const VerifyUser = React.createClass( {
 	componentDidMount() {
 		const { query } = this.props;
 
+		if ( this.props.isLoggedIn ) {
+			return this.goToNextPage();
+		}
+
 		if ( this.props.user.data.twoFactorAuthenticationEnabled || this.isUsingCodeFromQuery() ) {
 			// initializing this field causes the validate method to validate it
 			this.initializeTwoFactorAuthenticationField();
 		}
 
 		if ( this.isUsingCodeFromQuery() ) {
-			if ( query.domain ) {
-				this.props.fetchDomainPrice( query.domain ).then( action => {
-					this.props.selectDomain( action.result );
-				} );
-			}
-
 			// the sign-in email directs the user to this component only if two factor authentication is enabled
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
 			this.props.showToggle( 'isConfirmationCodeVisible' );
@@ -72,14 +70,24 @@ const VerifyUser = React.createClass( {
 		this.props.recordPageView();
 	},
 
-	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.isLoggedIn ) {
-			if ( nextProps.query.redirect_to ) {
+	ensureSelectedDomain() {
+		if ( this.props.hasSelectedDomain ) {
+			return Promise.resolve();
+		}
+		const { query: { domain } } = this.props;
+		return this.props.fetchDomainPrice( domain ).then( action => {
+			this.props.selectDomain( action.result );
+		} );
+	},
+
+	goToNextPage() {
+		return this.ensureSelectedDomain().then( () => {
+			if ( this.props.query.redirect_to ) {
 				this.props.redirectToQueryParamUrl();
 			} else {
 				this.props.redirect( 'myDomains' );
 			}
-		}
+		} );
 	},
 
 	initializeTwoFactorAuthenticationField() {
@@ -116,7 +124,7 @@ const VerifyUser = React.createClass( {
 			fields.code.value,
 			fields.twoFactorAuthenticationCode.value,
 			intention
-		);
+		).then( () => this.goToNextPage() );
 	},
 
 	verifyUser( email, code, twoFactorAuthenticationCode, intention ) {

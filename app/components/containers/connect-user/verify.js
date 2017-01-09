@@ -11,15 +11,14 @@ import { getAsyncValidateFunction } from 'lib/form';
 import { getSelectedDomain, hasSelectedDomain } from 'reducers/checkout/selectors';
 import { getPath } from 'routes';
 import { getUserConnect, isLoggedIn } from 'reducers/user/selectors';
-import { fetchDomainPrice } from 'actions/domain-price';
 import { recordPageView } from 'actions/analytics';
 import { redirect } from 'actions/routes';
-import { selectDomain } from 'actions/domain-search';
 import i18n from 'i18n-calypso';
 import VerifyUser from 'components/ui/connect-user/verify-user';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
 import { showToggle } from 'actions/ui/toggle';
 import { getToggle } from 'reducers/ui/toggle/selectors';
+import { ensureDomainSelected } from 'actions/domain-ensure-selected';
 
 const validate = values => {
 	const errors = {};
@@ -54,15 +53,25 @@ export default reduxForm(
 		addNotice,
 		connectUser,
 		connectUserComplete,
-		fetchDomainPrice,
+		goToNextPage: () => thunkDispatch => {
+			if ( ! ownProps.query ) {
+				return thunkDispatch( redirect( 'contactInformation' ) );
+			}
+
+			const { query: { redirect_to, domain } } = ownProps;
+
+			return ensureDomainSelected( domain ).then( () =>
+				redirect_to
+					? thunkDispatch( push( redirect_to ) )
+					: thunkDispatch( redirect( 'myDomains' ) )
+			);
+		},
 		redirectToTryWithDifferentEmail: withAnalytics( recordTracksEvent( 'delphin_try_different_email_click' ), () => thunkDispatch => {
 			thunkDispatch( clearConnectUser() );
 			thunkDispatch( redirect( 'signupUser' ) );
 		} ),
 		recordPageView,
 		redirect,
-		redirectToQueryParamUrl: () => push( ownProps.location.query.redirect_to ),
-		selectDomain,
 		showToggle,
 		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser: withAnalytics(

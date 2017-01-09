@@ -19,8 +19,8 @@ const VerifyUser = React.createClass( {
 		connectUserComplete: PropTypes.func.isRequired,
 		domain: PropTypes.object,
 		errors: PropTypes.object,
-		fetchDomainPrice: PropTypes.func.isRequired,
 		fields: PropTypes.object.isRequired,
+		goToNextPage: PropTypes.func.isRequired,
 		handleSubmit: PropTypes.func.isRequired,
 		hasSelectedDomain: PropTypes.bool.isRequired,
 		invalid: PropTypes.bool.isRequired,
@@ -29,9 +29,7 @@ const VerifyUser = React.createClass( {
 		query: PropTypes.object,
 		recordPageView: PropTypes.func.isRequired,
 		redirect: PropTypes.func.isRequired,
-		redirectToQueryParamUrl: PropTypes.func.isRequired,
 		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
-		selectDomain: PropTypes.func.isRequired,
 		showToggle: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
@@ -44,7 +42,7 @@ const VerifyUser = React.createClass( {
 		const { query } = this.props;
 
 		if ( this.props.isLoggedIn ) {
-			return this.goToNextPage();
+			return this.props.goToNextPage();
 		}
 
 		if ( this.props.user.data.twoFactorAuthenticationEnabled || this.isUsingCodeFromQuery() ) {
@@ -68,26 +66,6 @@ const VerifyUser = React.createClass( {
 		}
 
 		this.props.recordPageView();
-	},
-
-	ensureSelectedDomain() {
-		if ( this.props.hasSelectedDomain ) {
-			return Promise.resolve();
-		}
-		const { query: { domain } } = this.props;
-		return this.props.fetchDomainPrice( domain ).then( action => {
-			this.props.selectDomain( action.result );
-		} );
-	},
-
-	goToNextPage() {
-		return this.ensureSelectedDomain().then( () => {
-			if ( this.props.query.redirect_to ) {
-				this.props.redirectToQueryParamUrl();
-			} else {
-				this.props.redirect( 'myDomains' );
-			}
-		} );
 	},
 
 	initializeTwoFactorAuthenticationField() {
@@ -117,23 +95,14 @@ const VerifyUser = React.createClass( {
 	},
 
 	handleSubmit() {
-		const { fields, user: { data: { email }, intention } } = this.props;
+		const { fields, user: { data: { email }, intention }, verifyUser } = this.props;
 
-		return this.verifyUser(
+		return verifyUser(
 			email,
 			fields.code.value,
 			fields.twoFactorAuthenticationCode.value,
 			intention
-		).then( () => this.goToNextPage() );
-	},
-
-	verifyUser( email, code, twoFactorAuthenticationCode, intention ) {
-		return this.props.verifyUser(
-			email,
-			code,
-			twoFactorAuthenticationCode,
-			intention
-		);
+		).then( () => this.props.goToNextPage() );
 	},
 
 	twoFactorFields() {

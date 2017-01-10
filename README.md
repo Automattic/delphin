@@ -2,6 +2,8 @@
 
 Delphin is the [get.blog](https://get.blog/) front-end – a place where you can register a .blog domain in the easiest way.
 
+![beautiful screenshot](screenshot.png)
+
 It’s built with JavaScript – a very light [Node.js](https://nodejs.org) server, [React.js](https://facebook.github.io/react/), [Redux](http://redux.js.org/), [Webpack](https://webpack.js.org/), and many other wonderful libraries.
 
 ## Getting started

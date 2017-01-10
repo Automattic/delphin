@@ -4,7 +4,6 @@ import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
 import padStart from 'lodash/padStart';
 import range from 'lodash/range';
-import omit from 'lodash/omit';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -19,14 +18,6 @@ import { removeInvalidInputProps } from 'lib/form';
 import ValidationError from 'components/ui/form/validation-error';
 
 class PaymentFieldArea extends Component {
-	handleCreditCardNumberChange( event ) {
-		const { value } = event.target;
-
-		const rawFieldValue = card.parse( value );
-
-		this.props.fields.number.onChange( card.format( rawFieldValue ) );
-	}
-
 	renderCreditCards() {
 		const supportedCards = [
 			'Visa',
@@ -80,9 +71,8 @@ class PaymentFieldArea extends Component {
 
 					<Input
 						type="text"
-						field={ omit( fields.number, 'onChange' ) }
+						field={ fields.number }
 						dir="ltr"
-						onChange={ this.handleCreditCardNumberChange }
 						pattern="[0-9 ]*"
 					/>
 

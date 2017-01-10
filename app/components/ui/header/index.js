@@ -27,10 +27,10 @@ class Header extends Component {
 	}
 
 	handleDocumentClick( event ) {
-		const { enableFlag, isMenuVisible } = this.props;
+		const { disableFlag, isMenuVisible } = this.props;
 
 		if ( isMenuVisible && ! ReactDOM.findDOMNode( this ).contains( event.target ) ) {
-			enableFlag( 'headerMenu' );
+			disableFlag( 'headerMenu' );
 		}
 	}
 

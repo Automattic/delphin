@@ -76,6 +76,20 @@ class UpdateContactInformation extends React.Component {
 
 			<p className={ styles.updateInstructions }>{ i18n.translate( 'You may be asked to approve these changes for each domain separately. ' +
 				"We'll email you with instructions." ) }</p>
+
+			<p className={ styles.updateInstructions }>
+				{ i18n.translate(
+					'By clicking Update contact information, you agree to the ' +
+					'{{draLink}}Domain Registration Agreement{{/draLink}} and confirm that the Transferee has ' +
+					'agreed in writing to be bound by the same agreement.',
+					{
+						components: {
+							draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
+										target="_blank" rel="noopener noreferrer" />,
+						}
+					}
+				) }
+			</p>
 		</div>;
 	}
 

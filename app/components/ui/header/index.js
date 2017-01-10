@@ -113,7 +113,7 @@ class Header extends Component {
 									eventName="delphin_click_update_contact_information"
 									className={ styles.menuLink }
 									to={ getPath( 'updateContactInformation' ) }
-								>{ translate( 'Settings' ) }</TrackingLink>
+								>{ translate( 'Contact Information' ) }</TrackingLink>
 								<a
 									className={ styles.menuLink }
 									onClick={ this.handleClickLogOut }

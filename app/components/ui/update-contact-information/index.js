@@ -29,6 +29,11 @@ class UpdateContactInformation extends React.Component {
 		return this.props.validateContactInformation( domains, values );
 	}
 
+	getTransferLockNotice() {
+		return i18n.translate( 'If you change the name, organization, or email address, ' +
+			'you will not be able to transfer the registration to another registrar for 60 days.' );
+	}
+
 	handleFormSubmission( values ) {
 		const domains = this.props.domains.data.results.map( domain => domain.name );
 
@@ -39,7 +44,7 @@ class UpdateContactInformation extends React.Component {
 				redirectToMyDomains();
 
 				addNotice( {
-					message: i18n.translate( "We've updated your domains contact information!" ),
+					message: i18n.translate( 'We submitted your changes. Check your email for more information.' ),
 					status: 'success'
 				} );
 			} )
@@ -97,8 +102,9 @@ class UpdateContactInformation extends React.Component {
 						onFormSubmit={ this.handleFormSubmission }
 						hideHowdyMessage={ true }
 						submitButtonLabel={ i18n.translate( 'Update contact information' ) }
-						submitButtonSubmittingLabel={ i18n.translate( 'Updating WHOIS data…' ) }
+						submitButtonSubmittingLabel={ i18n.translate( 'Updating contact information…' ) }
 						preSubmitContent={ this.getAffectedDomainsNotice() }
+						footerContent={ this.getTransferLockNotice() }
 						submitDisabled={ this.isDataLoading() }
 					/>
 				</div>

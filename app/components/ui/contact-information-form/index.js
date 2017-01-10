@@ -355,11 +355,13 @@ class ContactInformationForm extends React.Component {
 					</Button>
 				</Form.SubmitArea>
 
-				<Form.Footer>
-					<p>
-						{ this.props.footerContent }
-					</p>
-				</Form.Footer>
+				{ this.props.footerContent &&
+					<Form.Footer>
+						<p>
+							{ this.props.footerContent }
+						</p>
+					</Form.Footer>
+				}
 			</Form>
 		);
 	}

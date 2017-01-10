@@ -58,12 +58,6 @@ class UpdateContactInformation extends React.Component {
 			} );
 	}
 
-	getWhoisPrivacyNotice() {
-		return i18n.translate( 'Domain owners are required to share contact information publicly. ' +
-			"We keep your personal information out of your domain's public records," +
-			' to protect your identity and prevent spam.' );
-	}
-
 	getAffectedDomainsNotice() {
 		return <div className={ styles.domainList }>
 			<h4>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
@@ -105,7 +99,6 @@ class UpdateContactInformation extends React.Component {
 						submitButtonLabel={ i18n.translate( 'Update contact information' ) }
 						submitButtonSubmittingLabel={ i18n.translate( 'Updating WHOIS data…' ) }
 						preSubmitContent={ this.getAffectedDomainsNotice() }
-						footerContent={ this.getWhoisPrivacyNotice() }
 						submitDisabled={ this.isDataLoading() }
 					/>
 				</div>

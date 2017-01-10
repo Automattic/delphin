@@ -1,8 +1,8 @@
 # Delphin
 
-Delphin is a place where you *register a single domain in the easiest way*.
+Delphin is the [get.blog](https://get.blog/) front-end – a place where you can register a .blog domain in the easiest way.
 
-It’s built with JavaScript – a very light [Node.js](https://nodejs.org) server, [React.js](https://facebook.github.io/react/), [Redux](http://redux.js.org/), [Webpack](https://webpack.github.io/), and many other wonderful libraries.
+It’s built with JavaScript – a very light [Node.js](https://nodejs.org) server, [React.js](https://facebook.github.io/react/), [Redux](http://redux.js.org/), [Webpack](https://webpack.js.org/), and many other wonderful libraries.
 
 ## Getting started
 
@@ -12,27 +12,25 @@ It’s built with JavaScript – a very light [Node.js](https://nodejs.org) serv
 4. Add `127.0.0.1 delphin.localhost` to your `hosts` file
 5. Open http://delphin.localhost:1337 in your browser
 
+Alternatively, you can use [Delphin Bootstrap](https://github.com/Automattic/delphin-bootstrap) to set up a virtual machine with a Delphin development environment for you.
+
 ## Testing
 
-You can execute tests with `yarn test`.
+You can execute the test suite with `yarn test`.
 
 Code in `/lib` and `/reducers` should have unit tests. Moreover these tests should live in a `/test` subdirectory inside the corresponding module. We use [Jest](https://facebook.github.io/jest/) for writing tests and encourage [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD).
 
-You can execute an individual test with `yarn test app/reducers/ui/domain-search/tests`.
+You can execute an individual test with e.g. `yarn test app/reducers/ui/domain-search/tests`.
 
 ## Contributing
 
-If Delphin sparks your interest, don’t hesitate to send a pull request, send a suggestion, file a bug, or just ask a question. We promise we’ll be nice.
+If Delphin sparks your interest, don’t hesitate to send a pull request, send a suggestion, file a bug, or just ask a question. We promise we’ll be nice. You can contribute in many ways.
 
-Delphin welcomes – and indeed has been built by – contributors from all walks of life, with different backgrounds, and with a wide range of experience. We're committed to doing our part to make both Delphin and the wider WordPress community welcoming to everyone.
-
-You can contribute in many ways. You can help reporting, testing, and detailing bugs.
-
-To clarify these expectations, Delphin has adopted the code of conduct defined by the Contributor Covenant. It can be read in full [here](CODE-OF-CONDUCT.md).
+Delphin welcomes – and indeed has been built by – contributors from all walks of life, with different backgrounds, and with a wide range of experience. We're committed to doing our part to make Delphin welcoming to everyone. To clarify these expectations, Delphin has adopted the code of conduct defined by the Contributor Covenant. It can be read in full [here](CODE-OF-CONDUCT.md).
 
 ## Coding Guidelines
 
-For now, our coding guidelines mirror [Calypso's guidelines](https://github.com/Automattic/wp-calypso/blob/master/docs/coding-guidelines.md).
+Delphin follows [Calypso's guidelines](https://github.com/Automattic/wp-calypso/blob/master/docs/coding-guidelines.md).
 
 ## Security
 

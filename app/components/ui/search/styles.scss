@@ -299,7 +299,6 @@
 
 .sort {
 	color: $blue-dark;
-	cursor: pointer;
 	font-size: 1.6rem;
 	padding: 10px 20px;
 
@@ -322,6 +321,7 @@
 	border-bottom: 1px solid $gray-medium;
 	border-radius: 0;
 	color: $blue-dark;
+	cursor: pointer;
 	font-size: 1.6rem;
 	height: 30px;
 	outline: none;

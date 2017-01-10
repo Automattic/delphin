@@ -54,16 +54,18 @@ export default reduxForm(
 		connectUser,
 		connectUserComplete,
 		goToNextPage: () => thunkDispatch => {
-			if ( ! ownProps.query ) {
-				return thunkDispatch( redirect( 'contactInformation' ) );
+			const { location: { query: { redirect_to, domain } } } = ownProps;
+
+			const redirectAction = redirect_to
+				? push( redirect_to )
+				: redirect( 'myDomains' );
+
+			if ( ! domain ) {
+				return thunkDispatch( redirectAction );
 			}
 
-			const { query: { redirect_to, domain } } = ownProps;
-
-			return ensureDomainSelected( domain ).then( () =>
-				redirect_to
-					? thunkDispatch( push( redirect_to ) )
-					: thunkDispatch( redirect( 'myDomains' ) )
+			return thunkDispatch( ensureDomainSelected( domain ) ).then( () =>
+				thunkDispatch( redirectAction )
 			);
 		},
 		redirectToTryWithDifferentEmail: withAnalytics( recordTracksEvent( 'delphin_try_different_email_click' ), () => thunkDispatch => {

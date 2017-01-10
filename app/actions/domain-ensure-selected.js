@@ -17,6 +17,6 @@ export function ensureDomainSelected( domainName ) {
 			return Promise.resolve();
 		}
 
-		return fetchDomainPrice( domainName ).then( result => selectDomain( result.result ) );
+		return dispatch( fetchDomainPrice( domainName ) ).then( result => dispatch( selectDomain( result.result ) ) );
 	};
 }

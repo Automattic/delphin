@@ -20,7 +20,7 @@ Alternatively, you can use [Delphin Bootstrap](https://github.com/Automattic/del
 
 You can execute the test suite with `yarn test`.
 
-Code in `/lib` and `/reducers` should have unit tests. Moreover these tests should live in a `/test` subdirectory inside the corresponding module. We use [Jest](https://facebook.github.io/jest/) for writing tests and encourage [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD).
+Code in folders named `lib` or `reducers` should have unit tests. Moreover, these tests should live in a subdirectory inside the corresponding module named `tests`. We use [Jest](https://facebook.github.io/jest/) for writing tests and encourage [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD).
 
 You can execute an individual test with e.g. `yarn test app/reducers/ui/domain-search/tests`.
 

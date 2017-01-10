@@ -1,17 +1,15 @@
-// External dependencies
-import { reducer as form } from 'redux-form';
-
 // Internal dependencies
 import { checkout } from './checkout';
 import { contactInformation } from './contact-information';
 import { contactSupport } from './contact-support';
-import territories from './territories';
+import form from './form';
 import { domainAvailability } from './domain-availability';
 import { domainSuggestions } from './domain-suggestions';
 import nameservers from './nameservers';
 import { notices } from './notices';
 import { prices } from './prices';
 import { service } from './service';
+import territories from './territories';
 import ui from './ui';
 import { user } from './user';
 

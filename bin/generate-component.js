@@ -4,7 +4,8 @@ const includes = require( 'lodash/includes' );
 
 const scaffolding = require( './lib/scaffolding' );
 
-clear(); // clear the terminal
+// clear the terminal
+clear();
 
 inquirer.prompt( [
 	{

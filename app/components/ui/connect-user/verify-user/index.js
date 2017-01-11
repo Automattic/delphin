@@ -18,6 +18,7 @@ const VerifyUser = React.createClass( {
 		connectUser: PropTypes.func.isRequired,
 		connectUserComplete: PropTypes.func.isRequired,
 		domain: PropTypes.object,
+		enableFlag: PropTypes.func.isRequired,
 		errors: PropTypes.object,
 		fields: PropTypes.object.isRequired,
 		goToNextPage: PropTypes.func.isRequired,
@@ -30,7 +31,6 @@ const VerifyUser = React.createClass( {
 		recordPageView: PropTypes.func.isRequired,
 		redirect: PropTypes.func.isRequired,
 		redirectToTryWithDifferentEmail: PropTypes.func.isRequired,
-		showToggle: PropTypes.func.isRequired,
 		submitFailed: PropTypes.bool.isRequired,
 		submitting: PropTypes.bool.isRequired,
 		updateCode: PropTypes.func.isRequired,
@@ -53,7 +53,7 @@ const VerifyUser = React.createClass( {
 		if ( this.isUsingCodeFromQuery() ) {
 			// the sign-in email directs the user to this component only if two factor authentication is enabled
 			this.props.connectUserComplete( Object.assign( {}, query, { twoFactorAuthenticationEnabled: true } ) );
-			this.props.showToggle( 'isConfirmationCodeVisible' );
+			this.props.enableFlag( 'isConfirmationCodeVisible' );
 			this.props.updateCode( query.code );
 		} else if ( ! this.props.user.wasCreated ) {
 			this.props.redirect( 'signupUser' );
@@ -87,7 +87,7 @@ const VerifyUser = React.createClass( {
 	handleConfirmationCodeLinkClick( event ) {
 		event.preventDefault();
 
-		this.props.showToggle( 'isConfirmationCodeVisible' );
+		this.props.enableFlag( 'isConfirmationCodeVisible' );
 	},
 
 	handleSubmit() {

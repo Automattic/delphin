@@ -27,22 +27,22 @@ class Header extends Component {
 	}
 
 	handleDocumentClick( event ) {
-		const { hideToggle, isMenuVisible } = this.props;
+		const { disableFlag, isMenuVisible } = this.props;
 
 		if ( isMenuVisible && ! ReactDOM.findDOMNode( this ).contains( event.target ) ) {
-			hideToggle( 'headerMenu' );
+			disableFlag( 'headerMenu' );
 		}
 	}
 
 	handleClickSettingsIcon( event ) {
 		event.preventDefault();
 
-		const { hideToggle, showToggle, isMenuVisible } = this.props;
+		const { disableFlag, enableFlag, isMenuVisible } = this.props;
 
 		if ( isMenuVisible ) {
-			hideToggle( 'headerMenu' );
+			disableFlag( 'headerMenu' );
 		} else {
-			showToggle( 'headerMenu' );
+			enableFlag( 'headerMenu' );
 		}
 	}
 
@@ -51,13 +51,13 @@ class Header extends Component {
 
 		const {
 			logoutUser,
-			hideToggle,
+			disableFlag,
 			addNotice,
 		} = this.props;
 
 		logoutUser();
 
-		hideToggle( 'headerMenu' );
+		disableFlag( 'headerMenu' );
 
 		defer( () => {
 			// `defer` is needed so that the route change triggered by logout
@@ -123,12 +123,12 @@ class Header extends Component {
 
 Header.propTypes = {
 	addNotice: PropTypes.func.isRequired,
-	hideToggle: PropTypes.func.isRequired,
+	disableFlag: PropTypes.func.isRequired,
+	enableFlag: PropTypes.func.isRequired,
 	isExcluded: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isMenuVisible: PropTypes.bool.isRequired,
 	logoutUser: PropTypes.func.isRequired,
-	showToggle: PropTypes.func.isRequired,
 };
 
 export default withStyles( styles )( bindHandlers( Header ) );

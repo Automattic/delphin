@@ -16,8 +16,8 @@ import { redirect } from 'actions/routes';
 import i18n from 'i18n-calypso';
 import VerifyUser from 'components/ui/connect-user/verify-user';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
-import { showToggle } from 'actions/ui/toggle';
-import { getToggle } from 'reducers/ui/toggle/selectors';
+import { enableFlag } from 'actions/ui/flag';
+import { getFlag } from 'reducers/ui/flags/selectors';
 import { ensureDomainSelected } from 'actions/domain-ensure-selected';
 
 const validate = values => {
@@ -44,7 +44,7 @@ export default reduxForm(
 	( state, ownProps ) => ( {
 		hasSelectedDomain: hasSelectedDomain( state ),
 		domain: getSelectedDomain( state ),
-		isConfirmationCodeVisible: getToggle( state, 'isConfirmationCodeVisible' ),
+		isConfirmationCodeVisible: getFlag( state, 'isConfirmationCodeVisible' ),
 		isLoggedIn: isLoggedIn( state ),
 		user: getUserConnect( state ),
 		query: ownProps.location.query
@@ -74,7 +74,7 @@ export default reduxForm(
 		} ),
 		recordPageView,
 		redirect,
-		showToggle,
+		enableFlag,
 		updateCode: code => change( 'verifyUser', 'code', code ),
 		verifyUser: withAnalytics(
 			( email, code, twoFactorAuthenticationCode, intention ) => recordTracksEvent( 'delphin_confirmation_code_submit', { is_existing_account: intention === 'login' } ),

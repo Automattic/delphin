@@ -20,7 +20,7 @@
     "prod:static": "yarn install --ignore-optional && NODE_ENV=production yarn run generate",
     "start": "yarn install && yarn run build && node server/build/bundle",
     "start:static": "yarn run prod:static && node server/static",
-    "test": "NODE_PATH=.:app jest --maxWorkers=4",
+    "test": "NODE_PATH=.:app jest $TEST_PATH --maxWorkers=4",
     "translate": "mkdir -p server/build && i18n-calypso -p delphin -e date -i 'app/**/*.js' -o server/build/delphin.pot"
   },
   "repository": {

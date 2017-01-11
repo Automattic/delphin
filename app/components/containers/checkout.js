@@ -16,8 +16,8 @@ import { getCountryCode, getFullName, getPostalCode } from 'reducers/contact-inf
 import { getUserSettings } from 'reducers/user/selectors';
 import RequireLogin from 'components/containers/require-login';
 import { withAnalytics, recordTracksEvent } from 'actions/analytics';
-import { showToggle, hideToggle } from 'actions/ui/toggle';
-import { getToggle } from 'reducers/ui/toggle/selectors';
+import { enableFlag, disableFlag } from 'actions/ui/flag';
+import { getFlag } from 'reducers/ui/flags/selectors';
 
 export default reduxForm(
 	{
@@ -40,7 +40,7 @@ export default reduxForm(
 		hasTrademarkClaim: hasDomainTrademarkClaim( state, getSelectedDomain( state ).domainName ),
 		domain: getSelectedDomain( state ),
 		domainCost: getSelectedDomainCost( state ),
-		isPurchasing: getToggle( state, 'isCheckoutProcessing' ),
+		isPurchasing: getFlag( state, 'isCheckoutProcessing' ),
 		initialValues: {
 			name: getFullName( state ),
 			countryCode: getCountryCode( state ),
@@ -54,8 +54,8 @@ export default reduxForm(
 			recordTracksEvent( 'delphin_application_review_submit' ),
 			purchaseDomain
 		),
-		showProcessingMessage: () => showToggle( 'isCheckoutProcessing', { persistent: true } ),
-		hideProcessingMessage: () => hideToggle( 'isCheckoutProcessing' ),
+		showProcessingMessage: () => enableFlag( 'isCheckoutProcessing', { persistent: true } ),
+		hideProcessingMessage: () => disableFlag( 'isCheckoutProcessing' ),
 		resetCheckout,
 		redirect: pathSlug => push( getPath( pathSlug ) )
 	}, dispatch )

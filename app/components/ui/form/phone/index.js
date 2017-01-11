@@ -124,6 +124,7 @@ class Phone extends React.Component {
 						onBlur: this.handleBlur
 					} }
 					className={ styles.callingCode }
+					inputClassName={ styles.callingCodeInput }
 					onChange={ this.handleCountryCallingCodeChange }
 				/>
 				<Input

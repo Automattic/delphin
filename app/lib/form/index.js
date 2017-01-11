@@ -203,3 +203,24 @@ export const validateEmail = email => {
 
 	return null;
 };
+
+/**
+ * Returns custom validation messages for a given invalid phone number. The API
+ * determines whether a phone number is valid or invalid, but uses validation
+ * that do not make sense on our client as we mask the fact that the numbers
+ * must separate the country code from the rest of the number with a period, so
+ * we determine if the entire phone number or just the local number is invalid
+ * and overwrite the messages from the API.
+ *
+ * @param {string} number - Phone number
+ * @return {string} A validation message
+ */
+export const getValidationMessageForInvalidPhoneNumber = number => {
+	if ( ! number || ! number.includes( '+' ) || number.split( '.' )[ 0 ] === '+' ) {
+		// The number is missing the country code
+		return i18n.translate( 'Enter your phone number including a country code (for example +1 628550199).' );
+	}
+
+	// The number has a country code but is still invalid
+	return i18n.translate( 'Enter your full phone number.' );
+};

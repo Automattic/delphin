@@ -1,6 +1,5 @@
 // External dependencies
 import camelCase from 'lodash/camelCase';
-import { translate } from 'i18n-calypso';
 
 // Internal dependencies
 import { addNotice } from 'actions/notices';
@@ -12,6 +11,7 @@ import {
 } from 'reducers/action-types';
 import { snakeifyKeys } from 'lib/formatters';
 import { normalizeContactInformation } from 'lib/checkout';
+import { getValidationMessageForInvalidPhoneNumber } from 'lib/form';
 
 export const fetchContactInformation = () => ( {
 	type: WPCOM_REQUEST,
@@ -82,7 +82,7 @@ export function validateContactInformation( domainNames, contactInformation ) {
 					// the API should accept phone numbers in a more
 					// human-friendly format.  Until then, we rewrite the error
 					// message here.
-					errors.phone = translate( "That's too short. Enter a full phone number." );
+					errors.phone = getValidationMessageForInvalidPhoneNumber( contactInformation.phone );
 				}
 
 				const rejectionReason = new Error( 'Validation error' );

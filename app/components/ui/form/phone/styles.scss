@@ -4,10 +4,13 @@
 }
 
 .phone-number {
-	margin-left: 5px;
 	width: 100%;
 }
 
 .calling-code {
 	max-width: 90px;
+}
+
+.phone-container .calling-code .calling-code-input { // specificity necessary to override default `Form` styles
+	border-right: 0;
 }

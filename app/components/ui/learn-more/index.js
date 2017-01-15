@@ -219,6 +219,25 @@ class LearnMore extends React.Component {
 								}
 							} ) }</p>
 						</div>
+
+						<div className={ styles.faq } id="contact-information-why-transfer">
+							<h3>{ i18n.translate( 'Why am I asked about transferring my domain when I only changed my contact information?' ) }</h3>
+							<p>
+								{ i18n.translate(
+									"When you update your domain's contact information and change the first name, " +
+									'last name, organization name, or email address, it is considered a change of ' +
+									"owner, even if you're not actually transferring the domain to someone else. " +
+									'The new owner, or "Transferee", has to agree to the ' +
+									'{{draLink}} domain registration agreement{{/draLink}}.',
+									{
+										components: {
+											draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
+														target="_blank" rel="noopener noreferrer" />,
+										}
+									}
+								) }
+							</p>
+						</div>
 					</div>
 				</div>
 			</SunriseStep>

@@ -5,6 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import ContactInformationFormFactory from 'components/containers/contact-information-form-factory';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
@@ -66,17 +67,21 @@ class UpdateContactInformation extends React.Component {
 	getAffectedDomainsNotice() {
 		return <div className={ styles.domainList }>
 			<h4>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
-			{ this.isDataLoading()
+			{
+				this.isDataLoading()
 				? i18n.translate( 'Loading your domains…' )
 				: <ul>
-				{
-					this.props.domains.data.results.map( domain => <li key={ domain.id }>{ domain.name }</li> )
-				}
-			</ul> }
+					{
+						this.props.domains.data.results.map( domain => <li key={ domain.id }>{ domain.name }</li> )
+					}
+				</ul>
+			}
 
 			{ ! this.isDataLoading() && this.props.domains.data.results > 1 &&
-				<p className={ styles.updateInstructions }>{ i18n.translate( 'You may be asked to approve these ' +
-				"changes for each domain separately. We'll email you with instructions." ) }</p>
+				<p className={ styles.updateInstructions }>
+				{ i18n.translate( 'You may be asked to approve these changes for each domain separately. ' +
+									"We'll email you with instructions." ) }
+				</p>
 			}
 
 			<p className={ styles.updateInstructions }>
@@ -88,7 +93,7 @@ class UpdateContactInformation extends React.Component {
 						components: {
 							draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
 										target="_blank" rel="noopener noreferrer" />,
-							faqLink: <a href="/learn-more#contact-information-why-transfer"
+							faqLink: <a href={ getPath( 'learnMore' ) + '#contact-information-why-transfer' }
 										target="_blank" rel="noopener noreferrer" />
 						}
 					}

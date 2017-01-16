@@ -228,10 +228,10 @@ class LearnMore extends React.Component {
 									'last name, organization name, or email address, it is considered a change of ' +
 									"owner, even if you're not actually transferring the domain to someone else. " +
 									'The new owner, or "Transferee", has to agree to the ' +
-									'{{draLink}} domain registration agreement{{/draLink}}.',
+									'{{link}}domain registration agreement{{/link}}.',
 									{
 										components: {
-											draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
+											link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
 														target="_blank" rel="noopener noreferrer" />,
 										}
 									}

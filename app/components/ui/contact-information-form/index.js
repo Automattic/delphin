@@ -83,8 +83,6 @@ class ContactInformationForm extends React.Component {
 		}, {} );
 
 		props.initializeForm( form );
-
-		this.handleFirstNameBlur();
 	}
 
 	setCountryCode( props = this.props ) {
@@ -153,9 +151,7 @@ class ContactInformationForm extends React.Component {
 	handleFirstNameBlur( event ) {
 		this.props.handleStopEditingFirstName();
 
-		if ( event ) {
-			this.props.fields.firstName.onBlur( event.target.value );
-		}
+		this.props.fields.firstName.onBlur( event.target.value );
 	}
 
 	handleFirstNameChange( event ) {

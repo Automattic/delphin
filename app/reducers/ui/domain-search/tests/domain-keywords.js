@@ -31,6 +31,19 @@ describe( 'ui.domainSearch reducer', () => {
 		} );
 	} );
 
+	it( 'should return keywords when pathname has localized slug', () => {
+		expect( domainKeywords( undefined, {
+			type: LOCATION_CHANGE,
+			payload: {
+				pathname: '/id/search',
+				query: { q: 'car' }
+			}
+		} ) ).toEqual( {
+			inputValue: '',
+			keywords: [ { value: 'car', id: 1 } ]
+		} );
+	} );
+
 	it( 'should change `inputValue` when the input changes', () => {
 		expect( domainKeywords( undefined, {
 			type: DOMAIN_SEARCH_INPUT_CHANGE,
@@ -44,7 +57,7 @@ describe( 'ui.domainSearch reducer', () => {
 			value: 'foobar '
 		} ) ).toEqual( {
 			inputValue: '',
-			keywords: [ { value: 'foobar', id: 1 } ]
+			keywords: [ { value: 'foobar', id: 2 } ]
 		} );
 	} );
 
@@ -56,7 +69,7 @@ describe( 'ui.domainSearch reducer', () => {
 			type: DOMAIN_SEARCH_SUBMIT
 		} ) ).toEqual( {
 			inputValue: '',
-			keywords: [ { value: 'foobar', id: 2 } ]
+			keywords: [ { value: 'foobar', id: 3 } ]
 		} );
 	} );
 

@@ -65,7 +65,7 @@ export default function domainKeywords( state = initialState, action ) {
 	switch ( type ) {
 		// sync keywords from the url if the url is different
 		case LOCATION_CHANGE:
-			if ( stripLocaleSlug( action.payload.pathname ) === getPath( 'search' ) && ! isEmpty( action.payload.query.q ) ) {
+			if ( ! isEmpty( action.payload.query.q ) && stripLocaleSlug( action.payload.pathname ) === getPath( 'search' ) ) {
 				const queryKeywords = action.payload.query.q.split( ' ' );
 
 				if ( state.keywords.length !== queryKeywords.length ||

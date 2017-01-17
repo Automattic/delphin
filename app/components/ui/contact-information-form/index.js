@@ -150,10 +150,12 @@ class ContactInformationForm extends React.Component {
 		return submitButtonLabel;
 	}
 
-	handleFirstNameBlur() {
+	handleFirstNameBlur( event ) {
 		this.props.handleStopEditingFirstName();
 
-		this.props.fields.firstName.onBlur( event.target.value );
+		if ( event ) {
+			this.props.fields.firstName.onBlur( event.target.value );
+		}
 	}
 
 	handleFirstNameChange( event ) {

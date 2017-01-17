@@ -40,6 +40,12 @@ let publicRoutes = [
 				getComponent: getComponent( 'checkout', 'contactInformation' )
 			},
 			{
+				path: 'update-contact-information',
+				slug: 'updateContactInformation',
+				static: false,
+				getComponent: getComponent( 'updateContactInformation', 'updateContactInformation' )
+			},
+			{
 				path: 'signup',
 				slug: 'signupUser',
 				static: true,

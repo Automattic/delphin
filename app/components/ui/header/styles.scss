@@ -148,9 +148,16 @@
 	display: block;
 }
 
-.log-out-link {
+.menu-link {
 	color: $black;
-	font-size: 1.3rem;
+	display: block;
+	font-size: 1.6rem;
+	padding: 10px;
+
+	@include breakpoint( '>480px' ) {
+		font-size: 1.4rem;
+		padding: 4px 5px;
+	}
 }
 
 .search-logo {

@@ -19,6 +19,7 @@ export const sections = {
 	myDomains: () => System.import( './my-domains' ),
 	setUpDomain: () => System.import( './set-up-domain' ),
 	checkout: () => System.import( './checkout' ),
+	updateContactInformation: () => System.import( './update-contact-information' ),
 };
 
 export const getComponent = ( section, routeSlug ) => ( location, callback ) => {

@@ -1,0 +1,68 @@
+@import 'app/styles/breakpoints';
+@import 'app/styles/colors';
+@import 'app/styles/fonts';
+@import 'app/styles/assets';
+
+.header {
+	background: $gray-xlight;
+	padding: 30px 20px 70px;
+	text-align: center;
+
+	@include breakpoint( '>480px' ) {
+		padding-bottom: 80px;
+	}
+}
+
+.heading {
+	color: $blue-dark;
+	font-family: $heading-font;
+	font-size: 2.6rem;
+	margin-top: 20px;
+
+	@include breakpoint( '>480px' ) {
+		font-size: 3rem;
+		margin-top: 40px;
+	}
+}
+
+.domain-list {
+	font-size: 1.6rem;
+	margin: 20px 0;
+
+	h4 {
+		color: $blue-dark;
+		font-size: 1.8rem;
+		font-weight: 700;
+		margin-bottom: 15px;
+	}
+
+	li {
+		background: url( #{$image-assets-url}checkmark-blue.svg ) no-repeat left center;
+		background-size: 12px;
+		padding: 1px 0 4px 20px;
+	}
+
+	.update-instructions {
+		font-size: 1.6rem;
+	}
+
+	@include breakpoint( '>480px' ) {
+		margin: 30px 0 0;
+	}
+}
+
+.text {
+	color: $blue-dark;
+	font-size: 1.8rem;
+	line-height: 1.4;
+	margin: 10px auto 0;
+	max-width: 480px;
+
+	strong {
+		word-wrap: break-word;
+	}
+
+	@include breakpoint( '>480px' ) {
+		font-size: 2rem;
+	}
+}

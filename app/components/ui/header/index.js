@@ -12,6 +12,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { getPath } from 'routes';
 import { imageUrl } from 'lib/assets';
 import styles from './styles.scss';
+import TrackingLink from 'components/containers/tracking-link';
 
 class Header extends Component {
 	componentWillMount() {
@@ -108,8 +109,13 @@ class Header extends Component {
 								<span className={ styles.visuallyHidden }>Settings</span>
 							</a>
 							<div className={ classNames( styles.menu, { [ styles.isVisible ]: isMenuVisible } ) }>
+								<TrackingLink
+									eventName="delphin_click_update_contact_information"
+									className={ styles.menuLink }
+									to={ getPath( 'updateContactInformation' ) }
+								>{ translate( 'Contact Information' ) }</TrackingLink>
 								<a
-									className={ styles.logOutLink }
+									className={ styles.menuLink }
 									onClick={ this.handleClickLogOut }
 								>{ translate( 'Log Out' ) }</a>
 							</div>

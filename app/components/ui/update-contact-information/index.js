@@ -86,9 +86,9 @@ class UpdateContactInformation extends React.Component {
 
 			<p className={ styles.updateInstructions }>
 				{ i18n.translate(
-					'By clicking Update contact information, you agree to the ' +
-					'{{draLink}}Domain Registration Agreement{{/draLink}} and confirm that the Transferee has ' +
-					'agreed in writing to be bound by the same agreement. {{faqLink}}What does this mean?{{/faqLink}}',
+					'By clicking Update Contact Information, you agree to the ' +
+					'{{draLink}}Domain Registration Agreement{{/draLink}} and confirm that if you are transferring ownership of the domain, ' +
+					'the new owner has agreed in writing to be bound by the same agreement. {{faqLink}}What does this mean?{{/faqLink}}',
 					{
 						components: {
 							draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
@@ -124,8 +124,8 @@ class UpdateContactInformation extends React.Component {
 						onValidate={ this.handleFormValidation }
 						onFormSubmit={ this.handleFormSubmission }
 						hideHowdyMessage={ true }
-						submitButtonLabel={ i18n.translate( 'Update contact information' ) }
-						submitButtonSubmittingLabel={ i18n.translate( 'Updating contact information…' ) }
+						submitButtonLabel={ i18n.translate( 'Update Contact Information' ) }
+						submitButtonSubmittingLabel={ i18n.translate( 'Updating Contact Information…' ) }
 						preSubmitContent={ this.getAffectedDomainsNotice() }
 						footerContent={ this.getTransferLockNotice() }
 						submitDisabled={ this.isDataLoading() }

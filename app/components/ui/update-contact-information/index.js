@@ -104,7 +104,7 @@ class UpdateContactInformation extends React.Component {
 
 	render() {
 		return (
-			<DocumentTitle title={ i18n.translate( 'Update Contact Information' ) }>
+			<DocumentTitle title={ i18n.translate( 'Update contact information' ) }>
 				<div>
 					<div className={ styles.header }>
 						<h2 className={ styles.heading }>
@@ -124,8 +124,8 @@ class UpdateContactInformation extends React.Component {
 						onValidate={ this.handleFormValidation }
 						onFormSubmit={ this.handleFormSubmission }
 						hideHowdyMessage={ true }
-						submitButtonLabel={ i18n.translate( 'Update Contact Information' ) }
-						submitButtonSubmittingLabel={ i18n.translate( 'Updating Contact Information…' ) }
+						submitButtonLabel={ i18n.translate( 'Update contact information' ) }
+						submitButtonSubmittingLabel={ i18n.translate( 'Updating contact information…' ) }
 						preSubmitContent={ this.getAffectedDomainsNotice() }
 						footerContent={ this.getTransferLockNotice() }
 						submitDisabled={ this.isDataLoading() }

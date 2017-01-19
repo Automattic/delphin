@@ -228,7 +228,7 @@ class LearnMore extends React.Component {
 									"When you update your domain's contact information and change the first name, " +
 									'last name, organization name, or email address, it is considered a change of ' +
 									"ownership, even if you're not actually transferring the domain to someone else. " +
-									'If you are transferring the domain to a new owner, they (the "Transferee”) ' +
+									'If you are transferring the domain to a new owner, they (the “Transferee”) ' +
 									'have to agree to the {{link}}Domain Registration Agreement{{/link}}.',
 									{
 										components: {

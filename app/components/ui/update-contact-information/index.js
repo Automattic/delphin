@@ -86,7 +86,7 @@ class UpdateContactInformation extends React.Component {
 
 			<p className={ styles.updateInstructions }>
 				{ i18n.translate(
-					'By clicking Update Contact Information, you agree to the ' +
+					'By clicking "Update contact information", you agree to the ' +
 					'{{draLink}}Domain Registration Agreement{{/draLink}} and confirm that if you are transferring ownership of the domain, ' +
 					'the new owner has agreed in writing to be bound by the same agreement. {{faqLink}}What does this mean?{{/faqLink}}',
 					{

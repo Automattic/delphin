@@ -227,9 +227,9 @@ class LearnMore extends React.Component {
 								{ i18n.translate(
 									"When you update your domain's contact information and change the first name, " +
 									'last name, organization name, or email address, it is considered a change of ' +
-									"owner, even if you're not actually transferring the domain to someone else. " +
-									'The new owner, or "Transferee", has to agree to the ' +
-									'{{link}}domain registration agreement{{/link}}.',
+									"ownership, even if you're not actually transferring the domain to someone else. " +
+									'If you are transferring the domain to a new owner, they (the “Transferee”) ' +
+									'have to agree to the {{link}}Domain Registration Agreement{{/link}}.',
 									{
 										components: {
 											link: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"

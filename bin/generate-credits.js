@@ -1,29 +1,23 @@
 const {
 	keys,
-	includes,
-	values,
-	zipWith
+	includes
 } = require( 'lodash' );
 const nlf = require( 'nlf' );
-const { dependencies } = require( '../package.json' );
+const { dependencies, devDependencies } = require( '../package.json' );
+const path = require( 'path' );
+const allDependencies = keys( Object.assign( {}, devDependencies, dependencies ) );
 
-const dependencyIds = zipWith(
-	keys( dependencies ),
-	values( dependencies ),
-	( name, id ) => `${ name }@${ id }`
-);
-
-nlf.find( {
+const results = nlf.find( {
+	directory: path.dirname( __dirname ),
 	summaryMode: 'off',
 }, ( err, data ) => {
 	const licenseInformation = data.reduce( ( result, module ) => {
-		// TODO: find a way to process also GitHub links like @automattic/dops-components
-		if ( includes( dependencyIds, module.id ) ) {
-			result.push( [ module.name, module.repository, module.summary() ] );
+		if ( includes( allDependencies, module.name ) ) {
+			( result[module.summary()] || ( result[module.summary()] = {} ) )[module.name] = module.repository;
 		}
 
 		return result;
-	}, [] );
+	}, {} );
 
 	console.log( licenseInformation );
 } );

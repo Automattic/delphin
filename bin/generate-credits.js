@@ -1,14 +1,17 @@
 const {
+	each,
 	keys,
-	includes
+	includes,
 } = require( 'lodash' );
+const fs = require( 'fs' );
 const nlf = require( 'nlf' );
-const { dependencies, devDependencies } = require( '../package.json' );
 const path = require( 'path' );
+const { dependencies, devDependencies } = require( '../package.json' );
 const allDependencies = keys( Object.assign( {}, devDependencies, dependencies ) );
+const projectRoot = path.dirname( __dirname );
 
 const results = nlf.find( {
-	directory: path.dirname( __dirname ),
+	directory: projectRoot,
 	summaryMode: 'off',
 }, ( err, data ) => {
 	const licenseInformation = data.reduce( ( result, module ) => {
@@ -19,5 +22,19 @@ const results = nlf.find( {
 		return result;
 	}, {} );
 
-	console.log( licenseInformation );
+	let licenseText = '';
+
+	each( licenseInformation, ( packages, license ) => {
+		licenseText += `${license}\n`;
+		each( packages, ( repository, name ) => {
+			licenseText += `  ${name}: ${repository}\n`;
+		} );
+		licenseText += "\n";
+	} );
+
+	fs.writeFile(`${projectRoot}/CREDITS.md`, licenseText, function( err ) {
+		if( err ) throw err;
+
+		console.log( 'Generated LICENSE.md file.' );
+	});
 } );

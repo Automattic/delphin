@@ -27,7 +27,7 @@ const results = nlf.find( {
 	each( licenseInformation, ( packages, license ) => {
 		licenseText += `${license}\n`;
 		each( packages, ( repository, name ) => {
-			licenseText += `  ${name}: ${repository}\n`;
+			licenseText += `* ${name}: ${repository}\n`;
 		} );
 		licenseText += "\n";
 	} );

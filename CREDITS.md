@@ -1,8 +1,38 @@
-Unknown
-* @automattic/dops-components: (none)
-* babel-runtime: https://github.com/babel/babel
+Credits
+=======
+This project makes use of Open Source components. Below is a list of these components included in this project's source code, and their license information. This project also uses js packages released by NPM, see [package.json](/package.json). Source code and license information for each of these packages is available at https://npmjs.org. Many thanks to all of the original authors!
 
-MIT
+### Apache-2.0,MIT
+* react-tap-event-plugin: http://github.com/zilverline/react-tap-event-plugin
+
+### Artistic-2.0
+* npm: https://github.com/npm/npm
+
+### BSD,BSD-3-Clause
+* react: https://github.com/facebook/react
+* react-addons-create-fragment: https://github.com/facebook/react
+* react-addons-css-transition-group: https://github.com/facebook/react
+* react-addons-test-utils: https://github.com/facebook/react
+* react-dom: https://github.com/facebook/react
+* serialize-javascript: https://github.com/yahoo/serialize-javascript
+
+### BSD-3-Clause
+* babel-jest: https://github.com/facebook/jest
+* jest-cli: https://github.com/facebook/jest
+* md5: http://github.com/pvorb/node-md5
+
+### GPL,GPL-2.0+
+* eslint-config-wpcalypso: https://github.com/Automattic/eslint-config-wpcalypso
+* eslint-plugin-wpcalypso: https://github.com/Automattic/eslint-plugin-wpcalypso
+
+### GPL-2.0
+* i18n-calypso: https://github.com/Automattic/i18n-calypso
+
+### ISC
+* inherits: http://github.com/isaacs/inherits
+* react-bind-handlers: github.com/fiolkaf/react-bind-handlers
+
+### MIT
 * @automattic/webpack-rtl-plugin: https://github.com/Automattic/webpack-rtl-plugin
 * async: https://github.com/caolan/async
 * autoprefixer: https://github.com/postcss/autoprefixer
@@ -67,45 +97,18 @@ MIT
 * wpcom: ssh://git@github.com/Automattic/wpcom.js
 * wpcom-xhr-request: http://github.com/Automattic/wpcom-xhr-request
 
-BSD-3-Clause
-* babel-jest: https://github.com/facebook/jest
-* jest-cli: https://github.com/facebook/jest
-* md5: http://github.com/pvorb/node-md5
-
-Public Domain,public domain
-* deep-freeze: http://github.com/substack/deep-freeze
-
-GPL,GPL-2.0+
-* eslint-config-wpcalypso: https://github.com/Automattic/eslint-config-wpcalypso
-* eslint-plugin-wpcalypso: https://github.com/Automattic/eslint-plugin-wpcalypso
-
-GPL-2.0
-* i18n-calypso: https://github.com/Automattic/i18n-calypso
-
-ISC
-* inherits: http://github.com/isaacs/inherits
-* react-bind-handlers: github.com/fiolkaf/react-bind-handlers
-
-Use: WTFPL, Contribute: Dojo CLA
-* jed: https://SlexAxton@github.com/SlexAxton/Jed
-
-Artistic-2.0
-* npm: https://github.com/npm/npm
-
-Unlicense
-* parse-domain: https://github.com/peerigon/parse-domain
-
-BSD,BSD-3-Clause
-* react: https://github.com/facebook/react
-* react-addons-create-fragment: https://github.com/facebook/react
-* react-addons-css-transition-group: https://github.com/facebook/react
-* react-addons-test-utils: https://github.com/facebook/react
-* react-dom: https://github.com/facebook/react
-* serialize-javascript: https://github.com/yahoo/serialize-javascript
-
-Apache-2.0,MIT
-* react-tap-event-plugin: http://github.com/zilverline/react-tap-event-plugin
-
-MIT,WTFPL
+### MIT,WTFPL
 * superagent-jsonp: https://github.com/lamp/superagent-jsonp
 
+### Public Domain,public domain
+* deep-freeze: http://github.com/substack/deep-freeze
+
+### Unknown
+* @automattic/dops-components: (none)
+* babel-runtime: https://github.com/babel/babel
+
+### Unlicense
+* parse-domain: https://github.com/peerigon/parse-domain
+
+### Use: WTFPL, Contribute: Dojo CLA
+* jed: https://SlexAxton@github.com/SlexAxton/Jed

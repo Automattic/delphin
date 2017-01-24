@@ -33,6 +33,7 @@ const config = {
 		quantcast: productionOnly,
 		facebookads: productionOnly,
 		atlas: productionOnly,
+		criteo: productionOnly
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',
@@ -43,6 +44,7 @@ const config = {
 		rest_api_oauth_client_secret: '7FVcj4q9nDvX3ic812oAGDR2oZFjSk0woryR0rRmNIO5Gn7k6HibTIlhvC7Wmof9'
 	},
 	google_analytics_key: 'UA-10673494-28',
+	criteo_account: 35949
 };
 
 if ( typeof window !== 'undefined' && window.location && window.location.search ) {

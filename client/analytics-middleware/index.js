@@ -11,7 +11,8 @@ import {
 
 const eventServices = {
 	ga: ( { category, action, label, value } ) => analyticsModule.ga.recordEvent( category, action, label, value ),
-	tracks: ( { name, properties } ) => analyticsModule.tracks.recordEvent( name, properties )
+	tracks: ( { name, properties } ) => analyticsModule.tracks.recordEvent( name, properties ),
+	criteo: ( { domain } ) => analyticsModule.criteo.recordSearch( domain )
 };
 
 const pageViewServices = {

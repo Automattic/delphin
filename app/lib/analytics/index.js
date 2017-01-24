@@ -3,6 +3,7 @@
  */
 import assign from 'lodash/assign';
 import debugFactory from 'debug';
+import { getPath } from 'routes';
 import omit from 'lodash/omit';
 import startsWith from 'lodash/startsWith';
 import isUndefined from 'lodash/isUndefined';
@@ -12,6 +13,7 @@ const debug = debugFactory( 'delphin:analytics' );
  * Internal dependencies
  */
 import config, { isEnabled } from 'config';
+import { isEmpty } from 'lodash';
 import { loadScript } from 'lib/load-script';
 import { stripLocaleSlug } from 'lib/routes';
 
@@ -80,6 +82,11 @@ if ( process.env.BROWSER ) {
 		loadScript( 'https://connect.facebook.net/en_US/fbevents.js', () => {
 			window.fbq( 'init', config( 'facebook_pixel_id' ) );
 		} );
+	}
+
+	if ( isEnabled( 'criteo' ) ) {
+		window.criteo_q = window.criteo_q || [];
+		loadScript( '//static.criteo.net/js/ld/ld.js' );
 	}
 }
 
@@ -157,6 +164,7 @@ const analytics = {
 			analytics.ga.recordPageView( urlPath, pageTitle );
 			analytics.facebookads.recordPageView();
 			analytics.quantcast.recordPageView();
+			analytics.criteo.recordPageView( urlPath );
 		}
 	},
 
@@ -179,6 +187,7 @@ const analytics = {
 			analytics.quantcast.recordPurchase( orderId, revenue, currencyCode );
 			analytics.facebookads.recordPurchase( orderId, revenue, currencyCode );
 			analytics.atlas.recordPurchase( orderId, revenue, currencyCode );
+			analytics.criteo.recordPurchase( orderId );
 		}
 	},
 
@@ -487,6 +496,76 @@ const analytics = {
 				currency: currencyCode,
 				revenue
 			} );
+		}
+	},
+
+	criteo: {
+		recordEvent( properties ) {
+			if ( ! isEnabled( 'criteo' ) ) {
+				return;
+			}
+
+			window.criteo_q.push( [ ...analytics.criteo.getDefaultParams(), ...properties ] );
+		},
+
+		getDefaultParams() {
+			let deviceType = 'd';
+
+			if ( /iPad/.test( navigator.userAgent ) ) {
+				deviceType = 't';
+			} else if ( /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test( navigator.userAgent ) ) {
+				deviceType = 'm';
+			}
+
+			return [
+				{ event: 'setAccount', account: config( 'criteo_account' ) },
+				{ event: 'setSiteType', account: deviceType },
+				{ event: 'setEmail', email: [ '' ] }
+			];
+		},
+
+		getPageViewEvent( urlPath ) {
+			switch ( urlPath ) {
+				case getPath( 'home' ):
+					return [
+						{ event: 'viewHome' }
+					];
+				case getPath( 'verifyUser' ):
+				case getPath( 'contactInformation' ):
+				case getPath( 'signupUser' ):
+					return [
+						{ event: 'viewItem', item: 1 }
+					];
+				case getPath( 'checkout' ):
+					return [
+						{ event: 'viewBasket', item: [ { id: 1, price: 0, quantity: 1 } ] }
+					];
+				default:
+					return [];
+			}
+		},
+
+		recordPageView( urlPath ) {
+			const pageViewEvent = analytics.criteo.getPageViewEvent( urlPath );
+
+			if ( isEmpty( pageViewEvent ) ) {
+				return;
+			}
+
+			analytics.criteo.recordEvent( pageViewEvent );
+		},
+
+		recordPurchase( orderId ) {
+			analytics.criteo.recordEvent( [
+				{ event: 'trackTransaction', id: orderId, item: [ { id: 1, price: 0, quantity: 1 } ] }
+			] );
+		},
+
+		recordSearch( searchString ) {
+			analytics.criteo.recordEvent( [
+				{ event: 'viewSearch', qterm: searchString },
+				{ event: 'viewItem', item: 1 }
+			] );
 		}
 	}
 };

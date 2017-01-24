@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 const {
 	each,
 	keys,
@@ -10,13 +11,17 @@ const { dependencies, devDependencies } = require( '../package.json' );
 const allDependencies = keys( Object.assign( {}, devDependencies, dependencies ) );
 const projectRoot = path.dirname( __dirname );
 
-const results = nlf.find( {
+nlf.find( {
 	directory: projectRoot,
 	summaryMode: 'off',
-}, ( err, data ) => {
+}, ( error, data ) => {
+	if ( error ) {
+		throw error;
+	}
+
 	const licenseInformation = data.reduce( ( result, module ) => {
 		if ( includes( allDependencies, module.name ) ) {
-			( result[module.summary()] || ( result[module.summary()] = {} ) )[module.name] = module.repository;
+			( result[ module.summary() ] || ( result[ module.summary() ] = {} ) )[ module.name ] = module.repository;
 		}
 
 		return result;
@@ -25,16 +30,18 @@ const results = nlf.find( {
 	let licenseText = '';
 
 	each( licenseInformation, ( packages, license ) => {
-		licenseText += `${license}\n`;
+		licenseText += `${ license }\n`;
 		each( packages, ( repository, name ) => {
-			licenseText += `* ${name}: ${repository}\n`;
+			licenseText += `* ${ name }: ${ repository }\n`;
 		} );
-		licenseText += "\n";
+		licenseText += '\n';
 	} );
 
-	fs.writeFile(`${projectRoot}/CREDITS.md`, licenseText, function( err ) {
-		if( err ) throw err;
+	fs.writeFile( `${ projectRoot }/CREDITS.md`, licenseText, ( err ) => {
+		if ( err ) {
+			throw err;
+		}
 
 		console.log( 'Generated LICENSE.md file.' );
-	});
+	} );
 } );

@@ -16,7 +16,7 @@
     "generate": "yarn run build && yarn run build:static",
     "generate-component": "node ./bin/generate-component",
     "hooks": "node hooks/manage",
-    "lint": "eslint --max-warnings 0 app client server && sass-lint --config .sass-lint.yml --max-warnings 0 --verbose",
+    "lint": "eslint --max-warnings 0 app bin client server && sass-lint --config .sass-lint.yml --max-warnings 0 --verbose",
     "preinstall": "yarn run clean",
     "prod:static": "yarn install --ignore-optional && NODE_ENV=production yarn run generate",
     "start": "yarn install && yarn run build && node server/build/bundle",

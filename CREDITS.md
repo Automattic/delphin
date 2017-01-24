@@ -3,13 +3,13 @@ Credits
 =======
 This project makes use of the Open Source packages listed below (see [package.json](/package.json) for a list that is always up-to-date). Their source code and detailed license information are available from [NPM](https://npmjs.org) or [GitHub](https://github.com/). Many thanks to all of the original authors!
 
-### Apache-2.0,MIT
+### Apache-2.0, MIT
 * react-tap-event-plugin: http://github.com/zilverline/react-tap-event-plugin
 
 ### Artistic-2.0
 * npm: https://github.com/npm/npm
 
-### BSD,BSD-3-Clause
+### BSD, BSD-3-Clause
 * react: https://github.com/facebook/react
 * react-addons-create-fragment: https://github.com/facebook/react
 * react-addons-css-transition-group: https://github.com/facebook/react
@@ -22,7 +22,7 @@ This project makes use of the Open Source packages listed below (see [package.js
 * jest-cli: https://github.com/facebook/jest
 * md5: http://github.com/pvorb/node-md5
 
-### GPL,GPL-2.0+
+### GPL, GPL-2.0+
 * eslint-config-wpcalypso: https://github.com/Automattic/eslint-config-wpcalypso
 * eslint-plugin-wpcalypso: https://github.com/Automattic/eslint-plugin-wpcalypso
 
@@ -98,10 +98,10 @@ This project makes use of the Open Source packages listed below (see [package.js
 * wpcom: ssh://git@github.com/Automattic/wpcom.js
 * wpcom-xhr-request: http://github.com/Automattic/wpcom-xhr-request
 
-### MIT,WTFPL
+### MIT, WTFPL
 * superagent-jsonp: https://github.com/lamp/superagent-jsonp
 
-### Public Domain,public domain
+### Public Domain
 * deep-freeze: http://github.com/substack/deep-freeze
 
 ### Unknown

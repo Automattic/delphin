@@ -1,5 +1,5 @@
 /* eslint-disable quote-props */
-const { flow } = require( 'lodash' );
+const { flow, uniqBy } = require( 'lodash' );
 const fs = require( 'fs' );
 const nlf = require( 'nlf' );
 const path = require( 'path' );
@@ -10,11 +10,12 @@ const projectRoot = path.dirname( __dirname );
 function extractLicenceInformation( data ) {
 	return data.reduce( ( result, module ) => {
 		if ( allDependencies.includes( module.name ) ) {
-			if ( ! result[ module.summary() ] ) {
-				result[ module.summary() ] = {};
+			const summary = uniqBy( module.summary(), name => name.toLowerCase() ).join( ', ' );
+			if ( ! result[ summary ] ) {
+				result[ summary ] = {};
 			}
 
-			result[ module.summary() ][ module.name ] = module.repository;
+			result[ summary ][ module.name ] = module.repository;
 		}
 
 		return result;

@@ -54,6 +54,7 @@ function saveOutput( output ) {
 }
 
 nlf.find( {
+	depth: 0,
 	directory: projectRoot,
 	summaryMode: 'off',
 }, ( error, data ) => {

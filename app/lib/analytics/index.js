@@ -519,7 +519,7 @@ const analytics = {
 
 			return [
 				{ event: 'setAccount', account: config( 'criteo_account' ) },
-				{ event: 'setSiteType', account: deviceType },
+				{ event: 'setSiteType', type: deviceType },
 				{ event: 'setEmail', email: [ '' ] }
 			];
 		},

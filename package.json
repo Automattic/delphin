@@ -55,7 +55,7 @@
     "serve-static": "^1.10.2"
   },
   "dependencies": {
-    "@automattic/dops-components": "github:automattic/dops-components",
+    "@automattic/dops-components": "github:automattic/dops-components#117349f",
     "@automattic/webpack-rtl-plugin": "github:automattic/webpack-rtl-plugin#v2.0.1",
     "async": "2.0.1",
     "autoprefixer": "6.5.0",

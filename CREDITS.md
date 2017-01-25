@@ -23,6 +23,7 @@ This project makes use of the Open Source packages listed below (see [package.js
 * md5: http://github.com/pvorb/node-md5
 
 ### GPL, GPL-2.0+
+* @automattic/dops-components: https://github.com/Automattic/dops-components
 * eslint-config-wpcalypso: https://github.com/Automattic/eslint-config-wpcalypso
 * eslint-plugin-wpcalypso: https://github.com/Automattic/eslint-plugin-wpcalypso
 
@@ -103,10 +104,6 @@ This project makes use of the Open Source packages listed below (see [package.js
 
 ### Public Domain
 * deep-freeze: http://github.com/substack/deep-freeze
-
-### Unknown
-* @automattic/dops-components: (none)
-* babel-runtime: https://github.com/babel/babel
 
 ### Unlicense
 * parse-domain: https://github.com/peerigon/parse-domain

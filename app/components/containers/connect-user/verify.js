@@ -22,8 +22,8 @@ import { ensureDomainSelected } from 'actions/domain-ensure-selected';
 
 const validate = values => {
 	const errors = {};
-	if ( ! values.code || ! /^[0-9]{6}$/i.test( values.code ) ) {
-		errors.code = i18n.translate( 'Your code should be six digits.' );
+	if ( ! values.code || ! /^[0-9]{8}$/i.test( values.code ) ) {
+		errors.code = i18n.translate( 'Your code should be eight digits.' );
 	}
 
 	if ( values.twoFactorAuthenticationCode !== undefined ) {

@@ -5,6 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { bindHandlers } from 'react-bind-handlers';
 
 // Internal dependencies
+import { isMobile } from 'lib/viewport';
 import styles from './styles.scss';
 import KeywordsContainer from 'components/containers/keywords';
 
@@ -46,7 +47,7 @@ class SearchInput extends React.Component {
 				<input
 					autoCapitalize="off"
 					autoComplete="off"
-					autoFocus
+					autoFocus={ ! isMobile() }
 					ref="searchInput"
 					type="text"
 					className="search"

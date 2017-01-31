@@ -6,6 +6,7 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { isMobile } from 'lib/viewport';
 import { removeInvalidInputProps } from 'lib/form';
 import styles from './styles.scss';
 import { withErrorFocusable } from 'components/ui/form/error-focuser';
@@ -53,7 +54,14 @@ class Input extends React.Component {
 				[ styles.hasError ]: isInvalid,
 				[ styles.errorLtr ]: this.props.dir === 'ltr'
 			} ),
-			newProps = omit( this.props, [ 'className', 'field', 'untouch', 'gridIconSize', 'inputClassName' ] );
+			newProps = omit( this.props, [
+				'autoFocus',
+				'className',
+				'field',
+				'untouch',
+				'gridIconSize',
+				'inputClassName'
+			] );
 
 		return (
 			<div className={ className }>
@@ -63,6 +71,7 @@ class Input extends React.Component {
 					</span>
 				) }
 				<input
+					autoFocus={ ! isMobile() && this.props.autoFocus }
 					id={ field.name }
 					className={ inputClassName }
 					{ ...removeInvalidInputProps( field ) }
@@ -84,6 +93,7 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
+	autoFocus: PropTypes.bool,
 	className: PropTypes.string,
 	dir: PropTypes.string,
 	field: PropTypes.object.isRequired,

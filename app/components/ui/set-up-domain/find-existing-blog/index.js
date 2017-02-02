@@ -12,7 +12,7 @@ import { extractHostName } from 'lib/domains';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
-import ProgressHeader from 'components/ui/set-up-domain/progress-header';
+import ProgressHeader from 'components/containers/set-up-domain/progress-header';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
 import styles from './styles.scss';

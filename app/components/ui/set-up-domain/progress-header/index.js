@@ -1,17 +1,16 @@
 // External dependencies
+import { bindHandlers } from 'react-bind-handlers';
 import i18n from 'i18n-calypso';
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getPath } from 'routes';
 import ProgressBar from 'components/ui/progress-bar';
-import { redirect } from 'actions/routes';
 import styles from './styles.scss';
 
-class ProgressHeader extends Component {
-	onExitClick() {
-		console.log(1);
+class ProgressHeader extends React.Component {
+	handleOnExitClick() {
+		this.props.redirect( 'myDomains' );
 	}
 
 	render() {
@@ -27,7 +26,7 @@ class ProgressHeader extends Component {
 				</h1>
 				<div>
 					<ProgressBar progress={ progress } />
-					<span onClick={ this.onExitClick } className={ styles.exit }>Exit</span>
+					<span onClick={ this.handleOnExitClick } className={ styles.exit }>Exit</span>
 				</div>
 			</div>
 		</div>;
@@ -36,7 +35,8 @@ class ProgressHeader extends Component {
 
 ProgressHeader.propTypes = {
 	content: PropTypes.string.isRequired,
-	progress: PropTypes.number.isRequired
+	progress: PropTypes.number.isRequired,
+	redirect: PropTypes.func.isRequired
 };
 
-export default withStyles( styles )( ProgressHeader );
+export default withStyles( styles )( bindHandlers( ProgressHeader ) );

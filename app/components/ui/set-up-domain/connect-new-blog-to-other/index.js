@@ -11,7 +11,7 @@ import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-serve
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
-import ProgressHeader from 'components/ui/set-up-domain/progress-header';
+import ProgressHeader from 'components/containers/set-up-domain/progress-header';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
 import withPageView from 'lib/analytics/with-page-view';

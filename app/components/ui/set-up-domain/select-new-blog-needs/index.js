@@ -11,7 +11,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
-import ProgressHeader from 'components/ui/set-up-domain/progress-header';
+import ProgressHeader from 'components/containers/set-up-domain/progress-header';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 

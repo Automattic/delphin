@@ -1,6 +1,6 @@
 // External dependencies
 import classNames from 'classnames';
-const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
+import Gridicon from 'gridicons';
 import omit from 'lodash/omit';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';

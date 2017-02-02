@@ -23,9 +23,9 @@ This project makes use of the Open Source packages listed below (see [package.js
 * md5: http://github.com/pvorb/node-md5
 
 ### GPL, GPL-2.0+
-* @automattic/dops-components: https://github.com/Automattic/dops-components
 * eslint-config-wpcalypso: https://github.com/Automattic/eslint-config-wpcalypso
 * eslint-plugin-wpcalypso: https://github.com/Automattic/eslint-plugin-wpcalypso
+* gridicons: https://github.com/Automattic/gridicons
 
 ### GPL-2.0
 * i18n-calypso: https://github.com/Automattic/i18n-calypso

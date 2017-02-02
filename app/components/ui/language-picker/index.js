@@ -1,6 +1,6 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
-const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
+import Gridicon from 'gridicons';
 import find from 'lodash/find';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';

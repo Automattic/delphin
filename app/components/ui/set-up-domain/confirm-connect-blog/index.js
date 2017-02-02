@@ -1,6 +1,5 @@
 // External dependencies
 import { bindHandlers } from 'react-bind-handlers';
-import classnames from 'classnames';
 import i18n from 'i18n-calypso';
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -10,7 +9,7 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import { getServiceName } from 'lib/services';
 import withPageView from 'lib/analytics/with-page-view';
@@ -60,21 +59,13 @@ class ConfirmConnectBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ classnames( styles.headerText ) }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
-
-							{ i18n.translate( 'Proceed to %(serviceName)s.', {
-								args: { serviceName },
-								comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
-							} ) }
-						</h1>
-						<ProgressBar progress={ 90 } />
-					</div>
-				</div>
+				<ProgressHeader
+					content={ i18n.translate( 'Proceed to %(serviceName)s.', {
+						args: { serviceName },
+						comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
+					} ) }
+					progress={ 90 }
+				/>
 
 				<Form onSubmit={ this.handleSubmit }>
 					{ blogType === 'existing' && (

@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import { getServiceName } from 'lib/services';
 import { preventWidows } from 'lib/formatters';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
 
@@ -20,18 +20,10 @@ class ConnectingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
-
-							{ i18n.translate( 'Connecting your domain.' ) }
-						</h1>
-						<ProgressBar progress={ 80 } />
-					</div>
-				</div>
+				<ProgressHeader
+					content={ i18n.translate( 'Connecting your domain.' ) }
+					progress={ 80 }
+				/>
 
 				<div className={ styles.contentContainer }>
 					<div className={ styles.statusContainer }>

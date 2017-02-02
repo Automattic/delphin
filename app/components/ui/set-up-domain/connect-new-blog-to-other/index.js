@@ -11,7 +11,7 @@ import CustomNameServersLink from 'components/ui/set-up-domain/custom-name-serve
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import { removeInvalidInputProps } from 'lib/form';
 import withPageView from 'lib/analytics/with-page-view';
@@ -63,20 +63,12 @@ class ConnectNewBlogToOther extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
-
-							{ i18n.translate( 'Meet your domain assistant.', {
-								comment: 'The domain assistant is our customer support team'
-							} ) }
-						</h1>
-						<ProgressBar progress={ 90 } />
-					</div>
-				</div>
+				<ProgressHeader
+					content={ i18n.translate( 'Meet your domain assistant.', {
+						comment: 'The domain assistant is our customer support team'
+					} ) }
+					progress={ 90 }
+				/>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

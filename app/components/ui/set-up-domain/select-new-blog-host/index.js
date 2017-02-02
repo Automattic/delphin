@@ -12,7 +12,7 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import { imageUrl } from 'lib/assets';
@@ -145,18 +145,10 @@ class SelectNewBlogHost extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
-
-							{ i18n.translate( 'Create a new blog.' ) }
-						</h1>
-						<ProgressBar progress={ 60 } />
-					</div>
-				</div>
+				<ProgressHeader
+					content={ i18n.translate( 'Create a new blog.' ) }
+					progress={ 60 }
+				/>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

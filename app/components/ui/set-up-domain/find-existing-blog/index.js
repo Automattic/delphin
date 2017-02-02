@@ -12,7 +12,7 @@ import { extractHostName } from 'lib/domains';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import Input from 'components/ui/form/input';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import ValidationError from 'components/ui/form/validation-error';
 import { canConnectToService } from 'lib/services';
 import styles from './styles.scss';
@@ -68,17 +68,10 @@ class FindExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
-							{ i18n.translate( 'Find your blog.' ) }
-						</h1>
-						<ProgressBar progress={ 30 } />
-					</div>
-				</div>
+				<ProgressHeader
+					content={ i18n.translate( 'Find your blog.' ) }
+					progress={ 30 }
+				/>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

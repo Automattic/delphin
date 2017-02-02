@@ -1,9 +1,9 @@
 // External dependencies
 import debounce from 'lodash/debounce';
+import Gridicon from 'gridicons';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-const Gridicon = require( '@automattic/dops-components/client/components/gridicon' );
 
 // Internal dependencies
 import config from 'config';

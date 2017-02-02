@@ -14,8 +14,7 @@ var config = {
 					path.resolve( __dirname, 'client' ),
 					path.resolve( __dirname, 'app' ),
 					path.resolve( __dirname, 'lib' ),
-					path.resolve( __dirname, 'server' ),
-					path.resolve( __dirname, 'node_modules', '@automattic', 'dops-components', 'client', 'components' )
+					path.resolve( __dirname, 'server' )
 				]
 			},
 			{

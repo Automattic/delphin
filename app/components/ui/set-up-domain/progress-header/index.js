@@ -16,8 +16,10 @@ const ProgressHeader = ( { children, handleOnExitClick, progress } ) => {
 				</span>
 				{ children }
 			</h1>
-			<div>
-				<ProgressBar progress={ progress } />
+			<div className={ styles.progressHeader }>
+				<div className={ styles.fullWidth }>
+					<ProgressBar progress={ progress } />
+				</div>
 				<span onClick={ handleOnExitClick } className={ styles.exit }>Exit</span>
 			</div>
 		</div>

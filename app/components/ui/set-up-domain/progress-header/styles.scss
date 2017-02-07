@@ -1,5 +1,20 @@
 @import 'app/components/ui/set-up-domain/styles';
 
 .exit {
+	color: $gray;
 	cursor: pointer;
+	font-size: 14px;
+	margin-left: 10px;
+	text-decoration: underline;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.progress-header {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	margin-top: 10px;
 }

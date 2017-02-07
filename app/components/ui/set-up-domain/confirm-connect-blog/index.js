@@ -9,7 +9,7 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import Form from 'components/ui/form';
 import { preventWidows } from 'lib/formatters';
-import ProgressHeader from 'components/containers/set-up-domain/progress-header';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import { getServiceName } from 'lib/services';
 import withPageView from 'lib/analytics/with-page-view';

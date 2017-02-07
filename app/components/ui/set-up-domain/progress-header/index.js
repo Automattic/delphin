@@ -4,10 +4,11 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { getPath } from 'routes';
 import ProgressBar from 'components/ui/progress-bar';
 import styles from './styles.scss';
 
-const ProgressHeader = ( { children, handleOnExitClick, progress } ) => {
+const ProgressHeader = ( { children, progress } ) => {
 	return <div className={ styles.headerContainer }>
 		<div className={ styles.header }>
 			<h1 className={ styles.headerText }>
@@ -20,7 +21,7 @@ const ProgressHeader = ( { children, handleOnExitClick, progress } ) => {
 				<div className={ styles.fullWidth }>
 					<ProgressBar progress={ progress } />
 				</div>
-				<span onClick={ handleOnExitClick } className={ styles.exit }>Exit</span>
+				<a className={ styles.exit } href={ getPath( 'myDomains' ) }>Exit</a>
 			</div>
 		</div>
 	</div>;
@@ -28,7 +29,6 @@ const ProgressHeader = ( { children, handleOnExitClick, progress } ) => {
 
 ProgressHeader.propTypes = {
 	children: PropTypes.string,
-	handleOnExitClick: PropTypes.func.isRequired,
 	progress: PropTypes.number.isRequired,
 };
 

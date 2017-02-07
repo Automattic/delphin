@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import DocumentTitle from 'components/ui/document-title';
 import { getServiceName } from 'lib/services';
 import { preventWidows } from 'lib/formatters';
-import ProgressHeader from 'components/containers/set-up-domain/progress-header';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
 

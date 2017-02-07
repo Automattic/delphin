@@ -10,7 +10,7 @@ import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
-import ProgressHeader from 'components/containers/set-up-domain/progress-header';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import Radio from 'components/ui/form/radio';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
@@ -53,10 +53,9 @@ class SelectBlogType extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Tell us about your blog.' ) }
-					progress={ 10 }
-				/>
+				<ProgressHeader progress={ 10 }>
+					{ i18n.translate( 'Tell us about your blog.' ) }
+				</ProgressHeader>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

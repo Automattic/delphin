@@ -34,14 +34,16 @@ function Progressbar( props ) {
 		i18n.translate( 'Checkout' )
 	];
 
-	return <ol className={ props.className + ' ' + styles.progressbar }>
-		{
-			steps.map( ( step, index ) => <li key={ step } className={ getStepClassName( currentStepIndex, index ) }>
-				<div className={ styles.progressbarStepCaption }>{ step }</div>
-				<div className={ styles.progressbarStepDot }></div>
-			</li> )
-		}
-	</ol>;
+	return (
+		<ol className={ props.className + ' ' + styles.progressbar }>
+			{
+				steps.map( ( step, index ) => <li key={ step } className={ getStepClassName( currentStepIndex, index ) }>
+					<div className={ styles.progressbarStepCaption }>{ step }</div>
+					<div className={ styles.progressbarStepDot }></div>
+				</li> )
+			}
+		</ol>
+	);
 }
 
 Progressbar.propTypes = {

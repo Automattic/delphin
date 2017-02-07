@@ -15,6 +15,7 @@ module.exports = {
 		// Custom PropTypes checks
 		'react/prop-types': 2,
 		'react/sort-prop-types': 2,
+		'react/jsx-wrap-multilines': 2,
 
 		// Disable new rules that trigger errors
 		'max-len': 0,

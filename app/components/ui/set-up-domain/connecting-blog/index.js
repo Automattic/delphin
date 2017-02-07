@@ -20,10 +20,9 @@ class ConnectingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Connecting your domain.' ) }
-					progress={ 80 }
-				/>
+				<ProgressHeader progress={ 80 }>
+					{ i18n.translate( 'Connecting your domain.' ) }
+				</ProgressHeader>
 
 				<div className={ styles.contentContainer }>
 					<div className={ styles.statusContainer }>

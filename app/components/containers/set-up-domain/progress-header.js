@@ -6,9 +6,8 @@ import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import { redirect } from 'actions/routes';
 
 export default connect(
-	( state, { content, progress } ) => ( {
-		content,
+	( state, { progress } ) => ( {
 		progress
 	} ),
-	{ redirect }
+	{ handleOnExitClick: () => redirect( 'myDomains' ) }
 )( ProgressHeader );

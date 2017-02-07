@@ -69,12 +69,11 @@ class ContactUsExistingBlog extends Component {
 		return (
 			<div className={ styles.domainSetup }>
 
-				<ProgressHeader
-					content={ i18n.translate( 'Meet your domain assistant.', {
+				<ProgressHeader progress={ 90 }>
+					{ i18n.translate( 'Meet your domain assistant.', {
 						comment: 'The domain assistant is our customer support team'
 					} ) }
-					progress={ 90 }
-				/>
+				</ProgressHeader>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>

@@ -59,13 +59,12 @@ class ConfirmConnectBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Proceed to %(serviceName)s.', {
+				<ProgressHeader progress={ 90 }>
+					{ i18n.translate( 'Proceed to %(serviceName)s.', {
 						args: { serviceName },
 						comment: 'serviceName is the name of a hosting service, e.g. WordPress.com.'
 					} ) }
-					progress={ 90 }
-				/>
+				</ProgressHeader>
 
 				<Form onSubmit={ this.handleSubmit }>
 					{ blogType === 'existing' && (

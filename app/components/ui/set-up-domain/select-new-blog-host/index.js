@@ -145,10 +145,9 @@ class SelectNewBlogHost extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Create a new blog.' ) }
-					progress={ 60 }
-				/>
+				<ProgressHeader progress={ 60 }>
+					{ i18n.translate( 'Create a new blog.' ) }
+				</ProgressHeader>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

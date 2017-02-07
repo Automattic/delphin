@@ -63,12 +63,11 @@ class ConnectNewBlogToOther extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Meet your domain assistant.', {
+				<ProgressHeader progress={ 90 }>
+					{ i18n.translate( 'Meet your domain assistant.', {
 						comment: 'The domain assistant is our customer support team'
 					} ) }
-					progress={ 90 }
-				/>
+				</ProgressHeader>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

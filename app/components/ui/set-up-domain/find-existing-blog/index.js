@@ -68,10 +68,9 @@ class FindExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Find your blog.' ) }
-					progress={ 30 }
-				/>
+				<ProgressHeader progress={ 30 }>
+					{ i18n.translate( 'Find your blog.' ) }
+				</ProgressHeader>
 
 				<Form onSubmit={ handleSubmit( this.handleSubmit ) }>
 					<Form.FieldArea>

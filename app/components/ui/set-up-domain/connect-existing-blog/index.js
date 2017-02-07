@@ -39,10 +39,9 @@ class ConnectExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<ProgressHeader
-					content={ i18n.translate( 'Connect to your blog.' ) }
-					progress={ 60 }
-				/>
+				<ProgressHeader progress={ 60 }>
+					{ i18n.translate( 'Connect to your blog.' ) }
+				</ProgressHeader>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>

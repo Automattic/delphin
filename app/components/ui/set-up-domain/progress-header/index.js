@@ -1,6 +1,7 @@
 // External dependencies
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -22,7 +23,7 @@ const ProgressHeader = ( { children, progress } ) => {
 					<div className={ styles.fullWidth }>
 						<ProgressBar progress={ progress } />
 					</div>
-					<a className={ styles.exit } href={ getPath( 'myDomains' ) }>{ i18n.translate( 'Exit' ) }</a>
+					<Link className={ styles.exit } to={ getPath( 'myDomains' ) }>{ i18n.translate( 'Exit' ) }</Link>
 				</div>
 			</div>
 		</div>

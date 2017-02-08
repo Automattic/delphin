@@ -22,7 +22,7 @@ const ProgressHeader = ( { children, progress } ) => {
 					<div className={ styles.fullWidth }>
 						<ProgressBar progress={ progress } />
 					</div>
-					<a className={ styles.exit } href={ getPath( 'myDomains' ) }>Exit</a>
+					<a className={ styles.exit } href={ getPath( 'myDomains' ) }>{ i18n.translate( 'Exit' ) }</a>
 				</div>
 			</div>
 		</div>
@@ -30,7 +30,7 @@ const ProgressHeader = ( { children, progress } ) => {
 };
 
 ProgressHeader.propTypes = {
-	children: PropTypes.string,
+	children: PropTypes.node.isRequired,
 	progress: PropTypes.number.isRequired,
 };
 

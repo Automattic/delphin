@@ -11,7 +11,7 @@ import DocumentTitle from 'components/ui/document-title';
 import { getPath } from 'routes';
 import Form from 'components/ui/form';
 import noop from 'lodash/noop';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import withPageView from 'lib/analytics/with-page-view';
 
@@ -39,18 +39,9 @@ class ConnectExistingBlog extends Component {
 			<div className={ styles.domainSetup }>
 				<DocumentTitle title={ i18n.translate( 'Set up domain' ) } />
 
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
-
-							{ i18n.translate( 'Connect to your blog.' ) }
-						</h1>
-						<ProgressBar progress={ 60 } />
-					</div>
-				</div>
+				<ProgressHeader progress={ 60 }>
+					{ i18n.translate( 'Connect to your blog.' ) }
+				</ProgressHeader>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>

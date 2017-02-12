@@ -65,41 +65,43 @@ class UpdateContactInformation extends React.Component {
 	}
 
 	getAffectedDomainsNotice() {
-		return <div className={ styles.domainList }>
-			<h4>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
-			{
-				this.isDataLoading()
-				? i18n.translate( 'Loading your domains…' )
-				: <ul>
-					{
-						this.props.domains.data.results.map( domain => <li key={ domain.id }>{ domain.name }</li> )
-					}
-				</ul>
-			}
-
-			{ ! this.isDataLoading() && this.props.domains.data.results > 1 &&
-				<p className={ styles.updateInstructions }>
-				{ i18n.translate( 'You may be asked to approve these changes for each domain separately. ' +
-									"We'll email you with instructions." ) }
-				</p>
-			}
-
-			<p className={ styles.updateInstructions }>
-				{ i18n.translate(
-					'By clicking "Update contact information", you agree to the ' +
-					'{{draLink}}Domain Registration Agreement{{/draLink}} and confirm that if you are transferring ownership of the domain, ' +
-					'the new owner has agreed in writing to be bound by the same agreement. {{faqLink}}What does this mean?{{/faqLink}}',
-					{
-						components: {
-							draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
-										target="_blank" rel="noopener noreferrer" />,
-							faqLink: <a href={ getPath( 'learnMore' ) + '#contact-information-why-transfer' }
-										target="_blank" rel="noopener noreferrer" />
+		return (
+			<div className={ styles.domainList }>
+				<h4>{ i18n.translate( 'Changes will apply to the following domains:' ) }</h4>
+				{
+					this.isDataLoading()
+					? i18n.translate( 'Loading your domains…' )
+					: <ul>
+						{
+							this.props.domains.data.results.map( domain => <li key={ domain.id }>{ domain.name }</li> )
 						}
-					}
-				) }
-			</p>
-		</div>;
+					</ul>
+				}
+
+				{ ! this.isDataLoading() && this.props.domains.data.results > 1 &&
+					<p className={ styles.updateInstructions }>
+					{ i18n.translate( 'You may be asked to approve these changes for each domain separately. ' +
+										"We'll email you with instructions." ) }
+					</p>
+				}
+
+				<p className={ styles.updateInstructions }>
+					{ i18n.translate(
+						'By clicking "Update contact information", you agree to the ' +
+						'{{draLink}}Domain Registration Agreement{{/draLink}} and confirm that if you are transferring ownership of the domain, ' +
+						'the new owner has agreed in writing to be bound by the same agreement. {{faqLink}}What does this mean?{{/faqLink}}',
+						{
+							components: {
+								draLink: <a href="https://wordpress.com/automattic-domain-name-registration-agreement/"
+											target="_blank" rel="noopener noreferrer" />,
+								faqLink: <a href={ getPath( 'learnMore' ) + '#contact-information-why-transfer' }
+											target="_blank" rel="noopener noreferrer" />
+							}
+						}
+					) }
+				</p>
+			</div>
+		);
 	}
 
 	render() {

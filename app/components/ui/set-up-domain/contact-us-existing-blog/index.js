@@ -7,7 +7,7 @@ import SetUpDomainBackLink from 'components/ui/set-up-domain/back-link';
 import Button from 'components/ui/button';
 import Form from 'components/ui/form';
 import { getPath } from 'routes';
-import ProgressBar from 'components/ui/progress-bar';
+import ProgressHeader from 'components/ui/set-up-domain/progress-header';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { removeInvalidInputProps } from 'lib/form';
@@ -68,20 +68,12 @@ class ContactUsExistingBlog extends Component {
 
 		return (
 			<div className={ styles.domainSetup }>
-				<div className={ styles.headerContainer }>
-					<div className={ styles.header }>
-						<h1 className={ styles.headerText }>
-							<span className={ styles.setUpLabel }>
-								{ i18n.translate( 'Setup: ' ) }
-							</span>
 
-							{ i18n.translate( 'Meet your domain assistant.', {
-								comment: 'The domain assistant is our customer support team'
-							} ) }
-						</h1>
-						<ProgressBar progress={ 90 } />
-					</div>
-				</div>
+				<ProgressHeader progress={ 90 }>
+					{ i18n.translate( 'Meet your domain assistant.', {
+						comment: 'The domain assistant is our customer support team'
+					} ) }
+				</ProgressHeader>
 
 				<Form onSubmit={ this.handleSubmit }>
 					<Form.FieldArea>

@@ -1,11 +1,13 @@
 {
   "presets": [
-    "es2015",
+    [ "env", {
+      "targets": {
+        "Electron": "1.3.5"
+      },
+      "debug": true,
+      "useBuiltIns": true
+    } ],
     "react",
-    "stage-1",
-    "stage-2"
-  ],
-  "plugins": [
-    "transform-runtime"
+    "stage-1"
   ]
 }

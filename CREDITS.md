@@ -63,6 +63,7 @@ This project makes use of the Open Source packages listed below (see [package.js
 * extract-text-webpack-plugin: ssh://git@github.com/webpack/extract-text-webpack-plugin
 * inquirer: https://github.com/sboudrias/Inquirer.js
 * isomorphic-style-loader: https://github.com/kriasoft/isomorphic-style-loader
+* jed: https://github.com/messageformat/Jed
 * json-loader: https://github.com/webpack/json-loader
 * jstimezonedetect: https://bitbucket.org/pellepim/jstimezonedetect
 * lodash: https://github.com/lodash/lodash
@@ -107,6 +108,3 @@ This project makes use of the Open Source packages listed below (see [package.js
 
 ### Unlicense
 * parse-domain: https://github.com/peerigon/parse-domain
-
-### Use: WTFPL, Contribute: Dojo CLA
-* jed: https://github.com/messageformat/Jed

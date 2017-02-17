@@ -109,4 +109,4 @@ This project makes use of the Open Source packages listed below (see [package.js
 * parse-domain: https://github.com/peerigon/parse-domain
 
 ### Use: WTFPL, Contribute: Dojo CLA
-* jed: https://github.com/SlexAxton/Jed
+* jed: https://github.com/messageformat/Jed

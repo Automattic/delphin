@@ -4,14 +4,12 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import Button from 'components/ui/button';
+import config from 'config';
 import DocumentTitle from 'components/ui/document-title';
 import { preventWidows } from 'lib/formatters';
 import { getPath } from 'routes';
 import styles from './styles.scss';
-import ValidationError from 'components/ui/form/validation-error';
 import withPageView from 'lib/analytics/with-page-view';
-import Input from 'components/ui/form/input';
 
 const SunriseHome = React.createClass( {
 	propTypes: {
@@ -31,8 +29,7 @@ const SunriseHome = React.createClass( {
 
 	render() {
 		const { handleSubmit } = this.props,
-			queryField = this.props.fields.q,
-			pageHeading = i18n.translate( 'Every .blog is a story. Tell yours.' );
+			pageHeading = i18n.translate( 'We\'re sunsetting get.blog.' );
 
 		return (
 			<div className={ styles.homeContainer }>
@@ -48,25 +45,11 @@ const SunriseHome = React.createClass( {
 						{ preventWidows( pageHeading, 2 ) }
 					</h2>
 
-					<div className={ styles.domainSearch }>
-						<div className={ styles.field }>
-							<Input
-								autoComplete="off"
-								autoCapitalize="off"
-								autoFocus
-								placeholder={ i18n.translate( 'Type a few keywords or a domain' ) }
-								inputClassName={ styles.input }
-								field={ queryField }
-								ref="q"
-							/>
-
-							<ValidationError field={ queryField } submitFailed={ this.props.submitFailed } />
-						</div>
-
-						<Button className={ styles.button }>
-							{ i18n.translate( 'Get started' ) }
-						</Button>
-					</div>
+					<h3 className={ styles.heading }>
+						{ i18n.translate( 'Head on to {{link}}wordpress.com/domains{{/link}} to find a new .blog domain for your blog.', {
+							components: { link: <a href={ config( 'new_search_url' ) } target="_blank" rel="noopener noreferrer" /> }
+						} ) }
+					</h3>
 				</form>
 
 				<div className={ styles.whatsYourStory } />

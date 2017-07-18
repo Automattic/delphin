@@ -1,12 +1,11 @@
 // External dependencies
-import { Link } from 'react-router';
 import i18n from 'i18n-calypso';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import config from 'config';
 import Button from 'components/ui/button';
-import { getPath } from 'routes';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import Form from 'components/ui/form';
@@ -108,8 +107,8 @@ const ConnectUser = React.createClass( {
 					{ i18n.translate( "Don't have an account yet?" ) }
 				</h3>
 				<p>
-					{ i18n.translate( 'Find a .blog you love to {{link}}get started now{{/link}}.', {
-						components: { link: <Link to={ getPath( 'search' ) } /> }
+					{ i18n.translate( 'Find a .blog you love on {{link}}wordpress.com/domains{{/link}}.', {
+						components: { link: <a href={ config( 'new_search_url' ) } rel="noopener noreferrer" /> }
 					} ) }
 				</p>
 			</Form.Footer>

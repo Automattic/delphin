@@ -45,7 +45,7 @@ const config = {
 	},
 	google_analytics_key: 'UA-10673494-28',
 	criteo_account: 35949,
-	new_search_url: 'https://wordpress.com/domains/',
+	new_search_url: 'https://wordpress.com/domains/?source=gdb',
 };
 
 if ( typeof window !== 'undefined' && window.location && window.location.search ) {

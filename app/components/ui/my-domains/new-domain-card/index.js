@@ -13,7 +13,7 @@ const NewDomainCard = () => {
 		<a className={ styles.newDomainCard } href={ newSearchUrl }>
 			<div>
 				<span>
-					{ i18n.translate( 'Use wordpress.com/domains to find a new domain.' ) }
+					{ i18n.translate( 'Find a new domain on WordPress.com' ) }
 				</span>
 			</div>
 		</a>

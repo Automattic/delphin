@@ -107,7 +107,7 @@ const ConnectUser = React.createClass( {
 					{ i18n.translate( "Don't have an account yet?" ) }
 				</h3>
 				<p>
-					{ i18n.translate( 'Find a .blog you love on {{link}}wordpress.com/domains{{/link}}.', {
+					{ i18n.translate( 'Find a .blog you love on {{link}}WordPress.com{{/link}}.', {
 						components: { link: <a href={ config( 'new_search_url' ) } rel="noopener noreferrer" /> }
 					} ) }
 				</p>

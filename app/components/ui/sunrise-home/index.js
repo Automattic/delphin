@@ -46,7 +46,7 @@ const SunriseHome = React.createClass( {
 					</h2>
 
 					<h3 className={ styles.heading }>
-						{ i18n.translate( 'get.blog is retired. Head to {{link}}wordpress.com/domains{{/link}} to find your new .blog domain.', {
+						{ i18n.translate( 'get.blog is retired. Head to {{link}}WordPress.com{{/link}} to find your new .blog domain.', {
 							components: { link: <a href={ config( 'new_search_url' ) } target="_blank" rel="noopener noreferrer" /> }
 						} ) }
 					</h3>

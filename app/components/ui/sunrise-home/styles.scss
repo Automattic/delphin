@@ -84,21 +84,21 @@
 	}
 
 	@include breakpoint( '>480px' ) {
-		font-size: 3.2rem;
+		font-size: 3rem;
 	}
 	@include breakpoint( '>660px' ) {
-		font-size: 4rem;
+		font-size: 3.8rem;
 	}
 }
 
 h3.heading {
-	font: 700 2rem $heading-font;
+	font: 400 2rem $heading-font;
 
 	@include breakpoint( '>480px' ) {
-		font-size: 2.6rem;
+		font-size: 2rem;
 	}
 	@include breakpoint( '>660px' ) {
-		font-size: 3.2rem;
+		font-size: 2.6rem;
 	}
 }
 

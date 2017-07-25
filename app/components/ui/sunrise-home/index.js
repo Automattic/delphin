@@ -29,7 +29,7 @@ const SunriseHome = React.createClass( {
 
 	render() {
 		const { handleSubmit } = this.props,
-			pageHeading = i18n.translate( 'It\'s been awesome!' );
+			pageHeading = i18n.translate( 'Interested in a .blog domain? (Who wouldn\'t be?)' );
 
 		return (
 			<div className={ styles.homeContainer }>
@@ -46,7 +46,7 @@ const SunriseHome = React.createClass( {
 					</h2>
 
 					<h3 className={ styles.heading }>
-						{ i18n.translate( 'get.blog is retired. Head to {{link}}WordPress.com{{/link}} to find your new .blog domain.', {
+						{ i18n.translate( 'Head to {{link}}WordPress.com{{/link}} to find your new .blog domain.', {
 							components: { link: <a href={ config( 'new_search_url' ) } target="_blank" rel="noopener noreferrer" /> }
 						} ) }
 					</h3>

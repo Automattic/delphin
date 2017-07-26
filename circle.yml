@@ -23,7 +23,7 @@ dependencies:
 deployment:
   production:
     branch:
-      master
+      sunset
     commands:
       - yarn run prod:static
       - tar cvzf $CIRCLE_ARTIFACTS/public.tar.gz -C public .

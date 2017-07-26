@@ -41,6 +41,13 @@ const Search = React.createClass( {
 	},
 
 	componentWillMount() {
+		// No search for you!
+		// (we're sunsetting delphin, sorry)
+		if ( typeof window !== 'undefined' ) {
+			window.location.replace( config( 'new_search_url' ) );
+			return;
+		}
+
 		this.debouncedRedirectToSearch = debounce( this.redirectToSearch, 500 );
 
 		const trimmedQuery = this.props.query.trim();
@@ -158,6 +165,10 @@ const Search = React.createClass( {
 	},
 
 	render() {
+		if ( true ) {
+			return null;
+		}
+
 		const query = this.props.query,
 			showAdditionalResultsLink = this.props.results &&
 				this.props.results.length > this.props.numberOfResultsToDisplay;

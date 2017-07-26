@@ -14,12 +14,12 @@
 	justify-content: center;
 	margin-bottom: 20px;
 	min-height: 200px;
+	padding: 10px;
 	position: relative;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 	width: 100%;
-	padding: 10px;
 
 	@include breakpoint( '<1040px' ) {
 		flex-basis: 49%;

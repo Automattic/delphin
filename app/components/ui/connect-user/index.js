@@ -146,14 +146,13 @@ const ConnectUser = React.createClass( {
 							<div>
 								<fieldset>
 									<label className={ styles.emailLabel }>
-										{ i18n.translate( 'Get.blog is not available right now ' +
-										                  'while we make some important changes.'
+										{ i18n.translate( 'Get.blog is not available right now while we make some important changes.'
 										) }
 									</label>
 									<label>
 										{ i18n.translate( 'If you purchased a domain on get.blog, ' +
-										                  'we\'ll send you an email with instructions ' +
-										                  'to log in and manage your domains.'
+											'we\'ll send you an email with instructions ' +
+											'to log in and manage your domains.'
 										) }
 									</label>
 								</fieldset>

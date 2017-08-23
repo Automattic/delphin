@@ -94,7 +94,7 @@ class Header extends Component {
 						</Link>
 					) }
 
-					{ ! isLoggedIn && (
+					{ ! isLoggedIn && this.props.location.pathname !== '/log-in' && (
 						<Link className={ styles.myDomainsLink } to={ getPath( 'loginUser' ) }>
 							{ translate( 'Log In' ) }
 						</Link>
@@ -134,6 +134,7 @@ Header.propTypes = {
 	isExcluded: PropTypes.bool.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
 	isMenuVisible: PropTypes.bool.isRequired,
+	location: PropTypes.object,
 	logoutUser: PropTypes.func.isRequired,
 };
 

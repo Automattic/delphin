@@ -11,13 +11,8 @@ const Header = ( { intention, domainName } ) => {
 	let heading = '';
 	let text = '';
 
-	if ( intention === 'signup' ) {
-		heading = i18n.translate( 'Your domain awaits' );
-		text = i18n.translate( 'Enter your email address to register %(domainName)s.', {
-			args: { domainName }
-		} );
-	} else if ( intention === 'login' ) {
-		heading = i18n.translate( 'Log in' );
+	if ( intention === 'signup' || intention === 'login' ) {
+		heading = i18n.translate( 'We\'re making some changes' );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
 
@@ -27,7 +22,7 @@ const Header = ( { intention, domainName } ) => {
 
 	return (
 		<div className={ styles.container }>
-			<div className={ classNames( styles.header, { [ styles.logInHeader ]: intention === 'login' } ) }>
+			<div className={ classNames( styles.header, { [ styles.logInHeader ]: intention === 'login' || intention === 'signup' } ) }>
 				{ heading && (
 					<h2 className={ styles.heading }>
 						{ heading }

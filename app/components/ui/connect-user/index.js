@@ -5,13 +5,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import config from 'config';
-import Button from 'components/ui/button';
 import DocumentTitle from 'components/ui/document-title';
 import styles from './styles.scss';
 import Form from 'components/ui/form';
 import Header from 'components/ui/connect-user/header';
-import Input from 'components/ui/form/input';
-import ValidationError from 'components/ui/form/validation-error';
 
 const ConnectUser = React.createClass( {
 	propTypes: {

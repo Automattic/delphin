@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 
-const Header = ( { intention, domainName } ) => {
+const Header = ( { intention } ) => {
 	let heading = '';
 	let text = '';
 

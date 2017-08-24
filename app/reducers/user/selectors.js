@@ -2,7 +2,7 @@ export const isLoggedOut = state => ! state.user.isLoggedIn && ! state.user.conn
 
 // isLoggedIn !== ! isLoggedOut, because there is a point when the app boots when
 // the app is determining if the user is logged in or out.
-export const isLoggedIn = state => {
+export const isLoggedIn = () => {
 	return false;
 	//return state.user.isLoggedIn;
 };

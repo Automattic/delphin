@@ -97,15 +97,12 @@ const ConnectUser = React.createClass( {
 	renderNoAccountMessage() {
 		const { intention } = this.props;
 
-		if ( intention !== 'login' ) {
+		if ( intention !== 'signup' ) {
 			return;
 		}
 
 		return (
 			<Form.Footer>
-				<h3 className={ styles.headline }>
-					{ i18n.translate( "Don't have an account yet?" ) }
-				</h3>
 				<p>
 					{ i18n.translate( 'Find a .blog you love on {{link}}WordPress.com{{/link}}.', {
 						components: { link: <a href={ config( 'new_search_url' ) } rel="noopener noreferrer" /> }
@@ -115,8 +112,29 @@ const ConnectUser = React.createClass( {
 		);
 	},
 
+	renderContactSupport() {
+		const { intention } = this.props;
+
+		if ( intention !== 'login' ) {
+			return;
+		}
+
+		return (
+			<Form.Footer>
+				<p>
+					{ i18n.translate(
+						'For any questions, please contact us at {{link}}help@get.blog{{/link}}.',
+						{
+							components: { link: <a href={ config( 'support_link' ) } rel="noopener noreferrer" /> }
+						}
+					) }
+				</p>
+			</Form.Footer>
+		);
+	},
+
 	render() {
-		const { fields, handleSubmit, intention, submitFailed, domain: { domainName } } = this.props;
+		const { handleSubmit, intention, domain: { domainName } } = this.props;
 
 		return (
 			<DocumentTitle title={ intention === 'login' ? i18n.translate( 'Log In' ) : i18n.translate( 'Sign Up' ) }>
@@ -127,20 +145,20 @@ const ConnectUser = React.createClass( {
 						<Form.FieldArea>
 							<div>
 								<fieldset>
-									<label className={ styles.emailLabel }>{ i18n.translate( 'Enter your email address to continue:' ) }</label>
-									<Input field={ fields.email } autoFocus type="email" dir="ltr" />
-									<ValidationError field={ fields.email } submitFailed={ submitFailed } />
+									<label className={ styles.emailLabel }>
+										{ i18n.translate( 'Get.blog is not available right now while we make some important changes.'
+										) }
+									</label>
+									<label>
+										{ i18n.translate( 'If you purchased a domain on get.blog, ' +
+											'we\'ll send you an email with instructions ' +
+											'to log in and manage your domains.'
+										) }
+									</label>
 								</fieldset>
-								{ this.renderTermsOfService() }
 							</div>
 						</Form.FieldArea>
-
-						<Form.SubmitArea>
-							<Button disabled={ this.isSubmitButtonDisabled() }>
-								{ i18n.translate( 'Log in' ) }
-							</Button>
-						</Form.SubmitArea>
-						{ this.renderPoweredBy() }
+						{ this.renderContactSupport() }
 						{ this.renderNoAccountMessage() }
 					</Form>
 

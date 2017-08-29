@@ -40,6 +40,15 @@ class LearnMore extends React.Component {
 		} );
 	}
 
+	componentWillMount() {
+		// No search for you!
+		// (we're sunsetting delphin, sorry)
+		if ( typeof window !== 'undefined' ) {
+			window.location.replace( 'https://support.wordpress.com' );
+			return;
+		}
+	}
+
 	componentDidMount() {
 		const {
 			hasLoadedPricesFromServer,

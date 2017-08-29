@@ -12,7 +12,7 @@ const Header = ( { intention } ) => {
 	let text = '';
 
 	if ( intention === 'signup' || intention === 'login' ) {
-		heading = i18n.translate( 'We\'re making some changes' );
+		heading = i18n.translate( 'Get.blog has moved to WordPress.com' );
 	} else if ( intention === 'verifyUser' ) {
 		heading = i18n.translate( 'Check your email' );
 

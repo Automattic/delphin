@@ -143,12 +143,10 @@ const ConnectUser = React.createClass( {
 							<div>
 								<fieldset>
 									<label className={ styles.emailLabel }>
-										{ i18n.translate( 'We have merged the ease of use of get.blog with the power of WordPress.com. ' +
-											'Get.blog domains are now managed at WordPress.com.'
-										) }
+										{ i18n.translate( 'We have merged the ease of use of get.blog with the power of WordPress.com. ' ) }
 									</label>
 									<label>
-										{ i18n.translate( 'If you purchased a domain on get.blog, ' +
+										{ i18n.translate( 'Get.blog domains are now managed at WordPress.com. If you purchased a domain on get.blog, ' +
 											'we sent you an email with instructions to log in and manage your domains on WordPress.com. ' +
 											'Check your email for more information or ' +
 											'visit WordPress.com now to {{link}}create your password{{/link}}.', {

@@ -152,8 +152,8 @@ const ConnectUser = React.createClass( {
 											'we sent you an email with instructions to log in and manage your domains on WordPress.com. ' +
 											'Check your email for more information or ' +
 											'visit WordPress.com now to {{link}}create your password{{/link}}.', {
-											components: { link: <a href="https://wordpress.com/wp-login.php?action=lostpassword" rel="noopener noreferrer" /> }
-										}
+												components: { link: <a href="https://wordpress.com/wp-login.php?action=lostpassword" rel="noopener noreferrer" /> }
+											}
 										) }
 									</label>
 								</fieldset>

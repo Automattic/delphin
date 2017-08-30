@@ -148,7 +148,7 @@ const ConnectUser = React.createClass( {
 									<label>
 										{ i18n.translate( 'Get.blog domains are now managed at WordPress.com. If you purchased a domain on get.blog, ' +
 											'you can log in to WordPress.com using the same email address. ' +
-											'If you don\'t have a password,  {{link}}create your password{{/link}}.', {
+											'If you don\'t have a password, {{link}}create your password{{/link}}.', {
 												components: { link: <a href="https://wordpress.com/wp-login.php?action=lostpassword&source=gdb" rel="noopener noreferrer" /> }
 											}
 										) }

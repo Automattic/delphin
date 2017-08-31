@@ -37,7 +37,7 @@ const config = {
 	},
 	languages,
 	sift_science_key: productionOnly ? 'a4f69f6759' : 'e00e878351',
-	support_link: 'mailto:help@get.blog',
+	support_link: 'mailto:help@wordpress.com',
 	tracks_event_prefix: 'delphin_',
 	wordpress: {
 		rest_api_oauth_client_id: 46199,

@@ -120,7 +120,7 @@ const ConnectUser = React.createClass( {
 			<Form.Footer>
 				<p>
 					{ i18n.translate(
-						'For any questions, please contact us at {{link}}help@get.blog{{/link}}.',
+						'For any questions, please contact us at {{link}}help@wordpress.com{{/link}}.',
 						{
 							components: { link: <a href={ config( 'support_link' ) } rel="noopener noreferrer" /> }
 						}
@@ -143,13 +143,14 @@ const ConnectUser = React.createClass( {
 							<div>
 								<fieldset>
 									<label className={ styles.emailLabel }>
-										{ i18n.translate( 'Get.blog is not available right now while we make some important changes.'
-										) }
+										{ i18n.translate( 'Enjoy the ease of use of get.blog, now with the power of WordPress.com.' ) }
 									</label>
 									<label>
 										{ i18n.translate( 'If you purchased a domain on get.blog, ' +
-											'we\'ll send you an email with instructions ' +
-											'to log in and manage your domains.'
+											'you can log in to WordPress.com using the same email address. ' +
+											'If you don\'t have a password, {{link}}create your password{{/link}}.', {
+												components: { link: <a href="https://wordpress.com/wp-login.php?action=lostpassword&source=gdb" rel="noopener noreferrer" /> }
+											}
 										) }
 									</label>
 								</fieldset>

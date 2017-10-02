@@ -26,7 +26,7 @@ const config = {
 		boom_analytics: productionOnly,
 		google_analytics: productionOnly,
 		mc_analytics: productionOnly,
-		sentry: productionOnly,
+		sentry: false,
 		tracks: productionOnly,
 		googleads: productionOnly,
 		bingads: productionOnly,

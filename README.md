@@ -1,6 +1,8 @@
 # Delphin
 
-Delphin is the [get.blog](https://get.blog/) front-end – a place where you can register a .blog domain in the easiest way.
+Delphin was the [get.blog](https://get.blog/) front-end – a place where you could register a .blog domain in the easiest way.
+
+### Delphin has reached its goals and allowed us to launch .blog successfully, but it's been since sunset. As such this repository has been [archived](https://help.github.com/en/articles/archiving-a-github-repository) - it's no longer actively maintained, the repository is read-only, but you can still fork it! 
 
 ![beautiful screenshot](screenshot.png)
 

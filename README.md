@@ -26,19 +26,9 @@ Code in folders named `lib` or `reducers` should have unit tests. Moreover, thes
 
 You can execute an individual test with e.g. `yarn test app/reducers/ui/domain-search/tests`.
 
-## Contributing
-
-If Delphin sparks your interest, don’t hesitate to send a pull request, send a suggestion, file a bug, or just ask a question. We promise we’ll be nice. You can contribute in many ways.
-
-Delphin welcomes – and indeed has been built by – contributors from all walks of life, with different backgrounds, and with a wide range of experience. We're committed to doing our part to make Delphin welcoming to everyone. To clarify these expectations, Delphin has adopted the code of conduct defined by the Contributor Covenant. It can be read in full [here](CODE-OF-CONDUCT.md).
-
 ## Coding Guidelines
 
 Delphin follows [Calypso's guidelines](https://github.com/Automattic/wp-calypso/blob/master/docs/coding-guidelines.md).
-
-## Security
-
-Need to report a security vulnerability? Go to [https://automattic.com/security/](https://automattic.com/security/) or directly to our security bug bounty site [https://hackerone.com/automattic](https://hackerone.com/automattic).
 
 ## Browser Support
 
